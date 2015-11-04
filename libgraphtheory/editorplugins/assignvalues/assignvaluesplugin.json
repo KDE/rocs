@@ -3,6 +3,7 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Assign values to graph edges and nodes.", 
+        "Description[ca@valencia]": "Assigna valors a les arestes i nodes del graf.", 
         "Description[ca]": "Assigna valors a les arestes i nodes del graf.", 
         "Description[de]": "Werte zu Graphenkanten und -knoten zuweisen.", 
         "Description[en_GB]": "Assign values to graph edges and nodes.", 
@@ -25,6 +26,7 @@
         "License": "GPL", 
         "Name": "Assign Values Plugin", 
         "Name[ast]": "Complementu d'asignación de valores", 
+        "Name[ca@valencia]": "Connector per assignar valors", 
         "Name[ca]": "Connector per assignar valors", 
         "Name[cs]": "Modul pro přiřazování hodnot", 
         "Name[de]": "Wertzuweisungs-Modul", 

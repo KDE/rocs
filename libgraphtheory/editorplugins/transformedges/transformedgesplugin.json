@@ -3,6 +3,7 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Transform graph edges by a transformation rule.", 
+        "Description[ca@valencia]": "Transforma les arestes del graf seguint una regla de transformació.", 
         "Description[ca]": "Transforma les arestes del graf seguint una regla de transformació.", 
         "Description[de]": "Graphenkanten mittels Transformationsregel umformen.", 
         "Description[en_GB]": "Transform graph edges by a transformation rule.", 

@@ -3,6 +3,7 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Read and write Graphviz graph documents (DOT)", 
+        "Description[ca@valencia]": "Llig i escriu documents gràfics del Graphviz (DOT).", 
         "Description[ca]": "Llegeix i escriu documents gràfics del Graphviz (DOT).", 
         "Description[cs]": "Čte a ukládá soubory grafů Graphviz (DOT)", 
         "Description[de]": "Graphviz-Graphendokumente (DOT) lesen und schreiben", 
@@ -26,6 +27,7 @@
         "License": "GPL", 
         "Name": "DOT Graph File Format", 
         "Name[ast]": "Formatu de ficheru de grafos DOT", 
+        "Name[ca@valencia]": "Format de fitxer de grafs DOT", 
         "Name[ca]": "Format de fitxer de grafs DOT", 
         "Name[cs]": "Formát souborů grafů DOT", 
         "Name[de]": "DOT-Graphendateiformat", 

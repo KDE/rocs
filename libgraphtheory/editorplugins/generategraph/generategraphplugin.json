@@ -3,6 +3,7 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "This generates a new graph by a pattern.", 
+        "Description[ca@valencia]": "Això genera un nou graf segons un patró.", 
         "Description[ca]": "Això genera un nou graf segons un patró.", 
         "Description[de]": "Erstellt anhand eines Musters einen neuen Graphen.", 
         "Description[en_GB]": "This generates a new graph by a pattern.", 
@@ -27,7 +28,7 @@
         "Name[ast]": "Xenerar grafu", 
         "Name[bg]": "Създаване на графика", 
         "Name[bs]": "Generiši Graf", 
-        "Name[ca@valencia]": "Genera el Graf", 
+        "Name[ca@valencia]": "Genera el graf", 
         "Name[ca]": "Genera el graf", 
         "Name[cs]": "Vygenerovat graf", 
         "Name[da]": "Generér graf", 

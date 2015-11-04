@@ -3,6 +3,7 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Read and write Graph Markup Language documents (GML)", 
+        "Description[ca@valencia]": "Llig i escriu fitxers escrits en Llenguatge de Marcatge de Gràfics (GML)", 
         "Description[ca]": "Llegeix i escriu fitxers escrits en Llenguatge de Marcatge de Gràfics (GML)", 
         "Description[cs]": "Číst a ukládat dokumenty Graph Markup Language (GML)", 
         "Description[de]": "Dokumente im Format „Graph Markup Language“ (GML) lesen und schreiben", 
@@ -26,6 +27,7 @@
         "License": "GPL", 
         "Name": "GML File Format", 
         "Name[ast]": "Formatu de ficheru GML", 
+        "Name[ca@valencia]": "Format de fitxer GML", 
         "Name[ca]": "Format de fitxer GML", 
         "Name[cs]": "Formát souboru GML", 
         "Name[de]": "GML-Dateiformat", 
