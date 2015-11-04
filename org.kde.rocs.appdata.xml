@@ -7,6 +7,7 @@
   <name xml:lang="ast">Rocs</name>
   <name xml:lang="bs">Rocs</name>
   <name xml:lang="ca">Rocs</name>
+  <name xml:lang="ca-valencia">Rocs</name>
   <name xml:lang="cs">Rocs</name>
   <name xml:lang="da">Rocs</name>
   <name xml:lang="de">Rocs</name>
@@ -35,6 +36,7 @@
   <summary xml:lang="ast">Teoría de grafos de Rocs</summary>
   <summary xml:lang="bs">Rocs teorija grafova</summary>
   <summary xml:lang="ca">Teoria de grafs Rocs</summary>
+  <summary xml:lang="ca-valencia">Teoria de grafs Rocs</summary>
   <summary xml:lang="de">Rocs-Graphentheorie</summary>
   <summary xml:lang="en-GB">Rocs Graph Theory</summary>
   <summary xml:lang="es">Teoría de grafos de Rocs</summary>
@@ -61,6 +63,7 @@
     <p xml:lang="ast">Rocs ye un IDE de la teoría de grafos pal diseñu y analís d'algoritmos de grafos. Apurre un editor visual cenciellu d'usar pa crear grafos, un motor pente scripts pa executar algoritmos, y delles ferramientes auxiliares pa simulaciones y esperimentos. Los algoritmos especifíquense en JavaScript.</p>
     <p xml:lang="bs">Rocs je IDE za teoriju grafova za dizajn i analizu graf algoritama. Pruža lak način za upotrebu vizualnog editora za kreiranje grafova, skriptni pogon za izvršenje algoritama i više pomoćnih alata za simulacije i eksperimente. Algoritmi su navedeni u JavaScript.</p>
     <p xml:lang="ca">Rocs és un EID (IDE) de Teoria de Grafs per dissenyar i analitzar algorismes de grafs. Ofereix un editor visual d'ús senzill per crear grafs, un motor de creació de scripts per executar algorismes i diverses eines d'ajuda per simulacions i experiments. Els algorismes s'especifiquen en JavaScript.</p>
+    <p xml:lang="ca-valencia">Rocs és un EID (IDE) de Teoria de Grafs per dissenyar i analitzar algorismes de grafs. Ofereix un editor visual d'ús senzill per crear grafs, un motor de creació de scripts per executar algorismes i diverses eines d'ajuda per simulacions i experiments. Els algorismes s'especifiquen en JavaScript.</p>
     <p xml:lang="de">Rocs ist eine Entwicklungsumgebung für Graphen-Theorie zur Entwicklung und Analyse von Graphen-Algorithmen. Es enthält einen einfach zu bedienenden Editor für die Erstellung von Datenstrukturen, ein leistungsfähiges Skriptmodul zur Ausführung von Algorithmen und mehrere Hilfswerkzeuge für Simulationen und Experimente. Algorithmen werden in JavaScript geschrieben.</p>
     <p xml:lang="en-GB">Rocs is a Graph Theory IDE for designing and analysing graph algorithms. It provides an easy to use visual editor for creating graphs, a scripting engine to execute algorithms, and several helper tools for simulations and experiments. Algorithms are specified in JavaScript.</p>
     <p xml:lang="es">Rocs es una interfaz de desarrollo integrado sobre la teoría de grafos que permite diseñar y analizar algoritmos de gafos. Proporciona un editor visual muy fácil de usar para crear grafos, un motor de guiones para ejecutar algoritmos y varias herramientas auxiliares para realizar simulaciones y experimentar. Los algoritmos se especifican en JavaScript.</p>
