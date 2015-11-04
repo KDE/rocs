@@ -10,6 +10,7 @@ X-KDE-PluginInfo-License=GPL
 Name=DOT Graph File Format
 Name[ast]=Formatu de ficheru de grafos DOT
 Name[ca]=Format de fitxer de grafs DOT
+Name[ca@valencia]=Format de fitxer de grafs DOT
 Name[cs]=Formát souborů grafů DOT
 Name[de]=DOT-Graphendateiformat
 Name[en_GB]=DOT Graph File Format

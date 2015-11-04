@@ -10,6 +10,7 @@ X-KDE-PluginInfo-License=GPL
 Name=TGF Graph File Format
 Name[ast]=Formatu de ficheru de grafos TGF
 Name[ca]=Format de fitxer de grafs TGF
+Name[ca@valencia]=Format de fitxer de grafs TGF
 Name[cs]=Formát souborů grafů TGF
 Name[de]=TGF-Graphendateiformat
 Name[en_GB]=TGF Graph File Format
