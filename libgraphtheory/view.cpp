@@ -102,7 +102,7 @@ View::View(QWidget *parent)
     QQmlComponent *component = new QQmlComponent(engine());
     component->loadUrl(path);
     if (!component->isReady() ) {
-        qWarning() << ("%s", qPrintable(component->errorString()));
+        qWarning() << component->errorString();
         return;
     }
 
