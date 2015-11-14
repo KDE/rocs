@@ -55,6 +55,7 @@ find_package(KF5 5.7 REQUIRED COMPONENTS
     Archive
     Config
     CoreAddons
+    Crash
     Declarative
     DocTools
     I18n
