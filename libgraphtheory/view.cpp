@@ -78,6 +78,9 @@ View::View(QWidget *parent)
 {
     setResizeMode(QQuickWidget::SizeRootObjectToView);
 
+    // workaround for QTBUG-40765
+    qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
+
     // prepare QML engine to be globally used
     KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setTranslationDomain("libgraphtheory");
@@ -102,7 +105,7 @@ View::View(QWidget *parent)
     QQmlComponent *component = new QQmlComponent(engine());
     component->loadUrl(path);
     if (!component->isReady() ) {
-        qCWarning(GRAPHTHEORY_GENERAL) << ("%s", qPrintable(component->errorString()));
+        qCWarning(GRAPHTHEORY_GENERAL) << component->errorString();
         return;
     }
 
