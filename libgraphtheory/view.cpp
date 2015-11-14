@@ -105,7 +105,7 @@ View::View(QWidget *parent)
     QQmlComponent *component = new QQmlComponent(engine());
     component->loadUrl(path);
     if (!component->isReady() ) {
-        qCWarning(GRAPHTHEORY_GENERAL) << ("%s", qPrintable(component->errorString()));
+        qCWarning(GRAPHTHEORY_GENERAL) << component->errorString();
         return;
     }
 
