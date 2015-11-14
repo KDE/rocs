@@ -93,6 +93,7 @@ target_link_libraries(rocs
         Grantlee5::Templates
         KF5::Archive
         KF5::CoreAddons
+        KF5::Crash
         KF5::Declarative
         KF5::I18n
         KF5::ItemViews
