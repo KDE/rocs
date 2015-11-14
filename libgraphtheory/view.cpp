@@ -78,6 +78,9 @@ View::View(QWidget *parent)
 {
     setResizeMode(QQuickWidget::SizeRootObjectToView);
 
+    // workaround for QTBUG-40765
+    qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
+
     // prepare QML engine to be globally used
     KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setTranslationDomain("libgraphtheory");
