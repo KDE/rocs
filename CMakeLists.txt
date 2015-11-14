@@ -20,6 +20,9 @@
 
 project(rocs)
 cmake_minimum_required(VERSION 3.0.0)
+if (POLICY CMP0063)
+    cmake_policy(SET CMP0063 NEW)
+endif()
 
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 find_package(KF5DocTools)
