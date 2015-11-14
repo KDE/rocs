@@ -56,8 +56,7 @@ int main(int argc, char *argv[])
                         "wagner.reck@gmail.com",
                         "http://wiglot.wordpress.com");
 
-    // TODO: for >=KF5.15 use KCrash::initialize();
-    KCrash::setCrashHandler(KCrash::defaultCrashHandler);
+    KCrash::initialize();
 
     QApplication app(argc, argv);
     app.setApplicationVersion(aboutData.version());

@@ -24,7 +24,7 @@ if (POLICY CMP0063)
     cmake_policy(SET CMP0063 NEW)
 endif()
 
-find_package(ECM 1.7.0 REQUIRED NO_MODULE)
+find_package(ECM 5.15.0 REQUIRED NO_MODULE)
 find_package(KF5DocTools)
 find_package(Boost "1.49" REQUIRED)
 find_package(Grantlee5 "5.0.0" REQUIRED)
@@ -54,7 +54,7 @@ find_package(Qt5 5.4 REQUIRED NO_MODULE COMPONENTS
     Test
     XmlPatterns
 )
-find_package(KF5 5.7 REQUIRED COMPONENTS
+find_package(KF5 5.15 REQUIRED COMPONENTS
     Archive
     Config
     CoreAddons
