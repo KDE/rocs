@@ -27,7 +27,6 @@
 #include <QDir>
 
 #include "rocsversion.h"
-#include "logging_p.h"
 #include "ui/mainwindow.h"
 
 int main(int argc, char *argv[])
@@ -56,10 +55,10 @@ int main(int argc, char *argv[])
                         "wagner.reck@gmail.com",
                         "http://wiglot.wordpress.com");
 
-    KCrash::initialize();
-
     QApplication app(argc, argv);
     app.setApplicationVersion(aboutData.version());
+
+    KCrash::initialize();
 
     /**
      * Create command line parser and feed it with known options
