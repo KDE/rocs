@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/libgraphtheory/qml">
+        <file>AddEdgeAction.qml</file>
+        <file>AddNodeAction.qml</file>
+        <file>DeleteAction.qml</file>
+        <file>EdgePropertyItem.qml</file>
+        <file>Line.qml</file>
+        <file>NodePropertyItem.qml</file>
+        <file>Scene.qml</file>
+        <file>SelectionRectangle.qml</file>
+        <file>SelectMoveAction.qml</file>
+    </qresource>
+</RCC>

@@ -68,6 +68,7 @@ set(graphtheory_SRCS
     qtquickitems/qsgarrowheadnode.cpp
     qtquickitems/qsglinenode.cpp
 )
+qt5_add_resources(graphtheory_SRCS qml/rocs.qrc)
 
 ki18n_wrap_ui(graphtheory_SRCS
     dialogs/nodeproperties.ui

@@ -100,8 +100,7 @@ View::View(QWidget *parent)
     qmlRegisterType<GraphTheory::NodeTypeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeTypeModel");
     qmlRegisterType<GraphTheory::EdgeTypeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeTypeModel");
 
-    QUrl path = QUrl::fromLocalFile(
-        QStandardPaths::locate(QStandardPaths::GenericDataLocation, "rocsgraphtheory/qml/Scene.qml"));
+    QUrl path = QUrl("qrc:/libgraphtheory/qml/Scene.qml");
     QQmlComponent *component = new QQmlComponent(engine());
     component->loadUrl(path);
     if (!component->isReady() ) {
