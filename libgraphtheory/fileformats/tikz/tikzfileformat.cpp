@@ -38,7 +38,7 @@ K_PLUGIN_FACTORY_WITH_JSON( FilePluginFactory,
                             registerPlugin<TikzFileFormat>();)
 
 TikzFileFormat::TikzFileFormat(QObject* parent, const QList< QVariant >&)
-    : FileFormatInterface("rocs_tgffileformat", parent)
+    : FileFormatInterface("rocs_tikzfileformat", parent)
 {
 }
 
