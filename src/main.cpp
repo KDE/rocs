@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     aboutData.setShortDescription(ki18nc("@title Short program description", "Graph Theory Simulator").toString());
 
     // credits and authors (in alphabetical list)
-    aboutData.addCredit(ki18nc("@info:credit", "(c) 2008-2015 Rocs Developers").toString());
+    aboutData.addCredit(ki18nc("@info:credit", "(c) 2008-2016 Rocs Developers").toString());
     aboutData.addAuthor(ki18nc("@info:credit Developer name", "Andreas Cord-Landwehr").toString(),
                         ki18nc("@info:credit Role", "Maintainer").toString(),
                         "cordlandwehr@kde.org",
