@@ -24,6 +24,7 @@
 #include "libgraphtheory/models/edgetypemodel.h"
 #include <KColorButton>
 #include <KLocalizedString>
+#include <QAbstractItemView>
 #include <QToolButton>
 #include <QLabel>
 #include <QLineEdit>
@@ -35,7 +36,7 @@
 using namespace GraphTheory;
 
 EdgeTypesDelegate::EdgeTypesDelegate(QAbstractItemView* parent)
-    : KWidgetItemDelegate(parent)
+    : KWidgetItemDelegate(parent, parent->viewport())
 {
 
 }

@@ -25,6 +25,7 @@
 #include <KColorButton>
 #include <KLocalizedString>
 #include <QApplication>
+#include <QAbstractItemView>
 #include <QDebug>
 #include <QLabel>
 #include <QLineEdit>
@@ -36,7 +37,7 @@
 using namespace GraphTheory;
 
 NodeTypesDelegate::NodeTypesDelegate(QAbstractItemView* parent)
-    : KWidgetItemDelegate(parent)
+    : KWidgetItemDelegate(parent, parent->viewport())
 {
 
 }
