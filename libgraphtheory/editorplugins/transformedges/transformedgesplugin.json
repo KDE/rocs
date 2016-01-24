@@ -9,6 +9,7 @@
         "Description[es]": "Transforma las aristas del grafo usando una regla de transformación.", 
         "Description[et]": "Graafi seoste teisendamine vastava reegli järgi.", 
         "Description[fi]": "Muuntaa graafin välit säännön mukaan.", 
+        "Description[fr]": "Transforme les arêtes d'un graphe à l'aide d'une règle de transformation.", 
         "Description[gl]": "Transforma as arestas do gráfico segundo unha regra de transformación.", 
         "Description[it]": "Trasforma gli archi di un grafo con una regola di trasformazione.", 
         "Description[nl]": "Kanten van de graaf volgens een bepaalde regel transformeren.", 
