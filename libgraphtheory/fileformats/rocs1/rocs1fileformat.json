@@ -3,6 +3,7 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Rocs Graph File Format (old)", 
+        "Description[ast]": "Formatu de ficheru de grafos Rocs (vieyu)", 
         "Description[ca@valencia]": "Format de fitxers de grafs del Rocs (antic)", 
         "Description[ca]": "Format de fitxers de grafs del Rocs (antic)", 
         "Description[cs]": "Formát souborů grafů Rocs (starý)", 
