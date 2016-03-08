@@ -57,7 +57,6 @@ find_package(KF5 5.15 REQUIRED COMPONENTS
     CoreAddons
     Crash
     Declarative
-    DocTools
     I18n
     ItemViews
     TextEditor
@@ -80,7 +79,9 @@ remove_definitions(-DQT_NO_KEYWORDS)
 ecm_optional_add_subdirectory(libgraphtheory)
 ecm_optional_add_subdirectory(src)
 ecm_optional_add_subdirectory(icons)
-ecm_optional_add_subdirectory(doc)
+if(KF5DocTools_FOUND)
+    ecm_optional_add_subdirectory(doc)
+endif()
 
 set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org")
 feature_summary(WHAT ALL)
