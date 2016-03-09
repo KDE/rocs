@@ -158,8 +158,8 @@ void TestProject::loadSaveMultipleScriptDocuments()
     Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), graphEditor);
     QCOMPARE(loadedProject.codeDocuments().count(), 2);
     QCOMPARE(loadedProject.documentName(loadedProject.codeDocuments().at(0)), QString("A"));
-    QCOMPARE(loadedProject.codeDocuments().at(0)->text(), QString("1"));
-    QCOMPARE(loadedProject.codeDocuments().at(1)->text(), QString("2"));
+    QCOMPARE(loadedProject.codeDocuments().at(0)->text().trimmed(), QString("1"));
+    QCOMPARE(loadedProject.codeDocuments().at(1)->text().trimmed(), QString("2"));
 
     graphEditor->deleteLater();
 }
