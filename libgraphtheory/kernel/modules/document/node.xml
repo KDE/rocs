@@ -44,7 +44,7 @@ Note that dynamic properties are only available after script execution, if they 
 <property>
     <name>type</name>
     <description>
-        <para>Read at set the identifier of the node's type. If setting, the node type identifier must exist.</para>
+        <para>Read and set the identifier of the node's type. If setting, the node type identifier must exist.</para>
     </description>
     <type>string</type>
 </property>
