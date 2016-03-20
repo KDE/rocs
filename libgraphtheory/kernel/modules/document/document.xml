@@ -121,7 +121,7 @@ The document object provides access to all elements.
         <parameter>
             <name>node</name>
             <type>Node</type>
-            <info>The to be deleted node.</info>
+            <info>The node to be deleted.</info>
         </parameter>
     </parameters>
 </method>
@@ -135,7 +135,7 @@ The document object provides access to all elements.
         <parameter>
             <name>edge</name>
             <type>Edge</type>
-            <info>The to be deleted edge.</info>
+            <info>The edge to be deleted.</info>
         </parameter>
     </parameters>
 </method>
