@@ -26,6 +26,7 @@
         "Description[tr]": "Graph İşaret Dili belgelerini oku ve yaz (GML)", 
         "Description[uk]": "Читання і запис файлів у форматі Graph Markup Language (GML).", 
         "Description[x-test]": "xxRead and write Graph Markup Language documents (GML)xx", 
+        "Description[zh_TW]": "讀寫 Graph Markup Language 文件 (GML) 。", 
         "Id": "rocs_gmlfileformat", 
         "License": "GPL", 
         "Name": "GML File Format", 

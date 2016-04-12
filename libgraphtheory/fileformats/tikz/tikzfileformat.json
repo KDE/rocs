@@ -25,6 +25,7 @@
         "Description[tr]": "LaTeX belgelerinde kullanmak üzere grafik belgelerini PGF/TikZ biçiminde yazar", 
         "Description[uk]": "Запис документів графів у форматі PGF/TikZ з метою наступного використання у документах LaTeX", 
         "Description[x-test]": "xxWrites graph documents in PGF/TikZ format for use in LaTeX documentsxx", 
+        "Description[zh_TW]": "寫入 PGF/TikZ 格式的圖形文件，以便在 LaTeX 文件中使用", 
         "Id": "rocs_tikzfileformat", 
         "License": "GPL", 
         "Name": "PGF/TikZ Graph File Export Plugin", 
