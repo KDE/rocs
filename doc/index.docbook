@@ -2,7 +2,6 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
 
   <!ENTITY kappname "&rocs;">
-  <!ENTITY package "rocs">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
 
@@ -35,8 +34,8 @@
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
-<date>2015-03-13</date>
-<releaseinfo>2.0.0 &kde; 15.04</releaseinfo>
+<date>2016-04-10</date>
+<releaseinfo>Rocs 2.1.50 (Applications 16.04)</releaseinfo>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
@@ -278,7 +277,7 @@ The user interface is divided into several logical parts as presented at the scr
     format="PNG"/></imageobject></inlinemediaobject><guibutton>Create Edge</guibutton> tools, for creating new elements on the whiteboard.
     Note the extra-toolbar for selecting the respective node or edge type that becomes visible of one of these tools is selected.
     Also tools for selecting and moving as well as deleting elements are available here.
-    For details see <xref linkend="user-interface-toolbars" />.
+    For details see <xref linkend="user-interface-toolbar" />.
     </para></listitem>
 </varlistentry>
 <varlistentry>
@@ -288,7 +287,6 @@ The user interface is divided into several logical parts as presented at the scr
         <itemizedlist>
         <listitem><para>Element Types: This widget gives you direct access to the available edge and node types.</para></listitem>
         <listitem><para>Journal: Each project has its own journal that can be used to, &eg; note tasks, results, or observations.</para></listitem>
-        <listitem><para>Handbook: To get direct access to the handbook and by this to the script documentation, you can open this widget.</para></listitem>
         <listitem><para>Scripting API: To get direct access to the script documentation, you can open this widget.</para></listitem>
         </itemizedlist>
     </para></listitem>
@@ -298,7 +296,7 @@ The user interface is divided into several logical parts as presented at the scr
     <listitem><para>
         In this text editor you can write algorithms as explained in detail in <xref linkend="scripting" />.
         You can work on several script documents simultaneously by using several tabs.
-        The disk symbol at a tab appears if the script contains unsaved changes.
+        <!--FIXME link to katepart handbook? -->
     </para></listitem>
 </varlistentry>
 <varlistentry>
@@ -319,17 +317,9 @@ The user interface is divided into several logical parts as presented at the scr
 </variablelist>
 </sect1>
 
-<sect1 id="user-interface-toolbars">
-<title>Toolbars</title>
-<para>There are different toolbars for the graph editor that allow you to access features by only one click. Per default, the following toolbars are shown:</para>
-<itemizedlist>
-    <listitem><para>Main Toolbar</para></listitem>
-<!--     <listitem><para>Alignment Toolbar</para></listitem> -->
-</itemizedlist>
-<!--  -->
-<sect2 id="user-interface-toolbars-main">
-<title>Main Toolbar</title>
-<para>The <emphasis>Main Toolbar</emphasis> consists of the following actions. Clicking at an action means that your mouse pointer applies this action at the graph editor whiteboard:</para>
+<sect1 id="user-interface-toolbar">
+<title>Graph Editor Toolbar</title>
+<para>This toolbar consists of the following actions. Clicking at an action means that your mouse pointer applies this action at the graph editor whiteboard:</para>
 <itemizedlist>
 <listitem><para>
 <inlinemediaobject><imageobject>
@@ -353,69 +343,23 @@ By keeping the mouse pointer pressed at the button, a menu shows up at which the
 </inlinemediaobject>
 <guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
 </itemizedlist>
-</sect2>
-
-<!--<sect2 id="user-interface-toolbars-alignment">
-<title>Alignment Toolbar</title>
-<para>You can add the optional <emphasis>Alignment Toolbar</emphasis>. Pressing an action at this toolbar has direct effect to the currently selected nodes:</para>
-<itemizedlist>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsaligntop.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Top</guilabel>: Align the data elements at the vertical position of the top-most data element. This only affects the vertical positions.</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsalignvmiddle.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Center</guilabel>: Align the data elements at the vertical position given by the center of all selected data elements vertical positions. This only affects the vertical positions.</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsalignbottom.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Base</guilabel>: Align the data elements at the vertical position of the bottom-most data element. This only affects the vertical positions.</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsalignleft.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Left</guilabel>: Align the data elements at the horizontal position of the left-most data element. This only affects the horizontal positions.</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsalignhmiddle.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Center</guilabel>: Align the data elements at the horizontal position of the top-most data element. This only affects the horizontal
-positions.</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsalignright.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Right</guilabel>: Align the data elements at the horizontal position of the right-most data element. This only affects the horizontal positions.</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsaligncircle.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Circle</guilabel>: Aligns the data elements at a circle of diameter equals to the maximal distance of the data elements. The data elements are positioned in the same sequence as given by view from the center of gravity of these data elements.</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsaligntree.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Minimize Crossing Edges</guilabel>: Rearrange the selected data elements to minimize the number of crossing connections (application of the Fruchterman-Reingold algorithm).</para></listitem>
-</itemizedlist>
-</sect2>-->
 </sect1>
+
+<!--FIXME nop alignment action any more?-->
 </chapter>
 
-
 <chapter id="scripting">
-<title>Executing Algorithms in &rocs;</title>
+<title>Scripting</title>
+<sect1>
+    <title>Executing Algorithms in &rocs;</title>
 <para>
-&rocs; internally uses the QtScript Java Script engine
+&rocs; internally uses the QtScript Java Script engine. <!--FIXME linkt to api docs ?-->
 This means, all algorithms that you implement must use Java Script.
 In the following, we explain how to access and change elements of a graph document from the scripting engine.
 It is important to note that changes done by the scripting engine are directly reflected at the properties at the graph editor elements.
 </para>
 
-<sect1 id="scripting-controls">
+<sect2>
 <title>Control Script Execution</title>
 <para>
     There are different execution modes for your algorithms:
@@ -426,30 +370,15 @@ It is important to note that changes done by the scripting engine are directly r
         <imagedata fileref="hi22-actions-controls-run.png" format="PNG"/></imageobject>
         </inlinemediaobject>
         <guilabel>Run</guilabel>: Execute the script until it finishes.</para></listitem>
-<!--TODO not available right now -->
-<!--    <listitem><para>
-        <inlinemediaobject><imageobject>
-        <imagedata fileref="rocs-control-engine-step.png" format="PNG"/></imageobject>
-        </inlinemediaobject>
-        <guilabel>One Step</guilabel>: Execute script until one step ends. A step ends when the script calls the function <literal>interrupt()</literal>:</para>
-    <programlisting>
-        interrupt();    // ends a step
-    </programlisting>
-    </listitem>
-    <listitem><para>
-        <inlinemediaobject><imageobject>
-        <imagedata fileref="rocs-control-engine-debug.png" format="PNG"/></imageobject>
-        </inlinemediaobject>
-        <guilabel>Debug</guilabel>: Execute script in debug mode. This opens the QtScript debug dialog.</para></listitem>-->
     <listitem><para>
         <inlinemediaobject><imageobject>
         <imagedata fileref="hi22-actions-control-stop.png" format="PNG"/></imageobject>
         </inlinemediaobject>
         <guilabel>Stop</guilabel>: Stop script execution (only available while a script is executed).</para></listitem>
 </itemizedlist>
-</sect1>
+</sect2>
 
-<sect1 id="scripting-output">
+<sect2>
 <title>Script Output</title>
 <para>
     During the execution of an algorithm, debug and program output is displayed in the <emphasis>Debug &amp; Script Output</emphasis>.
@@ -464,9 +393,9 @@ It is important to note that changes done by the scripting engine are directly r
     Console.debug(string message);          // displays the message as debug output
     Console.error(string message);          // displays the message as error output
 </programlisting>
-</sect1>
+</sect2>
 
-<sect1 id="scripting-API">
+<sect2>
 <title>Scripting Engine API</title>
 <para>
 The different parts of &rocs; each provide a static element that can be accessed by the scripting engine.
@@ -477,12 +406,94 @@ These are:
 </itemizedlist>
 For the explicit API use and for a method reference, please see the inline help at the &rocs; side bar.
 </para>
+</sect2>
 </sect1>
 </chapter>
 
+<chapter id="import-export">
+<title>Import and Export</title>
+<sect1 id="import-export-projects">
+    <title>Exchange &rocs; Projects</title>
+    <para>
+        &rocs; projects can be imported and exported as archived <literal>.tar.gz</literal> files.
+        These archives can be used to exchange projects.
+        Import and Export can be done with <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Import Graph</guimenuitem></menuchoice> and <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Export Graph as</guimenuitem></menuchoice>, respectively.
+    </para>
 
-&chapterImportExport;
+<sect2 id="import-export-graphs">
+    <title>Import and Export of Graph Documents</title>
+    <para>&rocs; currently supports import and export of the following file formats:</para>
+    <itemizedlist>
+        <listitem><para>DOT files, also known as Graphviz files</para></listitem>
+        <listitem><para>GML files</para></listitem>
+        <listitem><para>Trivial Graph Format files</para></listitem>
+        <listitem><para>Keyhole Markup Language Format</para></listitem>
+    </itemizedlist>
 
+<sect3 id="format-specification-tgf">
+<title>Trivial Graph File Format</title>
+<para>
+    The <emphasis>Trivial Graph Format</emphasis> (TGF) is a simple text-based file format for describing graphs.
+    A TGF file consists of a list of node definitions, that map the node IDs to labels, followed by a list of the edges.
+    In this format it is only possible to have one label per node and one value per edge.
+    &rocs; interprets imported graphs as undirected graphs.
+    Exported graphs will contain two edges per connection if connections are bidirectional.
+</para>
+
+<sect4>
+<title>Format Specification</title>
+    <itemizedlist>
+        <listitem><para>The file starts with a list of nodes (one node per line), followed by a line with the only character "#", followed by a list of edges (one edge per line).</para></listitem>
+        <listitem><para>A node consists of an integer (identifier), followed by a space, followed by an arbitrary string.</para></listitem>
+        <listitem><para>An edge consists of two integers (identifiers) separated by a space, followed by a space, followed by an arbitrary string. It is assumed that the directed edge points from the first identifier to the second identifier.</para></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title>Example</title>
+<programlisting>
+1 starting node
+2 transmitter
+3 sink
+#
+1 2 blue
+2 1 red
+2 3 green
+</programlisting>
+</sect4>
+</sect3>
+
+<sect3 id="format-specification-dot">
+<title>DOT Language / Graphviz Graph File Format</title>
+<para>
+    The DOT language is a plain text graph description language that allows both,a good human readable representation of graphs as well as an efficient processing by graph layout programs.
+    DOT is the default file format for the Graphviz graph visualization suite, but is also widely used by other graph tools.
+    The usual file extensions for DOT are <emphasis>.gv</emphasis> and <emphasis>.dot</emphasis>.
+</para>
+
+<sect4>
+<title>Unsupported Features</title>
+<para>
+    &rocs; can parse every graph file that contains a graph specified according to the DOT language specification<footnote><para>http://www.graphviz.org/content/dot-language</para></footnote>.
+    The support of language features is complete, despite of the following exceptions:
+</para>
+    <itemizedlist>
+        <listitem><para>subgraph: Due to the lack of a subgraph concept in &rocs;, subgraphs are only imported as a set of date elements and connections. Especially, connections to or from subgraphs are not imported.</para></listitem>
+        <listitem><para>&HTML; and &XML; attributes: Attributes (like labels) that contain &HTML; or &XML; syntax are read unchanged. Especially, not adjustment of fonts and styles are read from those attributes.</para></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title>Example</title>
+<programlisting>
+digraph myGraph {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect4>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
 
 <chapter id="credits">
 <title>Credits and License</title>
@@ -510,24 +521,6 @@ For the explicit API use and for a method reference, please see the inline help 
 &underGPL;               <!-- GPL License -->
 
 </chapter>
-
-<appendix id="installation">
-<title>Installation</title>
-
-<sect1 id="getting-rocs">
-<title>How to obtain &rocs;</title>
-
-&install.intro.documentation;
-
-</sect1>
-
-<sect1 id="compilation">
-<title>Compilation and installation</title>
-
-&install.compile.documentation;
-
-</sect1>
-</appendix>
 
 &documentation.index;
 </book>
