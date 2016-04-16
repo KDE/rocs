@@ -5,11 +5,6 @@
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
 
-  <!ENTITY apiConsole SYSTEM "apiConsole.docbook">
-  <!ENTITY apiDatastructure SYSTEM "apiDatastructure.docbook">
-  <!ENTITY apiGraphstructure SYSTEM "apiGraphstructure.docbook">
-
-  <!ENTITY chapterImportExport SYSTEM "chapterImportExport.docbook">
 ]>
 <book id="rocs" lang="&language;">
 
