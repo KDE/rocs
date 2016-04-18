@@ -83,7 +83,7 @@ MainWindow::MainWindow()
 
     setupWidgets();
     setupActions();
-    setupGUI(ToolBar | Keys | Save | Create);
+    setupGUI(Keys | Save | Create);
 
     setupToolsPluginsAction();
 

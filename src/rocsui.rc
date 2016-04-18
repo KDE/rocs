@@ -62,25 +62,5 @@
             </Menu>
         </Menu>
     </MenuBar>
-
-    <ToolBar name="main" >
-        <text>Main Toolbar</text>
-        <Action name="selectmove" />
-        <Action name="add_node" />
-        <Action name="add_edge" />
-        <Action name="delete" />
-        <Action name="zoom" />
-    </ToolBar>
-    <ToolBar name="align">
-        <text>Align Toolbar</text>
-        <Action name="align-htop"/>
-        <Action name="align-hcenter"/>
-        <Action name="align-hbottom"/>
-        <Action name="align-vleft"/>
-        <Action name="align-vcenter"/>
-        <Action name="align-vright" />
-        <Action name="align-circle" />
-        <Action name="align-tree" />
-    </ToolBar>
 </gui>
 
