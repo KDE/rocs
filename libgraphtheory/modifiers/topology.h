@@ -24,6 +24,8 @@
 #include "typenames.h"
 #include "graphtheory_export.h"
 
+#define BOOST_MATH_DISABLE_FLOAT128 1
+
 namespace GraphTheory
 {
 

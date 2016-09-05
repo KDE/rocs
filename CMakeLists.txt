@@ -70,7 +70,6 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
 )
 
-add_definitions(-fext-numeric-literals)
 add_definitions(-DQT_NO_CAST_TO_ASCII)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
