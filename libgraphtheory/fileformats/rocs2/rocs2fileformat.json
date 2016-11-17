@@ -25,6 +25,7 @@
         "Description[tr]": "Rocs Grafik Dosya Biçimi", 
         "Description[uk]": "формат файлів графів Rocs", 
         "Description[x-test]": "xxRocs Graph File Formatxx", 
+        "Description[zh_TW]": "Rocs 圖形檔案格式", 
         "Id": "rocs_rocs2fileformat", 
         "License": "GPL", 
         "Name": "Rocs File Format", 
