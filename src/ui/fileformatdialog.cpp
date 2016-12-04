@@ -78,7 +78,7 @@ bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
                 "<p>The file <br /><strong>'%1'</strong><br /> already exists; if you "
                 "do not want to overwrite it, change the file name to "
                 "something else.</p>", file.toDisplayString()),
-            i18n("File Exists"), KGuiItem(i18n("Overwrite") ))
+            i18n("File Exists"), KStandardGuiItem::overwrite())
             == KMessageBox::Cancel ) {
             return false;
         }
