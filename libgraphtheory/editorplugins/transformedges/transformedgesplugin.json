@@ -3,7 +3,6 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Transform graph edges by a transformation rule.", 
-        "Description[ast]": "Tresforma los berbesos del grafu pente una regla de tresformación.", 
         "Description[ca@valencia]": "Transforma les arestes del graf seguint una regla de transformació.", 
         "Description[ca]": "Transforma les arestes del graf seguint una regla de transformació.", 
         "Description[de]": "Graphenkanten mittels Transformationsregel umformen.", 
@@ -28,7 +27,6 @@
         "Id": "rocs_transformedges", 
         "License": "GPL", 
         "Name": "Transform Edges", 
-        "Name[ast]": "Tresformar berbesos", 
         "Name[bs]": "Trasformiši ivice", 
         "Name[ca@valencia]": "Transforma les arestes", 
         "Name[ca]": "Transforma les arestes", 

@@ -3,7 +3,6 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Rocs Graph File Format", 
-        "Description[ast]": "Formatu de ficheru de grafos Rocs", 
         "Description[ca@valencia]": "Format de fitxers de graf del Rocs", 
         "Description[ca]": "Format de fitxers de graf del Rocs", 
         "Description[cs]": "Formát souborů grafů Rocs", 
@@ -29,7 +28,6 @@
         "Id": "rocs_rocs2fileformat", 
         "License": "GPL", 
         "Name": "Rocs File Format", 
-        "Name[ast]": "Formatu de ficheru Rocs", 
         "Name[ca@valencia]": "Format de fitxer del Rocs", 
         "Name[ca]": "Format de fitxer del Rocs", 
         "Name[cs]": "Formát souborů Rocs", 

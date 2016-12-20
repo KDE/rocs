@@ -27,7 +27,6 @@
         "Id": "rocs_assignvaluesplugin", 
         "License": "GPL", 
         "Name": "Assign Values Plugin", 
-        "Name[ast]": "Complementu d'asignación de valores", 
         "Name[ca@valencia]": "Connector per assignar valors", 
         "Name[ca]": "Connector per assignar valors", 
         "Name[cs]": "Modul pro přiřazování hodnot", 

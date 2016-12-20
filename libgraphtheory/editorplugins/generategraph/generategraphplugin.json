@@ -3,7 +3,6 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "This generates a new graph by a pattern.", 
-        "Description[ast]": "Esto xenera un grafu nuevu por un patrón.", 
         "Description[ca@valencia]": "Això genera un nou graf segons un patró.", 
         "Description[ca]": "Això genera un nou graf segons un patró.", 
         "Description[de]": "Erstellt anhand eines Musters einen neuen Graphen.", 
@@ -28,7 +27,6 @@
         "Id": "rocs_generategraphplugin", 
         "License": "GPL", 
         "Name": "Generate Graph", 
-        "Name[ast]": "Xenerar grafu", 
         "Name[bg]": "Създаване на графика", 
         "Name[bs]": "Generiši Graf", 
         "Name[ca@valencia]": "Genera el graf", 

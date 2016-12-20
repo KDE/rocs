@@ -3,7 +3,6 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Writes graph documents in PGF/TikZ format for use in LaTeX documents", 
-        "Description[ast]": "Escribe documentos de grafos nel formatu PGF/TikZ pal so usu en documentos LaTeX", 
         "Description[ca@valencia]": "Escriu documents gràfics en format PGF/TikZ per utilitzar-los en documents LaTeX", 
         "Description[ca]": "Escriu documents gràfics en format PGF/TikZ per utilitzar-los en documents LaTeX", 
         "Description[de]": "Exportiert Graphendokumente im Format PGF/TikZ zur Verwendung in LaTeX-Dokumenten", 
@@ -28,7 +27,6 @@
         "Id": "rocs_tikzfileformat", 
         "License": "GPL", 
         "Name": "PGF/TikZ Graph File Export Plugin", 
-        "Name[ast]": "Complementu d'esportación de ficheros de grafos PGF/TikZ", 
         "Name[ca@valencia]": "Connector d'exportació del fitxer de grafs a PGF/TikZ", 
         "Name[ca]": "Connector d'exportació del fitxer de grafs a PGF/TikZ", 
         "Name[cs]": "Export souborů grafů PGF/TikZ", 
