@@ -174,7 +174,7 @@ There, we select a <guilabel>Random Graph</guilabel> with 30 nodes, 90 edges, an
 <title>Creating the Element Types</title>
 <para>
 We use the <guilabel>Element Types</guilabel> and create a second node type as well as a second edge type.
-For both new types we open the the properties dialog by using the respective <guibutton>Properties</guibutton> buttons and set the IDs to <literal>2</literal>.
+For both new types we open the properties dialog by using the respective <guibutton>Properties</guibutton> buttons and set the IDs to <literal>2</literal>.
 Furthermore, we change the colors of elements of these two new types (to distinguish them from the default types).
 Finally, we set all edge types to be bidirectional, and the IDs of the default types to <literal>1</literal>.
 </para>
