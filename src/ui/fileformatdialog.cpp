@@ -113,8 +113,8 @@ GraphDocumentPtr FileFormatDialog::importFile()
     }
     ext.append(i18n("*|All files"));
 
-    QPointer<QFileDialog> dialog = new QFileDialog(qobject_cast< QWidget* >(parent()));
-//     dialog->setCaption(i18nc("@title:window", "Import Graph File into Project")); //FIXME commented out for porting
+    QPointer<QFileDialog> dialog = new QFileDialog(qobject_cast< QWidget* >(parent()),
+                                                i18nc("@title:window", "Import Graph File into Project"));
     if (!dialog->exec()) {
         return GraphDocumentPtr();
     }
