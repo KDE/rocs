@@ -31,6 +31,7 @@
 #include <QUrl>
 #include <QFile>
 #include <QPointer>
+#include <QRegularExpression>
 
 using namespace GraphTheory;
 
@@ -43,17 +44,16 @@ bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
 {
     FileFormatManager manager;
 
-    //TODO rewrite this whole class, it is a wonder that the code works :)
-    QString ext;
+    QStringList nameFilter;
     QList<FileFormatInterface*> exportBackends = manager.backends(FileFormatManager::Export);
     foreach(FileFormatInterface * f, exportBackends) { //TODO fragile code
-        ext.append(f->extensions().join(";;"));
+        nameFilter << f->extensions();
     }
-    ext.append(i18n("*|All files"));
 
     QUrl startDirectory = QUrl::fromLocalFile(Settings::lastOpenedDirectory());
 
-    QPointer<QFileDialog> exportDialog = new QFileDialog(qobject_cast< QWidget* >(parent()), QString(), QString(), ext);
+    QPointer<QFileDialog> exportDialog = new QFileDialog(qobject_cast< QWidget* >(parent()));
+    exportDialog->setNameFilters(nameFilter);
     exportDialog->setLabelText(QFileDialog::Accept, i18nc("@action:button", "Export"));
     if (exportDialog->exec() != QDialog::Accepted) {
         return false;
@@ -64,13 +64,7 @@ bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
     }
 
     // set file ending
-    QUrl file;
-    ext = exportDialog->selectedNameFilter().remove('*');
-    if (exportDialog->selectedFiles().first().endsWith(ext)) {
-        file = QUrl::fromLocalFile(exportDialog->selectedFiles().first());
-    } else {
-        file = QUrl::fromLocalFile(exportDialog->selectedFiles().first().append(ext));
-    }
+    const QUrl file = QUrl::fromLocalFile(exportDialog->selectedFiles().first());
 
     // test if any file is overwritten
     if (QFile::exists(exportDialog->selectedFiles().first())) {
@@ -85,16 +79,28 @@ bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
     }
 
     // select plugin by extension
+    const QString filter = exportDialog->selectedNameFilter();
+
+    // find match for "(*.foo)"
+    QRegularExpressionMatch match;
+    filter.lastIndexOf(QRegularExpression("\\*\\.[a-zA-Z0-9]+"), -1, &match);
+    const QString ext = match.captured(0).right(match.captured(0).length() - 2);
     FileFormatInterface * filePlugin = manager.backendByExtension(ext);
-    if (!filePlugin) {
-        qDebug() << "Cannot export file: " << file.toLocalFile();
+    if (ext == QString() || !filePlugin) {
+        KMessageBox::error(qobject_cast< QWidget* >(parent()), i18n(
+            "<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file backend."
+            "Aborting export.</p>",
+            file.toDisplayString()));
+        qCritical() << "Cannot export file, since cannot find plugin for extension: " << file.toLocalFile() << ext;
         return false;
     }
 
     filePlugin->setFile(file);
     filePlugin->writeFile(document);
     if (filePlugin->hasError()) {
-        qDebug() << "Error occurred when writing file: " << filePlugin->errorString();
+        KMessageBox::error(qobject_cast< QWidget* >(parent()), i18n(
+            "<p>Error occured when writing file: <strong>'%1'</strong></p>", filePlugin->errorString()));
+        qCritical() << "Error occurred when writing file: " << filePlugin->errorString();
         return false;
     }
 
