@@ -88,7 +88,7 @@ bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
     FileFormatInterface * filePlugin = manager.backendByExtension(ext);
     if (ext == QString() || !filePlugin) {
         KMessageBox::error(qobject_cast< QWidget* >(parent()), i18n(
-            "<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file backend."
+            "<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file backend. "
             "Aborting export.</p>",
             file.toDisplayString()));
         qCritical() << "Cannot export file, since cannot find plugin for extension: " << file.toLocalFile() << ext;
@@ -99,7 +99,7 @@ bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
     filePlugin->writeFile(document);
     if (filePlugin->hasError()) {
         KMessageBox::error(qobject_cast< QWidget* >(parent()), i18n(
-            "<p>Error occured when writing file: <strong>'%1'</strong></p>", filePlugin->errorString()));
+            "<p>Error occurred when writing file: <strong>'%1'</strong></p>", filePlugin->errorString()));
         qCritical() << "Error occurred when writing file: " << filePlugin->errorString();
         return false;
     }
