@@ -84,7 +84,7 @@ protected:
      * Reimplemented method KMainWindow::queryClose().
      */
     virtual bool queryClose() Q_DECL_OVERRIDE;
-    void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
     void showConfigurationDialog();

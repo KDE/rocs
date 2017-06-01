@@ -36,7 +36,7 @@ class AssignValuesPlugin : public EditorPluginInterface
 public:
     AssignValuesPlugin(QObject* parent, const QList< QVariant >&);
     virtual ~AssignValuesPlugin();
-    virtual void showDialog(GraphDocumentPtr document);
+    void showDialog(GraphDocumentPtr document) Q_DECL_OVERRIDE;
 
 private:
     const QScopedPointer<AssignValuesPluginPrivate> d;

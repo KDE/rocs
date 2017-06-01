@@ -36,7 +36,7 @@ class GenerateGraphPlugin : public EditorPluginInterface
 public:
     GenerateGraphPlugin(QObject* parent, const QList< QVariant >&);
     virtual ~GenerateGraphPlugin();
-    virtual void showDialog(GraphDocumentPtr document);
+    void showDialog(GraphDocumentPtr document) Q_DECL_OVERRIDE;
 
 private:
     const QScopedPointer<GenerateGraphPluginPrivate> d;

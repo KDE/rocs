@@ -34,13 +34,13 @@ public:
     explicit EdgeTypesDelegate(QAbstractItemView *parent);
     virtual ~EdgeTypesDelegate();
     /** reimplemented from QAbstractItemDelegate **/
-    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+    void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const Q_DECL_OVERRIDE;
     /** reimplemented fromKWidgetItemDelegate **/
-    virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
+    QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const Q_DECL_OVERRIDE;
     /** reimplemented fromKWidgetItemDelegate **/
-    virtual QList<QWidget*> createItemWidgets(const QModelIndex &index) const;
+    QList<QWidget*> createItemWidgets(const QModelIndex &index) const Q_DECL_OVERRIDE;
     /** reimplemented fromKWidgetItemDelegate **/
-    virtual void updateItemWidgets(const QList<QWidget*> widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const;
+    void updateItemWidgets(const QList<QWidget*> widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
     void onColorDialogOpened();

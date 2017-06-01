@@ -40,19 +40,19 @@ public:
     /**
      * File extensions that are common for this file type.
      */
-    virtual const QStringList extensions() const;
+    const QStringList extensions() const Q_DECL_OVERRIDE;
 
     /**
      * Writes given graph document to formerly specified file \see setFile().
      * \param graph is graphDocument to be serialized
      */
-    virtual void writeFile(GraphDocumentPtr graph);
+    void writeFile(GraphDocumentPtr graph) Q_DECL_OVERRIDE;
 
     /**
      * Open given file and imports it into internal format.
      * \param file is url of a local file
      */
-    virtual void readFile();
+    void readFile() Q_DECL_OVERRIDE;
 
 private:
     QString direction(EdgeType::Direction direction) const;

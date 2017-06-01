@@ -48,9 +48,9 @@ public:
     bool isHighlighted() const;
     void setHighlighted(bool highlight);
     /** reimplemented from QQuickPaintedItem **/
-    void paint(QPainter *painter);
+    void paint(QPainter *painter) Q_DECL_OVERRIDE;
     /** reimplemented from QQuickItem **/
-    bool contains(const QPointF &point) const;
+    bool contains(const QPointF &point) const Q_DECL_OVERRIDE;
 
 Q_SIGNALS:
     void nodeChanged();

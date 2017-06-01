@@ -41,10 +41,10 @@ class SideToolButton: public QToolButton
 public:
     explicit SideToolButton(QWidget* parent = 0);
     Qt::Orientation orientation() const;
-    virtual QSize sizeHint() const;
+    QSize sizeHint() const Q_DECL_OVERRIDE;
 
 protected:
-    virtual void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };
 
 /**
