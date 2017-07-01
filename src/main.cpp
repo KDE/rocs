@@ -31,6 +31,7 @@
 
 int main(int argc, char *argv[])
 {
+    QApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("rocs");
 
     KAboutData aboutData("rocs",
@@ -55,7 +56,6 @@ int main(int argc, char *argv[])
                         "wagner.reck@gmail.com",
                         "http://wiglot.wordpress.com");
 
-    QApplication app(argc, argv);
     app.setApplicationVersion(aboutData.version());
 
     KCrash::initialize();
