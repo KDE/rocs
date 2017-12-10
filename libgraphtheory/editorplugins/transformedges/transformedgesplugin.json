@@ -24,6 +24,7 @@
         "Description[tr]": "Grafik kenarlarını bir dönüştürme kuralı ile dönüştür.",
         "Description[uk]": "Перетворити ребра графу за правилом перетворення.",
         "Description[x-test]": "xxTransform graph edges by a transformation rule.xx",
+        "Description[zh_CN]": "通过转换规则转换图形边缘。",
         "Description[zh_TW]": "依轉換規則來轉換圖形邊緣。",
         "Id": "rocs_transformedges",
         "License": "GPL",

@@ -24,6 +24,7 @@
         "Description[tr]": "Değerleri grafik kenarlarına ve düğümlerine ata.",
         "Description[uk]": "Додавання значень до ребер та вузлів графу.",
         "Description[x-test]": "xxAssign values to graph edges and nodes.xx",
+        "Description[zh_CN]": "给图的边和节点赋值。",
         "Description[zh_TW]": "指定值給圖形邊緣與節點。",
         "Id": "rocs_assignvaluesplugin",
         "License": "GPL",
@@ -50,6 +51,7 @@
         "Name[tr]": "Değerleri Ata",
         "Name[uk]": "Додаток пов’язування значень",
         "Name[x-test]": "xxAssign Values Pluginxx",
+        "Name[zh_CN]": "分配值插件",
         "Name[zh_TW]": "指定值外掛程式",
         "ServiceTypes": [
             "rocs/editorplugins"
