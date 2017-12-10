@@ -24,6 +24,7 @@
         "Description[tr]": "Bu, bir desene göre bir grafik oluşturur.",
         "Description[uk]": "Створює новий граф за шаблоном.",
         "Description[x-test]": "xxThis generates a new graph by a pattern.xx",
+        "Description[zh_CN]": "根据纹理生成新图形。",
         "Description[zh_TW]": "依樣式產生新的圖形。",
         "Id": "rocs_generategraphplugin",
         "License": "GPL",

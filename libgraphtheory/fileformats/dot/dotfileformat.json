@@ -25,6 +25,7 @@
         "Description[tr]": "Graphviz grafik belgelerini oku ve yaz (DOT)",
         "Description[uk]": "Читання і запис файлів документів графів Graphviz (DOT)",
         "Description[x-test]": "xxRead and write Graphviz graph documents (DOT)xx",
+        "Description[zh_CN]": "读写 Graphviz 图形文档 (DOT)",
         "Description[zh_TW]": "讀寫 Graphviz 圖形檔 (DOT)。",
         "Id": "rocs_dotfileformat",
         "License": "GPL",
@@ -51,6 +52,7 @@
         "Name[tr]": "DOT Grafik Dosya Biçimi",
         "Name[uk]": "формат файлів графів DOT",
         "Name[x-test]": "xxDOT Graph File Formatxx",
+        "Name[zh_CN]": "DOT 图形文件格式",
         "Name[zh_TW]": "DOT 圖形檔案格式",
         "ServiceTypes": [
             "rocs/graphtheory/fileformat"
