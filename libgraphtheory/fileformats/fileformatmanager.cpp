@@ -30,6 +30,7 @@
 #include <QDirIterator>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QMessageBox>
 
 using namespace GraphTheory;
 
@@ -121,6 +122,20 @@ void FileFormatManager::loadBackends()
             FileFormatInterface *plugin = factory->create<FileFormatInterface>(this);
             d->backends.append(plugin);
         }
+    }
+
+    // display a QMessageBox if no plugins are found
+    if (d->backends.empty()) {
+        QMessageBox pluginErrorMessageBox;
+        pluginErrorMessageBox.setWindowTitle(tr("Plugin Error"));
+        pluginErrorMessageBox.setTextFormat(Qt::RichText);
+        pluginErrorMessageBox.setText("Plugins could not be found in specified directories:<br>"+
+                                         dirsToCheck.join("<br>")+
+                                         "<br><br> Check <a href='http://doc.qt.io/qt-5/deployment-plugins.html'>"
+                                         "this link</a> for further informations.");
+        pluginErrorMessageBox.setDefaultButton(QMessageBox::Close);
+        pluginErrorMessageBox.exec();
+        exit(1);
     }
 
     // load static plugins
