@@ -19,7 +19,7 @@
 ##
 
 project(rocs)
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.3)
 
 find_package(ECM 5.15.0 REQUIRED NO_MODULE)
 find_package(KF5DocTools)
@@ -83,7 +83,7 @@ if(KF5DocTools_FOUND)
     ecm_optional_add_subdirectory(doc)
 endif()
 
-set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org")
+set_package_properties(Boost PROPERTIES DESCRIPTION "Boost C++ Libraries" URL "http://www.boost.org")
 feature_summary(WHAT ALL)
 
 install(FILES org.kde.rocs.appdata.xml DESTINATION ${CMAKE_INSTALL_METAINFODIR})
