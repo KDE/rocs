@@ -40,7 +40,7 @@ class NodeWrapperPrivate;
 /**
  * \class NodeWrapper
  * Wraps NodePtr to be accessible via QtScript. All properties of the node object are available
- * as commong QObject properties.
+ * as common QObject properties.
  */
 class NodeWrapper : public QObject
 {

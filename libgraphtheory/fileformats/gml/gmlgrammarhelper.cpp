@@ -94,7 +94,7 @@ const QString GmlGrammarHelper::processKey(const QString& key)
 
 void GmlGrammarHelper::setAttribute(const QString& key, const QString& value)
 {
-    qCDebug(GRAPHTHEORY_FILEFORMAT) << "Setting attibute " << key;
+    qCDebug(GRAPHTHEORY_FILEFORMAT) << "Setting attribute " << key;
     switch (currentState) {
     case begin: break;
     case graph:
@@ -103,7 +103,7 @@ void GmlGrammarHelper::setAttribute(const QString& key, const QString& value)
             joined.append('.').append(key);
 //             document->setDynamicProperty(joined, value);
         } else {
-            qCDebug(GRAPHTHEORY_FILEFORMAT) << "seting property to graph" << key << value;
+            qCDebug(GRAPHTHEORY_FILEFORMAT) << "setting property to graph" << key << value;
 //           if (!currentGraph->setProperty(processKey(key).toAscii(),value)){
 //             document->addDynamicProperty(processKey(key), value); //is a dinamic property
 //           }
@@ -140,7 +140,7 @@ void GmlGrammarHelper::setAttribute(const QString& key, const QString& value)
             joined.append('.').append(key);
             currentNode->setProperty(joined.toUtf8(), value);
         } else {
-            qCDebug(GRAPHTHEORY_FILEFORMAT) << "seting property to node" << key << value;
+            qCDebug(GRAPHTHEORY_FILEFORMAT) << "setting property to node" << key << value;
 //           if(!currentNode->setProperty(processKey(key).toAscii(),value)){
             currentNode->setDynamicProperty(processKey(key), value);
 //           }

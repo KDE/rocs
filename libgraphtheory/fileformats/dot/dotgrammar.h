@@ -27,7 +27,7 @@ class Document;
 
 namespace DotParser {
     /**
-    * Parse the given string \p str that represents the textual respresentation of a
+    * Parse the given string \p str that represents the textual representation of a
     * graph in DOT/Graphviz format. The given document \p graphDoc must
     * be of plugin type "Graph.
     */

@@ -18,8 +18,8 @@
     02110-1301, USA
 */
 
-#ifndef DOT_GRAPHPARSINGHELPER_H
-#define DOT_GRAPHPARSINGHELPER_H
+#ifndef DOT_GRAMMARHELPER_H
+#define DOT_GRAMMARHELPER_H
 
 #include "typenames.h"
 #include <QStringList>

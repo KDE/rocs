@@ -216,7 +216,7 @@ void DocumentWrapper::remove(NodeWrapper *node)
         emit message(i18nc("@info:shell", "%1: \"node\" is not a valid node object", command), Kernel::ErrorMessage);
         return;
     }
-    // note: The NodeWrapper object explicitly is not removed freom m_nodeMap and by this the node object is not removed.
+    // note: The NodeWrapper object explicitly is not removed from m_nodeMap and by this the node object is not removed.
     // This has the benefit to not taking care validity of Node, NodeWrapper and its QScriptObject, but on the downside
     // leads to much used memory, that is only freed after run.
     // TODO: we need a mechanism that carefully implements on-the-fly object deletions
@@ -230,7 +230,7 @@ void DocumentWrapper::remove(EdgeWrapper *edge)
         emit message(i18nc("@info:shell", "%1: \"edge\" is not a valid edge object", command), Kernel::ErrorMessage);
         return;
     }
-    // note: The EdgeWrapper object explicitly is not removed freom m_edgeMap and by this the edge object is not removed.
+    // note: The EdgeWrapper object explicitly is not removed from m_edgeMap and by this the edge object is not removed.
     // This has the benefit to not taking care validity of Edge, EdgeWrapper and its QScriptObject, but on the downside
     // leads to much used memory, that is only freed after run.
     // TODO: we need a mechanism that carefully implements on-the-fly object deletions

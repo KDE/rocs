@@ -31,7 +31,7 @@ namespace GraphTheory
 {
 /**
  * \class ConsoleModule
- * This class provides an interface object for the scripting engine to write informatoin to
+ * This class provides an interface object for the scripting engine to write information to
  * the application console. The application widget that displays these information shall listen
  * to this object.
  */

@@ -122,7 +122,7 @@ private:
 
     /**
      * Generate an Erdös-Renyi random graph. This graph is created by first creating a set of \p nodes
-     * many node elemnts and then creating any possibly edge with probability \p edgeProbability.
+     * many node elements and then creating any possibly edge with probability \p edgeProbability.
      *
      * \param nodes is the number of nodes of the generated graph
      * \param edgeProbability is the probability for creating an arbitrary edge

@@ -480,7 +480,7 @@ void TestKernel::neighborships()
 
 void TestKernel::neighborshipsWithTypes()
 {
-    // this test is the same as withouth types but we add an backedge of another type that
+    // this test is the same as without types but we add an backedge of another type that
     // changes the results if types are not respected
     GraphDocumentPtr document = GraphDocument::create();
     EdgeTypePtr typeA = document->edgeTypes().first();

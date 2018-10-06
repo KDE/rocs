@@ -86,7 +86,7 @@ bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
     filter.lastIndexOf(QRegularExpression("\\*\\.[a-zA-Z0-9]+"), -1, &match);
     const QString ext = match.captured(0).right(match.captured(0).length() - 2);
     FileFormatInterface * filePlugin = manager.backendByExtension(ext);
-    if (ext == QString() || !filePlugin) {
+    if (ext.isEmpty() || !filePlugin) {
         KMessageBox::error(qobject_cast< QWidget* >(parent()), i18n(
             "<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file backend. "
             "Aborting export.</p>",

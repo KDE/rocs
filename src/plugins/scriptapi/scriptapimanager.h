@@ -73,7 +73,7 @@ public:
     QString apiOverviewDocument() const;
 
     /**
-     * Load documenation object specification from locally stored XML file.
+     * Load documentation object specification from locally stored XML file.
      *
      * \param path is the local XML file containing the object API specification
      * \return true if loaded successfully, otherwise false

@@ -66,7 +66,7 @@ void gotKey(const std::string& key)
 //   }else if (k.compare("edge", Qt::CaseInsensitive) == 0){
 //     qCDebug(GRAPHTHEORY_FILEFORMAT) << "create a edge";
 //   }else {
-//     qCDebug(GRAPHTHEORY_FILEFORMAT) << "Process atribute " << k;
+//     qCDebug(GRAPHTHEORY_FILEFORMAT) << "Process attribute " << k;
 //     lastKey = key;
 //   }
 

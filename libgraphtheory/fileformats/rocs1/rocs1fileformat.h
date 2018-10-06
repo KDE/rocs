@@ -57,7 +57,7 @@ class Rocs1FileFormatPrivate;
  *
  * DataColor    : [RGB in hex]  # Color of newly created Data elements ( Nodes )
  * Pointercolor : [RBG in Hex]  # Color of newly created Data elements ( Nodes )
- * name         : [string]      # Name of the data structure acessible in the scripting interface.
+ * name         : [string]      # Name of the data structure accessible in the scripting interface.
  *
  * visibility : [bool]           # is this DataStructure visible?
  *

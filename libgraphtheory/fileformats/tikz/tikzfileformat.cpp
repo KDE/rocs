@@ -111,7 +111,7 @@ void TikzFileFormat::writeFile(GraphDocumentPtr graph)
     }
 
     // export data elements
-    // y-axis is mirrowed in tikz-format
+    // y-axis is mirrored in tikz-format
     foreach(NodeTypePtr type, graph->nodeTypes()) {
         foreach(NodePtr node, graph->nodes(type)) {
             QString nodeStr = QString("\\node[nodetype%1] (%2) at (%3,%4) [label=left:%5]  {%6};").

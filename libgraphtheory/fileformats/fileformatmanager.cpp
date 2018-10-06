@@ -132,7 +132,7 @@ void FileFormatManager::loadBackends()
         pluginErrorMessageBox.setText("Plugins could not be found in specified directories:<br>"+
                                          dirsToCheck.join("<br>")+
                                          "<br><br> Check <a href='http://doc.qt.io/qt-5/deployment-plugins.html'>"
-                                         "this link</a> for further informations.");
+                                         "this link</a> for further information.");
         pluginErrorMessageBox.setDefaultButton(QMessageBox::Close);
         pluginErrorMessageBox.exec();
         exit(1);

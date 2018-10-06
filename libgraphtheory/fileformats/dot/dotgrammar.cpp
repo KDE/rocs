@@ -108,7 +108,7 @@ namespace distinct
     //]
 }
 
-// The parser is implemented to fulfull exactly the DOT file specification. For details on the DOT
+// The parser is implemented to fulfill exactly the DOT file specification. For details on the DOT
 // file format see /usr/share/doc/graphviz/html/info/lang.html or the graphviz website. The used
 // specification is as follows:
 //
@@ -224,7 +224,7 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
         edgeop = string("->") | string("--");
 
         ID = lexeme[
-                // parse alpha-numberic sequence that is not a keyword
+                // parse alpha-numeric sequence that is not a keyword
                 ( !(distinct::keyword["graph"] | distinct::keyword["edge"] | distinct::keyword["node"])
                     >> char_("a-zA-Z0-9") >> *char_("a-zA-Z0-9_")
                 )

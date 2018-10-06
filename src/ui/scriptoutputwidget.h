@@ -29,7 +29,7 @@
  * \class ScriptOutputWidget
  *
  * This widget displays output and debug messages from a ConsoleInterface object.
- * Add this widget to your UI, add a ConsoleInterface object and registert that object at your
+ * Add this widget to your UI, add a ConsoleInterface object and register that object at your
  * script engine.
  */
 class ScriptOutputWidget : public QWidget

@@ -357,7 +357,7 @@ QList<NodeWrapper*> NodeWrapper::successors(int type) const
 QScriptValue NodeWrapper::distance(const QString &lengthProperty, QList< NodeWrapper* > targets)
 {
     //TODO at a later point in time:
-    //     factor this algorithm out into a self-containted graph algorithm class
+    //     factor this algorithm out into a self-contained graph algorithm class
 
     // Implementation of Floyd-Warshall Algorithm:
     // asymptotic runtime: O(n^3), n = number of nodes

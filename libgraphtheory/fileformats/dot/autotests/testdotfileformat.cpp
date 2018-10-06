@@ -541,7 +541,7 @@ void DotFileFormatTest::parseFileRussian()
     importer.setFile(QUrl::fromLocalFile("directed/russian.gv"));
     importer.readFile();
 
-    QEXPECT_FAIL("", "Parsing of cyrillic characters for identifiers not yet supported.", Continue);
+    QEXPECT_FAIL("", "Parsing of Cyrillic characters for identifiers not yet supported.", Continue);
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
 }
 

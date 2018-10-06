@@ -38,7 +38,7 @@ namespace GraphTheory
  *    character "#", followed by a list of edges (one edge per line).
  *  - A node consists of an integer (identifier), followed by a space, followed by an arbitrary string.
  *  - An edge consists of two integers (identifiers) separated by a space, followed by a space,
- *    followed by an arbitray string. It is assumed that the directed edge points from the first
+ *    followed by an arbitrary string. It is assumed that the directed edge points from the first
  *    identifier to the second identifier.
  */
 

@@ -41,7 +41,7 @@ class NodeWrapper;
 /**
  * \class EdgeWrapper
  * Wraps EdgePtr to be accessible via QtScript. All properties of the node object are available
- * as commong QObject properties.
+ * as common QObject properties.
  */
 class EdgeWrapper : public QObject
 {
