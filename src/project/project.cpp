@@ -24,6 +24,8 @@
 #include "libgraphtheory/editor.h"
 #include <KConfig>
 #include <KConfigGroup>
+#include <KLocalizedString>
+#include <KMessageBox>
 #include <KTextEditor/Document>
 #include <KTextEditor/Editor>
 #include <KTar>
@@ -123,6 +125,7 @@ bool ProjectPrivate::loadProject(const QUrl &url)
     }
     m_journal = KTextEditor::Editor::instance()->createDocument(nullptr);
     m_journal->openUrl(QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + metaInfo["journal.txt"].toString()));
+    Q_ASSERT(m_journal != nullptr);
 
     //TODO save & load open document index
 
@@ -179,7 +182,16 @@ Project::Project(const QUrl &projectFile, GraphTheory::Editor *graphEditor)
 {
     d->m_graphEditor = graphEditor;
     d->m_projectUrl = projectFile;
-    d->loadProject(projectFile);
+    if (!d->loadProject(projectFile)) {
+        addCodeDocument(KTextEditor::Editor::instance()->createDocument(nullptr));
+        addGraphDocument(graphEditor->createDocument());
+        setModified(false);
+        d->m_journal = KTextEditor::Editor::instance()->createDocument(nullptr);
+
+        KMessageBox::error(nullptr,
+                           i18nc("@info",
+                                 "The Rocs project could not be imported because the project file could not be parsed."));
+    }
 
     for (const auto &document : d->m_codeDocuments) {
         connect(document, &KTextEditor::Document::modifiedChanged,
@@ -448,7 +460,7 @@ bool Project::isModified() const
             return true;
         }
     }
-    if (d->m_journal->isModified()) {
+    if (d->m_journal && d->m_journal->isModified()) {
         return true;
     }
 
