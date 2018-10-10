@@ -40,12 +40,12 @@ CodeEditorWidget::CodeEditorWidget(QWidget *parent)
         qCritical() << "KTextEditor could not be found, please check your installation";
     }
     m_viewWidgets = new QTabWidget(this);
-    m_viewWidgets->setTabsClosable(false);
+    m_viewWidgets->setTabsClosable(true);
     layout->addWidget(m_viewWidgets);
     layout->setSpacing(0);
     setLayout(layout);
-
     connect(m_viewWidgets, &QTabWidget::tabBarDoubleClicked, this, &CodeEditorWidget::showDocumentNameDialog);
+    connect(m_viewWidgets, &QTabWidget::tabCloseRequested, this, &CodeEditorWidget::closeTab);
 }
 
 void CodeEditorWidget::setProject(Project *project)
@@ -103,4 +103,9 @@ void CodeEditorWidget::showDocumentNameDialog(int index)
         m_project->setDocumentName(document, name);
         m_viewWidgets->setTabText(index, name);
     }
+}
+
+void CodeEditorWidget::closeTab(int index)
+{
+    m_project->tryToRemoveCodeDocument(m_project->codeDocuments().at(index));
 }

@@ -47,6 +47,7 @@ private Q_SLOTS:
     void onCodeDocumentAboutToBeAdded(KTextEditor::Document *document, int index);
     void onCodeDocumentAboutToBeRemoved(int start, int end);
     void showDocumentNameDialog(int index);
+    void closeTab(int index);
 
 private:
     QTabWidget *m_viewWidgets;

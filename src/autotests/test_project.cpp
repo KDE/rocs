@@ -54,7 +54,7 @@ void TestProject::projectOperations()
     QCOMPARE(project.codeDocuments().length(), 2); // check correct adding
     QVERIFY(project.codeDocuments().first()->url().toLocalFile().startsWith(project.workingDir())); // check working dir
     QVERIFY(codeDoc1->url().toLocalFile() != codeDoc2->url().toLocalFile()); // check for distinct names
-    project.removeCodeDocument(codeDoc1);     // check removal
+    project.tryToRemoveCodeDocument(codeDoc1);     // check removal
     QCOMPARE(project.codeDocuments().length(), 1);
     QCOMPARE(project.documentName(codeDoc1), QString("Test"));
 

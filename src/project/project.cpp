@@ -262,10 +262,11 @@ KTextEditor::Document * Project::importCodeDocument(const QUrl &url)
     return document;
 }
 
-void Project::removeCodeDocument(KTextEditor::Document *document)
+void Project::tryToRemoveCodeDocument(KTextEditor::Document *document)
 {
     QString path = document->url().toString();
-    document->closeUrl();
+    if(!document->closeUrl())
+        return;
     int index = d->m_codeDocuments.indexOf(document);
     emit codeDocumentAboutToBeRemoved(index, index);
     disconnect(document, &KTextEditor::Document::modifiedChanged,
