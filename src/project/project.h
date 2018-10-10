@@ -102,7 +102,7 @@ public:
     /**
      * Remove the script file @p document from the project
      */
-    void removeCodeDocument(KTextEditor::Document *document);
+    void tryToRemoveCodeDocument(KTextEditor::Document *document);
 
     /**
      * @return project dependent document name
