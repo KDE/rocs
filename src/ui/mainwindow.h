@@ -98,7 +98,7 @@ private Q_SLOTS:
     void saveProjectAs();
 
     // script file handling
-    void createCodeDocument();
+    void tryToCreateCodeDocument();
     void importCodeDocument();
     void exportCodeDocument();
 

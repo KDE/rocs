@@ -290,7 +290,7 @@ void MainWindow::setupActions()
 
     createAction("document-save-as",     i18nc("@action:inmenu", "Save Project as"),   "save-project-as",    SLOT(saveProjectAs()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(createGraphDocument()), this);
-    createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(createCodeDocument()),    this);
+    createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(tryToCreateCodeDocument()),    this);
     createAction("document-import",     i18nc("@action:inmenu", "Import Graph"),       "import-graph",      SLOT(importGraphDocument()),   this);
     createAction("document-export",     i18nc("@action:inmenu", "Export Graph as"),    "export-graph-as",      SLOT(exportGraphDocument()), this);
     createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",          SLOT(importCodeDocument()),   this);
@@ -367,7 +367,7 @@ void MainWindow::createProject()
     }
 
     Project *project = new Project(m_graphEditor);
-    project->addCodeDocument(KTextEditor::Editor::instance()->createDocument(nullptr));
+    project->createCodeDocument(i18n("untitled"));
     project->addGraphDocument(m_graphEditor->createDocument());
     project->setModified(false);
 
@@ -480,18 +480,24 @@ QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suf
     return targetFile.fileName();
 }
 
-void MainWindow::createCodeDocument()
+void MainWindow::tryToCreateCodeDocument()
 {
     QString basePrefix = QInputDialog::getText(this,
                             i18n("ScriptName"),
                             i18n("Enter the name of your new script"));
     if (basePrefix.isNull()) {
         qDebug() << "Filename is empty and no script file was created.";
-    } else {
-        QString fileName = uniqueFilename(basePrefix, "js"); //TODO this does nothing
-        KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(nullptr);
-        m_currentProject->addCodeDocument(document);
+        return;
     }
+
+    QString fullPath = m_currentProject->workingDir() + QLatin1Char('/') + basePrefix + QStringLiteral(".js");
+    QFileInfo file(fullPath);
+    if (file.exists()) {
+        KMessageBox::error(this, i18n("File already exists."));
+        return;
+    }
+
+    m_currentProject->createCodeDocument(basePrefix);
 }
 
 void MainWindow::createGraphDocument()

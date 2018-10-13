@@ -89,6 +89,16 @@ public:
     QList<KTextEditor::Document*> codeDocuments() const;
 
     /**
+     * Creates a code document based on a given file path
+     */
+    KTextEditor::Document* createCodeDocument(const QString& filePath);
+
+    /**
+     * Returns a document of a given url (path)
+     */
+    KTextEditor::Document* openCodeDocument(const QUrl &url);
+
+    /**
      * Add code document @p document to project. This updates the document's url.
      */
     bool addCodeDocument(KTextEditor::Document *document);

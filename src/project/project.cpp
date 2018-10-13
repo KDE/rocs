@@ -183,7 +183,6 @@ Project::Project(const QUrl &projectFile, GraphTheory::Editor *graphEditor)
     d->m_graphEditor = graphEditor;
     d->m_projectUrl = projectFile;
     if (!d->loadProject(projectFile)) {
-        addCodeDocument(KTextEditor::Editor::instance()->createDocument(nullptr));
         addGraphDocument(graphEditor->createDocument());
         setModified(false);
         d->m_journal = KTextEditor::Editor::instance()->createDocument(nullptr);
@@ -222,26 +221,41 @@ QString Project::workingDir() const
     return d->m_workingDirectory.path();
 }
 
-bool Project::addCodeDocument(KTextEditor::Document *document)
+KTextEditor::Document* Project::createCodeDocument(const QString& filePath)
 {
-    // compute first unused document path
-    QStringList usedPaths;
-    foreach (KTextEditor::Document *document, d->m_codeDocuments) {
-        usedPaths.append(document->url().toLocalFile());
-    }
-    QString path;
-    for (int i = 0; i <= d->m_codeDocuments.count(); ++i) {
-        path = d->m_workingDirectory.path()
-            + QChar('/')
-            + "codefile" + QString::number(i) + QString(".js");
-        if (!usedPaths.contains(path)) {
-            break;
-        }
+    auto path = d->m_workingDirectory.path() + QLatin1Char('/') + filePath + QStringLiteral(".js");
+
+    auto doc = KTextEditor::Editor::instance()->createDocument(nullptr);
+    if (!doc->saveAs(QUrl::fromLocalFile(path))) {
+        qCritical() << "Error when saving code file to working directory, aborting.";
+        return nullptr;
     }
 
-    // put document into working directory
-    if (!document->saveAs(QUrl::fromLocalFile(path))) {
-        qCritical() << "Error when saving code file to working directory, aborting.";
+    if (!addCodeDocument(doc)) {
+        return nullptr;
+    }
+
+    return doc;
+}
+
+KTextEditor::Document* Project::openCodeDocument(const QUrl &url)
+{
+    auto doc = KTextEditor::Editor::instance()->createDocument(nullptr);
+    if (!doc->openUrl(url)) {
+        qCritical() << "Error when opening code file, aborting.";
+        return nullptr;
+    }
+
+    if (!addCodeDocument(doc)) {
+        return nullptr;
+    }
+
+    return doc;
+}
+
+bool Project::addCodeDocument(KTextEditor::Document *document)
+{
+    if (document == nullptr) {
         return false;
     }
 
@@ -256,10 +270,7 @@ bool Project::addCodeDocument(KTextEditor::Document *document)
 
 KTextEditor::Document * Project::importCodeDocument(const QUrl &url)
 {
-    KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(nullptr);
-    document->openUrl(url);
-    addCodeDocument(document);
-    return document;
+    return openCodeDocument(url);
 }
 
 void Project::tryToRemoveCodeDocument(KTextEditor::Document *document)
