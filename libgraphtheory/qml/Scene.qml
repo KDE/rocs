@@ -129,7 +129,6 @@ Item {
             width: sceneScrollView.width - 30
             height: sceneScrollView.height - 20
             z: -10 // must lie behind everything else
-            property variant origin: Qt.point(0, 0) // coordinate of global origin (0,0) in scene
             signal deleteSelected();
             signal startMoveSelected();
             signal finishMoveSelected();
@@ -169,7 +168,7 @@ Item {
                     lastMouseClicked = Qt.point(mouse.x, mouse.y)
                     if (addNodeAction.checked) {
                         mouse.accepted = true
-                        createNode(mouse.x + scene.origin.x, mouse.y + scene.origin.y, nodeTypeSelector.currentIndex);
+                        createNode(mouse.x, mouse.y, nodeTypeSelector.currentIndex);
                         return
                     }
                 }
@@ -205,7 +204,6 @@ Item {
                 EdgeItem {
                     id: edgeItem
                     edge: model.dataRole
-                    origin: scene.origin
                     z: -1 // edges must be below nodes
 
                     EdgePropertyItem {
@@ -234,7 +232,6 @@ Item {
                 NodeItem {
                     id: nodeItem
                     node: model.dataRole
-                    origin: scene.origin
                     highlighted: addEdgeAction.from == node || addEdgeAction.to == node
                     property bool __modifyingPosition: false
                     property variant __moveStartedPosition: Qt.point(0, 0)
@@ -294,15 +291,9 @@ Item {
                         }
                     }
                     onXChanged: {
-                        if (scene.origin != nodeItem.origin
-                            || nodeItem.__modifyingPosition
-                        ) { // do nothing if item not initialized
-                            return;
-                        }
                         if (x < 10) {
                             nodeItem.__modifyingPosition = true;
                             var delta = Math.max((10 - x), 10)
-                            scene.origin = Qt.point(scene.origin.x - delta, scene.origin.y);
                             scene.width += delta;
                             nodeItem.__modifyingPosition = false;
                             return;
@@ -316,15 +307,9 @@ Item {
                         }
                     }
                     onYChanged: {
-                        if (scene.origin != nodeItem.origin
-                            || nodeItem.__modifyingPosition
-                        ) { // do nothing if item not initialized
-                            return;
-                        }
                         if (y < 10) {
                             nodeItem.__modifyingPosition = true;
                             var delta = (10 - y)
-                            scene.origin = Qt.point(scene.origin.x, scene.origin.y - delta);
                             scene.height += delta;
                             nodeItem.__modifyingPosition = false;
                             return;
