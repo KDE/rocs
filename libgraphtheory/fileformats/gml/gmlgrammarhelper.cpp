@@ -176,7 +176,7 @@ void GmlGrammarHelper::createEdge()
             return;
         }
         currentEdge = Edge::create(nodeMap[edgeSource], nodeMap[edgeTarget]);
-        edgeSource.clear();;
+        edgeSource.clear();
         edgeTarget.clear();
         while (!edgeAttributes.isEmpty()) {
             QString property = edgeAttributes.keys().at(0);

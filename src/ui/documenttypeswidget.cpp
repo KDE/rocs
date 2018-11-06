@@ -76,7 +76,7 @@ DocumentTypesWidget::DocumentTypesWidget(QWidget *parent)
     connect(edgeDelegate, &EdgeTypesDelegate::colorChanged,
         this, &DocumentTypesWidget::onEdgeTypeColorChanged);
     connect(edgeDelegate, &EdgeTypesDelegate::nameChanged,
-        this, &DocumentTypesWidget::onEdgeTypeNameChanged);;
+        this, &DocumentTypesWidget::onEdgeTypeNameChanged);
     connect(edgeDelegate, &EdgeTypesDelegate::directionChanged,
         this, &DocumentTypesWidget::onEdgeTypeDirectionChanged);
     connect(m_createEdgeTypeButton, &QPushButton::clicked,

@@ -52,7 +52,7 @@ typedef QPair<int, int> BoostEdge;
 // handle boost exceptions
 namespace boost {
     void throw_exception(std::exception const &e) {
-        qCCritical(GRAPHTHEORY_GENERAL) << "Exception:" << e.what();;
+        qCCritical(GRAPHTHEORY_GENERAL) << "Exception:" << e.what();
     }
 }
 

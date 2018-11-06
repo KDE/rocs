@@ -67,7 +67,7 @@ typedef boost::iterator_property_map < PositionVec::iterator,
 // handle boost exceptions
 namespace boost {
     void throw_exception(std::exception const &e) {
-        qCCritical(GRAPHTHEORY_GENERAL) << "Exception:" << e.what();;
+        qCCritical(GRAPHTHEORY_GENERAL) << "Exception:" << e.what();
     }
 }
 
