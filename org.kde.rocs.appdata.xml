@@ -98,6 +98,7 @@
   <url type="help">http://docs.kde.org/stable/en/kdeedu/rocs/index.html</url>
   <screenshots>
     <screenshot type="default">
+      <caption>Working with graphs in Rocs</caption>
       <image>https://edu.kde.org/images/screenshots/rocs.png</image>
     </screenshot>
   </screenshots>
