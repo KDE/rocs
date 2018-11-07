@@ -96,6 +96,7 @@
   <url type="homepage">https://edu.kde.org/applications/all/rocs</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=rocs</url>
   <url type="help">http://docs.kde.org/stable/en/kdeedu/rocs/index.html</url>
+  <url type="donation">https://www.kde.org/community/donations/?app=rocs&amp;source=appdata</url>
   <screenshots>
     <screenshot type="default">
       <caption>Working with graphs in Rocs</caption>
