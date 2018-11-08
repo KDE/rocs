@@ -100,6 +100,14 @@
   <screenshots>
     <screenshot type="default">
       <caption>Working with graphs in Rocs</caption>
+      <caption xml:lang="ca">Treballant amb gràfics al Rocs</caption>
+      <caption xml:lang="ca-valencia">Treballant amb gràfics al Rocs</caption>
+      <caption xml:lang="gl">Traballando con grafos en Rocs</caption>
+      <caption xml:lang="nl">Met grafieken werken in Rocs</caption>
+      <caption xml:lang="pt">Lidar com grafos no Rocs</caption>
+      <caption xml:lang="sv">Arbeta med grafer i Rocs</caption>
+      <caption xml:lang="uk">Робота з графами у Rocs</caption>
+      <caption xml:lang="x-test">xxWorking with graphs in Rocsxx</caption>
       <image>https://edu.kde.org/images/screenshots/rocs.png</image>
     </screenshot>
   </screenshots>
