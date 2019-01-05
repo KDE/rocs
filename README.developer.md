@@ -3,8 +3,8 @@
 ## First Steps
 
 1. Read the API high-level/overview information at:
-   - [`libgraphtheory`](https://invent.kde.org/kde/rocs/tree/master/libgraphtheory)
-   - [`stc`](https://invent.kde.org/kde/rocs/tree/master/src)
+   - [`libgraphtheory`](libgraphtheory)
+   - [`stc`](src)
 2. Compile:
    - have a look at the `CMake` output!
 3. Run Tests and Run Application:
