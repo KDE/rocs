@@ -24,13 +24,13 @@ of the application
 
 ### Unit Tests
 
-* Rocs builds with KDE4_BUILD_TESTS 
+* Rocs builds with `KDE4_BUILD_TESTS`
 * All unit test pass:
   http://build.kde.org/view/KDEEDU/job/rocs_master/lastCompletedBuild/testReport/
 
 ### Documentation
 
-* Handbook builds: KDE4_ENABLE_HTMLHANDBOOK
+* Handbook builds: `KDE4_ENABLE_HTMLHANDBOOK`
 * Handbook is updated
 
 ### Website and Release Information
