@@ -1,4 +1,23 @@
-Rocs is Free Software and part of the KDE project, 
-It aims to provide a full featured Graph - Editor and a Programming Enviroment that's connected to the Graph
-by doing it so, it can be used for teachers to show the joy and mistery of Graph Theory, 
-and studants can use it to implement the various algorithms for the beloved teacher.
+# Rocs: an educational Graph Theory IDE
+
+<img src="https://invent.kde.org/kde/rocs/raw/master/icons/128-apps-rocs.png" align="right"
+     title="Juk logo" width="96" height="96">
+
+Rocs is a Graph Theory IDE for everybody interested in designing and analyzing
+graph algorithms (e.g., lecturers, students, researchers). For all these users,
+Rocs provides an easy to use visual data structure editor and a powerful
+scripting engine to execute algorithms.
+
+[Rocs at KDE.org](https://www.kde.org/applications/education/rocs).
+
+## Features
+
+- Canvas for Graph Drawing
+- IDE for Graph related Programming, using Javascript as it's main language,
+  plus the graph library
+- Data Structures are extensible from the scripting interface, so you can do
+  anything you want.
+
+## Installation
+
+[Installation instructions](INSTALL.md)
