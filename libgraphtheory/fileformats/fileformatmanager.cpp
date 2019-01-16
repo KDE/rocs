@@ -25,6 +25,7 @@
 #include <KPluginLoader>
 #include <KPluginMetaData>
 #include <KServiceTypeTrader>
+#include <KLocalizedString>
 #include <QString>
 #include <QDir>
 #include <QDirIterator>
@@ -127,12 +128,12 @@ void FileFormatManager::loadBackends()
     // display a QMessageBox if no plugins are found
     if (d->backends.empty()) {
         QMessageBox pluginErrorMessageBox;
-        pluginErrorMessageBox.setWindowTitle(tr("Plugin Error"));
+        pluginErrorMessageBox.setWindowTitle(i18n("Plugin Error"));
         pluginErrorMessageBox.setTextFormat(Qt::RichText);
-        pluginErrorMessageBox.setText("Plugins could not be found in specified directories:<br>"+
+        pluginErrorMessageBox.setText(i18n("Plugins could not be found in specified directories:<br>")+
                                          dirsToCheck.join("<br>")+
-                                         "<br><br> Check <a href='http://doc.qt.io/qt-5/deployment-plugins.html'>"
-                                         "this link</a> for further information.");
+                                         i18n("<br><br> Check <a href='http://doc.qt.io/qt-5/deployment-plugins.html'>"
+                                         "this link</a> for further information."));
         pluginErrorMessageBox.setDefaultButton(QMessageBox::Close);
         pluginErrorMessageBox.exec();
         exit(1);
