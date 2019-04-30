@@ -30,7 +30,7 @@ set(testproject_SRCS
     ../project/project.cpp
 )
 add_executable(TestProject ${testproject_SRCS})
-add_test(TestProject TestProject)
+add_test(NAME TestProject COMMAND TestProject)
 ecm_mark_as_test(TestProject)
 target_link_libraries(TestProject
     rocsgraphtheory

@@ -31,7 +31,7 @@ set(testtikzfileformat_SRCS
     ../../../logging.cpp
 )
 add_executable(TestTikzFileFormat ${testtikzfileformat_SRCS})
-add_test(TestTikzFileFormat TestTikzFileFormat)
+add_test(NAME TestTikzFileFormat COMMAND TestTikzFileFormat)
 ecm_mark_as_test(TestTikzFileFormat)
 target_link_libraries(TestTikzFileFormat
     rocsgraphtheory

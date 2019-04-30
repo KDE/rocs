@@ -30,7 +30,7 @@ set(testtgffileformat_SRCS
     ../../../logging.cpp
 )
 add_executable(TestTgfFileFormat ${testtgffileformat_SRCS})
-add_test(TestTgfFileFormat TestTgfFileFormat)
+add_test(NAME TestTgfFileFormat COMMAND TestTgfFileFormat)
 ecm_mark_as_test(TestTgfFileFormat)
 target_link_libraries(TestTgfFileFormat
     rocsgraphtheory

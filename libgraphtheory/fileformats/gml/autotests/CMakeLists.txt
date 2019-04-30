@@ -37,7 +37,7 @@ set(testgmlfileformat_SRCS
 )
 
 add_executable(TestGmlFileFormat ${testgmlfileformat_SRCS})
-add_test(TestGmlFileFormat TestGmlFileFormat)
+add_test(NAME TestGmlFileFormat COMMAND TestGmlFileFormat)
 ecm_mark_as_test(TestGmlFileFormat)
 target_link_libraries(TestGmlFileFormat
     rocsgraphtheory

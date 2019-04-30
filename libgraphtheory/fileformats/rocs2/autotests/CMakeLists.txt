@@ -33,7 +33,7 @@ set(testrocs2fileformat_SRCS
     ../../../logging.cpp
 )
 add_executable(TestRocs2FileFormat ${testrocs2fileformat_SRCS})
-add_test(TestRocs2FileFormat TestRocs2FileFormat)
+add_test(NAME TestRocs2FileFormat COMMAND TestRocs2FileFormat)
 ecm_mark_as_test(TestRocs2FileFormat)
 target_link_libraries(TestRocs2FileFormat
     rocsgraphtheory

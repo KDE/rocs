@@ -38,7 +38,7 @@ set(testdotfileformat_SRCS
 )
 kde_source_files_enable_exceptions(../dotgrammar.cpp)
 add_executable(TestDotFileFormat ${testdotfileformat_SRCS})
-add_test(TestDotFileFormat TestDotFileFormat)
+add_test(NAME TestDotFileFormat COMMAND TestDotFileFormat)
 ecm_mark_as_test(TestDotFileFormat)
 target_link_libraries(TestDotFileFormat
     rocsgraphtheory
