@@ -83,6 +83,7 @@ GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *par
     m_defaultIdentifiers.insert(CircleGraph, "CircleGraph");
     m_defaultIdentifiers.insert(ErdosRenyiRandomGraph, "RandomGraph");
     m_defaultIdentifiers.insert(RandomTree, "RandomTree");
+    m_defaultIdentifiers.insert(PathGraph, "PathGraph");
     m_defaultIdentifiers.insert(MeshGraph, "MeshGraph");
     m_graphGenerator = MeshGraph;
 
@@ -218,6 +219,12 @@ void GenerateGraphWidget::generateGraph()
         generateRandomTreeGraph(
             ui->randomTreeNodes->value()
         );
+        break;
+    case PathGraph:
+        generatePathGraph(
+            ui->pathNodes->value()
+        );
+        break;
     default:
         break;
     }
@@ -466,4 +473,27 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
 
     Topology topology = Topology();
     topology.directedGraphDefaultTopology(m_document);
+}
+
+void GenerateGraphWidget::generatePathGraph(int pathSize)
+{
+    QPointF center = documentCenter();
+
+    QList< QPair<QString, QPointF> > pathNodes;
+
+    // create mesh nodes, store them in map
+    NodeList nodes_list;
+    for (int i = 1; i <= pathSize; i++) {
+        NodePtr node = Node::create(m_document);
+        node->setX(i * 50 + center.x());
+        node->setY(center.y());
+        node->setType(m_nodeType);
+        nodes_list.append(node);
+    }
+
+    // connect circle nodes
+    for (int i = 0; i < pathSize - 1; i++) {
+        EdgePtr edge = Edge::create(nodes_list.at(i), nodes_list.at(i + 1));
+        edge->setType(m_edgeType);
+    }
 }

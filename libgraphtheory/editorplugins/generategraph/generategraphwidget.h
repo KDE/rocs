@@ -36,7 +36,8 @@ class GenerateGraphWidget : public QDialog
         CircleGraph,
         RandomEdgeGraph,
         ErdosRenyiRandomGraph,
-        RandomTree
+        RandomTree,
+        PathGraph
     };
 
 public:
@@ -139,6 +140,13 @@ private:
      * \param seed is the seed for random number generator
      */
     void generateRandomTreeGraph(int nodes);
+
+    /**
+     * Generate a path graph with specified number of nodes.
+     *
+     * \param pathSize is the number of nodes of the generated graph
+     */
+    void generatePathGraph(int pathSize);
 
     GraphDocumentPtr m_document;
     int m_seed;
