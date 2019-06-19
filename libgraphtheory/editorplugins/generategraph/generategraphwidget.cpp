@@ -84,7 +84,6 @@ GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *par
     m_defaultIdentifiers.insert(ErdosRenyiRandomGraph, "RandomGraph");
     m_defaultIdentifiers.insert(RandomTree, "RandomTree");
     m_defaultIdentifiers.insert(PathGraph, "PathGraph");
-    m_defaultIdentifiers.insert(MeshGraph, "MeshGraph");
     m_graphGenerator = MeshGraph;
 
     setWindowTitle(i18nc("@title:window", "Generate Graph"));
