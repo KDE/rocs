@@ -487,7 +487,7 @@ void GenerateGraphWidget::generatePathGraph(int pathSize)
 
     QList< QPair<QString, QPointF> > pathNodes;
 
-    // create mesh nodes, store them in map
+
     NodeList nodes_list;
     for (int i = 1; i <= pathSize; i++) {
         NodePtr node = Node::create(m_document);

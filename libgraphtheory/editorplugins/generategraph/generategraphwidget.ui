@@ -123,7 +123,7 @@
    <item row="6" column="0" colspan="3">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>7</number>
      </property>
      <widget class="QWidget" name="page_mesh">
       <layout class="QGridLayout" name="gridLayout_2">
@@ -176,51 +176,33 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_path">
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <widget class="QWidget" name="formLayoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>9</x>
-         <y>9</y>
-         <width>321</width>
-         <height>131</height>
-        </rect>
-       </property>
-       <layout class="QFormLayout" name="formLayoutPath">
-        <property name="fieldGrowthPolicy">
-         <enum>QFormLayout::ExpandingFieldsGrow</enum>
-        </property>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_pathNodes">
-          <property name="text">
-           <string>Path Size:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QSpinBox" name="pathNodes">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>999</number>
-          </property>
-          <property name="value">
-           <number>10</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+     <widget class="QWidget" name="page_star">
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <layout class="QFormLayout" name="formLayoutStar">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_numberSatellite">
+           <property name="text">
+            <string>Satellite Nodes:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="starSatelliteNodes">
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>999</number>
+           </property>
+           <property name="value">
+            <number>10</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="page_circle">
       <layout class="QGridLayout" name="gridLayout_4">
@@ -405,7 +387,7 @@
      <widget class="QWidget" name="page_random_tree">
       <layout class="QGridLayout" name="gridLayout_8">
        <item row="0" column="0">
-        <layout class="QFormLayout" name="formLayout">
+        <layout class="QFormLayout" name="formLayoutRandomTree">
          <item row="0" column="0">
           <widget class="QLabel" name="label_randomTreeNodes">
            <property name="text">
@@ -444,29 +426,19 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_star">
-      <layout class="QGridLayout" name="gridLayout_3">
+     <widget class="QWidget" name="page_path">
+      <layout class="QGridLayout" name="gridLayout_11">
        <item row="0" column="0">
-        <layout class="QFormLayout" name="formLayoutStar">
+        <layout class="QFormLayout" name="formLayoutPath">
          <item row="0" column="0">
-          <widget class="QLabel" name="label_numberSatellite">
+          <widget class="QLabel" name="labe_pathNodes">
            <property name="text">
-            <string>Satellite Nodes:</string>
+            <string>Number of Nodes:</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QSpinBox" name="starSatelliteNodes">
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>999</number>
-           </property>
-           <property name="value">
-            <number>10</number>
-           </property>
-          </widget>
+          <widget class="QSpinBox" name="pathNodes"/>
          </item>
         </layout>
        </item>
