@@ -37,7 +37,8 @@ class GenerateGraphWidget : public QDialog
         RandomEdgeGraph,
         ErdosRenyiRandomGraph,
         RandomTree,
-        PathGraph
+        PathGraph,
+        CompleteGraph
     };
 
 public:
@@ -147,6 +148,13 @@ private:
      * \param pathSize is the number of nodes of the generated graph
      */
     void generatePathGraph(int pathSize);
+
+    /**
+     * Generate a complete graph with specified number of nodes.
+     *
+     * \param nodes is the number of nodes of the generated graph
+     */
+    void generateCompleteGraph(int nodes);
 
     GraphDocumentPtr m_document;
     int m_seed;

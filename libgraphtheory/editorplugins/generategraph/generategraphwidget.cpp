@@ -84,6 +84,9 @@ GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *par
     m_defaultIdentifiers.insert(ErdosRenyiRandomGraph, "RandomGraph");
     m_defaultIdentifiers.insert(RandomTree, "RandomTree");
     m_defaultIdentifiers.insert(PathGraph, "PathGraph");
+    m_defaultIdentifiers.insert(CompleteGraph, "CompleteGraph");
+
+    // set default graph
     m_graphGenerator = MeshGraph;
 
     setWindowTitle(i18nc("@title:window", "Generate Graph"));
@@ -224,6 +227,10 @@ void GenerateGraphWidget::generateGraph()
             ui->pathNodes->value()
         );
         break;
+    case CompleteGraph:
+        generateCompleteGraph(
+            ui->completeNodes->value()
+        );
     default:
         break;
     }
@@ -490,9 +497,38 @@ void GenerateGraphWidget::generatePathGraph(int pathSize)
         nodes_list.append(node);
     }
 
-    // connect circle nodes
     for (int i = 0; i < pathSize - 1; i++) {
         EdgePtr edge = Edge::create(nodes_list.at(i), nodes_list.at(i + 1));
         edge->setType(m_edgeType);
+    }
+}
+
+void GenerateGraphWidget::generateCompleteGraph(int nodes)
+{
+    QPointF center = documentCenter();
+
+    // compute radius such that nodes have space ~100 between each other
+    // circle that border-length of 2*PI*radius
+    int radius = 100 * nodes / (2 * boost::math::constants::pi<double>());
+
+    QList< QPair<QString, QPointF> > circleNodes;
+
+    NodeList node_list;
+    for (int i = 1; i <= nodes; i++) {
+        NodePtr node = Node::create(m_document);
+        node->setX(sin(i * 2 * boost::math::constants::pi<double>() / nodes)*radius + center.x());
+        node->setY(cos(i * 2 * boost::math::constants::pi<double>() / nodes)*radius + center.y());
+        node->setType(m_nodeType);
+        node_list.append(node);
+    }
+
+    for (int i = 0; i < nodes - 1; i++) {
+        for (int j = i + 1; j < nodes; j++){
+            EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j));
+            EdgePtr edge_rl = Edge::create(node_list.at(j), node_list.at(i));
+
+            edge_lr->setType(m_edgeType);
+            edge_rl->setType(m_edgeType);
+        }
     }
 }

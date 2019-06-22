@@ -14,64 +14,6 @@
    <string>Generate Graph</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
-    <widget class="QLabel" name="labelIdentifier">
-     <property name="toolTip">
-      <string>The identifier of the created graph (used for scripting)</string>
-     </property>
-     <property name="text">
-      <string>Identifier</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="3">
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="labelEdgeType">
-     <property name="toolTip">
-      <string>The edge type to create the edges of the graph with</string>
-     </property>
-     <property name="text">
-      <string>Edge type</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="labelGenerator">
-     <property name="text">
-      <string>Graph Generator</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QLineEdit" name="identifier">
-     <property name="toolTip">
-      <string>Set the unique identifier of the generated graph.</string>
-     </property>
-     <property name="text">
-      <string>Graph</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2">
-    <widget class="KComboBox" name="edgeTypeSelector">
-     <property name="toolTip">
-      <string>Select the edge type for connections of the generated graph.</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="2">
-    <widget class="KComboBox" name="nodeTypeSelector">
-     <property name="toolTip">
-      <string>Select the node type for node elements of the generated graph.</string>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="2">
     <layout class="QHBoxLayout" name="advancedLayout">
      <item>
@@ -114,6 +56,11 @@
          <string>Path Graph</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>Complete Graph</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item alignment="Qt::AlignRight">
@@ -143,10 +90,40 @@
      </item>
     </layout>
    </item>
+   <item row="1" column="2">
+    <widget class="QLineEdit" name="identifier">
+     <property name="toolTip">
+      <string>Set the unique identifier of the generated graph.</string>
+     </property>
+     <property name="text">
+      <string>Graph</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="labelNodeType">
+     <property name="toolTip">
+      <string>The node type to create the nodes of the graph with</string>
+     </property>
+     <property name="text">
+      <string>Node type</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="labelIdentifier">
+     <property name="toolTip">
+      <string>The identifier of the created graph (used for scripting)</string>
+     </property>
+     <property name="text">
+      <string>Identifier</string>
+     </property>
+    </widget>
+   </item>
    <item row="6" column="0" colspan="3">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page_mesh">
       <layout class="QGridLayout" name="gridLayout_2">
@@ -200,6 +177,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page_path">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
       <widget class="QWidget" name="formLayoutWidget">
        <property name="geometry">
         <rect>
@@ -241,34 +221,6 @@
         </item>
        </layout>
       </widget>
-     </widget>
-     <widget class="QWidget" name="page_star">
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0">
-        <layout class="QFormLayout" name="formLayoutStar">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_numberSatellite">
-           <property name="text">
-            <string>Satellite Nodes:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QSpinBox" name="starSatelliteNodes">
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>999</number>
-           </property>
-           <property name="value">
-            <number>10</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
      </widget>
      <widget class="QWidget" name="page_circle">
       <layout class="QGridLayout" name="gridLayout_4">
@@ -492,6 +444,52 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="page_star">
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <layout class="QFormLayout" name="formLayoutStar">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_numberSatellite">
+           <property name="text">
+            <string>Satellite Nodes:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="starSatelliteNodes">
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>999</number>
+           </property>
+           <property name="value">
+            <number>10</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_complete">
+      <layout class="QGridLayout" name="gridLayout_10">
+       <item row="0" column="0">
+        <layout class="QFormLayout" name="formLayoutComplete">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_completeNodes">
+           <property name="text">
+            <string>Number of Nodes:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="completeNodes"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
    <item row="7" column="2">
@@ -501,13 +499,41 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="labelNodeType">
+   <item row="2" column="2">
+    <widget class="KComboBox" name="edgeTypeSelector">
      <property name="toolTip">
-      <string>The node type to create the nodes of the graph with</string>
+      <string>Select the edge type for connections of the generated graph.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="3">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="labelEdgeType">
+     <property name="toolTip">
+      <string>The edge type to create the edges of the graph with</string>
      </property>
      <property name="text">
-      <string>Node type</string>
+      <string>Edge type</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="labelGenerator">
+     <property name="text">
+      <string>Graph Generator</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="KComboBox" name="nodeTypeSelector">
+     <property name="toolTip">
+      <string>Select the node type for node elements of the generated graph.</string>
      </property>
     </widget>
    </item>
