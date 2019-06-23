@@ -85,6 +85,7 @@ GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *par
     m_defaultIdentifiers.insert(RandomTree, "RandomTree");
     m_defaultIdentifiers.insert(PathGraph, "PathGraph");
     m_defaultIdentifiers.insert(CompleteGraph, "CompleteGraph");
+    m_defaultIdentifiers.insert(CompleteBipartiteGraph, "CompleteBipartite");
 
     // set default graph
     m_graphGenerator = MeshGraph;
@@ -230,6 +231,11 @@ void GenerateGraphWidget::generateGraph()
     case CompleteGraph:
         generateCompleteGraph(
             ui->completeNodes->value()
+        );
+    case CompleteBipartiteGraph:
+        generateCompleteBipartiteGraph(
+            ui->completeBipartiteNodesLeft->value(),
+            ui->completeBipartiteNodesRight->value()
         );
     default:
         break;
@@ -526,6 +532,40 @@ void GenerateGraphWidget::generateCompleteGraph(int nodes)
         for (int j = i + 1; j < nodes; j++){
             EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j));
             EdgePtr edge_rl = Edge::create(node_list.at(j), node_list.at(i));
+
+            edge_lr->setType(m_edgeType);
+            edge_rl->setType(m_edgeType);
+        }
+    }
+}
+
+void GenerateGraphWidget::generateCompleteBipartiteGraph(int nodes_left, int nodes_right)
+{
+    QPointF center = documentCenter();
+
+    int separator = 100;
+    NodeList node_list;
+
+    for (int i = 0; i < nodes_left; i++) {
+        NodePtr node = Node::create(m_document);
+        node->setX(center.x());
+        node->setY(center.y() + i * 50);
+        node->setType(m_nodeType);
+        node_list.append(node);
+    }
+
+    for (int i = 0; i < nodes_right; i++) {
+        NodePtr node = Node::create(m_document);
+        node->setX(center.x() + separator);
+        node->setY(center.y() + i * 50);
+        node->setType(m_nodeType);
+        node_list.append(node);
+    }
+
+    for (int i = 0; i < nodes_left; i++) {
+        for (int j = 0; j < nodes_right; j++){
+            EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j + nodes_left));
+            EdgePtr edge_rl = Edge::create(node_list.at(j + nodes_left), node_list.at(i));
 
             edge_lr->setType(m_edgeType);
             edge_rl->setType(m_edgeType);

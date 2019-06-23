@@ -38,7 +38,8 @@ class GenerateGraphWidget : public QDialog
         ErdosRenyiRandomGraph,
         RandomTree,
         PathGraph,
-        CompleteGraph
+        CompleteGraph,
+        CompleteBipartiteGraph
     };
 
 public:
@@ -155,6 +156,15 @@ private:
      * \param nodes is the number of nodes of the generated graph
      */
     void generateCompleteGraph(int nodes);
+
+
+    /**
+     * Generate a complete bipartite graph with specified number of nodes.
+     *
+     * \param nodes_left is the number of nodes in the left set of the bipartite graph.
+     * \param nodes_right is the number of nodes in the right set of the bipartite graph.
+     */
+    void generateCompleteBipartiteGraph(int nodes_left, int nodes_right);
 
     GraphDocumentPtr m_document;
     int m_seed;

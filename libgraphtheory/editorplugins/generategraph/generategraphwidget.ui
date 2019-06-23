@@ -61,6 +61,11 @@
          <string>Complete Graph</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>Complete Bipartite</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item alignment="Qt::AlignRight">
@@ -123,7 +128,7 @@
    <item row="6" column="0" colspan="3">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>7</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page_mesh">
       <layout class="QGridLayout" name="gridLayout_2">
@@ -457,6 +462,34 @@
          </item>
          <item row="0" column="1">
           <widget class="QSpinBox" name="completeNodes"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_complete_bipartite">
+      <layout class="QGridLayout" name="gridLayout_12">
+       <item row="0" column="0">
+        <layout class="QFormLayout" name="formLayoutCompleteBipartite">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_completeBipartiteNodesLeft">
+           <property name="text">
+            <string>Left Set Nodes:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="completeBipartiteNodesLeft"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_completeBipartiteNodesRight">
+           <property name="text">
+            <string>Right Set Nodes:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="completeBipartiteNodesRight"/>
          </item>
         </layout>
        </item>
