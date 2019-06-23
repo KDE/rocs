@@ -22,7 +22,7 @@ project(rocs)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"rocs\")
 
-ecm_setup_version(2.1.50
+ecm_setup_version(KDE_APPLICATIONS_VERSION
     VARIABLE_PREFIX ROCS
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/rocsversion.h"
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/RocsConfigVersion.cmake"
