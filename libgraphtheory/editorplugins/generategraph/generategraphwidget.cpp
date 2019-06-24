@@ -298,10 +298,20 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
             if (j < columns - 1) { // horizontal edges
                 EdgePtr edge = Edge::create(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i, j + 1)]);
                 edge->setType(m_edgeType);
+
+                if (m_edgeType->direction() == EdgeType::Direction::Unidirectional) {
+                    EdgePtr edge = Edge::create(meshNodes[qMakePair(i, j + 1)], meshNodes[qMakePair(i, j)]);
+                    edge->setType(m_edgeType);
+                }
             }
             if (i < rows - 1) { // vertical edges
                 EdgePtr edge = Edge::create(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i + 1, j)]);
                 edge->setType(m_edgeType);
+
+                if (m_edgeType->direction() == EdgeType::Direction::Unidirectional) {
+                    EdgePtr edge = Edge::create(meshNodes[qMakePair(i + 1, j)], meshNodes[qMakePair(i, j)]);
+                    edge->setType(m_edgeType);
+                }
             }
         }
     }
@@ -531,10 +541,12 @@ void GenerateGraphWidget::generateCompleteGraph(int nodes)
     for (int i = 0; i < nodes - 1; i++) {
         for (int j = i + 1; j < nodes; j++){
             EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j));
-            EdgePtr edge_rl = Edge::create(node_list.at(j), node_list.at(i));
-
             edge_lr->setType(m_edgeType);
-            edge_rl->setType(m_edgeType);
+
+            if (m_edgeType->direction() == EdgeType::Direction::Unidirectional) {
+                EdgePtr edge_rl = Edge::create(node_list.at(j), node_list.at(i));
+                edge_rl->setType(m_edgeType);
+            }
         }
     }
 }
@@ -565,10 +577,12 @@ void GenerateGraphWidget::generateCompleteBipartiteGraph(int nodes_left, int nod
     for (int i = 0; i < nodes_left; i++) {
         for (int j = 0; j < nodes_right; j++){
             EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j + nodes_left));
-            EdgePtr edge_rl = Edge::create(node_list.at(j + nodes_left), node_list.at(i));
-
             edge_lr->setType(m_edgeType);
-            edge_rl->setType(m_edgeType);
+
+            if (m_edgeType->direction() == EdgeType::Direction::Unidirectional) {
+                EdgePtr edge_rl = Edge::create(node_list.at(j + nodes_left), node_list.at(i));
+                edge_rl->setType(m_edgeType);
+            }
         }
     }
 }
