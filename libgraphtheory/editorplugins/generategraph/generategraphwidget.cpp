@@ -83,7 +83,11 @@ GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *par
     m_defaultIdentifiers.insert(CircleGraph, "CircleGraph");
     m_defaultIdentifiers.insert(ErdosRenyiRandomGraph, "RandomGraph");
     m_defaultIdentifiers.insert(RandomTree, "RandomTree");
-    m_defaultIdentifiers.insert(MeshGraph, "MeshGraph");
+    m_defaultIdentifiers.insert(PathGraph, "PathGraph");
+    m_defaultIdentifiers.insert(CompleteGraph, "CompleteGraph");
+    m_defaultIdentifiers.insert(CompleteBipartiteGraph, "CompleteBipartite");
+
+    // set default graph
     m_graphGenerator = MeshGraph;
 
     setWindowTitle(i18nc("@title:window", "Generate Graph"));
@@ -218,6 +222,21 @@ void GenerateGraphWidget::generateGraph()
         generateRandomTreeGraph(
             ui->randomTreeNodes->value()
         );
+        break;
+    case PathGraph:
+        generatePathGraph(
+            ui->pathNodes->value()
+        );
+        break;
+    case CompleteGraph:
+        generateCompleteGraph(
+            ui->completeNodes->value()
+        );
+    case CompleteBipartiteGraph:
+        generateCompleteBipartiteGraph(
+            ui->completeBipartiteNodesLeft->value(),
+            ui->completeBipartiteNodesRight->value()
+        );
     default:
         break;
     }
@@ -279,10 +298,20 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
             if (j < columns - 1) { // horizontal edges
                 EdgePtr edge = Edge::create(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i, j + 1)]);
                 edge->setType(m_edgeType);
+
+                if (m_edgeType->direction() == EdgeType::Direction::Unidirectional) {
+                    EdgePtr edge = Edge::create(meshNodes[qMakePair(i, j + 1)], meshNodes[qMakePair(i, j)]);
+                    edge->setType(m_edgeType);
+                }
             }
             if (i < rows - 1) { // vertical edges
                 EdgePtr edge = Edge::create(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i + 1, j)]);
                 edge->setType(m_edgeType);
+
+                if (m_edgeType->direction() == EdgeType::Direction::Unidirectional) {
+                    EdgePtr edge = Edge::create(meshNodes[qMakePair(i + 1, j)], meshNodes[qMakePair(i, j)]);
+                    edge->setType(m_edgeType);
+                }
             }
         }
     }
@@ -466,4 +495,94 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
 
     Topology topology = Topology();
     topology.directedGraphDefaultTopology(m_document);
+}
+
+void GenerateGraphWidget::generatePathGraph(int pathSize)
+{
+    QPointF center = documentCenter();
+
+    QList< QPair<QString, QPointF> > pathNodes;
+
+
+    NodeList nodes_list;
+    for (int i = 1; i <= pathSize; i++) {
+        NodePtr node = Node::create(m_document);
+        node->setX(i * 50 + center.x());
+        node->setY(center.y());
+        node->setType(m_nodeType);
+        nodes_list.append(node);
+    }
+
+    for (int i = 0; i < pathSize - 1; i++) {
+        EdgePtr edge = Edge::create(nodes_list.at(i), nodes_list.at(i + 1));
+        edge->setType(m_edgeType);
+    }
+}
+
+void GenerateGraphWidget::generateCompleteGraph(int nodes)
+{
+    QPointF center = documentCenter();
+
+    // compute radius such that nodes have space ~100 between each other
+    // circle that border-length of 2*PI*radius
+    int radius = 100 * nodes / (2 * boost::math::constants::pi<double>());
+
+    QList< QPair<QString, QPointF> > circleNodes;
+
+    NodeList node_list;
+    for (int i = 1; i <= nodes; i++) {
+        NodePtr node = Node::create(m_document);
+        node->setX(sin(i * 2 * boost::math::constants::pi<double>() / nodes)*radius + center.x());
+        node->setY(cos(i * 2 * boost::math::constants::pi<double>() / nodes)*radius + center.y());
+        node->setType(m_nodeType);
+        node_list.append(node);
+    }
+
+    for (int i = 0; i < nodes - 1; i++) {
+        for (int j = i + 1; j < nodes; j++){
+            EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j));
+            edge_lr->setType(m_edgeType);
+
+            if (m_edgeType->direction() == EdgeType::Direction::Unidirectional) {
+                EdgePtr edge_rl = Edge::create(node_list.at(j), node_list.at(i));
+                edge_rl->setType(m_edgeType);
+            }
+        }
+    }
+}
+
+void GenerateGraphWidget::generateCompleteBipartiteGraph(int nodes_left, int nodes_right)
+{
+    QPointF center = documentCenter();
+
+    int separator = 100;
+    NodeList node_list;
+
+    for (int i = 0; i < nodes_left; i++) {
+        NodePtr node = Node::create(m_document);
+        node->setX(center.x());
+        node->setY(center.y() + i * 50);
+        node->setType(m_nodeType);
+        node_list.append(node);
+    }
+
+    for (int i = 0; i < nodes_right; i++) {
+        NodePtr node = Node::create(m_document);
+        node->setX(center.x() + separator);
+        node->setY(center.y() + i * 50);
+        node->setType(m_nodeType);
+        node_list.append(node);
+    }
+
+    for (int i = 0; i < nodes_left; i++) {
+        for (int j = 0; j < nodes_right; j++){
+            EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j + nodes_left));
+            edge_lr->setType(m_edgeType);
+
+            if (m_edgeType->direction() == EdgeType::Direction::Unidirectional) {
+                EdgePtr edge_rl = Edge::create(node_list.at(j + nodes_left), node_list.at(i));
+                edge_rl->setType(m_edgeType);
+            }
+        }
+    }
 }

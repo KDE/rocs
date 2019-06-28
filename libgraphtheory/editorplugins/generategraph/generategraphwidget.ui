@@ -7,37 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>354</width>
-    <height>274</height>
+    <height>344</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Generate Graph</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="labelGenerator">
-     <property name="text">
-      <string>Graph Generator</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="labelNodeType">
-     <property name="toolTip">
-      <string>The node type to create the nodes of the graph with</string>
-     </property>
-     <property name="text">
-      <string>Node type</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="3">
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="2">
     <layout class="QHBoxLayout" name="advancedLayout">
      <item>
@@ -75,6 +51,21 @@
          <string>Random Tree Graph</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>Path Graph</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Complete Graph</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Complete Bipartite</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item alignment="Qt::AlignRight">
@@ -104,6 +95,26 @@
      </item>
     </layout>
    </item>
+   <item row="1" column="2">
+    <widget class="QLineEdit" name="identifier">
+     <property name="toolTip">
+      <string>Set the unique identifier of the generated graph.</string>
+     </property>
+     <property name="text">
+      <string>Graph</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="labelNodeType">
+     <property name="toolTip">
+      <string>The node type to create the nodes of the graph with</string>
+     </property>
+     <property name="text">
+      <string>Node type</string>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="0">
     <widget class="QLabel" name="labelIdentifier">
      <property name="toolTip">
@@ -122,7 +133,7 @@
      <widget class="QWidget" name="page_mesh">
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
-        <layout class="QFormLayout" name="fromLayoutMesh">
+        <layout class="QFormLayout" name="formLayoutMesh">
          <property name="fieldGrowthPolicy">
           <enum>QFormLayout::ExpandingFieldsGrow</enum>
          </property>
@@ -142,7 +153,7 @@
             <number>1</number>
            </property>
            <property name="value">
-            <number>10</number>
+            <number>5</number>
            </property>
           </widget>
          </item>
@@ -162,7 +173,7 @@
             <number>1</number>
            </property>
            <property name="value">
-            <number>10</number>
+            <number>5</number>
            </property>
           </widget>
          </item>
@@ -173,7 +184,7 @@
      <widget class="QWidget" name="page_star">
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
-        <layout class="QFormLayout" name="formLayoutStart">
+        <layout class="QFormLayout" name="formLayoutStar">
          <item row="0" column="0">
           <widget class="QLabel" name="label_numberSatellite">
            <property name="text">
@@ -381,7 +392,7 @@
      <widget class="QWidget" name="page_random_tree">
       <layout class="QGridLayout" name="gridLayout_8">
        <item row="0" column="0">
-        <layout class="QFormLayout" name="formLayout">
+        <layout class="QFormLayout" name="formLayoutRandomTree">
          <item row="0" column="0">
           <widget class="QLabel" name="label_randomTreeNodes">
            <property name="text">
@@ -420,6 +431,107 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="page_path">
+      <layout class="QGridLayout" name="gridLayout_11">
+       <item row="0" column="0">
+        <layout class="QFormLayout" name="formLayoutPath">
+         <item row="0" column="0">
+          <widget class="QLabel" name="labe_pathNodes">
+           <property name="text">
+            <string>Number of Nodes:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="pathNodes">
+           <property name="value">
+            <number>4</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_complete">
+      <layout class="QGridLayout" name="gridLayout_10">
+       <item row="0" column="0">
+        <layout class="QFormLayout" name="formLayoutComplete">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_completeNodes">
+           <property name="text">
+            <string>Number of Nodes:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="completeNodes">
+           <property name="value">
+            <number>5</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_complete_bipartite">
+      <layout class="QGridLayout" name="gridLayout_12">
+       <item row="0" column="0">
+        <layout class="QFormLayout" name="formLayoutCompleteBipartite">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_completeBipartiteNodesLeft">
+           <property name="text">
+            <string>Left Set Nodes:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="completeBipartiteNodesLeft">
+           <property name="value">
+            <number>4</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_completeBipartiteNodesRight">
+           <property name="text">
+            <string>Right Set Nodes:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="completeBipartiteNodesRight">
+           <property name="value">
+            <number>4</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="7" column="2">
+    <widget class="QDialogButtonBox" name="buttons">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="KComboBox" name="edgeTypeSelector">
+     <property name="toolTip">
+      <string>Select the edge type for connections of the generated graph.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="3">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
     </widget>
    </item>
    <item row="2" column="0">
@@ -432,34 +544,17 @@
      </property>
     </widget>
    </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="labelGenerator">
+     <property name="text">
+      <string>Graph Generator</string>
+     </property>
+    </widget>
+   </item>
    <item row="3" column="2">
     <widget class="KComboBox" name="nodeTypeSelector">
      <property name="toolTip">
       <string>Select the node type for node elements of the generated graph.</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2">
-    <widget class="KComboBox" name="edgeTypeSelector">
-     <property name="toolTip">
-      <string>Select the edge type for connections of the generated graph.</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QLineEdit" name="identifier">
-     <property name="toolTip">
-      <string>Set the unique identifier of the generated graph.</string>
-     </property>
-     <property name="text">
-      <string>Graph</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="2">
-    <widget class="QDialogButtonBox" name="buttons">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
