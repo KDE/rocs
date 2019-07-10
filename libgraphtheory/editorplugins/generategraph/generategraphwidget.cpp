@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright 2011-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
  *
  *  This library is free software; you can redistribute it and/or
@@ -34,6 +34,7 @@
 #include <QMap>
 #include <QPair>
 #include <QButtonGroup>
+#include <QMessageBox>
 
 #include <cmath>
 
@@ -223,6 +224,13 @@ void GenerateGraphWidget::generateGraph()
             ui->randomTreeNodes->value()
         );
         break;
+    case RandomDag:
+        setSeed(ui->randomGeneratorSeed->value());
+        generateRandomDagGraph(
+            ui->randomDagNumberOfNodes->value(),
+            ui->randomDagEdgeProbability->value()
+        );
+        break;
     case PathGraph:
         generatePathGraph(
             ui->pathNodes->value()
@@ -232,6 +240,7 @@ void GenerateGraphWidget::generateGraph()
         generateCompleteGraph(
             ui->completeNodes->value()
         );
+        break;
     case CompleteBipartiteGraph:
         generateCompleteBipartiteGraph(
             ui->completeBipartiteNodesLeft->value(),
@@ -470,6 +479,12 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
 
 void GenerateGraphWidget::generateRandomTreeGraph(int number)
 {
+
+    if (EdgeType::Unidirectional == m_edgeType->direction()){
+        QMessageBox::critical(this, "Incorrect Edge Direction", "Edges in an Tree must be bidirectional.");
+        return;
+    }
+
     boost::mt19937 gen;
     gen.seed(static_cast<unsigned int>(m_seed));
 
@@ -497,12 +512,51 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
     topology.directedGraphDefaultTopology(m_document);
 }
 
+void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbability)
+{
+
+    if (EdgeType::Bidirectional == m_edgeType->direction()){
+        QMessageBox::critical(this, i18n("Incorrect Edge Direction"), i18n("Edges in an Directed Acyclical Graph must be directional."));
+        return;
+    }
+
+    boost::mt19937 gen;
+    gen.seed(static_cast<unsigned int>(m_seed));
+    boost::random::uniform_real_distribution<double> dist(0, 1);
+
+    NodeList nodes_list;
+
+    for (int j=0; j < nodes; j++) {
+        NodePtr node = Node::create(m_document);
+        node->setType(m_nodeType);
+        nodes_list.append(node);
+    }
+
+    // Create random edges between levels
+    // This level doesn't consider the new nodes created
+    for (int i=0; i < nodes - 1; i++) {
+        for (int j=i+1; j < nodes; j++) {
+            if (dist(gen)< edgeProbability) {
+                EdgePtr edge = Edge::create(nodes_list.at(i), nodes_list.at(j));
+                edge->setType(m_edgeType);
+            }
+        }
+    }
+
+        // Remove nodes in j where the degree is zero
+//        for (NodePtr n : nodes_list) {
+//            n->
+//        }
+
+    Topology topology = Topology();
+    topology.directedGraphDefaultTopology(m_document);
+}
+
 void GenerateGraphWidget::generatePathGraph(int pathSize)
 {
     QPointF center = documentCenter();
 
     QList< QPair<QString, QPointF> > pathNodes;
-
 
     NodeList nodes_list;
     for (int i = 1; i <= pathSize; i++) {

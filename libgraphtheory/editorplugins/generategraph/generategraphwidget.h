@@ -37,6 +37,7 @@ class GenerateGraphWidget : public QDialog
         RandomEdgeGraph,
         ErdosRenyiRandomGraph,
         RandomTree,
+        RandomDag,
         PathGraph,
         CompleteGraph,
         CompleteBipartiteGraph
@@ -142,6 +143,14 @@ private:
      * \param seed is the seed for random number generator
      */
     void generateRandomTreeGraph(int nodes);
+
+    /**
+     * Generate a random DAG by using a ranking algorithm.
+     *
+     * \param total_nodes is the number of nodes in the DAG
+     * \param edgeProbability is the probability of creating an edge
+     */
+    void generateRandomDagGraph(int nodes, double edgeProbability);
 
     /**
      * Generate a path graph with specified number of nodes.
