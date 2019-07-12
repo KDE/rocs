@@ -84,6 +84,7 @@ GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *par
     m_defaultIdentifiers.insert(CircleGraph, "CircleGraph");
     m_defaultIdentifiers.insert(ErdosRenyiRandomGraph, "RandomGraph");
     m_defaultIdentifiers.insert(RandomTree, "RandomTree");
+    m_defaultIdentifiers.insert(RandomDag, "RandomDag");
     m_defaultIdentifiers.insert(PathGraph, "PathGraph");
     m_defaultIdentifiers.insert(CompleteGraph, "CompleteGraph");
     m_defaultIdentifiers.insert(CompleteBipartiteGraph, "CompleteBipartite");
@@ -490,22 +491,35 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
 
     NodeList nodes;
 
-    NodePtr node = Node::create(m_document);
-    node->setType(m_nodeType);
-    nodes.append(node);
+    QVector<int> notAdded;
+    QVector<int> added;
 
-    for (int i = 1; i < number; ++i) {
-        NodePtr thisNode = Node::create(m_document);
+    for (int i=0; i<number; i++) {
+        NodePtr node = Node::create(m_document);
         node->setType(m_nodeType);
-        boost::random::uniform_int_distribution<> randomEarlierNodeGen(0, i-1);
-        int randomEarlierNode = randomEarlierNodeGen(gen);
-        EdgePtr edge = Edge::create(thisNode, nodes.at(randomEarlierNode));
+        nodes.append(node);
+
+        notAdded.push_back(i);
+    }
+
+    // shuffle
+    std::shuffle(notAdded.begin(), notAdded.end(), gen);
+
+    // add root
+    added.push_back(notAdded.front());
+    notAdded.pop_front();
+
+    while (!notAdded.empty()) {
+        boost::random::uniform_int_distribution<> dist(0, added.size()-1);
+
+        int randomIdx = dist(gen);
+        int next = notAdded.front();
+
+        notAdded.pop_front();
+        added.push_back(next);
+
+        EdgePtr edge = Edge::create(nodes.at(added[randomIdx]), nodes.at(next));
         edge->setType(m_edgeType);
-        if (m_edgeType->direction() == EdgeType::Unidirectional) {
-            edge = Edge::create(nodes.at(randomEarlierNode), thisNode);
-            edge->setType(m_edgeType);
-        }
-        nodes.append(thisNode);
     }
 
     Topology topology = Topology();
@@ -532,8 +546,7 @@ void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbabili
         nodes_list.append(node);
     }
 
-    // Create random edges between levels
-    // This level doesn't consider the new nodes created
+    // Create random edges
     for (int i=0; i < nodes - 1; i++) {
         for (int j=i+1; j < nodes; j++) {
             if (dist(gen)< edgeProbability) {
@@ -542,11 +555,6 @@ void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbabili
             }
         }
     }
-
-        // Remove nodes in j where the degree is zero
-//        for (NodePtr n : nodes_list) {
-//            n->
-//        }
 
     Topology topology = Topology();
     topology.directedGraphDefaultTopology(m_document);
