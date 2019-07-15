@@ -37,6 +37,7 @@
 #include <QMessageBox>
 
 #include <cmath>
+#include <random>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/iteration_macros.hpp>
@@ -392,11 +393,11 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdg
     QPointF center = documentCenter();
 
     Graph randomGraph;
-    boost::mt19937 gen;
+    std::mt19937 gen;
     gen.seed(static_cast<unsigned int>(m_seed));
 
     // generate graph
-    boost::generate_random_graph<Graph, boost::mt19937>(
+    boost::generate_random_graph<Graph, std::mt19937>(
         randomGraph,
         nodes,
         edges,
@@ -405,14 +406,14 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdg
     );
 
     // generate distribution topology and apply
-    boost::rectangle_topology< boost::mt19937 > topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
+    boost::rectangle_topology< std::mt19937 > topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
     PositionVec position_vec(boost::num_vertices(randomGraph));
     PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, randomGraph));
 
     boost::random_graph_layout(randomGraph, positionMap, topology);
 
     // minimize cuts by Fruchtman-Reingold layout algorithm
-    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< boost::mt19937 >, Graph, PositionMap >
+    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< std::mt19937 >, Graph, PositionMap >
     (randomGraph,
      positionMap,
      topology,
@@ -440,21 +441,21 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
 {
     QPointF center = documentCenter();
 
-    boost::mt19937 gen;
+    std::mt19937 gen;
     gen.seed(static_cast<unsigned int>(m_seed));
 
     // generate graph
-    typedef boost::erdos_renyi_iterator<boost::mt19937, Graph> ergen;
+    typedef boost::erdos_renyi_iterator<std::mt19937, Graph> ergen;
     Graph randomGraph(ergen(gen, nodes, edgeProbability, selfEdges), ergen(), nodes);
 
     // generate distribution topology and apply
-    boost::rectangle_topology< boost::mt19937 > topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
+    boost::rectangle_topology< std::mt19937 > topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
     PositionVec position_vec(boost::num_vertices(randomGraph));
     PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, randomGraph));
     boost::random_graph_layout(randomGraph, positionMap, topology);
 
     // minimize cuts by Fruchtman-Reingold layout algorithm
-    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< boost::mt19937 >, Graph, PositionMap >
+    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< std::mt19937 >, Graph, PositionMap >
     (randomGraph,
      positionMap,
      topology,
@@ -486,7 +487,7 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
         return;
     }
 
-    boost::mt19937 gen;
+    std::mt19937 gen;
     gen.seed(static_cast<unsigned int>(m_seed));
 
     NodeList nodes;
@@ -534,7 +535,7 @@ void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbabili
         return;
     }
 
-    boost::mt19937 gen;
+    std::mt19937 gen;
     gen.seed(static_cast<unsigned int>(m_seed));
     boost::random::uniform_real_distribution<double> dist(0, 1);
 
