@@ -1,5 +1,6 @@
 ﻿/*
  *  Copyright 2011-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2019       Caio Henrique Segawa Tonetti <caio.tonetti@gmail.com>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
