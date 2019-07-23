@@ -267,10 +267,12 @@ QPointF GenerateGraphWidget::documentCenter() const
     qreal xSum = 0;
     qreal ySum = 0;
     int number = m_document->nodes().length();
+
     foreach (NodePtr node, m_document->nodes()) {
         xSum += node->x();
         ySum += node->y();
     }
+
     if (number > 0) {
         center.setX(xSum / number);
         center.setY(ySum / number);
@@ -483,7 +485,7 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
 {
 
     if (EdgeType::Unidirectional == m_edgeType->direction()){
-        QMessageBox::critical(this, "Incorrect Edge Direction", "Edges in an Tree must be bidirectional.");
+        QMessageBox::critical(this, "Incorrect Edge Direction", "Edges in a Tree must be bidirectional.");
         return;
     }
 
@@ -495,7 +497,7 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
     QVector<int> notAdded;
     QVector<int> added;
 
-    for (int i=0; i<number; i++) {
+    for (int i = 0; i < number; i++) {
         NodePtr node = Node::create(m_document);
         node->setType(m_nodeType);
         nodes.append(node);
@@ -531,7 +533,7 @@ void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbabili
 {
 
     if (EdgeType::Bidirectional == m_edgeType->direction()){
-        QMessageBox::critical(this, i18n("Incorrect Edge Direction"), i18n("Edges in an Directed Acyclical Graph must be directional."));
+        QMessageBox::critical(this, i18n("Incorrect Edge Direction"), i18n("Edges in a Directed Acyclical Graph must be directional."));
         return;
     }
 
@@ -602,7 +604,7 @@ void GenerateGraphWidget::generateCompleteGraph(int nodes)
     }
 
     for (int i = 0; i < nodes - 1; i++) {
-        for (int j = i + 1; j < nodes; j++){
+        for (int j = i + 1; j < nodes; j++) {
             EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j));
             edge_lr->setType(m_edgeType);
 
