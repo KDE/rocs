@@ -106,8 +106,7 @@ void TgfFileFormat::readFile()
         }
     }
 
-    Topology layouter;
-    layouter.directedGraphDefaultTopology(document);
+    Topology::directedGraphDefaultTopology(document);
     setGraphDocument(document);
     setError(None);
 }

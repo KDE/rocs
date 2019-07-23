@@ -525,8 +525,7 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
         edge->setType(m_edgeType);
     }
 
-    Topology topology = Topology();
-    topology.directedGraphDefaultTopology(m_document);
+    Topology::directedGraphDefaultTopology(m_document);
 }
 
 void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbability)
@@ -559,8 +558,7 @@ void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbabili
         }
     }
 
-    Topology topology = Topology();
-    topology.directedGraphDefaultTopology(m_document);
+    Topology::directedGraphDefaultTopology(m_document);
 }
 
 void GenerateGraphWidget::generatePathGraph(int pathSize)

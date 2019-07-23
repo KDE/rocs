@@ -56,16 +56,6 @@ namespace boost {
     }
 }
 
-Topology::Topology()
-{
-
-}
-
-Topology::~Topology()
-{
-
-}
-
 void Topology::applyMinCutTreeAlignment(NodeList nodes)
 {
     // nodes must be at least of length 2, and two nodes cannot have crossing edges

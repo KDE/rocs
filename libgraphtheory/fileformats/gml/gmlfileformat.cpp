@@ -74,8 +74,8 @@ void GmlFileFormat::readFile()
         document->destroy();
         return;
     }
-    Topology layouter;
-    layouter.directedGraphDefaultTopology(document);
+
+    Topology::directedGraphDefaultTopology(document);
     setGraphDocument(document);
     setError(None);
 }

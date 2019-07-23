@@ -38,8 +38,7 @@ namespace GraphTheory
 class GRAPHTHEORY_EXPORT Topology
 {
 public:
-    Topology();
-    virtual ~Topology();
+    Topology() = delete;
 
     /** \brief applies Fruchterman-Reingold cut minimization
      *
@@ -51,7 +50,7 @@ public:
      * \param nodeList is the list of all nodes
      * \return void
      */
-    void applyMinCutTreeAlignment(NodeList nodes);
+    static void applyMinCutTreeAlignment(NodeList nodes);
 
     /** \brief applies Circle topology to node set
      *
@@ -63,7 +62,7 @@ public:
      * \param radius to optionally specify target radius
      * \return void
      */
-    void applyCircleAlignment(NodeList nodes, qreal radius=0);
+    static void applyCircleAlignment(NodeList nodes, qreal radius=0);
 
     /** \brief applies a default topology for undirected graphs
      *
@@ -71,7 +70,7 @@ public:
      * graph need not to be of type "Graph") only based on the node connections.
      * I.e., no possible present coordinates are respected.
      */
-    void directedGraphDefaultTopology(GraphDocumentPtr document);
+    static void directedGraphDefaultTopology(GraphDocumentPtr document);
 
     /** \brief applies a default topology for undirected graphs
      *
@@ -79,7 +78,7 @@ public:
      * graph need not to be of type "Graph") only based on the node connections.
      * I.e., no possible present coordinates are respected.
      */
-    void undirectedGraphDefaultTopology(GraphDocumentPtr document);
+    static void undirectedGraphDefaultTopology(GraphDocumentPtr document);
 };
 }
 
