@@ -1,5 +1,6 @@
-/*
+﻿/*
  *  Copyright 2011-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2019       Caio Henrique Segawa Tonetti <caio.tonetti@gmail.com>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -34,8 +35,10 @@
 #include <QMap>
 #include <QPair>
 #include <QButtonGroup>
+#include <QMessageBox>
 
 #include <cmath>
+#include <random>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/iteration_macros.hpp>
@@ -83,6 +86,7 @@ GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *par
     m_defaultIdentifiers.insert(CircleGraph, "CircleGraph");
     m_defaultIdentifiers.insert(ErdosRenyiRandomGraph, "RandomGraph");
     m_defaultIdentifiers.insert(RandomTree, "RandomTree");
+    m_defaultIdentifiers.insert(RandomDag, "RandomDag");
     m_defaultIdentifiers.insert(PathGraph, "PathGraph");
     m_defaultIdentifiers.insert(CompleteGraph, "CompleteGraph");
     m_defaultIdentifiers.insert(CompleteBipartiteGraph, "CompleteBipartite");
@@ -223,6 +227,13 @@ void GenerateGraphWidget::generateGraph()
             ui->randomTreeNodes->value()
         );
         break;
+    case RandomDag:
+        setSeed(ui->randomGeneratorSeed->value());
+        generateRandomDagGraph(
+            ui->randomDagNumberOfNodes->value(),
+            ui->randomDagEdgeProbability->value()
+        );
+        break;
     case PathGraph:
         generatePathGraph(
             ui->pathNodes->value()
@@ -232,6 +243,7 @@ void GenerateGraphWidget::generateGraph()
         generateCompleteGraph(
             ui->completeNodes->value()
         );
+        break;
     case CompleteBipartiteGraph:
         generateCompleteBipartiteGraph(
             ui->completeBipartiteNodesLeft->value(),
@@ -256,10 +268,12 @@ QPointF GenerateGraphWidget::documentCenter() const
     qreal xSum = 0;
     qreal ySum = 0;
     int number = m_document->nodes().length();
+
     foreach (NodePtr node, m_document->nodes()) {
         xSum += node->x();
         ySum += node->y();
     }
+
     if (number > 0) {
         center.setX(xSum / number);
         center.setY(ySum / number);
@@ -382,11 +396,11 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdg
     QPointF center = documentCenter();
 
     Graph randomGraph;
-    boost::mt19937 gen;
+    std::mt19937 gen;
     gen.seed(static_cast<unsigned int>(m_seed));
 
     // generate graph
-    boost::generate_random_graph<Graph, boost::mt19937>(
+    boost::generate_random_graph<Graph, std::mt19937>(
         randomGraph,
         nodes,
         edges,
@@ -395,14 +409,14 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdg
     );
 
     // generate distribution topology and apply
-    boost::rectangle_topology< boost::mt19937 > topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
+    boost::rectangle_topology< std::mt19937 > topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
     PositionVec position_vec(boost::num_vertices(randomGraph));
     PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, randomGraph));
 
     boost::random_graph_layout(randomGraph, positionMap, topology);
 
     // minimize cuts by Fruchtman-Reingold layout algorithm
-    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< boost::mt19937 >, Graph, PositionMap >
+    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< std::mt19937 >, Graph, PositionMap >
     (randomGraph,
      positionMap,
      topology,
@@ -430,21 +444,21 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
 {
     QPointF center = documentCenter();
 
-    boost::mt19937 gen;
+    std::mt19937 gen;
     gen.seed(static_cast<unsigned int>(m_seed));
 
     // generate graph
-    typedef boost::erdos_renyi_iterator<boost::mt19937, Graph> ergen;
+    typedef boost::erdos_renyi_iterator<std::mt19937, Graph> ergen;
     Graph randomGraph(ergen(gen, nodes, edgeProbability, selfEdges), ergen(), nodes);
 
     // generate distribution topology and apply
-    boost::rectangle_topology< boost::mt19937 > topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
+    boost::rectangle_topology< std::mt19937 > topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
     PositionVec position_vec(boost::num_vertices(randomGraph));
     PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, randomGraph));
     boost::random_graph_layout(randomGraph, positionMap, topology);
 
     // minimize cuts by Fruchtman-Reingold layout algorithm
-    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< boost::mt19937 >, Graph, PositionMap >
+    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< std::mt19937 >, Graph, PositionMap >
     (randomGraph,
      positionMap,
      topology,
@@ -470,31 +484,82 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
 
 void GenerateGraphWidget::generateRandomTreeGraph(int number)
 {
-    boost::mt19937 gen;
+
+    if (EdgeType::Unidirectional == m_edgeType->direction()){
+        QMessageBox::critical(this, "Incorrect Edge Direction", "Edges in a Tree must be bidirectional.");
+        return;
+    }
+
+    std::mt19937 gen;
     gen.seed(static_cast<unsigned int>(m_seed));
 
     NodeList nodes;
 
-    NodePtr node = Node::create(m_document);
-    node->setType(m_nodeType);
-    nodes.append(node);
+    QVector<int> notAdded;
+    QVector<int> added;
 
-    for (int i = 1; i < number; ++i) {
-        NodePtr thisNode = Node::create(m_document);
+    for (int i = 0; i < number; i++) {
+        NodePtr node = Node::create(m_document);
         node->setType(m_nodeType);
-        boost::random::uniform_int_distribution<> randomEarlierNodeGen(0, i-1);
-        int randomEarlierNode = randomEarlierNodeGen(gen);
-        EdgePtr edge = Edge::create(thisNode, nodes.at(randomEarlierNode));
-        edge->setType(m_edgeType);
-        if (m_edgeType->direction() == EdgeType::Unidirectional) {
-            edge = Edge::create(nodes.at(randomEarlierNode), thisNode);
-            edge->setType(m_edgeType);
-        }
-        nodes.append(thisNode);
+        nodes.append(node);
+
+        notAdded.push_back(i);
     }
 
-    Topology topology = Topology();
-    topology.directedGraphDefaultTopology(m_document);
+    // shuffle
+    std::shuffle(notAdded.begin(), notAdded.end(), gen);
+
+    // add root
+    added.push_back(notAdded.front());
+    notAdded.pop_front();
+
+    while (!notAdded.empty()) {
+        boost::random::uniform_int_distribution<> dist(0, added.size()-1);
+
+        int randomIdx = dist(gen);
+        int next = notAdded.front();
+
+        notAdded.pop_front();
+        added.push_back(next);
+
+        EdgePtr edge = Edge::create(nodes.at(added[randomIdx]), nodes.at(next));
+        edge->setType(m_edgeType);
+    }
+
+    Topology::directedGraphDefaultTopology(m_document);
+}
+
+void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbability)
+{
+
+    if (EdgeType::Bidirectional == m_edgeType->direction()){
+        QMessageBox::critical(this, i18n("Incorrect Edge Direction"), i18n("Edges in a Directed Acyclical Graph must be directional."));
+        return;
+    }
+
+    std::mt19937 gen;
+    gen.seed(static_cast<unsigned int>(m_seed));
+    boost::random::uniform_real_distribution<double> dist(0, 1);
+
+    NodeList nodes_list;
+
+    for (int j=0; j < nodes; j++) {
+        NodePtr node = Node::create(m_document);
+        node->setType(m_nodeType);
+        nodes_list.append(node);
+    }
+
+    // Create random edges
+    for (int i=0; i < nodes - 1; i++) {
+        for (int j=i+1; j < nodes; j++) {
+            if (dist(gen)< edgeProbability) {
+                EdgePtr edge = Edge::create(nodes_list.at(i), nodes_list.at(j));
+                edge->setType(m_edgeType);
+            }
+        }
+    }
+
+    Topology::directedGraphDefaultTopology(m_document);
 }
 
 void GenerateGraphWidget::generatePathGraph(int pathSize)
@@ -502,7 +567,6 @@ void GenerateGraphWidget::generatePathGraph(int pathSize)
     QPointF center = documentCenter();
 
     QList< QPair<QString, QPointF> > pathNodes;
-
 
     NodeList nodes_list;
     for (int i = 1; i <= pathSize; i++) {
@@ -539,7 +603,7 @@ void GenerateGraphWidget::generateCompleteGraph(int nodes)
     }
 
     for (int i = 0; i < nodes - 1; i++) {
-        for (int j = i + 1; j < nodes; j++){
+        for (int j = i + 1; j < nodes; j++) {
             EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j));
             edge_lr->setType(m_edgeType);
 

@@ -73,8 +73,8 @@ void DotFileFormat::readFile()
         setError(EncodingProblem, i18n("Could not parse file \"%1\".", file().toLocalFile()));
         return;
     }
-    Topology layouter;
-    layouter.directedGraphDefaultTopology(document);
+
+    Topology::directedGraphDefaultTopology(document);
      setError(None);
 }
 
