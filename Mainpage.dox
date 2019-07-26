@@ -7,14 +7,11 @@
  *
  * Rocs is divided into the following modules:
  *
- * - <a href="/4.x-api/kdeedu-apidocs/rocs/App/html/index.html"><b>Application</b></a>.
+ * - <a href="src/html/index.html"><b>Application</b></a>.
  *   <i>The Rocs Graph IDE.</i>
  *
- * - <a href="/4.x-api/kdeedu-apidocs/rocs/RocsCore/html/index.html"><b>Rocs Core Library</b></a>.
+ * - <b>Graph Theory Library</b>.
  *   <i>Core library for definition and simulation of data structures.</i>
- *
- * - <a href="/4.x-api/kdeedu-apidocs/rocs/VisualEditor/html/index.html"><b>Rocs Visual Editor</b></a>.
- *   <i>Visual editor for modifying and display of data structures.</i>
  *
  * @b Follow the development of this application and its libraries. Please consider joining the
  * <a href="https://mail.kde.org/mailman/listinfo/rocs-devel">Rocs Development Mailing List</a>.
