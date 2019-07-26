@@ -131,6 +131,7 @@ int NodeModel::rowCount(const QModelIndex &parent) const
 
 void NodeModel::onNodeAboutToBeAdded(NodePtr node, int index)
 {
+    Q_UNUSED(node)
     //TODO add missing signals
     beginInsertRows(QModelIndex(), index, index);
 }

@@ -136,6 +136,7 @@ int EdgeModel::rowCount(const QModelIndex &parent) const
 
 void EdgeModel::onEdgeAboutToBeAdded(EdgePtr edge, int index)
 {
+    Q_UNUSED(edge)
     //TODO add missing signals
     beginInsertRows(QModelIndex(), index, index);
 }
