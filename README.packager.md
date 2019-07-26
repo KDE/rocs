@@ -3,8 +3,8 @@
 This readme file currently covers the following topics (further topics will be
 included in the future):
 
-* Building
-* Licensing
+* [Building](#Building)
+* [Licensing](#Licensing)
 
 ## Building
 
@@ -13,10 +13,12 @@ the list of needed packages and versions.
 
 ## Licenses
 
+Rocs follows the
+[KDE Licensing policy](https://community.kde.org/Policies/Licensing_Policy).
+
 ### Source Files
 
-Rocs follows the
-[KDE Licensing policy](https://community.kde.org/Policies/Licensing_Policy). All
+ All
 `*.cpp`, `*.h`, and `*.cmake` source files are licensed under one of the
 following licenses:
 
@@ -29,7 +31,7 @@ and all sources in `libgraphtheory/` as LGPL-2+.
 
 ### Documentation
 
-The documentation files (to be found at: doc/*) are licensed under GFDL-NIV-1.2+.
+The documentation files (to be found at: `doc/`) are licensed under GFDL-NIV-1.2+.
 
 ### Test Files
 
@@ -40,7 +42,6 @@ These test files are only processed while executing the unit tests and can be
 omitted if no unit tests or no unit tests for a specific plugin, respectively,
 shall be executed:
 
-- `src/LoadSave/Plugins/dotFileFormat/Tests/TestGraphs/*`: EPL-1.0
-
-For further information see 
-`src/LoadSave/Plugins/dotFileFormat/Tests/TestGraphs/README`
+- `libgraphtheory/fileformats/dot/autotests/testfiles/`: EPL-1.0
+  For further information see 
+  `libgraphtheory/fileformats/dot/autotests/testfiles/README`.
