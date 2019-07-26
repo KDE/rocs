@@ -4,7 +4,7 @@
 
 1. Read the API high-level/overview information at:
    - [`libgraphtheory`](libgraphtheory)
-   - [`stc`](src)
+   - [`src`](src)
 2. Compile:
    - have a look at the `CMake` output!
 3. Run Tests and Run Application:
@@ -14,18 +14,18 @@
 
 The Rocs API is reasonable good documentation in most parts of Rocs,
 especially in the RocsCore library. You can either
-[create the doxygen files by hand](http://techbase.kde.org/Development/Tools/apidox)
-or use the nightly updated references at https://api.kde.org.
+[create the doxygen files by hand](https://techbase.kde.org/Development/Tools/apidox)
+or use the [nightly updated references](https://api.kde.org//4.x-api/kdeedu-apidocs/rocs/html/index.html).
 
 ## Project ToDo List
 
 Please read/update the
-[Community Wiki Page](http://community.kde.org/KDEEdu/Rocs/Todo).
+[Community Wiki Page](https://community.kde.org/KDEEdu/Rocs/Todo).
 
 ## Coding Styles
 
 The coding styles are (slowly) converging to the
-[KDE-libs coding styles](http://techbase.kde.org/Policies/Kdelibs_Coding_Style).
+[KDE-libs coding styles](https://community.kde.org/Policies/Kdelibs_Coding_Style).
 
 ## Mailing Lists
 
