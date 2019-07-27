@@ -115,7 +115,7 @@ void TestRocs1FileFormat::serializeUnserializeTypesTest()
     logEdgeTypes(document->edgeTypes());
 
     QCOMPARE(document->nodeTypes().count(), 2);
-    QCOMPARE(document->edgeTypes().count(), 2);
+    QCOMPARE(document->edgeTypes().count(), 3);
 }
 
 //TODO move to Rocs project file test
