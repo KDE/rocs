@@ -570,7 +570,8 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
         edge->setType(m_edgeType);
     }
 
-    Topology::directedGraphDefaultTopology(m_document);
+    Topology::applyCircleAlignment(nodes, 300);
+    Topology::applyMinCutTreeAlignment(nodes);
     adjustNodesToCanvas(nodes);
 }
 
@@ -604,7 +605,8 @@ void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbabili
         }
     }
 
-    Topology::directedGraphDefaultTopology(m_document);
+    Topology::applyCircleAlignment(nodes_list, 300);
+    Topology::applyMinCutTreeAlignment(nodes_list);
     adjustNodesToCanvas(nodes_list);
 }
 
