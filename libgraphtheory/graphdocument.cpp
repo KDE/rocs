@@ -127,15 +127,15 @@ GraphDocumentPtr GraphDocument::create()
     GraphDocumentPtr pi(new GraphDocument);
     pi->setQpointer(pi);
 
-    // create default edge bidirectional
-    EdgeTypePtr edgeTypeBidirectional = EdgeType::create(pi);
-    edgeTypeBidirectional->setName(i18n("bidirectional"));
-    edgeTypeBidirectional->setDirection(EdgeType::Direction::Bidirectional);
-
     // create default edge unidirectional
     EdgeTypePtr edgeTypeUnidirectional = EdgeType::create(pi);
     edgeTypeUnidirectional->setName(i18n("unidirectional"));
     edgeTypeUnidirectional->setDirection(EdgeType::Direction::Unidirectional);
+
+    // create default edge bidirectional
+    EdgeTypePtr edgeTypeBidirectional = EdgeType::create(pi);
+    edgeTypeBidirectional->setName(i18n("bidirectional"));
+    edgeTypeBidirectional->setDirection(EdgeType::Direction::Bidirectional);
 
     // create default node type
     NodeType::create(pi)->setName(i18n("default"));
