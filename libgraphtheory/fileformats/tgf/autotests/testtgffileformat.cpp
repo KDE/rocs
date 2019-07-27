@@ -75,6 +75,13 @@ void TestTgfFileFormat::serializeUnserializeTest()
     QVERIFY2(document->nodes().size() == 5, "ERROR: Number of data is not 5 ");
     QVERIFY2(document->edges().size() == 5, "ERROR: Number of pointers is not 5 ");
     foreach(NodePtr node, document->nodes()) {
+        qDebug() << "Node" << node->dynamicProperty("label");
+        for(const auto& e : node->outEdges()) {
+            qDebug() << ".. out" << e->from()->dynamicProperty("label") << e->to()->dynamicProperty("label");
+        }
+        for(const auto& e : node->inEdges()) {
+            qDebug() << ".. in " << e->from()->dynamicProperty("label") << e->to()->dynamicProperty("label");
+        }
         QCOMPARE(node->outEdges().size(), 1);
         QCOMPARE(node->inEdges().size(), 1);
         QCOMPARE(node->edges().count(), 2);
