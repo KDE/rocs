@@ -303,7 +303,11 @@ void adjustNodesToCanvas(T& nodes)
     }
     
     if ((minX < 0) || (minY < 0)) {
-        // min* is negative, so subtracting it means **adding** to the coordinate
+        // If either is non-negative, make it zero to not translate on that axis
+        minX = qMin(minX, 0);
+        minY = qMin(minY, 0);
+        
+        // min* is negative or zero, so subtracting it means **adding** to the coordinate
         for(auto& n : nodes) {
             n->setX(n->x() - minX);
             n->setY(n->y() - minY);
