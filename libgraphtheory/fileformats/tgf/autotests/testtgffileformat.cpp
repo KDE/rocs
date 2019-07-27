@@ -35,6 +35,8 @@ TestTgfFileFormat::TestTgfFileFormat()
 void TestTgfFileFormat::serializeUnserializeTest()
 {
     GraphDocumentPtr document = GraphDocument::create();
+    QCOMPARE(document->edgeTypes().first()->direction(), EdgeType::Direction::Unidirectional);
+    
     document->nodeTypes().first()->addDynamicProperty("label");
     document->edgeTypes().first()->addDynamicProperty("label");
     QMap<QString, NodePtr> dataList;
