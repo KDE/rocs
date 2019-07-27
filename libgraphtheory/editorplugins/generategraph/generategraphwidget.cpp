@@ -291,8 +291,8 @@ QPointF GenerateGraphWidget::documentCenter() const
 template<typename T>
 void adjustNodesToCanvas(T& nodes)
 {
-    int minX = 0;
-    int minY = 0;
+    qreal minX = 0;
+    qreal minY = 0;
     for(auto& n : nodes) {
         if (n->x() < minX) {
             minX = n->x();
@@ -304,8 +304,8 @@ void adjustNodesToCanvas(T& nodes)
     
     if ((minX < 0) || (minY < 0)) {
         // If either is non-negative, make it zero to not translate on that axis
-        minX = qMin(minX, 0);
-        minY = qMin(minY, 0);
+        minX = qMin(minX, qreal(0));
+        minY = qMin(minY, qreal(0));
         
         // min* is negative or zero, so subtracting it means **adding** to the coordinate
         for(auto& n : nodes) {
