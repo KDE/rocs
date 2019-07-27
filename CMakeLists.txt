@@ -82,6 +82,12 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_KEYWORDS)
 
+if(KF5Declarative_VERSION VERSION_GREATER_EQUAL "5.45")
+    add_definitions(-DKDECLARATIVE_HAVE_SETCONTEXT=1)
+else()
+    add_definitions(-DKDECLARATIVE_HAVE_SETCONTEXT=0)
+endif()
+
 ecm_optional_add_subdirectory(libgraphtheory)
 ecm_optional_add_subdirectory(src)
 ecm_optional_add_subdirectory(icons)

@@ -35,7 +35,7 @@
    <item row="0" column="1">
     <layout class="QHBoxLayout" name="advancedLayout">
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="property_choice_label">
        <property name="text">
         <string>Choose Properties</string>
        </property>
@@ -367,7 +367,7 @@
              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
             </property>
             <item row="0" column="0">
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="constant_label">
               <property name="text">
                <string>Constant</string>
               </property>

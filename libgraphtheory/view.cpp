@@ -85,7 +85,12 @@ View::View(QWidget *parent)
     KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setTranslationDomain("libgraphtheory");
     kdeclarative.setDeclarativeEngine(engine());
+#if KDECLARATIVE_HAVE_SETCONTEXT
+    kdeclarative.setupContext();
+    KDeclarative::KDeclarative::setupEngine(engine());
+#else
     kdeclarative.setupBindings();
+#endif
 
     qmlRegisterType<GraphTheory::Node>("org.kde.rocs.graphtheory", 1, 0, "Node");
     qmlRegisterType<GraphTheory::Edge>("org.kde.rocs.graphtheory", 1, 0, "Edge");
