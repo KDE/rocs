@@ -571,6 +571,7 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
     }
 
     Topology::directedGraphDefaultTopology(m_document);
+    adjustNodesToCanvas(nodes);
 }
 
 void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbability)
@@ -604,6 +605,7 @@ void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbabili
     }
 
     Topology::directedGraphDefaultTopology(m_document);
+    adjustNodesToCanvas(nodes_list);
 }
 
 void GenerateGraphWidget::generatePathGraph(int pathSize)
