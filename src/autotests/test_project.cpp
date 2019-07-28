@@ -55,8 +55,9 @@ void TestProject::projectOperations()
     
     qDebug() << "Project working dir  =" << project.workingDir();
     qDebug() << "Project document path=" << project.codeDocuments().first()->url().toLocalFile();
+    qDebug() << "Test working dir     =" << QDir::currentPath();
     
-    QVERIFY(project.codeDocuments().first()->url().toLocalFile().startsWith(project.workingDir())); // check working dir
+    QVERIFY(project.codeDocuments().first()->url().toLocalFile().startsWith(QDir::currentPath())); // check working dir
     QVERIFY(codeDoc1->url().toLocalFile() != codeDoc2->url().toLocalFile()); // check for distinct names
     project.tryToRemoveCodeDocument(codeDoc1);     // check removal
     QCOMPARE(project.codeDocuments().length(), 1);
