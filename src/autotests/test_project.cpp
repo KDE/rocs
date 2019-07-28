@@ -94,10 +94,22 @@ void TestProject::loadSave()
     project.addGraphDocument(GraphTheory::GraphDocument::create());
     QVERIFY(project.projectSave());
 
+    // Now the documents live in the test dir
+    for (const auto& d : project.codeDocuments()) {
+        qDebug() << "Code document path=" << d->url().toLocalFile();
+        QVERIFY(d->url().toLocalFile().startsWith(QDir::currentPath()));
+    }
+    
     Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), graphEditor);
     QCOMPARE(loadedProject.codeDocuments().count(), project.codeDocuments().count());
     QCOMPARE(loadedProject.graphDocuments().count(), project.graphDocuments().count());
 
+    // After load, they live in the project dir
+    for (const auto& d : loadedProject.codeDocuments()) {
+        qDebug() << "Code document path=" << d->url().toLocalFile();
+        QVERIFY(d->url().toLocalFile().startsWith(loadedProject.workingDir()));
+    }
+    
     graphEditor->deleteLater();
 }
 
