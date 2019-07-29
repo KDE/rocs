@@ -19,7 +19,11 @@
 ##
 
 cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
-project(rocs)
+
+project(rocs LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # KDE Application Version, managed by release script
 set(KDE_APPLICATIONS_VERSION_MAJOR "19")
