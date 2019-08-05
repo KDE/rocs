@@ -3,7 +3,19 @@
  *
  * Written by ctonetti
  * 
- * (Don't accept negative edges in the graph)
+ * (Won't accept negative edges in the graph)
+ *
+ * Time Complexity: 
+ *      (Depends on the data structure used)
+ *      - Our Priority Queue: O(V^2)
+ *      - Binary Heap: O(|E|log|V|)
+ *      - Fibonacci Heap: O(|E|+|V|log|V|)
+ *
+ *  This algorithm finds the shortest path between
+ *  a source node to all other nodes in a graph.
+ *  It iteratively updates the distances to the nodes
+ *  and always take the least cost node to build
+ *  paths.
  *
  */
 
@@ -58,10 +70,12 @@ function Element(e, p) {
     this.priority = p
 }
 
+// Unoptimized data structure
 function PriorityQueue() { 
     
     this.items = []
     
+    // Time Complexity: O(N)
     this.enqueue = function(node, weight) { 
 	var e = new Element(node, weight); 
 	var contain = false; 
@@ -79,12 +93,14 @@ function PriorityQueue() {
 	} 
     }
 
+    // Time Complexity: O(1)
     this.dequeue = function() { 
 	if (this.isEmpty()) 
             return "Underflow"; 
 	return this.items.shift(); 
     }
     
+    // Time Complexity: O(N)
     this.update = function(node, weight) {
         var idx = getIndex(node, this.items)
         
@@ -98,10 +114,12 @@ function PriorityQueue() {
         return false
     }
     
+    // Time Complexity: O(1)
     this.isEmpty = function() { 
         return this.items.length == 0; 
     }
     
+    // Time Complexity: O(N)
     this.print = function() {
         this.items.forEach(function(item) {
             Console.log(item.element.from().id + " - " + item.element.to().id)

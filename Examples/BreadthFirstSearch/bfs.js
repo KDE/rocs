@@ -3,6 +3,13 @@
  *
  * Written by ctonetti
  *
+ *  Time Complexity: O(|E| + |V|)
+ *
+ *  This algorithm is used to traverse an graph in an
+ *  tree-like structure by exploring the nodes in
+ *  "layers", prioritizing the exploration of the
+ *  nearest neighbor of a node.
+ *
  */
 
 function reset(G) {

@@ -3,6 +3,12 @@
  *
  * Written by ctonetti
  * 
+ *  Time Complexity: O(V^3)
+ *
+ *  This algorithm finds the shortest paths between
+ *  every pair of nodes in a graph by iteratively
+ *  "allowing" a number of nodes to be used in each
+ *  path, constructing a matrix of distances.
  *
  */
 

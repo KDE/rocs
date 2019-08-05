@@ -5,6 +5,12 @@
  * 
  * (Can detect negative cycles in graph)
  *
+ *  Time Complexity: O(|E||V|)
+ *
+ *  This algorithm finds the shortest path between
+ *  a source node to all other nodes in a graph by
+ *  relaxing each edge |V| times.
+ *
  */
 
 var INF = 1000000

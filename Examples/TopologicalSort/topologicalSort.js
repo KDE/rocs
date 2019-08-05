@@ -5,6 +5,13 @@
  * 
  * (A topological order is only valid for Directed Acyclical Graphs)
  *
+ *  Time Complexity: O(|E| + |V|)
+ *
+ *  This algorithm finds a topological order of a given graph.
+ *  A topological order is an order in which each node appear
+ *  before any of the nodes that can be reached by it's out
+ *  edges.
+ *
  */
 
 var order = []
