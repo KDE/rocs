@@ -133,7 +133,7 @@
    <item row="6" column="0" colspan="3">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="page_mesh">
       <layout class="QGridLayout" name="gridLayout_2">
@@ -450,7 +450,7 @@
          <item row="0" column="1">
           <widget class="QSpinBox" name="randomDagNumberOfNodes">
            <property name="minimum">
-            <number>10</number>
+            <number>1</number>
            </property>
            <property name="maximum">
             <number>999</number>
@@ -474,6 +474,20 @@
            </property>
            <property name="value">
             <double>0.500000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_dagGeneratorSeed">
+           <property name="text">
+            <string>Generator Seed</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="dagGeneratorSeed">
+           <property name="enabled">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -728,6 +742,38 @@
     <hint type="destinationlabel">
      <x>146</x>
      <y>194</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonShowAdvanced</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_dagGeneratorSeed</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>331</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonShowAdvanced</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dagGeneratorSeed</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>331</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>238</x>
+     <y>249</y>
     </hint>
    </hints>
   </connection>
