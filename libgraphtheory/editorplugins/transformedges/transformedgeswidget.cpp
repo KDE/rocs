@@ -68,6 +68,9 @@ void TransformEdgesWidget::transform()
     if (ui->radioButtonMakeSpanningtree->isChecked()) {
         makeSpanningTree();
     }
+    if (ui->radioButtonEraseSelfEdges->isChecked()) {
+        removeAllSelfEdges();
+    }
 }
 
 void TransformEdgesWidget::makeComplete()
@@ -223,4 +226,13 @@ qreal TransformEdgesWidget::makeSpanningTree()
     }
 
     return total;
+}
+
+void TransformEdgesWidget::removeAllSelfEdges()
+{
+    foreach(EdgePtr e, m_document->edges()) {
+        if (e->to() == e->from()) {
+            e->destroy();
+        }
+    }
 }
