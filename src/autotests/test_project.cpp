@@ -52,7 +52,12 @@ void TestProject::projectOperations()
     project.setDocumentName(codeDoc1, "Test");
 
     QCOMPARE(project.codeDocuments().length(), 2); // check correct adding
-    QVERIFY(project.codeDocuments().first()->url().toLocalFile().startsWith(project.workingDir())); // check working dir
+    
+    qDebug() << "Project working dir  =" << project.workingDir();
+    qDebug() << "Project document path=" << project.codeDocuments().first()->url().toLocalFile();
+    qDebug() << "Test working dir     =" << QDir::currentPath();
+    
+    QVERIFY(project.codeDocuments().first()->url().toLocalFile().startsWith(QDir::currentPath())); // check working dir
     QVERIFY(codeDoc1->url().toLocalFile() != codeDoc2->url().toLocalFile()); // check for distinct names
     project.tryToRemoveCodeDocument(codeDoc1);     // check removal
     QCOMPARE(project.codeDocuments().length(), 1);
@@ -89,10 +94,22 @@ void TestProject::loadSave()
     project.addGraphDocument(GraphTheory::GraphDocument::create());
     QVERIFY(project.projectSave());
 
+    // Now the documents live in the test dir
+    for (const auto& d : project.codeDocuments()) {
+        qDebug() << "Code document path=" << d->url().toLocalFile();
+        QVERIFY(d->url().toLocalFile().startsWith(QDir::currentPath()));
+    }
+    
     Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), graphEditor);
     QCOMPARE(loadedProject.codeDocuments().count(), project.codeDocuments().count());
     QCOMPARE(loadedProject.graphDocuments().count(), project.graphDocuments().count());
 
+    // After load, they live in the project dir
+    for (const auto& d : loadedProject.codeDocuments()) {
+        qDebug() << "Code document path=" << d->url().toLocalFile();
+        QVERIFY(d->url().toLocalFile().startsWith(loadedProject.workingDir()));
+    }
+    
     graphEditor->deleteLater();
 }
 
