@@ -1,65 +1,55 @@
-/**
- * Breadth-first search
+/*
+ * Breadth-First Search
  *
- *  __(')<  written by lambda fairy
- * \___)
+ * Written by ctonetti
+ *
+ *  Time Complexity: O(|E| + |V|)
+ *
+ *  This algorithm is used to traverse an graph in an
+ *  tree-like structure by exploring the nodes in
+ *  "layers", prioritizing the exploration of the
+ *  nearest neighbor of a node.
+ *
  */
 
-function reset_graph(g) {
-  function reset(thing) {
-    thing.set_type(0)
-    thing.color = '#999'
-  }
-  g.nodes().forEach(reset)
-  g.edges().forEach(reset)
-}
+function reset(G) {
+    G.nodes().forEach(unmark)
+    G.edges().forEach(unmark)
 
-function add_mine(g) {
-  var mine = g.nodes()[2]  // Completely arbitrary
-  mine.set_type(1)
-}
-
-function bfs(start, mark, is_match) {
-  var queue = [start]
-  start.seen = true; mark(start); interrupt()
-  var cursor
-  while (queue.length > 0) {
-    cursor = queue.shift()
-    if (is_match(cursor)) {
-      interrupt()
-      return true
-    }
-    cursor.neighbors().forEach(function(node) {
-      if (!node.seen) {
-	node.seen = true; mark(node)
-	queue.push(node)
-      }
-    }); interrupt()
-  }
-  return false
-}
-
-function set_type_to(value) {
-  return function(thing) { thing.set_type(value) }
-}
-
-reset_graph(lake)
-add_mine(lake)
-
-bfs(lake.nodes()[0],
-    function(node) {
-      Console.log('Found ' + node.name)
-      node.color = '#f90'
-    },
-    function(node) {
-      var match = false
-      if (node.type() == 1) {
-        Console.log('-- Deactivated mine at ' + node.name)
-	node.color = '#c00'
-	return true
-      } else {
-	Console.log('-- Cleared ' + node.name)
-        node.color = '#0a0'
-	return false
-      }
+    G.nodes().forEach(function(node) {
+        node.seen = false
     })
+}
+
+function mark(node) {
+    node.color = '#c00'
+}
+
+function unmark(node) {
+    node.color = '#fff'
+}
+
+function bfs(G, start) {
+    
+    var queue = [start]
+    start.seen = true
+
+    while (queue.length > 0) {
+        
+        var top = queue.shift();
+        top.seen = true
+
+        mark(top)
+
+        top.neighbors()
+        .filter(function(x) {
+            return !(x.seen)
+        })
+        .forEach(function(x) {
+            queue.push(x)
+        })
+    }
+}
+
+reset(Document)
+bfs(Document, Document.nodes()[0])

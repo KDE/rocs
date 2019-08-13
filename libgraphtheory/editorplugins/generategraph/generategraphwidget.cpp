@@ -129,6 +129,8 @@ GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *par
     ui->GNPGeneratorSeed->setVisible(false);
     ui->label_randomTreeGeneratorSeed->setVisible(false);
     ui->randomTreeGeneratorSeed->setVisible(false);
+    ui->label_dagGeneratorSeed->setVisible(false);
+    ui->dagGeneratorSeed->setVisible(false);
 
     for (int i = 0; i < document->edgeTypes().length(); ++i) {
         EdgeTypePtr type = document->edgeTypes().at(i);
@@ -214,7 +216,7 @@ void GenerateGraphWidget::generateGraph()
         );
         break;
     case ErdosRenyiRandomGraph:
-        setSeed(ui->randomGeneratorSeed->value());
+        setSeed(ui->GNPGeneratorSeed->value());
         generateErdosRenyiRandomGraph(
             ui->GNPNodes->value(),
             ui->GNPEdgeProbability->value(),
@@ -228,7 +230,7 @@ void GenerateGraphWidget::generateGraph()
         );
         break;
     case RandomDag:
-        setSeed(ui->randomGeneratorSeed->value());
+        setSeed(ui->dagGeneratorSeed->value());
         generateRandomDagGraph(
             ui->randomDagNumberOfNodes->value(),
             ui->randomDagEdgeProbability->value()
