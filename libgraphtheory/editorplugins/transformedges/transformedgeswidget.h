@@ -63,6 +63,11 @@ private:
      */
     qreal makeSpanningTree();
 
+    /**
+     * Remove all self-edges.
+     */
+    void removeAllSelfEdges();
+
 
     GraphDocumentPtr m_document;
     Ui::TransformEdgesWidget *ui;
