@@ -281,6 +281,40 @@ QPointF GenerateGraphWidget::documentCenter() const
     return center;
 }
 
+/** @brief make sure all @p nodes are on the canvas
+ * 
+ * Given a collection of @p nodes, make sure they are all visible
+ * on the canvas (e.g. have a non-negative X and Y coordinate)
+ * by finding the smallest X and Y and then uniformly translating
+ * all of the @p nodes by that amount if either are negative.
+ */
+template<typename T>
+void adjustNodesToCanvas(T& nodes)
+{
+    qreal minX = 0;
+    qreal minY = 0;
+    for(auto& n : nodes) {
+        if (n->x() < minX) {
+            minX = n->x();
+        }
+        if (n->y() < minY) {
+            minY = n->y();
+        }
+    }
+    
+    if ((minX < 0) || (minY < 0)) {
+        // If either is non-negative, make it zero to not translate on that axis
+        minX = qMin(minX, qreal(0));
+        minY = qMin(minY, qreal(0));
+        
+        // min* is negative or zero, so subtracting it means **adding** to the coordinate
+        for(auto& n : nodes) {
+            n->setX(n->x() - minX);
+            n->setY(n->y() - minY);
+        }
+    }
+}
+
 void GenerateGraphWidget::generateMesh(int rows, int columns)
 {
     QPointF center = documentCenter();
@@ -306,6 +340,8 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
         }
     }
 
+    adjustNodesToCanvas(meshNodes);
+    
     // connect mesh nodes
     for (int i = 0; i < columns; ++i) {
         for (int j = 0; j < rows; ++j) {
@@ -355,6 +391,8 @@ void GenerateGraphWidget::generateStar(int satelliteNodes)
     node->setType(m_nodeType);
     nodes.prepend(node);
 
+    adjustNodesToCanvas(nodes);
+    
     // connect circle nodes
     for (int i = 1; i <= satelliteNodes; ++i) {
         EdgePtr edge = Edge::create(nodes.at(0), nodes.at(i));
@@ -381,6 +419,8 @@ void GenerateGraphWidget::generateCircle(int number)
         node->setType(m_nodeType);
         nodes.append(node);
     }
+    
+    adjustNodesToCanvas(nodes);
 
     // connect circle nodes
     for (int i = 0; i < number - 1; i++) {
@@ -433,6 +473,8 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdg
         mapNodes[*vi]->setType(m_nodeType);
     }
 
+    adjustNodesToCanvas(mapNodes);
+    
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei != ei_end; ++ei) {
         EdgePtr edge = Edge::create(mapNodes[boost::source(*ei, randomGraph)], mapNodes[boost::target(*ei, randomGraph)]);
@@ -475,6 +517,8 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
         mapNodes[*vi]->setType(m_nodeType);
     }
 
+    adjustNodesToCanvas(mapNodes);
+    
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei != ei_end; ++ei) {
         EdgePtr edge = Edge::create(mapNodes[boost::source(*ei, randomGraph)], mapNodes[boost::target(*ei, randomGraph)]);
@@ -526,7 +570,9 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
         edge->setType(m_edgeType);
     }
 
-    Topology::directedGraphDefaultTopology(m_document);
+    Topology::applyCircleAlignment(nodes, 300);
+    Topology::applyMinCutTreeAlignment(nodes);
+    adjustNodesToCanvas(nodes);
 }
 
 void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbability)
@@ -559,7 +605,9 @@ void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbabili
         }
     }
 
-    Topology::directedGraphDefaultTopology(m_document);
+    Topology::applyCircleAlignment(nodes_list, 300);
+    Topology::applyMinCutTreeAlignment(nodes_list);
+    adjustNodesToCanvas(nodes_list);
 }
 
 void GenerateGraphWidget::generatePathGraph(int pathSize)
@@ -577,6 +625,8 @@ void GenerateGraphWidget::generatePathGraph(int pathSize)
         nodes_list.append(node);
     }
 
+    adjustNodesToCanvas(nodes_list);
+    
     for (int i = 0; i < pathSize - 1; i++) {
         EdgePtr edge = Edge::create(nodes_list.at(i), nodes_list.at(i + 1));
         edge->setType(m_edgeType);
@@ -602,6 +652,8 @@ void GenerateGraphWidget::generateCompleteGraph(int nodes)
         node_list.append(node);
     }
 
+    adjustNodesToCanvas(node_list);
+    
     for (int i = 0; i < nodes - 1; i++) {
         for (int j = i + 1; j < nodes; j++) {
             EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j));
@@ -637,6 +689,8 @@ void GenerateGraphWidget::generateCompleteBipartiteGraph(int nodes_left, int nod
         node->setType(m_nodeType);
         node_list.append(node);
     }
+
+    adjustNodesToCanvas(node_list);
 
     for (int i = 0; i < nodes_left; i++) {
         for (int j = 0; j < nodes_right; j++){
