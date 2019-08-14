@@ -130,6 +130,10 @@ private Q_SLOTS: // script execution
      * stop script execution
      */
     void stopScript();
+    /**
+     * enable/disable the debugger
+     **/
+    void checkDebugger();
 
 public Q_SLOTS:
     void showEditorPluginDialog();
@@ -155,6 +159,7 @@ private:
     // Other Bunch of stuff.
     QAction *m_runScript;
     QAction *m_stopScript;
+    QAction *m_openDebugger;
 
     ///Store the recent files.
     KRecentFilesAction *m_recentProjects;

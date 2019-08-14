@@ -184,14 +184,20 @@ QWidget* MainWindow::setupScriptPanel()
     m_stopScript = new QAction(QIcon::fromTheme("process-stop"), i18nc("@action:intoolbar Script Execution", "Stop"), this);
     m_stopScript->setToolTip(i18nc("@info:tooltip", "Stop script execution."));
     m_stopScript->setEnabled(false);
+    m_openDebugger = new QAction(QIcon::fromTheme("system-run"), i18nc("@action:intoolbar Open Debugger", "Debugger"), this);
+    m_openDebugger->setToolTip(i18nc("@info:tooltip", "Open de Javascript code debugger."));
+    m_openDebugger->setCheckable(true);
     executeCommands->addAction(m_runScript);
     executeCommands->addAction(m_stopScript);
+    executeCommands->addAction(m_openDebugger);
     // add actions to action collection to be able to set shortcuts on them in the ui
     actionCollection()->addAction("_runScript", m_runScript);
     actionCollection()->addAction("_stopScript", m_stopScript);
+    actionCollection()->addAction("_openDebugger", m_openDebugger);
 
     connect(m_runScript, &QAction::triggered, this, &MainWindow::executeScript);
     connect(m_stopScript, &QAction::triggered, this, &MainWindow::stopScript);
+    connect(m_openDebugger, &QAction::triggered, this, &MainWindow::checkDebugger);
 
     m_hScriptSplitter->addWidget(m_codeEditorWidget);
     m_hScriptSplitter->addWidget(m_outputWidget);
@@ -570,6 +576,11 @@ void MainWindow::executeScript()
     }
     QString script = m_codeEditorWidget->activeDocument()->text();
     enableStopAction();
+
+    if (m_openDebugger->isChecked()) {
+        m_kernel->triggerInterruptAction();
+    }
+
     m_kernel->execute(m_currentProject->activeGraphDocument(), script);
 }
 
@@ -577,6 +588,15 @@ void MainWindow::stopScript()
 {
     m_kernel->stop();
     disableStopAction();
+}
+
+void MainWindow::checkDebugger()
+{
+    if (m_openDebugger->isChecked()) {
+        m_kernel->attachDebugger();
+    } else {
+        m_kernel->detachDebugger();
+    }
 }
 
 void MainWindow::enableStopAction()

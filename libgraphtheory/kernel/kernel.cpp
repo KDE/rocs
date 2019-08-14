@@ -28,23 +28,27 @@
 
 #include <KLocalizedString>
 #include <QScriptEngine>
+#include <QScriptEngineDebugger>
 
 using namespace GraphTheory;
 
 class GraphTheory::KernelPrivate {
 public:
     KernelPrivate()
-        : m_engine(nullptr)
+        : m_engine(new QScriptEngine),
+          m_debugger(new QScriptEngineDebugger)
     {
     }
 
     ~KernelPrivate()
     {
+        m_debugger->detach();
     }
 
     QScriptValue registerGlobalObject(QObject *qobject, const QString &name);
 
     QScriptEngine *m_engine;
+    QScriptEngineDebugger *m_debugger;
     ConsoleModule m_consoleModule;
 };
 
@@ -60,6 +64,7 @@ QScriptValue KernelPrivate::registerGlobalObject(QObject *qobject, const QString
     return globalObject;
 }
 
+
 ///BEGIN: Kernel
 Kernel::Kernel()
     : d(new KernelPrivate)
@@ -74,9 +79,6 @@ Kernel::~Kernel()
 
 QScriptValue Kernel::execute(GraphDocumentPtr document, const QString &script)
 {
-    if (!d->m_engine) {
-        d->m_engine = new QScriptEngine(this);
-    }
 
     // register meta types
     qScriptRegisterSequenceMetaType<QList<GraphTheory::NodeWrapper*> >(d->m_engine);
@@ -129,6 +131,22 @@ void Kernel::stop()
 void Kernel::processMessage(const QString &messageString, Kernel::MessageType type)
 {
     emit message(messageString, type);
+}
+
+void Kernel::attachDebugger()
+{
+    d->m_debugger->attachTo(d->m_engine);
+}
+
+void Kernel::detachDebugger()
+{
+    d->m_debugger->detach();
+    d->m_debugger = new QScriptEngineDebugger;
+}
+
+void Kernel::triggerInterruptAction()
+{
+    d->m_debugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
 }
 
 //END: Kernel
