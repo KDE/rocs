@@ -72,8 +72,8 @@ void Topology::applyMinCutTreeAlignment(NodeList nodes)
         xList << node->x();
         yList << node->y();
     }
-    qSort(xList.begin(), xList.end());
-    qSort(yList.begin(), yList.end());
+    std::sort(xList.begin(), xList.end());
+    std::sort(yList.begin(), yList.end());
 
     // do not perform algorithm if graph is very dense:
     // this prevents very long algorithm computations and possible threading issues
@@ -146,8 +146,8 @@ void Topology::applyCircleAlignment(NodeList nodes, qreal radius)
             xList << node->x();
             yList << node->y();
         }
-        qSort(xList.begin(), xList.end());
-        qSort(yList.begin(), yList.end());
+        std::sort(xList.begin(), xList.end());
+        std::sort(yList.begin(), yList.end());
 
         radius = fmax(fabs(xList.first() - xList.last()), fabs(yList.first() - yList.last())) / 2;
     }
