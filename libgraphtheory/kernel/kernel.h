@@ -29,6 +29,8 @@
 #include <QScriptEngine>
 #include <QObject>
 
+#include <QAction>
+
 namespace GraphTheory
 {
 class KernelPrivate;
@@ -57,6 +59,9 @@ public:
     QScriptValue execute(GraphTheory::GraphDocumentPtr document, const QString &script);
     void stop();
 
+    void attachDebugger();
+    void detachDebugger();
+    void triggerInterruptAction();
 
 private Q_SLOTS:
     /** process all incoming messages and resend them afterwards**/
