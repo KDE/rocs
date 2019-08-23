@@ -185,7 +185,7 @@ QWidget* MainWindow::setupScriptPanel()
     m_stopScript->setToolTip(i18nc("@info:tooltip", "Stop script execution."));
     m_stopScript->setEnabled(false);
     m_openDebugger = new QAction(QIcon::fromTheme("system-run"), i18nc("@action:intoolbar Open Debugger", "Debugger"), this);
-    m_openDebugger->setToolTip(i18nc("@info:tooltip", "Open de Javascript code debugger."));
+    m_openDebugger->setToolTip(i18nc("@info:tooltip", "Open the Javascript code debugger."));
     m_openDebugger->setCheckable(true);
     executeCommands->addAction(m_runScript);
     executeCommands->addAction(m_stopScript);
