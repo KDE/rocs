@@ -82,7 +82,7 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_KEYWORDS)
 
-if(KF5Declarative_VERSION VERSION_GREATER_EQUAL "5.45")
+if(NOT KF5Declarative_VERSION VERSION_LESS "5.45")
     add_definitions(-DKDECLARATIVE_HAVE_SETCONTEXT=1)
 else()
     add_definitions(-DKDECLARATIVE_HAVE_SETCONTEXT=0)
