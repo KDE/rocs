@@ -390,10 +390,11 @@ void MainWindow::saveProject()
     if (m_currentProject->projectUrl().isEmpty()) {
         saveProjectAs();
         return;
-    } else {
-        m_currentProject->projectSave();
-        m_recentProjects->addUrl(m_currentProject->projectUrl());
     }
+
+    m_currentProject->projectSave();
+    m_recentProjects->addUrl(m_currentProject->projectUrl());
+
     updateCaption();
 }
 
