@@ -457,6 +457,7 @@ void MainWindow::updateCaption()
     if (!m_currentProject) {
         return;
     }
+
     QString modified;
     if (m_currentProject->isModified()) {
         modified = '*';
