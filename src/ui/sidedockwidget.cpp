@@ -1,5 +1,6 @@
 /*
  *  Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2019       Tomaz Canabrava <tcanabrava@kde.org>
  *
  *  This program is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
@@ -27,7 +28,7 @@
 #include <QToolBar>
 #include <QLabel>
 #include <QAction>
-#include <QVBoxLayout>
+#include <QStackedLayout>
 #include <QLayout>
 #include <QObject>
 #include <QWidget>
@@ -115,12 +116,14 @@ void SideToolButton::paintEvent(QPaintEvent *event)
     painter.end();
 }
 
-
 SidedockWidget::SidedockWidget(QWidget* parent)
     : QWidget(parent)
+    , _btnGroup(new QButtonGroup(this))
     , _showDock(false)
 {
     Q_ASSERT(parent); // we need a parent widget
+
+    _btnGroup->setExclusive(true);
 
     _toolBar = new QToolBar(i18nc("@title", "Side Toolbar"), this);
     _toolBar->setFloatable(false);
@@ -128,7 +131,7 @@ SidedockWidget::SidedockWidget(QWidget* parent)
     _toolBar->setObjectName("sidebar");
     _toolBar->setIconSize(QSize(16,16));
     _toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    setLayout(new QVBoxLayout);
+    setLayout(new QStackedLayout);
 }
 
 void SidedockWidget::addDock(QWidget* widget, const QString& title, const QIcon& icon)
@@ -143,58 +146,26 @@ void SidedockWidget::addDock(QWidget* widget, const QString& title, const QIcon&
     button->setIcon(icon);
     button->setShortcut(QKeySequence());
     button->setChecked(false); // initially do not check
-
+    _btnGroup->addButton(button);
     // only request action on user set action
-    connect(button, &SideToolButton::clicked, this, &SidedockWidget::buttonToggled);
+    const int idx = _widgets.count();
+
+    connect(button, &SideToolButton::clicked, this,
+        [this, button, idx] {
+        showDock(button->isChecked(), idx);
+    });
 
     // register and add to list
     _toolBar->addWidget(button);
-    _widgets.insert(button, widget);
+    _widgets.append(widget);
 }
 
-void SidedockWidget::buttonToggled(bool state)
-{
-    Q_UNUSED(state);
-
-    SideToolButton* button = qobject_cast<SideToolButton*>(sender());
-    if (!button) {
-        qWarning() << "Wrong sender for side bar toggle action, aborting";
-        return;
-    }
-
-    Q_ASSERT(button->isChecked() == state);
-    Q_ASSERT(_widgets.contains(button));
-
-    // if button is toggled off, close dock
-    if (button->isChecked() == false) {
-        showDock(false, _widgets[button]);
-    } else {
-        showDock(true, _widgets[button]);
-    }
-
-    // only one button is allowed to be toggled
-    QHash<SideToolButton*, QWidget*>::iterator iter = _widgets.begin();
-    while (iter != _widgets.end()) {
-        if (iter.key() != button) {
-            iter.key()->setChecked(false);
-            (*iter)->setVisible(false);
-        }
-        ++iter;
-    }
-}
-
-void SidedockWidget::showDock(bool show, QWidget* widget)
+void SidedockWidget::showDock(bool show, int nr)
 {
     _showDock = show;
-    if (show == false) {
-        widget->setVisible(false);
-        parentWidget()->setVisible(false);
-    }
-
-    if (show == true) {
-        widget->setVisible(true);
-        parentWidget()->setVisible(true);
-    }
+    setVisible(show);
+    auto *stackLayout = qobject_cast<QStackedLayout*>(layout());
+    stackLayout->setCurrentIndex(nr);
     emit visibilityChanged(show);
 }
 

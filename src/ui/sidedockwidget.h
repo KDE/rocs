@@ -24,6 +24,7 @@
 #include <QDockWidget>
 #include <QToolButton>
 #include <QHash>
+#include <QButtonGroup>
 
 class QIcon;
 class QToolBar;
@@ -60,17 +61,15 @@ public:
     explicit SidedockWidget(QWidget* parent);
     QToolBar * toolbar() const;
     void addDock(QWidget* dock, const QString& title, const QIcon& icon);
-    void showDock(bool show, QWidget* widget);
-
-public slots:
-    void buttonToggled(bool state);
+    void showDock(bool show, int nr);
 
 signals:
     void visibilityChanged(bool visible);
 
 private:
     QToolBar *_toolBar;
-    QHash<SideToolButton*, QWidget*> _widgets;
+    QButtonGroup *_btnGroup;
+    QList<QWidget*> _widgets;
     bool _showDock;
 };
 

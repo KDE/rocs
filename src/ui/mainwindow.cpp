@@ -222,18 +222,13 @@ QWidget* MainWindow::setupScriptPanel()
 
 QWidget* MainWindow::setupSidePanel()
 {
-    QWidget *panel = new QWidget(this);
-    panel->setLayout(new QVBoxLayout);
-    panel->setVisible(false);
-
     // add sidebar
-    SidedockWidget* sideDock = new SidedockWidget(panel);
+    SidedockWidget* sideDock = new SidedockWidget(this);
     addToolBar(Qt::RightToolBarArea, sideDock->toolbar());
-    panel->layout()->addWidget(sideDock);
 
     // add widgets to dock
     // document property widgets
-    DocumentTypesWidget *documentTypesWidget = new DocumentTypesWidget(panel);
+    DocumentTypesWidget *documentTypesWidget = new DocumentTypesWidget(this);
     connect(this, &MainWindow::graphDocumentChanged, documentTypesWidget, &DocumentTypesWidget::setDocument);
     sideDock->addDock(documentTypesWidget, i18n("Element Types"), QIcon::fromTheme("document-properties"));
     if (m_currentProject && m_currentProject->activeGraphDocument()) {
@@ -241,14 +236,14 @@ QWidget* MainWindow::setupSidePanel()
     }
 
     // Project Journal
-    m_journalWidget = new JournalEditorWidget(panel);
+    m_journalWidget = new JournalEditorWidget(this);
     sideDock->addDock(m_journalWidget, i18nc("@title", "Journal"), QIcon::fromTheme("story-editor"));
 
     // Rocs scripting API documentation
-    ScriptApiWidget* apiDoc = new ScriptApiWidget(panel);
+    ScriptApiWidget* apiDoc = new ScriptApiWidget(this);
     sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), QIcon::fromTheme("documentation"));
 
-    return panel;
+    return sideDock;
 }
 
 void MainWindow::setProject(Project *project)
