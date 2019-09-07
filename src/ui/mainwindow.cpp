@@ -127,11 +127,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (queryClose() == true) {
         event->accept();
-        return;
     } else {
         event->ignore();
-        return;
     }
+    return;
 }
 
 void MainWindow::setupWidgets()
