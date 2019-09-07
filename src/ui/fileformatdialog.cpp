@@ -52,7 +52,7 @@ bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
 
     QUrl startDirectory = QUrl::fromLocalFile(Settings::lastOpenedDirectory());
 
-    QPointer<QFileDialog> exportDialog = new QFileDialog(qobject_cast< QWidget* >(parent()));
+    QScopedPointer<QFileDialog> exportDialog(new QFileDialog());
     exportDialog->setNameFilters(nameFilter);
     exportDialog->setLabelText(QFileDialog::Accept, i18nc("@action:button", "Export"));
     if (exportDialog->exec() != QDialog::Accepted) {
