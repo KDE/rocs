@@ -163,4 +163,5 @@ void NodeTypesDelegate::showPropertiesDialog()
     QPointer<NodeTypeProperties> dialog = new NodeTypeProperties(0);
     dialog->setType(type->self());
     dialog->exec();
+    dialog->deleteLater();
 }
