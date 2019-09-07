@@ -86,10 +86,7 @@ QList< QWidget* > NodeTypesDelegate::createItemWidgets(const QModelIndex &index)
     connect(propertiesButton, &QToolButton::clicked,
         this, &NodeTypesDelegate::showPropertiesDialog);
 
-    return QList<QWidget*>() << colorButton
-                             << title
-                             << idLabel
-                             << propertiesButton;
+    return { colorButton, title, idLabel, propertiesButton };
 }
 
 void NodeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const
