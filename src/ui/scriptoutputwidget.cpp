@@ -43,12 +43,11 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget *parent)
 
 void ScriptOutputWidget::updateFixOutputButton()
 {
-    if (ui->buttonDisableClear->isChecked() == true) {
-        ui->buttonDisableClear->setIcon(QIcon::fromTheme("document-encrypt"));
-    }
-    else {
-        ui->buttonDisableClear->setIcon(QIcon::fromTheme("document-decrypt"));
-    }
+    ui->buttonDisableClear->setIcon(
+        QIcon::fromTheme(
+            ui->buttonDisableClear->isChecked()
+            ? QStringLiteral("document-encrypt")
+            : QStringLiteral("document-decrypt")));
 }
 
 void ScriptOutputWidget::clear()
