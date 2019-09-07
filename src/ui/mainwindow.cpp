@@ -336,7 +336,7 @@ void MainWindow::setupToolsPluginsAction()
     QList<QAction*> actions;
     int count = 0;
     for (auto plugin : availablePlugins) {
-        QAction *action = new QAction(plugin->displayName(), this);
+        auto *action = new QAction(plugin->displayName(), this);
         action->setData(count++);
         connect(action, &QAction::triggered,
             this, &MainWindow::showEditorPluginDialog);
