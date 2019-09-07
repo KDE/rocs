@@ -187,4 +187,5 @@ void EdgeTypesDelegate::showPropertiesDialog()
     QPointer<EdgeTypeProperties> dialog = new EdgeTypeProperties(0);
     dialog->setType(type->self());
     dialog->exec();
+    delete dialog;
 }
