@@ -527,20 +527,22 @@ bool MainWindow::queryClose()
     if (!m_currentProject) {
         return true;
     }
-    if (m_currentProject->isModified()) {
-        const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
-                                "@info",
-                                "Changes on your project are unsaved. Do you want to save your changes?"));
-        if (btnCode == KMessageBox::Yes) {
-            saveProject();
-            return true;
-        }
-        if (btnCode == KMessageBox::No) {
-            return true;
-        }
-        return false; // do not close
+    if (!m_currentProject->isModified()) {
+        return true;
     }
-    return true; // save to close project: no changes
+    const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
+                            "@info",
+                            "Changes on your project are unsaved. Do you want to save your changes?"));
+
+    if (btnCode == KMessageBox::Cancel) {
+        return false;
+    }
+
+    if (btnCode == KMessageBox::Yes) {
+        saveProject();
+    }
+
+    return true;
 }
 
 void MainWindow::quit()
