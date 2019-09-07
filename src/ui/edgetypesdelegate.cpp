@@ -172,11 +172,12 @@ void EdgeTypesDelegate::onDirectionSwitched()
     QModelIndex index = focusedIndex();
     EdgeType::Direction direction = static_cast<EdgeType::Direction>(
         index.data(EdgeTypeModel::DirectionRole).toInt());
-    if (direction == EdgeType::Bidirectional) {
-        emit directionChanged(index, EdgeType::Unidirectional);
-    } else {
-        emit directionChanged(index, EdgeType::Bidirectional);
-    }
+
+    const EdgeType::Direction newDirection = direction == EdgeType::Bidirectional
+        ? EdgeType::Unidirectional
+        : EdgeType::Bidirectional;
+
+    emit directionChanged(index, newDirection);
 }
 
 void EdgeTypesDelegate::showPropertiesDialog()
