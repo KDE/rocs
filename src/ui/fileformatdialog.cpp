@@ -52,22 +52,28 @@ bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
 
     QUrl startDirectory = QUrl::fromLocalFile(Settings::lastOpenedDirectory());
 
-    QScopedPointer<QFileDialog> exportDialog(new QFileDialog());
+    QPointer<QFileDialog> exportDialog = new QFileDialog(qobject_cast< QWidget* >(parent()));
     exportDialog->setNameFilters(nameFilter);
     exportDialog->setLabelText(QFileDialog::Accept, i18nc("@action:button", "Export"));
-    if (exportDialog->exec() != QDialog::Accepted) {
+
+    int retCode = exportDialog->exec();
+    const QUrl file = exportDialog->selectedFiles().count()
+        ? QUrl::fromLocalFile(exportDialog->selectedFiles().first())
+        : QUrl();
+
+    const QString filter = exportDialog->selectedNameFilter();
+    delete exportDialog;
+
+    if (retCode != QDialog::Accepted) {
         return false;
     }
 
-    if (exportDialog->selectedFiles().isEmpty()) {
+    if (file.isEmpty()) {
         return false;
     }
-
-    // set file ending
-    const QUrl file = QUrl::fromLocalFile(exportDialog->selectedFiles().first());
 
     // test if any file is overwritten
-    if (QFile::exists(exportDialog->selectedFiles().first())) {
+    if (QFile::exists(file.toLocalFile())) {
         if (KMessageBox::warningContinueCancel(qobject_cast< QWidget* >(parent()), i18n(
                 "<p>The file <br /><strong>'%1'</strong><br /> already exists; if you "
                 "do not want to overwrite it, change the file name to "
@@ -79,7 +85,6 @@ bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
     }
 
     // select plugin by extension
-    const QString filter = exportDialog->selectedNameFilter();
 
     // find match for "(*.foo)"
     QRegularExpressionMatch match;
