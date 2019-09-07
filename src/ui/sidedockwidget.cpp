@@ -65,21 +65,19 @@ QSize SideToolButton::sizeHint() const
     const int charWidth = fm.horizontalAdvance(QLatin1Char('x'));
 
     // compute text size
-    QSize textSize;
-    textSize = fm.size(Qt::TextShowMnemonic, option.text);
+    QSize textSize = fm.size(Qt::TextShowMnemonic, option.text);
     textSize.rwidth() += 2 * charWidth;
 
     // compute icon size
     const int spacing = 2;
-    int iconwidth = 0, iconheight = 0;
-    iconwidth = option.iconSize.height();
-    iconheight = option.iconSize.width();
+    const int iconwidth = option.iconSize.height();
+    const int iconheight = option.iconSize.width();
 
-    // compute final size
-    int width = 4 + textSize.width() + iconwidth + spacing;
-    int height = 4 + qMax(textSize.height(), iconheight) + spacing;
-
-    return QSize(height, width);
+    // compute final size. height and width are rotated.
+    return {
+        4 + qMax(textSize.height(), iconheight) + spacing,
+        4 + textSize.width() + iconwidth + spacing
+    };
 }
 
 void SideToolButton::paintEvent(QPaintEvent *event)
