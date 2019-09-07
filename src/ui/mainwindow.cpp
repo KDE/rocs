@@ -152,10 +152,17 @@ void MainWindow::setupWidgets()
     m_hSplitter->addWidget(sidePanel);
 
     // set sizes for script panel
-    m_hScriptSplitter->setSizes(QList<int>() << Settings::hScriptSplitterSizeLeft() << Settings::hScriptSplitterSizeRight() << 80);
+    m_hScriptSplitter->setSizes({
+        Settings::hScriptSplitterSizeLeft(),
+        Settings::hScriptSplitterSizeRight(),
+        80
+    });
 
     // set sizes for vertical splitter
-    m_vSplitter->setSizes(QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom());
+    m_vSplitter->setSizes({
+        Settings::vSplitterSizeTop(),
+        Settings::vSplitterSizeBottom()
+    });
 
     // set sizes for side panel
     // the following solves the setting of the panel width if it was closed at previous session
@@ -165,7 +172,11 @@ void MainWindow::setupWidgets()
         // that fixes the wrong saving of hSplitterSizeRight
         panelWidth = 400;
     }
-    m_hSplitter->setSizes(QList<int>() << Settings::hSplitterSizeLeft() << panelWidth);
+
+    m_hSplitter->setSizes({
+        Settings::hSplitterSizeLeft(),
+        panelWidth
+    });
 
     setCentralWidget(m_hSplitter);
 }
