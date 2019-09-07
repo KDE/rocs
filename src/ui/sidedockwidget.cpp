@@ -62,7 +62,7 @@ QSize SideToolButton::sizeHint() const
     QFontMetrics fm = fontMetrics();
 
     // calculate example character width
-    const int charWidth = fm.width(QLatin1Char('x'));
+    const int charWidth = fm.horizontalAdvance(QLatin1Char('x'));
 
     // compute text size
     QSize textSize;
