@@ -93,13 +93,8 @@ DocumentTypesWidget::~DocumentTypesWidget()
 
 void DocumentTypesWidget::setDocument(GraphDocumentPtr document)
 {
-    if (!document) { // deactivate controls if no document exists
-        m_createNodeTypeButton->setEnabled(false);
-        m_createEdgeTypeButton->setEnabled(false);
-    } else {
-        m_createNodeTypeButton->setEnabled(true);
-        m_createEdgeTypeButton->setEnabled(true);
-    }
+    m_createNodeTypeButton->setEnabled(document ? true : false);
+    m_createEdgeTypeButton->setEnabled(document ? true : false);
 
     m_document = document;
     m_nodeTypeModel.setDocument(document);
