@@ -440,12 +440,10 @@ void MainWindow::openProject(const QUrl &fileName)
                     i18nc("@title:window", "Open Project Files"),
                     startDirectory,
                     i18n("Rocs projects (*.rocs)")));
-
-        if (file.isEmpty()) {
-            return;
-        }
     }
-
+    if (file.isEmpty()) {
+        return;
+    }
     Project *project = new Project(file, m_graphEditor);
     setProject(project);
     m_recentProjects->addUrl(file);
