@@ -434,7 +434,7 @@ void MainWindow::openProject(const QUrl &fileName)
 
     QString startDirectory = Settings::lastOpenedDirectory();
     QUrl file = fileName;
-    if (file.isEmpty()){
+    if (file.isEmpty()) {
     // show open dialog
          file = QUrl::fromLocalFile(QFileDialog::getOpenFileName(this,
                     i18nc("@title:window", "Open Project Files"),
