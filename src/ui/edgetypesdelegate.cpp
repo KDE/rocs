@@ -85,11 +85,7 @@ QList< QWidget* > EdgeTypesDelegate::createItemWidgets(const QModelIndex &index)
     connect(title, &QLineEdit::textEdited, this, &EdgeTypesDelegate::onNameChanged);
     connect(propertiesButton, &QToolButton::clicked, this, &EdgeTypesDelegate::showPropertiesDialog);
 
-    return QList<QWidget*>() << colorButton
-                             << direction
-                             << title
-                             << idLabel
-                             << propertiesButton;
+    return { colorButton, direction, title, idLabel, propertiesButton };
 }
 
 void EdgeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const
