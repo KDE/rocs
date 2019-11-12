@@ -15,7 +15,7 @@
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
 project(rocs)
@@ -95,7 +95,7 @@ if(KF5DocTools_FOUND)
     ecm_optional_add_subdirectory(doc)
 endif()
 
-set_package_properties(Boost PROPERTIES DESCRIPTION "Boost C++ Libraries" URL "http://www.boost.org")
+set_package_properties(Boost PROPERTIES DESCRIPTION "Boost C++ Libraries" URL "https://www.boost.org")
 feature_summary(WHAT ALL)
 
 install(FILES org.kde.rocs.appdata.xml DESTINATION ${CMAKE_INSTALL_METAINFODIR})

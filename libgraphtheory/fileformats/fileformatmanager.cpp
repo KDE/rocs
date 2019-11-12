@@ -15,7 +15,7 @@
  *  Lesser General Public License for more details.
  *
  *  You should have received a copy of the GNU Lesser General Public
- *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ *  License along with this library.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include "fileformatmanager.h"
@@ -132,7 +132,7 @@ void FileFormatManager::loadBackends()
         pluginErrorMessageBox.setTextFormat(Qt::RichText);
         pluginErrorMessageBox.setText(i18n("Plugins could not be found in specified directories:<br>")+
                                          dirsToCheck.join("<br>")+
-                                         i18n("<br><br> Check <a href='http://doc.qt.io/qt-5/deployment-plugins.html'>"
+                                         i18n("<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>"
                                          "this link</a> for further information."));
         pluginErrorMessageBox.setDefaultButton(QMessageBox::Close);
         pluginErrorMessageBox.exec();

@@ -16,7 +16,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include <QApplication>
@@ -46,15 +46,15 @@ int main(int argc, char *argv[])
     aboutData.addAuthor(ki18nc("@info:credit Developer name", "Andreas Cord-Landwehr").toString(),
                         ki18nc("@info:credit Role", "Maintainer").toString(),
                         "cordlandwehr@kde.org",
-                        "http://cordlandwehr.wordpress.com");
+                        "https://cordlandwehr.wordpress.com");
     aboutData.addAuthor(ki18nc("@info:credit Developer name", "Tomaz Canabrava").toString(),
                         ki18nc("@info:credit Role", "Original Author").toString(),
                         "tcanabrava@kde.org",
-                        "http://liveblue.wordpress.com");
+                        "https://liveblue.wordpress.com");
     aboutData.addAuthor(ki18nc("@info:credit Developer name", "Wagner Reck").toString(),
                         ki18nc("@info:credit Role", "Developer").toString(),
                         "wagner.reck@gmail.com",
-                        "http://wiglot.wordpress.com");
+                        "https://wiglot.wordpress.com");
 
     app.setApplicationVersion(aboutData.version());
 
