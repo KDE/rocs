@@ -3,7 +3,7 @@
 **Last Update**: 2012-06-03
 
 This file describes the testing procedures that should be done when releasing 
-Rocs. The test procudure starts with a simple checklist (that can be skipped
+Rocs. The test procedure starts with a simple checklist (that can be skipped
 by beta testers) and then focuses on testing the functional properties
 of the application
 
@@ -18,19 +18,18 @@ of the application
 ### Static Code Checkers
 
 * All (important) Krazy issues are fixed:
-  http://www.englishbreakfastnetwork.org/krazy/reports/kde-4.x/kdeedu/rocs/index.html
-* CppCheck issues are fixed:
-  http://build.kde.org/view/KDEEDU/job/rocs_master/cppcheckResult
+  http://ebn.kde.org/krazy/reports/kde-4.x/kdeedu/rocs/index.html
+* Build issues are fixed:
+  https://build.kde.org/job/Applications/job/rocs/
 
 ### Unit Tests
 
-* Rocs builds with `KDE4_BUILD_TESTS`
 * All unit test pass:
-  http://build.kde.org/view/KDEEDU/job/rocs_master/lastCompletedBuild/testReport/
+  https://build.kde.org/job/Applications/job/rocs/
 
 ### Documentation
 
-* Handbook builds: `KDE4_ENABLE_HTMLHANDBOOK`
+* Handbook builds
 * Handbook is updated
 
 ### Website and Release Information
