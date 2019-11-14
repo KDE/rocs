@@ -101,28 +101,26 @@ void FileFormatManager::loadBackends()
     }
     d->backends.clear();
 
-    // dirs to check for plugins
-    QStringList dirsToCheck;
-    foreach (const QString &directory, QCoreApplication::libraryPaths()) {
-        dirsToCheck << directory + QDir::separator() + "rocs/fileformats";
-    }
-
-    // load plugins
-    QPluginLoader loader;
-    foreach (const QString &dir, dirsToCheck) {
-        QVector<KPluginMetaData> metadataList = KPluginLoader::findPlugins(dir,[=](const KPluginMetaData &data){
+    QVector<KPluginMetaData> metadataList = KPluginLoader::findPlugins(
+        "rocs/fileformats",
+        [](const KPluginMetaData &data){
             return data.serviceTypes().contains("rocs/graphtheory/fileformat");
-        });
-        for (const auto &metadata : metadataList) {
-            loader.setFileName(metadata.fileName());
-            qCDebug(GRAPHTHEORY_FILEFORMAT) << "Load Plugin: " << metadata.name();
-            if (!loader.load()) {
-                qCCritical(GRAPHTHEORY_FILEFORMAT) << "Error while loading plugin: " << metadata.name();
-            }
-            KPluginFactory *factory = KPluginLoader(loader.fileName()).factory();
-            FileFormatInterface *plugin = factory->create<FileFormatInterface>(this);
-            d->backends.append(plugin);
         }
+    );
+
+    QPluginLoader loader;
+
+    foreach (const auto &metadata, metadataList) {
+        loader.setFileName(metadata.fileName());
+
+        qCDebug(GRAPHTHEORY_FILEFORMAT) << "Load Plugin: " << metadata.name();
+        if (!loader.load()) {
+            qCCritical(GRAPHTHEORY_FILEFORMAT) << "Error while loading plugin: " << metadata.name();
+        }
+
+        KPluginFactory *factory = KPluginLoader(loader.fileName()).factory();
+        FileFormatInterface *plugin = factory->create<FileFormatInterface>(this);
+        d->backends.append(plugin);
     }
 
     // display a QMessageBox if no plugins are found
@@ -131,7 +129,7 @@ void FileFormatManager::loadBackends()
         pluginErrorMessageBox.setWindowTitle(i18n("Plugin Error"));
         pluginErrorMessageBox.setTextFormat(Qt::RichText);
         pluginErrorMessageBox.setText(i18n("Plugins could not be found in specified directories:<br>")+
-                                         dirsToCheck.join("<br>")+
+                                         QCoreApplication::libraryPaths().join("/rocs/fileformats<br>")+
                                          i18n("<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>"
                                          "this link</a> for further information."));
         pluginErrorMessageBox.setDefaultButton(QMessageBox::Close);
