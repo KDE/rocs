@@ -44,6 +44,8 @@ public:
     Qt::Orientation orientation() const;
     QSize sizeHint() const Q_DECL_OVERRIDE;
 
+    bool wasChecked;
+
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };

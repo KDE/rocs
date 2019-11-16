@@ -45,6 +45,8 @@ SideToolButton::SideToolButton(QWidget *parent)
     setCheckable(true);
     setAutoRaise(true);
     setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+
+    wasChecked = false;
 }
 
 Qt::Orientation SideToolButton::orientation() const
@@ -82,7 +84,7 @@ QSize SideToolButton::sizeHint() const
 
 void SideToolButton::paintEvent(QPaintEvent *event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
 
     // rotated paint
     QStylePainter painter(this);
@@ -144,12 +146,28 @@ void SidedockWidget::addDock(QWidget* widget, const QString& title, const QIcon&
     button->setIcon(icon);
     button->setShortcut(QKeySequence());
     button->setChecked(false); // initially do not check
+
     _btnGroup->addButton(button);
+
     // only request action on user set action
     const int idx = _widgets.count();
 
     connect(button, &SideToolButton::clicked, this,
         [this, button, idx] {
+
+        // Force uncheck the button because of the exclusive
+        // Without this the toolbar buttons cannot be all unchecked
+        // after one is clicked4
+        if (button->wasChecked) {
+            _btnGroup->setExclusive(false);
+            button->setChecked(false);
+            _btnGroup->setExclusive(true);
+
+            button->wasChecked = false;
+        } else {
+            button->wasChecked = true;
+        }
+
         showDock(button->isChecked(), idx);
     });
 
