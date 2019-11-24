@@ -8,8 +8,166 @@
 <html>
 <head>
 <title>Script API Documentation Plugin: Object</title>
-<link rel="stylesheet" href="bootstrap.css" />
-<link rel="stylesheet" href="bootstrap-apiview.css" />
+<style>
+body {
+  margin: 0;
+}
+
+h1 {
+  margin: 0.67em 0;
+  font-size: 2em;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+code {
+  font-family: monospace, serif;
+  font-size: 1em;
+}
+
+body {
+  font-family: "Dejavu Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #2e3436;
+  background-color: #ffffff;
+}
+
+a {
+  color: #0068c6;
+  text-decoration: none;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+h1,
+h2,
+h3,
+.h1,
+.h2,
+.h3 {
+  font-family: "Dejavu Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  line-height: 20px;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  line-height: 40px;
+}
+
+h3 {
+  line-height: 30px;
+}
+
+h1,
+.h1 {
+  font-size: 38.5px;
+}
+
+h2,
+.h2 {
+  font-size: 31.5px;
+}
+
+h3,
+.h3 {
+  font-size: 24.5px;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0 0 10px 25px;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin-bottom: 0;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  line-height: 20px;
+  margin-left: -35;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 10
+}
+
+th {
+  background-color: #c5c5c5;
+}
+
+hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid #fafafa;
+  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: #204a87;
+}
+
+hr {
+  height: 1px;
+  background-color: #dbded8;
+  border: 0;
+}
+
+pre {
+  padding: 0 3px 2px;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 12px;
+  color: #636363;
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 20px;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre;
+  white-space: pre-wrap;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+}
+
+#rocs-content-text h1, #rocs-content-text h2
+{
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #dadada;
+}
+
+.rocs-parameter-thead
+{
+    background-color:#dddddd
+}
+</style>
 </head>
 <body>
 
@@ -60,9 +218,9 @@
         <p>{{ paragraph }}</p>
     {% endfor %}
     {% if method.parameters.count %}
-    <table class="table-striped" style="width: 100%">
+    <table class="table-striped" width="100%">
     <thead class="rocs-parameter-thead">
-    <tr><th style="width: 30%">{{ i18nParameter }}</th><th>{{ i18nDescription }}</th></tr>
+    <tr><th style="width: 30%" align="left">{{ i18nParameter }}</th><th align="left">{{ i18nDescription }}</th></tr>
     </thead>
     <tbody>
     {% for parameter in method.parameters %}
@@ -87,6 +245,7 @@
         {{ method.returnType }}
         {% endif %}
     </p>
+    <hr />
 {% endfor %}
 {% endif %}
 </div>
