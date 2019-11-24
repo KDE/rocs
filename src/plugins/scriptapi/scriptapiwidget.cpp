@@ -22,8 +22,8 @@
 #include "scriptapimanager.h"
 #include "scriptapimodel.h"
 
-#include <QWebView>
 #include <QDebug>
+#include <QUrl>
 #include <QStandardPaths>
 #include <QIcon>
 
@@ -55,15 +55,16 @@ ScriptApiWidget::ScriptApiWidget(QWidget* parent)
     connect(ui->buttonPrev, &QPushButton::clicked, this, &ScriptApiWidget::historyGoBack);
 
     // listen to all links for ids
-    connect(ui->docDetails, &QWebView::linkClicked, this, static_cast<void (ScriptApiWidget::*)(const QUrl&)>(&ScriptApiWidget::showObjectApi));
+    connect(ui->docDetails, &QTextBrowser::anchorClicked, this, static_cast<void (ScriptApiWidget::*)(const QUrl&)>(&ScriptApiWidget::showObjectApi));
     // this option has the following idea:
     // * handle relative anchor calls directly in the web engine
     // * use for switching between object pages the path "http://virtual/<object-id>"
     //   such that that path is handles as external and progapages to this widget
     // drawback: history only works for object pages, not for anchors
-    ui->docDetails->page()->setLinkDelegationPolicy(QWebPage::DelegateExternalLinks);
+    ui->docDetails->setOpenExternalLinks(false);
 
     ui->docTree->setModel(m_model);
+    showHtmlOutline();
 }
 
 void ScriptApiWidget::showTreeOutline()
@@ -78,7 +79,7 @@ void ScriptApiWidget::showHtmlOutline()
 
 void ScriptApiWidget::showHtmlOutline(bool logHistory)
 {
-    ui->docDetails->setHtml(m_manager->apiOverviewDocument(), m_baseUrl);
+    ui->docDetails->setHtml(m_manager->apiOverviewDocument());
     ui->pageStack->setCurrentIndex(1);
 
     if (!logHistory) {
@@ -112,7 +113,7 @@ void ScriptApiWidget::showDetails(const QModelIndex &index)
 void ScriptApiWidget::showObjectApi(const QString &id, bool logHistory=true)
 {
     QString htmlDocument = m_manager->objectApiDocument(id);
-    ui->docDetails->setHtml(htmlDocument, m_baseUrl);
+    ui->docDetails->setHtml(htmlDocument);
     ui->pageStack->setCurrentIndex(1);
 
     if (logHistory) {
@@ -138,17 +139,12 @@ void ScriptApiWidget::showObjectApi(const QUrl &aliasPage)
         return;
     }
 
-    QString path = aliasPage.toString();
-    int len = path.length() - 1;
-    while (path.at(len) != '/' && len >= 0) {
-        --len;
-    }
-
-    if (len <= 0) {
-        showObjectApi(path);
+    // distinguish anchors and pages
+    const QString path = aliasPage.toString();
+    if (path.startsWith('#')) {
+        ui->docDetails->scrollToAnchor(path);
     } else {
-        QString id = path.mid(len + 1);
-        showObjectApi(id);
+        showObjectApi(path);
     }
 }
 

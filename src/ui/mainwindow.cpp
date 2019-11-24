@@ -72,7 +72,7 @@ using namespace GraphTheory;
 
 MainWindow::MainWindow()
     : KXmlGuiWindow()
-    , m_currentProject(0)
+    , m_currentProject(nullptr)
     , m_kernel(new Kernel)
     , m_codeEditorWidget(new CodeEditorWidget(this))
     , m_graphEditorWidget(new GraphEditorWidget(this))

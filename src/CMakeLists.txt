@@ -103,8 +103,6 @@ target_link_libraries(rocs
         Qt5::Core
         Qt5::Quick
         Qt5::QuickWidgets
-        Qt5::WebKit
-        Qt5::WebKitWidgets
         Qt5::XmlPatterns
 )
 

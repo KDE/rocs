@@ -86,11 +86,6 @@ DocumentTypesWidget::DocumentTypesWidget(QWidget *parent)
     show();
 }
 
-DocumentTypesWidget::~DocumentTypesWidget()
-{
-
-}
-
 void DocumentTypesWidget::setDocument(GraphDocumentPtr document)
 {
     m_createNodeTypeButton->setEnabled(document ? true : false);

@@ -33,7 +33,7 @@
     <li id="{{ property.documentAnchor }}">
         <strong>{{ property.name }}</strong> :
         {% if property.typeLink %}
-        <a href="http://virtual/{{ property.typeLink }}">{{ property.type }}</a>
+        <a href="{{ property.typeLink }}">{{ property.type }}</a>
         {% else %}
         {{ property.type }}
         {% endif %}
@@ -69,7 +69,7 @@
         <tr>
             <td><strong>{{ parameter.name }}</strong> :
             {% if parameter.typeLink %}
-            <a href="http://virtual/{{ parameter.typeLink }}">{{ parameter.type }}</a>
+            <a href="{{ parameter.typeLink }}">{{ parameter.type }}</a>
             {% else %}
             {{ parameter.type }}
             {% endif %}
@@ -82,7 +82,7 @@
     {% endif %}
     <p><b>{{ i18nReturnType }}</b> :
         {% if method.returnTypeLink %}
-        <a href="http://virtual/{{ method.returnTypeLink }}">{{ method.returnType }}</a>
+        <a href="{{ method.returnTypeLink }}">{{ method.returnType }}</a>
         {% else %}
         {{ method.returnType }}
         {% endif %}

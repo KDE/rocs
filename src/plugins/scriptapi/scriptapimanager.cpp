@@ -79,8 +79,8 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     }
 
     // get object API object
-    Object *objectApi = 0;
-    foreach (Object *obj, m_objectApiList) {
+    Object *objectApi {nullptr};
+    for (Object *obj : m_objectApiList) {
         if (obj->id() == identifier) {
             objectApi = obj;
             break;

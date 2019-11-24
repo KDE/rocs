@@ -20,7 +20,7 @@
       <item row="3" column="0">
        <widget class="QStackedWidget" name="pageStack">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="treeView">
          <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -32,13 +32,7 @@
         <widget class="QWidget" name="detailsView">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QWebView" name="docDetails">
-            <property name="url">
-             <url>
-              <string>about:blank</string>
-             </url>
-            </property>
-           </widget>
+           <widget class="QTextBrowser" name="docDetails"/>
           </item>
          </layout>
         </widget>
@@ -119,13 +113,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QWebView</class>
-   <extends>QWidget</extends>
-   <header>QtWebKit/QWebView</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

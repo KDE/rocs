@@ -33,7 +33,7 @@ class DocumentTypesWidget : public QWidget
     Q_OBJECT
 public:
     explicit DocumentTypesWidget(QWidget *parent);
-    ~DocumentTypesWidget();
+    ~DocumentTypesWidget() = default;
 
 public Q_SLOTS:
     void setDocument(GraphTheory::GraphDocumentPtr document);

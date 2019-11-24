@@ -49,8 +49,6 @@ find_package(Qt5 5.4 REQUIRED NO_MODULE COMPONENTS
     Gui
     QuickWidgets
     Script
-    WebKit
-    WebKitWidgets
     Widgets
     ScriptTools
     Svg

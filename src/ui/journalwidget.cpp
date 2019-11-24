@@ -30,7 +30,7 @@
 
 JournalEditorWidget::JournalEditorWidget(QWidget* parent)
     : QWidget(parent)
-    , m_currentProject(0)
+    , m_currentProject(nullptr)
     , m_modified(false)
 {
     ui = new Ui::JournalEditorWidget;
