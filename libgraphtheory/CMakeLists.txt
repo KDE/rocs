@@ -90,7 +90,6 @@ target_link_libraries(rocsgraphtheory
         KF5::ItemViews
         KF5::Declarative
         KF5::XmlGui
-        KF5::Service
 )
 
 set(rocscore_LIB_HDRS

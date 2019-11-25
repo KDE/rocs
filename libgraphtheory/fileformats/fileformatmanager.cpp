@@ -22,10 +22,12 @@
 #include "fileformatinterface.h"
 #include "logging_p.h"
 
+#include <KPluginFactory>
 #include <KPluginLoader>
 #include <KPluginMetaData>
-#include <KServiceTypeTrader>
 #include <KLocalizedString>
+
+#include <QCoreApplication>
 #include <QString>
 #include <QDir>
 #include <QDirIterator>

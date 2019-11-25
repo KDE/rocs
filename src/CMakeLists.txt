@@ -98,7 +98,6 @@ target_link_libraries(rocs
         KF5::I18n
         KF5::ItemViews
         KF5::Parts
-        KF5::Service
         KF5::TextEditor
         Qt5::Core
         Qt5::Quick

@@ -35,7 +35,6 @@ target_link_libraries(gmlfileformat
         Qt5::Core
         Qt5::Gui
         KF5::I18n
-        KF5::Service
         rocsgraphtheory
 )
 
