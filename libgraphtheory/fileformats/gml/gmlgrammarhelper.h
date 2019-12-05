@@ -29,6 +29,7 @@
 #include <string>
 #include <QStringList>
 #include <QMap>
+#include <QHash>
 
 namespace GmlParser
 {
