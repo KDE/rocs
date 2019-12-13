@@ -44,7 +44,7 @@ include(KDECMakeSettings)
 include(FeatureSummary)
 include(GenerateExportHeader)
 
-find_package(Qt5 5.4 REQUIRED NO_MODULE COMPONENTS
+find_package(Qt5 5.11 REQUIRED NO_MODULE COMPONENTS
     Core
     Gui
     QuickWidgets
