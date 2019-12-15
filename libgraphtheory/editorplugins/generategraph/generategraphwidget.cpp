@@ -266,7 +266,7 @@ GenerateGraphWidget::~GenerateGraphWidget()
 
 QPointF GenerateGraphWidget::documentCenter() const
 {
-    QPointF center = QPointF(0, 0);
+    QPointF center = QPointF(geometry().center());
     qreal xSum = 0;
     qreal ySum = 0;
     int number = m_document->nodes().length();
