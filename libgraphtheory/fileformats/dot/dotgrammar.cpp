@@ -426,7 +426,7 @@ void checkEdgeOperator(const std::string& str)
         return;
     }
 
-    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Error: incoherent edge direction relation" << endl;
+    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Error: incoherent edge direction relation";
 }
 
 void edgebound(const std::string& str)
