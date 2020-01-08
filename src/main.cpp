@@ -66,8 +66,6 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
     parser.setApplicationDescription(aboutData.shortDescription());
-    parser.addHelpOption();
-    parser.addVersionOption();
 
     parser.addPositionalArgument(QStringLiteral("project"), i18n("Project to open."), QStringLiteral("[url...]"));
 
