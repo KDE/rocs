@@ -139,7 +139,7 @@ void MainWindow::setupWidgets()
     QWidget *sidePanel = setupSidePanel();
     QWidget *scriptPanel = setupScriptPanel();
 
-    // splits the main window horizontal
+    // splits the main window horizontally
     m_vSplitter = new QSplitter(this);
     m_vSplitter->setOrientation(Qt::Vertical);
     m_vSplitter->addWidget(m_graphEditorWidget);
