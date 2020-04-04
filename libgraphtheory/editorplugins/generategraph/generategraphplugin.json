@@ -14,6 +14,7 @@
         "Description[fr]": "Cette fonction génère un nouveau graphe à l'aide d'un motif.",
         "Description[gl]": "Xera un gráfico novo segundo un padrón.",
         "Description[it]": "Questo genera un nuovo grafo secondo uno schema.",
+        "Description[ko]": "패턴을 사용하여 새 그래프를 만듭니다.",
         "Description[nl]": "Dit genereert een nieuwe graaf naar een patroon.",
         "Description[pl]": "Generuje to nowy graf według wzorca.",
         "Description[pt]": "Isto gera um novo grafo com base num dado padrão.",
