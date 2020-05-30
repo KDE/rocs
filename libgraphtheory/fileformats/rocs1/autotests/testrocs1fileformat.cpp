@@ -76,6 +76,14 @@ void TestRocs1FileFormat::serializeUnserializeTest()
     }
 }
 
+static void logEdgeTypes(const QList<EdgeTypePtr>& types)
+{
+    qDebug() << "Edge types:";
+    for (const auto& t : types) {
+        qDebug() << ".." << t->name() << t->direction();
+    }
+}
+
 void TestRocs1FileFormat::serializeUnserializeTypesTest()
 {
     GraphDocumentPtr document = GraphDocument::create();
@@ -83,6 +91,8 @@ void TestRocs1FileFormat::serializeUnserializeTypesTest()
     NodeTypePtr nodeType2 = NodeType::create(document);
     EdgeTypePtr edgeType2 = EdgeType::create(document);
 
+    logEdgeTypes(document->edgeTypes());
+    
     // add test data
     nodes.insert("a", Node::create(document));
     nodes["a"]->setDynamicProperty("label", "first node");
@@ -102,8 +112,10 @@ void TestRocs1FileFormat::serializeUnserializeTypesTest()
     QVERIFY(!format.hasError());
     document = format.graphDocument();
 
+    logEdgeTypes(document->edgeTypes());
+
     QCOMPARE(document->nodeTypes().count(), 2);
-    QCOMPARE(document->edgeTypes().count(), 2);
+    QCOMPARE(document->edgeTypes().count(), 3);
 }
 
 //TODO move to Rocs project file test

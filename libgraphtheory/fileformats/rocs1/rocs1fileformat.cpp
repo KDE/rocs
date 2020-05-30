@@ -64,6 +64,15 @@ const QStringList Rocs1FileFormat::extensions() const
         << i18n("Rocs 1 Graph File Format (%1)", QString("*.graph"));
 }
 
+template<typename T>
+void addTypes(QMap<int, T>& map, const QList<T>& list)
+{
+    int id = 0;
+    for (const auto& t : list) {
+        map.insert(id++, t);
+    }
+}
+
 void Rocs1FileFormat::readFile()
 {
     GraphDocumentPtr document = GraphDocument::create();
@@ -78,8 +87,9 @@ void Rocs1FileFormat::readFile()
     QMap<int, NodePtr> nodeMap;
     QMap<int, NodeTypePtr> nodeTypeMap;
     QMap<int, EdgeTypePtr> edgeTypeMap;
-    nodeTypeMap.insert(0, document->nodeTypes().first());
-    edgeTypeMap.insert(0, document->edgeTypes().first());
+
+    addTypes(nodeTypeMap, document->nodeTypes());
+    addTypes(edgeTypeMap, document->edgeTypes());
 
     QTextStream in(&fileHandle);
     in.setCodec("UTF-8");
