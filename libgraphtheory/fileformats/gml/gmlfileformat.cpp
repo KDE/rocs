@@ -99,20 +99,13 @@ void GmlFileFormat::writeFile(GraphDocumentPtr document)
 
         for(const NodePtr &n : document->nodes()) {
             out << QString("node [\n id \"%1\" \n").arg(n->dynamicProperty("name").toString());
-//                 foreach (QByteArray p, n->dynamicPropertyNames()){
-//                    out << p << " " << n->property(p).toString() << "\n";
-//                  }
             out << processNode(n);
             out << "]\n";
 
         }
         for (auto const &edge : document->edges()) {
             out << "edge [\n";
-//                  foreach (QByteArray p, e->dynamicPropertyNames()){
-//                    out << p << " " << e->property(p).toString() << "\n";
-//                  }
             out << processEdge(edge);
-
             out << "]\n";
         }
         out << "]\n";
