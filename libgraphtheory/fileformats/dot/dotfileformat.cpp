@@ -38,6 +38,9 @@ extern DotParser::DotGraphParsingHelper* phelper;
 
 using namespace GraphTheory;
 
+static QString processNode(const NodePtr &node);
+static QString processEdge(const EdgePtr &edge);
+
 K_PLUGIN_FACTORY_WITH_JSON( FilePluginFactory,
                             "dotfileformat.json",
                             registerPlugin<DotFileFormat>();)
@@ -95,12 +98,12 @@ void DotFileFormat::writeFile(GraphDocumentPtr document)
     QHash<int, bool> processedData;
 
     // process all data elements
-    foreach(NodePtr node, document->nodes()) {
+    for (const NodePtr &node : document->nodes()) {
         out << processNode(node);
     }
 
     // process all edges
-    for (auto const edge : document->edges()) {
+    for (const auto &edge : document->edges()) {
         out << processEdge(edge);
     }
     out << "}\n";
@@ -108,7 +111,7 @@ void DotFileFormat::writeFile(GraphDocumentPtr document)
     return;
 }
 
-QString DotFileFormat::processEdge(EdgePtr edge) const
+static QString processEdge(const EdgePtr &edge)
 {
     QString edgeStr;
     edgeStr.append(QString(" %1 -> %2 ")
@@ -122,7 +125,7 @@ QString DotFileFormat::processEdge(EdgePtr edge) const
         edgeStr.append("[");
         edgeStr.append(QString(" label = \"%2\" ").arg(edge->property("name").toString()));
     }
-    foreach(const QByteArray& property, edge->dynamicPropertyNames()) {
+    for(const QByteArray &property : edge->dynamicPropertyNames()) {
         if (firstProperty == true) {
                 firstProperty = false;
                 edgeStr.append("[");
@@ -137,7 +140,7 @@ QString DotFileFormat::processEdge(EdgePtr edge) const
     return edgeStr.append(";\n");
 }
 
-QString DotFileFormat::processNode(NodePtr node) const
+static QString processNode(const NodePtr &node)
 {
     QString nodeStr;
 
@@ -148,7 +151,7 @@ QString DotFileFormat::processNode(NodePtr node) const
         nodeStr.append(QString("label=\"%1\" ").arg(node->dynamicProperty("name").toString()));
     }
 
-    foreach(const QByteArray& property, node->dynamicPropertyNames()) {
+    for(const QByteArray &property : node->dynamicPropertyNames()) {
         nodeStr.append(", ");
         nodeStr.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(node->property(property).toString()));
     }

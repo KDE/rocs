@@ -50,11 +50,6 @@ public:
      * \param file is url of a local file
      */
     void readFile() Q_DECL_OVERRIDE;
-
-private:
-    QString processNode(NodePtr node) const;
-    QString processEdge(EdgePtr edge) const;
-
 };
 }
 
