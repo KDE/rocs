@@ -35,6 +35,9 @@
 
 using namespace GraphTheory;
 
+static QString processEdge(const EdgePtr &e);
+static QString processNode(const NodePtr &n);
+
 extern GmlParser::GmlGrammarHelper* phelper;
 
 K_PLUGIN_FACTORY_WITH_JSON( FilePluginFactory,
@@ -94,7 +97,7 @@ void GmlFileFormat::writeFile(GraphDocumentPtr document)
 //             out << QString("graph [\n directed %1 \n").arg(g->directed()?"1":"0");
         out << QString("id \"%1\" \n").arg("graph"); //TODO support export of name
 
-        foreach(NodePtr n, document->nodes()) {
+        for(const NodePtr &n : document->nodes()) {
             out << QString("node [\n id \"%1\" \n").arg(n->dynamicProperty("name").toString());
 //                 foreach (QByteArray p, n->dynamicPropertyNames()){
 //                    out << p << " " << n->property(p).toString() << "\n";
@@ -103,7 +106,7 @@ void GmlFileFormat::writeFile(GraphDocumentPtr document)
             out << "]\n";
 
         }
-        for (auto const edge : document->edges()) {
+        for (auto const &edge : document->edges()) {
             out << "edge [\n";
 //                  foreach (QByteArray p, e->dynamicPropertyNames()){
 //                    out << p << " " << e->property(p).toString() << "\n";
@@ -119,26 +122,26 @@ void GmlFileFormat::writeFile(GraphDocumentPtr document)
 }
 
 
-QString GmlFileFormat::processEdge(EdgePtr e) const
+static QString processEdge(const EdgePtr &e)
 {
     QString edge;
     edge.append(QString("source \"%1\"\n target \"%2\"\n").arg(e->from()->dynamicProperty("name").toString(), e->to()->dynamicProperty("name").toString()));
 //     edge.append (QString(" color \"%1\"\n").arg(e->color())); //Problem with comments (both starts by '#')
 
-    foreach(const QString &property, e->dynamicProperties()) {
+    for(const QString &property : e->dynamicProperties()) {
         edge.append(QString("%1 %2\n").arg(property).arg(e->dynamicProperty(property).toString()));
     }
 
     return edge;
 }
 
-QString GmlFileFormat::processNode(NodePtr n) const
+static QString processNode(const NodePtr &n)
 {
     QString node;
     node.append(QString("  x %1 \n  y %2 \n").arg(n->x()).arg(n->y()));
 //       node.append (QString(" color \"%1\"\n").arg(n->color())); //Problem with comments (both starts by '#')
 
-    foreach(const QString &property, n->dynamicProperties()) {
+    for(const QString &property : n->dynamicProperties()) {
         node.append(QString("%1 %2\n").arg(property).arg(n->dynamicProperty(property).toString()));
     }
 
