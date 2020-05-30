@@ -18,8 +18,12 @@
 #   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-project(rocs)
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
+
+project(rocs LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # KDE Application Version, managed by release script
 set(RELEASE_SERVICE_VERSION_MAJOR "20")
