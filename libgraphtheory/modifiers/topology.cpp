@@ -467,7 +467,7 @@ void Topology::applyForceBasedLayout(GraphDocumentPtr document, const qreal node
     //This is done heuristically so that there is enough room to move nodes around easily.
     //Because the heuristic used considers only circles, one extra circle is created for each edge.
     //The reasoning is that graphs with more edges need more space to drawn nicely.
-    const int numberOfCircles = graph.numberOfNodes;
+    const int numberOfCircles = graph.numberOfNodes + graph.edges.size();
     const qreal circleRadius = 2 * nodeRadius;
     const qreal side = squareSideRandomPlacementHeuristic(circleRadius, numberOfCircles);
     const qreal minX = margin + nodeRadius;
