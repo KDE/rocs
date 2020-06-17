@@ -1,5 +1,5 @@
 /*
- *  Copyright 2015  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2020  Dilson Almeida Guimarães <dilsonguim@gmail.com>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -18,8 +18,31 @@
  *  License along with this library.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "logging_p.h"
+#ifndef GRAPHLAYOUTPLUGIN_H
+#define GRAPHLAYOUTPLUGIN_H
 
-Q_LOGGING_CATEGORY(GRAPHTHEORY_FILEFORMAT, "org.kde.rocs.graphtheory.fileformat", QtWarningMsg)
-Q_LOGGING_CATEGORY(GRAPHTHEORY_GENERAL, "org.kde.rocs.graphtheory.general", QtDebugMsg)
-Q_LOGGING_CATEGORY(GRAPHTHEORY_KERNEL, "org.kde.rocs.graphtheory.kernel", QtWarningMsg)
+#include "editorplugins/editorplugininterface.h"
+
+class QObject;
+
+namespace GraphTheory
+{
+
+class GraphLayoutPluginPrivate;
+
+class GraphLayoutPlugin : public EditorPluginInterface
+{
+    Q_OBJECT
+
+public:
+    GraphLayoutPlugin(QObject* parent, const QList< QVariant >&);
+    virtual ~GraphLayoutPlugin();
+    void showDialog(GraphDocumentPtr document) Q_DECL_OVERRIDE;
+
+private:
+    const QScopedPointer<GraphLayoutPluginPrivate> d;
+};
+
+}
+
+#endif

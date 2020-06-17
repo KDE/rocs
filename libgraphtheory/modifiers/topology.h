@@ -79,6 +79,36 @@ public:
      * I.e., no possible present coordinates are respected.
      */
     static void undirectedGraphDefaultTopology(GraphDocumentPtr document);
+
+
+    /**
+     * Applies a force based graph layout algorithm to the graph.
+     *
+     * If @p randomizeInitialPositions is @c true, the current node positions are ignored.
+     * Otherwise, they are used as the initial layout.
+     *
+     * Using a value of 1 for the parameters @p areaFactor, @p repellingForce and @p attractionForce
+     * should give a reasonable results.
+     *
+     * The control given by the parameter @p areaFactor is not precise, meaning that doubling its
+     * value does not necessarily mean that the final layout will use an area twice as big.
+     * The greater @p areaFactor is, the more the nodes tend to spread.
+     *
+     * @param document The graph document to be laid out.
+     * @param nodeRadius The radius of the circles that are used to represent nodes.
+     * @param margin The size of the top and left margins.
+     * @param areaFactor A constant that imprecisely controls how much area the layout will take.
+     * @param repellingForce The magnitude of the repelling force between nodes.
+     * @param attractionForce The magnitude of the attraction force between neighbouring nodes.
+     * @param randomizeInitialPositions Indicates whether the algorithm should start from a
+     *                                  random layout.
+     * @param seed Seed used for generating random numbers.
+     */
+    static void applyForceBasedLayout(GraphDocumentPtr document, const qreal nodeRadius,
+                                      const qreal margin, const qreal areaFactor,
+                                      const qreal repellingForce, const qreal attractionForce,
+                                      const bool randomizeInitialPositions, const quint32 seed);
+    
 };
 }
 

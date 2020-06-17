@@ -1,4 +1,4 @@
-# Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+# Copyright 2020 Dilson Almeida Guimarães <dilsonguim@gmail.com>
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -21,7 +21,30 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-ecm_optional_add_subdirectory(assignvalues)
-ecm_optional_add_subdirectory(generategraph)
-ecm_optional_add_subdirectory(transformedges)
-ecm_optional_add_subdirectory(graphlayout)
+# Boost requires exceptions for this plugin
+kde_enable_exceptions()
+
+set(graphlayout_SRCS
+    graphlayoutplugin.cpp
+    graphlayoutwidget.cpp
+    ../../logging.cpp
+)
+
+#boost requires exceptions
+kde_source_files_enable_exceptions(graphlayoutplugin.cpp)
+
+ki18n_wrap_ui(graphlayout_SRCS graphlayoutwidget.ui)
+add_library(graphlayoutplugin
+    MODULE
+    ${graphlayout_SRCS}
+)
+
+target_link_libraries(graphlayoutplugin
+    PUBLIC
+    rocsgraphtheory
+    KF5::Completion
+)
+
+ecm_optional_add_subdirectory(autotests)
+
+install(TARGETS graphlayoutplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)
