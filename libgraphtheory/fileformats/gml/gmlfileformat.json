@@ -27,6 +27,7 @@
         "Description[sv]": "Läs och skriv GML-dokument (Graph Markup Language)",
         "Description[tr]": "Graph İşaret Dili belgelerini oku ve yaz (GML)",
         "Description[uk]": "Читання і запис файлів у форматі Graph Markup Language (GML).",
+        "Description[x-test]": "xxRead and write Graph Markup Language documents (GML)xx",
         "Description[zh_CN]": "读写图形标记语言文档 (GML)",
         "Description[zh_TW]": "讀寫 Graph Markup Language 文件 (GML) 。",
         "Id": "rocs_gmlfileformat",
@@ -56,6 +57,7 @@
         "Name[sv]": "GML-filformat",
         "Name[tr]": "GML Dosya Biçimi",
         "Name[uk]": "формат файлів GML",
+        "Name[x-test]": "xxGML File Formatxx",
         "Name[zh_CN]": "GML 文件格式",
         "Name[zh_TW]": "GML 檔案格式",
         "ServiceTypes": [
