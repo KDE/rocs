@@ -27,6 +27,7 @@
         "Description[sv]": "Rocs-graffilformat (gammalt)",
         "Description[tr]": "Rocs Grafik Dosya Biçimi (eski)",
         "Description[uk]": "формат файлів графів Rocs (застарілий)",
+        "Description[x-test]": "xxRocs Graph File Format (old)xx",
         "Description[zh_CN]": "Rocs 图形文件格式 (旧)",
         "Description[zh_TW]": "Rocs 圖形檔案格式（舊）",
         "Id": "rocs_rocs1fileformat",
@@ -56,6 +57,7 @@
         "Name[sv]": "Rocs-filformat (gammalt)",
         "Name[tr]": "Rocs Dosya Biçimi (eski)",
         "Name[uk]": "формат файлів Rocs (застарілий)",
+        "Name[x-test]": "xxRocs File Format (old)xx",
         "Name[zh_CN]": "Rocs 文件格式 (旧版)",
         "Name[zh_TW]": "Rocs 檔案格式（舊）",
         "ServiceTypes": [

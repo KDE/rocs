@@ -26,6 +26,7 @@
         "Description[sv]": "Läs och skriv grafdokument med Trivial Graph-format (TGF)",
         "Description[tr]": "Grafik belgelerini Açık Grafik Biçiminde oku ve yaz (TGF)",
         "Description[uk]": "Читання і запис документів графів у форматі звичайного графу (TGF)",
+        "Description[x-test]": "xxRead and write graph documents in Trivial Graph Format (TGF)xx",
         "Description[zh_CN]": "以琐碎图形格式 (TGF) 读写图形文档",
         "Description[zh_TW]": "讀寫 Trivial Graph Format (TGF) 格式的圖形檔。",
         "Id": "rocs_tgffileformat",
@@ -55,6 +56,7 @@
         "Name[sv]": "TGF-graffilformat",
         "Name[tr]": "TGF Grafik Dosya Biçimi",
         "Name[uk]": "формат файлів графів TGF",
+        "Name[x-test]": "xxTGF Graph File Formatxx",
         "Name[zh_CN]": "TGF 图形文件格式",
         "Name[zh_TW]": "TGF 圖形檔案格式",
         "ServiceTypes": [

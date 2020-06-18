@@ -27,6 +27,7 @@
         "Description[sv]": "Rocs-graffilformat",
         "Description[tr]": "Rocs Grafik Dosya Biçimi",
         "Description[uk]": "формат файлів графів Rocs",
+        "Description[x-test]": "xxRocs Graph File Formatxx",
         "Description[zh_CN]": "Rocs 图形文件格式",
         "Description[zh_TW]": "Rocs 圖形檔案格式",
         "Id": "rocs_rocs2fileformat",
@@ -56,6 +57,7 @@
         "Name[sv]": "Rocs-filformat",
         "Name[tr]": "Rocs Dosya Biçimi",
         "Name[uk]": "формат файлів Rocs",
+        "Name[x-test]": "xxRocs File Formatxx",
         "Name[zh_CN]": "Rocs 文件格式",
         "Name[zh_TW]": "Rocs 檔案格式",
         "ServiceTypes": [

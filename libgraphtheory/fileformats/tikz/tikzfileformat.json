@@ -26,6 +26,7 @@
         "Description[sv]": "Skriver grafdokument med PGF/TikZ-format för användning i Latex-dokument",
         "Description[tr]": "LaTeX belgelerinde kullanmak üzere grafik belgelerini PGF/TikZ biçiminde yazar",
         "Description[uk]": "Запис документів графів у форматі PGF/TikZ з метою наступного використання у документах LaTeX",
+        "Description[x-test]": "xxWrites graph documents in PGF/TikZ format for use in LaTeX documentsxx",
         "Description[zh_CN]": "将图形文档写入为 PGF/TikZ 格式以用于 LaTex 文档",
         "Description[zh_TW]": "寫入 PGF/TikZ 格式的圖形文件，以便在 LaTeX 文件中使用",
         "Id": "rocs_tikzfileformat",
@@ -55,6 +56,7 @@
         "Name[sv]": "Exportinsticksprogram för PGF/TikZ-graffilformat",
         "Name[tr]": "PGF/TikZ Grafik Dosya Dışa Aktarma Eklentisi",
         "Name[uk]": "Додаток експортування файлів графів PGF/TikZ",
+        "Name[x-test]": "xxPGF/TikZ Graph File Export Pluginxx",
         "Name[zh_CN]": "PGF/TikZ 图形文件导出插件",
         "Name[zh_TW]": "PGF/TikZ 圖形檔匯出外掛程式",
         "ServiceTypes": [
