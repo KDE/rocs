@@ -233,15 +233,20 @@ void Topology::undirectedGraphDefaultTopology(GraphDocumentPtr document)
  *
  * By easily, understand the following:
  * Consider a square with side length computed by this method. An algorithm that places circles
- * at random positions inside this square, with uniform probability, should have a high chance
- * of getting no intersections between the circles. For 3 circles or more, this chance is higher
- * than 60%.
+ * at random positions inside this square, with uniform probability, is expected to generate
+ * little or no intersection between circles.
  *
  */
 qreal squareSideRandomPlacementHeuristic(const qreal radius, const int numberOfCircles)
 {
+    if (numberOfCircles < 2) {
+        return 2 * radius;
+    }
+
     //This formula was obtained by a mix of experimentation and calculations.
-    return qMax(4.26 * numberOfCircles - 3.5, 2.) * radius;
+    //return qMax(4.26 * numberOfCircles - 3.5, 2.) * radius;
+    
+    return qSqrt(15.59 * numberOfCircles - 21.32) * radius;   
 }
 
 QMap<NodePtr, int> mapNodesToIndexes(const NodeList& nodes)
@@ -344,11 +349,15 @@ QVector<QPointF> forceBasedLayout(const RemappedGraph& graph, const qreal areaFa
     Q_ASSERT(areaFactor > 0.);
     Q_ASSERT(graph.numberOfNodes > 0);
 
-    //TODO: Take care of disconnected graphs.
-
     //Constant used to calculate the forces acting on each node.
     const qreal area = (maxX - minX) * (maxY - minY);
     const qreal k = areaFactor * qSqrt(area / graph.numberOfNodes);
+
+    //Length of the diagonal of the rectangle.
+    const qreal diagonalLength = qSqrt(qPow(maxX - minX, 2) + qPow(maxY - minY, 2));
+
+    //Maximum distance at which repelling forces do act.
+    const qreal repellingForceRadius = qMax(3 * nodeRadius, diagonalLength / 2);
     
     QVector<QPointF> currentPositions = initialPositions;
     QVector<QVector2D> nodeForce(graph.numberOfNodes);
@@ -361,13 +370,19 @@ QVector<QPointF> forceBasedLayout(const RemappedGraph& graph, const qreal areaFa
             for (int j = i + 1; j < graph.numberOfNodes; j++) {
                 QVector2D direction(currentPositions[j] - currentPositions[i]);
                 const qreal distance = direction.length();
+
+                //Avoid using repelling forces between nodes that are too far from each other.
+                //Even when small, this forces tend to make nodes go to the sides of the rectangle.
+                if (distance > repellingForceRadius) {
+                    continue;
+                }
                 
                 //Adaptation of the original Fruchterman-Reingold calculation to consider the
                 //radius of nodes, avoiding intersection between pairs of nodes.
                 //Using k insted of k * k in the force calculation seems to lead to better results.
                 const qreal correctedDistance = qMax(distance - 2 * nodeRadius, 
                                                      1. / graph.numberOfNodes);
-                const qreal force = repellingForce * k / correctedDistance;
+                const qreal force = repellingForce * k * k / correctedDistance;
 
                 //If the distance is too small, pick a random direction to avoid the case in
                 //which two nodes have the same position.
@@ -390,7 +405,7 @@ QVector<QPointF> forceBasedLayout(const RemappedGraph& graph, const qreal areaFa
             const qreal distance = direction.length();
 
             //Do not use attraction forces between nodes that are already too close.
-            if (distance < 2 * nodeRadius) {
+            if (distance < 3 * nodeRadius) {
                 continue;
             }
 
@@ -400,6 +415,7 @@ QVector<QPointF> forceBasedLayout(const RemappedGraph& graph, const qreal areaFa
             nodeForce[i] += force * direction;
             nodeForce[j] -= force * direction;
         }
+
 
         //Calculates the current temperature using a liner cooling schedule.
         const qreal temperature = initialTemperature * (numberOfIterations - iteration) /
@@ -467,7 +483,8 @@ void Topology::applyForceBasedLayout(GraphDocumentPtr document, const qreal node
     //This is done heuristically so that there is enough room to move nodes around easily.
     //Because the heuristic used considers only circles, one extra circle is created for each edge.
     //The reasoning is that graphs with more edges need more space to drawn nicely.
-    const int numberOfCircles = graph.numberOfNodes + graph.edges.size();
+    const int numberOfCircles = graph.numberOfNodes + qMin(graph.edges.size(),
+                                                           5 * graph.numberOfNodes);
     const qreal circleRadius = 2 * nodeRadius;
     const qreal side = squareSideRandomPlacementHeuristic(circleRadius, numberOfCircles);
     const qreal minX = margin + nodeRadius;
