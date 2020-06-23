@@ -92,7 +92,7 @@ void GraphLayoutWidget::setSeed(int seed)
 void GraphLayoutWidget::layoutGraph()
 {
 
-    //Sliders values map to parameteres with a non-linear scale
+    //Slider values map to parameters with a non-linear scale
     const qreal areaFactor = qPow(10, qreal(m_areaFactor - 50) / 50);
     const qreal repellingForce = qPow(10, qreal(m_repellingForce - 50) / 50);
     const qreal attractionForce = qPow(10, qreal(m_attractionForce - 50) / 50);
