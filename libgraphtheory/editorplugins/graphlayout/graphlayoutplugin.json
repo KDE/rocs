@@ -3,11 +3,9 @@
     "KPlugin": {
         "Category": "Plugins",
         "Description": "This generates graph layouts automatically.",
-        "Description[pt_BR]": "Isto gera disposições do grafo automaticamente. ",
         "Id": "rocs_graphlayoutplugin",
         "License": "GPL",
         "Name": "Graph Layout",
-        "Name[pt_BR]": "Disposição do Grafo",
         "ServiceTypes": [
             "rocs/editorplugins"
         ],
