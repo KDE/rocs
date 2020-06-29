@@ -18,6 +18,7 @@
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../)
 
+#Gets graphs for the data-driven functionality test
 file(COPY graphs DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 set(testforcebasedlayout_SRCS
@@ -31,4 +32,15 @@ ecm_mark_as_test(TestForceBasedLayout)
 target_link_libraries(TestForceBasedLayout
     rocsgraphtheory
     Qt5::Test
+)
+
+set(qualitybenchmark_SRCS
+    qualitybenchmark.cpp
+    metricsummarizer.cpp
+    layoutevaluator.cpp
+)
+
+add_executable(QualityBenchmark ${qualitybenchmark_SRCS})
+target_link_libraries(QualityBenchmark
+    rocsgraphtheory
 )
