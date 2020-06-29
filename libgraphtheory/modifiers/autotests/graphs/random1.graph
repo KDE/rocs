@@ -1,0 +1,84 @@
+[Document Properties] 
+DataStructurePlugin : Graph
+
+[DataType 0]
+Name : default
+Properties : 
+
+[PointerType 0]
+Name : unidirectional
+Direction : unidirectional
+Properties : 
+
+[PointerType 1]
+Name : bidirectional
+Direction : bidirectional
+Properties : 
+
+[DataStructure 0] 
+[Data 95]
+type : 0
+
+[Data 96]
+type : 0
+
+[Data 97]
+type : 0
+
+[Data 98]
+type : 0
+
+[Data 99]
+type : 0
+
+[Data 100]
+type : 0
+
+[Data 101]
+type : 0
+
+[Data 102]
+type : 0
+
+[Data 103]
+type : 0
+
+[Data 104]
+type : 0
+
+[Pointer 99->97]
+type : 1
+
+[Pointer 98->99]
+type : 1
+
+[Pointer 95->101]
+type : 1
+
+[Pointer 102->96]
+type : 1
+
+[Pointer 102->98]
+type : 1
+
+[Pointer 100->104]
+type : 1
+
+[Pointer 104->102]
+type : 1
+
+[Pointer 99->103]
+type : 1
+
+[Pointer 104->101]
+type : 1
+
+[Pointer 99->97]
+type : 1
+
+[Pointer 101->98]
+type : 1
+
+[Pointer 95->99]
+type : 1
+

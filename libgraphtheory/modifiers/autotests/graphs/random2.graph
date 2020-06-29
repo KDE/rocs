@@ -1,0 +1,198 @@
+[Document Properties] 
+DataStructurePlugin : Graph
+
+[DataType 0]
+Name : default
+Properties : 
+
+[PointerType 0]
+Name : unidirectional
+Direction : unidirectional
+Properties : 
+
+[PointerType 1]
+Name : bidirectional
+Direction : bidirectional
+Properties : 
+
+[DataStructure 0] 
+[Data 115]
+type : 0
+
+[Data 116]
+type : 0
+
+[Data 117]
+type : 0
+
+[Data 118]
+type : 0
+
+[Data 119]
+type : 0
+
+[Data 120]
+type : 0
+
+[Data 121]
+type : 0
+
+[Data 122]
+type : 0
+
+[Data 123]
+type : 0
+
+[Data 124]
+type : 0
+
+[Data 125]
+type : 0
+
+[Data 126]
+type : 0
+
+[Data 127]
+type : 0
+
+[Data 128]
+type : 0
+
+[Data 129]
+type : 0
+
+[Data 130]
+type : 0
+
+[Data 131]
+type : 0
+
+[Data 132]
+type : 0
+
+[Data 133]
+type : 0
+
+[Data 134]
+type : 0
+
+[Pointer 118->133]
+type : 1
+
+[Pointer 124->120]
+type : 1
+
+[Pointer 129->122]
+type : 1
+
+[Pointer 119->131]
+type : 1
+
+[Pointer 124->133]
+type : 1
+
+[Pointer 127->128]
+type : 1
+
+[Pointer 119->120]
+type : 1
+
+[Pointer 120->134]
+type : 1
+
+[Pointer 119->132]
+type : 1
+
+[Pointer 117->116]
+type : 1
+
+[Pointer 116->121]
+type : 1
+
+[Pointer 123->124]
+type : 1
+
+[Pointer 129->132]
+type : 1
+
+[Pointer 134->122]
+type : 1
+
+[Pointer 129->121]
+type : 1
+
+[Pointer 119->120]
+type : 1
+
+[Pointer 129->128]
+type : 1
+
+[Pointer 120->126]
+type : 1
+
+[Pointer 115->132]
+type : 1
+
+[Pointer 120->126]
+type : 1
+
+[Pointer 130->115]
+type : 1
+
+[Pointer 115->129]
+type : 1
+
+[Pointer 115->134]
+type : 1
+
+[Pointer 115->128]
+type : 1
+
+[Pointer 133->134]
+type : 1
+
+[Pointer 121->124]
+type : 1
+
+[Pointer 122->123]
+type : 1
+
+[Pointer 116->118]
+type : 1
+
+[Pointer 125->126]
+type : 1
+
+[Pointer 122->123]
+type : 1
+
+[Pointer 117->127]
+type : 1
+
+[Pointer 126->124]
+type : 1
+
+[Pointer 133->128]
+type : 1
+
+[Pointer 130->128]
+type : 1
+
+[Pointer 118->127]
+type : 1
+
+[Pointer 128->116]
+type : 1
+
+[Pointer 123->122]
+type : 1
+
+[Pointer 131->132]
+type : 1
+
+[Pointer 132->117]
+type : 1
+
+[Pointer 132->130]
+type : 1
+

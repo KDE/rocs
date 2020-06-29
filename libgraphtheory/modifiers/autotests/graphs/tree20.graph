@@ -1,0 +1,135 @@
+[Document Properties] 
+DataStructurePlugin : Graph
+
+[DataType 0]
+Name : default
+Properties : 
+
+[PointerType 0]
+Name : unidirectional
+Direction : unidirectional
+Properties : 
+
+[PointerType 1]
+Name : bidirectional
+Direction : bidirectional
+Properties : 
+
+[DataStructure 0] 
+[Data 75]
+type : 0
+
+[Data 76]
+type : 0
+
+[Data 77]
+type : 0
+
+[Data 78]
+type : 0
+
+[Data 79]
+type : 0
+
+[Data 80]
+type : 0
+
+[Data 81]
+type : 0
+
+[Data 82]
+type : 0
+
+[Data 83]
+type : 0
+
+[Data 84]
+type : 0
+
+[Data 85]
+type : 0
+
+[Data 86]
+type : 0
+
+[Data 87]
+type : 0
+
+[Data 88]
+type : 0
+
+[Data 89]
+type : 0
+
+[Data 90]
+type : 0
+
+[Data 91]
+type : 0
+
+[Data 92]
+type : 0
+
+[Data 93]
+type : 0
+
+[Data 94]
+type : 0
+
+[Pointer 86->94]
+type : 1
+
+[Pointer 86->77]
+type : 1
+
+[Pointer 94->88]
+type : 1
+
+[Pointer 77->93]
+type : 1
+
+[Pointer 93->87]
+type : 1
+
+[Pointer 93->85]
+type : 1
+
+[Pointer 87->91]
+type : 1
+
+[Pointer 94->83]
+type : 1
+
+[Pointer 87->81]
+type : 1
+
+[Pointer 93->78]
+type : 1
+
+[Pointer 94->90]
+type : 1
+
+[Pointer 94->76]
+type : 1
+
+[Pointer 76->84]
+type : 1
+
+[Pointer 85->79]
+type : 1
+
+[Pointer 84->80]
+type : 1
+
+[Pointer 76->75]
+type : 1
+
+[Pointer 79->89]
+type : 1
+
+[Pointer 83->92]
+type : 1
+
+[Pointer 79->82]
+type : 1
+
