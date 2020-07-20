@@ -23,10 +23,14 @@
 #include "edge.h"
 #include "logging_p.h"
 
+#include <algorithm>
+
 #include <QList>
 #include <QPair>
 #include <QVector>
 #include <QVector2D>
+#include <QStack>
+#include <QQueue>
 #include <QtMath>
 #include <QPointF>
 #include <QRandomGenerator>
@@ -59,6 +63,7 @@ struct RemappedGraph {
     int numberOfNodes;
     QMap<NodePtr, int> nodeToIndexMap;
     QVector<RemappedEdge> edges;
+    QVector<QVector<int>> adjacency;
 };
 
 // handle boost exceptions
@@ -277,6 +282,11 @@ RemappedGraph remapGraph(const GraphDocumentPtr document) {
     remappedGraph.numberOfNodes = document->nodes().size();
     remappedGraph.nodeToIndexMap = mapNodesToIndexes(document->nodes());
     remappedGraph.edges = getRemappedEdges(document->edges(), remappedGraph.nodeToIndexMap);
+    remappedGraph.adjacency.resize(remappedGraph.numberOfNodes);
+    for (const QPair<int, int>& edge : remappedGraph.edges) {
+        remappedGraph.adjacency[edge.first].push_back(edge.second);
+        remappedGraph.adjacency[edge.second].push_back(edge.first);
+    }
     return remappedGraph;
 }
 
@@ -528,3 +538,348 @@ void Topology::applyForceBasedLayout(GraphDocumentPtr document, const qreal node
     //Moves nodes to their final positions.
     moveNodes(document->nodes(), graph.nodeToIndexMap, positions);
 }
+
+/* Returns the children of @p node in a Depth-First-Search tree.
+ *
+ * @param graph The graph being searched.
+ * @param visited Indicates which nodes have already been visited by the Depth-First-Search.
+ * @param node The current node of the search.
+ */
+QVector<int> getChildren(const RemappedGraph& graph, const QVector<bool>& visited, const int node)
+{
+    QVector<int> children;
+    for (const int neighbour : graph.adjacency[node]) {
+        if (not visited[neighbour]) {
+            children.push_back(neighbour);
+        }
+    }
+    return children;
+}
+
+/* Reorders the children heuristically to avoid the need of very long edges.
+ *
+ * The length of the edges between a node and its children depends on the angle formed by the
+ * centers of the two children and the origin. If this angle is very small, long edges are needed
+ * to avoid the intersection of two nodes. The smallest of these angles is determined by the
+ * number of leafs in the sub-trees rooted at two consecutive nodes. This function mixes
+ * nodes with small and large number of leafs in their sub-trees in order to avoid having two
+ * consecutive children with a small number of leafs in their sub-trees.
+ */
+void reorderChildrenForRadialLayout(const QVector<int>& numberOfLeafs, QVector<int>& children)
+{
+    const auto numberOfLeafsComparator = [&numberOfLeafs](const int i, const int j) {
+            return numberOfLeafs[i] < numberOfLeafs[j];
+        };
+
+    std::sort(children.begin(), children.end(), numberOfLeafsComparator);
+
+    const  int numberOfChildren = children.size();
+    int small = 0;
+    int large = numberOfChildren - 1;
+    while (small < large) {
+        std::swap(children[small], children[large]);
+        small += 2;
+        large -= 2;
+    }
+}
+
+/* Calculates a wedge angle that guarantees that no edge crosses can happen.
+ *
+ */
+qreal constrainWedgeAngle(const QVector<int>& numberOfLeafs, const qreal wedgeAngle,
+                          const qreal circleRadius, const int node,
+                          const QVector<int>& children, const qreal circleRadiusForChildren)
+{
+    if (children.size() <= 1 or circleRadius == 0.) {
+        return wedgeAngle;
+    }
+
+    //Proportion of the are in the sides of the wedge in which there will be no edges.
+    const qreal leftProportion = qreal(numberOfLeafs[children[0]]) / numberOfLeafs[node] / 2.;
+    const qreal rightProportion = qreal(numberOfLeafs[children.back()]) / numberOfLeafs[node] / 2.;
+    const qreal maximumProportion = qMax(leftProportion, rightProportion);
+
+    //Limit the wedge angle to guarantee no crosses between edges.
+    const qreal maximumWedgeAngle = 2. * acos(circleRadius / circleRadiusForChildren) /
+                                    maximumProportion;
+
+    return qMin(wedgeAngle, maximumWedgeAngle);
+}
+
+/* Checks whether a given circle radius is valid for placing the children of a node.
+ *
+ * In order to be valid, the radius must be large enough to allow the radialLayoutHelper
+ * to place the node in such a way that guarantees that no edge crosses or node intersections
+ * can happen.
+ */
+bool isValidCircleRadiusForChildren(const QVector<int>& numberOfLeafs, const qreal nodeRadius,
+                                    const qreal wedgeAngle, const qreal circleRadius,
+                                    const qreal nodeSeparation, const int node,
+                                    const QVector<int>& children,
+                                    const qreal circleRadiusForChildren)
+{
+    const qreal constrainedWedgeAngle = constrainWedgeAngle(numberOfLeafs, wedgeAngle, circleRadius,
+                                                            node, children,
+                                                            circleRadiusForChildren);
+    const qreal minimumDistance = 2. * nodeRadius + nodeSeparation;
+    const qreal squaredMinimumDistance = minimumDistance * minimumDistance;
+
+    const qreal nodeAngle = constrainedWedgeAngle / 2.;
+    QPointF nodePosition(circleRadius * qCos(nodeAngle), circleRadius * qSin(nodeAngle));
+
+    const int numberOfChildren = children.size();
+    qreal childRotation = 0.;
+    QPointF previousChildPosition;
+    for (int i = 0; i < numberOfChildren; i++) {
+        const int child = children[i];
+        const qreal childWedgeAngle = constrainedWedgeAngle * numberOfLeafs[child] /
+                                      numberOfLeafs[node];
+        const qreal childAngle = childRotation + childWedgeAngle / 2.;
+        childRotation += childWedgeAngle;
+        QPointF childPosition(circleRadiusForChildren * qCos(childAngle),
+                              circleRadiusForChildren * qSin(childAngle));
+
+        //Checks the distance between a node and of its children.
+        const QPointF nodeChildDifference = childPosition - nodePosition;
+        const qreal squaredNodeChildDistance(QPointF::dotProduct(nodeChildDifference,
+                                                                 nodeChildDifference));
+        if (squaredNodeChildDistance < squaredMinimumDistance) {
+            return false;
+        }
+
+        //Checks the distance between two children.
+        if (i > 0) {
+            const QPointF difference = childPosition - previousChildPosition;
+            const qreal squaredDistanceBetweenChildren = QPointF::dotProduct(difference,
+                                                                             difference);
+            if (squaredDistanceBetweenChildren < squaredMinimumDistance) {
+                return false;
+            }
+        }
+        previousChildPosition = childPosition;
+    }
+
+
+    return true;
+}
+
+/* Calculates the radius of the circle at which the center of the children will be placed.
+ * outside of.
+ *
+ * This functions the minimum radius that guarantees that no edge crosses or circle intersections
+ * are possible, considering that a node and its children are placed by the radialLayoutHelper
+ * function.
+ */
+qreal calculateCircleRadiusForChildren(const QVector<int>& numberOfLeafs, const qreal nodeRadius,
+                                       const qreal wedgeAngle, const qreal circleRadius,
+                                       const qreal nodeSeparation, const int node,
+                                       const QVector<int>& children)
+{
+    //Binary search is used to find the smallest valid radius up to a tolerance.
+    //In order to avoid infinite loop due to rounding errors, a maximum number of iterations
+    //is specified.
+    constexpr int MAXIMUM_NUMBER_OF_ITERATIONS = 100;
+    constexpr qreal TOLERANCE = 1.e-4;
+   
+    //Finds a suitable lower bound for the binary search
+    const qreal minimumDistanceBetweenCenters = 2. * nodeRadius + nodeSeparation;
+    qreal deltaRadiusLowerBound = qSqrt(qPow(minimumDistanceBetweenCenters, 2.) + 
+                                        qPow(circleRadius, 2.)) - circleRadius;
+    
+    //Finds a suitable upper bound for the binary search.
+    qreal deltaRadiusUpperBound = deltaRadiusLowerBound;
+    for (int iteration = 0; iteration < MAXIMUM_NUMBER_OF_ITERATIONS; iteration++) {
+        const qreal circleRadiusForChildren = circleRadius + deltaRadiusUpperBound;
+        if (isValidCircleRadiusForChildren(numberOfLeafs, nodeRadius, wedgeAngle, circleRadius,
+                                           nodeSeparation, node, children,
+                                           circleRadiusForChildren)) {
+            break;
+        }
+
+        deltaRadiusUpperBound *= 2.;
+    }
+
+    //Searches for the minimum valid radius
+    for (int iteration = 0; iteration < MAXIMUM_NUMBER_OF_ITERATIONS; iteration++) {
+        if (deltaRadiusUpperBound - deltaRadiusLowerBound < TOLERANCE) {
+            break;
+        }
+
+        const qreal deltaRadius = (deltaRadiusUpperBound + deltaRadiusLowerBound) / 2.;
+        const qreal circleRadiusForChildren = circleRadius + deltaRadius;
+        if (isValidCircleRadiusForChildren(numberOfLeafs, nodeRadius, wedgeAngle, circleRadius,
+                                           nodeSeparation, node, children,
+                                           circleRadiusForChildren)) {
+            deltaRadiusUpperBound = deltaRadius;
+        } else {
+            deltaRadiusLowerBound = deltaRadius;
+        }
+    }
+
+    return circleRadius + deltaRadiusUpperBound;
+}
+
+/* Helper function that calculates the radial layout recursively.
+ *
+ * This function calculates positions for each node in the sub-tree rooted at @p node.
+ * Consider the circle C centered at the origin with radius @circleRadius.
+ * Consider the wedge W, formed by the points with polar angle between @p rotationAngle and
+ * @p rotationAngle + @p wedgeAngle.
+ * The center of each node in the sub-tree rooted at @p node is placed outside or in the border of
+ * C and inside W. The parameters that define C and W are chosen in such a way that edge crosses
+ * are impossible and the distance between any pair of nodes is at least @p nodeSeparation.
+ *
+ * @param graph A tree graph.
+ * @param numberOfLeafs The number of leafs in the sub-tree rooted at each node.
+ * @param nodeRadius The radius of the circles used to draw nodes.
+ * @param wedgeAngle The internal angle of the wedge in which nodes are placed.
+ * @param rotationAngle The angle between the x-axis and the wedge in which nodes are placed.
+ * @param circleRadius The radius of the circles whose exterior is used to place nodes.
+ * @param nodeSeparation Lower bound on the distance between nodes
+ * @param node Root of the current sub-tree.
+ * @param visited Flags used to indicate which nodes have already been placed.
+ *                Initially, all positions of @p visited must be false.
+ *                This function changes @p visited.
+ * @param positions A place to write the position of each node.
+ */
+void radialLayoutHelper(const RemappedGraph& graph, const QVector<int>& numberOfLeafs,
+                        const qreal nodeRadius, const qreal wedgeAngle, const qreal rotationAngle,
+                        const qreal circleRadius, const qreal nodeSeparation, const int node,
+                        QVector<bool>& visited, QVector<QPointF>& positions)
+{
+    visited[node] = true;
+    
+    //Places current node at the center of the wedge.
+    const qreal nodeAngle = wedgeAngle / 2. + rotationAngle;
+    positions[node].setX(circleRadius * qCos(nodeAngle));
+    positions[node].setY(circleRadius * qSin(nodeAngle));
+
+    QVector<int> children = getChildren(graph, visited, node);
+    reorderChildrenForRadialLayout(numberOfLeafs, children);
+
+    const qreal circleRadiusForChildren = calculateCircleRadiusForChildren(numberOfLeafs,
+            nodeRadius, wedgeAngle, circleRadius, nodeSeparation, node, children);
+
+
+    const qreal constrainedWedgeAngle = constrainWedgeAngle(numberOfLeafs, wedgeAngle, circleRadius,
+                                                            node, children,
+                                                            circleRadiusForChildren);
+
+    qreal childRotationAngle = rotationAngle + (wedgeAngle - constrainedWedgeAngle) / 2.;
+    for (const int child : children) { 
+        const qreal childWedgeAngle = constrainedWedgeAngle * numberOfLeafs[child] /
+                                      numberOfLeafs[node];
+
+        radialLayoutHelper(graph, numberOfLeafs, nodeRadius, childWedgeAngle, childRotationAngle,
+                           circleRadiusForChildren, nodeSeparation, child, visited, positions);
+        
+        childRotationAngle += childWedgeAngle;
+    }
+}
+
+/* Calculates the number of leafs in each sub-tree of a Depth-First-Search tree of @p graph.
+ *
+ * @param graph The graph to be searched.
+ * @param node The current node.
+ * @param visited Indicates which nodes have already been visited in the search.
+ * @param numberOfLeafs A place to store the answer.
+ */
+void calculateNumberOfLeafs(const RemappedGraph& graph, const int node, QVector<bool>& visited,
+                            QVector<int>& numberOfLeafs)
+{
+    visited[node] = true;
+
+    numberOfLeafs[node] = 0;
+    bool isLeaf = true;
+    for (const int neighbour : graph.adjacency[node]) {
+        if (not visited[neighbour]) {
+            isLeaf = false;
+            calculateNumberOfLeafs(graph, neighbour, visited, numberOfLeafs);
+            numberOfLeafs[node] += numberOfLeafs[neighbour];
+        }
+    }
+
+    if (isLeaf) {
+        numberOfLeafs[node] = 1;
+    }
+}
+
+/* Finds a center of a tree.
+ *
+ * A center is a node with minimum eccentricity (i.e. distance to most distance node).
+ * 
+ * @param graph A tree graph.
+ */
+int findTreeCenter(const RemappedGraph& graph) {
+    int center = 0;
+    QQueue<int> queue;
+    QVector<int> degree(graph.numberOfNodes);
+    QVector<bool> visited(graph.numberOfNodes);
+    for (int node = 0; node < graph.numberOfNodes; node++) {
+        degree[node] = graph.adjacency[node].size();
+        if (degree[node] == 1) {
+            queue.enqueue(node);
+        }
+    }
+
+    while (not queue.isEmpty()) {
+        const int node = queue.dequeue();
+        visited[node] = true;
+        center = node;
+        for (const int neighbour : graph.adjacency[node]) {
+            if (not visited[neighbour]) {
+                degree[neighbour]--;
+                if (degree[neighbour] == 1) {
+                    queue.enqueue(neighbour);
+                }
+            }
+        }
+    }
+
+    return center;
+}
+
+/* Generates a radial layout for a tree.
+ *
+ * @param graph A tree graph.
+ * @param minX Minimum x-coordinate that can be assigned to a node.
+ * @param minY Minimum y-coordinate that can be assigned to a node.
+ * @param nodeRadius The radius of the circles used to draw nodes.
+ * @param nodeSeparation A lower bound on the distance between two nodes.
+ */
+QVector<QPointF> radialLayout(const RemappedGraph& graph, const qreal minX, const qreal minY,
+                              const qreal nodeRadius, const qreal nodeSeparation)
+{
+    const qreal initialWedgeAngle = 2. * M_PI;
+    
+    const int root = findTreeCenter(graph);
+
+    QVector<bool> visited(graph.numberOfNodes);
+    QVector<int> numberOfLeafs(graph.numberOfNodes);
+    calculateNumberOfLeafs(graph, root, visited, numberOfLeafs);
+
+    visited.fill(false);
+    QVector<QPointF> positions(graph.numberOfNodes);
+    radialLayoutHelper(graph, numberOfLeafs, nodeRadius, initialWedgeAngle, 0., 0., nodeSeparation,
+                       root, visited, positions);
+
+
+    translateGraphToUpperLeftCorner(minX, qInf(), minY, qInf(), positions); 
+    
+    return positions;
+}
+
+
+void Topology::applyRadialLayoutToTree(GraphDocumentPtr document, const qreal nodeRadius,
+                                       const qreal margin, const qreal nodeSeparation)
+{
+    const RemappedGraph graph = remapGraph(document);
+   
+    const qreal minX = nodeRadius + margin;
+    const qreal minY = nodeRadius + margin;
+    QVector<QPointF> positions = radialLayout(graph, minX, minY, nodeRadius, nodeSeparation);
+   
+    moveNodes(document->nodes(), graph.nodeToIndexMap, positions);
+}
+
+

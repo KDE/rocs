@@ -109,7 +109,7 @@ void GraphLayoutWidget::layoutGraph()
 
     Topology::applyForceBasedLayout(m_document, nodeRadius, margin, areaFactor, repellingForce,
                                     attractionForce, randomizeInitialPositions, seed);
-    
+
     close();
     deleteLater();
 }

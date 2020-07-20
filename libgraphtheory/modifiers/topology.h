@@ -108,7 +108,10 @@ public:
                                       const qreal margin, const qreal areaFactor,
                                       const qreal repellingForce, const qreal attractionForce,
                                       const bool randomizeInitialPositions, const quint32 seed);
-    
+
+
+    static void applyRadialLayoutToTree(GraphDocumentPtr document, const qreal nodeRadius,
+                                       const qreal margin, const qreal minimumNodeSeparation);
 };
 }
 
