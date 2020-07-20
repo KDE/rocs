@@ -110,8 +110,16 @@ public:
                                       const bool randomizeInitialPositions, const quint32 seed);
 
 
+    /**
+     * Aplies a radial layout to a tree.
+     *
+     * @param document The graph document to be laid out. This document should represented a tree.
+     * @param nodeRadius The radius of the circles that are used to represent nodes.
+     * @param margin The size of the top and left margins.
+     * @param nodeSeparation The minimum distance between two nodes.
+     */
     static void applyRadialLayoutToTree(GraphDocumentPtr document, const qreal nodeRadius,
-                                       const qreal margin, const qreal minimumNodeSeparation);
+                                       const qreal margin, const qreal nodeSeparation);
 };
 }
 
