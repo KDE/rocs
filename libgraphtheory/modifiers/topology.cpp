@@ -873,6 +873,11 @@ QVector<QPointF> radialLayout(const RemappedGraph& graph, const qreal minX, cons
 void Topology::applyRadialLayoutToTree(GraphDocumentPtr document, const qreal nodeRadius,
                                        const qreal margin, const qreal nodeSeparation)
 {
+    //There is nothing to do with an empty graph.
+    if (document->nodes().empty()) {
+        return;
+    }
+
     const RemappedGraph graph = remapGraph(document);
    
     const qreal minX = nodeRadius + margin;
