@@ -24,6 +24,7 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
+#include "edgetype.h"
 #include "editor.h"
 #include "modifiers/topology.h"
 #include "layoutevaluator.h"
@@ -36,7 +37,7 @@ constexpr int REPETITIONS = 30;
 //Applies the force based layout algorithm with fixed parameters
 void applyForceBasedLayout(GraphDocumentPtr document, const quint32 seed)
 {
-    constexpr qreal nodeRadius = 10;;
+    constexpr qreal nodeRadius = 10.;
     constexpr qreal margin = 5.;
     constexpr qreal areaFactor = 1.;
     constexpr qreal repellingForce = 1.;
@@ -46,22 +47,41 @@ void applyForceBasedLayout(GraphDocumentPtr document, const quint32 seed)
                                     attractionForce, randomizeInitialPositions, seed);
 }
 
+//Applies the radial tree layout algorithm with fixed parameters.
+void applyRadialLayout(GraphDocumentPtr document, const quint32 seed)
+{
+    constexpr qreal nodeRadius = 10.;
+    constexpr qreal margin = 5.;
+    constexpr qreal nodeSeparation = 50.;
+    constexpr qreal wedgeAngle = 2. * M_PI;
+    constexpr qreal rotationAngle = 0.;
+    const NodePtr root = nullptr;
+    const bool status =  Topology::applyRadialLayoutToTree(document, nodeRadius, margin,
+                                                           nodeSeparation, root, wedgeAngle,
+                                                           rotationAngle);
+    Q_ASSERT(status);
+}
+
 GraphDocumentPtr generatePath(const int numberOfNodes)
 {
     Editor editor;
     GraphDocumentPtr document = editor.createDocument();
+    EdgeTypePtr edgeType = EdgeType::create(document);
+    edgeType->setDirection(EdgeType::Bidirectional);
 
     NodePtr previous = Node::create(document);
     for (int i = 1; i < numberOfNodes; i++) {
         NodePtr node = Node::create(document);
-        Edge::create(previous, node);
+        EdgePtr edge = Edge::create(previous, node);
+        edge->setType(edgeType);
         previous = node;
     }
 
     return document;
 }
 
-void benchmarkOnPaths(const quint32 runSeed)
+template<typename F>
+void benchmarkOnPaths(const quint32 runSeed, F applyLayout, const char* name)
 {
     QRandomGenerator runSeedGenerator(runSeed);
     for (int numberOfNodes = 10; numberOfNodes <= 50; numberOfNodes += 10) {
@@ -69,11 +89,11 @@ void benchmarkOnPaths(const quint32 runSeed)
         
         LayoutEvaluator evaluator;
         for (int repetition = 0; repetition < REPETITIONS; repetition++) { 
-            applyForceBasedLayout(document, runSeedGenerator.generate());
+            applyLayout(document, runSeedGenerator.generate());
             evaluator.evaluateLayout(document);
         }
 
-        std::cout << "[Force based layout on paths with " << numberOfNodes << " nodes.] {" << std::endl;
+        std::cout << "[" << name << " on paths with " << numberOfNodes << " nodes.] {" << std::endl;
         evaluator.showResults(std::cout);
         std::cout << "} " << std::endl << std::endl;
     }
@@ -83,12 +103,15 @@ GraphDocumentPtr generateCompleteGraph(const int numberOfNodes)
 {
     Editor editor;
     GraphDocumentPtr document = editor.createDocument();
-
+    EdgeTypePtr edgeType = EdgeType::create(document);
+    edgeType->setDirection(EdgeType::Bidirectional);
+    
     for (int i = 0; i < numberOfNodes; i++) {
         const NodePtr nodeA = Node::create(document);
         for (const NodePtr nodeB : document->nodes()) {
             if (nodeA != nodeB) {
-                Edge::create(nodeA, nodeB);
+                EdgePtr edge = Edge::create(nodeA, nodeB);
+                edge->setType(edgeType);
             }
         }
     }
@@ -120,15 +143,17 @@ GraphDocumentPtr generateCircle(const int numberOfNodes)
 {
     Editor editor;
     GraphDocumentPtr document = editor.createDocument();
+    EdgeTypePtr edgeType = EdgeType::create(document);
+    edgeType->setDirection(EdgeType::Bidirectional);
 
     NodePtr first = Node::create(document);
     NodePtr previous = first;
     for (int i = 1; i < numberOfNodes; i++) {
         NodePtr node = Node::create(document);
-        Edge::create(previous, node);
+        Edge::create(previous, node)->setType(edgeType);
         previous = node;
     }
-    Edge::create(previous, first);
+    Edge::create(previous, first)->setType(edgeType);
 
     return document;
 }
@@ -158,19 +183,22 @@ GraphDocumentPtr generateRandomTree(const int numberOfNodes, const quint32 seed)
 
     Editor editor;
     GraphDocumentPtr document = editor.createDocument();
+    EdgeTypePtr edgeType = EdgeType::create(document);
+    edgeType->setDirection(EdgeType::Bidirectional);
 
     for (int i = 0; i < numberOfNodes; i++) {
         NodePtr node = Node::create(document);
         if (i) {
             const int j = randomGenerator.bounded(i);
-            Edge::create(document->nodes()[j], node);
+            Edge::create(document->nodes()[j], node)->setType(edgeType);
         }
     }
 
     return document;
 }
 
-void benchmarkOnTrees(const quint32 genSeed, const quint32 runSeed)
+template<typename F> 
+void benchmarkOnTrees(const quint32 genSeed, const quint32 runSeed, F applyLayout, const char* name)
 {
     QRandomGenerator genSeedGenerator(genSeed);
     QRandomGenerator runSeedGenerator(runSeed);
@@ -179,11 +207,11 @@ void benchmarkOnTrees(const quint32 genSeed, const quint32 runSeed)
         for (int repetition = 0; repetition < REPETITIONS; repetition++) {
             GraphDocumentPtr document = generateRandomTree(numberOfNodes,
                                                            genSeedGenerator.generate());
-            applyForceBasedLayout(document, runSeedGenerator.generate());
+            applyLayout(document, runSeedGenerator.generate());
             evaluator.evaluateLayout(document);
         }
     
-        std::cout << "[Force based layout on trees with " << numberOfNodes << " nodes.] {" << std::endl;
+        std::cout << "[" << name << " on trees with " << numberOfNodes << " nodes.] {" << std::endl;
         evaluator.showResults(std::cout);
         std::cout << "} " << std::endl << std::endl;
     }
@@ -202,9 +230,11 @@ int main(int argc, char* argv[]) {
     const quint32 circlesRunSeed = seedGenerator.generate();
     const quint32 treesRunSeed = seedGenerator.generate();
 
-    benchmarkOnPaths(pathsRunSeed);
+    benchmarkOnPaths(pathsRunSeed, applyForceBasedLayout, "Force based layout");
+    benchmarkOnPaths(pathsRunSeed, applyRadialLayout, "Radial layout");
     benchmarkOnCompleteGraphs(completeGraphsRunSeed);
     benchmarkOnCircles(circlesRunSeed);
-    benchmarkOnTrees(treesGenSeed, treesRunSeed);
+    benchmarkOnTrees(treesGenSeed, treesRunSeed, applyForceBasedLayout, "Force based layout");
+    benchmarkOnTrees(treesGenSeed, treesRunSeed, applyRadialLayout, "Radial layout");
 }
 
