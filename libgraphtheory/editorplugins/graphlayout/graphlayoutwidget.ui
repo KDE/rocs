@@ -6,24 +6,185 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>306</width>
-    <height>161</height>
+    <width>374</width>
+    <height>264</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>306</width>
-    <height>161</height>
+    <width>374</width>
+    <height>264</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Graph Layout</string>
   </property>
+  <widget class="QTabWidget" name="tabs">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>351</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
+   <widget class="QWidget" name="forceBasedLayoutTab">
+    <attribute name="title">
+     <string>Force Based Layout</string>
+    </attribute>
+    <widget class="QWidget" name="formLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>30</y>
+       <width>271</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="forceBasedLayoutTabFormLayout">
+      <property name="horizontalSpacing">
+       <number>16</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>16</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="areaFactorLabel">
+        <property name="text">
+         <string>Area factor:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSlider" name="areaFactorSlider">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="repellingForceLabel">
+        <property name="text">
+         <string>Repelling force:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSlider" name="repellingForceSlider">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="attractionForceLabel">
+        <property name="text">
+         <string>Attraction force:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSlider" name="attractionForceSlider">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="radialTreeLayoutTab">
+    <attribute name="title">
+     <string>Radial Tree Layout</string>
+    </attribute>
+    <widget class="QWidget" name="formLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>301</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="radialTreeLayoutTabFormLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="rootLabel">
+        <property name="text">
+         <string>Center/Root:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="rootComboBox"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="nodeSeparationLabel">
+        <property name="text">
+         <string>Node separation:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSlider" name="nodeSeparationSlider">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="treeTypeLabel">
+        <property name="text">
+         <string>Tree type:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QRadioButton" name="freeTreeRadioButton">
+        <property name="text">
+         <string>Free tree</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QRadioButton" name="rootedTreeRadioButton">
+        <property name="text">
+         <string>Rooted tree</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+  </widget>
   <widget class="QDialogButtonBox" name="mainButtons">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>120</y>
+     <x>190</x>
+     <y>220</y>
      <width>171</width>
      <height>32</height>
     </rect>
@@ -40,84 +201,6 @@
    <property name="standardButtons">
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
-  </widget>
-  <widget class="QWidget" name="formLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>281</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <layout class="QFormLayout" name="formLayout">
-    <property name="horizontalSpacing">
-     <number>16</number>
-    </property>
-    <property name="verticalSpacing">
-     <number>16</number>
-    </property>
-    <item row="0" column="0">
-     <widget class="QLabel" name="areaFactorLabel">
-      <property name="text">
-       <string>Area factor:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QSlider" name="areaFactorSlider">
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>100</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="repellingForceLabel">
-      <property name="text">
-       <string>Repelling force:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="attractionForceLabel">
-      <property name="text">
-       <string>Attraction force:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QSlider" name="repellingForceSlider">
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>100</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QSlider" name="attractionForceSlider">
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>100</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-   </layout>
   </widget>
  </widget>
  <resources/>

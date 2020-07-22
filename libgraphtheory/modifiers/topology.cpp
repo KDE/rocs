@@ -846,22 +846,22 @@ int findTreeCenter(const RemappedGraph& graph) {
  * @param minY Minimum y-coordinate that can be assigned to a node.
  * @param nodeRadius The radius of the circles used to draw nodes.
  * @param nodeSeparation A lower bound on the distance between two nodes.
+ * @param root Root node of the tree.
+ * @param initialWedgeAngle Angle of the wedge used for the root.
+ * @param initialRotationAngle Rotation angle for the root.
  */
 QVector<QPointF> radialLayout(const RemappedGraph& graph, const qreal minX, const qreal minY,
-                              const qreal nodeRadius, const qreal nodeSeparation)
+                              const qreal nodeRadius, const qreal nodeSeparation, const int root,
+                              const qreal initialWedgeAngle, const qreal initialRotationAngle)
 {
-    const qreal initialWedgeAngle = 2. * M_PI;
-    
-    const int root = findTreeCenter(graph);
-
     QVector<bool> visited(graph.numberOfNodes);
     QVector<int> numberOfLeafs(graph.numberOfNodes);
     calculateNumberOfLeafs(graph, root, visited, numberOfLeafs);
 
     visited.fill(false);
     QVector<QPointF> positions(graph.numberOfNodes);
-    radialLayoutHelper(graph, numberOfLeafs, nodeRadius, initialWedgeAngle, 0., 0., nodeSeparation,
-                       root, visited, positions);
+    radialLayoutHelper(graph, numberOfLeafs, nodeRadius, initialWedgeAngle, initialRotationAngle,
+                       0., nodeSeparation, root, visited, positions);
 
 
     translateGraphToUpperLeftCorner(minX, qInf(), minY, qInf(), positions); 
@@ -871,7 +871,9 @@ QVector<QPointF> radialLayout(const RemappedGraph& graph, const qreal minX, cons
 
 
 void Topology::applyRadialLayoutToTree(GraphDocumentPtr document, const qreal nodeRadius,
-                                       const qreal margin, const qreal nodeSeparation)
+                                       const qreal margin, const qreal nodeSeparation,
+                                       const NodePtr root, const qreal wedgeAngle,
+                                       const qreal rotationAngle)
 {
     //There is nothing to do with an empty graph.
     if (document->nodes().empty()) {
@@ -879,12 +881,19 @@ void Topology::applyRadialLayoutToTree(GraphDocumentPtr document, const qreal no
     }
 
     const RemappedGraph graph = remapGraph(document);
-   
+    
+    int rootIndex = 0;
+    if (root == nullptr) {
+        rootIndex = findTreeCenter(graph);
+    } else {
+        rootIndex = graph.nodeToIndexMap[root];
+    }
+
     const qreal minX = nodeRadius + margin;
     const qreal minY = nodeRadius + margin;
-    QVector<QPointF> positions = radialLayout(graph, minX, minY, nodeRadius, nodeSeparation);
+    
+    QVector<QPointF> positions = radialLayout(graph, minX, minY, nodeRadius, nodeSeparation,
+                                              rootIndex, wedgeAngle, rotationAngle);
    
     moveNodes(document->nodes(), graph.nodeToIndexMap, positions);
 }
-
-

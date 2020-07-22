@@ -60,15 +60,57 @@ public slots:
     */
     void setAttractionForce(int attractionForce);
 
+    /**
+    * Updates the index of the current tab.
+    */
+    void setCurrentTabIndex(const int index);
+
+
+    /**
+    * Updates the root parameter for the radial tree layout.
+    */
+    void setRoot(const int index);
+
+    /**
+    * Updates the node separation parameter for the radial tree layout.
+    */
+    void setNodeSeparation(const int nodeSeparation);
+
+    /**
+    * Updates the type of tree for the radial tree layout algorithm.
+    */
+    void freeTreeTypeToggle(const bool checked);
+    void rootedTreeTypeToggle(const bool checked);
 private:
-    
+    enum class TreeType {Free, Rooted}; 
+
     GraphDocumentPtr m_document;
     int m_seed;
     int m_areaFactor;
     int m_repellingForce;
     int m_attractionForce;
+    int m_currentTabIndex;
+    int m_root;
+    TreeType m_treeType;
+    int m_nodeSeparation;
+    
 
     Ui::GraphLayoutWidget *ui;
+
+    /**
+    * Returns the name of the current tab.
+    */
+    QString getCurrentTabName() const;
+
+    /**
+    * Handles the application of the force-based layout.
+    */
+    void handleForceBasedLayout();
+
+    /**
+    * Handles the application of the radial tree layout.
+    */
+    void handleRadialTreeLayout();
 };
 }
 

@@ -45,6 +45,10 @@ GraphLayoutWidget::GraphLayoutWidget(GraphDocumentPtr document, QWidget *parent)
     , m_areaFactor(50)
     , m_repellingForce(50)
     , m_attractionForce(50)
+    , m_currentTabIndex(0)
+    , m_root(-1)
+    , m_nodeSeparation(50)
+    , m_treeType(TreeType::Free)
 {
     setWindowTitle(i18nc("@title:window", "Graph Layout"));
     
@@ -56,18 +60,40 @@ GraphLayoutWidget::GraphLayoutWidget(GraphDocumentPtr document, QWidget *parent)
     ui->setupUi(widget);
     mainLayout->addWidget(widget);
 
+    connect(ui->tabs, &QTabWidget::currentChanged, this, &GraphLayoutWidget::setCurrentTabIndex);
     connect(ui->mainButtons, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(ui->mainButtons, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     connect(this, &QDialog::accepted, this, &GraphLayoutWidget::layoutGraph);
     connect(ui->areaFactorSlider, &QSlider::valueChanged, this, &GraphLayoutWidget::setAreaFactor);
-    connect(ui->repellingForceSlider, &QSlider::valueChanged, this, &GraphLayoutWidget::setRepellingForce);
-    connect(ui->attractionForceSlider, &QSlider::valueChanged, this, &GraphLayoutWidget::setAttractionForce);
+    connect(ui->repellingForceSlider, &QSlider::valueChanged, this,
+            &GraphLayoutWidget::setRepellingForce);
+    connect(ui->attractionForceSlider, &QSlider::valueChanged, this,
+            &GraphLayoutWidget::setAttractionForce);
+
+    connect(ui->nodeSeparationSlider, &QSlider::valueChanged, this,
+            &GraphLayoutWidget::setNodeSeparation);
+    connect(ui->rootComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &GraphLayoutWidget::setRoot);
+    
+    connect(ui->freeTreeRadioButton, &QRadioButton::toggled, this,
+            &GraphLayoutWidget::freeTreeTypeToggle);
+    connect(ui->rootedTreeRadioButton, &QRadioButton::toggled, this,
+            &GraphLayoutWidget::rootedTreeTypeToggle);
+
+    //Adds items to center/root combo box in the radial layout tab
+    ui->rootComboBox->addItem("Automatic selection", QVariant(-1));
+    for (const auto nodePtr : document->nodes()) {
+        const int nodeId = nodePtr->id();
+        ui->rootComboBox->addItem(QString::number(nodeId), QVariant(nodeId));
+    }
 
     // default values
+    ui->tabs->setCurrentIndex(m_currentTabIndex);
     ui->areaFactorSlider->setValue(50);
     ui->repellingForceSlider->setValue(50);
     ui->attractionForceSlider->setValue(50);
+    ui->nodeSeparationSlider->setValue(50);
 }
 
 
@@ -89,9 +115,27 @@ void GraphLayoutWidget::setSeed(int seed)
     m_seed = seed;
 }
 
+void GraphLayoutWidget::setCurrentTabIndex(const int index)
+{
+    m_currentTabIndex = index;
+}
+
 void GraphLayoutWidget::layoutGraph()
 {
 
+    const QString currentTabName = getCurrentTabName();
+    if (currentTabName == "forceBasedLayoutTab") {
+        handleForceBasedLayout();
+    } else if (currentTabName == "radialTreeLayoutTab") {
+        handleRadialTreeLayout();
+    }
+
+    close();
+    deleteLater();
+}
+
+void GraphLayoutWidget::handleForceBasedLayout()
+{
     //Slider values map to parameters with a non-linear scale
     const qreal areaFactor = qPow(10, qreal(m_areaFactor - 50) / 50);
     const qreal repellingForce = qPow(10, qreal(m_repellingForce - 50) / 50);
@@ -109,9 +153,68 @@ void GraphLayoutWidget::layoutGraph()
 
     Topology::applyForceBasedLayout(m_document, nodeRadius, margin, areaFactor, repellingForce,
                                     attractionForce, randomizeInitialPositions, seed);
+}
 
-    close();
-    deleteLater();
+void GraphLayoutWidget::handleRadialTreeLayout()
+{
+    //TODO: Check if the graph is a tree.
+
+    //Finds the root node. In case of automatic selection, a null pointer is used.
+    NodePtr root = nullptr;
+    for (const NodePtr node : m_document->nodes()) {
+        if (node->id() == m_root) {
+            root = node;
+            break;
+        }
+    }
+
+    const qreal nodeRadius = 10.;
+    const qreal margin = 5.;
+    const qreal nodeSeparation = m_nodeSeparation;
+
+    if (m_treeType == TreeType::Free) {
+        const qreal wedgeAngle = 2. * M_PI;
+        const qreal rotationAngle = 0.;
+        
+        Topology::applyRadialLayoutToTree(m_document, nodeRadius, margin, nodeSeparation, root,
+                                          wedgeAngle, rotationAngle);
+    } else {
+        const qreal wedgeAngle = M_PI / 2.;
+        const qreal rotationAngle = (M_PI - wedgeAngle) / 2.;
+        
+        Topology::applyRadialLayoutToTree(m_document, nodeRadius, margin, nodeSeparation, root,
+                                          wedgeAngle, rotationAngle);
+    }
+}
+
+void GraphLayoutWidget::setNodeSeparation(const int nodeSeparation)
+{
+    m_nodeSeparation = nodeSeparation;
+}
+
+void GraphLayoutWidget::setRoot(const int index)
+{
+    m_root = ui->rootComboBox->itemData(index).toInt();
+}
+
+void GraphLayoutWidget::freeTreeTypeToggle(const bool checked)
+{
+    if (checked) {
+        m_treeType = TreeType::Free;
+    }
+}
+
+void GraphLayoutWidget::rootedTreeTypeToggle(const bool checked)
+{
+    if (checked) {
+        m_treeType = TreeType::Rooted;
+    }
+}
+
+QString GraphLayoutWidget::getCurrentTabName() const
+{
+    const QWidget* currentTab = ui->tabs->widget(m_currentTabIndex);
+    return currentTab->objectName();
 }
 
 GraphLayoutWidget::~GraphLayoutWidget()

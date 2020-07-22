@@ -111,15 +111,21 @@ public:
 
 
     /**
-     * Aplies a radial layout to a tree.
+     * Applies a radial layout to a tree.
      *
-     * @param document The graph document to be laid out. This document should represented a tree.
+     * @param document The graph document to be laid out. This document should represent a tree.
      * @param nodeRadius The radius of the circles that are used to represent nodes.
      * @param margin The size of the top and left margins.
      * @param nodeSeparation The minimum distance between two nodes.
+     * @param root Node to be used as root. Use nullptr to indicate that the root should be selected
+     *             automatically.
+     * @param wedgeAngle Angle of the wedge into which the nodes should be placed.
+     * @param rotation Angle to rotate all nodes around the root.
      */
     static void applyRadialLayoutToTree(GraphDocumentPtr document, const qreal nodeRadius,
-                                       const qreal margin, const qreal nodeSeparation);
+                                       const qreal margin, const qreal nodeSeparation,
+                                       const NodePtr root, const qreal wedgeAngle,
+                                       const qreal rotationAngle);
 };
 }
 
