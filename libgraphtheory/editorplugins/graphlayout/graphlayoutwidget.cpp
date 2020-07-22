@@ -157,8 +157,6 @@ void GraphLayoutWidget::handleForceBasedLayout()
 
 void GraphLayoutWidget::handleRadialTreeLayout()
 {
-    //TODO: Check if the graph is a tree.
-
     //Finds the root node. In case of automatic selection, a null pointer is used.
     NodePtr root = nullptr;
     for (const NodePtr node : m_document->nodes()) {
@@ -172,18 +170,13 @@ void GraphLayoutWidget::handleRadialTreeLayout()
     const qreal margin = 5.;
     const qreal nodeSeparation = m_nodeSeparation;
 
-    if (m_treeType == TreeType::Free) {
-        const qreal wedgeAngle = 2. * M_PI;
-        const qreal rotationAngle = 0.;
-        
-        Topology::applyRadialLayoutToTree(m_document, nodeRadius, margin, nodeSeparation, root,
-                                          wedgeAngle, rotationAngle);
-    } else {
-        const qreal wedgeAngle = M_PI / 2.;
-        const qreal rotationAngle = (M_PI - wedgeAngle) / 2.;
-        
-        Topology::applyRadialLayoutToTree(m_document, nodeRadius, margin, nodeSeparation, root,
-                                          wedgeAngle, rotationAngle);
+    const qreal wedgeAngle = m_treeType == TreeType::Free ? 2. * M_PI : M_PI / 2.;
+    const qreal rotationAngle = m_treeType == TreeType::Free ? 0. : (M_PI - wedgeAngle) / 2.;
+    const bool status = Topology::applyRadialLayoutToTree(m_document, nodeRadius, margin,
+                                                          nodeSeparation, root, wedgeAngle,
+                                                          rotationAngle);
+    if (not status) {
+        QMessageBox::critical(this, "Incorrect type of graph", "This layout algorithm can only be appied to trees.");
     }
 }
 

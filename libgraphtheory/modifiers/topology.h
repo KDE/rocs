@@ -121,11 +121,14 @@ public:
      *             automatically.
      * @param wedgeAngle Angle of the wedge into which the nodes should be placed.
      * @param rotation Angle to rotate all nodes around the root.
+     *
+     * @return true if the layout can be applied and false otherwise. The layout can be applied if
+     *         @p document represents a tree.
      */
-    static void applyRadialLayoutToTree(GraphDocumentPtr document, const qreal nodeRadius,
-                                       const qreal margin, const qreal nodeSeparation,
-                                       const NodePtr root, const qreal wedgeAngle,
-                                       const qreal rotationAngle);
+    static bool applyRadialLayoutToTree(GraphDocumentPtr document, const qreal nodeRadius,
+                                        const qreal margin, const qreal nodeSeparation,
+                                        const NodePtr root, const qreal wedgeAngle,
+                                        const qreal rotationAngle);
 };
 }
 

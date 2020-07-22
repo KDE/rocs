@@ -869,19 +869,81 @@ QVector<QPointF> radialLayout(const RemappedGraph& graph, const qreal minX, cons
     return positions;
 }
 
+/* Checks whether all the edges of a graph are bidirectional.
+ */
+bool hasOnlyBidirectionalEdges(GraphDocumentPtr document)
+{
+    for (const EdgePtr edge : document->edges()) {
+        if (edge->type()->direction() != EdgeType::Bidirectional) {
+            return false;
+        }
+    }
+    return true;
+}
 
-void Topology::applyRadialLayoutToTree(GraphDocumentPtr document, const qreal nodeRadius,
+/* Checks whether a graph is connected
+*/
+bool isConnected(const RemappedGraph& graph)
+{
+    if (graph.numberOfNodes == 0) {
+        return true;
+    }
+
+    QVector<bool> visited(graph.numberOfNodes);
+    QStack<int> stack;
+    stack.push(0);
+    visited[0] = true;
+    while (not stack.empty()) {
+        const int node = stack.pop();
+        for (const int neighbour : graph.adjacency[node]) {
+            if (not visited[neighbour]) {
+                stack.push(neighbour);
+                visited[neighbour] = true;
+            }
+        }
+    }
+
+    for (int i = 0; i < graph.numberOfNodes; i++) {
+        if (not visited[i]) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+/* Checks whether a graph is a tree.
+*/
+bool isTree(const RemappedGraph& graph)
+{
+    if (graph.numberOfNodes - 1 != graph.edges.size()) {
+        return false;
+    }
+
+    return isConnected(graph);
+}
+
+bool Topology::applyRadialLayoutToTree(GraphDocumentPtr document, const qreal nodeRadius,
                                        const qreal margin, const qreal nodeSeparation,
                                        const NodePtr root, const qreal wedgeAngle,
                                        const qreal rotationAngle)
 {
     //There is nothing to do with an empty graph.
     if (document->nodes().empty()) {
-        return;
+        return true;
+    }
+
+    //Allow only bidirectional edges.
+    if (not hasOnlyBidirectionalEdges(document)) {
+        return false;
     }
 
     const RemappedGraph graph = remapGraph(document);
     
+    if (not isTree(graph)) {
+        return false;
+    }
+
     int rootIndex = 0;
     if (root == nullptr) {
         rootIndex = findTreeCenter(graph);
@@ -896,4 +958,6 @@ void Topology::applyRadialLayoutToTree(GraphDocumentPtr document, const qreal no
                                               rootIndex, wedgeAngle, rotationAngle);
    
     moveNodes(document->nodes(), graph.nodeToIndexMap, positions);
+
+    return true;
 }
