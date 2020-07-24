@@ -54,6 +54,9 @@ private:
     bool intersects(const NodePtr a, const NodePtr b) const;
     int calculateNumberOfNodeIntersections(GraphDocumentPtr document);
     int calculateNumberOfNodesWithIntersections(GraphDocumentPtr document);
+    QPointF projectOntoSegment(const QLineF& segment, const QPointF& point) const;
+    qreal squaredDistance(const QPointF& pointA, const QPointF& pointB) const;
+    bool doSegmentsIntersect(const QLineF& segmentA, const QLineF& segmentB) const;
 public:
 
     /*

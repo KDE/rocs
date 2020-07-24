@@ -2,12 +2,49 @@
 
 #include <QLineF>
 #include <QVector2D>
+#include <iostream>
+#include <iomanip>
 
 void LayoutEvaluator::showMetric(const MetricSummarizer& metric, std::ostream& outputStream) const
 {
     outputStream << "\tminimum: " << metric.minimum() << std::endl;
     outputStream << "\tmaximum: " << metric.maximum() << std::endl;
     outputStream << "\taverage: " << metric.average() << std::endl;
+}
+
+QPointF LayoutEvaluator::projectOntoSegment(const QLineF& segment, const QPointF& point) const
+{
+    const QPointF p1p2 = segment.p1() - segment.p2();
+    const QPointF pointp2 = point - segment.p2();
+    const qreal denominator = QPointF::dotProduct(p1p2, p1p2);
+    const qreal numerator = QPointF::dotProduct(p1p2, pointp2);
+    const qreal lambda = qMin(1., qMax(0., numerator / denominator));
+    return segment.p1() * lambda + segment.p2() * (1. - lambda);
+}
+
+qreal LayoutEvaluator::squaredDistance(const QPointF& pointA, const QPointF& pointB) const
+{
+    return QPointF::dotProduct(pointA - pointB, pointA - pointB);
+}
+
+bool LayoutEvaluator::doSegmentsIntersect(const QLineF& segmentA, const QLineF& segmentB) const
+{
+    constexpr qreal EPS = 1.e-1;
+
+    QPointF point;
+    if (segmentA.intersects(segmentB, &point) != QLineF::BoundedIntersection) {
+        return false;
+    }
+
+    if (squaredDistance(point, projectOntoSegment(segmentA, point)) > EPS) {
+        return false;
+    }
+
+    if (squaredDistance(point, projectOntoSegment(segmentB, point)) > EPS) {
+        return false;
+    }
+
+    return true;
 }
 
 bool LayoutEvaluator::crosses(const EdgePtr a, const EdgePtr b) const
@@ -18,11 +55,15 @@ bool LayoutEvaluator::crosses(const EdgePtr a, const EdgePtr b) const
         return false;
     }
 
-    QLineF segmentA(a->from()->x(), a->from()->y(), a->to()->x(), a->to()->y());
-    QLineF segmentB(b->from()->x(), b->from()->y(), b->to()->x(), b->to()->y());
+    QPointF aFrom(a->from()->x(), a->from()->y());
+    QPointF aTo(a->to()->x(), a->to()->y());
+    QPointF bFrom(b->from()->x(), b->from()->y());
+    QPointF bTo(b->to()->x(), b->to()->y());
 
-    QPointF point;
-    return segmentA.intersects(segmentB, &point) == QLineF::BoundedIntersection;
+    QLineF segmentA(aFrom, aTo);
+    QLineF segmentB(bFrom, bTo);
+    
+    return doSegmentsIntersect(segmentA, segmentB);
 }
 
 int LayoutEvaluator::calculateNumberOfEdgeCrosses(GraphDocumentPtr document)
@@ -34,7 +75,7 @@ int LayoutEvaluator::calculateNumberOfEdgeCrosses(GraphDocumentPtr document)
                 numberOfEdgeCrosses++;
             }
         }
-    } 
+    }
     return numberOfEdgeCrosses / 2;
 }
 
