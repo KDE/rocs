@@ -34,6 +34,20 @@ target_link_libraries(TestForceBasedLayout
     Qt5::Test
 )
 
+set(testradiallayout_SRCS
+    testradiallayout.cpp
+)
+
+
+add_executable(TestRadialLayout ${testradiallayout_SRCS})
+add_test(NAME TestRadialLayout COMMAND TesRadialLayout)
+ecm_mark_as_test(TestRadialLayout)
+target_link_libraries(TestRadialLayout
+    rocsgraphtheory
+    Qt5::Test
+)
+
+
 set(qualitybenchmark_SRCS
     qualitybenchmark.cpp
     metricsummarizer.cpp
