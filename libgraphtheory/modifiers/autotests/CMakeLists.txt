@@ -40,7 +40,7 @@ set(testradiallayout_SRCS
 
 
 add_executable(TestRadialLayout ${testradiallayout_SRCS})
-add_test(NAME TestRadialLayout COMMAND TesRadialLayout)
+add_test(NAME TestRadialLayout COMMAND TestRadialLayout)
 ecm_mark_as_test(TestRadialLayout)
 target_link_libraries(TestRadialLayout
     rocsgraphtheory
