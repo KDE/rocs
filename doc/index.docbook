@@ -500,7 +500,6 @@ digraph myGraph {
             There are two different layout algorithms that can be applied: Force Based Layout and Radial Tree Layout. To apply one of them, select the corresponding
             tab of the graph layout tool, choose the desired parameters and execute the algorithm by clicking on the <guibutton>OK</guibutton> button. Details that are specific to each one of the layout algorithms are provided in the next sections.
         </para>
-    </sect1>
     
     <sect2>
         <title>Force Based Layout</title>
@@ -523,7 +522,6 @@ digraph myGraph {
         <para>
             Another parameter that can be controlled is the Area Factor. This parameter controls how the nodes are spread. Layouts generated with high values of Area Factor have a tendency of  having large distances between nodes.
         </para>
-    </sect2>
     
     <sect3>
         <title>Radial Tree Layout</title>
@@ -558,6 +556,8 @@ digraph myGraph {
             Similarly, decreasing the value of this parameter will cause the distance between nodes to decrease.
         </para>
     </sect3>
+    </sect2>
+    </sect1>
 </chapter>
 
 <chapter id="credits">
