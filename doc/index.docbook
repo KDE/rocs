@@ -490,6 +490,76 @@ digraph myGraph {
 </sect1>
 </chapter>
 
+<chapter id="graph-layout">
+    <title>Graph Layout</title>
+    
+    <sect1>
+        <title>Laying out graphs automatically in &rocs;</title>
+        <para>
+            &rocs; can lay out graphs automatically. The &rocs; graph layout tool can be found in the main menu at <menuchoice><guimenu>Graph Document</guimenu> <guisubmenu>Tools</guisubmenu> <guimenuitem>Graph Layout</guimenuitem></menuchoice>.
+            There are two different layout algorithms that can be applied: Force Based Layout and Radial Tree Layout. To apply one of them, select the corresponding
+            tab of the graph layout tool, choose the desired parameters and execute the algorithm by clicking on the <guibutton>OK</guibutton> button. Details that are specific to each one of the layout algorithms are provided in the next sections.
+        </para>
+    </sect1>
+    
+    <sect2>
+        <title>Force Based Layout</title>
+        
+        <para>
+            The Force Based Layout can be applied to any graph. Intuitively, this algorithm simulates forces acting in each node. There are repelling forces between pairs of nodes and attraction forces between pairs of nodes that are neighbours. The magnitude of these forces can be specified by moving the corresponding sliders in the user interface.
+        </para>
+        <screenshot>
+            <screeninfo>A Screenshot of the Force Based Layout tab of the &rocs; graph layout tool.</screeninfo>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG" />
+                </imageobject>
+                <textobject>
+                    <phrase>A Screenshot of the Force Based Layout tab of the &rocs; graph layout tool.</phrase>
+                </textobject>
+            </mediaobject>
+        </screenshot>
+
+        <para>
+            Another parameter that can be controlled is the Area Factor. This parameter controls how the nodes are spread. Layouts generated with high values of Area Factor have a tendency of  having large distances between nodes.
+        </para>
+    </sect2>
+    
+    <sect3>
+        <title>Radial Tree Layout</title>
+        <para>
+            The Radial Tree Layout can only be applied to trees. Any attempt to apply this layout algorithm to other kinds of graph will produce an error message.
+            Parameters for the Radial Tree Layout can be selected using the provided user interface.
+        </para>
+        
+        
+        <screenshot>
+            <screeninfo>A Screenshot of the Radial Tree Layout tab of the &rocs; graph layout tool.</screeninfo>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG" />
+                </imageobject>
+                <textobject>
+                    <phrase>A Screenshot of the Radial Tree Layout tab of the &rocs; graph layout tool.</phrase>
+                </textobject>
+            </mediaobject>
+        </screenshot>
+
+        <para>
+            The tree type parameter selects between a free tree layout and a rooted tree layout. In a free tree layout, nodes are placed freely without any apparent hierarchy between them. In a rooted tree layout, the root node is placed at the top and sub-trees are laid out below it, giving an idea of a hierarchy between nodes.
+        </para>
+        
+        <para>    
+            The center/root parameter defines which node is going be used as root for the rooted tree layout or as center for the free tree layout. The center of a free tree layout is the first node to be placed by the algorithm. All other nodes are placed on circles centered at the center node. A center/root can be selected automatically by the layout algorithm.
+        </para>
+        
+        <para>
+            The node separation parameter controls the distance between nodes. Increasing the value of this parameter will cause the distance between nodes to increase.
+            Similarly, decreasing the value of this parameter will cause the distance between nodes to decrease.
+        </para>
+    </sect3>
+</chapter>
+
 <chapter id="credits">
 <title>Credits and License</title>
 
