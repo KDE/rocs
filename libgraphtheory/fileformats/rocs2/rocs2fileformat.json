@@ -3,8 +3,8 @@
     "KPlugin": {
         "Category": "Plugins",
         "Description": "Rocs Graph File Format",
-        "Description[ca@valencia]": "Format de fitxers de graf del Rocs",
-        "Description[ca]": "Format de fitxers de graf del Rocs",
+        "Description[ca@valencia]": "Format de fitxer de graf del Rocs",
+        "Description[ca]": "Format de fitxer de graf del Rocs",
         "Description[cs]": "Formát souborů grafů Rocs",
         "Description[de]": "Rocs-Graphendatei-Format",
         "Description[el]": "Τύπος αποθήκευσης αρχείων γράφων Rocs",
