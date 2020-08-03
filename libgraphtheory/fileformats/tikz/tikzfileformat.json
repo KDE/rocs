@@ -3,8 +3,8 @@
     "KPlugin": {
         "Category": "Plugins",
         "Description": "Writes graph documents in PGF/TikZ format for use in LaTeX documents",
-        "Description[ca@valencia]": "Escriu documents gràfics en format PGF/TikZ per utilitzar-los en documents LaTeX",
-        "Description[ca]": "Escriu documents gràfics en format PGF/TikZ per utilitzar-los en documents LaTeX",
+        "Description[ca@valencia]": "Escriu documents gràfics en format PGF/TikZ per a usar-los en documents LaTeX",
+        "Description[ca]": "Escriu documents gràfics en format PGF/TikZ per a usar-los en documents LaTeX",
         "Description[de]": "Exportiert Graphendokumente im Format PGF/TikZ zur Verwendung in LaTeX-Dokumenten",
         "Description[el]": "Γράφει τα έγγραφα γράφων σε μορφή PGF/TikZ για να χρησιμοποιηθούν σε έγγραφα LaTeX",
         "Description[en_GB]": "Writes graph documents in PGF/TikZ format for use in LaTeX documents",

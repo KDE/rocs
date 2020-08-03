@@ -3,8 +3,8 @@
     "KPlugin": {
         "Category": "Plugins",
         "Description": "Read and write graph documents in Trivial Graph Format (TGF)",
-        "Description[ca@valencia]": "Llig i escriu fitxers escrits en Format Gràfic Trivial (TGF)",
-        "Description[ca]": "Llegeix i escriu fitxers escrits en Format Gràfic Trivial (TGF)",
+        "Description[ca@valencia]": "Llig i escriu fitxers escrits en el Format Gràfic Trivial (TGF)",
+        "Description[ca]": "Llegeix i escriu fitxers escrits en el Format Gràfic Trivial (TGF)",
         "Description[de]": "Dokumente im Format „Trivial Graph“ (TGF) lesen und schreiben",
         "Description[el]": "Ανάγνωση και εγγραφή αρχείων γράφων σε μορφή Trivial Graph (TGF)",
         "Description[en_GB]": "Read and write graph documents in Trivial Graph Format (TGF)",
