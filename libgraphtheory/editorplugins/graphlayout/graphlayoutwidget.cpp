@@ -83,7 +83,7 @@ GraphLayoutWidget::GraphLayoutWidget(GraphDocumentPtr document, QWidget *parent)
 
     //Adds items to center/root combo box in the radial layout tab
     ui->rootComboBox->addItem("Automatic selection", QVariant(-1));
-    for (const auto nodePtr : document->nodes()) {
+    for (const auto& nodePtr : document->nodes()) {
         const int nodeId = nodePtr->id();
         ui->rootComboBox->addItem(QString::number(nodeId), QVariant(nodeId));
     }
