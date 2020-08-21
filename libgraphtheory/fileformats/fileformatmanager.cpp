@@ -144,7 +144,7 @@ void FileFormatManager::loadBackends()
 
 FileFormatInterface * FileFormatManager::backendByExtension(const QString &ext)
 {
-    QString suffix = ext.section('.', -1); // get suffix
+    QString suffix = "*." + ext.section('.', -1); // get suffix
     if (suffix.isEmpty()) {
         qCWarning(GRAPHTHEORY_FILEFORMAT) << "File does not contain extension, falling back to default file format";
         return defaultBackend();
