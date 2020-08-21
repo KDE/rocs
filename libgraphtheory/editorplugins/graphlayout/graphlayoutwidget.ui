@@ -204,38 +204,5 @@
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>mainButtons</sender>
-   <signal>accepted()</signal>
-   <receiver>GraphLayoutWidget</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>mainButtons</sender>
-   <signal>rejected()</signal>
-   <receiver>GraphLayoutWidget</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
