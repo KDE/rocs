@@ -55,6 +55,7 @@ void TestRocs2FileFormat::documentTypesTest()
     document->edgeTypes().first()->style()->setPropertyNamesVisible(true);
     document->edgeTypes().first()->addDynamicProperty("label");
     document->edgeTypes().first()->setDirection(EdgeType::Bidirectional);
+    QCOMPARE(document->edgeTypes().count(), 2); // 2 = default type + custom type
 
     // create exporter plugin
     Rocs2FileFormat serializer(this, QList<QVariant>());
@@ -79,13 +80,19 @@ void TestRocs2FileFormat::documentTypesTest()
     QCOMPARE(importDocument->nodeTypes().first()->style()->color().name(), QString("#ff0000"));
 
     // test edge type
-    QCOMPARE(importDocument->edgeTypes().count(), 1);
-    QCOMPARE(importDocument->edgeTypes().first()->id(), 1);
-    QCOMPARE(importDocument->edgeTypes().first()->name(), QString("testName"));
-    QCOMPARE(importDocument->edgeTypes().first()->style()->color().name(), QString("#ff0000"));
-    QCOMPARE(importDocument->edgeTypes().first()->style()->isVisible(), false);
-    QCOMPARE(importDocument->edgeTypes().first()->style()->isPropertyNamesVisible(), true);
-    QCOMPARE(importDocument->edgeTypes().first()->direction(), EdgeType::Bidirectional);
+    QCOMPARE(importDocument->edgeTypes().count(), 2);
+    for (const EdgeTypePtr &type : importDocument->edgeTypes()) {
+        auto iter = std::find_if(document->edgeTypes().cbegin(), document->edgeTypes().cend(), [type](const EdgeTypePtr &testType) {
+            return testType->id() == type->id();
+        });
+        QVERIFY(iter != document->edgeTypes().cend());
+        QCOMPARE(type->id(), (*iter)->id());
+        QCOMPARE(type->name(), (*iter)->name());
+        QCOMPARE(type->style()->color().name(), (*iter)->style()->color().name());
+        QCOMPARE(type->style()->isVisible(), (*iter)->style()->isVisible());
+        QCOMPARE(type->style()->isPropertyNamesVisible(), (*iter)->style()->isPropertyNamesVisible());
+        QCOMPARE(type->direction(), (*iter)->direction());
+    }
 }
 
 // test if nodes, edges, and the graph structure itself is re-imported correctly
