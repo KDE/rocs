@@ -163,7 +163,7 @@ void TestGraphOperations::testEdgeTypeCreateDelete()
     QVERIFY(typeB->id() != -1);
 
     // check that 2 created types + default type exist
-    QCOMPARE(document->edgeTypes().length(), 2);
+    QCOMPARE(document->edgeTypes().length(), 3);
 
     // check changing of node type of a node
     QCOMPARE(edge->type(), typeA);
@@ -175,7 +175,7 @@ void TestGraphOperations::testEdgeTypeCreateDelete()
     QCOMPARE(document->edges(typeB).length(),  1);
 
     typeB->destroy();
-    QCOMPARE(document->edgeTypes().length(), 1);
+    QCOMPARE(document->edgeTypes().length(), 2);
     typeB.reset();
     QCOMPARE(document->edges().length(), 0);
     document->destroy();
