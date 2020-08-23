@@ -27,6 +27,7 @@
 #include "edgetypestyle.h"
 #include "nodetypestyle.h"
 #include "logging_p.h"
+#include <algorithm>
 #include <KLocalizedString>
 #include <KPluginFactory>
 #include <QJsonDocument>
@@ -107,13 +108,24 @@ void Rocs2FileFormat::readFile()
     QJsonArray edgeTypesJson = jsonObj["EdgeTypes"].toArray();
     for (int index = 0; index < edgeTypesJson.count(); ++index) {
         QJsonObject typeJson = edgeTypesJson.at(index).toObject();
-        EdgeTypePtr type = EdgeType::create(document);
-        type->setId(typeJson["Id"].toInt());
+        EdgeTypePtr type;
+
+        // if type ID already is in use, replace it
+        QList<EdgeTypePtr> types = document->edgeTypes();
+        auto iter = std::find_if(types.cbegin(), types.cend(), [typeJson](const EdgeTypePtr &testType) {
+            return testType->id() == typeJson["Id"].toInt();
+        });
+        if (types.cend() != iter) {
+            type = *iter;
+        } else {
+            type = EdgeType::create(document);
+            type->setId(typeJson["Id"].toInt());
+        }
         type->setName(typeJson["Name"].toString());
+        type->setDirection(direction(typeJson["Direction"].toString()));
         type->style()->setColor(QColor(typeJson["Color"].toString()));
         type->style()->setVisible(typeJson["Visible"].toBool());
         type->style()->setPropertyNamesVisible(typeJson["PropertyNamesVisible"].toBool());
-        type->setDirection(direction(typeJson["Direction"].toString()));
 
         QJsonArray propertiesJson = typeJson["Properties"].toArray();
         for (int pIndex = 0; pIndex < propertiesJson.count(); ++pIndex) {
