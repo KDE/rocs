@@ -254,6 +254,8 @@ qreal squareSideRandomPlacementHeuristic(const qreal radius, const int numberOfC
     return qSqrt(15.59 * numberOfCircles - 21.32) * radius;   
 }
 
+/* Maps the nodes in a node list to indexes, starting from the index 0.
+ */
 QMap<NodePtr, int> mapNodesToIndexes(const NodeList& nodes)
 {
     int nextIndex = 0;
@@ -277,6 +279,10 @@ QVector<RemappedEdge> getRemappedEdges(const EdgeList& edges,
     return remappedEdges;
 }
 
+/* 
+ * Extracts the graph from a GraphDocument to a representation that is more convenient for
+ * the graph layout algorithms. 
+ */
 RemappedGraph remapGraph(const GraphDocumentPtr document) {
     RemappedGraph remappedGraph;
     remappedGraph.numberOfNodes = document->nodes().size();
@@ -290,6 +296,11 @@ RemappedGraph remapGraph(const GraphDocumentPtr document) {
     return remappedGraph;
 }
 
+/* Updates the positions of the nodes in a NodeList.
+ *
+ * For performance reasons, this should not be done all the time.
+ * Every time a coordinate of a node changes, a Qt signal is emitted.
+ */
 void moveNodes(const NodeList& nodes, const QMap<NodePtr, int>& nodeToIndexMap,
                const QVector<QPointF>& positions)
 {
@@ -301,6 +312,8 @@ void moveNodes(const NodeList& nodes, const QMap<NodePtr, int>& nodeToIndexMap,
     }
 }
 
+/* Extracts the current positions of the nodes in a NodeList.
+ */
 QVector<QPointF> getCurrentPositions(const NodeList& nodes,
                                     const QMap<NodePtr, int>& nodeToIndexMap)
 {
@@ -313,11 +326,16 @@ QVector<QPointF> getCurrentPositions(const NodeList& nodes,
 }
 
 
+/* Computes a unit vector with direction chosen at random.
+ * All the directions have the same probability of being chosen.
+ */
 QVector2D randomDirection(QRandomGenerator& randomGenerator) {
     const qreal angle = randomGenerator.bounded(2 * M_PI);
     return QVector2D(qCos(angle), qSin(angle));
 }
 
+/* Given point, computes the closest point to it that lies inside the specified rectangle.
+ */
 QPointF projectIntoRectangle(const QPointF& point, const qreal minX, const qreal maxX,
                                const qreal& minY, const qreal& maxY)
 {
@@ -445,6 +463,10 @@ QVector<QPointF> forceBasedLayout(const RemappedGraph& graph, const qreal areaFa
     return currentPositions;
 }
 
+/* Randomly assigns positions to the nodes of a graph. The positions of the nodes are
+ * chosen independently from each other with uniform probability inside the specified
+ * rectangle.
+ */
 QVector<QPointF> randomLayout(const RemappedGraph& graph, const qreal minX, const qreal maxX,
                               const qreal minY, const qreal maxY, QRandomGenerator& randomGenerator)
 {
@@ -458,6 +480,9 @@ QVector<QPointF> randomLayout(const RemappedGraph& graph, const qreal minX, cons
     return positions;
 }
 
+/* Translates de nodes of a graph so that the graph touches the left and the upper sides of the
+ * specified rectangle.
+ */
 void translateGraphToUpperLeftCorner(const qreal minX, const qreal maxX, const qreal minY,
                                     const qreal maxY, QVector<QPointF>& positions)
 {
