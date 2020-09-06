@@ -90,8 +90,8 @@ if(KF5DocTools_FOUND)
     ecm_optional_add_subdirectory(doc)
 endif()
 
+ki18n_install(po)
 set_package_properties(Boost PROPERTIES DESCRIPTION "Boost C++ Libraries" URL "https://www.boost.org")
 feature_summary(WHAT ALL)
 
-ki18n_install(po)
 install(FILES org.kde.rocs.appdata.xml DESTINATION ${CMAKE_INSTALL_METAINFODIR})
