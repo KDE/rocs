@@ -94,7 +94,6 @@ target_link_libraries(rocs
         KF5::Archive
         KF5::CoreAddons
         KF5::Crash
-        KF5::Declarative
         KF5::I18n
         KF5::ItemViews
         KF5::Parts

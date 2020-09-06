@@ -59,12 +59,11 @@ find_package(Qt5 5.11 REQUIRED NO_MODULE COMPONENTS
     Test
     XmlPatterns
 )
-find_package(KF5 5.15 REQUIRED COMPONENTS
+find_package(KF5 5.17 REQUIRED COMPONENTS
     Archive
     Config
     CoreAddons
     Crash
-    Declarative
     I18n
     ItemViews
     TextEditor
@@ -83,12 +82,6 @@ add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_KEYWORDS)
-
-if(NOT KF5Declarative_VERSION VERSION_LESS "5.45")
-    add_definitions(-DKDECLARATIVE_HAVE_SETCONTEXT=1)
-else()
-    add_definitions(-DKDECLARATIVE_HAVE_SETCONTEXT=0)
-endif()
 
 ecm_optional_add_subdirectory(libgraphtheory)
 ecm_optional_add_subdirectory(src)

@@ -24,8 +24,6 @@
 #include "edge.h"
 #include "editor.h"
 #include "view.h"
-
-#include <KDeclarative/KDeclarative>
 #include <QApplication>
 #include <QObject>
 #include <QQmlComponent>

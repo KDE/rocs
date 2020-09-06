@@ -25,8 +25,6 @@ include_directories(
     ./
 )
 
-add_definitions(-DTRANSLATION_DOMAIN=\"libgraphtheory\")
-
 set(graphtheory_SRCS
     edge.cpp
     edgetype.cpp
@@ -88,7 +86,6 @@ target_link_libraries(rocsgraphtheory
         Qt5::ScriptTools
         KF5::I18n
         KF5::ItemViews
-        KF5::Declarative
         KF5::XmlGui
 )
 

@@ -34,8 +34,8 @@
 #include "dialogs/edgeproperties.h"
 #include "logging_p.h"
 
-#include <KDeclarative/KDeclarative>
-
+#include <QQmlApplicationEngine>
+#include <KLocalizedContext>
 #include <QObject>
 #include <QQmlComponent>
 #include <QQmlContext>
@@ -81,16 +81,10 @@ View::View(QWidget *parent)
     // workaround for QTBUG-40765
     qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
 
-    // prepare QML engine to be globally used
-    KDeclarative::KDeclarative kdeclarative;
-    kdeclarative.setTranslationDomain("libgraphtheory");
-    kdeclarative.setDeclarativeEngine(engine());
-#if KDECLARATIVE_HAVE_SETCONTEXT
-    kdeclarative.setupContext();
-    KDeclarative::KDeclarative::setupEngine(engine());
-#else
-    kdeclarative.setupBindings();
-#endif
+    // prepare i18n
+    auto context = new KLocalizedContext(this);
+    context->setTranslationDomain("libgraphtheory");
+    engine()->rootContext()->setContextObject(context);
 
     qmlRegisterType<GraphTheory::Node>("org.kde.rocs.graphtheory", 1, 0, "Node");
     qmlRegisterType<GraphTheory::Edge>("org.kde.rocs.graphtheory", 1, 0, "Edge");
