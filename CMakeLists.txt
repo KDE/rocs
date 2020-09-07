@@ -97,6 +97,7 @@ if(KF5DocTools_FOUND)
     ecm_optional_add_subdirectory(doc)
 endif()
 
+ki18n_install(po)
 set_package_properties(Boost PROPERTIES DESCRIPTION "Boost C++ Libraries" URL "https://www.boost.org")
 feature_summary(WHAT ALL)
 
