@@ -91,6 +91,9 @@ if(KF5DocTools_FOUND)
 endif()
 
 ki18n_install(po)
+if (KF5DocTools_FOUND)
+    kdoctools_install(po)
+endif()
 set_package_properties(Boost PROPERTIES DESCRIPTION "Boost C++ Libraries" URL "https://www.boost.org")
 feature_summary(WHAT ALL)
 
