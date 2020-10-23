@@ -20,7 +20,6 @@
 
 #include "editor.h"
 #include "typenames.h"
-#include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
 #include "fileformats/fileformatmanager.h"

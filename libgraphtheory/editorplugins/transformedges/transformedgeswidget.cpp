@@ -19,7 +19,6 @@
  */
 
 #include "transformedgeswidget.h"
-#include "typenames.h"
 #include "graphdocument.h"
 #include "edge.h"
 #include "modifiers/topology.h"

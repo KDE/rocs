@@ -19,15 +19,12 @@
  */
 
 #include "grapheditorwidget.h"
-#include "libgraphtheory/typenames.h"
 #include "libgraphtheory/graphdocument.h"
 #include "libgraphtheory/view.h"
-#include "project/project.h"
 #include <KLocalizedString>
 #include <QInputDialog>
 #include <QTabWidget>
 #include <QVBoxLayout>
-#include <QWidget>
 #include <QDebug>
 
 using namespace GraphTheory;

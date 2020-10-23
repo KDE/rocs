@@ -21,7 +21,6 @@
 #include "gmlgrammarhelper.h"
 #include "gmlgrammar.h"
 #include "graphdocument.h"
-#include "node.h"
 #include "edge.h"
 #include "logging_p.h"
 #include <QFile>

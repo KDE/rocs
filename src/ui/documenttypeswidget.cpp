@@ -21,10 +21,7 @@
 #include "documenttypeswidget.h"
 #include "nodetypesdelegate.h"
 #include "edgetypesdelegate.h"
-#include "libgraphtheory/models/nodetypemodel.h"
-#include "libgraphtheory/models/edgetypemodel.h"
 #include "libgraphtheory/nodetype.h"
-#include "libgraphtheory/edgetype.h"
 #include <KLocalizedString>
 #include <KWidgetItemDelegate>
 #include <QGridLayout>

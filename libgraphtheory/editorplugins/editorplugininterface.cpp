@@ -21,8 +21,6 @@
 #include "editorplugins/editorplugininterface.h"
 #include "logging_p.h"
 
-#include "typenames.h"
-#include <QObject>
 
 using namespace GraphTheory;
 

@@ -19,9 +19,6 @@
  */
 
 #include "view.h"
-#include "edgetype.h"
-#include "nodetype.h"
-#include "edge.h"
 #include "models/nodemodel.h"
 #include "models/edgemodel.h"
 #include "models/nodepropertymodel.h"
@@ -36,11 +33,9 @@
 
 #include <QQmlApplicationEngine>
 #include <KLocalizedContext>
-#include <QObject>
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQmlEngine>
-#include <QQuickWidget>
 #include <QPointer>
 #include <QStandardPaths>
 

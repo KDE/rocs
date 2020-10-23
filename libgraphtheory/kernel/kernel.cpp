@@ -19,7 +19,6 @@
  */
 
 #include "kernel.h"
-#include "graphdocument.h"
 #include "documentwrapper.h"
 #include "nodewrapper.h"
 #include "edgewrapper.h"
@@ -27,7 +26,6 @@
 #include "kernel/modules/console/consolemodule.h"
 
 #include <KLocalizedString>
-#include <QScriptEngine>
 #include <QScriptEngineDebugger>
 
 using namespace GraphTheory;

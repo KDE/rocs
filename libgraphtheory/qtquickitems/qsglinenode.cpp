@@ -21,7 +21,6 @@
 #include "qsglinenode.h"
 #include "qsgarrowheadnode.h"
 #include <QSGGeometry>
-#include <QSGFlatColorMaterial>
 #include <QColor>
 
 using namespace GraphTheory;

@@ -21,9 +21,7 @@
 #include "documentwrapper.h"
 #include "nodewrapper.h"
 #include "edgewrapper.h"
-#include "graphdocument.h"
 #include "nodetype.h"
-#include "edge.h"
 #include <KLocalizedString>
 #include <QDebug>
 

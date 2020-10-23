@@ -19,7 +19,6 @@
 */
 
 #include "tgffileformat.h"
-#include "fileformats/fileformatinterface.h"
 #include "modifiers/topology.h"
 #include "graphdocument.h"
 #include "node.h"

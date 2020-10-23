@@ -19,7 +19,6 @@
  */
 
 #include "edgetypesdelegate.h"
-#include "libgraphtheory/edgetype.h"
 #include "libgraphtheory/dialogs/edgetypeproperties.h"
 #include "libgraphtheory/models/edgetypemodel.h"
 #include <KColorButton>

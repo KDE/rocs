@@ -18,7 +18,6 @@
 
 #include "dotgrammar.h"
 #include "dotgrammarhelper.h"
-#include "typenames.h"
 #include "graphdocument.h"
 #include "node.h"
 #include "logging_p.h"

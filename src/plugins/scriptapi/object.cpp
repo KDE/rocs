@@ -20,7 +20,6 @@
 
 
 #include "object.h"
-#include <QStringList>
 #include <QDebug>
 
 Object::Object(QObject* parent)

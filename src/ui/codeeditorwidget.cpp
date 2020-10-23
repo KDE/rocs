@@ -19,7 +19,6 @@
  */
 
 #include "codeeditorwidget.h"
-#include "project/project.h"
 #include <KTextEditor/View>
 #include <KTextEditor/Editor>
 #include <KTextEditor/Document>

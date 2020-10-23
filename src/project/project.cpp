@@ -19,9 +19,7 @@
  */
 
 #include "project.h"
-#include "libgraphtheory/typenames.h"
 #include "libgraphtheory/graphdocument.h"
-#include "libgraphtheory/editor.h"
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
@@ -32,9 +30,7 @@
 #include <QUrl>
 #include <QDir>
 #include <QHash>
-#include <QString>
 #include <QMap>
-#include <QList>
 #include <QSaveFile>
 #include <QTemporaryFile>
 #include <QTemporaryDir>

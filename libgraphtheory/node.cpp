@@ -19,14 +19,12 @@
  */
 
 #include "node.h"
-#include "graphdocument.h"
 #include "nodetype.h"
 #include "edge.h"
 #include "nodetypestyle.h"
 #include "logging_p.h"
 
 #include <QPointF>
-#include <QColor>
 
 using namespace GraphTheory;
 

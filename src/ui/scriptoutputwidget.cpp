@@ -19,7 +19,6 @@
  */
  
 #include "scriptoutputwidget.h"
-#include <QWidget>
 #include <QDebug>
 #include <QIcon>
 

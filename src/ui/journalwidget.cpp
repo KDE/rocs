@@ -20,7 +20,6 @@
 
 #include "journalwidget.h"
 #include "project/project.h"
-#include "ui_journalwidget.h"
 #include <QSaveFile>
 #include <QDebug>
 #include <QTextStream>

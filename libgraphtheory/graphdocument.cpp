@@ -20,8 +20,6 @@
 
 #include "graphdocument.h"
 #include "view.h"
-#include "edgetype.h"
-#include "nodetype.h"
 #include "edge.h"
 #include "fileformats/fileformatmanager.h"
 #include "logging_p.h"

@@ -20,12 +20,10 @@
 
 #include "edgewrapper.h"
 #include "documentwrapper.h"
-#include "graphdocument.h"
 #include "edgetype.h"
 #include "edge.h"
 #include "edgetypestyle.h"
 #include <KLocalizedString>
-#include <QColor>
 #include <QDebug>
 #include <QEvent>
 

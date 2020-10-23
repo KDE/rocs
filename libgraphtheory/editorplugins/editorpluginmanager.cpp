@@ -19,7 +19,6 @@
  */
 
 #include "editorpluginmanager.h"
-#include "editorplugininterface.h"
 #include "logging_p.h"
 
 #include <KPluginMetaData>

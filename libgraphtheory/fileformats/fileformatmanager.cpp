@@ -19,7 +19,6 @@
  */
 
 #include "fileformatmanager.h"
-#include "fileformatinterface.h"
 #include "logging_p.h"
 
 #include <KPluginFactory>

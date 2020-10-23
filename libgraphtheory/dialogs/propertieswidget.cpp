@@ -24,7 +24,6 @@
 #include "nodetype.h"
 #include "models/edgetypepropertymodel.h"
 #include "models/nodetypepropertymodel.h"
-#include "typenames.h"
 #include <KLocalizedString>
 #include <QLayout>
 #include <QGridLayout>

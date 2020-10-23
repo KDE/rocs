@@ -20,10 +20,8 @@
 
 #include "fileformats/fileformatinterface.h"
 
-#include "typenames.h"
 #include "graphdocument.h"
 #include <QStringList>
-#include <QObject>
 #include <QUrl>
 
 using namespace GraphTheory;

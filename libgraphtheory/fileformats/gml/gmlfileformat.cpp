@@ -21,7 +21,6 @@
 #include "gmlfileformat.h"
 #include "gmlgrammarhelper.h"
 #include "gmlgrammar.h"
-#include "fileformats/fileformatinterface.h"
 #include "modifiers/topology.h"
 #include "graphdocument.h"
 #include "node.h"

@@ -19,7 +19,6 @@
  */
 
 #include "tikzfileformat.h"
-#include "fileformats/fileformatinterface.h"
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"

@@ -23,8 +23,6 @@
 #include "rocsversion.h"
 #include "settings.h"
 
-#include "libgraphtheory/editor.h"
-#include "libgraphtheory/editorplugins/editorpluginmanager.h"
 #include "libgraphtheory/kernel/kernel.h"
 #include "libgraphtheory/view.h"
 
