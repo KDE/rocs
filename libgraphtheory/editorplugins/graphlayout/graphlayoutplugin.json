@@ -3,9 +3,21 @@
     "KPlugin": {
         "Category": "Plugins",
         "Description": "This generates graph layouts automatically.",
+        "Description[ca]": "Això genera automàticament les disposicions dels grafs.",
+        "Description[es]": "Esto genera diseños de grafos automáticamente.",
+        "Description[pt]": "Isto gera disposições dos grafos de forma automática.",
+        "Description[sv]": "Skapar graflayouter automatiskt.",
+        "Description[uk]": "Автоматично створює компонування графів.",
+        "Description[x-test]": "xxThis generates graph layouts automatically.xx",
         "Id": "rocs_graphlayoutplugin",
         "License": "GPL",
         "Name": "Graph Layout",
+        "Name[ca]": "Disposició del graf",
+        "Name[es]": "Diseño del gráfico",
+        "Name[pt]": "Disposição de Grafos",
+        "Name[sv]": "Graflayout",
+        "Name[uk]": "Компонування графу",
+        "Name[x-test]": "xxGraph Layoutxx",
         "ServiceTypes": [
             "rocs/editorplugins"
         ],
