@@ -3,6 +3,7 @@
     "KPlugin": {
         "Category": "Plugins",
         "Description": "This generates graph layouts automatically.",
+        "Description[ca@valencia]": "Això genera automàticament les disposicions dels grafs.",
         "Description[ca]": "Això genera automàticament les disposicions dels grafs.",
         "Description[es]": "Esto genera diseños de grafos automáticamente.",
         "Description[nl]": "Dit genereert automatisch indelingen voor grafen.",
@@ -15,6 +16,7 @@
         "Id": "rocs_graphlayoutplugin",
         "License": "GPL",
         "Name": "Graph Layout",
+        "Name[ca@valencia]": "Disposició del graf",
         "Name[ca]": "Disposició del graf",
         "Name[es]": "Diseño del gráfico",
         "Name[nl]": "Indeling grafen",
