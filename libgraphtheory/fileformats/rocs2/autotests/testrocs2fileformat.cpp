@@ -26,7 +26,7 @@
 #include "edge.h"
 #include "edgetypestyle.h"
 #include "nodetypestyle.h"
-#include <QtTest>
+#include <QTest>
 
 using namespace GraphTheory;
 

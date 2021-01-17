@@ -24,7 +24,7 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
-#include <QtTest>
+#include <QTest>
 
 using namespace GraphTheory;
 

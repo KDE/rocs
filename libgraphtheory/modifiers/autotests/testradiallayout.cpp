@@ -25,8 +25,9 @@
 #include "edge.h"
 #include "editor.h"
 #include "modifiers/topology.h"
-#include <QtTest>
+#include <QTest>
 #include <QVector2D>
+#include <math.h>
 
 #include <iostream>
 

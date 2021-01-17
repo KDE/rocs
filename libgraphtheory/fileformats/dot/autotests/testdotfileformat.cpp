@@ -26,8 +26,9 @@
 #include "edge.h"
 #include "logging_p.h"
 #include <string>
-#include <QtTest>
+#include <QTest>
 #include <QUrl>
+#include <QTemporaryFile>
 
 using namespace GraphTheory;
 
