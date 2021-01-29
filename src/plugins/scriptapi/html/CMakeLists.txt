@@ -21,5 +21,5 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-install(FILES objectApi.html DESTINATION ${DATA_INSTALL_DIR}/rocs/plugin/apidoc/)
-install(FILES overview.html DESTINATION ${DATA_INSTALL_DIR}/rocs/plugin/apidoc/)
+install(FILES objectApi.html DESTINATION ${KDE_INSTALL_DATADIR}/rocs/plugin/apidoc/)
+install(FILES overview.html DESTINATION ${KDE_INSTALL_DATADIR}/rocs/plugin/apidoc/)

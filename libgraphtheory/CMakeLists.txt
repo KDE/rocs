@@ -111,7 +111,7 @@ set_target_properties(
 )
 
 install(TARGETS rocsgraphtheory  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel)
+install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${KDE_INSTALL_INCLUDEDIR}/rocs  COMPONENT Devel)
 
 # Boost requires exceptions
 kde_source_files_enable_exceptions(modifiers/topology.cpp modifiers/valueassign.cpp)

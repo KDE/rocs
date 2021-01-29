@@ -106,9 +106,9 @@ target_link_libraries(rocs
 
 ################## INSTALLS ##########################
 install(TARGETS rocs ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-install(PROGRAMS org.kde.rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-install(FILES rocsui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/rocs)
-install(FILES rocs.kcfg DESTINATION ${KCFG_INSTALL_DIR})
+install(PROGRAMS org.kde.rocs.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES rocsui.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/rocs)
+install(FILES rocs.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
 
 ecm_optional_add_subdirectory(plugins/scriptapi)
 ecm_optional_add_subdirectory(autotests)

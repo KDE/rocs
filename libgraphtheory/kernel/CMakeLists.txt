@@ -21,11 +21,11 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-install(FILES kernelapi.xsd DESTINATION ${DATA_INSTALL_DIR}/rocs/schemes)
-install(FILES modules/console/console.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/kernelapi)
-install(FILES modules/document/document.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/kernelapi)
-install(FILES modules/document/node.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/kernelapi)
-install(FILES modules/document/edge.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/kernelapi)
+install(FILES kernelapi.xsd DESTINATION ${KDE_INSTALL_DATADIR}/rocs/schemes)
+install(FILES modules/console/console.xml DESTINATION ${KDE_INSTALL_DATADIR}/rocs/kernelapi)
+install(FILES modules/document/document.xml DESTINATION ${KDE_INSTALL_DATADIR}/rocs/kernelapi)
+install(FILES modules/document/node.xml DESTINATION ${KDE_INSTALL_DATADIR}/rocs/kernelapi)
+install(FILES modules/document/edge.xml DESTINATION ${KDE_INSTALL_DATADIR}/rocs/kernelapi)
 
 # also copy all files for autotests
 file(COPY kernelapi.xsd DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../autotests/kernelapi)

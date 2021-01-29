@@ -97,4 +97,4 @@ endif()
 set_package_properties(Boost PROPERTIES DESCRIPTION "Boost C++ Libraries" URL "https://www.boost.org")
 feature_summary(WHAT ALL)
 
-install(FILES org.kde.rocs.appdata.xml DESTINATION ${CMAKE_INSTALL_METAINFODIR})
+install(FILES org.kde.rocs.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
