@@ -36,6 +36,6 @@ target_link_libraries(rocs2fileformat
         rocsgraphtheory
 )
 
-install(TARGETS rocs2fileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
+install(TARGETS rocs2fileformat DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

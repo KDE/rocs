@@ -110,7 +110,7 @@ set_target_properties(
         SOVERSION ${GRAPHTHEORY_LIB_SOVERSION}
 )
 
-install(TARGETS rocsgraphtheory  ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS rocsgraphtheory  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel)
 
 # Boost requires exceptions

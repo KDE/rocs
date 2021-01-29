@@ -32,6 +32,6 @@ target_link_libraries(tikzfileformat
     rocsgraphtheory
 )
 
-install(TARGETS tikzfileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
+install(TARGETS tikzfileformat DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

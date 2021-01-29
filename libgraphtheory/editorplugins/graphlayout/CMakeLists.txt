@@ -47,4 +47,4 @@ target_link_libraries(graphlayoutplugin
 
 ecm_optional_add_subdirectory(autotests)
 
-install(TARGETS graphlayoutplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)
+install(TARGETS graphlayoutplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/editorplugins)

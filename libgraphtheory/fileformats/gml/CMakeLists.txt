@@ -41,6 +41,6 @@ target_link_libraries(gmlfileformat
 # Boost::spirit requires exceptions
 kde_target_enable_exceptions(gmlfileformat PRIVATE)
 
-install(TARGETS gmlfileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
+install(TARGETS gmlfileformat DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

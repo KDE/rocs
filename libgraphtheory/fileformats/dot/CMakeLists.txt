@@ -41,6 +41,6 @@ target_link_libraries(dotfileformat
         rocsgraphtheory
 )
 
-install(TARGETS dotfileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
+install(TARGETS dotfileformat DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

@@ -47,4 +47,4 @@ target_link_libraries(generategraphplugin
 
 ecm_optional_add_subdirectory(autotests)
 
-install(TARGETS generategraphplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)
+install(TARGETS generategraphplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/editorplugins)

@@ -40,4 +40,4 @@ target_link_libraries(transformedgesplugin
 
 ecm_optional_add_subdirectory(autotests)
 
-install(TARGETS transformedgesplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)
+install(TARGETS transformedgesplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/editorplugins)

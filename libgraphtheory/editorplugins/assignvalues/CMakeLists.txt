@@ -41,4 +41,4 @@ target_link_libraries(assignvaluesplugin
 kde_source_files_enable_exceptions(assignvalueswidget.cpp)
 ecm_optional_add_subdirectory(autotests)
 
-install(TARGETS assignvaluesplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)
+install(TARGETS assignvaluesplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/editorplugins)
