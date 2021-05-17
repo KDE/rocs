@@ -22,8 +22,7 @@ class FileFormatManagerPrivate;
 
 /** \class FileFormatManager
  * The FileFormatManager provides access to all graph file format plugins. The backend manager loads
- * plugins on creation. For loading, the path "$QT_PLUGIN_PATH/rocs/fileformats" is searched for all
- * plugins of ServiceType "rocs/graphtheory/fileformat".
+ * plugins on creation. For loading, the path "$QT_PLUGIN_PATH/rocs/fileformats" is searched for all plugins.
  */
 class GRAPHTHEORY_EXPORT FileFormatManager : public QObject
 {

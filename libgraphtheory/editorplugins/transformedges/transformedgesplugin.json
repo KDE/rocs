@@ -67,9 +67,6 @@
         "Name[x-test]": "xxTransform Edgesxx",
         "Name[zh_CN]": "转换边",
         "Name[zh_TW]": "轉換邊緣",
-        "ServiceTypes": [
-            "rocs/editorplugins"
-        ],
         "Version": "0.2"
     }
 }

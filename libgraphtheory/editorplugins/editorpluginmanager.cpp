@@ -52,28 +52,16 @@ QList<EditorPluginInterface*> EditorPluginManager::plugins() const
 void EditorPluginManager::loadPlugins()
 {
     // remove all present plugins
-    foreach(EditorPluginInterface *f, d->m_plugins) {
-        delete f;
-    }
+    qDeleteAll(d->m_plugins);
     d->m_plugins.clear();
 
-    // dirs to check for plugins
-    QStringList dirsToCheck;
-    foreach (const QString &directory, QCoreApplication::libraryPaths()) {
-        dirsToCheck << directory + QDir::separator() + "rocs/editorplugins";
-    }
-
     // load plugins
-    foreach (const QString &dir, dirsToCheck) {
-        QVector<KPluginMetaData> metadataList = KPluginLoader::findPlugins(dir,[=](const KPluginMetaData &data){
-            return data.serviceTypes().contains("rocs/editorplugins");
-        });
-        for (const auto &metadata : metadataList) {
-            KPluginFactory *factory = KPluginLoader(metadata.fileName()).factory();
-            EditorPluginInterface *plugin = factory->create<EditorPluginInterface>(this);
-            plugin->setDisplayName(metadata.name());
-            d->m_plugins.append(plugin);
-            qCDebug(GRAPHTHEORY_GENERAL) << "Loaded plugin:" << metadata.name();
-        }
+    const QVector<KPluginMetaData> metadataList = KPluginLoader::findPlugins(QStringLiteral("rocs/editorplugins"));
+    for (const auto &metadata : metadataList) {
+        KPluginFactory *factory = KPluginLoader(metadata.fileName()).factory();
+        EditorPluginInterface *plugin = factory->create<EditorPluginInterface>(this);
+        plugin->setDisplayName(metadata.name());
+        d->m_plugins.append(plugin);
+        qCDebug(GRAPHTHEORY_GENERAL) << "Loaded plugin:" << metadata.name();
     }
 }

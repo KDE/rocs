@@ -60,9 +60,6 @@
         "Name[x-test]": "xxGML File Formatxx",
         "Name[zh_CN]": "GML 文件格式",
         "Name[zh_TW]": "GML 檔案格式",
-        "ServiceTypes": [
-            "rocs/graphtheory/fileformat"
-        ],
         "Version": "0.1"
     }
 }

@@ -71,9 +71,6 @@
         "Name[x-test]": "xxGenerate Graphxx",
         "Name[zh_CN]": "生成图",
         "Name[zh_TW]": "產生圖形",
-        "ServiceTypes": [
-            "rocs/editorplugins"
-        ],
         "Version": "0.2"
     }
 }

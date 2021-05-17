@@ -88,16 +88,11 @@ void FileFormatManager::loadBackends()
     }
     d->backends.clear();
 
-    QVector<KPluginMetaData> metadataList = KPluginLoader::findPlugins(
-        "rocs/fileformats",
-        [](const KPluginMetaData &data){
-            return data.serviceTypes().contains("rocs/graphtheory/fileformat");
-        }
-    );
+    const QVector<KPluginMetaData> metadataList = KPluginLoader::findPlugins("rocs/fileformats");
 
     QPluginLoader loader;
 
-    foreach (const auto &metadata, metadataList) {
+    for (const auto &metadata : metadataList) {
         loader.setFileName(metadata.fileName());
 
         qCDebug(GRAPHTHEORY_FILEFORMAT) << "Load Plugin: " << metadata.name();

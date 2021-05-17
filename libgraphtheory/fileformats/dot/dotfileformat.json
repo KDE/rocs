@@ -60,9 +60,6 @@
         "Name[x-test]": "xxDOT Graph File Formatxx",
         "Name[zh_CN]": "DOT 图形文件格式",
         "Name[zh_TW]": "DOT 圖形檔案格式",
-        "ServiceTypes": [
-            "rocs/graphtheory/fileformat"
-        ],
         "Version": "0.1"
     }
 }

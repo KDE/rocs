@@ -38,9 +38,6 @@
         "Name[sv]": "Graflayout",
         "Name[uk]": "Компонування графу",
         "Name[x-test]": "xxGraph Layoutxx",
-        "ServiceTypes": [
-            "rocs/editorplugins"
-        ],
         "Version": "0.1"
     }
 }

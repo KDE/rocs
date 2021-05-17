@@ -59,9 +59,6 @@
         "Name[x-test]": "xxTGF Graph File Formatxx",
         "Name[zh_CN]": "TGF 图形文件格式",
         "Name[zh_TW]": "TGF 圖形檔案格式",
-        "ServiceTypes": [
-            "rocs/graphtheory/fileformat"
-        ],
         "Version": "0.1"
     }
 }
