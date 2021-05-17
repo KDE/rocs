@@ -12,7 +12,7 @@ set(dotformat_SRCS
 # Boost requires exceptions
 kde_source_files_enable_exceptions(dotgrammar.cpp)
 
-add_library(dotfileformat MODULE ${dotformat_SRCS})
+kcoreaddons_add_plugin(dotfileformat SOURCES ${dotformat_SRCS} INSTALL_NAMESPACE "rocs/fileformats")
 
 target_link_libraries(dotfileformat
     PUBLIC
@@ -21,7 +21,5 @@ target_link_libraries(dotfileformat
         KF5::I18n
         rocsgraphtheory
 )
-
-install(TARGETS dotfileformat DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

@@ -8,10 +8,7 @@ set(assignvalues_SRCS
     ../../logging.cpp
 )
 ki18n_wrap_ui(assignvalues_SRCS assignvalueswidget.ui)
-add_library(assignvaluesplugin
-    MODULE
-    ${assignvalues_SRCS}
-)
+kcoreaddons_add_plugin(assignvaluesplugin SOURCES ${assignvalues_SRCS} INSTALL_NAMESPACE "rocs/editorplugins")
 
 target_link_libraries(assignvaluesplugin
     PUBLIC
@@ -21,5 +18,3 @@ target_link_libraries(assignvaluesplugin
 
 kde_source_files_enable_exceptions(assignvalueswidget.cpp)
 ecm_optional_add_subdirectory(autotests)
-
-install(TARGETS assignvaluesplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/editorplugins)

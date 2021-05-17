@@ -7,7 +7,7 @@ set(rocs1format_SRCS
     ../../logging.cpp
 )
 
-add_library(rocs1fileformat MODULE ${rocs1format_SRCS})
+kcoreaddons_add_plugin(rocs1fileformat SOURCES ${rocs1format_SRCS} INSTALL_NAMESPACE "rocs/fileformats")
 
 target_link_libraries(rocs1fileformat
     PUBLIC
@@ -16,7 +16,5 @@ target_link_libraries(rocs1fileformat
         KF5::I18n
         rocsgraphtheory
 )
-
-install(TARGETS rocs1fileformat DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

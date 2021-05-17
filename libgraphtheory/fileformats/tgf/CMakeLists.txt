@@ -7,12 +7,10 @@ set(tgfformat_SRCS
     ../../logging.cpp
 )
 
-add_library(tgffileformat MODULE ${tgfformat_SRCS})
+kcoreaddons_add_plugin(tgffileformat SOURCES ${tgfformat_SRCS} INSTALL_NAMESPACE "rocs/fileformats")
 
 target_link_libraries(tgffileformat
     rocsgraphtheory
 )
-
-install(TARGETS tgffileformat DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

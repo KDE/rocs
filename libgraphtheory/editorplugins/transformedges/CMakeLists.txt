@@ -8,10 +8,8 @@ set(transformedges_SRCS
     ../../logging.cpp
 )
 ki18n_wrap_ui(transformedges_SRCS transformedgeswidget.ui)
-add_library(transformedgesplugin
-    MODULE
-    ${transformedges_SRCS}
-)
+
+kcoreaddons_add_plugin(transformedgesplugin SOURCES ${transformedges_SRCS} INSTALL_NAMESPACE "rocs/editorplugins")
 
 target_link_libraries(transformedgesplugin
     PUBLIC
@@ -20,5 +18,3 @@ target_link_libraries(transformedgesplugin
 )
 
 ecm_optional_add_subdirectory(autotests)
-
-install(TARGETS transformedgesplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/editorplugins)

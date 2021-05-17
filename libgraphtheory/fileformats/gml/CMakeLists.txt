@@ -9,7 +9,7 @@ set(gmlformat_SRCS
     ../../logging.cpp
 )
 
-add_library(gmlfileformat MODULE ${gmlformat_SRCS})
+kcoreaddons_add_plugin(gmlfileformat SOURCES ${gmlformat_SRCS} INSTALL_NAMESPACE "rocs/fileformats")
 
 target_link_libraries(gmlfileformat
     PUBLIC
@@ -21,7 +21,5 @@ target_link_libraries(gmlfileformat
 
 # Boost::spirit requires exceptions
 kde_target_enable_exceptions(gmlfileformat PRIVATE)
-
-install(TARGETS gmlfileformat DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

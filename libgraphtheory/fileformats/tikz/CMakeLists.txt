@@ -7,12 +7,10 @@ set(tikzformat_SRCS
     ../../logging.cpp
 )
 
-add_library(tikzfileformat MODULE ${tikzformat_SRCS})
+kcoreaddons_add_plugin(tikzfileformat SOURCES ${tikzformat_SRCS} INSTALL_NAMESPACE "rocs/fileformats")
 
 target_link_libraries(tikzfileformat
     rocsgraphtheory
 )
-
-install(TARGETS tikzfileformat DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

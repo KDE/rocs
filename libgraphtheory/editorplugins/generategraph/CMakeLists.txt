@@ -15,10 +15,7 @@ set(generategraph_SRCS
 kde_source_files_enable_exceptions(generategraphplugin.cpp)
 
 ki18n_wrap_ui(generategraph_SRCS generategraphwidget.ui)
-add_library(generategraphplugin
-    MODULE
-    ${generategraph_SRCS}
-)
+kcoreaddons_add_plugin(generategraphplugin SOURCES ${generategraph_SRCS} INSTALL_NAMESPACE "rocs/editorplugins")
 
 target_link_libraries(generategraphplugin
     PUBLIC
@@ -27,5 +24,3 @@ target_link_libraries(generategraphplugin
 )
 
 ecm_optional_add_subdirectory(autotests)
-
-install(TARGETS generategraphplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/editorplugins)
