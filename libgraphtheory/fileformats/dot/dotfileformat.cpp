@@ -53,7 +53,6 @@ void DotFileFormat::readFile()
     GraphDocumentPtr document = GraphDocument::create();
     setGraphDocument(document);
 
-    QList < QPair<QString, QString> > edges;
     QFile fileHandle(file().toLocalFile());
     if (!fileHandle.open(QFile::ReadOnly)) {
         setError(CouldNotOpenFile, i18n("Could not open file \"%1\" in read mode: %2", file().toLocalFile(), fileHandle.errorString()));
@@ -73,7 +72,6 @@ void DotFileFormat::writeFile(GraphDocumentPtr document)
 {
     // prepare file handle for output
     QFile fileHandle(file().toLocalFile());
-    QVariantList subgraphs;
     if (!fileHandle.open(QFile::WriteOnly | QFile::Text)) {
         setError(FileIsReadOnly, i18n("Cannot open file %1 to write document. Error: %2", file().fileName(), fileHandle.errorString()));
         return;
@@ -81,9 +79,6 @@ void DotFileFormat::writeFile(GraphDocumentPtr document)
     QTextStream out(&fileHandle);
 
     out << "digraph {\n";
-
-    // create fast access list of already processed nodes: serialize each node only once
-    QHash<int, bool> processedData;
 
     // process all data elements
     for (const NodePtr &node : document->nodes()) {
