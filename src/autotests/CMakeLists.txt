@@ -12,6 +12,7 @@ set(testproject_SRCS
 )
 add_executable(TestProject ${testproject_SRCS})
 add_test(NAME TestProject COMMAND TestProject)
+target_compile_definitions(TestProject PRIVATE ADDITIONAL_PLUGIN_DIR="${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 ecm_mark_as_test(TestProject)
 target_link_libraries(TestProject
     rocsgraphtheory

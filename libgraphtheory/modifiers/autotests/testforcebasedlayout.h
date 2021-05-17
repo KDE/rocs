@@ -8,13 +8,17 @@
 #define TESTFORCEBASEDLAYOUT_H
 
 #include <QObject>
+#include <QCoreApplication>
 #include <QVector>
 #include <QUrl>
 #include "typenames.h"
 
 class ForceBasedLayoutTest : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
+public:
+    ForceBasedLayoutTest() { QCoreApplication::addLibraryPath(ADDITIONAL_PLUGIN_DIR); }
+
 private:
     void findGraphFiles(const QString& path, QVector<QUrl>& files);
 private slots:

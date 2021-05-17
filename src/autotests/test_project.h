@@ -8,10 +8,13 @@
 #define TESTPROJECT_H
 
 #include <QObject>
+#include <QCoreApplication>
 
 class TestProject : public QObject
 {
     Q_OBJECT
+public:
+    TestProject() { QCoreApplication::addLibraryPath(ADDITIONAL_PLUGIN_DIR); }
 
 private Q_SLOTS:
     void projectOperations();

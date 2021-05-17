@@ -19,6 +19,7 @@ target_link_libraries(TestForceBasedLayout
     rocsgraphtheory
     Qt5::Test
 )
+target_compile_definitions(TestForceBasedLayout PRIVATE ADDITIONAL_PLUGIN_DIR="${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 set(testradiallayout_SRCS
     testradiallayout.cpp
@@ -32,6 +33,7 @@ target_link_libraries(TestRadialLayout
     rocsgraphtheory
     Qt5::Test
 )
+target_compile_definitions(TestRadialLayout PRIVATE ADDITIONAL_PLUGIN_DIR="${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 
 set(qualitybenchmark_SRCS
@@ -44,3 +46,4 @@ add_executable(QualityBenchmark ${qualitybenchmark_SRCS})
 target_link_libraries(QualityBenchmark
     rocsgraphtheory
 )
+target_compile_definitions(QualityBenchmark PRIVATE ADDITIONAL_PLUGIN_DIR="${CMAKE_BINARY_DIR}/bin/plugins")

@@ -8,6 +8,7 @@
 #define LAYOUTEVALUATOR_H
 
 #include <QObject>
+#include <QCoreApplication>
 #include <QString>
 #include <QVector>
 #include <iostream>
@@ -25,6 +26,9 @@ using namespace GraphTheory;
 class LayoutEvaluator : public QObject
 {
     Q_OBJECT;
+public:
+    LayoutEvaluator() { QCoreApplication::addLibraryPath(ADDITIONAL_PLUGIN_DIR); }
+
 private:
     MetricSummarizer numberOfEdgeCrossesMetric_m;
     MetricSummarizer numberOfEdgesWithCrossesMetric_m;
