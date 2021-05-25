@@ -15,7 +15,7 @@
         "Description[fr]": "Assigne des valeurs aux arêtes et aux sommets d'un graphe.",
         "Description[gl]": "Asigna valores ás arestas e vértices do gráfico.",
         "Description[it]": "Assegna valori ad archi e nodi di un grafo.",
-        "Description[ko]": "그래프의 선과 점에 값을 할당합니다.",
+        "Description[ko]": "그래프의 변과 꼭짓점에 값을 할당합니다.",
         "Description[nl]": "Waarden toekennen aan randen en knooppunten van grafen.",
         "Description[pl]": "Przypisz wartości krawędziom i węzłom grafu",
         "Description[pt]": "Atribui valores às arestas e nós do grafo.",
