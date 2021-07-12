@@ -66,7 +66,7 @@ public:
 bool ProjectPrivate::loadProject(const QUrl &url)
 {
     // extract archive file to temporary working directory
-    KTar tar = KTar(url.toLocalFile(), QString("application/x-gzip"));
+    KTar tar = KTar(url.toLocalFile(), QStringLiteral("application/gzip"));
     if (!tar.open(QIODevice::ReadOnly)) {
         qCritical() << "Could not open project archive file for reading, aborting.";
         return false;
@@ -404,7 +404,7 @@ bool Project::projectSave()
         qCritical() << "No project file specified, abort saving.";
         return false;
     }
-    KTar tar = KTar(d->m_projectUrl.toLocalFile(), QString("application/x-gzip"));
+    KTar tar = KTar(d->m_projectUrl.toLocalFile(), QStringLiteral("application/gzip"));
     tar.open(QIODevice::WriteOnly);
 
     foreach (KTextEditor::Document *document, d->m_codeDocuments) {
