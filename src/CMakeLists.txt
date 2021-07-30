@@ -7,8 +7,6 @@
 #   SPDX-License-Identifier: GPL-2.0-or-later
 ##
 
-project(rocs)
-
 add_definitions(-DTRANSLATION_DOMAIN=\"rocs\")
 
 ecm_setup_version(${RELEASE_SERVICE_VERSION}
