@@ -15,7 +15,7 @@
  */
 class MetricSummarizer : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
 private:
     QVector<qreal> values_m;
 public:

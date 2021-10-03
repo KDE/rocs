@@ -25,7 +25,7 @@ using namespace GraphTheory;
  */
 class LayoutEvaluator : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     LayoutEvaluator() { QCoreApplication::addLibraryPath(ADDITIONAL_PLUGIN_DIR); }
 

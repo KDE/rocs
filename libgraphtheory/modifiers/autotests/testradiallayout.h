@@ -13,7 +13,7 @@
 
 class RadialLayoutTest : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
 private:
 private Q_SLOTS:
     void emptyGraph();
