@@ -75,8 +75,9 @@ bool LayoutEvaluator::crosses(const EdgePtr a, const EdgePtr b) const
 int LayoutEvaluator::calculateNumberOfEdgeCrosses(GraphDocumentPtr document)
 {
     int numberOfEdgeCrosses = 0;
-    for (const EdgePtr edgeA : document->edges()) {
-        for (const EdgePtr edgeB : document->edges()) {
+    const auto edges = document->edges();
+    for (const EdgePtr &edgeA : edges) {
+        for (const EdgePtr &edgeB : edges) {
             if (edgeA != edgeB and crosses(edgeA, edgeB)) {
                 numberOfEdgeCrosses++;
             }
@@ -88,8 +89,9 @@ int LayoutEvaluator::calculateNumberOfEdgeCrosses(GraphDocumentPtr document)
 int LayoutEvaluator::calculateNumberOfEdgesWithCrosses(GraphDocumentPtr document)
 {
     int numberOfEdgesWithCrosses = 0;
-    for (const EdgePtr edgeA : document->edges()) {
-        for (const EdgePtr edgeB : document->edges()) {
+    const auto edges = document->edges();
+    for (const EdgePtr &edgeA : edges) {
+        for (const EdgePtr &edgeB : edges) {
             if (edgeA != edgeB and crosses(edgeA, edgeB)) {
                 numberOfEdgesWithCrosses++;
                 break;
@@ -113,8 +115,9 @@ bool LayoutEvaluator::intersects(const NodePtr a, const NodePtr b) const
 int LayoutEvaluator::calculateNumberOfNodeIntersections(GraphDocumentPtr document)
 {
     int numberOfNodeIntersections = 0;
-    for (const NodePtr nodeA : document->nodes()) {
-        for (const NodePtr nodeB : document->nodes()) {
+    const auto nodes = document->nodes();
+    for (const NodePtr &nodeA : nodes) {
+        for (const NodePtr &nodeB : nodes) {
             if (nodeA != nodeB and intersects(nodeA, nodeB)) {
                 numberOfNodeIntersections++;
             }
@@ -126,8 +129,9 @@ int LayoutEvaluator::calculateNumberOfNodeIntersections(GraphDocumentPtr documen
 int LayoutEvaluator::calculateNumberOfNodesWithIntersections(GraphDocumentPtr document)
 {
     int numberOfNodesWithIntersections = 0;
-    for (const NodePtr nodeA : document->nodes()) {
-        for (const NodePtr nodeB : document->nodes()) {
+    const auto nodes = document->nodes();
+    for (const NodePtr &nodeA : nodes) {
+        for (const NodePtr &nodeB : nodes) {
             if (nodeA != nodeB and intersects(nodeA, nodeB)) {
                 numberOfNodesWithIntersections++;
                 break;

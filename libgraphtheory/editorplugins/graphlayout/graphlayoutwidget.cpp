@@ -145,7 +145,8 @@ void GraphLayoutWidget::handleRadialTreeLayout()
 {
     //Finds the root node. In case of automatic selection, a null pointer is used.
     NodePtr root = nullptr;
-    for (const NodePtr node : m_document->nodes()) {
+    const auto nodes = m_document->nodes();
+    for (const NodePtr &node : nodes) {
         if (node->id() == m_root) {
             root = node;
             break;

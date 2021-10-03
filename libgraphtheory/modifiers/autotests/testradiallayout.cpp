@@ -38,7 +38,8 @@ void RadialLayoutTest::testMargin()
                                                           rotationAngle);
     QVERIFY(status);
 
-    for (const NodePtr node : document->nodes()) {
+    const auto nodes = document->nodes();
+    for (const NodePtr &node : nodes) {
         QVERIFY(node->x() - EPS >= margin);
         QVERIFY(node->y() - EPS >= margin);
     }

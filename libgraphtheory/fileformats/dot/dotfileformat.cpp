@@ -81,12 +81,14 @@ void DotFileFormat::writeFile(GraphDocumentPtr document)
     out << "digraph {\n";
 
     // process all data elements
-    for (const NodePtr &node : document->nodes()) {
+    const auto nodes = document->nodes();
+    for (const NodePtr &node : nodes) {
         out << processNode(node);
     }
 
     // process all edges
-    for (const auto &edge : document->edges()) {
+    const auto edges = document->edges();
+    for (const auto &edge : edges) {
         out << processEdge(edge);
     }
     out << "}\n";

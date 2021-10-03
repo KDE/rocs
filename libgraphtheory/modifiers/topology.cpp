@@ -886,7 +886,8 @@ QVector<QPointF> radialLayout(const RemappedGraph& graph, const qreal minX, cons
  */
 bool hasOnlyBidirectionalEdges(GraphDocumentPtr document)
 {
-    for (const EdgePtr edge : document->edges()) {
+    const auto edges = document->edges();
+    for (const EdgePtr &edge : edges) {
         if (edge->type()->direction() != EdgeType::Bidirectional) {
             return false;
         }

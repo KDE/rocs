@@ -98,7 +98,8 @@ void NodeWrapper::setType(int typeId)
     if (newType->id() == typeId) {
         return;
     }
-    for (const auto &type : m_node->document()->nodeTypes()) {
+    const auto nodeTypes = m_node->document()->nodeTypes();
+    for (const auto &type : nodeTypes) {
         if (type->id() == typeId) {
             newType = type;
             break;
@@ -116,7 +117,8 @@ void NodeWrapper::setType(int typeId)
 QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges() const
 {
     QList<EdgeWrapper*> edges;
-    for (const auto &edge : m_node->edges()) {
+    const auto nodeEdges = m_node->edges();
+    for (const auto &edge : nodeEdges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
     }
     return edges;
@@ -125,7 +127,8 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges() const
 QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges(int type) const
 {
     EdgeTypePtr typePtr;
-    for (const auto &typeTest : m_node->document()->edgeTypes()) {
+    const auto edgeTypes = m_node->document()->edgeTypes();
+    for (const auto &typeTest : edgeTypes) {
         if (typeTest->id() == type) {
             typePtr = typeTest;
             break;
@@ -137,7 +140,8 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges(int type) const
         return QList<EdgeWrapper*>();
     }
     QList<EdgeWrapper*> edges;
-    for (const auto &edge : m_node->edges(typePtr)) {
+    const auto nodeEges = m_node->edges(typePtr);
+    for (const auto &edge : nodeEges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
     }
     return edges;
@@ -146,7 +150,8 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges(int type) const
 QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges() const
 {
     QList<EdgeWrapper*> edges;
-    for (const auto &edge : m_node->inEdges()) {
+    const auto inEdges = m_node->inEdges();
+    for (const auto &edge : inEdges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
     }
     return edges;
@@ -155,7 +160,8 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges() const
 QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges(int type) const
 {
     EdgeTypePtr typePtr;
-    for (const auto &typeTest : m_node->document()->edgeTypes()) {
+    const auto edgeTypes = m_node->document()->edgeTypes();
+    for (const auto &typeTest : edgeTypes) {
         if (typeTest->id() == type) {
             typePtr = typeTest;
             break;
@@ -167,7 +173,8 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges(int type) const
         return QList<EdgeWrapper*>();
     }
     QList<EdgeWrapper*> edges;
-    for (const auto &edge : m_node->inEdges(typePtr)) {
+    const auto inEdges = m_node->inEdges(typePtr);
+    for (const auto &edge : inEdges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
     }
     return edges;
@@ -176,7 +183,8 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges(int type) const
 QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges() const
 {
     QList<EdgeWrapper*> edges;
-    for (const auto &edge : m_node->outEdges()) {
+    const auto outEdges = m_node->outEdges();
+    for (const auto &edge : outEdges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
     }
     return edges;
@@ -185,7 +193,8 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges() const
 QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges(int type) const
 {
     EdgeTypePtr typePtr;
-    for (const auto &typeTest : m_node->document()->edgeTypes()) {
+    const auto edgeTypes = m_node->document()->edgeTypes();
+    for (const auto &typeTest : edgeTypes) {
         if (typeTest->id() == type) {
             typePtr = typeTest;
             break;
@@ -197,7 +206,8 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges(int type) const
         return QList<EdgeWrapper*>();
     }
     QList<EdgeWrapper*> edges;
-    for (const auto &edge : m_node->outEdges(typePtr)) {
+    const auto outEdges = m_node->outEdges(typePtr);
+    for (const auto &edge : outEdges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
     }
     return edges;
@@ -206,7 +216,8 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges(int type) const
 QList<NodeWrapper*> NodeWrapper::neighbors() const
 {
     QSet<NodeWrapper*> neighbors;
-    for (const auto &edge : m_node->edges()) {
+    const auto edges = m_node->edges();
+    for (const auto &edge : edges) {
         if (m_node == edge->from()) {
             neighbors.insert(m_documentWrapper->nodeWrapper(edge->to()));
         } else {
@@ -219,7 +230,8 @@ QList<NodeWrapper*> NodeWrapper::neighbors() const
 QList<NodeWrapper*> NodeWrapper::neighbors(int type) const
 {
     EdgeTypePtr typePtr;
-    for (const auto &typeTest : m_node->document()->edgeTypes()) {
+    const auto edgeTypes = m_node->document()->edgeTypes();
+    for (const auto &typeTest : edgeTypes) {
         if (typeTest->id() == type) {
             typePtr = typeTest;
             break;
@@ -231,7 +243,8 @@ QList<NodeWrapper*> NodeWrapper::neighbors(int type) const
         return QList<NodeWrapper*>();
     }
     QSet<NodeWrapper*> neighbors;
-    for (const auto &edge : m_node->edges(typePtr)) {
+    const auto edges = m_node->edges(typePtr);
+    for (const auto &edge : edges) {
         if (m_node == edge->from()) {
             neighbors.insert(m_documentWrapper->nodeWrapper(edge->to()));
         } else {
@@ -244,7 +257,8 @@ QList<NodeWrapper*> NodeWrapper::neighbors(int type) const
 QList<NodeWrapper*> NodeWrapper::predecessors() const
 {
     QSet<NodeWrapper*> precessors;
-    for (const auto &edge : m_node->inEdges()) {
+    const auto inEdges = m_node->inEdges();
+    for (const auto &edge : inEdges) {
         if (edge->type()->direction() == EdgeType::Unidirectional) {
             precessors.insert(m_documentWrapper->nodeWrapper(edge->from()));
             continue;
@@ -262,7 +276,8 @@ QList<NodeWrapper*> NodeWrapper::predecessors() const
 QList<NodeWrapper*> NodeWrapper::predecessors(int type) const
 {
     EdgeTypePtr typePtr;
-    for (const auto &typeTest : m_node->document()->edgeTypes()) {
+    const auto edgeTypes = m_node->document()->edgeTypes();
+    for (const auto &typeTest : edgeTypes) {
         if (typeTest->id() == type) {
             typePtr = typeTest;
             break;
@@ -274,7 +289,8 @@ QList<NodeWrapper*> NodeWrapper::predecessors(int type) const
         return QList<NodeWrapper*>();
     }
     QSet<NodeWrapper*> precessors;
-    for (const auto &edge : m_node->inEdges(typePtr)) {
+    const auto inEdges = m_node->inEdges(typePtr);
+    for (const auto &edge : inEdges) {
         if (edge->type()->direction() == EdgeType::Unidirectional) {
             precessors.insert(m_documentWrapper->nodeWrapper(edge->from()));
             continue;
@@ -292,7 +308,8 @@ QList<NodeWrapper*> NodeWrapper::predecessors(int type) const
 QList<NodeWrapper*> NodeWrapper::successors() const
 {
     QSet<NodeWrapper*> successors;
-    for (const auto &edge : m_node->outEdges()) {
+    const auto outEdges = m_node->outEdges();
+    for (const auto &edge : outEdges) {
         if (edge->type()->direction() == EdgeType::Unidirectional) {
             successors.insert(m_documentWrapper->nodeWrapper(edge->to()));
             continue;
@@ -310,7 +327,8 @@ QList<NodeWrapper*> NodeWrapper::successors() const
 QList<NodeWrapper*> NodeWrapper::successors(int type) const
 {
     EdgeTypePtr typePtr;
-    for (const auto &typeTest : m_node->document()->edgeTypes()) {
+    const auto edgeTypes = m_node->document()->edgeTypes();
+    for (const auto &typeTest : edgeTypes) {
         if (typeTest->id() == type) {
             typePtr = typeTest;
             break;
@@ -322,7 +340,8 @@ QList<NodeWrapper*> NodeWrapper::successors(int type) const
         return QList<NodeWrapper*>();
     }
     QSet<NodeWrapper*> successors;
-    for (const auto &edge : m_node->outEdges(typePtr)) {
+    const auto outEdges = m_node->outEdges(typePtr);
+    for (const auto &edge : outEdges) {
         if (edge->type()->direction() == EdgeType::Unidirectional) {
             successors.insert(m_documentWrapper->nodeWrapper(edge->to()));
             continue;
@@ -426,7 +445,8 @@ bool NodeWrapper::event(QEvent *e)
 
 void NodeWrapper::updateDynamicProperties()
 {
-    for (const auto &property : m_node->dynamicProperties()) {
+    const auto dynamicProperties = m_node->dynamicProperties();
+    for (const auto &property : dynamicProperties) {
         // property value must not be set to QVariant::Invalid, else the properties are not accessible
         // from the script engine
         if (m_node->dynamicProperty(property).isValid()) {

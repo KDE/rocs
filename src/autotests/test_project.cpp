@@ -81,7 +81,8 @@ void TestProject::loadSave()
     QVERIFY(project.projectSave());
 
     // Now the documents live in the test dir
-    for (const auto& d : project.codeDocuments()) {
+    const auto docs = project.codeDocuments();
+    for (const auto& d : docs) {
         qDebug() << "Code document path=" << d->url().toLocalFile();
         QVERIFY(d->url().toLocalFile().startsWith(QDir::currentPath()));
     }
@@ -91,7 +92,8 @@ void TestProject::loadSave()
     QCOMPARE(loadedProject.graphDocuments().count(), project.graphDocuments().count());
 
     // After load, they live in the project dir
-    for (const auto& d : loadedProject.codeDocuments()) {
+    const auto loadedDocs = loadedProject.codeDocuments();
+    for (const auto& d : loadedDocs) {
         qDebug() << "Code document path=" << d->url().toLocalFile();
         QVERIFY(d->url().toLocalFile().startsWith(loadedProject.workingDir()));
     }

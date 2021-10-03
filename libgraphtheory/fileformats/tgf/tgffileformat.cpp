@@ -110,7 +110,8 @@ void TgfFileFormat::writeFile(GraphDocumentPtr document)
     QTextStream out(&fileHandle);
     // export data elements
     //FIXME only default data type considered
-    for(const NodePtr &node : document->nodes()) {
+    const auto nodes = document->nodes();
+    for (const NodePtr &node : nodes) {
         out << node->id();
         out << " ";
         out << node->dynamicProperty("label").toString(); //TODO change to selectable property
@@ -118,7 +119,8 @@ void TgfFileFormat::writeFile(GraphDocumentPtr document)
     }
     out << "#\n";
     // export pointers
-    for (const auto &edge : document->edges()) {
+    const auto edges = document->edges();
+    for (const auto &edge : edges) {
         out << edge->from()->id() << " " << edge->to()->id() << " " << edge->dynamicProperty("label").toString() <<'\n';
     }
     setError(None);

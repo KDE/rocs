@@ -67,7 +67,8 @@ void TestRocs2FileFormat::documentTypesTest()
 
     // test edge type
     QCOMPARE(importDocument->edgeTypes().count(), 2);
-    for (const EdgeTypePtr &type : importDocument->edgeTypes()) {
+    const auto edgeTypes = importDocument->edgeTypes();
+    for (const EdgeTypePtr &type : edgeTypes) {
         auto iter = std::find_if(document->edgeTypes().cbegin(), document->edgeTypes().cend(), [type](const EdgeTypePtr &testType) {
             return testType->id() == type->id();
         });

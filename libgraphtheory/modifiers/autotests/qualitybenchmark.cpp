@@ -94,7 +94,8 @@ GraphDocumentPtr generateCompleteGraph(const int numberOfNodes)
     
     for (int i = 0; i < numberOfNodes; i++) {
         const NodePtr nodeA = Node::create(document);
-        for (const NodePtr nodeB : document->nodes()) {
+        const auto nodes = document->nodes();
+        for (const NodePtr &nodeB : nodes) {
             if (nodeA != nodeB) {
                 EdgePtr edge = Edge::create(nodeA, nodeB);
                 edge->setType(edgeType);
