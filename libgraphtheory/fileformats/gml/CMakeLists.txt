@@ -22,4 +22,6 @@ target_link_libraries(gmlfileformat
 # Boost::spirit requires exceptions
 kde_target_enable_exceptions(gmlfileformat PRIVATE)
 
-ecm_optional_add_subdirectory(autotests)
+if(BUILD_TESTING)
+    ecm_optional_add_subdirectory(autotests)
+endif()

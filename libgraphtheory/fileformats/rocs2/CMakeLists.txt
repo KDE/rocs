@@ -17,4 +17,6 @@ target_link_libraries(rocs2fileformat
         rocsgraphtheory
 )
 
-ecm_optional_add_subdirectory(autotests)
+if(BUILD_TESTING)
+    ecm_optional_add_subdirectory(autotests)
+endif()

@@ -24,6 +24,8 @@ target_link_libraries(graphlayoutplugin
     KF5::Completion
 )
 
-ecm_optional_add_subdirectory(autotests)
-
 install(TARGETS graphlayoutplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/editorplugins)
+
+if(BUILD_TESTING)
+    ecm_optional_add_subdirectory(autotests)
+endif()

@@ -23,4 +23,6 @@ target_link_libraries(generategraphplugin
     KF5::Completion
 )
 
-ecm_optional_add_subdirectory(autotests)
+if(BUILD_TESTING)
+    ecm_optional_add_subdirectory(autotests)
+endif()

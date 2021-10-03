@@ -90,4 +90,7 @@ install(FILES rocsui.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/rocs)
 install(FILES rocs.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
 
 ecm_optional_add_subdirectory(plugins/scriptapi)
-ecm_optional_add_subdirectory(autotests)
+
+if(BUILD_TESTING)
+    ecm_optional_add_subdirectory(autotests)
+endif()

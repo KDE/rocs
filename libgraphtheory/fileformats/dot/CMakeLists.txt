@@ -22,4 +22,6 @@ target_link_libraries(dotfileformat
         rocsgraphtheory
 )
 
-ecm_optional_add_subdirectory(autotests)
+if(BUILD_TESTING)
+    ecm_optional_add_subdirectory(autotests)
+endif()

@@ -39,6 +39,10 @@ include(GenerateExportHeader)
 find_package(Boost "1.49" REQUIRED)
 find_package(Grantlee5 "5.0.0" REQUIRED)
 
+if(BUILD_TESTING)
+    set(QT_CONDITIONAL_COMPONENTS Test)
+endif()
+
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS
     Core
     Gui
@@ -47,8 +51,8 @@ find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS
     Widgets
     ScriptTools
     Svg
-    Test
     XmlPatterns
+    ${QT_CONDITIONAL_COMPONENTS}
 )
 find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Archive

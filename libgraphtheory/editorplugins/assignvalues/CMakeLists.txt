@@ -17,4 +17,7 @@ target_link_libraries(assignvaluesplugin
 )
 
 kde_source_files_enable_exceptions(assignvalueswidget.cpp)
-ecm_optional_add_subdirectory(autotests)
+
+if(BUILD_TESTING)
+    ecm_optional_add_subdirectory(autotests)
+endif()
