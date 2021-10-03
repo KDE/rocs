@@ -42,7 +42,7 @@ public:
     static EdgeTypePtr create(GraphDocumentPtr document);
 
     /** Destroys the edge type */
-    virtual ~EdgeType();
+    ~EdgeType() override;
 
     /**
      * @return shared pointer to object

@@ -25,7 +25,7 @@ class EdgeItem : public QQuickItem
 
 public:
     explicit EdgeItem(QQuickItem *parent = 0);
-    virtual ~EdgeItem();
+    ~EdgeItem() override;
     Edge * edge() const;
     void setEdge(Edge *edge);
     /** translation of global origin (0,0) into scene coordinates **/
@@ -34,7 +34,7 @@ public:
     void setOrigin(const QPointF &origin);
 
 protected:
-    virtual QSGNode * updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data) Q_DECL_OVERRIDE;
+    QSGNode * updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data) override;
 
 Q_SIGNALS:
     void edgeChanged();

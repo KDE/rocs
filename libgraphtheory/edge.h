@@ -40,7 +40,7 @@ public:
     static EdgePtr create(NodePtr from, NodePtr to);
 
     /** Destroys the edge */
-    virtual ~Edge();
+    ~Edge() override;
 
     /**
      * @return shared pointer to object

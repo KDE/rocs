@@ -37,7 +37,7 @@ public:
 
     Kernel();
 
-    virtual ~Kernel();
+    ~Kernel() override;
 
     /**
      * execute javascript @p script on @p document and @return result as reported by engine

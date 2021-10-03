@@ -65,7 +65,7 @@ public:
      * \param parent is the object parent
      */
     FileFormatInterface(const QString &componentName, QObject* parent);
-    virtual ~FileFormatInterface();
+    ~FileFormatInterface() override;
 
     /**
      * Returns \p PluginType to indicate whether the plugin only provides import, only export

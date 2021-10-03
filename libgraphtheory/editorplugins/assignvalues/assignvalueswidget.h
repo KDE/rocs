@@ -33,7 +33,7 @@ class AssignValuesWidget : public QDialog
 
 public:
     explicit AssignValuesWidget(GraphDocumentPtr document, QWidget *parent = 0);
-    ~AssignValuesWidget();
+    ~AssignValuesWidget() override;
 
 public Q_SLOTS:
     /**

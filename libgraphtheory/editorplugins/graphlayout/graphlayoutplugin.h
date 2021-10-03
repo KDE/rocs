@@ -22,8 +22,8 @@ class GraphLayoutPlugin : public EditorPluginInterface
 
 public:
     GraphLayoutPlugin(QObject* parent, const QList< QVariant >&);
-    virtual ~GraphLayoutPlugin();
-    void showDialog(GraphDocumentPtr document) Q_DECL_OVERRIDE;
+    ~GraphLayoutPlugin() override;
+    void showDialog(GraphDocumentPtr document) override;
 
 private:
     const QScopedPointer<GraphLayoutPluginPrivate> d;

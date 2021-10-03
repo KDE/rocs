@@ -23,7 +23,7 @@ class QSGLineNode : public QSGGeometryNode
 
 public:
     explicit QSGLineNode();
-    virtual ~QSGLineNode();
+    ~QSGLineNode() override;
     void setLine(const QPointF &from, const QPointF &to);
     void setColor(const QColor &color);
     void setDirection(EdgeType::Direction direction);

@@ -21,7 +21,7 @@ class GraphLayoutWidget : public QDialog
 
 public:
     explicit GraphLayoutWidget(GraphDocumentPtr document, QWidget *parent = 0);
-    ~GraphLayoutWidget();
+    ~GraphLayoutWidget() override;
 
 public slots:
     /**

@@ -37,7 +37,7 @@ class EdgeWrapper : public QObject
 public:
     EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper);
 
-    virtual ~EdgeWrapper();
+    ~EdgeWrapper() override;
 
     EdgePtr edge() const;
 
@@ -57,7 +57,7 @@ public:
     Q_INVOKABLE bool directed() const;
 
     /** reimplemented from QObject **/
-    virtual bool event(QEvent *e) Q_DECL_OVERRIDE;
+    bool event(QEvent *e) override;
 
 public Q_SLOTS:
     void updateDynamicProperties();

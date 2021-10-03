@@ -30,7 +30,7 @@ class GRAPHTHEORY_EXPORT EditorPluginManager : public QObject
 public:
     EditorPluginManager();
 
-    ~EditorPluginManager();
+    ~EditorPluginManager() override;
 
     /**
      * Returns list of loaded plugins. Plugins are loaded with first call to \see self().

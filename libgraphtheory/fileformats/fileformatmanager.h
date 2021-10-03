@@ -38,7 +38,7 @@ public:
 
     FileFormatManager();
 
-    ~FileFormatManager();
+    ~FileFormatManager() override;
 
     /**
      * Returns list of loaded backends. Backends are loaded with first call to \see self().

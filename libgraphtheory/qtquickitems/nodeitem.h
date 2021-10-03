@@ -24,7 +24,7 @@ class NodeItem : public QQuickPaintedItem
 
 public:
     explicit NodeItem(QQuickPaintedItem *parent = 0);
-    virtual ~NodeItem();
+    ~NodeItem() override;
     Node * node() const;
     void setNode(Node *node);
     /** translation of global origin (0,0) into scene coordinates **/
@@ -34,9 +34,9 @@ public:
     bool isHighlighted() const;
     void setHighlighted(bool highlight);
     /** reimplemented from QQuickPaintedItem **/
-    void paint(QPainter *painter) Q_DECL_OVERRIDE;
+    void paint(QPainter *painter) override;
     /** reimplemented from QQuickItem **/
-    bool contains(const QPointF &point) const Q_DECL_OVERRIDE;
+    bool contains(const QPointF &point) const override;
 
 Q_SIGNALS:
     void nodeChanged();

@@ -37,7 +37,7 @@ class MainWindow : public KXmlGuiWindow
 public:
     /*! default constructor */
     MainWindow();
-    ~MainWindow();
+    ~MainWindow() override;
 
 private:
     void setupWidgets();
@@ -72,8 +72,8 @@ protected:
     /**
      * Reimplemented method KMainWindow::queryClose().
      */
-    virtual bool queryClose() Q_DECL_OVERRIDE;
-    void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    bool queryClose() override;
+    void closeEvent(QCloseEvent *event) override;
 
 private Q_SLOTS:
     void showConfigurationDialog();

@@ -21,8 +21,8 @@ class TransformEdgesPlugin : public EditorPluginInterface
 
 public:
     TransformEdgesPlugin(QObject* parent, const QList< QVariant >&);
-    virtual ~TransformEdgesPlugin();
-    void showDialog(GraphDocumentPtr document) Q_DECL_OVERRIDE;
+    ~TransformEdgesPlugin() override;
+    void showDialog(GraphDocumentPtr document) override;
 
 private:
     const QScopedPointer<TransformEdgesPluginPrivate> d;

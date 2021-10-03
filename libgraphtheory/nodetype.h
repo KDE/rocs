@@ -38,7 +38,7 @@ public:
     static NodeTypePtr create(GraphDocumentPtr document);
 
     /** Destroys the edge type */
-    virtual ~NodeType();
+    ~NodeType() override;
 
     /**
      * @return shared pointer to object

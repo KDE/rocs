@@ -40,7 +40,7 @@ class NodeWrapper : public QObject
 public:
     NodeWrapper(NodePtr node, DocumentWrapper *documentWrapper);
 
-    virtual ~NodeWrapper();
+    ~NodeWrapper() override;
 
     NodePtr node() const;
 
@@ -169,7 +169,7 @@ public:
     Q_INVOKABLE QScriptValue distance(const QString &lengthProperty, QList<GraphTheory::NodeWrapper*> targets);
 
     /** reimplemented from QObject **/
-    virtual bool event(QEvent *e) Q_DECL_OVERRIDE;
+    bool event(QEvent *e) override;
 
 public Q_SLOTS:
     void updateDynamicProperties();

@@ -31,7 +31,7 @@ public:
     };
 
     explicit Object(QObject *parent = 0);
-    ~Object();
+    ~Object() override;
 
     QString id() const;
     void setId(const QString& id);

@@ -24,7 +24,7 @@ class GRAPHTHEORY_EXPORT Editor : public QObject
 
 public:
     explicit Editor();
-    virtual ~Editor();
+    ~Editor() override;
     QList<GraphDocumentPtr> documents() const;
     GraphDocumentPtr createDocument();
 

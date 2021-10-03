@@ -42,7 +42,7 @@ public:
     static NodePtr create(GraphDocumentPtr document);
 
     /** Destroys the node */
-    virtual ~Node();
+    ~Node() override;
 
     /**
      * @return shared pointer to object

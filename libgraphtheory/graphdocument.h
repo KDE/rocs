@@ -39,7 +39,7 @@ public:
     static GraphDocumentPtr create();
 
     /** Destroys the document */
-    virtual ~GraphDocument();
+    ~GraphDocument() override;
 
     /**
      * @return shared pointer to object

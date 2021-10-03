@@ -25,7 +25,7 @@ class GRAPHTHEORY_EXPORT EdgeTypeStyle : public QObject
     Q_OBJECT
 public:
     EdgeTypeStyle();
-    ~EdgeTypeStyle();
+    ~EdgeTypeStyle() override;
     void setColor(const QColor &color);
     QColor color() const;
     void setVisible(bool visible);

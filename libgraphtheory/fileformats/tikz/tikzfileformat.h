@@ -22,25 +22,25 @@ class TikzFileFormat : public FileFormatInterface
     Q_OBJECT
 public:
     explicit TikzFileFormat(QObject* parent, const QList< QVariant >&);
-    ~TikzFileFormat();
+    ~TikzFileFormat() override;
 
-    FileFormatInterface::PluginType pluginCapability() const Q_DECL_OVERRIDE;
+    FileFormatInterface::PluginType pluginCapability() const override;
 
     /**
      * File extensions that are common for this file type.
      */
-    const QStringList extensions() const Q_DECL_OVERRIDE;
+    const QStringList extensions() const override;
 
     /**
      * Writes given graph document to formerly specified file \see setFile().
      * \param graph is graph document to be serialized
      */
-    void writeFile(GraphDocumentPtr graph) Q_DECL_OVERRIDE;
+    void writeFile(GraphDocumentPtr graph) override;
 
     /**
      * Open given file and imports it into internal format.
      */
-    void readFile() Q_DECL_OVERRIDE;
+    void readFile() override;
 };
 }
 

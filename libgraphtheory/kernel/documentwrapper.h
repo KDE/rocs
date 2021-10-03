@@ -34,7 +34,7 @@ class DocumentWrapper : public QObject
 
 public:
     DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engine);
-    virtual ~DocumentWrapper();
+    ~DocumentWrapper() override;
 
     QScriptEngine * engine() const;
 

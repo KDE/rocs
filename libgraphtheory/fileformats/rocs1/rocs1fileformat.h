@@ -110,24 +110,24 @@ class Rocs1FileFormat : public FileFormatInterface
 
 public:
     explicit Rocs1FileFormat(QObject *parent, const QList< QVariant >&);
-    ~Rocs1FileFormat();
+    ~Rocs1FileFormat() override;
 
     /**
      * File extensions that are common for this file type.
      */
-    const QStringList extensions() const Q_DECL_OVERRIDE;
+    const QStringList extensions() const override;
 
     /**
      * Writes given graph document to formerly specified file \see setFile().
      * \param graph is graphDocument to be serialized
      */
-    void writeFile(GraphDocumentPtr graph) Q_DECL_OVERRIDE;
+    void writeFile(GraphDocumentPtr graph) override;
 
     /**
      * Open given file and imports it into internal format.
      * \param file is url of a local file
      */
-    void readFile() Q_DECL_OVERRIDE;
+    void readFile() override;
 
 private:
     QString serialize(GraphDocumentPtr document);

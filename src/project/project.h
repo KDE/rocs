@@ -57,7 +57,7 @@ public:
      */
     explicit Project(const QUrl &url, GraphTheory::Editor *graphEditor);
 
-    virtual ~Project();
+    ~Project() override;
 
     /**
      * @return the project's journal document

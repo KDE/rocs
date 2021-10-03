@@ -34,7 +34,7 @@ public:
      */
     explicit EditorPluginInterface(const QString &componentName, QObject *parent);
 
-    virtual ~EditorPluginInterface();
+    ~EditorPluginInterface() override;
 
     virtual void showDialog(GraphDocumentPtr document) = 0;
 

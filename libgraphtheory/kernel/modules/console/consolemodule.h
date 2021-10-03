@@ -27,7 +27,7 @@ class GRAPHTHEORY_EXPORT ConsoleModule : public QObject
 
 public:
     explicit ConsoleModule(QObject *parent = 0);
-    ~ConsoleModule();
+    ~ConsoleModule() override;
 
     /**
      * Clear the backlog.

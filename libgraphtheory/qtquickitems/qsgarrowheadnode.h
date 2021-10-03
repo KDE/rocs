@@ -20,7 +20,7 @@ class QSGArrowHeadNode : public QSGGeometryNode
 
 public:
     explicit QSGArrowHeadNode();
-    virtual ~QSGArrowHeadNode();
+    ~QSGArrowHeadNode() override;
     void setArrow(const QPointF &from, const QPointF &to);
     void setColor(const QColor &color);
 
