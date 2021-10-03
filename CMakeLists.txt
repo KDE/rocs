@@ -17,11 +17,8 @@ set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_
 
 project(rocs LANGUAGES CXX VERSION ${RELEASE_SERVICE_VERSION})
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 set(QT_MIN_VERSION "5.15.0")
-set(KF_MIN_VERSION "5.83.0")
+set(KF_MIN_VERSION "5.85.0")
 
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 
@@ -72,11 +69,9 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
 )
 
-add_definitions(-DQT_NO_CAST_TO_ASCII)
-add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+# added by KDE_COMPILERSETTINGS_LEVEL 5.85.0
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
-remove_definitions(-DQT_NO_KEYWORDS)
 
 ecm_optional_add_subdirectory(libgraphtheory)
 ecm_optional_add_subdirectory(src)
