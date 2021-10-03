@@ -26,7 +26,7 @@ class SideToolButton: public QToolButton
     Q_OBJECT
 
 public:
-    explicit SideToolButton(QWidget* parent = 0);
+    explicit SideToolButton(QWidget* parent = nullptr);
     Qt::Orientation orientation() const;
     QSize sizeHint() const override;
 

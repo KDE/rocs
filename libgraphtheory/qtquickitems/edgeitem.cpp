@@ -17,7 +17,7 @@ using namespace GraphTheory;
 class GraphTheory::EdgeItemPrivate {
 public:
     EdgeItemPrivate()
-        : m_edge(0)
+        : m_edge(nullptr)
         , m_origin(0, 0)
         , m_pointFrom(0, 0)
         , m_pointTo(0, 0)

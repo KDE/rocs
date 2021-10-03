@@ -25,7 +25,7 @@ class Method : public QObject
     Q_PROPERTY(QString documentAnchor READ apiDocumentAnchor)
 
 public:
-    explicit Method(QObject *parent = 0);
+    explicit Method(QObject *parent = nullptr);
 
     QString name() const;
     void setName(const QString &name);

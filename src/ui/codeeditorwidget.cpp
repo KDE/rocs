@@ -17,7 +17,7 @@
 
 CodeEditorWidget::CodeEditorWidget(QWidget *parent)
     : QWidget(parent)
-    , m_project(Q_NULLPTR)
+    , m_project(nullptr)
 {
     QLayout *layout = new QVBoxLayout();
     m_editor = KTextEditor::Editor::instance();

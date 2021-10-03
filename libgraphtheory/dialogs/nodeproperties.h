@@ -18,7 +18,7 @@ class NodeProperties : public QDialog
     Q_OBJECT
 
 public:
-    explicit NodeProperties(QWidget *parent = 0);
+    explicit NodeProperties(QWidget *parent = nullptr);
     void setData(NodePtr node);
 
 private Q_SLOTS:

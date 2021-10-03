@@ -22,7 +22,7 @@ class GraphTheory::GraphDocumentPrivate {
 public:
     GraphDocumentPrivate()
         : m_valid(false)
-        , m_view(0)
+        , m_view(nullptr)
         , m_documentUrl(QUrl())
         , m_name(QString())
         , m_lastGeneratedId(0)

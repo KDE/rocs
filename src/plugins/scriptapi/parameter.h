@@ -20,7 +20,7 @@ class Parameter : public QObject
     Q_PROPERTY(QString typeLink READ typeLink)
 
 public:
-    explicit Parameter(QObject *parent = 0);
+    explicit Parameter(QObject *parent = nullptr);
 
     QString name() const;
     void setName(const QString &name);

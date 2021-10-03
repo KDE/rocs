@@ -27,7 +27,7 @@ class ScriptApiManager : public QObject
     Q_OBJECT
 
 public:
-    explicit ScriptApiManager(QObject *parent = 0);
+    explicit ScriptApiManager(QObject *parent = nullptr);
 
     /**
      * This method loads all api documentation files.

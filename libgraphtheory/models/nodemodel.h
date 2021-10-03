@@ -30,7 +30,7 @@ public:
         DataRole                        //!< access to Node object
     };
 
-    explicit NodeModel(QObject *parent = 0);
+    explicit NodeModel(QObject *parent = nullptr);
     ~NodeModel() override;
     /**
      * Reimplemented from QAbstractListModel::roleNames()

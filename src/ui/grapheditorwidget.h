@@ -23,7 +23,7 @@ class GraphEditorWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GraphEditorWidget(QWidget *parent = 0);
+    explicit GraphEditorWidget(QWidget *parent = nullptr);
     void setProject(Project *project);
 
 Q_SIGNALS:

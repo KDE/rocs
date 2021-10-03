@@ -22,7 +22,7 @@ class ScriptOutputWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ScriptOutputWidget(QWidget *parent = 0);
+    explicit ScriptOutputWidget(QWidget *parent = nullptr);
     bool isOutputClearEnabled() const;
 
 public Q_SLOTS:

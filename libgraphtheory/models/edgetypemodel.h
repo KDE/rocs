@@ -32,7 +32,7 @@ public:
         DataRole                        //!< access to EdgeType object
     };
 
-    explicit EdgeTypeModel(QObject *parent = 0);
+    explicit EdgeTypeModel(QObject *parent = nullptr);
     ~EdgeTypeModel() override;
     /**
      * Reimplemented from QAbstractListModel::roleNames()

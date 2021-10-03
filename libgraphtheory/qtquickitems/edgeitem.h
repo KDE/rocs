@@ -24,7 +24,7 @@ class EdgeItem : public QQuickItem
     Q_PROPERTY(QPointF origin READ origin WRITE setOrigin)
 
 public:
-    explicit EdgeItem(QQuickItem *parent = 0);
+    explicit EdgeItem(QQuickItem *parent = nullptr);
     ~EdgeItem() override;
     Edge * edge() const;
     void setEdge(Edge *edge);

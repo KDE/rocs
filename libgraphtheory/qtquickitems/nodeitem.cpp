@@ -15,7 +15,7 @@ using namespace GraphTheory;
 class GraphTheory::NodeItemPrivate {
 public:
     NodeItemPrivate()
-        : m_node(0)
+        : m_node(nullptr)
         , m_origin(0,0)
         , m_visible(true)
         , m_highlighted(false)

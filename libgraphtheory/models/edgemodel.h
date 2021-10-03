@@ -29,7 +29,7 @@ public:
         DataRole                        //!< access to Edge object
     };
 
-    explicit EdgeModel(QObject *parent = 0);
+    explicit EdgeModel(QObject *parent = nullptr);
     ~EdgeModel() override;
     /**
      * Reimplemented from QAbstractListModel::roleNames()

@@ -30,7 +30,7 @@ public:
         VisibilityRole                    //!< is property name visible
     };
 
-    explicit EdgePropertyModel(QObject *parent = 0);
+    explicit EdgePropertyModel(QObject *parent = nullptr);
     ~EdgePropertyModel() override;
     /**
      * Reimplemented from QAbstractListModel::roleNames()

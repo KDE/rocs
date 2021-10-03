@@ -15,7 +15,7 @@
 class Item
 {
 public:
-    Item(const QList<QVariant> &data, Item *parent = 0);
+    Item(const QList<QVariant> &data, Item *parent = nullptr);
     ~Item();
 
     void appendChild(Item *child);

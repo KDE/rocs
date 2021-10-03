@@ -26,7 +26,7 @@ class GRAPHTHEORY_EXPORT ConsoleModule : public QObject
     Q_OBJECT
 
 public:
-    explicit ConsoleModule(QObject *parent = 0);
+    explicit ConsoleModule(QObject *parent = nullptr);
     ~ConsoleModule() override;
 
     /**

@@ -13,7 +13,7 @@ using namespace GraphTheory;
 
 QSGLineNode::QSGLineNode()
     : m_geometry(QSGGeometry::defaultAttributes_Point2D(), 2)
-    , m_arrowHead(0)
+    , m_arrowHead(nullptr)
 {
     m_material.setColor(QColor(0, 0, 0));
     setMaterial(&m_material);
@@ -60,6 +60,6 @@ void QSGLineNode::setDirection(EdgeType::Direction direction)
     if (m_arrowHead && direction == EdgeType::Bidirectional) {
         removeChildNode(m_arrowHead);
         delete m_arrowHead;
-        m_arrowHead = 0;
+        m_arrowHead = nullptr;
     }
 }

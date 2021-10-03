@@ -21,7 +21,7 @@ class Property : public QObject
     Q_PROPERTY(QString documentAnchor READ apiDocumentAnchor)
 
 public:
-    explicit Property(QObject *parent = 0);
+    explicit Property(QObject *parent = nullptr);
 
     QString name() const;
     void setName(const QString &name);

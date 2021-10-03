@@ -23,7 +23,7 @@ class GraphTheory::GenerateGraphPluginPrivate
 {
 public:
     GenerateGraphPluginPrivate()
-        : m_dialog(0)
+        : m_dialog(nullptr)
     {
     }
 

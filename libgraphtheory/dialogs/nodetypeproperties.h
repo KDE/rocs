@@ -26,7 +26,7 @@ class GRAPHTHEORY_EXPORT NodeTypeProperties : public QDialog
     Q_OBJECT
 
 public:
-    explicit NodeTypeProperties(QWidget *parent = 0);
+    explicit NodeTypeProperties(QWidget *parent = nullptr);
     void setType(NodeTypePtr type);
 
 private Q_SLOTS:

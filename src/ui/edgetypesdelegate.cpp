@@ -36,7 +36,7 @@ void EdgeTypesDelegate::paint(QPainter* painter, const QStyleOptionViewItem &opt
     if (!index.isValid()) {
         return;
     }
-    QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, 0);
+    QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, nullptr);
 }
 
 QSize EdgeTypesDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -169,7 +169,7 @@ void EdgeTypesDelegate::showPropertiesDialog()
 {
     QModelIndex index = focusedIndex();
     EdgeType *type = qobject_cast<EdgeType*>(index.data(EdgeTypeModel::DataRole).value<QObject*>());
-    QPointer<EdgeTypeProperties> dialog = new EdgeTypeProperties(0);
+    QPointer<EdgeTypeProperties> dialog = new EdgeTypeProperties(nullptr);
     dialog->setType(type->self());
     dialog->exec();
     delete dialog;

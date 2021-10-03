@@ -38,7 +38,7 @@ void NodeTypesDelegate::paint(QPainter* painter, const QStyleOptionViewItem &opt
     if (!index.isValid()) {
         return;
     }
-    QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, 0);
+    QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, nullptr);
 }
 
 QSize NodeTypesDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -146,7 +146,7 @@ void NodeTypesDelegate::showPropertiesDialog()
 {
     QModelIndex index = focusedIndex();
     NodeType *type = qobject_cast<NodeType*>(index.data(NodeTypeModel::DataRole).value<QObject*>());
-    QPointer<NodeTypeProperties> dialog = new NodeTypeProperties(0);
+    QPointer<NodeTypeProperties> dialog = new NodeTypeProperties(nullptr);
     dialog->setType(type->self());
     dialog->exec();
     dialog->deleteLater();

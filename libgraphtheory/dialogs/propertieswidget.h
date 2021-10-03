@@ -22,7 +22,7 @@ class PropertiesWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit PropertiesWidget(QWidget *parent = 0);
+    explicit PropertiesWidget(QWidget *parent = nullptr);
     void setType(GraphTheory::NodeTypePtr type);
     void setType(GraphTheory::EdgeTypePtr type);
 

@@ -18,8 +18,8 @@ using namespace GraphTheory;
 GraphEditorWidget::GraphEditorWidget(QWidget *parent)
     : QWidget(parent)
     , m_viewWidgets(new QTabWidget(this))
-    , m_project(0)
-    , m_editor(0)
+    , m_project(nullptr)
+    , m_editor(nullptr)
 {
     QLayout *layout = new QVBoxLayout();
     m_viewWidgets->setTabsClosable(false);

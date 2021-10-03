@@ -18,7 +18,7 @@ class EdgeProperties : public QDialog
     Q_OBJECT
 
 public:
-    explicit EdgeProperties(QWidget *parent = 0);
+    explicit EdgeProperties(QWidget *parent = nullptr);
     void setData(EdgePtr edge);
 
 private Q_SLOTS:

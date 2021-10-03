@@ -31,8 +31,8 @@ class ProjectPrivate
 {
 public:
     ProjectPrivate()
-        : m_journal(Q_NULLPTR)
-        , m_graphEditor(Q_NULLPTR)
+        : m_journal(nullptr)
+        , m_graphEditor(nullptr)
         , m_modified(false)
         , m_activeGraphDocumentIndex(-1)
         , m_activeCodeDocumentIndex(-1)

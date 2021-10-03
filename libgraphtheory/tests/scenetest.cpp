@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     EdgePtr edge = Edge::create(from, to);
     edge->setDynamicProperty("weight", "3");
 
-    QQuickWidget *widget = document->createView(0);
+    QQuickWidget *widget = document->createView(nullptr);
     widget->show();
 
     rc = app.exec();

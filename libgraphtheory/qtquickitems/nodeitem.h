@@ -23,7 +23,7 @@ class NodeItem : public QQuickPaintedItem
     Q_PROPERTY(bool highlighted READ isHighlighted WRITE setHighlighted NOTIFY highlightedChanged)
 
 public:
-    explicit NodeItem(QQuickPaintedItem *parent = 0);
+    explicit NodeItem(QQuickPaintedItem *parent = nullptr);
     ~NodeItem() override;
     Node * node() const;
     void setNode(Node *node);

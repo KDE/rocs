@@ -20,7 +20,7 @@ class FileFormatDialog : public QObject
     Q_OBJECT
 
 public:
-    explicit FileFormatDialog(QObject *parent = 0);
+    explicit FileFormatDialog(QObject *parent = nullptr);
     GraphTheory::GraphDocumentPtr importFile();
     bool exportFile(GraphTheory::GraphDocumentPtr document) const;
     void dialogExec();

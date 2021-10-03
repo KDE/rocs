@@ -126,7 +126,7 @@ GraphDocumentPtr FileFormatDialog::importFile()
     }
 
     int index = fileName.lastIndexOf('.');
-    FileFormatInterface * filePlugin = 0;
+    FileFormatInterface * filePlugin = nullptr;
     if (index == -1) {
         qDebug() << "Cannot open file without extension.";
         return GraphDocumentPtr();

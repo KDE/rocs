@@ -22,7 +22,7 @@ class CodeEditorWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit CodeEditorWidget(QWidget *parent = 0);
+    explicit CodeEditorWidget(QWidget *parent = nullptr);
     void setProject(Project *project);
     KTextEditor::Document *activeDocument() const;
 

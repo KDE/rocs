@@ -22,7 +22,7 @@ class GraphTheory::GraphLayoutPluginPrivate
 {
 public:
     GraphLayoutPluginPrivate()
-        : m_dialog(0)
+        : m_dialog(nullptr)
     {
     }
 

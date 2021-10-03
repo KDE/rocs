@@ -27,7 +27,7 @@ class GRAPHTHEORY_EXPORT EdgeTypeProperties : public QDialog
     Q_OBJECT
 
 public:
-    explicit EdgeTypeProperties(QWidget *parent = 0);
+    explicit EdgeTypeProperties(QWidget *parent = nullptr);
     void setType(EdgeTypePtr type);
 
 private Q_SLOTS:

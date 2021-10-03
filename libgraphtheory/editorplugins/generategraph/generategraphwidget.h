@@ -33,7 +33,7 @@ class GenerateGraphWidget : public QDialog
     };
 
 public:
-    explicit GenerateGraphWidget(GraphDocumentPtr document, QWidget *parent = 0);
+    explicit GenerateGraphWidget(GraphDocumentPtr document, QWidget *parent = nullptr);
     ~GenerateGraphWidget() override;
 
 public slots:

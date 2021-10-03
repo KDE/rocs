@@ -28,7 +28,7 @@ public:
         NameRole = Qt::UserRole + 1,      //!< unique identifier of node
     };
 
-    explicit NodeTypePropertyModel(QObject *parent = 0);
+    explicit NodeTypePropertyModel(QObject *parent = nullptr);
     ~NodeTypePropertyModel() override;
     /**
      * Reimplemented from QAbstractListModel::roleNames()

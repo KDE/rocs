@@ -31,7 +31,7 @@ void PropertyDelegate::paint(QPainter* painter, const QStyleOptionViewItem &opti
     if (!index.isValid()) {
         return;
     }
-    QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, 0);
+    QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, nullptr);
 }
 
 QSize PropertyDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const

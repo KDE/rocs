@@ -18,7 +18,7 @@ class TransformEdgesWidget : public QDialog
     Q_OBJECT
 
 public:
-    explicit TransformEdgesWidget(GraphDocumentPtr document, QWidget *parent = 0);
+    explicit TransformEdgesWidget(GraphDocumentPtr document, QWidget *parent = nullptr);
     ~TransformEdgesWidget() override;
 
 public Q_SLOTS:

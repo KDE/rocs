@@ -30,7 +30,7 @@ public:
         KernelModule
     };
 
-    explicit Object(QObject *parent = 0);
+    explicit Object(QObject *parent = nullptr);
     ~Object() override;
 
     QString id() const;

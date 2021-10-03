@@ -152,7 +152,7 @@ using boost::spirit::repository::qi::confix;
 
 typedef BOOST_TYPEOF(SKIPPER) skipper_type;
 
-DotGraphParsingHelper* phelper = 0;
+DotGraphParsingHelper* phelper = nullptr;
 
 template <typename Iterator, typename Skipper = space_type>
 struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {

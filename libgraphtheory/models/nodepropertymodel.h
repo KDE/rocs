@@ -30,7 +30,7 @@ public:
         VisibilityRole                    //!< is property name visible
     };
 
-    explicit NodePropertyModel(QObject *parent = 0);
+    explicit NodePropertyModel(QObject *parent = nullptr);
     ~NodePropertyModel() override;
     /**
      * Reimplemented from QAbstractListModel::roleNames()

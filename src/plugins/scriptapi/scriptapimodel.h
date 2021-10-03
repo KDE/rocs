@@ -23,7 +23,7 @@ public:
         AnchorRole
     };
 
-    explicit ScriptApiModel(QList<Object* > dataList, QObject *parent = 0);
+    explicit ScriptApiModel(QList<Object* > dataList, QObject *parent = nullptr);
     ~ScriptApiModel() override;
 
     QVariant data(const QModelIndex &index, int role) const override;
