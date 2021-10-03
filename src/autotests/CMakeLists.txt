@@ -6,11 +6,10 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
 file(COPY testfiles DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-set(testproject_SRCS
+add_executable(TestProject
     test_project.cpp
     ../project/project.cpp
 )
-add_executable(TestProject ${testproject_SRCS})
 add_test(NAME TestProject COMMAND TestProject)
 target_compile_definitions(TestProject PRIVATE ADDITIONAL_PLUGIN_DIR="${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 ecm_mark_as_test(TestProject)

@@ -6,7 +6,19 @@ include_directories(
     ./
 )
 
-set(graphtheory_SRCS
+# we use SOVERION 0 to make clear that this is neither stable API nor stable ABI
+# i.e., the library for now is only used internally in Rocs and we require the exact
+# version as released alongside Rocs
+set(GRAPHTHEORY_LIB_VERSION "0.0.1")
+set(GRAPHTHEORY_LIB_SOVERSION "0")
+
+add_library(rocsgraphtheory SHARED)
+set_target_properties(rocsgraphtheory PROPERTIES
+#         VERSION ${GRAPHTHEORY_LIB_VERSION}
+        SOVERSION ${GRAPHTHEORY_LIB_SOVERSION}
+)
+
+target_sources(rocsgraphtheory PRIVATE
     edge.cpp
     edgetype.cpp
     edgetypestyle.cpp
@@ -46,15 +58,15 @@ set(graphtheory_SRCS
     qtquickitems/edgeitem.cpp
     qtquickitems/qsgarrowheadnode.cpp
     qtquickitems/qsglinenode.cpp
-)
-qt5_add_resources(graphtheory_SRCS qml/rocs.qrc)
 
-ki18n_wrap_ui(graphtheory_SRCS
+    qml/rocs.qrc
+)
+
+ki18n_wrap_ui(rocsgraphtheory
     dialogs/nodeproperties.ui
     dialogs/edgeproperties.ui
 )
 
-add_library(rocsgraphtheory SHARED ${graphtheory_SRCS} )
 generate_export_header(rocsgraphtheory BASE_NAME graphtheory)
 
 target_link_libraries(rocsgraphtheory
@@ -78,18 +90,6 @@ set(rocscore_LIB_HDRS
 
 # KI18N Translation Domain for library
 add_definitions(-DTRANSLATION_DOMAIN=\"libgraphtheory\")
-
-# we use SOVERION 0 to make clear that this is neither stable API nor stable ABI
-# i.e., the library for now is only used internally in Rocs and we require the exact
-# version as released alongside Rocs
-set(GRAPHTHEORY_LIB_VERSION "0.0.1")
-set(GRAPHTHEORY_LIB_SOVERSION "0")
-set_target_properties(
-    rocsgraphtheory
-    PROPERTIES
-#         VERSION ${GRAPHTHEORY_LIB_VERSION}
-        SOVERSION ${GRAPHTHEORY_LIB_SOVERSION}
-)
 
 install(TARGETS rocsgraphtheory  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${KDE_INSTALL_INCLUDEDIR}/rocs  COMPONENT Devel)

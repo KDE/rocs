@@ -7,12 +7,9 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/../)
 #Gets graphs for the data-driven functionality test
 file(COPY graphs DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-set(testforcebasedlayout_SRCS
+add_executable(TestForceBasedLayout
     testforcebasedlayout.cpp
 )
-
-
-add_executable(TestForceBasedLayout ${testforcebasedlayout_SRCS})
 add_test(NAME TestForceBasedLayout COMMAND TestForceBasedLayout)
 ecm_mark_as_test(TestForceBasedLayout)
 target_link_libraries(TestForceBasedLayout
@@ -21,12 +18,10 @@ target_link_libraries(TestForceBasedLayout
 )
 target_compile_definitions(TestForceBasedLayout PRIVATE ADDITIONAL_PLUGIN_DIR="${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
-set(testradiallayout_SRCS
+
+add_executable(TestRadialLayout
     testradiallayout.cpp
 )
-
-
-add_executable(TestRadialLayout ${testradiallayout_SRCS})
 add_test(NAME TestRadialLayout COMMAND TestRadialLayout)
 ecm_mark_as_test(TestRadialLayout)
 target_link_libraries(TestRadialLayout
@@ -36,13 +31,11 @@ target_link_libraries(TestRadialLayout
 target_compile_definitions(TestRadialLayout PRIVATE ADDITIONAL_PLUGIN_DIR="${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 
-set(qualitybenchmark_SRCS
+add_executable(QualityBenchmark
     qualitybenchmark.cpp
     metricsummarizer.cpp
     layoutevaluator.cpp
 )
-
-add_executable(QualityBenchmark ${qualitybenchmark_SRCS})
 target_link_libraries(QualityBenchmark
     rocsgraphtheory
 )

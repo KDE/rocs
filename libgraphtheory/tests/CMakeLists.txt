@@ -2,13 +2,8 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
-set(scenetest_SRCS
+add_executable(scenetest
     scenetest.cpp
-)
-
-add_executable(
-    scenetest
-    ${scenetest_SRCS}
 )
 
 target_link_libraries(scenetest

@@ -10,7 +10,7 @@ file(COPY testfiles/directed DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY testfiles/undirected DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
-set(testdotfileformat_SRCS
+add_executable(TestDotFileFormat
     testdotfileformat.cpp
     ../dotfileformat.cpp
     ../dotgrammar.cpp
@@ -18,7 +18,6 @@ set(testdotfileformat_SRCS
     ../../../logging.cpp
 )
 kde_source_files_enable_exceptions(../dotgrammar.cpp)
-add_executable(TestDotFileFormat ${testdotfileformat_SRCS})
 add_test(NAME TestDotFileFormat COMMAND TestDotFileFormat)
 ecm_mark_as_test(TestDotFileFormat)
 target_link_libraries(TestDotFileFormat

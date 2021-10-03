@@ -6,12 +6,11 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
-set(testtikzfileformat_SRCS
+add_executable(TestTikzFileFormat
     testtikzfileformat.cpp
     ../tikzfileformat.cpp
     ../../../logging.cpp
 )
-add_executable(TestTikzFileFormat ${testtikzfileformat_SRCS})
 add_test(NAME TestTikzFileFormat COMMAND TestTikzFileFormat)
 ecm_mark_as_test(TestTikzFileFormat)
 target_link_libraries(TestTikzFileFormat

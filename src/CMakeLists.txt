@@ -21,7 +21,11 @@ include_directories(
     ./
 )
 
-set( rocs_interface_SRCS
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+
+add_executable(rocs)
+
+target_sources(rocs PRIVATE
     ui/journalwidget.cpp
     ui/sidedockwidget.cpp
     ui/fileformatdialog.cpp
@@ -40,26 +44,19 @@ set( rocs_interface_SRCS
     plugins/scriptapi/parameter.cpp
     plugins/scriptapi/scriptapimanager.cpp
     plugins/scriptapi/scriptapimodel.cpp
-)
-
-set(
-    rocs_SRCS
     main.cpp
-    ${rocs_interface_SRCS}
-    ${rocs_script_SRC}
 )
 
-ki18n_wrap_ui(
-    rocs_SRCS
+ki18n_wrap_ui(rocs
     ui/journalwidget.ui
     ui/scriptoutputwidget.ui
     plugins/scriptapi/scriptapiwidget.ui
 )
 
-kconfig_add_kcfg_files(rocs_Settings_SRCS settings.kcfgc)
+kconfig_add_kcfg_files(rocs settings.kcfgc)
 
 # add icon to executable on windows and mac
-ecm_add_app_icon(rocs_SRCS
+ecm_add_app_icon(rocs
     ICONS
     ${CMAKE_CURRENT_SOURCE_DIR}/../icons/16-apps-rocs.png
     ${CMAKE_CURRENT_SOURCE_DIR}/../icons/22-apps-rocs.png
@@ -67,12 +64,6 @@ ecm_add_app_icon(rocs_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/../icons/48-apps-rocs.png
     ${CMAKE_CURRENT_SOURCE_DIR}/../icons/64-apps-rocs.png
     ${CMAKE_CURRENT_SOURCE_DIR}/../icons/128-apps-rocs.png
-)
-
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-add_executable( rocs
-    ${rocs_SRCS}
-    ${rocs_Settings_SRCS}
 )
 
 target_link_libraries(rocs
