@@ -33,8 +33,8 @@ GraphLayoutWidget::GraphLayoutWidget(GraphDocumentPtr document, QWidget *parent)
     , m_attractionForce(50)
     , m_currentTabIndex(0)
     , m_root(-1)
-    , m_nodeSeparation(50)
     , m_treeType(TreeType::Free)
+    , m_nodeSeparation(50)
 {
     setWindowTitle(i18nc("@title:window", "Graph Layout"));
     
