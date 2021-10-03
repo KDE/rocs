@@ -36,7 +36,7 @@ public:
     explicit GenerateGraphWidget(GraphDocumentPtr document, QWidget *parent = nullptr);
     ~GenerateGraphWidget() override;
 
-public slots:
+public Q_SLOTS:
     /**
      * Select graph generator by its index.
      *

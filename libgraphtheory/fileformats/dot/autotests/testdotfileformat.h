@@ -25,7 +25,7 @@ class DotFileFormatTest : public QObject
      */
     void checkNodes(GraphTheory::GraphDocumentPtr document, QList<QString> nodeNames);
 
-private slots:
+private Q_SLOTS:
     void init();
     void simpleGraphParsing();
     void parseSubgraphs();

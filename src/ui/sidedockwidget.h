@@ -51,7 +51,7 @@ public:
     void addDock(QWidget* dock, const QString& title, const QIcon& icon);
     void showDock(bool show, int nr);
 
-signals:
+Q_SIGNALS:
     void visibilityChanged(bool visible);
 
 private:

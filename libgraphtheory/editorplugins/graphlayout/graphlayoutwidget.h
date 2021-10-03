@@ -23,7 +23,7 @@ public:
     explicit GraphLayoutWidget(GraphDocumentPtr document, QWidget *parent = nullptr);
     ~GraphLayoutWidget() override;
 
-public slots:
+public Q_SLOTS:
     /**
      * Lay out the graph.
      */

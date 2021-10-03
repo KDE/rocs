@@ -15,7 +15,7 @@ class TestRocs2FileFormat : public QObject
 public:
     TestRocs2FileFormat();
 
-private slots:
+private Q_SLOTS:
     void documentTypesTest();
     void nodeAndEdgeTest();
     void parseVersion1Format();

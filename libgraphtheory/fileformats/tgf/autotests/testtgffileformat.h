@@ -15,7 +15,7 @@ class TestTgfFileFormat : public QObject
 public:
     TestTgfFileFormat();
 
-private slots:
+private Q_SLOTS:
     void serializeUnserializeTest();
 };
 

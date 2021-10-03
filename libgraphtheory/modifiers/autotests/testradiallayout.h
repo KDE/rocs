@@ -15,7 +15,7 @@ class RadialLayoutTest : public QObject
 {
     Q_OBJECT;
 private:
-private slots:
+private Q_SLOTS:
     void emptyGraph();
     void cycleGraph();
     void disconnectedGraph();

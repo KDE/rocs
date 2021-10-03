@@ -15,7 +15,7 @@ class TestTikzFileFormat : public QObject
 public:
     TestTikzFileFormat();
 
-private slots:
+private Q_SLOTS:
     void serializeTest();
 };
 

@@ -66,7 +66,7 @@ public:
      */
     bool loadObjectApi(const QUrl &path);
 
-signals:
+Q_SIGNALS:
     void objectApiAdded();
     void objectApiAboutToBeAdded(Object*,int);
     void objectApiRemoved();

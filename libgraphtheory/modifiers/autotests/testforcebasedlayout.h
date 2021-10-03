@@ -21,7 +21,7 @@ public:
 
 private:
     void findGraphFiles(const QString& path, QVector<QUrl>& files);
-private slots:
+private Q_SLOTS:
     void testMargin_data();
     void testMargin();
 };

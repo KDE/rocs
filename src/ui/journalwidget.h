@@ -41,7 +41,7 @@ public:
      */
     bool isModified() const;
 
-private slots:
+private Q_SLOTS:
     /**
      * Set the internal state of the widget to modified.
      */
