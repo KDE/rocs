@@ -50,11 +50,13 @@ AssignValuesWidget::AssignValuesWidget(GraphDocumentPtr document, QWidget *paren
 
     // set types
     ui->nodeType->addItem(i18n("All Data Types"), -1);
-    foreach (NodeTypePtr type, m_document->nodeTypes()) {
+    const auto nodeTypes = m_document->nodeTypes();
+    for (const NodeTypePtr &type : nodeTypes) {
         ui->nodeType->addItem(type->name());
     }
     ui->edgeType->addItem(i18n("All Edge Types"), -1);
-    foreach (EdgeTypePtr type, document->edgeTypes()) {
+    const auto edgeTypes = document->edgeTypes();
+    for (const EdgeTypePtr &type : edgeTypes) {
         ui->edgeType->addItem(type->name());
     }
 
@@ -69,10 +71,10 @@ AssignValuesWidget::AssignValuesWidget(GraphDocumentPtr document, QWidget *paren
 
     // set all available properties as possible completes
     KCompletion *complete = ui->propertyName->completionObject();
-    foreach (NodeTypePtr type, m_document->nodeTypes()) {
+    for (const NodeTypePtr &type : nodeTypes) {
         complete->insertItems(type->dynamicProperties());
     }
-    foreach (EdgeTypePtr type, m_document->edgeTypes()) {
+    for (const EdgeTypePtr &type : edgeTypes) {
         complete->insertItems(type->dynamicProperties());
     }
     ui->propertyName->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -152,7 +154,8 @@ void AssignValuesWidget::assignValues()
         // case: all properties are selected
         if (typeSelection == -1) {
             nodes = m_document->nodes();
-            foreach (NodeTypePtr type, m_document->nodeTypes()) {
+            const auto nodeTypes = m_document->nodeTypes();
+            for (const NodeTypePtr &type : nodeTypes) {
                 type->addDynamicProperty(property);
             }
         }
@@ -166,7 +169,8 @@ void AssignValuesWidget::assignValues()
         // case: all properties are selected
         if (typeSelection == -1) {
             edges = m_document->edges();
-            foreach (EdgeTypePtr type, m_document->edgeTypes()) {
+            const auto edgeTypes = m_document->edgeTypes();
+            for (const EdgeTypePtr& type : edgeTypes) {
                 type->addDynamicProperty(property);
             }
         }

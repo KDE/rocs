@@ -59,7 +59,7 @@ namespace boost {
     }
 }
 
-void Topology::applyMinCutTreeAlignment(NodeList nodes)
+void Topology::applyMinCutTreeAlignment(const NodeList &nodes)
 {
     // nodes must be at least of length 2, and two nodes cannot have crossing edges
     if (nodes.count() < 3) {
@@ -71,7 +71,7 @@ void Topology::applyMinCutTreeAlignment(NodeList nodes)
     // set box inside which we may reposition
     QList<qreal> xList;
     QList<qreal> yList;
-    foreach(NodePtr node, nodes) {
+    for (const NodePtr& node : nodes) {
         xList << node->x();
         yList << node->y();
     }
@@ -91,14 +91,15 @@ void Topology::applyMinCutTreeAlignment(NodeList nodes)
     QMap<NodePtr, int> node_mapping;
     QMap<QPair<int, int>, EdgePtr > edge_mapping; // to map all edges back afterwards
     int counter = 0;
-    foreach(NodePtr node, nodes) {
+    for (const NodePtr& node :nodes) {
         node_mapping[node] = counter++;
     }
 
-    QVector<BoostEdge> edges(nodes.first()->document()->edges().count());
+    const auto documentEdges = nodes.first()->document()->edges();
+    QVector<BoostEdge> edges(documentEdges.size());
 
     counter = 0;
-    foreach(EdgePtr edge, nodes.first()->document()->edges()) {
+    for (const EdgePtr& edge : documentEdges) {
         edges[counter++] = BoostEdge(node_mapping[edge->from()], node_mapping[edge->to()]);
     }
 
@@ -111,7 +112,7 @@ void Topology::applyMinCutTreeAlignment(NodeList nodes)
 
     PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, graph));
     counter = 0;
-    foreach(NodePtr node, nodes) {
+    for (const NodePtr &node : nodes) {
         positionMap[counter][0] = node->x();
         positionMap[counter][1] = node->y();
         counter++;
@@ -126,14 +127,14 @@ void Topology::applyMinCutTreeAlignment(NodeList nodes)
     );
 
     // put nodes at whiteboard as generated
-    foreach(NodePtr node, nodes) {
+    for (const NodePtr& node : nodes) {
         Vertex v = boost::vertex(node_mapping[node], graph);
         node->setX(positionMap[v][0]);
         node->setY(positionMap[v][1]);
     }
 }
 
-void Topology::applyCircleAlignment(NodeList nodes, qreal radius)
+void Topology::applyCircleAlignment(const NodeList &nodes, qreal radius)
 {
     if (nodes.length() == 0) {
         return;
@@ -145,7 +146,7 @@ void Topology::applyCircleAlignment(NodeList nodes, qreal radius)
         // set box inside which we may reposition
         QList<qreal> xList;
         QList<qreal> yList;
-        foreach(NodePtr node, nodes) {
+        for (const NodePtr& node : nodes) {
             xList << node->x();
             yList << node->y();
         }
@@ -159,14 +160,15 @@ void Topology::applyCircleAlignment(NodeList nodes, qreal radius)
     QMap<NodePtr, int> node_mapping;
     QMap<QPair<int, int>, EdgePtr > edge_mapping; // to map all edges back afterwards
     int counter = 0;
-    foreach(NodePtr node, nodes) {
+    for (const NodePtr &node : nodes) {
         node_mapping[node] = counter++;
     }
 
-    QVector<BoostEdge> edges(nodes.first()->document()->edges().count());
+    const auto documentEdges = nodes.first()->document()->edges();
+    QVector<BoostEdge> edges(documentEdges.size());
 
     counter = 0;
-    foreach(EdgePtr edge, nodes.first()->document()->edges()) {
+    for (const EdgePtr& edge : documentEdges) {
         edges[counter++] = BoostEdge(node_mapping[edge->from()], node_mapping[edge->to()]);
     }
 
@@ -179,7 +181,7 @@ void Topology::applyCircleAlignment(NodeList nodes, qreal radius)
 
     PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, graph));
     counter = 0;
-    foreach(NodePtr node, nodes) {
+    for (const NodePtr &node : nodes) {
         positionMap[counter][0] = node->x();
         positionMap[counter][1] = node->y();
         counter++;
@@ -191,7 +193,7 @@ void Topology::applyCircleAlignment(NodeList nodes, qreal radius)
                                                     radius);
 
     // put nodes at whiteboard as generated
-    foreach(NodePtr node, nodes) {
+    for (const NodePtr &node : nodes) {
         Vertex v = boost::vertex(node_mapping[node], graph);
         node->setX(positionMap[v][0]);
         node->setY(positionMap[v][1]);
@@ -246,7 +248,7 @@ QMap<NodePtr, int> mapNodesToIndexes(const NodeList& nodes)
 {
     int nextIndex = 0;
     QMap<NodePtr, int> nodeToIndexMap;
-    foreach(const NodePtr node, nodes) {
+    for (const NodePtr& node : nodes) {
         nodeToIndexMap[node] = nextIndex;
         nextIndex++;
     }
@@ -257,7 +259,7 @@ QVector<RemappedEdge> getRemappedEdges(const EdgeList& edges,
                                        const QMap<NodePtr, int>& nodeToIndexMap)
 {
     QVector<RemappedEdge> remappedEdges;
-    foreach(const EdgePtr edge, edges) {
+    for (const EdgePtr& edge : edges) {
         const int from = nodeToIndexMap[edge->from()];
         const int to = nodeToIndexMap[edge->to()];
         remappedEdges.push_back(RemappedEdge(from, to));
@@ -290,7 +292,7 @@ RemappedGraph remapGraph(const GraphDocumentPtr document) {
 void moveNodes(const NodeList& nodes, const QMap<NodePtr, int>& nodeToIndexMap,
                const QVector<QPointF>& positions)
 {
-    foreach(const NodePtr node, nodes) {
+    for (const NodePtr& node : nodes) {
         const int index = nodeToIndexMap[node];
         const QPointF& position = positions[index];
         node->setX(position.x());
@@ -304,7 +306,7 @@ QVector<QPointF> getCurrentPositions(const NodeList& nodes,
                                     const QMap<NodePtr, int>& nodeToIndexMap)
 {
     QVector<QPointF> positions(nodes.size());
-    foreach(const NodePtr node, nodes) {
+    for (const NodePtr& node : nodes) {
         const int index = nodeToIndexMap[node];
         positions[index] = QPointF(node->x(), node->y());
     }

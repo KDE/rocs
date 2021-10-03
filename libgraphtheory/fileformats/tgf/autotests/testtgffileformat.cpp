@@ -62,7 +62,8 @@ void TestTgfFileFormat::serializeUnserializeTest()
     // test imported values
     QVERIFY2(document->nodes().size() == 5, "ERROR: Number of data is not 5 ");
     QVERIFY2(document->edges().size() == 5, "ERROR: Number of pointers is not 5 ");
-    foreach(NodePtr node, document->nodes()) {
+    const auto documentNodes = document->nodes();
+    for (const NodePtr &node : documentNodes) {
         qDebug() << "Node" << node->dynamicProperty("label");
         for(const auto& e : node->outEdges()) {
             qDebug() << ".. out" << e->from()->dynamicProperty("label") << e->to()->dynamicProperty("label");

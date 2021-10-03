@@ -122,7 +122,8 @@ void NodeProperties::validateIdInput()
         return;
     }
     int valid = true;
-    foreach (const auto &node, m_node->document()->nodes()) {
+    const auto nodes = m_node->document()->nodes();
+    for (const auto &node : nodes) {
         if (node != m_node && node->id() == ui->id->value()) {
             valid = false;
             break;

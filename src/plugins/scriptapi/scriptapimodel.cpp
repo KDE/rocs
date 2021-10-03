@@ -223,7 +223,7 @@ QVariant ScriptApiModel::headerData(int section, Qt::Orientation orientation, in
 
 void ScriptApiModel::setupModelData(QList<Object*> dataList, Item *parent)
 {
-    foreach (Object *object, dataList) {
+    for (Object *object : std::as_const(dataList)) {
         QList<QVariant> columnData;
         columnData << object->id();
         Item *objectItem = new Item(columnData, parent);
@@ -235,7 +235,8 @@ void ScriptApiModel::setupModelData(QList<Object*> dataList, Item *parent)
         Item *propertyContainer = new Item(propertyColumnData, objectItem);
         propertyContainer->setDocumentAnchor(object->apiDocumentIdentifier(), "properties");
         objectItem->appendChild(propertyContainer);
-        foreach (Property *property, object->properties()) {
+        const auto properties = object->properties();
+        for (Property *property : properties) {
             QList<QVariant> columnData;
             columnData << property->name();
             Item *propertyItem = new Item(columnData, propertyContainer);
@@ -249,7 +250,8 @@ void ScriptApiModel::setupModelData(QList<Object*> dataList, Item *parent)
         Item *methodContainer = new Item(methodColumnData, objectItem);
         methodContainer->setDocumentAnchor(object->apiDocumentIdentifier(), "methods");
         objectItem->appendChild(methodContainer);
-        foreach (Method *method, object->methods()) {
+        const auto methods = object->methods();
+        for (Method *method : methods) {
             QList<QVariant> columnData;
             columnData << method->name();
             Item *methodProperty = new Item(columnData, methodContainer);

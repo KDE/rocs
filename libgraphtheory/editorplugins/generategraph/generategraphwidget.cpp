@@ -254,9 +254,10 @@ QPointF GenerateGraphWidget::documentCenter() const
     QPointF center = QPointF(geometry().center());
     qreal xSum = 0;
     qreal ySum = 0;
-    int number = m_document->nodes().length();
+    const auto documentNodes = m_document->nodes();
+    int number = documentNodes.size();
 
-    foreach (NodePtr node, m_document->nodes()) {
+    for (const NodePtr &node : documentNodes) {
         xSum += node->x();
         ySum += node->y();
     }

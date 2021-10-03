@@ -56,19 +56,23 @@ GraphDocumentPtr GraphDocument::self() const
 void GraphDocument::destroy()
 {
     d->m_valid = false;
-    foreach (EdgePtr edge, d->m_edges) {
+    const auto edges = d->m_edges;
+    for (const EdgePtr &edge : edges) {
         edge->destroy();
     }
     d->m_edges.clear();
-    foreach (NodePtr node, d->m_nodes) {
+    const auto nodes = d->m_nodes;
+    for (const NodePtr &node : nodes) {
         node->destroy();
     }
     d->m_nodes.clear();
-    foreach (NodeTypePtr type, d->m_nodeTypes) {
+    const auto nodeTypes = d->m_nodeTypes;
+    for (const NodeTypePtr &type : nodeTypes) {
         type->destroy();
     }
     d->m_nodeTypes.clear();
-    foreach (EdgeTypePtr type, d->m_edgeTypes) {
+    const auto edgeTypes = d->m_edgeTypes;
+    for (const EdgeTypePtr &type : edgeTypes) {
         type->destroy();
     }
     d->m_edgeTypes.clear();
@@ -135,7 +139,7 @@ NodeList GraphDocument::nodes(NodeTypePtr type) const
     }
 
     NodeList nodes;
-    foreach (NodePtr node, d->m_nodes) {
+    for (const NodePtr &node : std::as_const(d->m_nodes)) {
         if (node->type() == type) {
             nodes.append(node);
         }
@@ -150,7 +154,7 @@ EdgeList GraphDocument::edges(EdgeTypePtr type) const
     }
 
     EdgeList edges;
-    foreach (EdgePtr edge, d->m_edges) {
+    for (const EdgePtr &edge : std::as_const(d->m_edges)) {
         if (edge->type() == type) {
             edges.append(edge);
         }
@@ -252,7 +256,8 @@ void GraphDocument::remove(EdgePtr edge)
 
 void GraphDocument::remove(NodeTypePtr type)
 {
-    foreach (NodePtr node, d->m_nodes) {
+    const auto nodes = d->m_nodes;
+    for (const NodePtr &node : nodes) {
         if (node->type() == type) {
             node->destroy();
         }
@@ -269,7 +274,8 @@ void GraphDocument::remove(NodeTypePtr type)
 
 void GraphDocument::remove(EdgeTypePtr type)
 {
-    foreach (EdgePtr edge, edges(type)) {
+    const auto typeEdges = edges(type);
+    for (const EdgePtr &edge : typeEdges) {
         edge->destroy();
     }
     if (type->isValid()) {

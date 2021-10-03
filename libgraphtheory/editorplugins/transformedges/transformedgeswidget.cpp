@@ -61,7 +61,8 @@ void TransformEdgesWidget::transform()
 void TransformEdgesWidget::makeComplete()
 {
     //TODO only default edge type considered
-    foreach(EdgePtr e, m_document->edges()) {
+    const auto edges = m_document->edges();
+    for (const EdgePtr &e : edges) {
         e->destroy();
     }
 
@@ -78,19 +79,22 @@ void TransformEdgesWidget::makeComplete()
 void TransformEdgesWidget::removeAllEdges()
 {
     //TODO only default edge type considered
-    foreach(EdgePtr e, m_document->edges()) {
+    const auto edges = m_document->edges();
+    for (const EdgePtr &e : edges) {
         e->destroy();
     }
 }
 
 void TransformEdgesWidget::reverseAllEdges()
 {
-    foreach (EdgeTypePtr type , m_document->edgeTypes()) {
+    const auto edgeTypes = m_document->edgeTypes();
+    for (const EdgeTypePtr &type : edgeTypes) {
         if (type->direction() == EdgeType::Bidirectional) {
             continue;
         }
         QList< QPair< NodePtr, NodePtr > > newEdges;
-        foreach(EdgePtr e, m_document->edges(type)) {
+        const auto edges = m_document->edges(type);
+        for (const EdgePtr &e : edges) {
             newEdges << QPair< NodePtr, NodePtr >(e->to(), e->from());
             e->destroy();
         }
@@ -215,7 +219,8 @@ qreal TransformEdgesWidget::makeSpanningTree()
 
 void TransformEdgesWidget::removeAllSelfEdges()
 {
-    foreach(EdgePtr e, m_document->edges()) {
+    const auto edges = m_document->edges();
+    for (const EdgePtr &e : edges) {
         if (e->to() == e->from()) {
             e->destroy();
         }

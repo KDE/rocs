@@ -120,8 +120,8 @@ void Rocs1FileFormat::readFile()
                 } else if (dataLine.startsWith(QLatin1String("IconName :"))) {
                     QString iconString = dataLine.section(' ', 2);
                 } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
-                    QStringList properties = dataLine.section(' ', 2).split(',');
-                    foreach(const QString& property, properties) {
+                    const QStringList properties = dataLine.section(' ', 2).split(',');
+                    for (const QString& property : properties) {
                         if (!property.isEmpty()) {
                             nodeTypeMap[tmpDataTypeId]->addDynamicProperty(property.section('=',0,0));
                         }
@@ -154,8 +154,8 @@ void Rocs1FileFormat::readFile()
                         qCCritical(GRAPHTHEORY_FILEFORMAT) << "Direction unset, use default direction of this data type backend.";
                     }
                 } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
-                    QStringList properties = dataLine.section(' ', 2).split(',');
-                    foreach(const QString& property, properties) {
+                    const QStringList properties = dataLine.section(' ', 2).split(',');
+                    for (const QString& property : properties) {
                         if (!property.isEmpty()) {
                             tmpEdgeType->addDynamicProperty(property.section('=',0,0));
                         }
@@ -287,7 +287,8 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
 
     for(int typeID = 0; typeID < document->nodeTypes().length(); ++typeID) {
         QStringList properties;
-        foreach (const QString &property, document->nodeTypes().at(typeID)->dynamicProperties()) {
+        const auto dynamicProperties = document->nodeTypes().at(typeID)->dynamicProperties();
+        for (const QString &property : dynamicProperties) {
             properties.append(property + QString('='));
         }
 
@@ -299,7 +300,8 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
 
     for(int typeID = 0; typeID < document->edgeTypes().length(); ++typeID) {
         QStringList properties;
-        foreach (const QString &property, document->edgeTypes().at(typeID)->dynamicProperties()) {
+        const auto dynamicProperties = document->edgeTypes().at(typeID)->dynamicProperties();
+        for (const QString &property : dynamicProperties) {
             properties.append(property + QString('='));
         }
 
@@ -316,20 +318,24 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
     }
 
     d->_buffer += QString("[DataStructure 0] \n"); // all in one datastructure now
-    foreach(NodePtr n, document->nodes()) {
+    const auto nodes = document->nodes();
+    for (const NodePtr &n : nodes) {
         d->_buffer += QString("[Data %1]\n").arg(QString::number(n->id()));
         d->_buffer += QString("type : ") + QString::number(document->nodeTypes().indexOf(n->type())) + QChar('\n');
-        foreach(const QString &property, n->dynamicProperties()) {
+        const auto dynamicProperties = n->dynamicProperties();
+        for (const QString &property : dynamicProperties) {
             d->_buffer += QString("%1 : %2 \n").arg(property).arg(n->dynamicProperty(property).toString());
         }
         d->_buffer += QChar('\n');
     }
-    foreach(EdgePtr e, document->edges()) {
+    const auto edges = document->edges();
+    for (const EdgePtr &e : edges) {
         d->_buffer += QString("[Pointer %1->%2]\n").
             arg(QString::number(e->from()->id())).
             arg(QString::number(e->to()->id())).toUtf8();
         d->_buffer += QString("type : ") + QString::number(document->edgeTypes().indexOf(e->type())) + QChar('\n');
-        foreach(const QString &property, e->dynamicProperties()) {
+        const auto dynamicProperties = e->dynamicProperties();
+        for (const QString &property : dynamicProperties) {
             d->_buffer += QString("%1 : %2 \n").arg(property).arg(e->dynamicProperty(property).toString());
         }
         d->_buffer += QChar('\n');

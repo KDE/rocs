@@ -36,7 +36,7 @@ public:
      * \param nodeList is the list of all nodes
      * \return void
      */
-    static void applyMinCutTreeAlignment(NodeList nodes);
+    static void applyMinCutTreeAlignment(const NodeList &nodes);
 
     /** \brief applies Circle topology to node set
      *
@@ -48,7 +48,7 @@ public:
      * \param radius to optionally specify target radius
      * \return void
      */
-    static void applyCircleAlignment(NodeList nodes, qreal radius=0);
+    static void applyCircleAlignment(const NodeList &nodes, qreal radius=0);
 
     /** \brief applies a default topology for undirected graphs
      *

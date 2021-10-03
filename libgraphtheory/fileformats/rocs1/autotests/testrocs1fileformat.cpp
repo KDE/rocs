@@ -57,7 +57,8 @@ void TestRocs1FileFormat::serializeUnserializeTest()
 
     QCOMPARE(document->nodes().count(), 5);
     QCOMPARE(document->edges().count(), 5);
-    foreach(NodePtr node, document->nodes()) {
+    const auto documentNodes = document->nodes();
+    for (const NodePtr &node : documentNodes) {
         QCOMPARE(node->edges().count(), 2);
     }
 }

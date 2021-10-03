@@ -126,7 +126,8 @@ void EdgeTypeProperties::apply()
 void EdgeTypeProperties::validateIdInput()
 {
     int valid = true;
-    foreach (const auto &type, m_type->document()->edgeTypes()) {
+    const auto types = m_type->document()->edgeTypes();
+    for (const auto &type : types) {
         if (type != m_type && type->id() == m_id->value()) {
             valid = false;
             break;

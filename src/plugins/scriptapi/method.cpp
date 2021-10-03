@@ -31,7 +31,7 @@ void Method::setDescription(const QStringList &description)
 QVariantList Method::description() const
 {
     QVariantList list;
-    foreach (const QString &paragraph, m_description) {
+    for (const QString &paragraph : m_description) {
         list << paragraph;
     }
     return list;

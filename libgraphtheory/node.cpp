@@ -83,7 +83,8 @@ NodePtr Node::self() const
 void Node::destroy()
 {
     d->m_valid = false;
-    foreach (EdgePtr edge, d->m_edges) {
+    const auto edges = d->m_edges;
+    for (const EdgePtr &edge : edges) {
         d->m_document->remove(edge);
     }
     d->m_document->remove(d->q);
@@ -170,7 +171,7 @@ EdgeList Node::edges(EdgeTypePtr type) const
         return d->m_edges;
     }
     EdgeList edges;
-    foreach (EdgePtr edge, d->m_edges) {
+    for (const EdgePtr &edge : std::as_const(d->m_edges)) {
         if (edge->type() == type) {
             edges.append(edge);
         }
@@ -181,7 +182,7 @@ EdgeList Node::edges(EdgeTypePtr type) const
 EdgeList Node::inEdges(EdgeTypePtr type) const
 {
     EdgeList inEdges;
-    foreach (EdgePtr edge, d->m_edges) {
+    for (const EdgePtr &edge : std::as_const(d->m_edges)) {
         if (type && edge->type() != type) {
             continue;
         }
@@ -201,7 +202,7 @@ EdgeList Node::inEdges(EdgeTypePtr type) const
 EdgeList Node::outEdges(EdgeTypePtr type) const
 {
     EdgeList outEdges;
-    foreach (EdgePtr edge, d->m_edges) {
+    for (const EdgePtr &edge : std::as_const(d->m_edges)) {
         if (type && edge->type() != type) {
             continue;
         }

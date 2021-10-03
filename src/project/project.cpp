@@ -119,13 +119,13 @@ bool ProjectPrivate::writeProjectMetaInfo()
     QJsonObject metaInfo;
 
     QJsonArray codeDocs, codeDocNames, graphDocs;
-    foreach (KTextEditor::Document *document,  m_codeDocuments) {
+    for (KTextEditor::Document *document : std::as_const(m_codeDocuments)) {
         QJsonObject docInfo;
         docInfo.insert("file", document->url().fileName());
         codeDocs.append(docInfo);
         codeDocNames.append(m_documentNames.value(document));
     }
-    foreach (GraphTheory::GraphDocumentPtr document,  m_graphDocuments) {
+    for (const GraphTheory::GraphDocumentPtr &document : std::as_const(m_graphDocuments)) {
         QJsonObject docInfo;
         docInfo.insert("file", document->documentUrl().fileName());
         docInfo.insert("name", document->documentName());
@@ -315,7 +315,7 @@ bool Project::addGraphDocument(GraphDocumentPtr document)
 {
     // compute first unused document path
     QStringList usedFileNames;
-    foreach (GraphTheory::GraphDocumentPtr document, d->m_graphDocuments) {
+    for (const GraphTheory::GraphDocumentPtr &document : std::as_const(d->m_graphDocuments)) {
         usedFileNames.append(document->documentUrl().fileName());
     }
     QString fileName;
@@ -407,11 +407,11 @@ bool Project::projectSave()
     KTar tar = KTar(d->m_projectUrl.toLocalFile(), QStringLiteral("application/gzip"));
     tar.open(QIODevice::WriteOnly);
 
-    foreach (KTextEditor::Document *document, d->m_codeDocuments) {
+    for (KTextEditor::Document *document : std::as_const(d->m_codeDocuments)) {
         document->save();
         tar.addLocalFile(document->url().toLocalFile(), document->url().fileName());
     }
-    foreach (GraphTheory::GraphDocumentPtr document, d->m_graphDocuments) {
+    for (const GraphTheory::GraphDocumentPtr &document : std::as_const(d->m_graphDocuments)) {
         document->documentSave();
         tar.addLocalFile(document->documentUrl().toLocalFile(), document->documentUrl().fileName());
     }
@@ -443,12 +443,12 @@ void Project::setModified(bool modified)
 
 bool Project::isModified() const
 {
-    foreach (GraphDocumentPtr document, d->m_graphDocuments) {
+    for (const GraphDocumentPtr &document : std::as_const(d->m_graphDocuments)) {
         if (document->isModified()) {
             return true;
         }
     }
-    foreach (KTextEditor::Document *document, d->m_codeDocuments) {
+    for (KTextEditor::Document *document : std::as_const(d->m_codeDocuments)) {
         if (document->isModified()) {
             return true;
         }

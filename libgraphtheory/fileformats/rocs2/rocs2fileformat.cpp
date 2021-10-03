@@ -127,7 +127,8 @@ void Rocs2FileFormat::readFile()
         // set type
         NodeTypePtr typeToSet;
         //TODO this is not very efficient for big files: use table instead to cache IDs
-        foreach (NodeTypePtr type, document->nodeTypes()) {
+        const auto nodeTypes = document->nodeTypes();
+        for (const NodeTypePtr &type : nodeTypes) {
             if (type->id() == nodeJson["Type"].toInt()) {
                 typeToSet = type;
                 break;
@@ -135,7 +136,7 @@ void Rocs2FileFormat::readFile()
         }
         if (!typeToSet) {
             qCCritical(GRAPHTHEORY_FILEFORMAT) << "No type found with this ID, defaulting to first found type";
-            typeToSet = document->nodeTypes().first();
+            typeToSet = nodeTypes.first();
         }
         node->setType(typeToSet);
 
@@ -160,7 +161,8 @@ void Rocs2FileFormat::readFile()
         // find nodes to connect to
         NodePtr fromNode, toNode;
         //TODO this is not very efficient for big files: use table instead to cache IDs
-        foreach (NodePtr node, document->nodes()) {
+        const auto nodes = document->nodes();
+        for (const NodePtr &node : nodes) {
             if (node->id() == edgeJson["From"].toInt()) {
                 fromNode = node;
             }
@@ -178,7 +180,8 @@ void Rocs2FileFormat::readFile()
         // set type
         EdgeTypePtr typeToSet;
         //TODO this is not very efficient for big files: use table instead to cache IDs
-        foreach (EdgeTypePtr type, document->edgeTypes()) {
+        const auto edgeTypes = document->edgeTypes();
+        for (const EdgeTypePtr &type : edgeTypes) {
             if (type->id() == edgeJson["Type"].toInt()) {
                 typeToSet = type;
                 break;
@@ -186,7 +189,7 @@ void Rocs2FileFormat::readFile()
         }
         if (!typeToSet) {
             qCCritical(GRAPHTHEORY_FILEFORMAT) << "No type found with this ID, defaulting to first found type";
-            typeToSet = document->edgeTypes().first();
+            typeToSet = edgeTypes.first();
         }
         edge->setType(typeToSet);
 
@@ -215,7 +218,8 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
 
     // serialize node types
     QJsonArray nodeTypes;
-    foreach (const auto &type, document->nodeTypes()) {
+    const auto documentNodeTypes = document->nodeTypes();
+    for (const auto &type : documentNodeTypes) {
         QJsonObject typeJson;
         typeJson.insert("Id", type->id());
         if (type->id() == -1) {
@@ -226,7 +230,8 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
         typeJson.insert("Visible", type->style()->isVisible());
         typeJson.insert("PropertyNamesVisible", type->style()->isPropertyNamesVisible());
         QJsonArray propertiesJson;
-        foreach (const QString &property, type->dynamicProperties()) {
+        const auto dynamicProperties = type->dynamicProperties();
+        for (const QString &property : dynamicProperties) {
             propertiesJson.append(property);
         }
         typeJson.insert("Properties", propertiesJson);
@@ -236,7 +241,8 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
 
     // serialize edge types
     QJsonArray edgeTypes;
-    foreach (EdgeTypePtr type, document->edgeTypes()) {
+    const auto documentEdgeTypes = document->edgeTypes();
+    for (const EdgeTypePtr &type : documentEdgeTypes) {
         QJsonObject typeJson;
         typeJson.insert("Id", type->id());
         if (type->id() == -1) {
@@ -248,7 +254,8 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
         typeJson.insert("PropertyNamesVisible", type->style()->isPropertyNamesVisible());
         typeJson.insert("Direction", direction(type->direction()));
         QJsonArray propertiesJson;
-        foreach (const QString &property, type->dynamicProperties()) {
+        const auto dynamicProperties = type->dynamicProperties();
+        for (const QString &property : dynamicProperties) {
             propertiesJson.append(property);
         }
         typeJson.insert("Properties", propertiesJson);
@@ -258,7 +265,8 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
 
     // serialize nodes
     QJsonArray nodes;
-    foreach (const auto &node, document->nodes()) {
+    const auto documentNodes = document->nodes();
+    for (const auto &node : documentNodes) {
         QJsonObject nodeJson;
         nodeJson.insert("Id", node->id());
         nodeJson.insert("Type", node->type()->id());
@@ -266,7 +274,8 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
         nodeJson.insert("Y", node->y());
         nodeJson.insert("Color", node->color().name());
         QJsonArray propertiesJson;
-        foreach (const QString &property, node->dynamicProperties()) {
+        const auto dynamicProperties = node->dynamicProperties();
+        for (const QString &property : dynamicProperties) {
             QJsonObject propertyJson;
             propertyJson.insert("Name", property);
             propertyJson.insert("Value", node->dynamicProperty(property).toString());
@@ -279,13 +288,15 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
 
     // serialize edges
     QJsonArray edges;
-    foreach (const auto &edge, document->edges()) {
+    const auto documentEdges = document->edges();
+    for (const auto &edge : documentEdges) {
         QJsonObject edgeJson;
         edgeJson.insert("Type", edge->type()->id());
         edgeJson.insert("From", edge->from()->id());
         edgeJson.insert("To", edge->to()->id());
         QJsonArray propertiesJson;
-        foreach (const QString &property, edge->dynamicProperties()) {
+        const auto dynamicProperties = edge->dynamicProperties();
+        for (const QString &property : dynamicProperties) {
             QJsonObject propertyJson;
             propertyJson.insert("Name", property);
             propertyJson.insert("Value", edge->dynamicProperty(property).toString());

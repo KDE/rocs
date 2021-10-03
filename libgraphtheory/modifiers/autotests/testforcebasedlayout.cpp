@@ -65,7 +65,8 @@ void ForceBasedLayoutTest::testMargin()
     
     Topology::applyForceBasedLayout(document, nodeRadius, margin, 1., 1., 1., true, 0);
 
-    foreach(NodePtr node, document->nodes()) {
+    const auto nodes = document->nodes();
+    for (const NodePtr &node : nodes) {
         QVERIFY(node->x() - nodeRadius >= margin - EPS);
         QVERIFY(node->y() - nodeRadius >= margin - EPS);
     }

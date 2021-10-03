@@ -42,7 +42,7 @@ void ScriptApiManager::loadLocalData()
     }
 
     const QStringList files = QDir(dir).entryList(QStringList() << QStringLiteral("*.xml"));
-    Q_FOREACH (const QString &file, files) {
+    for (const QString &file : files) {
         loadObjectApi(QUrl::fromLocalFile(dir + '/' + file));
     }
 }
@@ -95,14 +95,16 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     // properties
     // we use QHash to override parent properties
     QHash<QString, QVariant> propertyList;
-    foreach (Property *property, objectApi->properties()) {
+    const auto properties = objectApi->properties();
+    for (Property *property : properties) {
         propertyList.insert(property->name(), QVariant::fromValue<QObject*>(property));
     }
     mapping.insert("properties", propertyList.values());
 
     // properties
     QVariantList methodList;
-    foreach (Method *method, objectApi->methods()) {
+    const auto methods = objectApi->methods();
+    for (Method *method : methods) {
         methodList.append(QVariant::fromValue<QObject*>(method));
     }
     mapping.insert("methods", methodList);
@@ -250,7 +252,7 @@ QString ScriptApiManager::apiOverviewDocument() const
     // objects
     QVariantList kernelModuleList;
     QVariantList elementList;
-    foreach (Object *object, m_objectApiList) {
+    for (Object *object : m_objectApiList) {
         switch (object->componentType()) {
         case Object::KernelModule:
             kernelModuleList.append(QVariant::fromValue<QObject*>(object));

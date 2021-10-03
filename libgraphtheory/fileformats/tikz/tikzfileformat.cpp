@@ -69,15 +69,17 @@ void TikzFileFormat::writeFile(GraphDocumentPtr graph)
 
     // style information
     out << "\\tikzstyle{value} = [font=\\small]\n";
-    for (int i = 0; i < graph->nodeTypes().length(); ++i) {
-        nodeTypeIdMap.insert(graph->nodeTypes().at(i), i);
+    const auto nodeTypes = graph->nodeTypes();
+    for (int i = 0; i < nodeTypes.size(); ++i) {
+        nodeTypeIdMap.insert(nodeTypes.at(i), i);
         // TODO set type specific style information
         QString dataTypeStyle = QString("\\tikzstyle{nodetype%1}=[circle,thin,fill=black!25,minimum size=20pt,inner sep=0pt]").
             arg(i);
         out << dataTypeStyle << "\n";
     }
-    for (int i = 0; i < graph->edgeTypes().length(); ++i) {
-        EdgeTypePtr type = graph->edgeTypes().at(i);
+    const auto edgeTypes = graph->edgeTypes();
+    for (int i = 0; i < edgeTypes.size(); ++i) {
+        EdgeTypePtr type = edgeTypes.at(i);
         edgeTypeIdMap.insert(type, i);
 
         // set style attributes
@@ -97,8 +99,9 @@ void TikzFileFormat::writeFile(GraphDocumentPtr graph)
 
     // export data elements
     // y-axis is mirrored in tikz-format
-    foreach(NodeTypePtr type, graph->nodeTypes()) {
-        foreach(NodePtr node, graph->nodes(type)) {
+    for (const NodeTypePtr &type : nodeTypes) {
+        const auto nodes = graph->nodes(type);
+        for (const NodePtr &node : nodes) {
             QString nodeStr = QString("\\node[nodetype%1] (%2) at (%3,%4) [label=left:%5]  {%6};").
                 arg(nodeTypeIdMap[type]).
                 arg(node->id()).
@@ -112,8 +115,9 @@ void TikzFileFormat::writeFile(GraphDocumentPtr graph)
     }
 
     // export pointers
-    foreach(EdgeTypePtr type, graph->edgeTypes()) {
-        foreach(EdgePtr edge, graph->edges(type)) {
+    for (const EdgeTypePtr &type : edgeTypes) {
+        const auto edges = graph->edges(type);
+        for (const EdgePtr &edge : edges) {
             QString edgeStr = QString("\\path[edgetype%1] (%2) -- node[value] {%3} (%4);").
                 arg(edgeTypeIdMap[type]).
                 arg(edge->from()->id()).

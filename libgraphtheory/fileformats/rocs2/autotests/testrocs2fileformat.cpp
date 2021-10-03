@@ -122,7 +122,8 @@ void TestRocs2FileFormat::nodeAndEdgeTest()
 
     // find node with ID 1 and then test it
     NodePtr testNode;
-    foreach (NodePtr node, importDocument->nodes()) {
+    const auto importDocumentNodes = importDocument->nodes();
+    for (const NodePtr& node : importDocumentNodes) {
         if (node->id() == 1) {
             testNode = node;
         }

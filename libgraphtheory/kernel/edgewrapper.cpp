@@ -48,7 +48,8 @@ void EdgeWrapper::setType(int typeId)
     if (newType->id() == typeId) {
         return;
     }
-    foreach (EdgeTypePtr type, m_edge->from()->document()->edgeTypes()) {
+    const auto edgeTypes = m_edge->from()->document()->edgeTypes();
+    for (const EdgeTypePtr &type : edgeTypes) {
         if (type->id() == typeId) {
             newType = type;
             break;
@@ -98,7 +99,8 @@ bool EdgeWrapper::event(QEvent *e)
 
 void EdgeWrapper::updateDynamicProperties()
 {
-    foreach (const QString &property, m_edge->dynamicProperties()) {
+    const auto dynamicProperties = m_edge->dynamicProperties();
+    for (const QString &property : dynamicProperties) {
         // property value must not be set to QVariant::Invalid, else the properties are not accessible
         // from the script engine
         if (m_edge->dynamicProperty(property).isValid()) {

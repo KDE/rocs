@@ -31,7 +31,7 @@ void Property::setDescription(const QStringList &description)
 QVariantList Property::description() const
 {
     QVariantList list;
-    foreach (const QString &paragraph, m_description) {
+    for (const QString &paragraph : m_description) {
         list.append(paragraph);
     }
     return list;

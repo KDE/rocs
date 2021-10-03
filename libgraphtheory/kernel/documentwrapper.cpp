@@ -17,10 +17,12 @@ DocumentWrapper::DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engin
     : m_document(document)
     , m_engine(engine)
 {
-    foreach (NodePtr node, document->nodes()) {
+    const auto nodes = document->nodes();
+    for (const NodePtr &node : nodes) {
         registerWrapper(node);
     }
-    foreach (EdgePtr edge, document->edges()) {
+    const auto edges = document->edges();
+    for (const EdgePtr &edge : edges) {
         registerWrapper(edge);
     }
 
@@ -105,7 +107,8 @@ QScriptValue DocumentWrapper::nodes() const
 QScriptValue DocumentWrapper::nodes(int type) const
 {
     NodeTypePtr typePtr;
-    foreach (NodeTypePtr typeTest, m_document->nodeTypes()) {
+    const auto nodeTypes = m_document->nodeTypes();
+    for (const NodeTypePtr &typeTest : nodeTypes) {
         if (typeTest->id() == type) {
             typePtr = typeTest;
             break;
@@ -143,7 +146,8 @@ QScriptValue DocumentWrapper::edges() const
 QScriptValue DocumentWrapper::edges(int type) const
 {
     EdgeTypePtr typePtr;
-    foreach (EdgeTypePtr typeTest, m_document->edgeTypes()) {
+    const auto edgeTypes = m_document->edgeTypes();
+    for (const EdgeTypePtr &typeTest : edgeTypes) {
         if (typeTest->id() == type) {
             typePtr = typeTest;
             break;

@@ -87,7 +87,8 @@ MainWindow::MainWindow()
     // disable save action from kpart, since we take care for the editor by global save action
     // here "file_save" is the action identifier from katepartui.rc
     // note that we may not use that name for our own actions
-    foreach(KActionCollection *ac, KActionCollection::allCollections()) {
+    const auto allCollections = KActionCollection::allCollections();
+    for (KActionCollection *ac : allCollections) {
         if (ac->action("file_save")) {
             ac->action("file_save")->setDisabled(true);
         }

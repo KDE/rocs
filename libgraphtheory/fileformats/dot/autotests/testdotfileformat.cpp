@@ -36,12 +36,12 @@ static const std::string subgraph = "digraph trees {"
 
 void DotFileFormatTest::checkNodes(GraphDocumentPtr document, QList<QString> nodeNames)
 {
-    NodeList nodes = document->nodes();
-    foreach(const NodePtr &node, nodes) {
+    const NodeList nodes = document->nodes();
+    for (const NodePtr &node : nodes) {
         qCDebug(GRAPHTHEORY_FILEFORMAT) << "test NODE " << node->dynamicProperty("name").toString();
     }
 
-    foreach(const NodePtr &node, nodes) {
+    for (const NodePtr &node : nodes) {
         QString name = node->dynamicProperty("name").toString();
         int index = nodeNames.indexOf(name);
         if (index == -1) {
@@ -91,9 +91,9 @@ void DotFileFormatTest::parseFileER()
     QVERIFY(document->edges().count() == 12);
 
     // Check that a pointer has the correct label & that the node labels work.
-    NodeList nodes = document->nodes();
+    const NodeList nodes = document->nodes();
     NodePtr from, to;
-    foreach(const NodePtr &node, nodes) {
+    for (const NodePtr &node : nodes) {
         QString name = node->dynamicProperty("label").toString();
         if (name == "student") {
             from = node;
@@ -298,10 +298,10 @@ void DotFileFormatTest::parseFileFsm()
     QVERIFY(document->edges().count() == 14);
 
     // Check that a pointer has the correct label and that the shapes are correct.
-    NodeList nodes = document->nodes();
+    const NodeList nodes = document->nodes();
     QVERIFY(nodes.length() == 9); // Make the test quit because the parser has too many LR nodes.
     NodePtr from, to;
-    foreach(const NodePtr &node, nodes) {
+    for (const NodePtr &node : nodes) {
         QString name = node->property("name").toString();
         if (name == "LR_0") {
             from = node;

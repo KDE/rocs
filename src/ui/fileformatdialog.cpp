@@ -34,8 +34,8 @@ bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
     FileFormatManager manager;
 
     QStringList nameFilter;
-    QList<FileFormatInterface*> exportBackends = manager.backends(FileFormatManager::Export);
-    foreach(FileFormatInterface * f, exportBackends) { //TODO fragile code
+    const QList<FileFormatInterface*> exportBackends = manager.backends(FileFormatManager::Export);
+    for (FileFormatInterface * f : exportBackends) { //TODO fragile code
         nameFilter << f->extensions();
     }
 
@@ -107,8 +107,8 @@ GraphDocumentPtr FileFormatDialog::importFile()
     FileFormatManager manager;
 
     QString ext;
-    QList<FileFormatInterface*> importBackends = manager.backends(FileFormatManager::Import);
-    foreach(FileFormatInterface * f, importBackends) {
+    const QList<FileFormatInterface*> importBackends = manager.backends(FileFormatManager::Import);
+    for (FileFormatInterface * f : importBackends) {
         ext.append(f->extensions().join(""));
     }
     ext.append(i18n("*|All files"));

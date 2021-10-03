@@ -57,7 +57,7 @@ QList<FileFormatInterface*> FileFormatManager::backends() const
 QList<FileFormatInterface*> FileFormatManager::backends(PluginType type) const
 {
     QList<FileFormatInterface*> backends;
-    foreach(FileFormatInterface *backend, d->backends) {
+    for (FileFormatInterface *backend : std::as_const(d->backends)) {
         switch(type) {
             case Import:
                 if (backend->pluginCapability() == FileFormatInterface::ImportOnly
@@ -83,7 +83,7 @@ QList<FileFormatInterface*> FileFormatManager::backends(PluginType type) const
 void FileFormatManager::loadBackends()
 {
     // remove all present backends
-    foreach(FileFormatInterface *f, d->backends) {
+    for (FileFormatInterface *f : std::as_const(d->backends)) {
         delete f;
     }
     d->backends.clear();
@@ -130,7 +130,7 @@ FileFormatInterface * FileFormatManager::backendByExtension(const QString &ext)
         qCWarning(GRAPHTHEORY_FILEFORMAT) << "File does not contain extension, falling back to default file format";
         return defaultBackend();
     }
-    foreach(FileFormatInterface * p,  d->backends) {
+    for (FileFormatInterface * p :  std::as_const(d->backends)) {
         if (p->extensions().join(";").contains(suffix, Qt::CaseInsensitive)) {
             return p;
         }
