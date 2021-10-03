@@ -7,7 +7,7 @@
 #   SPDX-License-Identifier: GPL-2.0-or-later
 ##
 
-cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 # KDE Application Version, managed by release script
 set(RELEASE_SERVICE_VERSION_MAJOR "21")
@@ -20,24 +20,29 @@ project(rocs LANGUAGES CXX VERSION ${RELEASE_SERVICE_VERSION})
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(ECM 5.40.0 REQUIRED NO_MODULE)
-find_package(KF5DocTools)
-find_package(Boost "1.49" REQUIRED)
-find_package(Grantlee5 "5.0.0" REQUIRED)
+set(QT_MIN_VERSION "5.15.0")
+set(KF_MIN_VERSION "5.83.0")
+
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+
 include(ECMAddAppIcon)
 include(ECMAddTests)
 include(ECMInstallIcons)
 include(ECMOptionalAddSubdirectory)
 include(ECMSetupVersion)
-include(KDEInstallDirs)
-include(KDECompilerSettings NO_POLICY_SCOPE)
-include(KDECMakeSettings)
 include(FeatureSummary)
 include(GenerateExportHeader)
 
-find_package(Qt5 5.11 REQUIRED NO_MODULE COMPONENTS
+find_package(Boost "1.49" REQUIRED)
+find_package(Grantlee5 "5.0.0" REQUIRED)
+
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS
     Core
     Gui
     QuickWidgets
@@ -48,7 +53,7 @@ find_package(Qt5 5.11 REQUIRED NO_MODULE COMPONENTS
     Test
     XmlPatterns
 )
-find_package(KF5 5.17 REQUIRED COMPONENTS
+find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Archive
     Config
     CoreAddons
@@ -58,6 +63,7 @@ find_package(KF5 5.17 REQUIRED COMPONENTS
     TextEditor
     XmlGui
 )
+find_package(KF5DocTools)
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
