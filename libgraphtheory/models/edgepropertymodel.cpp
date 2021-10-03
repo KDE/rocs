@@ -74,11 +74,11 @@ void EdgePropertyModel::setEdge(Edge *edge)
         connect(d->m_edge.data(), &Edge::styleChanged,[=]() {
             QVector<int> changedRoles;
             changedRoles.append(VisibilityRole);
-            emit dataChanged(index(0), index(d->m_edge->dynamicProperties().count() - 1), changedRoles);
+            Q_EMIT dataChanged(index(0), index(d->m_edge->dynamicProperties().count() - 1), changedRoles);
         } );
     }
     endResetModel();
-    emit edgeChanged();
+    Q_EMIT edgeChanged();
 }
 
 Edge * EdgePropertyModel::edge() const
@@ -149,7 +149,7 @@ void EdgePropertyModel::onDynamicPropertyRemoved()
 
 void EdgePropertyModel::onDynamicPropertyChanged(int row)
 {
-    emit dataChanged(index(row, 0), index(row, 0));
+    Q_EMIT dataChanged(index(row, 0), index(row, 0));
 }
 
 QVariant EdgePropertyModel::headerData(int section, Qt::Orientation orientation, int role) const

@@ -168,7 +168,7 @@ void SidedockWidget::showDock(bool show, int nr)
     setVisible(show);
     auto *stackLayout = qobject_cast<QStackedLayout*>(layout());
     stackLayout->setCurrentIndex(nr);
-    emit visibilityChanged(show);
+    Q_EMIT visibilityChanged(show);
 }
 
 QToolBar* SidedockWidget::toolbar() const

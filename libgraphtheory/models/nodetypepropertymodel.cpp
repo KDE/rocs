@@ -69,7 +69,7 @@ void NodeTypePropertyModel::setNodeType(NodeType *type)
             this, &NodeTypePropertyModel::onDynamicPropertyChanged);
     }
     endResetModel();
-    emit nodeChanged();
+    Q_EMIT nodeChanged();
 }
 
 NodeType * NodeTypePropertyModel::node() const
@@ -135,7 +135,7 @@ void NodeTypePropertyModel::onDynamicPropertyRemoved()
 
 void NodeTypePropertyModel::onDynamicPropertyChanged(int row)
 {
-    emit dataChanged(index(row, 0), index(row, 0));
+    Q_EMIT dataChanged(index(row, 0), index(row, 0));
 }
 
 QVariant NodeTypePropertyModel::headerData(int section, Qt::Orientation orientation, int role) const

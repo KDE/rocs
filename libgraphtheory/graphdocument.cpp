@@ -170,9 +170,9 @@ void GraphDocument::insert(NodePtr node)
         d->m_lastGeneratedId = node->id();
     }
 
-    emit nodeAboutToBeAdded(node, d->m_nodes.length());
+    Q_EMIT nodeAboutToBeAdded(node, d->m_nodes.length());
     d->m_nodes.append(node);
-    emit nodeAdded();
+    Q_EMIT nodeAdded();
     setModified(true);
 }
 
@@ -186,9 +186,9 @@ void GraphDocument::insert(EdgePtr edge)
         return;
     }
 
-    emit edgeAboutToBeAdded(edge, d->m_edges.length());
+    Q_EMIT edgeAboutToBeAdded(edge, d->m_edges.length());
     d->m_edges.append(edge);
-    emit edgeAdded();
+    Q_EMIT edgeAdded();
     setModified(true);
 }
 
@@ -201,9 +201,9 @@ void GraphDocument::insert(NodeTypePtr type)
     if (0 <= type->id() && (uint)type->id() < d->m_lastGeneratedId) {
         d->m_lastGeneratedId = type->id();
     }
-    emit nodeTypeAboutToBeAdded(type, d->m_nodeTypes.length());
+    Q_EMIT nodeTypeAboutToBeAdded(type, d->m_nodeTypes.length());
     d->m_nodeTypes.append(type);
-    emit nodeTypeAdded();
+    Q_EMIT nodeTypeAdded();
     setModified(true);
 }
 
@@ -216,9 +216,9 @@ void GraphDocument::insert(EdgeTypePtr type)
     if (0 <= type->id() && (uint)type->id() < d->m_lastGeneratedId) {
         d->m_lastGeneratedId = type->id();
     }
-    emit edgeTypeAboutToBeAdded(type, d->m_edgeTypes.length());
+    Q_EMIT edgeTypeAboutToBeAdded(type, d->m_edgeTypes.length());
     d->m_edgeTypes.append(type);
-    emit edgeTypeAdded();
+    Q_EMIT edgeTypeAdded();
     setModified(true);
 }
 
@@ -229,9 +229,9 @@ void GraphDocument::remove(NodePtr node)
     }
     int index = d->m_nodes.indexOf(node);
     if (index >= 0) {
-        emit nodesAboutToBeRemoved(index,index);
+        Q_EMIT nodesAboutToBeRemoved(index,index);
         d->m_nodes.removeAt(index);
-        emit nodesRemoved();
+        Q_EMIT nodesRemoved();
     }
     setModified(true);
 }
@@ -243,9 +243,9 @@ void GraphDocument::remove(EdgePtr edge)
     }
     int index = d->m_edges.indexOf(edge);
     if (index >= 0) {
-        emit edgesAboutToBeRemoved(index,index);
+        Q_EMIT edgesAboutToBeRemoved(index,index);
         d->m_edges.removeAt(index);
-        emit edgesRemoved();
+        Q_EMIT edgesRemoved();
     }
     setModified(true);
 }
@@ -261,9 +261,9 @@ void GraphDocument::remove(NodeTypePtr type)
         type->destroy();
     }
     int index = d->m_nodeTypes.indexOf(type);
-    emit nodeTypesAboutToBeRemoved(index, index);
+    Q_EMIT nodeTypesAboutToBeRemoved(index, index);
     d->m_nodeTypes.removeOne(type);
-    emit nodeTypesRemoved();
+    Q_EMIT nodeTypesRemoved();
     setModified(true);
 }
 
@@ -276,9 +276,9 @@ void GraphDocument::remove(EdgeTypePtr type)
         type->destroy();
     }
     int index = d->m_edgeTypes.indexOf(type);
-    emit edgeTypesAboutToBeRemoved(index, index);
+    Q_EMIT edgeTypesAboutToBeRemoved(index, index);
     d->m_edgeTypes.removeOne(type);
-    emit edgeTypesRemoved();
+    Q_EMIT edgeTypesRemoved();
     setModified(true);
 }
 
@@ -317,7 +317,7 @@ void GraphDocument::setDocumentName(const QString& name)
         return;
     }
     d->m_name = name;
-    emit documentNameChanged(name);
+    Q_EMIT documentNameChanged(name);
     setModified(true);
 }
 //END file stuff
@@ -356,7 +356,7 @@ bool GraphDocument::documentSaveAs(const QUrl &documentUrl)
     // update document path if necessary
     if (d->m_documentUrl != documentUrl) {
         d->m_documentUrl = documentUrl;
-        emit documentUrlChanged();
+        Q_EMIT documentUrlChanged();
     }
     setModified(false);
 
@@ -371,7 +371,7 @@ QUrl GraphDocument::documentUrl() const
 void GraphDocument::setDocumentUrl(const QUrl &documentUrl)
 {
     d->m_documentUrl = documentUrl;
-    emit documentUrlChanged();
+    Q_EMIT documentUrlChanged();
 }
 
 bool GraphDocument::isModified() const
@@ -385,7 +385,7 @@ void GraphDocument::setModified(bool modified)
         return;
     }
     d->m_modified = modified;
-    emit modifiedChanged();
+    Q_EMIT modifiedChanged();
 }
 
 //END

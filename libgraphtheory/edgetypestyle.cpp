@@ -51,7 +51,7 @@ void EdgeTypeStyle::setColor(const QColor &color)
         return;
     }
     d->m_color = color;
-    emit colorChanged(color);
+    Q_EMIT colorChanged(color);
 }
 
 QColor EdgeTypeStyle::color() const
@@ -65,7 +65,7 @@ void EdgeTypeStyle::setVisible(bool visible)
         return;
     }
     d->m_visible = visible;
-    emit visibilityChanged(visible);
+    Q_EMIT visibilityChanged(visible);
 }
 
 bool EdgeTypeStyle::isVisible() const
@@ -79,7 +79,7 @@ void EdgeTypeStyle::setPropertyNamesVisible(bool visible)
         return;
     }
     d->m_propertyNamesVisible = visible;
-    emit propertyNamesVisibilityChanged(visible);
+    Q_EMIT propertyNamesVisibilityChanged(visible);
 }
 
 bool EdgeTypeStyle::isPropertyNamesVisible() const

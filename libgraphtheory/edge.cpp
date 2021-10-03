@@ -129,8 +129,8 @@ void Edge::setType(EdgeTypePtr type)
     connect(type->style(), &EdgeTypeStyle::changed,
         this, &Edge::styleChanged);
 
-    emit typeChanged(type);
-    emit styleChanged();
+    Q_EMIT typeChanged(type);
+    Q_EMIT styleChanged();
 }
 
 QVariant Edge::dynamicProperty(const QString &property) const
@@ -152,7 +152,7 @@ void Edge::setDynamicProperty(const QString &property, const QVariant &value)
         qCWarning(GRAPHTHEORY_GENERAL) << "Dynamic property not registered at type, aborting to set property.";
     }
     setProperty(("_graph_" + property).toLatin1(), value);
-    emit dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));
+    Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));
 }
 
 void Edge::updateDynamicProperty(const QString &property)
@@ -162,14 +162,14 @@ void Edge::updateDynamicProperty(const QString &property)
         setDynamicProperty(property, QVariant::Invalid);
     }
 
-    emit dynamicPropertiesChanged();
+    Q_EMIT dynamicPropertiesChanged();
 }
 
 void Edge::renameDynamicProperty(const QString &oldProperty, const QString &newProperty)
 {
     setDynamicProperty(newProperty, dynamicProperty(oldProperty));
     setDynamicProperty(oldProperty, QVariant::Invalid);
-    emit dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(newProperty));
+    Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(newProperty));
 }
 
 void Edge::setQpointer(EdgePtr q)

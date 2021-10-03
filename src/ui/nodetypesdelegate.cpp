@@ -128,7 +128,7 @@ void NodeTypesDelegate::onColorChanged(const QColor &color)
 {
     // use temporary stored index, since focusedIndex() does not return current index
     // reason: the color dialog signal does not allow for correct index estimation
-    emit colorChanged(m_workaroundColorButtonIndex, color);
+    Q_EMIT colorChanged(m_workaroundColorButtonIndex, color);
 }
 
 void NodeTypesDelegate::onColorDialogOpened()
@@ -139,7 +139,7 @@ void NodeTypesDelegate::onColorDialogOpened()
 void NodeTypesDelegate::onNameChanged(const QString &name)
 {
     QModelIndex index = focusedIndex();
-    emit nameChanged(index, name);
+    Q_EMIT nameChanged(index, name);
 }
 
 void NodeTypesDelegate::showPropertiesDialog()

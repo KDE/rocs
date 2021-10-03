@@ -85,7 +85,7 @@ QScriptValue DocumentWrapper::node(int id) const
         }
     }
     QString command = QString("Document.node(%1)").arg(id);
-    emit message(i18nc("@info:shell", "%1: no node with ID %2 registered", command, id), Kernel::ErrorMessage);
+    Q_EMIT message(i18nc("@info:shell", "%1: no node with ID %2 registered", command, id), Kernel::ErrorMessage);
     return QScriptValue();
 }
 
@@ -113,7 +113,7 @@ QScriptValue DocumentWrapper::nodes(int type) const
     }
     if (!typePtr) {
         QString command = QString("Document.nodes(%1)").arg(type);
-        emit message(i18nc("@info:shell", "%1: node type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: node type ID %2 not registered", command, type), Kernel::ErrorMessage);
         return m_engine->newArray();
     }
     NodeList nodes = m_document->nodes(typePtr);
@@ -151,7 +151,7 @@ QScriptValue DocumentWrapper::edges(int type) const
     }
     if (!typePtr) {
         QString command = QString("Document.edges(%1)").arg(type);
-        emit message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
         return m_engine->newArray();
     }
     EdgeList edges = m_document->edges(typePtr);
@@ -179,12 +179,12 @@ QScriptValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
 {
     if (!from) {
         QString command = QString("Document.createEdge(from, to)");
-        emit message(i18nc("@info:shell", "%1: \"from\" is not a valid node object", command), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: \"from\" is not a valid node object", command), Kernel::ErrorMessage);
         return QScriptValue();
     }
     if (!to) {
         QString command = QString("Document.createEdge(from, to)");
-        emit message(i18nc("@info:shell", "%1: \"to\" is not a valid node object", command), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: \"to\" is not a valid node object", command), Kernel::ErrorMessage);
         return QScriptValue();
     }
     EdgePtr edge = Edge::create(from->node(), to->node());
@@ -197,7 +197,7 @@ void DocumentWrapper::remove(NodeWrapper *node)
 {
     if (!node) {
         QString command = QString("Document.remove(node)");
-        emit message(i18nc("@info:shell", "%1: \"node\" is not a valid node object", command), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: \"node\" is not a valid node object", command), Kernel::ErrorMessage);
         return;
     }
     // note: The NodeWrapper object explicitly is not removed from m_nodeMap and by this the node object is not removed.
@@ -211,7 +211,7 @@ void DocumentWrapper::remove(EdgeWrapper *edge)
 {
     if (!edge) {
         QString command = QString("Document.remove(edge)");
-        emit message(i18nc("@info:shell", "%1: \"edge\" is not a valid edge object", command), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: \"edge\" is not a valid edge object", command), Kernel::ErrorMessage);
         return;
     }
     // note: The EdgeWrapper object explicitly is not removed from m_edgeMap and by this the edge object is not removed.

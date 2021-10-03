@@ -96,7 +96,7 @@ void EdgeType::setName(const QString& name)
         return;
     }
     d->m_name = name;
-    emit nameChanged(name);
+    Q_EMIT nameChanged(name);
 }
 
 QString EdgeType::name() const
@@ -115,7 +115,7 @@ void EdgeType::setId(int id)
         return;
     }
     d->m_id = id;
-    emit idChanged(id);
+    Q_EMIT idChanged(id);
 }
 
 EdgeTypeStyle * EdgeType::style() const
@@ -133,9 +133,9 @@ void EdgeType::addDynamicProperty(const QString& property)
     if (d->m_dynamicProperties.contains(property)) {
         return;
     }
-    emit dynamicPropertyAboutToBeAdded(property, d->m_dynamicProperties.count());
+    Q_EMIT dynamicPropertyAboutToBeAdded(property, d->m_dynamicProperties.count());
     d->m_dynamicProperties.append(property);
-    emit dynamicPropertyAdded();
+    Q_EMIT dynamicPropertyAdded();
 }
 
 void EdgeType::removeDynamicProperty(const QString& property)
@@ -144,9 +144,9 @@ void EdgeType::removeDynamicProperty(const QString& property)
         return;
     }
     int index = d->m_dynamicProperties.indexOf(property);
-    emit dynamicPropertiesAboutToBeRemoved(index, index);
+    Q_EMIT dynamicPropertiesAboutToBeRemoved(index, index);
     d->m_dynamicProperties.removeOne(property);
-    emit dynamicPropertyRemoved(property);
+    Q_EMIT dynamicPropertyRemoved(property);
 }
 
 void EdgeType::renameDynamicProperty(const QString& oldProperty, const QString& newProperty)
@@ -159,8 +159,8 @@ void EdgeType::renameDynamicProperty(const QString& oldProperty, const QString& 
     }
     int index = d->m_dynamicProperties.indexOf(oldProperty);
     d->m_dynamicProperties[index] = newProperty;
-    emit dynamicPropertyRenamed(oldProperty, newProperty);
-    emit dynamicPropertyChanged(index);
+    Q_EMIT dynamicPropertyRenamed(oldProperty, newProperty);
+    Q_EMIT dynamicPropertyChanged(index);
 }
 
 EdgeType::Direction EdgeType::direction() const
@@ -174,7 +174,7 @@ void EdgeType::setDirection(EdgeType::Direction direction)
         return;
     }
     d->m_direction = direction;
-    emit directionChanged(direction);
+    Q_EMIT directionChanged(direction);
 }
 
 void EdgeType::setQpointer(EdgeTypePtr q)

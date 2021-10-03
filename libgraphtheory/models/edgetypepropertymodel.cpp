@@ -69,7 +69,7 @@ void EdgeTypePropertyModel::setEdgeType(EdgeType *type)
             this, &EdgeTypePropertyModel::onDynamicPropertyChanged);
     }
     endResetModel();
-    emit edgeChanged();
+    Q_EMIT edgeChanged();
 }
 
 EdgeType * EdgeTypePropertyModel::edge() const
@@ -135,7 +135,7 @@ void EdgeTypePropertyModel::onDynamicPropertyRemoved()
 
 void EdgeTypePropertyModel::onDynamicPropertyChanged(int row)
 {
-    emit dataChanged(index(row, 0), index(row, 0));
+    Q_EMIT dataChanged(index(row, 0), index(row, 0));
 }
 
 QVariant EdgeTypePropertyModel::headerData(int section, Qt::Orientation orientation, int role) const

@@ -102,7 +102,7 @@ void PropertyDelegate::onNameEditingFinished()
     if (!m_propertyIndex.isValid()) {
         return;
     }
-    emit nameChanged(m_propertyIndex, m_lastNameInput);
+    Q_EMIT nameChanged(m_propertyIndex, m_lastNameInput);
 }
 
 void PropertyDelegate::onNameInputChanged(const QString &name)
@@ -114,5 +114,5 @@ void PropertyDelegate::onNameInputChanged(const QString &name)
 void PropertyDelegate::onDelete()
 {
     const QModelIndex index = focusedIndex();
-    emit deleteProperty(index);
+    Q_EMIT deleteProperty(index);
 }

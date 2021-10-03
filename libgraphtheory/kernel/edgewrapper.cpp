@@ -20,7 +20,7 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
     , m_documentWrapper(documentWrapper)
 {
     connect(m_edge.data(), &Edge::styleChanged, this, [=] () {
-        emit colorChanged(m_edge->type()->style()->color());
+        Q_EMIT colorChanged(m_edge->type()->style()->color());
     } );
     connect(m_edge.data(), &Edge::dynamicPropertiesChanged, this, &EdgeWrapper::updateDynamicProperties);
     connect(m_edge.data(), &Edge::typeChanged, this, &EdgeWrapper::typeChanged);
@@ -56,7 +56,7 @@ void EdgeWrapper::setType(int typeId)
     }
     if (newType == m_edge->type()) {
         QString command = QString("edge.type = %1)").arg(typeId);
-        emit message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, typeId), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, typeId), Kernel::ErrorMessage);
         return;
     }
     m_edge->setType(newType);

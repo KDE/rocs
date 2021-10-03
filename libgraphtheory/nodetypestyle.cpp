@@ -52,7 +52,7 @@ void NodeTypeStyle::setColor(const QColor &color)
         return;
     }
     d->m_color = color;
-    emit colorChanged(color);
+    Q_EMIT colorChanged(color);
 }
 
 QColor NodeTypeStyle::color() const
@@ -66,7 +66,7 @@ void NodeTypeStyle::setVisible(bool visible)
         return;
     }
     d->m_visible = visible;
-    emit visibilityChanged(visible);
+    Q_EMIT visibilityChanged(visible);
 }
 
 bool NodeTypeStyle::isVisible() const
@@ -80,7 +80,7 @@ void NodeTypeStyle::setPropertyNamesVisible(bool visible)
         return;
     }
     d->m_propertyNamesVisible = visible;
-    emit propertyNamesVisibilityChanged(visible);
+    Q_EMIT propertyNamesVisibilityChanged(visible);
 }
 
 bool NodeTypeStyle::isPropertyNamesVisible() const

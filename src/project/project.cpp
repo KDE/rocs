@@ -241,11 +241,11 @@ bool Project::addCodeDocument(KTextEditor::Document *document)
         return false;
     }
 
-    emit codeDocumentAboutToBeAdded(document, d->m_codeDocuments.count());
+    Q_EMIT codeDocumentAboutToBeAdded(document, d->m_codeDocuments.count());
     connect(document, &KTextEditor::Document::modifiedChanged,
         this, &Project::modifiedChanged);
     d->m_codeDocuments.append(document);
-    emit codeDocumentAdded();
+    Q_EMIT codeDocumentAdded();
     setModified(true);
     return true;
 }
@@ -261,11 +261,11 @@ void Project::tryToRemoveCodeDocument(KTextEditor::Document *document)
     if(!document->closeUrl())
         return;
     int index = d->m_codeDocuments.indexOf(document);
-    emit codeDocumentAboutToBeRemoved(index, index);
+    Q_EMIT codeDocumentAboutToBeRemoved(index, index);
     disconnect(document, &KTextEditor::Document::modifiedChanged,
         this, &Project::modifiedChanged);
     d->m_codeDocuments.removeAt(index);
-    emit codeDocumentRemoved();
+    Q_EMIT codeDocumentRemoved();
     if (!path.startsWith(d->m_workingDirectory.path())) {
         qCritical() << "Aborting removal of document: not in temporary working directory";
         return;
@@ -303,7 +303,7 @@ void Project::setActiveCodeDocument(int index)
         return;
     }
     d->m_activeCodeDocumentIndex = index;
-    emit activeCodeDocumentChanged(index);
+    Q_EMIT activeCodeDocumentChanged(index);
 }
 
 QList<GraphDocumentPtr> Project::graphDocuments() const
@@ -332,11 +332,11 @@ bool Project::addGraphDocument(GraphDocumentPtr document)
     // put document into working directory
     document->documentSaveAs(QUrl::fromLocalFile(path));
     int index = d->m_graphDocuments.length();
-    emit graphDocumentAboutToBeAdded(document, index);
+    Q_EMIT graphDocumentAboutToBeAdded(document, index);
     connect(document.data(), &GraphDocument::modifiedChanged,
         this, &Project::modifiedChanged);
     d->m_graphDocuments.append(document);
-    emit graphDocumentAdded();
+    Q_EMIT graphDocumentAdded();
     setModified(true);
 
     if (d->m_activeGraphDocumentIndex < 0) {
@@ -368,9 +368,9 @@ void Project::removeGraphDocument(GraphDocumentPtr document)
         qCritical() << "Could not remove graph file" << path;
     }
     int index = d->m_graphDocuments.indexOf(document);
-    emit graphDocumentAboutToBeRemoved(index, index);
+    Q_EMIT graphDocumentAboutToBeRemoved(index, index);
     d->m_graphDocuments.removeAt(index);
-    emit graphDocumentRemoved();
+    Q_EMIT graphDocumentRemoved();
     setModified(true);
 }
 
@@ -381,8 +381,8 @@ void Project::setActiveGraphDocument(int index)
         return;
     }
     d->m_activeGraphDocumentIndex = index;
-    emit activeGraphDocumentChanged(index);
-    emit activeGraphDocumentChanged(d->m_graphDocuments.at(index));
+    Q_EMIT activeGraphDocumentChanged(index);
+    Q_EMIT activeGraphDocumentChanged(d->m_graphDocuments.at(index));
 }
 
 GraphDocumentPtr Project::activeGraphDocument() const
@@ -438,7 +438,7 @@ void Project::setModified(bool modified)
         return;
     }
     d->m_modified = modified;
-    emit modifiedChanged();
+    Q_EMIT modifiedChanged();
 }
 
 bool Project::isModified() const

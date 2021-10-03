@@ -152,7 +152,7 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
     // create object documentation
     Object *objectApi = new Object(this);
     m_objectApiList.append(objectApi);
-    emit objectApiAboutToBeAdded(objectApi, m_objectApiList.count() - 1);
+    Q_EMIT objectApiAboutToBeAdded(objectApi, m_objectApiList.count() - 1);
 
     objectApi->setTitle(root.firstChildElement("name").text());
     objectApi->setId(root.firstChildElement("id").text());
@@ -230,7 +230,7 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
         objectApi->addMethod(method);
     }
 
-    emit objectApiAdded();
+    Q_EMIT objectApiAdded();
     return true;
 }
 

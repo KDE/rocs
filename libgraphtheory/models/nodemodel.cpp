@@ -140,8 +140,8 @@ void NodeModel::onNodesRemoved()
 
 void NodeModel::emitNodeChanged(int row)
 {
-    emit nodeChanged(row);
-    emit dataChanged(index(row, 0), index(row, 0));
+    Q_EMIT nodeChanged(row);
+    Q_EMIT dataChanged(index(row, 0), index(row, 0));
 }
 
 QVariant NodeModel::headerData(int section, Qt::Orientation orientation, int role) const

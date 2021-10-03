@@ -30,17 +30,17 @@ void ConsoleModule::clear()
 void ConsoleModule::log(const QString& messageString)
 {
     m_backlog.append(qMakePair<Kernel::MessageType, QString>(Kernel::InfoMessage, messageString));
-    emit(message(messageString, Kernel::InfoMessage));
+    Q_EMIT message(messageString, Kernel::InfoMessage);
 }
 
 void ConsoleModule::debug(const QString& messageString)
 {
     m_backlog.append(qMakePair<Kernel::MessageType, QString>(Kernel::WarningMessage, messageString));
-    emit(message(messageString, Kernel::WarningMessage));
+    Q_EMIT message(messageString, Kernel::WarningMessage);
 }
 
 void ConsoleModule::error(const QString& messageString)
 {
     m_backlog.append(qMakePair<Kernel::MessageType, QString>(Kernel::ErrorMessage, messageString));
-    emit(message(messageString, Kernel::ErrorMessage));
+    Q_EMIT message(messageString, Kernel::ErrorMessage);
 }

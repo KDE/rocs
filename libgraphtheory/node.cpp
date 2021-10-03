@@ -133,8 +133,8 @@ void Node::setType(NodeTypePtr type)
         this, &Node::renameDynamicProperty);
     connect(type->style(), &NodeTypeStyle::changed,
         this, &Node::styleChanged);
-    emit typeChanged(type);
-    emit styleChanged();
+    Q_EMIT typeChanged(type);
+    Q_EMIT styleChanged();
 }
 
 void Node::insert(EdgePtr edge)
@@ -146,7 +146,7 @@ void Node::insert(EdgePtr edge)
         return;
     }
     d->m_edges.append(edge);
-    emit edgeAdded(edge);
+    Q_EMIT edgeAdded(edge);
 }
 
 void Node::remove(EdgePtr edge)
@@ -229,7 +229,7 @@ void Node::setId(int id)
         return;
     }
     d->m_id = id;
-    emit idChanged(id);
+    Q_EMIT idChanged(id);
 }
 
 qreal Node::x() const
@@ -243,7 +243,7 @@ void Node::setX(qreal x)
         return;
     }
     d->m_x = x;
-    emit positionChanged(QPointF(x, d->m_y));
+    Q_EMIT positionChanged(QPointF(x, d->m_y));
 }
 
 qreal Node::y() const
@@ -257,7 +257,7 @@ void Node::setY(qreal y)
         return;
     }
     d->m_y = y;
-    emit positionChanged(QPointF(d->m_x, y));
+    Q_EMIT positionChanged(QPointF(d->m_x, y));
 }
 
 QColor Node::color() const
@@ -271,7 +271,7 @@ void Node::setColor(const QColor &color)
         return;
     }
     d->m_color = color;
-    emit colorChanged(color);
+    Q_EMIT colorChanged(color);
 }
 
 QVariant Node::dynamicProperty(const QString &property) const
@@ -296,7 +296,7 @@ void Node::setDynamicProperty(const QString &property, const QVariant &value)
         qCWarning(GRAPHTHEORY_GENERAL) << "Dynamic property not registered at type, aborting to set property.";
     }
     setProperty(("_graph_" + property).toLatin1(), value);
-    emit dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));
+    Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));
 }
 
 void Node::updateDynamicProperty(const QString &property)
@@ -305,14 +305,14 @@ void Node::updateDynamicProperty(const QString &property)
     if (!d->m_type->dynamicProperties().contains(property)) {
         setDynamicProperty(property, QVariant::Invalid);
     }
-    emit dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));
+    Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));
 }
 
 void Node::renameDynamicProperty(const QString &oldProperty, const QString &newProperty)
 {
     setDynamicProperty(newProperty, dynamicProperty(oldProperty));
     setDynamicProperty(oldProperty, QVariant::Invalid);
-    emit dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(newProperty));
+    Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(newProperty));
 }
 
 void Node::setQpointer(NodePtr q)

@@ -74,11 +74,11 @@ void NodePropertyModel::setNode(Node* node)
         connect(d->m_node.data(), &Node::styleChanged,[=]() {
             QVector<int> changedRoles;
             changedRoles.append(VisibilityRole);
-            emit dataChanged(index(0), index(d->m_node->dynamicProperties().count() - 1), changedRoles);
+            Q_EMIT dataChanged(index(0), index(d->m_node->dynamicProperties().count() - 1), changedRoles);
         } );
     }
     endResetModel();
-    emit nodeChanged();
+    Q_EMIT nodeChanged();
 }
 
 Node * NodePropertyModel::node() const
@@ -149,7 +149,7 @@ void NodePropertyModel::onDynamicPropertyRemoved()
 
 void NodePropertyModel::onDynamicPropertyChanged(int row)
 {
-    emit dataChanged(index(row, 0), index(row, 0));
+    Q_EMIT dataChanged(index(row, 0), index(row, 0));
 }
 
 QVariant NodePropertyModel::headerData(int section, Qt::Orientation orientation, int role) const

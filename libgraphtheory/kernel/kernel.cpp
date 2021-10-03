@@ -90,18 +90,18 @@ QScriptValue Kernel::execute(GraphDocumentPtr document, const QString &script)
 
     QScriptValue result = d->m_engine->evaluate(script).toString();
     if (d->m_engine && d->m_engine->hasUncaughtException()) {
-        emit message(result.toString(), WarningMessage);
-        emit message(d->m_engine->uncaughtExceptionBacktrace().join("\n"), InfoMessage);
+        Q_EMIT message(result.toString(), WarningMessage);
+        Q_EMIT message(d->m_engine->uncaughtExceptionBacktrace().join("\n"), InfoMessage);
     }
     if (d->m_engine) {
-        emit message(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"), InfoMessage);
-        emit message(result.toString(), InfoMessage);
+        Q_EMIT message(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"), InfoMessage);
+        Q_EMIT message(result.toString(), InfoMessage);
         d->m_engine->popContext();
     }
     // end processing messages
     disconnect(&documentWrapper, &DocumentWrapper::message, this, &Kernel::processMessage);
 
-    emit executionFinished();
+    Q_EMIT executionFinished();
     d->m_engine->globalObject().setProperty("Document", QScriptValue());
 
     return result;
@@ -114,7 +114,7 @@ void Kernel::stop()
 
 void Kernel::processMessage(const QString &messageString, Kernel::MessageType type)
 {
-    emit message(messageString, type);
+    Q_EMIT message(messageString, type);
 }
 
 void Kernel::attachDebugger()

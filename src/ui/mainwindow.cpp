@@ -250,7 +250,7 @@ void MainWindow::setProject(Project *project)
     connect(project, &Project::modifiedChanged,
         this, &MainWindow::updateCaption);
     m_currentProject = project;
-    emit graphDocumentChanged(m_currentProject->activeGraphDocument());
+    Q_EMIT graphDocumentChanged(m_currentProject->activeGraphDocument());
 }
 
 void MainWindow::setupActions()

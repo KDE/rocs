@@ -89,7 +89,7 @@ void EdgeItem::setEdge(Edge *edge)
 
     updatePosition();
     updateVisibility();
-    emit edgeChanged();
+    Q_EMIT edgeChanged();
 }
 
 QPointF EdgeItem::origin() const

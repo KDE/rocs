@@ -78,7 +78,7 @@ void NodeItem::setNode(Node *node)
     connect(this, &NodeItem::yChanged,
         this, &NodeItem::updatePositionfromScene);
 
-    emit nodeChanged();
+    Q_EMIT nodeChanged();
     updateVisibility();
     update();
 }
@@ -110,7 +110,7 @@ void NodeItem::setHighlighted(bool highlight)
         return;
     }
     d->m_highlighted = highlight;
-    emit highlightedChanged();
+    Q_EMIT highlightedChanged();
     update();
 }
 

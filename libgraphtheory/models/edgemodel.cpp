@@ -145,8 +145,8 @@ void EdgeModel::onEdgesRemoved()
 
 void EdgeModel::emitEdgeChanged(int row)
 {
-    emit edgeChanged(row);
-    emit dataChanged(index(row, 0), index(row, 0));
+    Q_EMIT edgeChanged(row);
+    Q_EMIT dataChanged(index(row, 0), index(row, 0));
 }
 
 QVariant EdgeModel::headerData(int section, Qt::Orientation orientation, int role) const

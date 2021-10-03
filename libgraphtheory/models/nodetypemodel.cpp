@@ -88,7 +88,7 @@ void NodeTypeModel::setDocument(GraphDocumentPtr document)
             this, &NodeTypeModel::onNodeTypesRemoved);
     }
     endResetModel();
-    emit documentChanged();
+    Q_EMIT documentChanged();
 }
 
 NodeTypePtr NodeTypeModel::type(int index) const
@@ -195,8 +195,8 @@ void NodeTypeModel::onNodeTypesRemoved()
 
 void NodeTypeModel::emitNodeTypeChanged(int row)
 {
-    emit nodeChanged(row);
-    emit dataChanged(index(row, 0), index(row, 0));
+    Q_EMIT nodeChanged(row);
+    Q_EMIT dataChanged(index(row, 0), index(row, 0));
 }
 
 QVariant NodeTypeModel::headerData(int section, Qt::Orientation orientation, int role) const
