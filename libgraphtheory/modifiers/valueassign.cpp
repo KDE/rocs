@@ -30,7 +30,7 @@ void ValueAssign::enumerate(const QVector<T> &list, const QString &property, int
         if (!overrideValues && !list[i]->dynamicProperty(property).isNull()) {
             return;
         }
-        list[i]->setDynamicProperty(property, baseString + QString::number(start++));
+        list[i]->setDynamicProperty(property, QString(baseString + QString::number(start++)));
     }
 }
 template GRAPHTHEORY_EXPORT void ValueAssign::enumerate<NodePtr>(const QVector<NodePtr> &list, const QString &property, int start, const QString &baseString, bool overrideValues);
