@@ -33,7 +33,7 @@ NodeTypeProperties::NodeTypeProperties(QWidget *parent)
     , m_id(new QSpinBox(this))
     , m_color(new KColorButton(this))
     , m_visible(new QCheckBox(i18n("Nodes"), this))
-    , m_propertyNamesVisible(new QCheckBox(i18n("Property Names"), this))
+    , m_propertyNamesVisible(new QCheckBox(i18n("Property names"), this))
     , m_properties(new PropertiesWidget(this))
     , m_okButton(new QPushButton(this))
     , m_type(NodeTypePtr())
@@ -44,19 +44,19 @@ NodeTypeProperties::NodeTypeProperties(QWidget *parent)
     QWidget *widget = new QWidget(this);
     QFormLayout *head = new QFormLayout(widget);
     // set name row
-    head->addRow(i18n("Name"), m_name);
+    head->addRow(i18n("Name:"), m_name);
     // set identifier rw
-    head->addRow(i18n("Identifier"), m_id);
+    head->addRow(i18n("Identifier:"), m_id);
     m_id->setMinimum(1);
     // set color row
-    head->addRow(i18n("Color"), m_color);
+    head->addRow(i18n("Color:"), m_color);
     // set visibilities row
     QWidget *visibilityWidget = new QWidget(this);
     QVBoxLayout *visibilityForm = new QVBoxLayout(visibilityWidget);
     visibilityForm->addWidget(m_visible);
     visibilityForm->addWidget(m_propertyNamesVisible);
     visibilityWidget->setLayout(visibilityForm);
-    head->addRow(i18n("Visibility"), visibilityWidget);
+    head->addRow(i18n("Visibility:"), visibilityWidget);
     // set layout
     widget->setLayout(head);
 

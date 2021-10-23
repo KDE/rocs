@@ -116,7 +116,7 @@
       <string>The node type to create the nodes of the graph with</string>
      </property>
      <property name="text">
-      <string>Node type</string>
+      <string>Node type:</string>
      </property>
     </widget>
    </item>
@@ -126,7 +126,7 @@
       <string>The identifier of the created graph (used for scripting)</string>
      </property>
      <property name="text">
-      <string>Identifier</string>
+      <string>Identifier:</string>
      </property>
     </widget>
    </item>
@@ -290,7 +290,7 @@
          <item row="2" column="0">
           <widget class="QLabel" name="label_randomGeneratorSeed">
            <property name="text">
-            <string>Generator Seed:</string>
+            <string>Generator seed:</string>
            </property>
           </widget>
          </item>
@@ -604,14 +604,14 @@
       <string>The edge type to create the edges of the graph with</string>
      </property>
      <property name="text">
-      <string>Edge type</string>
+      <string>Edge type:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="0">
     <widget class="QLabel" name="labelGenerator">
      <property name="text">
-      <string>Graph Generator</string>
+      <string>Graph generator:</string>
      </property>
     </widget>
    </item>

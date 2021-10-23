@@ -21,7 +21,7 @@
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>Script Output:</string>
+             <string>Script output:</string>
             </property>
            </widget>
           </item>

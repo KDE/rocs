@@ -117,16 +117,16 @@ GraphDocumentPtr GraphDocument::create()
 
     // create default edge unidirectional
     EdgeTypePtr edgeTypeUnidirectional = EdgeType::create(pi);
-    edgeTypeUnidirectional->setName(i18n("unidirectional"));
+    edgeTypeUnidirectional->setName(i18n("Unidirectional"));
     edgeTypeUnidirectional->setDirection(EdgeType::Direction::Unidirectional);
 
     // create default edge bidirectional
     EdgeTypePtr edgeTypeBidirectional = EdgeType::create(pi);
-    edgeTypeBidirectional->setName(i18n("bidirectional"));
+    edgeTypeBidirectional->setName(i18n("Bidirectional"));
     edgeTypeBidirectional->setDirection(EdgeType::Direction::Bidirectional);
 
     // create default node type
-    NodeType::create(pi)->setName(i18n("default"));
+    NodeType::create(pi)->setName(i18n("Default"));
     pi->d->m_valid = true;
     pi->d->m_modified = false;
     return pi;

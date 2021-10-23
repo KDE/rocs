@@ -275,7 +275,7 @@ void MainWindow::setupActions()
     actionCollection()->setDefaultShortcut(projectSaveAction, QKeySequence::Save);
     connect(projectSaveAction, &QAction::triggered, this, &MainWindow::saveProject);
 
-    QAction *projectOpenAction = new QAction(QIcon::fromTheme("document-open"), i18nc("@action:inmenu", "Open Project"), this);
+    QAction *projectOpenAction = new QAction(QIcon::fromTheme("document-open"), i18nc("@action:inmenu", "Open Project..."), this);
     projectOpenAction->setShortcutContext(Qt::ApplicationShortcut);
     actionCollection()->addAction("open-project", projectOpenAction);
     actionCollection()->setDefaultShortcut(projectOpenAction, QKeySequence::Open);
@@ -287,13 +287,13 @@ void MainWindow::setupActions()
     actionCollection()->addAction("recent-project", m_recentProjects);
     m_recentProjects->loadEntries(Settings::self()->config()->group("RecentFiles"));
 
-    createAction("document-save-as",     i18nc("@action:inmenu", "Save Project as"),   "save-project-as",    SLOT(saveProjectAs()), this);
+    createAction("document-save-as",     i18nc("@action:inmenu", "Save Project As..."),   "save-project-as",    SLOT(saveProjectAs()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(createGraphDocument()), this);
-    createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(tryToCreateCodeDocument()),    this);
-    createAction("document-import",     i18nc("@action:inmenu", "Import Graph"),       "import-graph",      SLOT(importGraphDocument()),   this);
-    createAction("document-export",     i18nc("@action:inmenu", "Export Graph as"),    "export-graph-as",      SLOT(exportGraphDocument()), this);
-    createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",          SLOT(importCodeDocument()),   this);
-    createAction("document-export", i18nc("@action:inmenu", "Export Script"),      "export-script",      SLOT(exportCodeDocument()), this);
+    createAction("document-new",        i18nc("@action:inmenu", "New Script File..."),    "new-script",        SLOT(tryToCreateCodeDocument()),    this);
+    createAction("document-import",     i18nc("@action:inmenu", "Import Graph..."),       "import-graph",      SLOT(importGraphDocument()),   this);
+    createAction("document-export",     i18nc("@action:inmenu", "Export Graph As..."),    "export-graph-as",      SLOT(exportGraphDocument()), this);
+    createAction("document-import",  i18nc("@action:inmenu", "Import Script..."),       "add-script",          SLOT(importCodeDocument()),   this);
+    createAction("document-export", i18nc("@action:inmenu", "Export Script..."),      "export-script",      SLOT(exportCodeDocument()), this);
 }
 
 void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,

@@ -108,7 +108,7 @@ void FileFormatManager::loadBackends()
     // display a QMessageBox if no plugins are found
     if (d->backends.empty()) {
         QMessageBox pluginErrorMessageBox;
-        pluginErrorMessageBox.setWindowTitle(i18n("Plugin Error"));
+        pluginErrorMessageBox.setWindowTitle(i18nc("@title:window", "Plugin Error"));
         pluginErrorMessageBox.setTextFormat(Qt::RichText);
         pluginErrorMessageBox.setText(i18n("Plugins could not be found in specified directories:<br>")+
                                          QCoreApplication::libraryPaths().join("/rocs/fileformats<br>")+

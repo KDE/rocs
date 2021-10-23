@@ -22,7 +22,7 @@
         <string>This option connects all nodes of the given graph. The new edges do not have any preset weights.</string>
        </property>
        <property name="text">
-        <string>Complete Graph</string>
+        <string>Complete graph</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -35,7 +35,7 @@
         <string>This option removes all edges from the given graph.</string>
        </property>
        <property name="text">
-        <string>Remove all Edges</string>
+        <string>Remove all edges</string>
        </property>
       </widget>
      </item>
@@ -45,7 +45,7 @@
         <string>This option reverses all edges of a directed graph. Note that this does not apply to undirected graphs.</string>
        </property>
        <property name="text">
-        <string>Reverse all Edges</string>
+        <string>Reverse all edges</string>
        </property>
       </widget>
      </item>
@@ -59,14 +59,14 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This option executes &lt;span style=&quot; font-style:italic;&quot;&gt;Prim's Minimal Spanning Tree Algorithm&lt;/span&gt; at the graph. All edges without given weights are assumed to have weights equals 1. Directed and undirected graphs are processed accordingly.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string>Spanning Tree Transformation</string>
+        <string>Spanning tree transformation</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QRadioButton" name="radioButtonEraseSelfEdges">
        <property name="text">
-        <string>Remove all Self Edges</string>
+        <string>Remove all self edges</string>
        </property>
       </widget>
      </item>

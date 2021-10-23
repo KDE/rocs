@@ -129,7 +129,7 @@
             <item row="0" column="0">
              <widget class="QLabel" name="IDlabelStartValue">
               <property name="text">
-               <string>Start ID</string>
+               <string>Start ID:</string>
               </property>
              </widget>
             </item>
@@ -431,7 +431,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
-         <string>Nodes</string>
+         <string>Nodes:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -444,7 +444,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="labelProperty">
         <property name="text">
-         <string>Property Name</string>
+         <string>Property name:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -457,7 +457,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
-         <string>Edges</string>
+         <string>Edges:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

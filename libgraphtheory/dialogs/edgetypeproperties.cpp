@@ -35,7 +35,7 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
     , m_color(new KColorButton(this))
     , m_direction(new QComboBox(this))
     , m_visible(new QCheckBox(i18n("Edges"), this))
-    , m_propertyNamesVisible(new QCheckBox(i18n("Property Names"), this))
+    , m_propertyNamesVisible(new QCheckBox(i18n("Property names"), this))
     , m_properties(new PropertiesWidget(this))
     , m_okButton(new QPushButton(this))
     , m_type(EdgeTypePtr())
@@ -45,20 +45,20 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
     // form layout with static edge type properties
     QWidget *widget = new QWidget(this);
     QFormLayout *head = new QFormLayout(widget);
-    head->addRow(i18n("Name"), m_name);
-    head->addRow(i18n("Identifier"), m_id);
+    head->addRow(i18n("Name:"), m_name);
+    head->addRow(i18n("Identifier:"), m_id);
     m_id->setMinimum(1);
-    head->addRow(i18n("Color"), m_color);
+    head->addRow(i18n("Color:"), m_color);
     m_direction->addItem(QIcon::fromTheme("rocsunidirectional"), i18n("Unidirectional"), EdgeType::Unidirectional);
     m_direction->addItem(QIcon::fromTheme("rocsbidirectional"), i18n("Bidirectional"), EdgeType::Bidirectional);
-    head->addRow(i18n("Direction"), m_direction);
+    head->addRow(i18n("Direction:"), m_direction);
     // set visibilities row
     QWidget *visibilityWidget = new QWidget(this);
     QVBoxLayout *visibilityForm = new QVBoxLayout(visibilityWidget);
     visibilityForm->addWidget(m_visible);
     visibilityForm->addWidget(m_propertyNamesVisible);
     visibilityWidget->setLayout(visibilityForm);
-    head->addRow(i18n("Visibility"), visibilityWidget);
+    head->addRow(i18n("Visibility:"), visibilityWidget);
     // set layout
     widget->setLayout(head);
 
