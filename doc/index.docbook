@@ -1,7 +1,5 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-
-  <!ENTITY kappname "&rocs;">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
 
@@ -29,14 +27,14 @@
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
-<date>2016-04-10</date>
-<releaseinfo>Rocs 2.1.50 (Applications 16.04)</releaseinfo>
+<date>2021-10-23</date>
+<releaseinfo>KDE Gear 21.08</releaseinfo>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
 <abstract>
 <para>
-&rocs; is a graph theory tool by &kde;.
+&rocs; is a graph theory tool.
 </para>
 </abstract>
 
@@ -48,6 +46,7 @@
 <keyword>graphs</keyword>
 <keyword>node</keyword>
 <keyword>edge</keyword>
+<keyword>Rocs</keyword>
 </keywordset>
 
 </bookinfo>
@@ -68,20 +67,16 @@ The most important parts are <xref linkend="introduction-nutshell"/> and <xref l
     <listitem><para>everybody who is interested in data structures and algorithms.</para></listitem>
 </itemizedlist>
 <para>For all them, &rocs; provides an easy to use graphical editor for creating graphs, a powerful scripting engine to execute algorithms, and several helper tools for simulations, experiments, and graph exports.
-The typical way of using &rocs; is to create a graph, either by hand (i.e., dragging nodes and edges to the whiteboard), or by using one of the graph generators.
+The typical way of using &rocs; is to create a graph, either by hand (&ie;, dragging nodes and edges to the whiteboard), or by using one of the graph generators.
 Graph algorithms then can be implemented and executed on the created graph and all changes, which the algorithm performs, are visible immediately in the graph editor.
 </para>
 
 <screenshot>
-<screeninfo>A Screenshot of &rocs;.</screeninfo>
-<mediaobject>
-<imageobject>
-<imagedata fileref="rocs-screenshot.png" format="PNG" />
-</imageobject>
-<textobject>
-<phrase>A Screenshot of &rocs;.</phrase>
-</textobject>
-</mediaobject>
+  <screeninfo>A Screenshot of &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject><imagedata fileref="rocs-screenshot.png" format="PNG" /></imageobject>
+    <textobject><phrase>A Screenshot of &rocs;.</phrase></textobject>
+  </mediaobject>
 </screenshot>
 </sect1>
 
@@ -106,7 +101,7 @@ Everything belonging to a graph document is accessible by the script engine via 
 <sect2>
 <title>Edge Types</title>
 <para>
-In some scenarios, graphs consist of different types of edges (e.g., an undirected graph plus the tree edges computed by a breadh-first-search algorithm) that shall be handled and displayed differently.
+In some scenarios, graphs consist of different types of edges (&eg;, an undirected graph plus the tree edges computed by a breadh-first-search algorithm) that shall be handled and displayed differently.
 For this, besides a default edge type, you can define arbitrary other edge types.
 Each edge type has its individual visual representation, dynamic properties, and can be set to be either undirected or directed.
 The scripting interface provides convenience methods to specifically access only edges of specific types.
@@ -116,7 +111,7 @@ The scripting interface provides convenience methods to specifically access only
 <sect2>
 <title>Node Types</title>
 <para>
-Analog to edge types, you can define different types of nodes of a graph (e.g., to give some nodes special roles).
+Analog to edge types, you can define different types of nodes of a graph (&eg;, to give some nodes special roles).
 Each node type has its own visual representation and dynamic properties.
 </para>
 </sect2>
@@ -128,13 +123,13 @@ Every (node or edge) element can have properties.
 Those properties must be setup at the corresponding node or edge type.
 Properties are identified and accessed by their names and can contain any value.
 To create new or change existing properties, use the <guilabel>Element Types</guilabel> sidebar and use the
-<inlinemediaobject><imageobject><imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/>
+<inlinemediaobject><imageobject><imagedata fileref="document-properties.png" format="PNG"/>
 </imageobject></inlinemediaobject><guibutton>Properties</guibutton>
 button to open the property dialog.
 </para>
 <para>
 You can also use the scripting engine to access registered properties and change their values.
-In the following example we assume that the property "weight" is registered for the default edge type.
+In the following example we assume that the property <quote>weight</quote> is registered for the default edge type.
 <programlisting>
 var nodes = Document.nodes()
 for (var i = 0; i &lt; nodes.length; ++i){
@@ -158,7 +153,7 @@ This problem is known to be NP-hard and we want to illustrate how to find an app
 </para>
 <para>
 Our goal is to visualize the relationship of the matching and the minimum vertex cover.
-For this, we want to specify two edge types, one to display matching edges and one type to display "ordinary" edges, as well as two node types that we use to distinguish nodes contained in C and those not contained in C.
+For this, we want to specify two edge types, one to display matching edges and one type to display <quote>ordinary</quote> edges, as well as two node types that we use to distinguish nodes contained in C and those not contained in C.
 </para>
 
 <sect2>
@@ -173,10 +168,7 @@ There, we select a <guilabel>Random Graph</guilabel> with 30 nodes, 90 edges, an
 <sect2>
 <title>Creating the Element Types</title>
 <para>
-We use the <guilabel>Element Types</guilabel> and create a second node type as well as a second edge type.
-For both new types we open the properties dialog by using the respective <guibutton>Properties</guibutton> buttons and set the IDs to <literal>2</literal>.
-Furthermore, we change the colors of elements of these two new types (to distinguish them from the default types).
-Finally, we set all edge types to be bidirectional, and the IDs of the default types to <literal>1</literal>.
+We use the <guilabel>Element Types</guilabel> and create a second node type as well as a second edge type. For both new types we open the properties dialog by using the respective <inlinemediaobject><imageobject><imagedata fileref="document-properties.png" format="PNG"/></imageobject></inlinemediaobject><guibutton>Properties</guibutton> buttons and set the IDs to <literal>2</literal>. Furthermore, we change the colors of elements of these two new types (to distinguish them from the default types). Finally, we set all edge types to be bidirectional, and the IDs of the default types to <literal>1</literal>.
 </para>
 </sect2>
 
@@ -231,7 +223,7 @@ Console.log("Vertex Cover contains " + C.length + " nodes.");
 <sect2>
 <title>Execute the Algorithm</title>
 <para>
-The algorithm can be executed by the <guibutton>Run</guibutton> button at the script control panel.
+The algorithm can be executed by the <inlinemediaobject><imageobject><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject></inlinemediaobject><guibutton>Run</guibutton> button at the script control panel.
 </para>
 </sect2>
 </sect1>
@@ -245,99 +237,63 @@ The algorithm can be executed by the <guibutton>Run</guibutton> button at the sc
 <para>
 The user interface is divided into several logical parts as presented at the screenshot below.
 </para>
+
 <screenshot>
-    <screeninfo>&GUI; elements of the &rocs; interface.</screeninfo>
-    <mediaobject>
-    <imageobject>
-    <imagedata fileref="rocs-interfaces.png" format="PNG" />
-    </imageobject>
-    <textobject>
-    <phrase>&GUI; elements of the &rocs; interface.</phrase>
-    </textobject>
-    </mediaobject>
+  <screeninfo>&GUI; elements of the &rocs; interface.</screeninfo>
+  <mediaobject>
+    <imageobject><imagedata fileref="rocs-interfaces.png" format="PNG" /></imageobject>
+    <textobject><phrase>&GUI; elements of the &rocs; interface.</phrase></textobject>
+  </mediaobject>
 </screenshot>
+
 <variablelist>
-<varlistentry>
+  <varlistentry>
     <term>Graph Editor</term>
     <listitem><para>
     The editor provides a whiteboard at that nodes and edges can be placed.
     Double-clicking at any of its elements opens a corresponding property menu.
-    You can use the tools from the <emphasis>Graph Editor Toolbar</emphasis> to create and modify graphs.</para></listitem>
-</varlistentry>
-<varlistentry>
-    <term>Graph Editor Toolbar</term>
-    <listitem><para>
-    The toolbar provides the <inlinemediaobject><imageobject><imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject>
-    </inlinemediaobject><guibutton>Create Node</guibutton> or <inlinemediaobject><imageobject><imagedata fileref="hi22-actions-rocsedge.png"
-    format="PNG"/></imageobject></inlinemediaobject><guibutton>Create Edge</guibutton> tools, for creating new elements on the whiteboard.
-    Note the extra-toolbar for selecting the respective node or edge type that becomes visible of one of these tools is selected.
-    Also tools for selecting and moving as well as deleting elements are available here.
-    For details see <xref linkend="user-interface-toolbar" />.
-    </para></listitem>
-</varlistentry>
-<varlistentry>
-    <term>Side Bar</term>
-    <listitem><para>
-        At the right, you can find the side bar that provides several tools for your workflow:
-        <itemizedlist>
-        <listitem><para>Element Types: This widget gives you direct access to the available edge and node types.</para></listitem>
-        <listitem><para>Journal: Each project has its own journal that can be used to, &eg; note tasks, results, or observations.</para></listitem>
-        <listitem><para>Scripting API: To get direct access to the script documentation, you can open this widget.</para></listitem>
-        </itemizedlist>
-    </para></listitem>
-</varlistentry>
-<varlistentry>
-    <term>Script Editor</term>
-    <listitem><para>
-        In this text editor you can write algorithms as explained in detail in <xref linkend="scripting" />.
-        You can work on several script documents simultaneously by using several tabs.
-        <!--FIXME link to katepart handbook? -->
-    </para></listitem>
-</varlistentry>
-<varlistentry>
-    <term>Script Output</term>
-    <listitem><para>
-        This text area either shows debug information or the script output of your algorithm, depending on the toggled setting at the top of this widget.
-        If the script throws an error, automatically the debug output is presented.
-    </para></listitem>
-</varlistentry>
-<varlistentry>
-    <term>Controls</term>
-    <listitem><para>
-        Here you can find the controls for executing scripts.
-        You can execute the script that is currently open at the script editor by pressing <guiicon>Run</guiicon>.
-        While the script is executed, it is possible to stop execution by pressing the <guiicon>Stop</guiicon> button.
-    </para></listitem>
-</varlistentry>
-</variablelist>
-</sect1>
+    You can use the tools from the <emphasis>Side Bar Tabs</emphasis> to create and modify graphs.</para>
+    <para>Available tools:</para>
+      <itemizedlist>
+        <listitem><para>Top left in the box, your found the following action icons. Clicking at an action means that your mouse pointer applies this action at the graph editor whiteboard:</para>
+          <itemizedlist>
+            <listitem><para><inlinemediaobject><imageobject><imagedata fileref="sc-actions-rocsselect.png" format="PNG"/></imageobject></inlinemediaobject><guiicon>Select and Move</guiicon>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some data elements and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
 
-<sect1 id="user-interface-toolbar">
-<title>Graph Editor Toolbar</title>
-<para>This toolbar consists of the following actions. Clicking at an action means that your mouse pointer applies this action at the graph editor whiteboard:</para>
-<itemizedlist>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-actions-rocsselectmove.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Select and Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some data elements and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Create Node</guilabel>: Click at an arbitrary position at the graph editor whiteboard to create a new data element that belongs to the currently selected data structure.
-By keeping the mouse pointer pressed at the button, a menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Create Edge</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse pointer pressed at the button, a menu shows up at which the edge type of the new created edges can be selected (only if different edge types exist).</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-actions-rocsdelete.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
-</itemizedlist>
+            <listitem><para><inlinemediaobject><imageobject><imagedata fileref="sc-actions-rocsnode.png" format="PNG"/></imageobject></inlinemediaobject><guiicon>Add a Node</guiicon>: Click at an arbitrary position at the graph editor whiteboard to create a new data element that belongs to the currently selected data structure. By keeping the mouse pointer pressed at the button, a menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
+
+            <listitem><para><inlinemediaobject><imageobject><imagedata fileref="sc-actions-rocsedge.png" format="PNG"/></imageobject></inlinemediaobject><guiicon>Create an Edge</guiicon>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse pointer pressed at the button, a menu shows up at which the edge type of the new created edges can be selected (only if different edge types exist).</para></listitem>
+
+            <listitem><para><inlinemediaobject><imageobject><imagedata fileref="sc-actions-rocsdelete.png" format="PNG"/></imageobject></inlinemediaobject><guiicon>Delete element</guiicon>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>Side Bar</term>
+    <listitem><para>At the right, you can find the side bar that provides several tools for your workflow:</para>
+      <itemizedlist>
+        <listitem><para><guilabel>Element Types</guilabel>: This widget gives you direct access to the available edge and node types.</para></listitem>
+
+        <listitem><para><guilabel>Journal</guilabel>: Each project has its own journal that can be used to, &eg; note tasks, results, or observations.</para></listitem>
+
+        <listitem><para><guilabel>Scripting API</guilabel>: To get direct access to the script documentation, you can open this widget.</para></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>Script Editor</term>
+    <listitem><para>In this text editor you can write algorithms as explained in detail in <xref linkend="scripting" />. You can work on several script documents simultaneously by using several tabs.<!--FIXME link to katepart handbook? --></para></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>Script output:</term>
+    <listitem><para>This text area either shows debug information or the script output of your algorithm, depending on the toggled setting at the top of this widget. If the script throws an error, automatically the debug output is presented.</para></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>Controls</term>
+    <listitem><para>Here you can find the controls for executing scripts. You can execute the script that is currently open at the script editor by pressing the <inlinemediaobject><imageobject><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject></inlinemediaobject><guibutton>Run</guibutton> button. While the script is executed, it is possible to stop execution by pressing the <inlinemediaobject><imageobject><imagedata fileref="process-stop.png" format="PNG"/></imageobject></inlinemediaobject><guibutton>Stop</guibutton> button.</para></listitem>
+  </varlistentry>
+</variablelist>
 </sect1>
 
 <!--FIXME nop alignment action any more?-->
@@ -348,8 +304,8 @@ By keeping the mouse pointer pressed at the button, a menu shows up at which the
 <sect1>
     <title>Executing Algorithms in &rocs;</title>
 <para>
-&rocs; internally uses the QtScript Java Script engine. <!--FIXME linkt to api docs ?-->
-This means, all algorithms that you implement must use Java Script.
+&rocs; internally uses the QtScript &javascript; engine. <!--FIXME linkt to api docs ?-->
+This means, all algorithms that you implement must use &javascript;.
 In the following, we explain how to access and change elements of a graph document from the scripting engine.
 It is important to note that changes done by the scripting engine are directly reflected at the properties at the graph editor elements.
 </para>
@@ -362,14 +318,14 @@ It is important to note that changes done by the scripting engine are directly r
 <itemizedlist>
     <listitem><para>
         <inlinemediaobject><imageobject>
-        <imagedata fileref="hi22-actions-controls-run.png" format="PNG"/></imageobject>
+        <imagedata fileref="media-playback-start.png" format="PNG"/></imageobject>
         </inlinemediaobject>
-        <guilabel>Run</guilabel>: Execute the script until it finishes.</para></listitem>
+        <guibutton>Run</guibutton>: Execute the script until it finishes.</para></listitem>
     <listitem><para>
         <inlinemediaobject><imageobject>
-        <imagedata fileref="hi22-actions-control-stop.png" format="PNG"/></imageobject>
+        <imagedata fileref="process-stop.png" format="PNG"/></imageobject>
         </inlinemediaobject>
-        <guilabel>Stop</guilabel>: Stop script execution (only available while a script is executed).</para></listitem>
+        <guibutton>Stop</guibutton>: Stop script execution (only available while a script is executed).</para></listitem>
 </itemizedlist>
 </sect2>
 
@@ -410,17 +366,17 @@ For the explicit API use and for a method reference, please see the inline help 
 <sect1 id="import-export-projects">
     <title>Exchange &rocs; Projects</title>
     <para>
-        &rocs; projects can be imported and exported as archived <literal>.tar.gz</literal> files.
+        &rocs; projects can be imported and exported as archived <literal role="extension">.tar.gz</literal> files.
         These archives can be used to exchange projects.
-        Import and Export can be done with <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Import Graph</guimenuitem></menuchoice> and <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Export Graph as</guimenuitem></menuchoice>, respectively.
+        Import and Export can be done with the <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Import Graph...</guimenuitem></menuchoice> and <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Export Graph As...</guimenuitem></menuchoice> menu items, respectively.
     </para>
 
 <sect2 id="import-export-graphs">
     <title>Import and Export of Graph Documents</title>
     <para>&rocs; currently supports import and export of the following file formats:</para>
     <itemizedlist>
-        <listitem><para>DOT files, also known as Graphviz files</para></listitem>
-        <listitem><para>GML files</para></listitem>
+        <listitem><para>&DOT; files, also known as Graphviz files</para></listitem>
+        <listitem><para><acronym>GML</acronym> files</para></listitem>
         <listitem><para>Trivial Graph Format files</para></listitem>
         <listitem><para>Keyhole Markup Language Format</para></listitem>
     </itemizedlist>
@@ -428,8 +384,8 @@ For the explicit API use and for a method reference, please see the inline help 
 <sect3 id="format-specification-tgf">
 <title>Trivial Graph File Format</title>
 <para>
-    The <emphasis>Trivial Graph Format</emphasis> (TGF) is a simple text-based file format for describing graphs.
-    A TGF file consists of a list of node definitions, that map the node IDs to labels, followed by a list of the edges.
+    The <emphasis>Trivial Graph Format</emphasis> (<acronym>TGF</acronym>) is a simple text-based file format for describing graphs.
+    A <acronym>TGF</acronym> file consists of a list of node definitions, that map the node IDs to labels, followed by a list of the edges.
     In this format it is only possible to have one label per node and one value per edge.
     &rocs; interprets imported graphs as undirected graphs.
     Exported graphs will contain two edges per connection if connections are bidirectional.
@@ -438,7 +394,7 @@ For the explicit API use and for a method reference, please see the inline help 
 <sect4>
 <title>Format Specification</title>
     <itemizedlist>
-        <listitem><para>The file starts with a list of nodes (one node per line), followed by a line with the only character "#", followed by a list of edges (one edge per line).</para></listitem>
+        <listitem><para>The file starts with a list of nodes (one node per line), followed by a line with the only character <quote>#</quote>, followed by a list of edges (one edge per line).</para></listitem>
         <listitem><para>A node consists of an integer (identifier), followed by a space, followed by an arbitrary string.</para></listitem>
         <listitem><para>An edge consists of two integers (identifiers) separated by a space, followed by a space, followed by an arbitrary string. It is assumed that the directed edge points from the first identifier to the second identifier.</para></listitem>
     </itemizedlist>
@@ -458,17 +414,17 @@ For the explicit API use and for a method reference, please see the inline help 
 </sect3>
 
 <sect3 id="format-specification-dot">
-<title>DOT Language / Graphviz Graph File Format</title>
+<title>&DOT; Language / Graphviz Graph File Format</title>
 <para>
-    The DOT language is a plain text graph description language that allows both,a good human readable representation of graphs as well as an efficient processing by graph layout programs.
-    DOT is the default file format for the Graphviz graph visualization suite, but is also widely used by other graph tools.
-    The usual file extensions for DOT are <emphasis>.gv</emphasis> and <emphasis>.dot</emphasis>.
+    The &DOT; language is a plain text graph description language that allows both,a good human readable representation of graphs as well as an efficient processing by graph layout programs.
+    &DOT; is the default file format for the Graphviz graph visualization suite, but is also widely used by other graph tools.
+    The usual file extensions for &DOT; are <literal role="extension">.gv</literal> and <literal role="extension">.dot</literal>.
 </para>
 
 <sect4>
 <title>Unsupported Features</title>
 <para>
-    &rocs; can parse every graph file that contains a graph specified according to the DOT language specification<footnote><para>http://www.graphviz.org/content/dot-language</para></footnote>.
+    &rocs; can parse every graph file that contains a graph specified according to the &DOT; language specification<footnote><para>https://graphviz.org/doc/info/lang.html</para></footnote>.
     The support of language features is complete, despite of the following exceptions:
 </para>
     <itemizedlist>
@@ -492,65 +448,58 @@ digraph myGraph {
 
 <chapter id="graph-layout">
     <title>Graph Layout</title>
-    
+
     <sect1>
         <title>Laying out graphs automatically in &rocs;</title>
         <para>
             &rocs; can lay out graphs automatically. The &rocs; graph layout tool can be found in the main menu at <menuchoice><guimenu>Graph Document</guimenu> <guisubmenu>Tools</guisubmenu> <guimenuitem>Graph Layout</guimenuitem></menuchoice>.
             There are two different layout algorithms that can be applied: Force Based Layout and Radial Tree Layout. To apply one of them, select the corresponding
-            tab of the graph layout tool, choose the desired parameters and execute the algorithm by clicking on the <guibutton>OK</guibutton> button. Details that are specific to each one of the layout algorithms are provided in the next sections.
+            tab of the graph layout tool, choose the desired parameters and execute the algorithm by pressing on the <guibutton>OK</guibutton> button. Details that are specific to each one of the layout algorithms are provided in the next sections.
         </para>
-    
+
     <sect2>
         <title>Force Based Layout</title>
-        
+
         <para>
             The Force Based Layout can be applied to any graph. Intuitively, this algorithm simulates forces acting in each node. There are repelling forces between pairs of nodes and attraction forces between pairs of nodes that are neighbours. The magnitude of these forces can be specified by moving the corresponding sliders in the user interface.
         </para>
+
         <screenshot>
-            <screeninfo>A Screenshot of the Force Based Layout tab of the &rocs; graph layout tool.</screeninfo>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG" />
-                </imageobject>
-                <textobject>
-                    <phrase>A Screenshot of the Force Based Layout tab of the &rocs; graph layout tool.</phrase>
-                </textobject>
-            </mediaobject>
+          <screeninfo>A Screenshot of the Force Based Layout tab of the &rocs; graph layout tool.</screeninfo>
+          <mediaobject>
+            <imageobject><imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG" /></imageobject>
+            <textobject><phrase>A Screenshot of the Force Based Layout tab of the &rocs; graph layout tool.</phrase></textobject>
+          </mediaobject>
         </screenshot>
 
         <para>
             Another parameter that can be controlled is the Area Factor. This parameter controls how the nodes are spread. Layouts generated with high values of Area Factor have a tendency of  having large distances between nodes.
         </para>
-    
+
     <sect3>
         <title>Radial Tree Layout</title>
         <para>
             The Radial Tree Layout can only be applied to trees. Any attempt to apply this layout algorithm to other kinds of graph will produce an error message.
             Parameters for the Radial Tree Layout can be selected using the provided user interface.
         </para>
-        
-        
+
+
         <screenshot>
-            <screeninfo>A Screenshot of the Radial Tree Layout tab of the &rocs; graph layout tool.</screeninfo>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG" />
-                </imageobject>
-                <textobject>
-                    <phrase>A Screenshot of the Radial Tree Layout tab of the &rocs; graph layout tool.</phrase>
-                </textobject>
-            </mediaobject>
+          <screeninfo>A Screenshot of the Radial Tree Layout tab of the &rocs; graph layout tool.</screeninfo>
+          <mediaobject>
+            <imageobject><imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG" /></imageobject>
+            <textobject><phrase>A Screenshot of the Radial Tree Layout tab of the &rocs; graph layout tool.</phrase></textobject>
+          </mediaobject>
         </screenshot>
 
         <para>
             The tree type parameter selects between a free tree layout and a rooted tree layout. In a free tree layout, nodes are placed freely without any apparent hierarchy between them. In a rooted tree layout, the root node is placed at the top and sub-trees are laid out below it, giving an idea of a hierarchy between nodes.
         </para>
-        
-        <para>    
+
+        <para>
             The center/root parameter defines which node is going be used as root for the rooted tree layout or as center for the free tree layout. The center of a free tree layout is the first node to be placed by the algorithm. All other nodes are placed on circles centered at the center node. A center/root can be selected automatically by the layout algorithm.
         </para>
-        
+
         <para>
             The node separation parameter controls the distance between nodes. Increasing the value of this parameter will cause the distance between nodes to increase.
             Similarly, decreasing the value of this parameter will cause the distance between nodes to decrease.
