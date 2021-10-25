@@ -4,7 +4,7 @@
         "Category": "Plugins",
         "Description": "Read and write Graphviz graph documents (DOT)",
         "Description[ca@valencia]": "Llig i escriu documents gràfics del Graphviz (DOT).",
-        "Description[ca]": "Llegeix i escriu documents gràfics del Graphviz (DOT).",
+        "Description[ca]": "Llegeix i escriu documents gràfics del Graphviz (DOT)",
         "Description[cs]": "Čte a ukládá soubory grafů Graphviz (DOT)",
         "Description[de]": "Graphviz-Graphendokumente (DOT) lesen und schreiben",
         "Description[el]": "Ανάγνωση και εγγραφή εγγράφων γράφων Graphviz (DOT)",
