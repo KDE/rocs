@@ -205,7 +205,7 @@ QString Project::workingDir() const
 
 KTextEditor::Document* Project::createCodeDocument(const QString& filePath)
 {
-    auto path = d->m_workingDirectory.path() + QLatin1Char('/') + filePath + QStringLiteral(".js");
+    const QString path = d->m_workingDirectory.path() + QLatin1Char('/') + filePath + QStringLiteral(".js");
 
     auto doc = KTextEditor::Editor::instance()->createDocument(nullptr);
     if (!doc->saveAs(QUrl::fromLocalFile(path))) {
