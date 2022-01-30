@@ -24,6 +24,7 @@
         "Id": "rocs_graphlayoutplugin",
         "License": "GPL",
         "Name": "Graph Layout",
+        "Name[ar]": "تخطيط الرسم",
         "Name[ca@valencia]": "Disposició del graf",
         "Name[ca]": "Disposició del graf",
         "Name[cs]": "Rozvržení grafu",
