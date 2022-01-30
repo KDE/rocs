@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-or-later</project_license>
   <name>Rocs</name>
+  <name xml:lang="ar">روكس</name>
   <name xml:lang="bs">Rocs</name>
   <name xml:lang="ca">Rocs</name>
   <name xml:lang="ca-valencia">Rocs</name>
@@ -37,6 +38,7 @@
   <name xml:lang="zh-CN">Rocs</name>
   <name xml:lang="zh-TW">繪圖_Rocs</name>
   <summary>Rocs Graph Theory</summary>
+  <summary xml:lang="ar">روكس نظرية البيان</summary>
   <summary xml:lang="bs">Rocs teorija grafova</summary>
   <summary xml:lang="ca">Teoria de grafs Rocs</summary>
   <summary xml:lang="ca-valencia">Teoria de grafs Rocs</summary>
@@ -69,6 +71,7 @@
   <summary xml:lang="zh-TW">Rocs 圖形理論</summary>
   <description>
     <p>Rocs is a Graph Theory IDE for designing and analyzing graph algorithms. It provides an easy to use visual editor for creating graphs, a scripting engine to execute algorithms, and several helper tools for simulations and experiments. Algorithms are specified in JavaScript.</p>
+    <p xml:lang="ar">روكس هي بيئة تطوير متكاملة لنظرية البيان لتصميم وتحليل خوارزميات الرسم البياني. يوفر محررًا مرئيًا سهل الاستخدام لإنشاء الرسوم البيانية، ومحرك برمجة نصية لتنفيذ الخوارزميات  والعديد من الأدوات المساعدة للمحاكاة والتجارب. تحدد الخوارزميات في جافاسكربت.</p>
     <p xml:lang="bs">Rocs je IDE za teoriju grafova za dizajn i analizu graf algoritama. Pruža lak način za upotrebu vizualnog editora za kreiranje grafova, skriptni pogon za izvršenje algoritama i više pomoćnih alata za simulacije i eksperimente. Algoritmi su navedeni u JavaScript.</p>
     <p xml:lang="ca">El Rocs és un EID (IDE) de Teoria de Grafs per a dissenyar i analitzar algorismes de grafs. Ofereix un editor visual d'ús senzill per a crear grafs, un motor de creació de scripts per a executar algorismes i diverses eines d'ajuda per a simulacions i experiments. Els algorismes s'especifiquen en JavaScript.</p>
     <p xml:lang="ca-valencia">El Rocs és un EID (IDE) de Teoria de Grafs per a dissenyar i analitzar algorismes de grafs. Ofereix un editor visual d'ús senzill per a crear grafs, un motor de creació de scripts per a executar algorismes i diverses eines d'ajuda per a simulacions i experiments. Els algorismes s'especifiquen en JavaScript.</p>
@@ -104,6 +107,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>Working with graphs in Rocs</caption>
+      <caption xml:lang="ar">التعامل مع الرسوم مع روكس</caption>
       <caption xml:lang="ca">Treballant amb grafs al Rocs</caption>
       <caption xml:lang="ca-valencia">Treballant amb grafs al Rocs</caption>
       <caption xml:lang="cs">Práce s grafy v Rocs</caption>
