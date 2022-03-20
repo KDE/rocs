@@ -3,7 +3,7 @@
     "KPlugin": {
         "Category": "Plugins",
         "Description": "This generates graph layouts automatically.",
-        "Description[ca@valencia]": "Això genera automàticament les disposicions dels grafs.",
+        "Description[ca@valencia]": "Açò genera automàticament les disposicions dels grafs.",
         "Description[ca]": "Això genera automàticament les disposicions dels grafs.",
         "Description[cs]": "Toto automaticky generuje rozložení grafu.",
         "Description[de]": "Erstellt automatisch Layouts von Graphen.",
