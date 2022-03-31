@@ -77,6 +77,7 @@ target_link_libraries(rocsgraphtheory
         Qt5::Gui
         Qt5::Script
         Qt5::ScriptTools
+        KF5::CoreAddons
         KF5::I18n
         KF5::ItemViews
         KF5::XmlGui
