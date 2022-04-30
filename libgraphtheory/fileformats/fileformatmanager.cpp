@@ -8,7 +8,6 @@
 #include "logging_p.h"
 
 #include <KPluginFactory>
-#include <KPluginLoader>
 #include <KPluginMetaData>
 #include <KLocalizedString>
 
@@ -88,21 +87,19 @@ void FileFormatManager::loadBackends()
     }
     d->backends.clear();
 
-    const QVector<KPluginMetaData> metadataList = KPluginLoader::findPlugins("rocs/fileformats");
-
-    QPluginLoader loader;
+    const QVector<KPluginMetaData> metadataList = KPluginMetaData::findPlugins("rocs/fileformats");
 
     for (const auto &metadata : metadataList) {
-        loader.setFileName(metadata.fileName());
-
         qCDebug(GRAPHTHEORY_FILEFORMAT) << "Load Plugin: " << metadata.name();
-        if (!loader.load()) {
-            qCCritical(GRAPHTHEORY_FILEFORMAT) << "Error while loading plugin: " << metadata.name();
+
+        const auto result = KPluginFactory::instantiatePlugin<FileFormatInterface>(metadata, this);
+
+        if (!result) {
+            qCCritical(GRAPHTHEORY_FILEFORMAT) << "Error while loading plugin:" << result.errorString;
+            continue;
         }
 
-        KPluginFactory *factory = KPluginLoader(loader.fileName()).factory();
-        FileFormatInterface *plugin = factory->create<FileFormatInterface>(this);
-        d->backends.append(plugin);
+        d->backends.append(result.plugin);
     }
 
     // display a QMessageBox if no plugins are found

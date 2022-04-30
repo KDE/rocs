@@ -8,7 +8,6 @@
 #include "logging_p.h"
 
 #include <KPluginMetaData>
-#include <KPluginLoader>
 #include <KPluginFactory>
 #include <QString>
 #include <QCoreApplication>
@@ -56,12 +55,17 @@ void EditorPluginManager::loadPlugins()
     d->m_plugins.clear();
 
     // load plugins
-    const QVector<KPluginMetaData> metadataList = KPluginLoader::findPlugins(QStringLiteral("rocs/editorplugins"));
+    const QVector<KPluginMetaData> metadataList = KPluginMetaData::findPlugins(QStringLiteral("rocs/editorplugins"));
     for (const auto &metadata : metadataList) {
-        KPluginFactory *factory = KPluginLoader(metadata.fileName()).factory();
-        EditorPluginInterface *plugin = factory->create<EditorPluginInterface>(this);
-        plugin->setDisplayName(metadata.name());
-        d->m_plugins.append(plugin);
+        const auto result = KPluginFactory::instantiatePlugin<EditorPluginInterface>(metadata, this);
+
+        if (!result) {
+            qCWarning(GRAPHTHEORY_GENERAL) << "Failed to load editor plugin" << result.errorText;
+            continue;
+        }
+
+        result.plugin->setDisplayName(metadata.name());
+        d->m_plugins.append(result.plugin);
         qCDebug(GRAPHTHEORY_GENERAL) << "Loaded plugin:" << metadata.name();
     }
 }
