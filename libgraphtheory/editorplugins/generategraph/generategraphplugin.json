@@ -3,7 +3,7 @@
     "KPlugin": {
         "Category": "Plugins",
         "Description": "This generates a new graph by a pattern.",
-        "Description[ca@valencia]": "Genera un nou graf segons un patró.",
+        "Description[ca@valencia]": "Genera un graf nou segons un patró.",
         "Description[ca]": "Això genera un nou graf segons un patró.",
         "Description[de]": "Erstellt anhand eines Musters einen neuen Graphen.",
         "Description[el]": "Δημιουργία ενός νέου γράφου με βάση ένα μοτίβο.",
