@@ -3,7 +3,7 @@
     "KPlugin": {
         "Category": "Plugins",
         "Description": "Assign values to graph edges and nodes.",
-        "Description[ca@valencia]": "Selecciona valors a les arestes i nodes del graf.",
+        "Description[ca@valencia]": "Assigna valors a les arestes i nodes del graf.",
         "Description[ca]": "Assigna valors a les arestes i nodes del graf.",
         "Description[de]": "Werte zu Graphenkanten und -knoten zuweisen.",
         "Description[el]": "Ανάθεση τιμών στους κόμβους και στις ακμές του γράφου.",
