@@ -3,7 +3,7 @@
     "KPlugin": {
         "Category": "Plugins",
         "Description": "Read and write graph documents in Trivial Graph Format (TGF)",
-        "Description[ca@valencia]": "Llig i escriu fichers escrits en el Format Gràfic Trivial (TGF)",
+        "Description[ca@valencia]": "Llig i escriu fitxers escrits en el Format Gràfic Trivial (TGF)",
         "Description[ca]": "Llegeix i escriu fitxers escrits en el Format Gràfic Trivial (TGF)",
         "Description[de]": "Dokumente im Format „Trivial Graph“ (TGF) lesen und schreiben",
         "Description[el]": "Ανάγνωση και εγγραφή αρχείων γράφων σε μορφή Trivial Graph (TGF)",
@@ -32,7 +32,7 @@
         "Id": "rocs_tgffileformat",
         "License": "GPL",
         "Name": "TGF Graph File Format",
-        "Name[ca@valencia]": "Format de ficher de grafs TGF",
+        "Name[ca@valencia]": "Format de fitxer de grafs TGF",
         "Name[ca]": "Format de fitxer de grafs TGF",
         "Name[cs]": "Formát souborů grafů TGF",
         "Name[de]": "TGF-Graphendateiformat",
