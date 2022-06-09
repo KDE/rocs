@@ -32,7 +32,7 @@
         "Id": "rocs_tikzfileformat",
         "License": "GPL",
         "Name": "PGF/TikZ Graph File Export Plugin",
-        "Name[ca@valencia]": "Conector d'exportació del ficher de grafs a PGF/TikZ",
+        "Name[ca@valencia]": "Conector d'exportació del fitxer de grafs a PGF/TikZ",
         "Name[ca]": "Connector d'exportació del fitxer de grafs a PGF/TikZ",
         "Name[cs]": "Export souborů grafů PGF/TikZ",
         "Name[de]": "PGF/TikZ-Graphendateiexportmodul",
