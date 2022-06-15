@@ -8,7 +8,6 @@
 
 #include <QLineF>
 #include <QVector2D>
-#include <iostream>
 #include <iomanip>
 
 void LayoutEvaluator::showMetric(const MetricSummarizer& metric, std::ostream& outputStream) const
