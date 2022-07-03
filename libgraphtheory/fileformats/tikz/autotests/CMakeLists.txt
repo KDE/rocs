@@ -15,5 +15,5 @@ add_test(NAME TestTikzFileFormat COMMAND TestTikzFileFormat)
 ecm_mark_as_test(TestTikzFileFormat)
 target_link_libraries(TestTikzFileFormat
     rocsgraphtheory
-    Qt5::Test
+    Qt::Test
 )

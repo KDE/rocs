@@ -17,5 +17,5 @@ add_test(NAME TestRocs2FileFormat COMMAND TestRocs2FileFormat)
 ecm_mark_as_test(TestRocs2FileFormat)
 target_link_libraries(TestRocs2FileFormat
     rocsgraphtheory
-    Qt5::Test
+    Qt::Test
 )

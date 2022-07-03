@@ -11,8 +11,8 @@ kcoreaddons_add_plugin(rocs2fileformat SOURCES ${rocs2format_SRCS} INSTALL_NAMES
 
 target_link_libraries(rocs2fileformat
     PUBLIC
-        Qt5::Core
-        Qt5::Gui
+        Qt::Core
+        Qt::Gui
         KF5::I18n
         rocsgraphtheory
 )

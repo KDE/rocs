@@ -71,12 +71,12 @@ generate_export_header(rocsgraphtheory BASE_NAME graphtheory)
 
 target_link_libraries(rocsgraphtheory
     PUBLIC
-        Qt5::Core
-        Qt5::Quick
-        Qt5::QuickWidgets
-        Qt5::Gui
-        Qt5::Script
-        Qt5::ScriptTools
+        Qt::Core
+        Qt::Quick
+        Qt::QuickWidgets
+        Qt::Gui
+        Qt::Script
+        Qt::ScriptTools
         KF5::CoreAddons
         KF5::I18n
         KF5::ItemViews

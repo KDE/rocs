@@ -17,5 +17,5 @@ target_link_libraries(TestProject
     rocsgraphtheory
     KF5::TextEditor
     KF5::Archive
-    Qt5::Test
+    Qt::Test
 )

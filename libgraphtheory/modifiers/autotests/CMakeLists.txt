@@ -14,7 +14,7 @@ add_test(NAME TestForceBasedLayout COMMAND TestForceBasedLayout)
 ecm_mark_as_test(TestForceBasedLayout)
 target_link_libraries(TestForceBasedLayout
     rocsgraphtheory
-    Qt5::Test
+    Qt::Test
 )
 target_compile_definitions(TestForceBasedLayout PRIVATE ADDITIONAL_PLUGIN_DIR="${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
@@ -26,7 +26,7 @@ add_test(NAME TestRadialLayout COMMAND TestRadialLayout)
 ecm_mark_as_test(TestRadialLayout)
 target_link_libraries(TestRadialLayout
     rocsgraphtheory
-    Qt5::Test
+    Qt::Test
 )
 target_compile_definitions(TestRadialLayout PRIVATE ADDITIONAL_PLUGIN_DIR="${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 

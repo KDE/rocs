@@ -16,8 +16,8 @@ kcoreaddons_add_plugin(dotfileformat SOURCES ${dotformat_SRCS} INSTALL_NAMESPACE
 
 target_link_libraries(dotfileformat
     PUBLIC
-        Qt5::Core
-        Qt5::Gui
+        Qt::Core
+        Qt::Gui
         KF5::I18n
         rocsgraphtheory
 )

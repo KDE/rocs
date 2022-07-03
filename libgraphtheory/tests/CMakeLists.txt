@@ -9,8 +9,8 @@ add_executable(scenetest
 target_link_libraries(scenetest
     PUBLIC
         rocsgraphtheory
-        Qt5::Core
-        Qt5::Quick
-        Qt5::Widgets
+        Qt::Core
+        Qt::Quick
+        Qt::Widgets
         KF5::I18n
 )

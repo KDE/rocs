@@ -77,10 +77,10 @@ target_link_libraries(rocs
         KF5::ItemViews
         KF5::Parts
         KF5::TextEditor
-        Qt5::Core
-        Qt5::Quick
-        Qt5::QuickWidgets
-        Qt5::XmlPatterns
+        Qt::Core
+        Qt::Quick
+        Qt::QuickWidgets
+        Qt::XmlPatterns
 )
 
 ################## INSTALLS ##########################

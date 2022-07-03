@@ -20,7 +20,7 @@ add_test(NAME TestGmlFileFormat COMMAND TestGmlFileFormat)
 ecm_mark_as_test(TestGmlFileFormat)
 target_link_libraries(TestGmlFileFormat
     rocsgraphtheory
-    Qt5::Test
+    Qt::Test
 )
 
 # Boost::spirit requires exceptions

@@ -22,6 +22,6 @@ add_test(NAME TestDotFileFormat COMMAND TestDotFileFormat)
 ecm_mark_as_test(TestDotFileFormat)
 target_link_libraries(TestDotFileFormat
     rocsgraphtheory
-    Qt5::Gui
-    Qt5::Test
+    Qt::Gui
+    Qt::Test
 )

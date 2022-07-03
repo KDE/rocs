@@ -14,5 +14,5 @@ add_test(NAME TestTgfFileFormat COMMAND TestTgfFileFormat)
 ecm_mark_as_test(TestTgfFileFormat)
 target_link_libraries(TestTgfFileFormat
     rocsgraphtheory
-    Qt5::Test
+    Qt::Test
 )
