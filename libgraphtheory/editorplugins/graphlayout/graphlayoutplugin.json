@@ -20,6 +20,7 @@
         "Description[ru]": "Автоматически создаёт компоновку графов.",
         "Description[sl]": "To samodejno ustvari postavitve grafov.",
         "Description[sv]": "Skapar graflayouter automatiskt.",
+        "Description[tr]": "Bu, grafik yerleşimini otomatik oluşturur.",
         "Description[uk]": "Автоматично створює компонування графів.",
         "Description[x-test]": "xxThis generates graph layouts automatically.xx",
         "Id": "rocs_graphlayoutplugin",
@@ -43,6 +44,7 @@
         "Name[ru]": "Компоновка графов",
         "Name[sl]": "Postavitev grafa",
         "Name[sv]": "Graflayout",
+        "Name[tr]": "Grafik Yerleşimi",
         "Name[uk]": "Компонування графу",
         "Name[x-test]": "xxGraph Layoutxx",
         "Version": "0.1"
