@@ -31,3 +31,7 @@ ecm_install_icons( ICONS
   DESTINATION ${KDE_INSTALL_ICONDIR}
   THEME hicolor
 )
+
+target_sources(rocsgraphtheory PRIVATE
+	icons.qrc
+)

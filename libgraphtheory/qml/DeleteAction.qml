@@ -11,7 +11,7 @@ import org.kde.rocs.graphtheory 1.0
 Action {
     id: root
     text: i18n("Delete Element")
-    iconName: "rocsdelete"
+    iconSource: "qrc:/icons/delete"
     checkable: true
     tooltip: i18n("Delete element from scene")
 }

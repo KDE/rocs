@@ -12,7 +12,7 @@ Action {
     id: root
 
     text: i18n("Select & Move")
-    iconName: "rocsselect"
+    iconSource: "qrc:/icons/select"
     checkable: true
     tooltip: i18n("Select and move elements on the scene")
 }

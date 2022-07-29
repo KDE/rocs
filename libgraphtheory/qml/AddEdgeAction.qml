@@ -26,7 +26,7 @@ Action {
     }
 
     text: i18n("Create Edge")
-    iconName: "rocsedge"
+    iconSource: "qrc:/icons/edge"
     checkable: true
     tooltip: i18n("Create an edge between two nodes")
 }

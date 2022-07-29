@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="delete">sc-actions-rocsdelete.svgz</file>
+	<file alias="select">sc-actions-rocsselect.svgz</file>
+	<file alias="node">sc-actions-rocsnode.svgz</file>
+	<file alias="edge" >sc-actions-rocsedge.svgz</file>
+    </qresource>
+</RCC>
