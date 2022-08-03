@@ -4,7 +4,8 @@
  *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
-#include "transformedgesplugin.h"
+#include "editorplugins/editorplugininterface.h"
+
 #include "transformedgeswidget.h"
 #include "typenames.h"
 #include "graphdocument.h"
@@ -16,21 +17,26 @@
 
 using namespace GraphTheory;
 
-K_PLUGIN_CLASS_WITH_JSON(TransformEdgesPlugin, "transformedgesplugin.json")
-
-TransformEdgesPlugin::TransformEdgesPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &)
-    : EditorPluginInterface(parent, data)
+class TransformEdgesPlugin : public EditorPluginInterface
 {
-}
-
-void TransformEdgesPlugin::showDialog(GraphDocumentPtr document)
-{
-    if (!document) {
-        qCCritical(GRAPHTHEORY_GENERAL) << "No valid graph document given, aborting.";
+    Q_OBJECT
+public:
+    TransformEdgesPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+        : EditorPluginInterface(parent, data)
+    {
     }
-    QPointer<TransformEdgesWidget> dialog = new TransformEdgesWidget(document);
-    dialog->exec();
-    return;
-}
+
+    void showDialog(GraphDocumentPtr document) override
+    {
+        if (!document) {
+            qCCritical(GRAPHTHEORY_GENERAL) << "No valid graph document given, aborting.";
+        }
+        QPointer<TransformEdgesWidget> dialog = new TransformEdgesWidget(document);
+        dialog->exec();
+        return;
+    }
+};
+
+K_PLUGIN_CLASS_WITH_JSON(TransformEdgesPlugin, "transformedgesplugin.json")
 
 #include "transformedgesplugin.moc"

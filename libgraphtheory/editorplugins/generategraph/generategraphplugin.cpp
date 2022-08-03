@@ -4,7 +4,8 @@
  *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
-#include "generategraphplugin.h"
+#include "editorplugins/editorplugininterface.h"
+
 #include "generategraphwidget.h"
 #include "typenames.h"
 #include "graphdocument.h"
@@ -15,21 +16,26 @@
 
 using namespace GraphTheory;
 
-K_PLUGIN_CLASS_WITH_JSON(GenerateGraphPlugin, "generategraphplugin.json")
-
-GenerateGraphPlugin::GenerateGraphPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &)
-    : EditorPluginInterface(parent, data)
+class GenerateGraphPlugin : public EditorPluginInterface
 {
+    Q_OBJECT
 
-}
-
-void GenerateGraphPlugin::showDialog(GraphDocumentPtr document)
-{
-    if (!document) {
-        qCCritical(GRAPHTHEORY_GENERAL) << "No valid graph document given, aborting.";
+public:
+    GenerateGraphPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+        : EditorPluginInterface(parent, data)
+    {
     }
-    QPointer<GenerateGraphWidget> dialog = new GenerateGraphWidget(document);
-    dialog->exec();
-}
+
+    void showDialog(GraphDocumentPtr document) override
+    {
+        if (!document) {
+            qCCritical(GRAPHTHEORY_GENERAL) << "No valid graph document given, aborting.";
+        }
+        QPointer<GenerateGraphWidget> dialog = new GenerateGraphWidget(document);
+        dialog->exec();
+    }
+};
+
+K_PLUGIN_CLASS_WITH_JSON(GenerateGraphPlugin, "generategraphplugin.json")
 
 #include "generategraphplugin.moc"
