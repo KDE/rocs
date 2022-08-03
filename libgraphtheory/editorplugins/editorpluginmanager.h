@@ -13,6 +13,8 @@
 #include <QObject>
 #include <QList>
 
+#include <memory>
+
 class KPluginInfo;
 
 namespace GraphTheory
@@ -40,15 +42,9 @@ public:
     QList <EditorPluginInterface*> plugins() const;
 
 private:
-    /**
-     * \internal
-     * Clears list of plugins and reloads them.
-     */
-    void loadPlugins();
-
     static EditorPluginManager * instance;
 
-    const QScopedPointer<EditorPluginManagerPrivate> d;
+    const std::unique_ptr<EditorPluginManagerPrivate> d;
 };
 }
 

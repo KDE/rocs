@@ -31,12 +31,9 @@ EditorPluginInterface::EditorPluginInterface(const QString &componentName, QObje
 
 }
 
-EditorPluginInterface::~EditorPluginInterface()
-{
+EditorPluginInterface::~EditorPluginInterface() = default;
 
-}
-
-QString EditorPluginInterface::displayName()
+QString EditorPluginInterface::displayName() const
 {
     if (d->m_displayName.isEmpty()) {
         return d->m_componentName;

@@ -21,39 +21,12 @@ using namespace GraphTheory;
 class GraphTheory::EditorPluginManagerPrivate
 {
 public:
-    EditorPluginManagerPrivate()
-    {
-
-    }
-
-    ~EditorPluginManagerPrivate()
-    { }
-
     QList<EditorPluginInterface*> m_plugins;
 };
 
 EditorPluginManager::EditorPluginManager()
     : d(new EditorPluginManagerPrivate)
 {
-    loadPlugins();
-}
-
-EditorPluginManager::~EditorPluginManager()
-{
-
-}
-
-QList<EditorPluginInterface*> EditorPluginManager::plugins() const
-{
-    return d->m_plugins;
-}
-
-void EditorPluginManager::loadPlugins()
-{
-    // remove all present plugins
-    qDeleteAll(d->m_plugins);
-    d->m_plugins.clear();
-
     // load plugins
     const QVector<KPluginMetaData> metadataList = KPluginMetaData::findPlugins(QStringLiteral("rocs/editorplugins"));
     for (const auto &metadata : metadataList) {
@@ -68,4 +41,11 @@ void EditorPluginManager::loadPlugins()
         d->m_plugins.append(result.plugin);
         qCDebug(GRAPHTHEORY_GENERAL) << "Loaded plugin:" << metadata.name();
     }
+}
+
+EditorPluginManager::~EditorPluginManager() = default;
+
+QList<EditorPluginInterface *> EditorPluginManager::plugins() const
+{
+    return d->m_plugins;
 }

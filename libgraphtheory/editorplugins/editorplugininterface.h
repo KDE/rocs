@@ -11,6 +11,8 @@
 #include "typenames.h"
 #include "graphtheory_export.h"
 
+#include <memory>
+
 class QUrl;
 class QDialog;
 
@@ -41,7 +43,7 @@ public:
     /**
      * @return display name of plugin, if nothing is set returns componentName
      */
-    virtual QString displayName();
+    virtual QString displayName() const;
 
     /**
      * set display name of plugin
@@ -49,7 +51,7 @@ public:
     virtual void setDisplayName(const QString &name);
 
 private:
-    const QScopedPointer<EditorPluginInterfacePrivate> d;
+    const std::unique_ptr<EditorPluginInterfacePrivate> d;
 };
 }
 
