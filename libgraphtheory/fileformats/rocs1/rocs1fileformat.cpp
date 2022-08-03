@@ -22,9 +22,7 @@
 
 using namespace GraphTheory;
 
-K_PLUGIN_FACTORY_WITH_JSON( FilePluginFactory,
-                            "rocs1fileformat.json",
-                            registerPlugin<Rocs1FileFormat>();)
+K_PLUGIN_CLASS_WITH_JSON(Rocs1FileFormat, "rocs1fileformat.json")
 
 class GraphTheory::Rocs1FileFormatPrivate
 {

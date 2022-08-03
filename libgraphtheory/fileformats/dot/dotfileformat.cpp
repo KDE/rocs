@@ -29,9 +29,7 @@ using namespace GraphTheory;
 static QString processNode(const NodePtr &node);
 static QString processEdge(const EdgePtr &edge);
 
-K_PLUGIN_FACTORY_WITH_JSON( FilePluginFactory,
-                            "dotfileformat.json",
-                            registerPlugin<DotFileFormat>();)
+K_PLUGIN_CLASS_WITH_JSON(DotFileFormat, "dotfileformat.json")
 
 DotFileFormat::~DotFileFormat()
 {

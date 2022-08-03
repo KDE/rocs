@@ -14,9 +14,7 @@
 
 using namespace GraphTheory;
 
-K_PLUGIN_FACTORY_WITH_JSON( EditorPluginFactory,
-                            "graphlayoutplugin.json",
-                            registerPlugin<GraphLayoutPlugin>();)
+K_PLUGIN_CLASS_WITH_JSON(GraphLayoutPlugin, "graphlayoutplugin.json")
 
 class GraphTheory::GraphLayoutPluginPrivate
 {

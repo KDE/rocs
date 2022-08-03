@@ -18,9 +18,7 @@
 
 using namespace GraphTheory;
 
-K_PLUGIN_FACTORY_WITH_JSON( FilePluginFactory,
-                            "tikzfileformat.json",
-                            registerPlugin<TikzFileFormat>();)
+K_PLUGIN_CLASS_WITH_JSON(TikzFileFormat, "tikzfileformat.json")
 
 TikzFileFormat::TikzFileFormat(QObject* parent, const QList< QVariant >&)
     : FileFormatInterface("rocs_tikzfileformat", parent)

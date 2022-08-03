@@ -28,9 +28,7 @@ static QString processNode(const NodePtr &n);
 
 extern GmlParser::GmlGrammarHelper* phelper;
 
-K_PLUGIN_FACTORY_WITH_JSON( FilePluginFactory,
-                            "gmlfileformat.json",
-                            registerPlugin<GmlFileFormat>();)
+K_PLUGIN_CLASS_WITH_JSON(GmlFileFormat, "gmlfileformat.json")
 
 GmlFileFormat::GmlFileFormat(QObject *parent, const QList<QVariant>&) :
     FileFormatInterface("rocs_gmlfileformat", parent)

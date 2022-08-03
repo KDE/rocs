@@ -15,9 +15,7 @@
 
 using namespace GraphTheory;
 
-K_PLUGIN_FACTORY_WITH_JSON( EditorPluginFactory,
-                            "generategraphplugin.json",
-                            registerPlugin<GenerateGraphPlugin>();)
+K_PLUGIN_CLASS_WITH_JSON(GenerateGraphPlugin, "generategraphplugin.json")
 
 class GraphTheory::GenerateGraphPluginPrivate
 {

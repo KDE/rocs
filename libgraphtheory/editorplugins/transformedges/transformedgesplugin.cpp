@@ -16,9 +16,7 @@
 
 using namespace GraphTheory;
 
-K_PLUGIN_FACTORY_WITH_JSON( EditorPluginFactory,
-                            "transformedgesplugin.json",
-                            registerPlugin<TransformEdgesPlugin>();)
+K_PLUGIN_CLASS_WITH_JSON(TransformEdgesPlugin, "transformedgesplugin.json")
 
 class GraphTheory::TransformEdgesPluginPrivate
 {
