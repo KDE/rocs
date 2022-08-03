@@ -32,8 +32,8 @@ public:
     QDialog *m_dialog;
 };
 
-GenerateGraphPlugin::GenerateGraphPlugin(QObject* parent,  const QList<QVariant> & /* args*/)
-    : EditorPluginInterface("rocs_generategraphplugin", parent)
+GenerateGraphPlugin::GenerateGraphPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+    : EditorPluginInterface(parent, data)
     , d(new GenerateGraphPluginPrivate)
 {
 

@@ -42,7 +42,7 @@ void TestTikzFileFormat::serializeTest()
     Edge::create(nodes["e"], nodes["a"]);
 
     // create exporter plugin
-    TikzFileFormat serializer(this, QList<QVariant>());
+    TikzFileFormat serializer(this, KPluginMetaData(), QVariantList());
     serializer.setFile(QUrl::fromLocalFile("test.tgf"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);

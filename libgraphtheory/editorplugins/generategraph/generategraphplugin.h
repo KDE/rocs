@@ -20,7 +20,7 @@ class GenerateGraphPlugin : public EditorPluginInterface
     Q_OBJECT
 
 public:
-    GenerateGraphPlugin(QObject* parent, const QList< QVariant >&);
+    GenerateGraphPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &);
     ~GenerateGraphPlugin() override;
     void showDialog(GraphDocumentPtr document) override;
 

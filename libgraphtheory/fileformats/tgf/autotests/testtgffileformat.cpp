@@ -46,13 +46,13 @@ void TestTgfFileFormat::serializeUnserializeTest()
     Edge::create(dataList["e"], dataList["a"]);
 
     // create exporter plugin
-    TgfFileFormat serializer(this, QList<QVariant>());
+    TgfFileFormat serializer(this, KPluginMetaData(), QVariantList());
     serializer.setFile(QUrl::fromLocalFile("test.tgf"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);
 
     // create importer
-    TgfFileFormat importer(this, QList<QVariant>());
+    TgfFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("test.tgf"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);

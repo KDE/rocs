@@ -30,8 +30,8 @@ extern GmlParser::GmlGrammarHelper* phelper;
 
 K_PLUGIN_CLASS_WITH_JSON(GmlFileFormat, "gmlfileformat.json")
 
-GmlFileFormat::GmlFileFormat(QObject *parent, const QList<QVariant>&) :
-    FileFormatInterface("rocs_gmlfileformat", parent)
+GmlFileFormat::GmlFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+    : FileFormatInterface(parent, data)
 {
 }
 

@@ -44,13 +44,13 @@ void TestRocs2FileFormat::documentTypesTest()
     QCOMPARE(document->edgeTypes().count(), 2); // 2 = default type + custom type
 
     // create exporter plugin
-    Rocs2FileFormat serializer(this, QList<QVariant>());
+    Rocs2FileFormat serializer(this, KPluginMetaData(), QVariantList());
     serializer.setFile(QUrl::fromLocalFile("test.graph2"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);
 
     // create importer
-    Rocs2FileFormat importer(this, QList<QVariant>());
+    Rocs2FileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("test.graph2"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);
@@ -105,13 +105,13 @@ void TestRocs2FileFormat::nodeAndEdgeTest()
     Edge::create(dataList["a"], dataList["b"])->setDynamicProperty("label", "test value");
 
     // create exporter plugin
-    Rocs2FileFormat serializer(this, QList<QVariant>());
+    Rocs2FileFormat serializer(this, KPluginMetaData(), QVariantList());
     serializer.setFile(QUrl::fromLocalFile("test.graph2"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);
 
     // create importer
-    Rocs2FileFormat importer(this, QList<QVariant>());
+    Rocs2FileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("test.graph2"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);
@@ -144,7 +144,7 @@ void TestRocs2FileFormat::nodeAndEdgeTest()
 // regression test: test parsing of format version 1
 void TestRocs2FileFormat::parseVersion1Format()
 {
-    Rocs2FileFormat importer(this, QList<QVariant>());
+    Rocs2FileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("importtest_v1.graph2"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());

@@ -25,8 +25,8 @@ using namespace GraphTheory;
 
 K_PLUGIN_CLASS_WITH_JSON(Rocs2FileFormat, "rocs2fileformat.json")
 
-Rocs2FileFormat::Rocs2FileFormat(QObject* parent, const QList< QVariant >&)
-    : FileFormatInterface("rocs_tgffileformat", parent)
+Rocs2FileFormat::Rocs2FileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+    : FileFormatInterface(parent, data)
 {
 }
 

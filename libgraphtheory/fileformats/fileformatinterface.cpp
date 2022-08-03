@@ -15,8 +15,8 @@ using namespace GraphTheory;
 class GraphTheory::FileFormatInterfacePrivate
 {
 public:
-    FileFormatInterfacePrivate(const QString &componentName)
-        : componentName(componentName)
+    FileFormatInterfacePrivate(const KPluginMetaData &data)
+        : componentName(data.name())
     {
         lastError = FileFormatInterface::None;
     }
@@ -28,10 +28,9 @@ public:
     QUrl file;
 };
 
-
-FileFormatInterface::FileFormatInterface(const QString &componentName, QObject *parent):
-    QObject(parent),
-    d(new FileFormatInterfacePrivate(componentName))
+FileFormatInterface::FileFormatInterface(QObject *parent, const KPluginMetaData &data)
+    : QObject(parent)
+    , d(new FileFormatInterfacePrivate(data))
 {
 }
 

@@ -75,7 +75,7 @@ void DotFileFormatTest::parseSubgraphs()
 void DotFileFormatTest::parseFileER()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("undirected/ER.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -112,7 +112,7 @@ void DotFileFormatTest::parseFileER()
 void DotFileFormatTest::parseFileHeawood()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("undirected/Heawood.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -121,7 +121,7 @@ void DotFileFormatTest::parseFileHeawood()
 void DotFileFormatTest::parseFileNgk104()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("undirected/ngk10_4.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -130,7 +130,7 @@ void DotFileFormatTest::parseFileNgk104()
 void DotFileFormatTest::parseFilePetersen()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("undirected/Petersen.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -139,7 +139,7 @@ void DotFileFormatTest::parseFilePetersen()
 void DotFileFormatTest::parseFileProcess()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("undirected/process.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -156,7 +156,7 @@ void DotFileFormatTest::parseFileProcess()
 void DotFileFormatTest::parseFileAbstract()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/abstract.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -165,7 +165,7 @@ void DotFileFormatTest::parseFileAbstract()
 void DotFileFormatTest::parseFileAlf()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/alf.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -174,7 +174,7 @@ void DotFileFormatTest::parseFileAlf()
 void DotFileFormatTest::parseFileArrows()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/arrows.gv"));
     importer.readFile();
     QEXPECT_FAIL("", "File contains invalid identifiers with underbar at beginning.", Continue);
@@ -184,7 +184,7 @@ void DotFileFormatTest::parseFileArrows()
 void DotFileFormatTest::parseFileAwilliams()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/awilliams.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -193,7 +193,7 @@ void DotFileFormatTest::parseFileAwilliams()
 void DotFileFormatTest::parseFileClust()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/clust.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -202,7 +202,7 @@ void DotFileFormatTest::parseFileClust()
 void DotFileFormatTest::parseFileClust1()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/clust1.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -211,7 +211,7 @@ void DotFileFormatTest::parseFileClust1()
 void DotFileFormatTest::parseFileClust2()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/clust2.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -220,7 +220,7 @@ void DotFileFormatTest::parseFileClust2()
 void DotFileFormatTest::parseFileClust3()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/clust3.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -229,7 +229,7 @@ void DotFileFormatTest::parseFileClust3()
 void DotFileFormatTest::parseFileClust4()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/clust4.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -238,7 +238,7 @@ void DotFileFormatTest::parseFileClust4()
 void DotFileFormatTest::parseFileClust5()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/clust5.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -247,7 +247,7 @@ void DotFileFormatTest::parseFileClust5()
 void DotFileFormatTest::parseFileCrazy()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/crazy.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -256,7 +256,7 @@ void DotFileFormatTest::parseFileCrazy()
 void DotFileFormatTest::parseFileCtext()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/ctext.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -265,7 +265,7 @@ void DotFileFormatTest::parseFileCtext()
 void DotFileFormatTest::parseFileDfa()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/dfa.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -274,7 +274,7 @@ void DotFileFormatTest::parseFileDfa()
 void DotFileFormatTest::parseFileFig6()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/fig6.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -283,7 +283,7 @@ void DotFileFormatTest::parseFileFig6()
 void DotFileFormatTest::parseFileFsm()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/fsm.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -319,7 +319,7 @@ void DotFileFormatTest::parseFileFsm()
 void DotFileFormatTest::parseFileKW91()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/KW91.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -328,7 +328,7 @@ void DotFileFormatTest::parseFileKW91()
 void DotFileFormatTest::parseFileLatin1()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/Latin1.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -337,7 +337,7 @@ void DotFileFormatTest::parseFileLatin1()
 void DotFileFormatTest::parseFileNaN()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/NaN.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -346,7 +346,7 @@ void DotFileFormatTest::parseFileNaN()
 void DotFileFormatTest::parseFileGrammar()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/grammar.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -355,7 +355,7 @@ void DotFileFormatTest::parseFileGrammar()
 void DotFileFormatTest::parseFileHashtable()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/hashtable.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -364,7 +364,7 @@ void DotFileFormatTest::parseFileHashtable()
 void DotFileFormatTest::parseFileHondaTokoro()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/honda-tokoro.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -373,7 +373,7 @@ void DotFileFormatTest::parseFileHondaTokoro()
 void DotFileFormatTest::parseFileJapanese()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/japanese.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -382,7 +382,7 @@ void DotFileFormatTest::parseFileJapanese()
 void DotFileFormatTest::parseFileJcctree()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/jcctree.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -391,7 +391,7 @@ void DotFileFormatTest::parseFileJcctree()
 void DotFileFormatTest::parseFileJsort()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/jsort.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -400,7 +400,7 @@ void DotFileFormatTest::parseFileJsort()
 void DotFileFormatTest::parseFileLdbxtried()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/ldbxtried.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -409,7 +409,7 @@ void DotFileFormatTest::parseFileLdbxtried()
 void DotFileFormatTest::parseFileLongflat()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/longflat.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -418,7 +418,7 @@ void DotFileFormatTest::parseFileLongflat()
 void DotFileFormatTest::parseFileMike()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/mike.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -427,7 +427,7 @@ void DotFileFormatTest::parseFileMike()
 void DotFileFormatTest::parseFileNhg()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/nhg.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -436,7 +436,7 @@ void DotFileFormatTest::parseFileNhg()
 void DotFileFormatTest::parseFileOldarrows()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/oldarrows.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -445,7 +445,7 @@ void DotFileFormatTest::parseFileOldarrows()
 void DotFileFormatTest::parseFilePgram()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/pgram.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -454,7 +454,7 @@ void DotFileFormatTest::parseFilePgram()
 void DotFileFormatTest::parseFilePm2way()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/pm2way.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -463,7 +463,7 @@ void DotFileFormatTest::parseFilePm2way()
 void DotFileFormatTest::parseFilePmpipe()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/pmpipe.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -472,7 +472,7 @@ void DotFileFormatTest::parseFilePmpipe()
 void DotFileFormatTest::parseFilePolypoly()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/polypoly.gv"));
     importer.readFile();
     QEXPECT_FAIL("", "Not parsing with unknown reason: need to investigate further.", Continue);
@@ -482,7 +482,7 @@ void DotFileFormatTest::parseFilePolypoly()
 void DotFileFormatTest::parseFileProc3d()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/proc3d.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -491,7 +491,7 @@ void DotFileFormatTest::parseFileProc3d()
 void DotFileFormatTest::parseFilePsfonttest()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/psfonttest.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -500,7 +500,7 @@ void DotFileFormatTest::parseFilePsfonttest()
 void DotFileFormatTest::parseFileRecord2()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/record2.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -509,7 +509,7 @@ void DotFileFormatTest::parseFileRecord2()
 void DotFileFormatTest::parseFileRecords()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/records.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -518,7 +518,7 @@ void DotFileFormatTest::parseFileRecords()
 void DotFileFormatTest::parseFileRowe()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/rowe.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -527,7 +527,7 @@ void DotFileFormatTest::parseFileRowe()
 void DotFileFormatTest::parseFileRussian()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/russian.gv"));
     importer.readFile();
 
@@ -538,7 +538,7 @@ void DotFileFormatTest::parseFileRussian()
 void DotFileFormatTest::parseFileSdh()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/sdh.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -547,7 +547,7 @@ void DotFileFormatTest::parseFileSdh()
 void DotFileFormatTest::parseFileShells()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/shells.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -556,7 +556,7 @@ void DotFileFormatTest::parseFileShells()
 void DotFileFormatTest::parseFileStates()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/states.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -565,7 +565,7 @@ void DotFileFormatTest::parseFileStates()
 void DotFileFormatTest::parseFileStructs()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/structs.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -574,7 +574,7 @@ void DotFileFormatTest::parseFileStructs()
 void DotFileFormatTest::parseFileSwitch()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/switch.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -583,7 +583,7 @@ void DotFileFormatTest::parseFileSwitch()
 void DotFileFormatTest::parseFileTable()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/table.gv"));
     importer.readFile();
 
@@ -594,7 +594,7 @@ void DotFileFormatTest::parseFileTable()
 void DotFileFormatTest::parseFileTrain11()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/train11.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -603,7 +603,7 @@ void DotFileFormatTest::parseFileTrain11()
 void DotFileFormatTest::parseFileTrapeziumlr()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/trapeziumlr.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -612,7 +612,7 @@ void DotFileFormatTest::parseFileTrapeziumlr()
 void DotFileFormatTest::parseFileTree()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/tree.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -621,7 +621,7 @@ void DotFileFormatTest::parseFileTree()
 void DotFileFormatTest::parseFileTriedds()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/triedds.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -630,7 +630,7 @@ void DotFileFormatTest::parseFileTriedds()
 void DotFileFormatTest::parseFileTry()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/try.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -639,7 +639,7 @@ void DotFileFormatTest::parseFileTry()
 void DotFileFormatTest::parseFileUnix()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/unix.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -663,7 +663,7 @@ void DotFileFormatTest::parseFileUnix()
 void DotFileFormatTest::parseFileUnix2()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/unix2.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -672,7 +672,7 @@ void DotFileFormatTest::parseFileUnix2()
 void DotFileFormatTest::parseFileViewfile()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/viewfile.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -681,7 +681,7 @@ void DotFileFormatTest::parseFileViewfile()
 void DotFileFormatTest::parseFileWorld()
 {
     // create importer plugin
-    DotFileFormat importer(this, QList<QVariant>());
+    DotFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("directed/world.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
@@ -698,7 +698,7 @@ void DotFileFormatTest::writeAndParseTest()
     Edge::create(nodes["a"], nodes["b"]);
 
     // create testfile
-    DotFileFormat dotFormat(this, QList<QVariant>());
+    DotFileFormat dotFormat(this, KPluginMetaData(), QVariantList());
     QTemporaryFile testFile;
     testFile.open();
     dotFormat.setFile(QUrl::fromLocalFile(testFile.fileName()));

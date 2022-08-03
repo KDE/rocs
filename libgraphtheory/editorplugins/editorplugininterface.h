@@ -7,9 +7,10 @@
 #ifndef EDITORPLUGININTERFACE_H
 #define EDITORPLUGININTERFACE_H
 
-#include <QObject>
-#include "typenames.h"
 #include "graphtheory_export.h"
+#include "typenames.h"
+#include <KPluginMetaData>
+#include <QObject>
 
 #include <memory>
 
@@ -34,7 +35,7 @@ public:
      * @param componentData is description of the plugin
      * @param parent The parent object for the plugin.
      */
-    explicit EditorPluginInterface(const QString &componentName, QObject *parent);
+    explicit EditorPluginInterface(QObject *parent, const KPluginMetaData &data);
 
     ~EditorPluginInterface() override;
 
@@ -44,11 +45,6 @@ public:
      * @return display name of plugin, if nothing is set returns componentName
      */
     virtual QString displayName() const;
-
-    /**
-     * set display name of plugin
-     */
-    virtual void setDisplayName(const QString &name);
 
 private:
     const std::unique_ptr<EditorPluginInterfacePrivate> d;

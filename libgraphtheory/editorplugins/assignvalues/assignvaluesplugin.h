@@ -20,7 +20,7 @@ class AssignValuesPlugin : public EditorPluginInterface
     Q_OBJECT
 
 public:
-    AssignValuesPlugin(QObject* parent, const QList< QVariant >&);
+    AssignValuesPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &);
     ~AssignValuesPlugin() override;
     void showDialog(GraphDocumentPtr document) override;
 

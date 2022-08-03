@@ -33,9 +33,8 @@ public:
     QDialog *m_dialog;
 };
 
-
-TransformEdgesPlugin::TransformEdgesPlugin(QObject* parent, const QList< QVariant >&)
-    : EditorPluginInterface("rocs_transformedgesplugin", parent)
+TransformEdgesPlugin::TransformEdgesPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+    : EditorPluginInterface(parent, data)
     , d(new TransformEdgesPluginPrivate)
 {
 }

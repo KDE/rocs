@@ -21,7 +21,7 @@ using namespace GraphTheory;
 void TestGmlFileFormat::parseTest()
 {
     // create importer plugin
-    GmlFileFormat importer(this, QList<QVariant>());
+    GmlFileFormat importer(this, KPluginMetaData(), QVariantList());
     importer.setFile(QUrl::fromLocalFile("example.gml"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);
@@ -51,7 +51,7 @@ void TestGmlFileFormat::serializeTest()
     Edge::create(dataList["e"], dataList["a"]);
 
     // create exporter plugin
-    GmlFileFormat serializer(this, QList<QVariant>());
+    GmlFileFormat serializer(this, KPluginMetaData(), QVariantList());
     serializer.setFile(QUrl::fromLocalFile("test.gml"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);

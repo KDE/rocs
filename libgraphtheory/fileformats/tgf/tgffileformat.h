@@ -35,7 +35,7 @@ class TgfFileFormat : public FileFormatInterface
 {
     Q_OBJECT
 public:
-    explicit TgfFileFormat(QObject *parent, const QList< QVariant >&);
+    explicit TgfFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
     ~TgfFileFormat() override;
 
     /**

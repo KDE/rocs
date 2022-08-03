@@ -20,7 +20,7 @@ class Rocs2FileFormat : public FileFormatInterface
 {
     Q_OBJECT
 public:
-    explicit Rocs2FileFormat(QObject *parent, const QList< QVariant >&);
+    explicit Rocs2FileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
     ~Rocs2FileFormat() override;
 
     /**

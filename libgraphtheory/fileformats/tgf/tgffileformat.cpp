@@ -24,8 +24,8 @@ using namespace GraphTheory;
 
 K_PLUGIN_CLASS_WITH_JSON(TgfFileFormat, "tgffileformat.json")
 
-TgfFileFormat::TgfFileFormat(QObject* parent, const QList< QVariant >&)
-    : FileFormatInterface("rocs_tgffileformat", parent)
+TgfFileFormat::TgfFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+    : FileFormatInterface(parent, data)
 {
 }
 

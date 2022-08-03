@@ -31,8 +31,8 @@ public:
     QDialog *m_dialog;
 };
 
-GraphLayoutPlugin::GraphLayoutPlugin(QObject* parent,  const QList<QVariant> & /* args*/)
-    : EditorPluginInterface("rocs_graphlayoutplugin", parent)
+GraphLayoutPlugin::GraphLayoutPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+    : EditorPluginInterface(parent, data)
     , d(new GraphLayoutPluginPrivate)
 {
 

@@ -35,9 +35,8 @@ public:
     QDialog *m_dialog;
 };
 
-
-AssignValuesPlugin::AssignValuesPlugin(QObject* parent, const QList< QVariant >&)
-    : EditorPluginInterface("rocs_assignvaluesplugin", parent)
+AssignValuesPlugin::AssignValuesPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+    : EditorPluginInterface(parent, data)
     , d(new AssignValuesPluginPrivate)
 {
 }

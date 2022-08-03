@@ -44,7 +44,7 @@ void TestRocs1FileFormat::serializeUnserializeTest()
     Edge::create(nodes["e"], nodes["a"]);
 
     // serialize to file
-    Rocs1FileFormat format(this, QList<QVariant>());
+    Rocs1FileFormat format(this, KPluginMetaData(), QVariantList());
     format.setFile(QUrl::fromLocalFile("test.graph"));
     format.writeFile(document);
     QVERIFY(format.hasError() == false);
@@ -88,7 +88,7 @@ void TestRocs1FileFormat::serializeUnserializeTypesTest()
     Edge::create(nodes["a"], nodes["b"]);
 
     // serialize to file
-    Rocs1FileFormat format(this, QList<QVariant>());
+    Rocs1FileFormat format(this, KPluginMetaData(), QVariantList());
     format.setFile(QUrl::fromLocalFile("testtypes.graph"));
     format.writeFile(document);
     QVERIFY(format.hasError() == false);

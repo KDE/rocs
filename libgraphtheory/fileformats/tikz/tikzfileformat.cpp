@@ -20,8 +20,8 @@ using namespace GraphTheory;
 
 K_PLUGIN_CLASS_WITH_JSON(TikzFileFormat, "tikzfileformat.json")
 
-TikzFileFormat::TikzFileFormat(QObject* parent, const QList< QVariant >&)
-    : FileFormatInterface("rocs_tikzfileformat", parent)
+TikzFileFormat::TikzFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+    : FileFormatInterface(parent, data)
 {
 }
 

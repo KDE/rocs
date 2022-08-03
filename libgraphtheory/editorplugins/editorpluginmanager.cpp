@@ -37,7 +37,6 @@ EditorPluginManager::EditorPluginManager()
             continue;
         }
 
-        result.plugin->setDisplayName(metadata.name());
         d->m_plugins.append(result.plugin);
         qCDebug(GRAPHTHEORY_GENERAL) << "Loaded plugin:" << metadata.name();
     }

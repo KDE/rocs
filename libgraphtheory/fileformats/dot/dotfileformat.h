@@ -20,7 +20,7 @@ class DotFileFormat : public FileFormatInterface
 {
     Q_OBJECT
 public:
-    explicit DotFileFormat(QObject *parent, const QList< QVariant >&);
+    explicit DotFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
     ~DotFileFormat() override;
 
     /**

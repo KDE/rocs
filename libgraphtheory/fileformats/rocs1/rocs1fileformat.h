@@ -109,7 +109,7 @@ class Rocs1FileFormat : public FileFormatInterface
     Q_OBJECT
 
 public:
-    explicit Rocs1FileFormat(QObject *parent, const QList< QVariant >&);
+    explicit Rocs1FileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
     ~Rocs1FileFormat() override;
 
     /**

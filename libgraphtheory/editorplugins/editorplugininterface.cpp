@@ -13,20 +13,20 @@ using namespace GraphTheory;
 class GraphTheory::EditorPluginInterfacePrivate
 {
 public:
-    EditorPluginInterfacePrivate(const QString &componentName)
-        : m_componentName(componentName)
+    EditorPluginInterfacePrivate(const KPluginMetaData &data)
+        : m_componentName(data.pluginId())
+        , m_displayName(data.name())
     {
 
     }
 
     const QString m_componentName;
-    QString m_displayName;
-    QString m_lastErrorString;
+    const QString m_displayName;
 };
 
-EditorPluginInterface::EditorPluginInterface(const QString &componentName, QObject *parent)
+EditorPluginInterface::EditorPluginInterface(QObject *parent, const KPluginMetaData &data)
     : QObject(parent)
-    , d(new EditorPluginInterfacePrivate(componentName))
+    , d(new EditorPluginInterfacePrivate(data))
 {
 
 }
@@ -39,9 +39,4 @@ QString EditorPluginInterface::displayName() const
         return d->m_componentName;
     }
     return d->m_displayName;
-}
-
-void EditorPluginInterface::setDisplayName(const QString &name)
-{
-    d->m_displayName = name;
 }

@@ -21,7 +21,7 @@ class TikzFileFormat : public FileFormatInterface
 {
     Q_OBJECT
 public:
-    explicit TikzFileFormat(QObject* parent, const QList< QVariant >&);
+    explicit TikzFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
     ~TikzFileFormat() override;
 
     FileFormatInterface::PluginType pluginCapability() const override;

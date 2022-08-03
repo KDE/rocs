@@ -20,7 +20,7 @@ class TransformEdgesPlugin : public EditorPluginInterface
     Q_OBJECT
 
 public:
-    TransformEdgesPlugin(QObject* parent, const QList< QVariant >&);
+    TransformEdgesPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &);
     ~TransformEdgesPlugin() override;
     void showDialog(GraphDocumentPtr document) override;
 

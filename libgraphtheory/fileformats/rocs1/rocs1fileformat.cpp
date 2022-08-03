@@ -34,8 +34,8 @@ public:
     QString _buffer;
 };
 
-Rocs1FileFormat::Rocs1FileFormat(QObject *parent, const QList< QVariant >&)
-    : FileFormatInterface("rocs_rocs1fileformat", parent)
+Rocs1FileFormat::Rocs1FileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+    : FileFormatInterface(parent, data)
 {
     d = new Rocs1FileFormatPrivate;
 }

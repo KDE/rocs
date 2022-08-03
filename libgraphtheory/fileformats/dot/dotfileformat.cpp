@@ -35,8 +35,8 @@ DotFileFormat::~DotFileFormat()
 {
 }
 
-DotFileFormat::DotFileFormat(QObject* parent, const QList< QVariant >&) :
-    FileFormatInterface("rocs_dotfileformat", parent)
+DotFileFormat::DotFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
+    : FileFormatInterface(parent, data)
 {
 }
 

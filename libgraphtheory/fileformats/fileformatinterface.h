@@ -7,9 +7,10 @@
 #ifndef FILEFORMATINTERFACE_H
 #define FILEFORMATINTERFACE_H
 
-#include <QObject>
-#include "typenames.h"
 #include "graphtheory_export.h"
+#include "typenames.h"
+#include <KPluginMetaData>
+#include <QObject>
 
 class QUrl;
 
@@ -64,7 +65,7 @@ public:
      * \param aboutData is description of the plugin
      * \param parent is the object parent
      */
-    FileFormatInterface(const QString &componentName, QObject* parent);
+    FileFormatInterface(QObject *parent, const KPluginMetaData &data);
     ~FileFormatInterface() override;
 
     /**

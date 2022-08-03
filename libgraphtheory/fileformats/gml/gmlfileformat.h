@@ -20,7 +20,7 @@ class GmlFileFormat : public FileFormatInterface
 {
     Q_OBJECT
 public:
-    explicit GmlFileFormat(QObject *parent, const QList< QVariant >&);
+    explicit GmlFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
     ~GmlFileFormat() override;
 
     /**
