@@ -9,26 +9,16 @@
 
 #include "editorplugins/editorplugininterface.h"
 
-class QObject;
-
 namespace GraphTheory
 {
-
-class GraphLayoutPluginPrivate;
-
 class GraphLayoutPlugin : public EditorPluginInterface
 {
     Q_OBJECT
 
 public:
     GraphLayoutPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &);
-    ~GraphLayoutPlugin() override;
     void showDialog(GraphDocumentPtr document) override;
-
-private:
-    const QScopedPointer<GraphLayoutPluginPrivate> d;
 };
-
 }
 
 #endif

@@ -24,20 +24,9 @@ using namespace GraphTheory;
 
 K_PLUGIN_CLASS_WITH_JSON(Rocs1FileFormat, "rocs1fileformat.json")
 
-class GraphTheory::Rocs1FileFormatPrivate
-{
-public:
-    Rocs1FileFormatPrivate()
-        : _buffer()
-    {}
-
-    QString _buffer;
-};
-
 Rocs1FileFormat::Rocs1FileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
     : FileFormatInterface(parent, data)
 {
-    d = new Rocs1FileFormatPrivate;
 }
 
 Rocs1FileFormat::~Rocs1FileFormat()
@@ -265,7 +254,7 @@ void Rocs1FileFormat::writeFile(GraphDocumentPtr graph)
     stream.setCodec("UTF-8");
     // TODO test for successful serialization
     serialize(graph);
-    stream << d->_buffer;
+    stream << m_buffer;
 
     if (!saveFile.commit()) {
         setError(FileIsReadOnly, i18n("Could not write data, aborting. Error: %1.", saveFile.errorString()));
@@ -277,9 +266,9 @@ void Rocs1FileFormat::writeFile(GraphDocumentPtr graph)
 
 QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
 {
-    d->_buffer.clear();
+    m_buffer.clear();
 
-    d->_buffer = QString("[Document Properties] \n")
+    m_buffer = QString("[Document Properties] \n")
               + QString("DataStructurePlugin : Graph") + QChar('\n')
               + QChar('\n');
 
@@ -290,7 +279,7 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
             properties.append(property + QString('='));
         }
 
-        d->_buffer += QString("[DataType %1]").arg(QString::number(typeID)) + QChar('\n')
+        m_buffer += QString("[DataType %1]").arg(QString::number(typeID)) + QChar('\n')
             + QString("Name : ") + document->nodeTypes().at(typeID)->name() + QChar('\n')
             + QString("Properties : ") + properties.join(QChar(','))
             + QChar('\n') + QChar('\n');
@@ -308,42 +297,42 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
             ? "bidirectional"
             : "unidirectional";
 
-        d->_buffer += QString("[PointerType %1]").arg(QString::number(typeID)) + QChar('\n')
+        m_buffer += QString("[PointerType %1]").arg(QString::number(typeID)) + QChar('\n')
             + QString("Name : ") + document->edgeTypes().at(typeID)->name() + QChar('\n')
             + QString("Direction : ") + direction + QChar('\n')
             + QString("Properties : ") + properties.join(QChar(','))
             + QChar('\n') + QChar('\n');
     }
 
-    d->_buffer += QString("[DataStructure 0] \n"); // all in one datastructure now
+    m_buffer += QString("[DataStructure 0] \n"); // all in one datastructure now
     const auto nodes = document->nodes();
     for (const NodePtr &n : nodes) {
-        d->_buffer += QString("[Data %1]\n").arg(QString::number(n->id()));
-        d->_buffer += QString("type : ") + QString::number(document->nodeTypes().indexOf(n->type())) + QChar('\n');
+        m_buffer += QString("[Data %1]\n").arg(QString::number(n->id()));
+        m_buffer += QString("type : ") + QString::number(document->nodeTypes().indexOf(n->type())) + QChar('\n');
         const auto dynamicProperties = n->dynamicProperties();
         for (const QString &property : dynamicProperties) {
-            d->_buffer += QString("%1 : %2 \n").arg(property).arg(n->dynamicProperty(property).toString());
+            m_buffer += QString("%1 : %2 \n").arg(property).arg(n->dynamicProperty(property).toString());
         }
-        d->_buffer += QChar('\n');
+        m_buffer += QChar('\n');
     }
     const auto edges = document->edges();
     for (const EdgePtr &e : edges) {
-        d->_buffer += QString("[Pointer %1->%2]\n").
+        m_buffer += QString("[Pointer %1->%2]\n").
             arg(QString::number(e->from()->id())).
             arg(QString::number(e->to()->id())).toUtf8();
-        d->_buffer += QString("type : ") + QString::number(document->edgeTypes().indexOf(e->type())) + QChar('\n');
+        m_buffer += QString("type : ") + QString::number(document->edgeTypes().indexOf(e->type())) + QChar('\n');
         const auto dynamicProperties = e->dynamicProperties();
         for (const QString &property : dynamicProperties) {
-            d->_buffer += QString("%1 : %2 \n").arg(property).arg(e->dynamicProperty(property).toString());
+            m_buffer += QString("%1 : %2 \n").arg(property).arg(e->dynamicProperty(property).toString());
         }
-        d->_buffer += QChar('\n');
+        m_buffer += QChar('\n');
     }
 
     qCDebug(GRAPHTHEORY_FILEFORMAT) << "------- /// BEGIN internal file format /// -------";
-    qCDebug(GRAPHTHEORY_FILEFORMAT) << d->_buffer;
+    qCDebug(GRAPHTHEORY_FILEFORMAT) << m_buffer;
     qCDebug(GRAPHTHEORY_FILEFORMAT) << "------- /// internal file format END /// -------";
 
-    return d->_buffer;
+    return m_buffer;
 }
 
 #include "rocs1fileformat.moc"

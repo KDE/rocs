@@ -9,23 +9,15 @@
 
 #include "editorplugins/editorplugininterface.h"
 
-class QObject;
-
 namespace GraphTheory
 {
-class TransformEdgesPluginPrivate;
-
 class TransformEdgesPlugin : public EditorPluginInterface
 {
     Q_OBJECT
 
 public:
     TransformEdgesPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &);
-    ~TransformEdgesPlugin() override;
     void showDialog(GraphDocumentPtr document) override;
-
-private:
-    const QScopedPointer<TransformEdgesPluginPrivate> d;
 };
 }
 

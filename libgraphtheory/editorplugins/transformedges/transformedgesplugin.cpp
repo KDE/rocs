@@ -18,30 +18,9 @@ using namespace GraphTheory;
 
 K_PLUGIN_CLASS_WITH_JSON(TransformEdgesPlugin, "transformedgesplugin.json")
 
-class GraphTheory::TransformEdgesPluginPrivate
-{
-public:
-    TransformEdgesPluginPrivate()
-        : m_dialog(nullptr)
-    {
-    }
-
-    ~TransformEdgesPluginPrivate()
-    {
-        m_dialog->deleteLater();
-    }
-    QDialog *m_dialog;
-};
-
 TransformEdgesPlugin::TransformEdgesPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &)
     : EditorPluginInterface(parent, data)
-    , d(new TransformEdgesPluginPrivate)
 {
-}
-
-TransformEdgesPlugin::~TransformEdgesPlugin()
-{
-
 }
 
 void TransformEdgesPlugin::showDialog(GraphDocumentPtr document)

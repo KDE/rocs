@@ -9,23 +9,15 @@
 
 #include "editorplugins/editorplugininterface.h"
 
-class QObject;
-
 namespace GraphTheory
 {
-class AssignValuesPluginPrivate;
-
 class AssignValuesPlugin : public EditorPluginInterface
 {
     Q_OBJECT
 
 public:
     AssignValuesPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &);
-    ~AssignValuesPlugin() override;
     void showDialog(GraphDocumentPtr document) override;
-
-private:
-    const QScopedPointer<AssignValuesPluginPrivate> d;
 };
 }
 

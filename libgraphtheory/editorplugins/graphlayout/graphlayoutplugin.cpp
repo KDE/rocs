@@ -16,31 +16,9 @@ using namespace GraphTheory;
 
 K_PLUGIN_CLASS_WITH_JSON(GraphLayoutPlugin, "graphlayoutplugin.json")
 
-class GraphTheory::GraphLayoutPluginPrivate
-{
-public:
-    GraphLayoutPluginPrivate()
-        : m_dialog(nullptr)
-    {
-    }
-
-    ~GraphLayoutPluginPrivate()
-    {
-        m_dialog->deleteLater();
-    }
-    QDialog *m_dialog;
-};
-
 GraphLayoutPlugin::GraphLayoutPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &)
     : EditorPluginInterface(parent, data)
-    , d(new GraphLayoutPluginPrivate)
 {
-
-}
-
-GraphLayoutPlugin::~GraphLayoutPlugin()
-{
-
 }
 
 void GraphLayoutPlugin::showDialog(GraphDocumentPtr document)

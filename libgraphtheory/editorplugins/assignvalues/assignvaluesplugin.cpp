@@ -20,30 +20,9 @@ using namespace GraphTheory;
 
 K_PLUGIN_CLASS_WITH_JSON(AssignValuesPlugin, "assignvaluesplugin.json")
 
-class GraphTheory::AssignValuesPluginPrivate
-{
-public:
-    AssignValuesPluginPrivate()
-        : m_dialog(nullptr)
-    {
-    }
-
-    ~AssignValuesPluginPrivate()
-    {
-        m_dialog->deleteLater();
-    }
-    QDialog *m_dialog;
-};
-
 AssignValuesPlugin::AssignValuesPlugin(QObject *parent, const KPluginMetaData &data, const QVariantList &)
     : EditorPluginInterface(parent, data)
-    , d(new AssignValuesPluginPrivate)
 {
-}
-
-AssignValuesPlugin::~AssignValuesPlugin()
-{
-
 }
 
 void AssignValuesPlugin::showDialog(GraphDocumentPtr document)
@@ -53,7 +32,6 @@ void AssignValuesPlugin::showDialog(GraphDocumentPtr document)
     }
     QPointer<AssignValuesWidget> dialog = new AssignValuesWidget(document);
     dialog->exec();
-    return;
 }
 
 #include "assignvaluesplugin.moc"

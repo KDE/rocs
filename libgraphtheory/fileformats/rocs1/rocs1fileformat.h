@@ -13,7 +13,6 @@
 namespace GraphTheory
 {
 
-class Rocs1FileFormatPrivate;
 
 /** \brief class RocsGraphFileFormatPlugin: Import and Export Plugin for internal graph format.
  *
@@ -133,7 +132,7 @@ private:
     QString serialize(GraphDocumentPtr document);
     void serializeProperties(QObject *o);
 
-    Rocs1FileFormatPrivate *d;
+    QString m_buffer;
 };
 }
 
