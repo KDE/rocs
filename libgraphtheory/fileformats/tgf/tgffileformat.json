@@ -29,7 +29,6 @@
         "Name[uk]": "формат файлів графів TGF",
         "Name[x-test]": "xxTGF Graph File Formatxx",
         "Name[zh_CN]": "TGF 图形文件格式",
-        "Name[zh_TW]": "TGF 圖形檔案格式",
-        "Version": "0.1"
+        "Name[zh_TW]": "TGF 圖形檔案格式"
     }
 }

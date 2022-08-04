@@ -24,7 +24,6 @@
         "Name[sv]": "Graflayout",
         "Name[tr]": "Grafik Yerleşimi",
         "Name[uk]": "Компонування графу",
-        "Name[x-test]": "xxGraph Layoutxx",
-        "Version": "0.1"
+        "Name[x-test]": "xxGraph Layoutxx"
     }
 }
