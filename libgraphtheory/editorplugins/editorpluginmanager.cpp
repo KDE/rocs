@@ -32,13 +32,12 @@ EditorPluginManager::EditorPluginManager()
     for (const auto &metadata : metadataList) {
         const auto result = KPluginFactory::instantiatePlugin<EditorPluginInterface>(metadata, this);
 
-        if (!result) {
+        if (result) {
+            d->m_plugins.append(result.plugin);
+            qCDebug(GRAPHTHEORY_GENERAL) << "Loaded editor plugin:" << metadata.pluginId();
+        } else {
             qCWarning(GRAPHTHEORY_GENERAL) << "Failed to load editor plugin" << result.errorText;
-            continue;
         }
-
-        d->m_plugins.append(result.plugin);
-        qCDebug(GRAPHTHEORY_GENERAL) << "Loaded plugin:" << metadata.name();
     }
 }
 

@@ -33,13 +33,13 @@ FileFormatManager::FileFormatManager()
 {
     const QVector<KPluginMetaData> metadataList = KPluginMetaData::findPlugins("rocs/fileformats");
     for (const auto &metadata : metadataList) {
-        qCDebug(GRAPHTHEORY_FILEFORMAT) << "Load Plugin: " << metadata.name();
 
         const auto result = KPluginFactory::instantiatePlugin<FileFormatInterface>(metadata, this);
         if (result) {
             d->backends.append(result.plugin);
+            qCDebug(GRAPHTHEORY_FILEFORMAT) << "Loaded fileformat plugin:" << metadata.pluginId();
         } else {
-            qWarning(GRAPHTHEORY_FILEFORMAT) << "Error while loading plugin:" << result.errorString;
+            qWarning(GRAPHTHEORY_FILEFORMAT) << "Failed to load fileformat plugin" << result.errorText;
         }
     }
 
