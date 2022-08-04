@@ -1,7 +1,6 @@
 {
     "KPlugin": {
         "Id": "rocs_transformedges",
-        "License": "GPL",
         "Name": "Transform Edges",
         "Name[bs]": "Trasformiši ivice",
         "Name[ca@valencia]": "Transforma les arestes",

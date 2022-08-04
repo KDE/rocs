@@ -1,7 +1,6 @@
 {
     "KPlugin": {
         "Id": "rocs_assignvaluesplugin",
-        "License": "GPL",
         "Name": "Assign Values Plugin",
         "Name[ca@valencia]": "Connector d'assignació de valors",
         "Name[ca]": "Connector d'assignació de valors",

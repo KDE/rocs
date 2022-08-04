@@ -1,7 +1,6 @@
 {
     "KPlugin": {
         "Id": "rocs_dotfileformat",
-        "License": "GPL",
         "Name": "DOT Graph File Format",
         "Name[ca@valencia]": "Format de fitxer de grafs DOT",
         "Name[ca]": "Format de fitxer de grafs DOT",

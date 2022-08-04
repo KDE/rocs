@@ -1,7 +1,6 @@
 {
     "KPlugin": {
         "Id": "rocs_generategraphplugin",
-        "License": "GPL",
         "Name": "Generate Graph",
         "Name[bg]": "Създаване на графика",
         "Name[bs]": "Generiši Graf",

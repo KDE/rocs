@@ -1,7 +1,6 @@
 {
     "KPlugin": {
         "Id": "rocs_rocs2fileformat",
-        "License": "GPL",
         "Name": "Rocs File Format",
         "Name[ca@valencia]": "Format de fitxer de Rocs",
         "Name[ca]": "Format de fitxer del Rocs",

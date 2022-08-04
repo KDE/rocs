@@ -1,7 +1,6 @@
 {
     "KPlugin": {
         "Id": "rocs_gmlfileformat",
-        "License": "GPL",
         "Name": "GML File Format",
         "Name[ca@valencia]": "Format de fitxer GML",
         "Name[ca]": "Format de fitxer GML",
