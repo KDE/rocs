@@ -146,8 +146,7 @@ void DotFileFormatTest::parseFileProcess()
     GraphDocumentPtr document = importer.graphDocument();
 
     // check that all of the node names were imported, and that there are no extras
-    QStringList nodeNames;
-    nodeNames << "run" << "intr" << "runbl" << "kernel" << "zombie" << "sleep" << "swap" << "runmem" << "runswap" << "new";
+    const QStringList nodeNames{"run", "intr", "runbl", "kernel", "zombie", "sleep", "swap", "runmem", "runswap", "new"};
     checkNodes(document, nodeNames);
     // Check the numbers of pointers
     QVERIFY(document->edges().count() == 13);
@@ -290,8 +289,7 @@ void DotFileFormatTest::parseFileFsm()
     GraphDocumentPtr document = importer.graphDocument();
 
     // check that all of the node names were imported, and that there are no extras
-    QStringList nodeNames;
-    nodeNames << "LR_0" << "LR_1" << "LR_2" << "LR_3" << "LR_4" << "LR_5" << "LR_6" << "LR_7" << "LR_8";
+    const QStringList nodeNames{"LR_0", "LR_1", "LR_2", "LR_3", "LR_4", "LR_5", "LR_6", "LR_7", "LR_8"};
     checkNodes(document, nodeNames);
 
     // Check the numbers of pointers

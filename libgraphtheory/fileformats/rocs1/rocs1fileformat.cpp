@@ -35,8 +35,7 @@ Rocs1FileFormat::~Rocs1FileFormat()
 
 const QStringList Rocs1FileFormat::extensions() const
 {
-    return QStringList()
-        << i18n("Rocs 1 Graph File Format (%1)", QString("*.graph"));
+    return QStringList{i18n("Rocs 1 Graph File Format (%1)", QString("*.graph"))};
 }
 
 template<typename T>

@@ -35,8 +35,7 @@ TgfFileFormat::~TgfFileFormat()
 
 const QStringList TgfFileFormat::extensions() const
 {
-    return QStringList()
-           << i18n("Trivial Graph Format (%1)", QString("*.tgf"));
+    return QStringList{i18n("Trivial Graph Format (%1)", QString("*.tgf"))};
 }
 
 

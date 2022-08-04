@@ -41,7 +41,7 @@ void ScriptApiManager::loadLocalData()
         return;
     }
 
-    const QStringList files = QDir(dir).entryList(QStringList() << QStringLiteral("*.xml"));
+    const QStringList files = QDir(dir).entryList(QStringList{QStringLiteral("*.xml")});
     for (const QString &file : files) {
         loadObjectApi(QUrl::fromLocalFile(dir + '/' + file));
     }

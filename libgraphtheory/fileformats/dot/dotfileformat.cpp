@@ -42,8 +42,7 @@ DotFileFormat::DotFileFormat(QObject *parent, const KPluginMetaData &data, const
 
 const QStringList DotFileFormat::extensions() const
 {
-    return QStringList()
-           << i18n("Graphviz Format (%1)", QString("*.dot"));
+    return QStringList{i18n("Graphviz Format (%1)", QString("*.dot"))};
 }
 
 void DotFileFormat::readFile()

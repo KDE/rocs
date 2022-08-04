@@ -41,8 +41,7 @@ GmlFileFormat::~GmlFileFormat()
 
 const QStringList GmlFileFormat::extensions() const
 {
-    return QStringList()
-        << i18n("Graph Markup Language Format (%1)", QString("*.gml"));
+    return QStringList{i18n("Graph Markup Language Format (%1)", QString("*.gml"))};
 }
 
 void GmlFileFormat::readFile()

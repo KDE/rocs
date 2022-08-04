@@ -36,8 +36,9 @@ Rocs2FileFormat::~Rocs2FileFormat()
 
 const QStringList Rocs2FileFormat::extensions() const
 {
-    return QStringList()
-           << i18n("Rocs Graph Format (%1)", QString("*.graph2")); // do not confuse with Rocs-1 format
+    return QStringList{
+        i18n("Rocs Graph Format (%1)", QString("*.graph2")) // do not confuse with Rocs-1 format
+    };
 }
 
 void Rocs2FileFormat::readFile()
