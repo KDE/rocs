@@ -1,7 +1,6 @@
 {
     "Encoding": "UTF-8",
     "KPlugin": {
-        "Category": "Plugins",
         "Id": "rocs_tgffileformat",
         "License": "GPL",
         "Name": "TGF Graph File Format",

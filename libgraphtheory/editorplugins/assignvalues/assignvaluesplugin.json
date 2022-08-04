@@ -1,7 +1,6 @@
 {
     "Encoding": "UTF-8",
     "KPlugin": {
-        "Category": "Plugins",
         "Id": "rocs_assignvaluesplugin",
         "License": "GPL",
         "Name": "Assign Values Plugin",
