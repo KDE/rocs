@@ -24,29 +24,44 @@ using namespace GraphTheory;
 class GraphTheory::FileFormatManagerPrivate
 {
 public:
-    FileFormatManagerPrivate()
-        : defaultGraphFilePlugin(nullptr)
-    {
-
-    }
-
-    ~FileFormatManagerPrivate()
-    { }
-
     QList<FileFormatInterface*> backends;
-    FileFormatInterface *defaultGraphFilePlugin;
+    FileFormatInterface *defaultGraphFilePlugin = nullptr;
 };
 
 FileFormatManager::FileFormatManager()
     : d(new FileFormatManagerPrivate)
 {
-    loadBackends();
+    const QVector<KPluginMetaData> metadataList = KPluginMetaData::findPlugins("rocs/fileformats");
+    for (const auto &metadata : metadataList) {
+        qCDebug(GRAPHTHEORY_FILEFORMAT) << "Load Plugin: " << metadata.name();
+
+        const auto result = KPluginFactory::instantiatePlugin<FileFormatInterface>(metadata, this);
+        if (result) {
+            d->backends.append(result.plugin);
+        } else {
+            qWarning(GRAPHTHEORY_FILEFORMAT) << "Error while loading plugin:" << result.errorString;
+        }
+    }
+
+    // display a QMessageBox if no plugins are found
+    if (d->backends.empty()) {
+        QMessageBox pluginErrorMessageBox;
+        pluginErrorMessageBox.setWindowTitle(i18nc("@title:window", "Plugin Error"));
+        pluginErrorMessageBox.setTextFormat(Qt::RichText);
+        pluginErrorMessageBox.setText(i18n("Plugins could not be found in specified directories:<br>")
+                                      + QCoreApplication::libraryPaths().join("/rocs/fileformats<br>")
+                                      + i18n("<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>"
+                                             "this link</a> for further information."));
+        pluginErrorMessageBox.setDefaultButton(QMessageBox::Close);
+        pluginErrorMessageBox.exec();
+        exit(1);
+    }
+
+    // find default file plugin
+    d->defaultGraphFilePlugin = backendByExtension("graph2");
 }
 
-FileFormatManager::~FileFormatManager()
-{
-
-}
+FileFormatManager::~FileFormatManager() = default;
 
 QList<FileFormatInterface*> FileFormatManager::backends() const
 {
@@ -79,48 +94,7 @@ QList<FileFormatInterface*> FileFormatManager::backends(PluginType type) const
     return backends;
 }
 
-void FileFormatManager::loadBackends()
-{
-    // remove all present backends
-    for (FileFormatInterface *f : std::as_const(d->backends)) {
-        delete f;
-    }
-    d->backends.clear();
-
-    const QVector<KPluginMetaData> metadataList = KPluginMetaData::findPlugins("rocs/fileformats");
-
-    for (const auto &metadata : metadataList) {
-        qCDebug(GRAPHTHEORY_FILEFORMAT) << "Load Plugin: " << metadata.name();
-
-        const auto result = KPluginFactory::instantiatePlugin<FileFormatInterface>(metadata, this);
-
-        if (!result) {
-            qCCritical(GRAPHTHEORY_FILEFORMAT) << "Error while loading plugin:" << result.errorString;
-            continue;
-        }
-
-        d->backends.append(result.plugin);
-    }
-
-    // display a QMessageBox if no plugins are found
-    if (d->backends.empty()) {
-        QMessageBox pluginErrorMessageBox;
-        pluginErrorMessageBox.setWindowTitle(i18nc("@title:window", "Plugin Error"));
-        pluginErrorMessageBox.setTextFormat(Qt::RichText);
-        pluginErrorMessageBox.setText(i18n("Plugins could not be found in specified directories:<br>")+
-                                         QCoreApplication::libraryPaths().join("/rocs/fileformats<br>")+
-                                         i18n("<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>"
-                                         "this link</a> for further information."));
-        pluginErrorMessageBox.setDefaultButton(QMessageBox::Close);
-        pluginErrorMessageBox.exec();
-        exit(1);
-    }
-
-    // load static plugins
-    d->defaultGraphFilePlugin = backendByExtension("graph2");
-}
-
-FileFormatInterface * FileFormatManager::backendByExtension(const QString &ext)
+FileFormatInterface *FileFormatManager::backendByExtension(const QString &ext) const
 {
     QString suffix = "*." + ext.section('.', -1); // get suffix
     if (suffix.isEmpty()) {
@@ -135,7 +109,7 @@ FileFormatInterface * FileFormatManager::backendByExtension(const QString &ext)
     return nullptr;
 }
 
-FileFormatInterface * FileFormatManager::defaultBackend()
+FileFormatInterface *FileFormatManager::defaultBackend() const
 {
     return d->defaultGraphFilePlugin;
 }

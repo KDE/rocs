@@ -13,7 +13,7 @@
 #include <QObject>
 #include <QList>
 
-class KPluginInfo;
+#include <memory>
 
 namespace GraphTheory
 {
@@ -64,7 +64,7 @@ public:
      * \param ext specifies the extension string
      * \return backend to handle files with specified extension or 0 otherwise
      */
-    FileFormatInterface * backendByExtension(const QString &ext);
+    FileFormatInterface *backendByExtension(const QString &ext) const;
 
     /**
      * Returns the default backend used for serialization/loading of graph files. Use this if
@@ -72,18 +72,12 @@ public:
      *
      * \return plugin interface for the graph file backend
      */
-    FileFormatInterface * defaultBackend();
+    FileFormatInterface *defaultBackend() const;
 
 private:
-    /**
-     * \internal
-     * Clears list of backends and reloads them from dynamic service trader.
-     */
-    void loadBackends();
-
     static FileFormatManager * instance;
 
-    const QScopedPointer<FileFormatManagerPrivate> d;
+    const std::unique_ptr<FileFormatManagerPrivate> d;
 };
 }
 
