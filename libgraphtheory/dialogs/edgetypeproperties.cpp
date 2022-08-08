@@ -136,7 +136,7 @@ void EdgeTypeProperties::validateIdInput()
     // set color
     QPalette palette = m_id->palette();
     if (valid) {
-        palette.setColor(QPalette::Text, Qt::black);
+        palette = style()->standardPalette();
         m_okButton->setEnabled(true);
         m_okButton->setToolTip(i18nc("@info:tooltip", "The selected ID for this edge type."));
     } else {
