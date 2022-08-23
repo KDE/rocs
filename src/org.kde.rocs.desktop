@@ -4,7 +4,6 @@ Exec=rocs %u -qwindowtitle %c
 Icon=rocs
 X-DocPath=rocs/index.html
 MimeType=application/x-rocs;
-Terminal=false
 Name=Rocs
 Name[ar]=روكس
 Name[bs]=Rocs
