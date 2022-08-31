@@ -20,6 +20,7 @@
   <name xml:lang="gl">Rocs</name>
   <name xml:lang="id">Rocs</name>
   <name xml:lang="it">Rocs</name>
+  <name xml:lang="ka">Rocs</name>
   <name xml:lang="ko">Rocs</name>
   <name xml:lang="lt">Rocs</name>
   <name xml:lang="nds">Rocs</name>
@@ -53,6 +54,7 @@
   <summary xml:lang="gl">Teoría de gráficos con Rocs</summary>
   <summary xml:lang="id">Teori Grafik Rocs</summary>
   <summary xml:lang="it">Rocs - Teoria dei grafi</summary>
+  <summary xml:lang="ka">Rocs -ის გრაფიკის თეორია</summary>
   <summary xml:lang="ko">Rocs 그래프 이론</summary>
   <summary xml:lang="nds">Graphentheorie „Rocs“</summary>
   <summary xml:lang="nl">Rocs grafentheorie</summary>
@@ -121,6 +123,7 @@
       <caption xml:lang="gl">Traballando con grafos en Rocs</caption>
       <caption xml:lang="id">Bekerja dengan grafik di Rocs</caption>
       <caption xml:lang="it">Lavorare coi grafi in Rocs</caption>
+      <caption xml:lang="ka">გრაფიკებთან მუშაობა Rocs-ში</caption>
       <caption xml:lang="ko">Rocs로 그래프 작업</caption>
       <caption xml:lang="nl">Met grafieken werken in Rocs</caption>
       <caption xml:lang="nn">Arbeid med grafar i Rocs</caption>
