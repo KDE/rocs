@@ -124,7 +124,6 @@ void SidedockWidget::addDock(QWidget* widget, const QString& title, const QIcon&
 {
     widget->setVisible(false);
     layout()->addWidget(widget);
-
     SideToolButton* button = new SideToolButton(this);
 
     button->setText(title);
@@ -132,30 +131,43 @@ void SidedockWidget::addDock(QWidget* widget, const QString& title, const QIcon&
     button->setIcon(icon);
     button->setShortcut(QKeySequence());
     button->setChecked(false); // initially do not check
-
+    button->wasChecked = false;
     _btnGroup->addButton(button);
 
     // only request action on user set action
     const int idx = _widgets.count();
+    int idx_aux = idx;
 
+    if (idx == 0) { // set widget of ElementTypes as standard
+   	button->setChecked(true);
+	button->wasChecked = true;
+    }
+    
     connect(button, &SideToolButton::clicked, this,
-        [this, button, idx] {
-
+        [this, button, idx, &idx_aux] {
         // Force uncheck the button because of the exclusive
         // Without this the toolbar buttons cannot be all unchecked
-        // after one is clicked4
-        if (button->wasChecked) {
-            _btnGroup->setExclusive(false);
-            button->setChecked(false);
-            _btnGroup->setExclusive(true);
+        // after one is clicked
 
-            button->wasChecked = false;
-        } else {
+	if (button->wasChecked) {	
+       		if (idx_aux == idx) {
+            		_btnGroup->setExclusive(false);
+            		button->setChecked(false);
+           		_btnGroup->setExclusive(true);
+           		button->wasChecked = false;
+		}
+		else {
+			button->wasChecked = true;
+		}
+	}
+       	else {
             button->wasChecked = true;
         }
-
+	
+	idx_aux = idx;
+	
         showDock(button->isChecked(), idx);
-    });
+	});
 
     // register and add to list
     _toolBar->addWidget(button);
