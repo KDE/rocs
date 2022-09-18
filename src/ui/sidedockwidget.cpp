@@ -28,8 +28,6 @@ SideToolButton::SideToolButton(QWidget *parent)
     setCheckable(true);
     setAutoRaise(true);
     setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-
-    wasChecked = false;
 }
 
 Qt::Orientation SideToolButton::orientation() const
@@ -99,7 +97,6 @@ void SideToolButton::paintEvent(QPaintEvent *event)
 SidedockWidget::SidedockWidget(QWidget *parent)
     : QWidget(parent)
     , _btnGroup(new QButtonGroup(this))
-    , _showDock(false)
 {
     Q_ASSERT(parent); // we need a parent widget
 
@@ -112,6 +109,17 @@ SidedockWidget::SidedockWidget(QWidget *parent)
     _toolBar->setIconSize(QSize(16, 16));
     _toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     setLayout(new QStackedLayout);
+
+    connect(_btnGroup, &QButtonGroup::idClicked, this, [this](int index) {
+        auto *stackLayout = qobject_cast<QStackedLayout *>(layout());
+        if (stackLayout->currentIndex() == index) {
+            setVisible(!isVisible());
+        } else {
+            auto *stackLayout = qobject_cast<QStackedLayout *>(layout());
+            stackLayout->setCurrentIndex(index);
+            setVisible(true);
+        }
+    });
 }
 
 void SidedockWidget::addDock(QWidget *widget, const QString &title, const QIcon &icon)
@@ -126,45 +134,16 @@ void SidedockWidget::addDock(QWidget *widget, const QString &title, const QIcon 
     button->setIcon(icon);
     button->setShortcut(QKeySequence());
     button->setChecked(false); // initially do not check
-    button->wasChecked = false;
-    _btnGroup->addButton(button);
+    const int index = _widgets.count();
+    _btnGroup->addButton(button, index);
 
-    // only request action on user set action
-    const int idx = _widgets.count();
-
-    if (idx == 0) { // set widget of ElementTypes as standard
+    if (index == 0) { // set widget of ElementTypes as standard
         button->setChecked(true);
-        button->wasChecked = true;
     }
-
-    connect(button, &SideToolButton::clicked, this, [this, button, idx] {
-        // Force uncheck the button because of the exclusive
-        // Without this the toolbar buttons cannot be all unchecked
-        // after one is clicked
-        if (button->wasChecked) {
-            _btnGroup->setExclusive(false);
-            button->setChecked(false);
-            _btnGroup->setExclusive(true);
-            button->wasChecked = false;
-        } else {
-            button->wasChecked = true;
-        }
-
-        showDock(button->isChecked(), idx);
-    });
 
     // register and add to list
     _toolBar->addWidget(button);
     _widgets.append(widget);
-}
-
-void SidedockWidget::showDock(bool show, int nr)
-{
-    _showDock = show;
-    setVisible(show);
-    auto *stackLayout = qobject_cast<QStackedLayout *>(layout());
-    stackLayout->setCurrentIndex(nr);
-    Q_EMIT visibilityChanged(show);
 }
 
 QToolBar *SidedockWidget::toolbar() const

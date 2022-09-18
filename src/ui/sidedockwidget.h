@@ -7,10 +7,9 @@
 #ifndef SIDEDOCKWIDGET_H
 #define SIDEDOCKWIDGET_H
 
+#include <QButtonGroup>
 #include <QDockWidget>
 #include <QToolButton>
-#include <QHash>
-#include <QButtonGroup>
 
 class QIcon;
 class QToolBar;
@@ -21,16 +20,14 @@ class QAction;
  *
  * Used for vertical tool button bars.
  */
-class SideToolButton: public QToolButton
+class SideToolButton : public QToolButton
 {
     Q_OBJECT
 
 public:
-    explicit SideToolButton(QWidget* parent = nullptr);
+    explicit SideToolButton(QWidget *parent = nullptr);
     Qt::Orientation orientation() const;
     QSize sizeHint() const override;
-
-    bool wasChecked;
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -41,25 +38,19 @@ protected:
  *
  * Docking widget for side panel.
  */
-class SidedockWidget: public QWidget
+class SidedockWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit SidedockWidget(QWidget* parent);
-    QToolBar * toolbar() const;
-    void addDock(QWidget* dock, const QString& title, const QIcon& icon);
-    void showDock(bool show, int nr);
-
-Q_SIGNALS:
-    void visibilityChanged(bool visible);
+    explicit SidedockWidget(QWidget *parent);
+    QToolBar *toolbar() const;
+    void addDock(QWidget *dock, const QString &title, const QIcon &icon);
 
 private:
-    QToolBar *_toolBar;
-    QButtonGroup *_btnGroup;
-    QList<QWidget*> _widgets;
-    bool _showDock;
+    QToolBar *_toolBar{nullptr};
+    QButtonGroup *_btnGroup{nullptr};
+    QList<QWidget *> _widgets;
 };
-
 
 #endif
