@@ -13,3 +13,4 @@ doc/*.html
 .cache
 .idea
 /cmake-build*
+CMakeLists.txt.user
