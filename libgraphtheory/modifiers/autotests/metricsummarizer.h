@@ -18,26 +18,27 @@ class MetricSummarizer : public QObject
     Q_OBJECT
 private:
     QVector<qreal> values_m;
+
 public:
     /*
      * Adds a new metric value.
      */
     void addValue(const qreal value);
-   
+
     /*
      * Calculates the minimum value already added.
      */
     qreal minimum() const;
-    
+
     /*
      * Calculates the maximum value already added.
      */
     qreal maximum() const;
-    
+
     /*
      * Calculates the average of the added values.
      */
     qreal average() const;
 };
 
- #endif
+#endif

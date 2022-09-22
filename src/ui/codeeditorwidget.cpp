@@ -5,15 +5,15 @@
  */
 
 #include "codeeditorwidget.h"
-#include <KTextEditor/View>
-#include <KTextEditor/Editor>
-#include <KTextEditor/Document>
 #include <KLocalizedString>
+#include <KTextEditor/Document>
+#include <KTextEditor/Editor>
+#include <KTextEditor/View>
+#include <QDebug>
 #include <QInputDialog>
 #include <QLineEdit>
 #include <QTabWidget>
 #include <QVBoxLayout>
-#include <QDebug>
 
 CodeEditorWidget::CodeEditorWidget(QWidget *parent)
     : QWidget(parent)
@@ -53,12 +53,12 @@ void CodeEditorWidget::setProject(Project *project)
     }
 }
 
-KTextEditor::Document * CodeEditorWidget::activeDocument() const
+KTextEditor::Document *CodeEditorWidget::activeDocument() const
 {
     return m_project->codeDocuments().at(m_viewWidgets->currentIndex());
 }
 
-void CodeEditorWidget::onCodeDocumentAboutToBeAdded(KTextEditor::Document* document, int index)
+void CodeEditorWidget::onCodeDocumentAboutToBeAdded(KTextEditor::Document *document, int index)
 {
     m_viewWidgets->insertTab(index, document->createView(this), m_project->documentName(document));
 }
@@ -70,7 +70,6 @@ void CodeEditorWidget::onCodeDocumentAboutToBeRemoved(int start, int end)
     }
 }
 
-
 void CodeEditorWidget::showDocumentNameDialog(int index)
 {
     if (!m_project || m_project->codeDocuments().count() < index) {
@@ -79,11 +78,11 @@ void CodeEditorWidget::showDocumentNameDialog(int index)
     auto document = m_project->codeDocuments().at(index);
     bool ok;
     QString name = QInputDialog::getText(this,
-        i18nc("@title", "Code Document Name"),
-        i18n("Enter the name of your code document"),
-        QLineEdit::Normal,
-        m_project->documentName(document),
-        &ok);
+                                         i18nc("@title", "Code Document Name"),
+                                         i18n("Enter the name of your code document"),
+                                         QLineEdit::Normal,
+                                         m_project->documentName(document),
+                                         &ok);
     if (ok) {
         m_project->setDocumentName(document, name);
         m_viewWidgets->setTabText(index, name);

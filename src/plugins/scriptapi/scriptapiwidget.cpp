@@ -9,11 +9,11 @@
 #include "scriptapimodel.h"
 
 #include <QDebug>
-#include <QUrl>
-#include <QStandardPaths>
 #include <QIcon>
+#include <QStandardPaths>
+#include <QUrl>
 
-ScriptApiWidget::ScriptApiWidget(QWidget* parent)
+ScriptApiWidget::ScriptApiWidget(QWidget *parent)
     : QWidget(parent)
     , m_manager(new ScriptApiManager(this))
     , m_historyPointer(-1)
@@ -41,7 +41,7 @@ ScriptApiWidget::ScriptApiWidget(QWidget* parent)
     connect(ui->buttonPrev, &QPushButton::clicked, this, &ScriptApiWidget::historyGoBack);
 
     // listen to all links for ids
-    connect(ui->docDetails, &QTextBrowser::anchorClicked, this, static_cast<void (ScriptApiWidget::*)(const QUrl&)>(&ScriptApiWidget::showObjectApi));
+    connect(ui->docDetails, &QTextBrowser::anchorClicked, this, static_cast<void (ScriptApiWidget::*)(const QUrl &)>(&ScriptApiWidget::showObjectApi));
     // this option has the following idea:
     // * handle relative anchor calls directly in the web engine
     // * use for switching between object pages the path "http://virtual/<object-id>"
@@ -96,7 +96,7 @@ void ScriptApiWidget::showDetails(const QModelIndex &index)
     // m_model->data(index, ApiDocModel::AnchorRole).toString();
 }
 
-void ScriptApiWidget::showObjectApi(const QString &id, bool logHistory=true)
+void ScriptApiWidget::showObjectApi(const QString &id, bool logHistory = true)
 {
     QString htmlDocument = m_manager->objectApiDocument(id);
     ui->docDetails->setHtml(htmlDocument);
@@ -105,7 +105,7 @@ void ScriptApiWidget::showObjectApi(const QString &id, bool logHistory=true)
     if (logHistory) {
         // update history
         if (m_historyPointer < m_history.count() - 1) {
-            while (m_historyPointer < m_history.count() -1) {
+            while (m_historyPointer < m_history.count() - 1) {
                 m_history.removeAt(m_history.count() - 1);
             }
             ui->buttonNext->setEnabled(false);

@@ -6,10 +6,10 @@
 
 #include "testtgffileformat.h"
 #include "../tgffileformat.h"
+#include "edge.h"
 #include "fileformats/fileformatinterface.h"
 #include "graphdocument.h"
 #include "node.h"
-#include "edge.h"
 #include <QTest>
 
 using namespace GraphTheory;
@@ -22,7 +22,7 @@ void TestTgfFileFormat::serializeUnserializeTest()
 {
     GraphDocumentPtr document = GraphDocument::create();
     QCOMPARE(document->edgeTypes().first()->direction(), EdgeType::Direction::Unidirectional);
-    
+
     document->nodeTypes().first()->addDynamicProperty("label");
     document->edgeTypes().first()->addDynamicProperty("label");
     QMap<QString, NodePtr> dataList;
@@ -65,10 +65,10 @@ void TestTgfFileFormat::serializeUnserializeTest()
     const auto documentNodes = document->nodes();
     for (const NodePtr &node : documentNodes) {
         qDebug() << "Node" << node->dynamicProperty("label");
-        for(const auto& e : node->outEdges()) {
+        for (const auto &e : node->outEdges()) {
             qDebug() << ".. out" << e->from()->dynamicProperty("label") << e->to()->dynamicProperty("label");
         }
-        for(const auto& e : node->inEdges()) {
+        for (const auto &e : node->inEdges()) {
             qDebug() << ".. in " << e->from()->dynamicProperty("label") << e->to()->dynamicProperty("label");
         }
         QCOMPARE(node->outEdges().size(), 1);

@@ -7,8 +7,8 @@
 #include "edgetypeproperties.h"
 #include "edge.h"
 #include "edgetypestyle.h"
-#include "propertieswidget.h"
 #include "graphdocument.h"
+#include "propertieswidget.h"
 
 #include <KColorButton>
 #include <KGuiItem>
@@ -80,15 +80,11 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
     buttons->addButton(m_okButton, QDialogButtonBox::AcceptRole);
     buttons->addButton(cancelButton, QDialogButtonBox::RejectRole);
     mainLayout->addWidget(buttons);
-    connect(m_okButton, &QPushButton::clicked,
-        this, &EdgeTypeProperties::accept);
-    connect(cancelButton, &QPushButton::clicked,
-        this, &EdgeTypeProperties::reject);
+    connect(m_okButton, &QPushButton::clicked, this, &EdgeTypeProperties::accept);
+    connect(cancelButton, &QPushButton::clicked, this, &EdgeTypeProperties::reject);
 
-    connect(m_id, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
-        this, &EdgeTypeProperties::validateIdInput);
-    connect(this, &QDialog::accepted,
-        this, &EdgeTypeProperties::apply);
+    connect(m_id, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &EdgeTypeProperties::validateIdInput);
+    connect(this, &QDialog::accepted, this, &EdgeTypeProperties::apply);
     setAttribute(Qt::WA_DeleteOnClose);
 }
 

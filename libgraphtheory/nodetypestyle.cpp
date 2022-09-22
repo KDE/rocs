@@ -6,12 +6,13 @@
 
 #include "nodetypestyle.h"
 #include <QColor>
-#include <QString>
 #include <QDebug>
+#include <QString>
 
 using namespace GraphTheory;
 
-class GraphTheory::NodeTypeStylePrivate {
+class GraphTheory::NodeTypeStylePrivate
+{
 public:
     NodeTypeStylePrivate()
         : m_color(77, 77, 77) // dark gray
@@ -33,17 +34,13 @@ NodeTypeStyle::NodeTypeStyle()
     : QObject()
     , d(new NodeTypeStylePrivate)
 {
-    connect(this, &NodeTypeStyle::colorChanged,
-        this, &NodeTypeStyle::changed);
-    connect(this, &NodeTypeStyle::visibilityChanged,
-        this, &NodeTypeStyle::changed);
-    connect(this, &NodeTypeStyle::propertyNamesVisibilityChanged,
-        this, &NodeTypeStyle::changed);
+    connect(this, &NodeTypeStyle::colorChanged, this, &NodeTypeStyle::changed);
+    connect(this, &NodeTypeStyle::visibilityChanged, this, &NodeTypeStyle::changed);
+    connect(this, &NodeTypeStyle::propertyNamesVisibilityChanged, this, &NodeTypeStyle::changed);
 }
 
 NodeTypeStyle::~NodeTypeStyle()
 {
-
 }
 
 void NodeTypeStyle::setColor(const QColor &color)

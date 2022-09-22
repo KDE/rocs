@@ -9,9 +9,9 @@
 #define DOT_GRAMMARHELPER_H
 
 #include "typenames.h"
-#include <QStringList>
-#include <QObject>
 #include <QMap>
+#include <QObject>
+#include <QStringList>
 
 namespace DotParser
 {
@@ -50,22 +50,23 @@ struct DotGraphParsingHelper {
     void applyAttributedList();
 
     void createEdge();
-    void addEdgeBound(QString bound) {
+    void addEdgeBound(QString bound)
+    {
         edgebounds.append(bound);
     }
     void setObjectAttributes(QObject *graphElement, const DotParser::DotGraphParsingHelper::AttributesMap &attributes);
 
     QString attributeId;
     QString valid;
-    std::string attributed; //FIXME change to enum
+    std::string attributed; // FIXME change to enum
 
     AttributesMap unprocessedAttributes;
     AttributesMap graphAttributes;
     AttributesMap nodeAttributes;
     AttributesMap edgeAttributes;
-    QList< AttributesMap > graphAttributeStack;
-    QList< AttributesMap > nodeAttributeStack;
-    QList< AttributesMap > edgeAttributeStack;
+    QList<AttributesMap> graphAttributeStack;
+    QList<AttributesMap> nodeAttributeStack;
+    QList<AttributesMap> edgeAttributeStack;
 
     QStringList edgebounds;
 

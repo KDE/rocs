@@ -5,13 +5,13 @@
  */
 
 #include "nodetypesdelegate.h"
-#include "libgraphtheory/nodetype.h"
 #include "libgraphtheory/dialogs/nodetypeproperties.h"
 #include "libgraphtheory/models/nodetypemodel.h"
+#include "libgraphtheory/nodetype.h"
 #include <KColorButton>
 #include <KLocalizedString>
-#include <QApplication>
 #include <QAbstractItemView>
+#include <QApplication>
 #include <QDebug>
 #include <QLabel>
 #include <QLineEdit>
@@ -22,18 +22,16 @@
 
 using namespace GraphTheory;
 
-NodeTypesDelegate::NodeTypesDelegate(QAbstractItemView* parent)
+NodeTypesDelegate::NodeTypesDelegate(QAbstractItemView *parent)
     : KWidgetItemDelegate(parent, parent->viewport())
 {
-
 }
 
 NodeTypesDelegate::~NodeTypesDelegate()
 {
-
 }
 
-void NodeTypesDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void NodeTypesDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (!index.isValid()) {
         return;
@@ -41,15 +39,15 @@ void NodeTypesDelegate::paint(QPainter* painter, const QStyleOptionViewItem &opt
     QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, nullptr);
 }
 
-QSize NodeTypesDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
+QSize NodeTypesDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     Q_UNUSED(index);
-    int iconHeight = option.decorationSize.height() + (m_vPadding * 2); //icon height + padding either side
-    int textHeight = option.fontMetrics.height()*2 + (m_vPadding * 2) + 10; // text height * 2 + padding + some space between the lines
-    return QSize(-1,qMax(iconHeight, textHeight)); // any width, he view should give us the whole thing
+    int iconHeight = option.decorationSize.height() + (m_vPadding * 2); // icon height + padding either side
+    int textHeight = option.fontMetrics.height() * 2 + (m_vPadding * 2) + 10; // text height * 2 + padding + some space between the lines
+    return QSize(-1, qMax(iconHeight, textHeight)); // any width, he view should give us the whole thing
 }
 
-QList< QWidget* > NodeTypesDelegate::createItemWidgets(const QModelIndex &index) const
+QList<QWidget *> NodeTypesDelegate::createItemWidgets(const QModelIndex &index) const
 {
     // items created by this method and added to the return-list will be
     // deleted by KWidgetItemDelegate
@@ -63,19 +61,15 @@ QList< QWidget* > NodeTypesDelegate::createItemWidgets(const QModelIndex &index)
     QToolButton *propertiesButton = new QToolButton();
     propertiesButton->setIcon(QIcon::fromTheme("document-properties"));
 
-    connect(colorButton, &KColorButton::changed,
-        this, &NodeTypesDelegate::onColorChanged);
-    connect(colorButton, &KColorButton::pressed,
-        this, &NodeTypesDelegate::onColorDialogOpened);
-    connect(title, &QLineEdit::textEdited,
-        this, &NodeTypesDelegate::onNameChanged);
-    connect(propertiesButton, &QToolButton::clicked,
-        this, &NodeTypesDelegate::showPropertiesDialog);
+    connect(colorButton, &KColorButton::changed, this, &NodeTypesDelegate::onColorChanged);
+    connect(colorButton, &KColorButton::pressed, this, &NodeTypesDelegate::onColorDialogOpened);
+    connect(title, &QLineEdit::textEdited, this, &NodeTypesDelegate::onNameChanged);
+    connect(propertiesButton, &QToolButton::clicked, this, &NodeTypesDelegate::showPropertiesDialog);
 
-    return { colorButton, title, idLabel, propertiesButton };
+    return {colorButton, title, idLabel, propertiesButton};
 }
 
-void NodeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const
+void NodeTypesDelegate::updateItemWidgets(const QList<QWidget *> widgets, const QStyleOptionViewItem &option, const QPersistentModelIndex &index) const
 {
     // widgets:
     // ColorButton | Title | ID
@@ -86,10 +80,10 @@ void NodeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const
 
     Q_ASSERT(widgets.size() == 4);
 
-    KColorButton *colorButton = qobject_cast<KColorButton*>(widgets.at(0));
-    QLineEdit *title = qobject_cast<QLineEdit*>(widgets.at(1));
-    QLabel *id = qobject_cast<QLabel*>(widgets.at(2));
-    QToolButton *propertiesButton = qobject_cast<QToolButton*>(widgets.at(3));
+    KColorButton *colorButton = qobject_cast<KColorButton *>(widgets.at(0));
+    QLineEdit *title = qobject_cast<QLineEdit *>(widgets.at(1));
+    QLabel *id = qobject_cast<QLabel *>(widgets.at(2));
+    QToolButton *propertiesButton = qobject_cast<QToolButton *>(widgets.at(3));
 
     Q_ASSERT(title);
     Q_ASSERT(colorButton);
@@ -145,7 +139,7 @@ void NodeTypesDelegate::onNameChanged(const QString &name)
 void NodeTypesDelegate::showPropertiesDialog()
 {
     QModelIndex index = focusedIndex();
-    NodeType *type = qobject_cast<NodeType*>(index.data(NodeTypeModel::DataRole).value<QObject*>());
+    NodeType *type = qobject_cast<NodeType *>(index.data(NodeTypeModel::DataRole).value<QObject *>());
     QPointer<NodeTypeProperties> dialog = new NodeTypeProperties(nullptr);
     dialog->setType(type->self());
     dialog->exec();

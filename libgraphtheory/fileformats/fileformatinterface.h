@@ -38,26 +38,13 @@ public:
     /**
      * Describes the last error of the plugin.
      */
-    enum Error {
-        None,
-        Unknown,
-        FileIsReadOnly,
-        CouldNotOpenFile,
-        NoGraphFound,
-        EncodingProblem,
-        CouldNotRecognizeFileFormat,
-        NotSupportedOperation
-    };
+    enum Error { None, Unknown, FileIsReadOnly, CouldNotOpenFile, NoGraphFound, EncodingProblem, CouldNotRecognizeFileFormat, NotSupportedOperation };
 
     /**
      * Describes the capability of the plugin, i.e., if the plugin can be used
      * to read and/or write files.
      */
-    enum PluginType {
-        ImportOnly,
-        ExportOnly,
-        ImportAndExport
-    };
+    enum PluginType { ImportOnly, ExportOnly, ImportAndExport };
 
     /**
      * Constructor.
@@ -134,7 +121,6 @@ public:
      */
     virtual GraphDocumentPtr graphDocument() const;
 
-
 protected:
     /**
      * \internal
@@ -142,7 +128,7 @@ protected:
      *
      * \return file that is last used for write/read
      */
-    const QUrl & file() const;
+    const QUrl &file() const;
 
     /**
      * \internal

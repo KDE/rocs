@@ -7,16 +7,16 @@
 #ifndef LAYOUTEVALUATOR_H
 #define LAYOUTEVALUATOR_H
 
-#include <QObject>
+#include "edge.h"
+#include "editor.h"
+#include "graphdocument.h"
+#include "metricsummarizer.h"
+#include "node.h"
 #include <QCoreApplication>
+#include <QObject>
 #include <QString>
 #include <QVector>
 #include <iostream>
-#include "metricsummarizer.h"
-#include "graphdocument.h"
-#include "editor.h"
-#include "edge.h"
-#include "node.h"
 
 using namespace GraphTheory;
 
@@ -27,7 +27,10 @@ class LayoutEvaluator : public QObject
 {
     Q_OBJECT
 public:
-    LayoutEvaluator() { QCoreApplication::addLibraryPath(ADDITIONAL_PLUGIN_DIR); }
+    LayoutEvaluator()
+    {
+        QCoreApplication::addLibraryPath(ADDITIONAL_PLUGIN_DIR);
+    }
 
 private:
     MetricSummarizer numberOfEdgeCrossesMetric_m;
@@ -35,8 +38,8 @@ private:
     MetricSummarizer numberOfNodeIntersectionsMetric_m;
     MetricSummarizer numberOfNodesWithIntersectionsMetric_m;
 
-    void showMetric(const MetricSummarizer& metric, std::ostream& outputStream) const;
-    
+    void showMetric(const MetricSummarizer &metric, std::ostream &outputStream) const;
+
     bool crosses(const EdgePtr a, const EdgePtr b) const;
     int calculateNumberOfEdgeCrosses(GraphDocumentPtr document);
     int calculateNumberOfEdgesWithCrosses(GraphDocumentPtr document);
@@ -44,11 +47,11 @@ private:
     bool intersects(const NodePtr a, const NodePtr b) const;
     int calculateNumberOfNodeIntersections(GraphDocumentPtr document);
     int calculateNumberOfNodesWithIntersections(GraphDocumentPtr document);
-    QPointF projectOntoSegment(const QLineF& segment, const QPointF& point) const;
-    qreal squaredDistance(const QPointF& pointA, const QPointF& pointB) const;
-    bool doSegmentsIntersect(const QLineF& segmentA, const QLineF& segmentB) const;
-public:
+    QPointF projectOntoSegment(const QLineF &segment, const QPointF &point) const;
+    qreal squaredDistance(const QPointF &pointA, const QPointF &pointB) const;
+    bool doSegmentsIntersect(const QLineF &segmentA, const QLineF &segmentB) const;
 
+public:
     /*
      * Evaluates a new layout.
      */
@@ -57,7 +60,7 @@ public:
     /*
      * Presents a summary of each metric, combining the results of all layouts evaluated.
      */
-    void showResults(std::ostream& outputStream) const;
+    void showResults(std::ostream &outputStream) const;
 };
 
- #endif
+#endif

@@ -6,8 +6,8 @@
 
 #include "qsglinenode.h"
 #include "qsgarrowheadnode.h"
-#include <QSGGeometry>
 #include <QColor>
+#include <QSGGeometry>
 
 using namespace GraphTheory;
 
@@ -40,9 +40,9 @@ void QSGLineNode::setLine(const QPointF &from, const QPointF &to)
     markDirty(QSGNode::DirtyGeometry);
 }
 
-void QSGLineNode::setColor(const QColor& color)
+void QSGLineNode::setColor(const QColor &color)
 {
-    QSGFlatColorMaterial *m = static_cast<QSGFlatColorMaterial*>(material());
+    QSGFlatColorMaterial *m = static_cast<QSGFlatColorMaterial *>(material());
     m->setColor(color);
     if (m_arrowHead) {
         m_arrowHead->setColor(color);

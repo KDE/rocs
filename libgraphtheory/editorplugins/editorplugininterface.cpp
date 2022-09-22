@@ -7,7 +7,6 @@
 #include "editorplugins/editorplugininterface.h"
 #include "logging_p.h"
 
-
 using namespace GraphTheory;
 
 class GraphTheory::EditorPluginInterfacePrivate
@@ -17,7 +16,6 @@ public:
         : m_componentName(data.pluginId())
         , m_displayName(data.name())
     {
-
     }
 
     const QString m_componentName;
@@ -28,7 +26,6 @@ EditorPluginInterface::EditorPluginInterface(QObject *parent, const KPluginMetaD
     : QObject(parent)
     , d(new EditorPluginInterfacePrivate(data))
 {
-
 }
 
 EditorPluginInterface::~EditorPluginInterface() = default;

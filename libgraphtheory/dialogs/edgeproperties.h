@@ -7,11 +7,12 @@
 #ifndef EDGEPROPERTIES_H
 #define EDGEPROPERTIES_H
 
-#include <QDialog>
 #include "typenames.h"
 #include "ui_edgeproperties.h"
+#include <QDialog>
 
-namespace GraphTheory {
+namespace GraphTheory
+{
 
 class EdgeProperties : public QDialog
 {

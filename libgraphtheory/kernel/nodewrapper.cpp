@@ -5,13 +5,13 @@
  */
 
 #include "nodewrapper.h"
+#include "edge.h"
 #include "edgewrapper.h"
 #include "nodetype.h"
-#include "edge.h"
 #include <KLocalizedString>
-#include <QPointF>
 #include <QDebug>
 #include <QEvent>
+#include <QPointF>
 
 using namespace GraphTheory;
 
@@ -31,7 +31,6 @@ NodeWrapper::NodeWrapper(NodePtr node, DocumentWrapper *documentWrapper)
 
 NodeWrapper::~NodeWrapper()
 {
-
 }
 
 NodePtr NodeWrapper::node() const
@@ -114,9 +113,9 @@ void NodeWrapper::setType(int typeId)
     // change signal will be emitted by connection to m_node signal
 }
 
-QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges() const
+QList<GraphTheory::EdgeWrapper *> NodeWrapper::edges() const
 {
-    QList<EdgeWrapper*> edges;
+    QList<EdgeWrapper *> edges;
     const auto nodeEdges = m_node->edges();
     for (const auto &edge : nodeEdges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
@@ -124,7 +123,7 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges() const
     return edges;
 }
 
-QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges(int type) const
+QList<GraphTheory::EdgeWrapper *> NodeWrapper::edges(int type) const
 {
     EdgeTypePtr typePtr;
     const auto edgeTypes = m_node->document()->edgeTypes();
@@ -137,9 +136,9 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges(int type) const
     if (!typePtr) {
         QString command = QString("node.edges(%1)").arg(type);
         Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
-        return QList<EdgeWrapper*>();
+        return QList<EdgeWrapper *>();
     }
-    QList<EdgeWrapper*> edges;
+    QList<EdgeWrapper *> edges;
     const auto nodeEges = m_node->edges(typePtr);
     for (const auto &edge : nodeEges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
@@ -147,9 +146,9 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges(int type) const
     return edges;
 }
 
-QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges() const
+QList<GraphTheory::EdgeWrapper *> NodeWrapper::inEdges() const
 {
-    QList<EdgeWrapper*> edges;
+    QList<EdgeWrapper *> edges;
     const auto inEdges = m_node->inEdges();
     for (const auto &edge : inEdges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
@@ -157,7 +156,7 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges() const
     return edges;
 }
 
-QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges(int type) const
+QList<GraphTheory::EdgeWrapper *> NodeWrapper::inEdges(int type) const
 {
     EdgeTypePtr typePtr;
     const auto edgeTypes = m_node->document()->edgeTypes();
@@ -167,12 +166,13 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges(int type) const
             break;
         }
     }
-    if (!typePtr) {;
+    if (!typePtr) {
+        ;
         QString command = QString("node.inEdges(%1)").arg(type);
         Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
-        return QList<EdgeWrapper*>();
+        return QList<EdgeWrapper *>();
     }
-    QList<EdgeWrapper*> edges;
+    QList<EdgeWrapper *> edges;
     const auto inEdges = m_node->inEdges(typePtr);
     for (const auto &edge : inEdges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
@@ -180,9 +180,9 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges(int type) const
     return edges;
 }
 
-QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges() const
+QList<GraphTheory::EdgeWrapper *> NodeWrapper::outEdges() const
 {
-    QList<EdgeWrapper*> edges;
+    QList<EdgeWrapper *> edges;
     const auto outEdges = m_node->outEdges();
     for (const auto &edge : outEdges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
@@ -190,7 +190,7 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges() const
     return edges;
 }
 
-QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges(int type) const
+QList<GraphTheory::EdgeWrapper *> NodeWrapper::outEdges(int type) const
 {
     EdgeTypePtr typePtr;
     const auto edgeTypes = m_node->document()->edgeTypes();
@@ -203,9 +203,9 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges(int type) const
     if (!typePtr) {
         QString command = QString("node.outEdges(%1)").arg(type);
         Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
-        return QList<EdgeWrapper*>();
+        return QList<EdgeWrapper *>();
     }
-    QList<EdgeWrapper*> edges;
+    QList<EdgeWrapper *> edges;
     const auto outEdges = m_node->outEdges(typePtr);
     for (const auto &edge : outEdges) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
@@ -213,9 +213,9 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges(int type) const
     return edges;
 }
 
-QList<NodeWrapper*> NodeWrapper::neighbors() const
+QList<NodeWrapper *> NodeWrapper::neighbors() const
 {
-    QSet<NodeWrapper*> neighbors;
+    QSet<NodeWrapper *> neighbors;
     const auto edges = m_node->edges();
     for (const auto &edge : edges) {
         if (m_node == edge->from()) {
@@ -227,7 +227,7 @@ QList<NodeWrapper*> NodeWrapper::neighbors() const
     return neighbors.values();
 }
 
-QList<NodeWrapper*> NodeWrapper::neighbors(int type) const
+QList<NodeWrapper *> NodeWrapper::neighbors(int type) const
 {
     EdgeTypePtr typePtr;
     const auto edgeTypes = m_node->document()->edgeTypes();
@@ -240,9 +240,9 @@ QList<NodeWrapper*> NodeWrapper::neighbors(int type) const
     if (!typePtr) {
         QString command = QString("node.neighbors(%1)").arg(type);
         Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
-        return QList<NodeWrapper*>();
+        return QList<NodeWrapper *>();
     }
-    QSet<NodeWrapper*> neighbors;
+    QSet<NodeWrapper *> neighbors;
     const auto edges = m_node->edges(typePtr);
     for (const auto &edge : edges) {
         if (m_node == edge->from()) {
@@ -254,9 +254,9 @@ QList<NodeWrapper*> NodeWrapper::neighbors(int type) const
     return neighbors.values();
 }
 
-QList<NodeWrapper*> NodeWrapper::predecessors() const
+QList<NodeWrapper *> NodeWrapper::predecessors() const
 {
-    QSet<NodeWrapper*> precessors;
+    QSet<NodeWrapper *> precessors;
     const auto inEdges = m_node->inEdges();
     for (const auto &edge : inEdges) {
         if (edge->type()->direction() == EdgeType::Unidirectional) {
@@ -273,7 +273,7 @@ QList<NodeWrapper*> NodeWrapper::predecessors() const
     return precessors.values();
 }
 
-QList<NodeWrapper*> NodeWrapper::predecessors(int type) const
+QList<NodeWrapper *> NodeWrapper::predecessors(int type) const
 {
     EdgeTypePtr typePtr;
     const auto edgeTypes = m_node->document()->edgeTypes();
@@ -286,9 +286,9 @@ QList<NodeWrapper*> NodeWrapper::predecessors(int type) const
     if (!typePtr) {
         QString command = QString("node.predecessors(%1)").arg(type);
         Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
-        return QList<NodeWrapper*>();
+        return QList<NodeWrapper *>();
     }
-    QSet<NodeWrapper*> precessors;
+    QSet<NodeWrapper *> precessors;
     const auto inEdges = m_node->inEdges(typePtr);
     for (const auto &edge : inEdges) {
         if (edge->type()->direction() == EdgeType::Unidirectional) {
@@ -305,9 +305,9 @@ QList<NodeWrapper*> NodeWrapper::predecessors(int type) const
     return precessors.values();
 }
 
-QList<NodeWrapper*> NodeWrapper::successors() const
+QList<NodeWrapper *> NodeWrapper::successors() const
 {
-    QSet<NodeWrapper*> successors;
+    QSet<NodeWrapper *> successors;
     const auto outEdges = m_node->outEdges();
     for (const auto &edge : outEdges) {
         if (edge->type()->direction() == EdgeType::Unidirectional) {
@@ -324,7 +324,7 @@ QList<NodeWrapper*> NodeWrapper::successors() const
     return successors.values();
 }
 
-QList<NodeWrapper*> NodeWrapper::successors(int type) const
+QList<NodeWrapper *> NodeWrapper::successors(int type) const
 {
     EdgeTypePtr typePtr;
     const auto edgeTypes = m_node->document()->edgeTypes();
@@ -337,9 +337,9 @@ QList<NodeWrapper*> NodeWrapper::successors(int type) const
     if (!typePtr) {
         QString command = QString("node.successors(%1)").arg(type);
         Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
-        return QList<NodeWrapper*>();
+        return QList<NodeWrapper *>();
     }
-    QSet<NodeWrapper*> successors;
+    QSet<NodeWrapper *> successors;
     const auto outEdges = m_node->outEdges(typePtr);
     for (const auto &edge : outEdges) {
         if (edge->type()->direction() == EdgeType::Unidirectional) {
@@ -356,10 +356,10 @@ QList<NodeWrapper*> NodeWrapper::successors(int type) const
     return successors.values();
 }
 
-QScriptValue NodeWrapper::distance(const QString &lengthProperty, QList< NodeWrapper* > targets)
+QScriptValue NodeWrapper::distance(const QString &lengthProperty, QList<NodeWrapper *> targets)
 {
-    //TODO at a later point in time:
-    //     factor this algorithm out into a self-contained graph algorithm class
+    // TODO at a later point in time:
+    //      factor this algorithm out into a self-contained graph algorithm class
 
     // Implementation of Floyd-Warshall Algorithm:
     // asymptotic runtime: O(n^3), n = number of nodes
@@ -387,16 +387,15 @@ QScriptValue NodeWrapper::distance(const QString &lengthProperty, QList< NodeWra
     }
 
     // initialize distance matrix D
-    QVector< QVector<qreal> > D(n, QVector<qreal>(n));
+    QVector<QVector<qreal>> D(n, QVector<qreal>(n));
     for (int i = 0; i < n; ++i) {
-    for (int j = 0; j < n; ++j) {
-        if (i == j) {
-            D[i][j] = 0;
+        for (int j = 0; j < n; ++j) {
+            if (i == j) {
+                D[i][j] = 0;
+            } else {
+                D[i][j] = std::numeric_limits<qreal>::max();
+            }
         }
-        else {
-            D[i][j] = std::numeric_limits<qreal>::max();
-        }
-    }
     }
 
     // set edges lengths to D
@@ -409,13 +408,13 @@ QScriptValue NodeWrapper::distance(const QString &lengthProperty, QList< NodeWra
 
     // computation
     for (int k = 0; k < n; ++k) {
-    for (int i = 0; i < n; ++i) {
-    for (int j = 0; j < n; ++j) {
-        if (D[i][j] > D[i][k] + D[k][j]) {
-            D[i][j] = D[i][k] + D[k][j];
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (D[i][j] > D[i][k] + D[k][j]) {
+                    D[i][j] = D[i][k] + D[k][j];
+                }
+            }
         }
-    }
-    }
     }
 
     // compute return statement

@@ -8,10 +8,10 @@
 */
 
 #include "tgffileformat.h"
-#include "modifiers/topology.h"
-#include "graphdocument.h"
-#include "node.h"
 #include "edge.h"
+#include "graphdocument.h"
+#include "modifiers/topology.h"
+#include "node.h"
 #include <KAboutData>
 #include <KLocalizedString>
 #include <KPluginFactory>
@@ -37,7 +37,6 @@ const QStringList TgfFileFormat::extensions() const
 {
     return QStringList{i18n("Trivial Graph Format (%1)", QString("*.tgf"))};
 }
-
 
 void TgfFileFormat::readFile()
 {
@@ -65,7 +64,7 @@ void TgfFileFormat::readFile()
 
         if (mode == Nodes) { // read node
             int identifier = line.section(' ', 0, 0).toInt();
-            QString label = line.section(' ', 1);  // get label, this is everything after first space
+            QString label = line.section(' ', 1); // get label, this is everything after first space
             NodePtr node = Node::create(document);
             node->setDynamicProperty("label", label.simplified());
             node->setId(identifier);
@@ -106,19 +105,19 @@ void TgfFileFormat::writeFile(GraphDocumentPtr document)
 
     QTextStream out(&fileHandle);
     // export data elements
-    //FIXME only default data type considered
+    // FIXME only default data type considered
     const auto nodes = document->nodes();
     for (const NodePtr &node : nodes) {
         out << node->id();
         out << " ";
-        out << node->dynamicProperty("label").toString(); //TODO change to selectable property
+        out << node->dynamicProperty("label").toString(); // TODO change to selectable property
         out << '\n';
     }
     out << "#\n";
     // export pointers
     const auto edges = document->edges();
     for (const auto &edge : edges) {
-        out << edge->from()->id() << " " << edge->to()->id() << " " << edge->dynamicProperty("label").toString() <<'\n';
+        out << edge->from()->id() << " " << edge->to()->id() << " " << edge->dynamicProperty("label").toString() << '\n';
     }
     setError(None);
 }

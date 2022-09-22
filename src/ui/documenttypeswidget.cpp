@@ -5,16 +5,16 @@
  */
 
 #include "documenttypeswidget.h"
-#include "nodetypesdelegate.h"
 #include "edgetypesdelegate.h"
 #include "libgraphtheory/nodetype.h"
+#include "nodetypesdelegate.h"
 #include <KLocalizedString>
 #include <KWidgetItemDelegate>
+#include <QDebug>
 #include <QGridLayout>
+#include <QLabel>
 #include <QListView>
 #include <QPushButton>
-#include <QLabel>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -37,12 +37,9 @@ DocumentTypesWidget::DocumentTypesWidget(QWidget *parent)
     nodeTypeView->setModel(&m_nodeTypeModel);
     layout->addWidget(nodeTypeView);
 
-    connect(nodeDelegate, &NodeTypesDelegate::colorChanged,
-        this, &DocumentTypesWidget::onNodeTypeColorChanged);
-    connect(nodeDelegate, &NodeTypesDelegate::nameChanged,
-        this, &DocumentTypesWidget::onNodeTypeNameChanged);
-    connect(m_createNodeTypeButton, &QPushButton::clicked,
-        this, &DocumentTypesWidget::onCreateNodeType);
+    connect(nodeDelegate, &NodeTypesDelegate::colorChanged, this, &DocumentTypesWidget::onNodeTypeColorChanged);
+    connect(nodeDelegate, &NodeTypesDelegate::nameChanged, this, &DocumentTypesWidget::onNodeTypeNameChanged);
+    connect(m_createNodeTypeButton, &QPushButton::clicked, this, &DocumentTypesWidget::onCreateNodeType);
 
     // edge types
     layout->addWidget(new QLabel(i18nc("@title", "Edge Types")));
@@ -56,14 +53,10 @@ DocumentTypesWidget::DocumentTypesWidget(QWidget *parent)
     edgeTypeView->setModel(&m_edgeTypeModel);
     layout->addWidget(edgeTypeView);
 
-    connect(edgeDelegate, &EdgeTypesDelegate::colorChanged,
-        this, &DocumentTypesWidget::onEdgeTypeColorChanged);
-    connect(edgeDelegate, &EdgeTypesDelegate::nameChanged,
-        this, &DocumentTypesWidget::onEdgeTypeNameChanged);
-    connect(edgeDelegate, &EdgeTypesDelegate::directionChanged,
-        this, &DocumentTypesWidget::onEdgeTypeDirectionChanged);
-    connect(m_createEdgeTypeButton, &QPushButton::clicked,
-        this, &DocumentTypesWidget::onCreateEdgeType);
+    connect(edgeDelegate, &EdgeTypesDelegate::colorChanged, this, &DocumentTypesWidget::onEdgeTypeColorChanged);
+    connect(edgeDelegate, &EdgeTypesDelegate::nameChanged, this, &DocumentTypesWidget::onEdgeTypeNameChanged);
+    connect(edgeDelegate, &EdgeTypesDelegate::directionChanged, this, &DocumentTypesWidget::onEdgeTypeDirectionChanged);
+    connect(m_createEdgeTypeButton, &QPushButton::clicked, this, &DocumentTypesWidget::onCreateEdgeType);
 
     setLayout(layout);
     show();
@@ -84,7 +77,7 @@ void DocumentTypesWidget::onNodeTypeColorChanged(const QModelIndex &index, const
     m_nodeTypeModel.setData(index, QVariant::fromValue<QColor>(color), NodeTypeModel::ColorRole);
 }
 
-void DocumentTypesWidget::onNodeTypeNameChanged(const QModelIndex& index, const QString& name)
+void DocumentTypesWidget::onNodeTypeNameChanged(const QModelIndex &index, const QString &name)
 {
     m_nodeTypeModel.setData(index, QVariant(name), NodeTypeModel::TitleRole);
 }
@@ -100,12 +93,12 @@ void DocumentTypesWidget::onEdgeTypeColorChanged(const QModelIndex &index, const
     m_edgeTypeModel.setData(index, QVariant::fromValue<QColor>(color), EdgeTypeModel::ColorRole);
 }
 
-void DocumentTypesWidget::onEdgeTypeNameChanged(const QModelIndex& index, const QString& name)
+void DocumentTypesWidget::onEdgeTypeNameChanged(const QModelIndex &index, const QString &name)
 {
     m_edgeTypeModel.setData(index, QVariant(name), EdgeTypeModel::TitleRole);
 }
 
-void DocumentTypesWidget::onEdgeTypeDirectionChanged(const QModelIndex& index, const EdgeType::Direction& direction)
+void DocumentTypesWidget::onEdgeTypeDirectionChanged(const QModelIndex &index, const EdgeType::Direction &direction)
 {
     m_edgeTypeModel.setData(index, direction, EdgeTypeModel::DirectionRole);
 }

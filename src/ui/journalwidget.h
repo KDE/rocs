@@ -7,8 +7,8 @@
 #ifndef JOURNALWIDGET_H
 #define JOURNALWIDGET_H
 
-#include <QWidget>
 #include "ui_journalwidget.h"
+#include <QWidget>
 
 class Project;
 
@@ -26,7 +26,7 @@ public:
     /**
      * Default constructor.
      */
-    explicit JournalEditorWidget(QWidget* parent);
+    explicit JournalEditorWidget(QWidget *parent);
 
     /**
      * Loads journal from specified project \p project. File path and file name changes of the
@@ -34,7 +34,7 @@ public:
      *
      * \param project the project for which the journal shall be added to the widget
      */
-    void openJournal(Project* project);
+    void openJournal(Project *project);
 
     /**
      * \return true if journal is modified since loading, otherwise false

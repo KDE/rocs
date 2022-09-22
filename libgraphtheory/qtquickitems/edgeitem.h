@@ -7,8 +7,8 @@
 #ifndef EDGEITEM_H
 #define EDGEITEM_H
 
-#include "graphtheory_export.h"
 #include "edge.h"
+#include "graphtheory_export.h"
 #include <QQuickItem>
 
 class QSGNode;
@@ -20,13 +20,13 @@ class EdgeItemPrivate;
 class EdgeItem : public QQuickItem
 {
     Q_OBJECT
-    Q_PROPERTY(GraphTheory::Edge * edge READ edge WRITE setEdge NOTIFY edgeChanged)
+    Q_PROPERTY(GraphTheory::Edge *edge READ edge WRITE setEdge NOTIFY edgeChanged)
     Q_PROPERTY(QPointF origin READ origin WRITE setOrigin)
 
 public:
     explicit EdgeItem(QQuickItem *parent = nullptr);
     ~EdgeItem() override;
-    Edge * edge() const;
+    Edge *edge() const;
     void setEdge(Edge *edge);
     /** translation of global origin (0,0) into scene coordinates **/
     QPointF origin() const;
@@ -34,7 +34,7 @@ public:
     void setOrigin(const QPointF &origin);
 
 protected:
-    QSGNode * updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data) override;
+    QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data) override;
 
 Q_SIGNALS:
     void edgeChanged();

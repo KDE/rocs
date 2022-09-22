@@ -8,10 +8,10 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <QApplication>
 #include <KAboutData>
 #include <KCrash>
 #include <KLocalizedString>
+#include <QApplication>
 #include <QCommandLineParser>
 #include <QDir>
 
@@ -23,9 +23,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("rocs");
 
-    KAboutData aboutData("rocs",
-                         ki18nc("@title Displayed program name", "Rocs").toString(),
-                         ROCS_VERSION_STRING);
+    KAboutData aboutData("rocs", ki18nc("@title Displayed program name", "Rocs").toString(), ROCS_VERSION_STRING);
 
     aboutData.addLicense(KAboutLicense::GPL_V2);
     aboutData.setShortDescription(ki18nc("@title Short program description", "Graph Theory Simulator").toString());

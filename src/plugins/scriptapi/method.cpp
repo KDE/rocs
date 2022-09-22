@@ -7,10 +7,9 @@
 #include "method.h"
 #include "parameter.h"
 
-Method::Method(QObject* parent)
+Method::Method(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 void Method::setName(const QString &name)
@@ -37,7 +36,7 @@ QVariantList Method::description() const
     return list;
 }
 
-void Method::setReturnType(const QString& type)
+void Method::setReturnType(const QString &type)
 {
     m_returnType = type;
 }
@@ -47,7 +46,7 @@ QString Method::returnType() const
     return m_returnType;
 }
 
-void Method::addParameter(const QString& name, const QString& type, const QString& info, const QString &typeLink = QString())
+void Method::addParameter(const QString &name, const QString &type, const QString &info, const QString &typeLink = QString())
 {
     Parameter *parameter = new Parameter(this);
     parameter->setName(name);
@@ -62,7 +61,7 @@ QVariant Method::parametersVar() const
     return QVariant::fromValue(m_parameters);
 }
 
-QList<Parameter*> Method::parameters() const
+QList<Parameter *> Method::parameters() const
 {
     return m_parameters;
 }
@@ -72,7 +71,7 @@ QString Method::apiDocumentAnchor()
     return QString("method").append(m_name);
 }
 
-void Method::setReturnTypeLink(const QString& link)
+void Method::setReturnTypeLink(const QString &link)
 {
     m_returnTypeLink = link;
 }

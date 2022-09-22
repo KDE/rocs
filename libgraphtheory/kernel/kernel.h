@@ -7,13 +7,13 @@
 #ifndef KERNEL_H
 #define KERNEL_H
 
-#include "graphtheory_export.h"
-#include "typenames.h"
-#include "node.h"
 #include "graphdocument.h"
+#include "graphtheory_export.h"
+#include "node.h"
+#include "typenames.h"
 
-#include <QScriptEngine>
 #include <QObject>
+#include <QScriptEngine>
 
 #include <QAction>
 
@@ -29,11 +29,7 @@ class GRAPHTHEORY_EXPORT Kernel : public QObject
     Q_OBJECT
 
 public:
-    enum MessageType {
-        InfoMessage,
-        WarningMessage,
-        ErrorMessage
-    };
+    enum MessageType { InfoMessage, WarningMessage, ErrorMessage };
 
     Kernel();
 

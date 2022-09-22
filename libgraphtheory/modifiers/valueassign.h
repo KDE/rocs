@@ -7,8 +7,8 @@
 #ifndef VALUEASSIGN_H
 #define VALUEASSIGN_H
 
-#include "typenames.h"
 #include "graphtheory_export.h"
+#include "typenames.h"
 
 namespace GraphTheory
 {
@@ -17,7 +17,6 @@ namespace GraphTheory
  */
 class GRAPHTHEORY_EXPORT ValueAssign
 {
-
 public:
     ValueAssign();
     /**
@@ -30,7 +29,7 @@ public:
      * \param overrideValues if true, current property values are overwritten; otherwise not
      */
     template<typename T>
-    void enumerate(const QVector<T>& list, const QString &property, int start, const QString &baseString, bool overrideValues = true);
+    void enumerate(const QVector<T> &list, const QString &property, int start, const QString &baseString, bool overrideValues = true);
 
     /**
      * Assign strings in increasing order starting at 'start' to all nodes.

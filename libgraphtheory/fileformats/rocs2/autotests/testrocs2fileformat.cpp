@@ -6,11 +6,11 @@
 
 #include "testrocs2fileformat.h"
 #include "../rocs2fileformat.h"
+#include "edge.h"
+#include "edgetypestyle.h"
 #include "fileformats/fileformatinterface.h"
 #include "graphdocument.h"
 #include "node.h"
-#include "edge.h"
-#include "edgetypestyle.h"
 #include "nodetypestyle.h"
 #include <QTest>
 
@@ -124,7 +124,7 @@ void TestRocs2FileFormat::nodeAndEdgeTest()
     // find node with ID 1 and then test it
     NodePtr testNode;
     const auto importDocumentNodes = importDocument->nodes();
-    for (const NodePtr& node : importDocumentNodes) {
+    for (const NodePtr &node : importDocumentNodes) {
         if (node->id() == 1) {
             testNode = node;
         }

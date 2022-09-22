@@ -7,10 +7,10 @@
 #ifndef QSGLINENODE_H
 #define QSGLINENODE_H
 
-#include "graphtheory_export.h"
 #include "edgetype.h"
-#include <QSGGeometryNode>
+#include "graphtheory_export.h"
 #include <QSGFlatColorMaterial>
+#include <QSGGeometryNode>
 
 class QColor;
 
@@ -20,7 +20,6 @@ class QSGArrowHeadNode;
 
 class QSGLineNode : public QSGGeometryNode
 {
-
 public:
     explicit QSGLineNode();
     ~QSGLineNode() override;

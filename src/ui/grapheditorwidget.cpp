@@ -8,10 +8,10 @@
 #include "libgraphtheory/graphdocument.h"
 #include "libgraphtheory/view.h"
 #include <KLocalizedString>
+#include <QDebug>
 #include <QInputDialog>
 #include <QTabWidget>
 #include <QVBoxLayout>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -41,14 +41,10 @@ void GraphEditorWidget::setProject(Project *project)
         m_viewWidgets->removeTab(0);
     }
 
-    connect(project, &Project::graphDocumentAboutToBeAdded,
-        this, &GraphEditorWidget::onGraphDocumentAboutToBeAdded);
-    connect(project, &Project::graphDocumentAboutToBeRemoved,
-        this, &GraphEditorWidget::onGraphDocumentAboutToBeRemoved);
-    connect(m_viewWidgets, &QTabWidget::currentChanged,
-        project, &Project::setActiveGraphDocument);
-    connect(m_viewWidgets, &QTabWidget::tabBarDoubleClicked,
-        this, &GraphEditorWidget::showDocumentNameDialog);
+    connect(project, &Project::graphDocumentAboutToBeAdded, this, &GraphEditorWidget::onGraphDocumentAboutToBeAdded);
+    connect(project, &Project::graphDocumentAboutToBeRemoved, this, &GraphEditorWidget::onGraphDocumentAboutToBeRemoved);
+    connect(m_viewWidgets, &QTabWidget::currentChanged, project, &Project::setActiveGraphDocument);
+    connect(m_viewWidgets, &QTabWidget::tabBarDoubleClicked, this, &GraphEditorWidget::showDocumentNameDialog);
 
     // initialize views
     for (int index = 0; index < project->graphDocuments().count(); ++index) {
@@ -80,11 +76,11 @@ void GraphEditorWidget::showDocumentNameDialog(int index)
     GraphDocumentPtr document = m_project->graphDocuments().at(index);
     bool ok;
     QString name = QInputDialog::getText(this,
-        i18nc("@title", "Graph Document Name"),
-        i18n("Enter the name of your graph document"),
-        QLineEdit::Normal,
-        document->documentName(),
-        &ok);
+                                         i18nc("@title", "Graph Document Name"),
+                                         i18n("Enter the name of your graph document"),
+                                         QLineEdit::Normal,
+                                         document->documentName(),
+                                         &ok);
     if (ok) {
         document->setDocumentName(name);
         m_viewWidgets->setTabText(index, name);

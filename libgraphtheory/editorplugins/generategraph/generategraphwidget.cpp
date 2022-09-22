@@ -7,40 +7,38 @@
 
 #include "generategraphwidget.h"
 
-#include "graphdocument.h"
 #include "edge.h"
-#include "modifiers/topology.h"
+#include "graphdocument.h"
 #include "logging_p.h"
+#include "modifiers/topology.h"
 
-#include <KLocalizedString>
 #include <KComboBox>
+#include <KLocalizedString>
 
+#include <QButtonGroup>
 #include <QDateTime>
 #include <QList>
 #include <QMap>
-#include <QPair>
-#include <QButtonGroup>
 #include <QMessageBox>
+#include <QPair>
 
 #include <cmath>
 #include <random>
 
 #include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/erdos_renyi_generator.hpp>
+#include <boost/graph/fruchterman_reingold.hpp>
 #include <boost/graph/iteration_macros.hpp>
 #include <boost/graph/random.hpp>
 #include <boost/graph/random_layout.hpp>
 #include <boost/graph/topology.hpp>
-#include <boost/graph/fruchterman_reingold.hpp>
-#include <boost/random/mersenne_twister.hpp>
-#include <boost/graph/erdos_renyi_generator.hpp>
 #include <boost/math/constants/constants.hpp>
+#include <boost/random/mersenne_twister.hpp>
 
 using namespace GraphTheory;
 
 // typedefs used for the boost graph library
-typedef boost::adjacency_list < boost::listS, boost::vecS, boost::undirectedS,
-        boost::property<boost::vertex_name_t, std::string> >
-        Graph;
+typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::property<boost::vertex_name_t, std::string>> Graph;
 
 typedef boost::rectangle_topology<> topology_type;
 
@@ -48,17 +46,16 @@ typedef topology_type::point_type point_type;
 
 typedef std::vector<point_type> PositionVec;
 
-typedef boost::iterator_property_map < PositionVec::iterator,
-        boost::property_map<Graph, boost::vertex_index_t>::type >
-        PositionMap;
+typedef boost::iterator_property_map<PositionVec::iterator, boost::property_map<Graph, boost::vertex_index_t>::type> PositionMap;
 
 // handle boost exceptions
-namespace boost {
-    void throw_exception(std::exception const &e) {
-        qCCritical(GRAPHTHEORY_GENERAL) << "Exception:" << e.what();
-    }
+namespace boost
+{
+void throw_exception(std::exception const &e)
+{
+    qCCritical(GRAPHTHEORY_GENERAL) << "Exception:" << e.what();
 }
-
+}
 
 GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *parent)
     : QDialog(parent)
@@ -119,22 +116,14 @@ GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *par
 
     for (int i = 0; i < document->edgeTypes().length(); ++i) {
         EdgeTypePtr type = document->edgeTypes().at(i);
-        QString item = i18nc(
-            "@item:inlistbox",
-            "%1 (ID %2)",
-            type->name(),
-            i);
+        QString item = i18nc("@item:inlistbox", "%1 (ID %2)", type->name(), i);
         ui->edgeTypeSelector->addItem(item, QVariant(i));
     }
     ui->edgeTypeSelector->setCurrentIndex(0);
 
     for (int i = 0; i < document->nodeTypes().length(); ++i) {
         NodeTypePtr type = document->nodeTypes().at(i);
-        QString item = i18nc(
-            "@item:inlistbox",
-            "%1 (ID %2)",
-            type->name(),
-            i);
+        QString item = i18nc("@item:inlistbox", "%1 (ID %2)", type->name(), i);
         ui->nodeTypeSelector->addItem(item, QVariant(i));
     }
     ui->nodeTypeSelector->setCurrentIndex(0);
@@ -194,48 +183,28 @@ void GenerateGraphWidget::generateGraph()
         break;
     case RandomEdgeGraph:
         setSeed(ui->randomGeneratorSeed->value());
-        generateRandomGraph(
-            ui->randomNodes->value(),
-            ui->randomEdges->value(),
-            ui->randomAllowSelfedges->isTristate()
-        );
+        generateRandomGraph(ui->randomNodes->value(), ui->randomEdges->value(), ui->randomAllowSelfedges->isTristate());
         break;
     case ErdosRenyiRandomGraph:
         setSeed(ui->GNPGeneratorSeed->value());
-        generateErdosRenyiRandomGraph(
-            ui->GNPNodes->value(),
-            ui->GNPEdgeProbability->value(),
-            ui->GNPAllowSelfedges->isTristate()
-        );
+        generateErdosRenyiRandomGraph(ui->GNPNodes->value(), ui->GNPEdgeProbability->value(), ui->GNPAllowSelfedges->isTristate());
         break;
     case RandomTree:
         setSeed(ui->randomTreeGeneratorSeed->value());
-        generateRandomTreeGraph(
-            ui->randomTreeNodes->value()
-        );
+        generateRandomTreeGraph(ui->randomTreeNodes->value());
         break;
     case RandomDag:
         setSeed(ui->dagGeneratorSeed->value());
-        generateRandomDagGraph(
-            ui->randomDagNumberOfNodes->value(),
-            ui->randomDagEdgeProbability->value()
-        );
+        generateRandomDagGraph(ui->randomDagNumberOfNodes->value(), ui->randomDagEdgeProbability->value());
         break;
     case PathGraph:
-        generatePathGraph(
-            ui->pathNodes->value()
-        );
+        generatePathGraph(ui->pathNodes->value());
         break;
     case CompleteGraph:
-        generateCompleteGraph(
-            ui->completeNodes->value()
-        );
+        generateCompleteGraph(ui->completeNodes->value());
         break;
     case CompleteBipartiteGraph:
-        generateCompleteBipartiteGraph(
-            ui->completeBipartiteNodesLeft->value(),
-            ui->completeBipartiteNodesRight->value()
-        );
+        generateCompleteBipartiteGraph(ui->completeBipartiteNodesLeft->value(), ui->completeBipartiteNodesRight->value());
     default:
         break;
     }
@@ -270,18 +239,18 @@ QPointF GenerateGraphWidget::documentCenter() const
 }
 
 /** @brief make sure all @p nodes are on the canvas
- * 
+ *
  * Given a collection of @p nodes, make sure they are all visible
  * on the canvas (e.g. have a non-negative X and Y coordinate)
  * by finding the smallest X and Y and then uniformly translating
  * all of the @p nodes by that amount if either are negative.
  */
 template<typename T>
-void adjustNodesToCanvas(T& nodes)
+void adjustNodesToCanvas(T &nodes)
 {
     qreal minX = 0;
     qreal minY = 0;
-    for(auto& n : nodes) {
+    for (auto &n : nodes) {
         if (n->x() < minX) {
             minX = n->x();
         }
@@ -289,14 +258,14 @@ void adjustNodesToCanvas(T& nodes)
             minY = n->y();
         }
     }
-    
+
     if ((minX < 0) || (minY < 0)) {
         // If either is non-negative, make it zero to not translate on that axis
         minX = qMin(minX, qreal(0));
         minY = qMin(minY, qreal(0));
-        
+
         // min* is negative or zero, so subtracting it means **adding** to the coordinate
-        for(auto& n : nodes) {
+        for (auto &n : nodes) {
             n->setX(n->x() - minX);
             n->setY(n->y() - minY);
         }
@@ -315,7 +284,7 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     }
 
     // create mesh of NxN points
-    QMap<QPair<int, int>, NodePtr > meshNodes;
+    QMap<QPair<int, int>, NodePtr> meshNodes;
 
     // create mesh nodes, store them in map
     for (int i = 0; i < columns; ++i) {
@@ -329,7 +298,7 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     }
 
     adjustNodesToCanvas(meshNodes);
-    
+
     // connect mesh nodes
     for (int i = 0; i < columns; ++i) {
         for (int j = 0; j < rows; ++j) {
@@ -366,8 +335,8 @@ void GenerateGraphWidget::generateStar(int satelliteNodes)
     NodeList nodes;
     for (int i = 1; i <= satelliteNodes; i++) {
         NodePtr node = Node::create(m_document);
-        node->setX(sin(i * 2 * boost::math::constants::pi<double>() / satelliteNodes)*radius + center.x());
-        node->setY(cos(i * 2 * boost::math::constants::pi<double>() / satelliteNodes)*radius + center.y());
+        node->setX(sin(i * 2 * boost::math::constants::pi<double>() / satelliteNodes) * radius + center.x());
+        node->setY(cos(i * 2 * boost::math::constants::pi<double>() / satelliteNodes) * radius + center.y());
         node->setType(m_nodeType);
         nodes.append(node);
     }
@@ -380,7 +349,7 @@ void GenerateGraphWidget::generateStar(int satelliteNodes)
     nodes.prepend(node);
 
     adjustNodesToCanvas(nodes);
-    
+
     // connect circle nodes
     for (int i = 1; i <= satelliteNodes; ++i) {
         EdgePtr edge = Edge::create(nodes.at(0), nodes.at(i));
@@ -396,18 +365,18 @@ void GenerateGraphWidget::generateCircle(int number)
     // circle that border-length of 2*PI*radius
     int radius = 50 * number / (2 * boost::math::constants::pi<double>());
 
-    QList< QPair<QString, QPointF> > circleNodes;
+    QList<QPair<QString, QPointF>> circleNodes;
 
     // create mesh nodes, store them in map
     NodeList nodes;
     for (int i = 1; i <= number; i++) {
         NodePtr node = Node::create(m_document);
-        node->setX(sin(i * 2 * boost::math::constants::pi<double>() / number)*radius + center.x());
-        node->setY(cos(i * 2 * boost::math::constants::pi<double>() / number)*radius + center.y());
+        node->setX(sin(i * 2 * boost::math::constants::pi<double>() / number) * radius + center.x());
+        node->setY(cos(i * 2 * boost::math::constants::pi<double>() / number) * radius + center.y());
         node->setType(m_nodeType);
         nodes.append(node);
     }
-    
+
     adjustNodesToCanvas(nodes);
 
     // connect circle nodes
@@ -428,31 +397,24 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdg
     gen.seed(static_cast<unsigned int>(m_seed));
 
     // generate graph
-    boost::generate_random_graph<Graph, std::mt19937>(
-        randomGraph,
-        nodes,
-        edges,
-        gen,
-        selfEdges
-    );
+    boost::generate_random_graph<Graph, std::mt19937>(randomGraph, nodes, edges, gen, selfEdges);
 
     // generate distribution topology and apply
-    boost::rectangle_topology< std::mt19937 > topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
+    boost::rectangle_topology<std::mt19937> topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
     PositionVec position_vec(boost::num_vertices(randomGraph));
     PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, randomGraph));
 
     boost::random_graph_layout(randomGraph, positionMap, topology);
 
     // minimize cuts by Fruchtman-Reingold layout algorithm
-    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< std::mt19937 >, Graph, PositionMap >
-    (randomGraph,
-     positionMap,
-     topology,
-     boost::cooling(boost::linear_cooling<double>(100))
-    );
+    boost::fruchterman_reingold_force_directed_layout<boost::rectangle_topology<std::mt19937>, Graph, PositionMap>(
+        randomGraph,
+        positionMap,
+        topology,
+        boost::cooling(boost::linear_cooling<double>(100)));
 
     // put nodes at whiteboard as generated
-    QMap<int, NodePtr > mapNodes;
+    QMap<int, NodePtr> mapNodes;
     boost::graph_traits<Graph>::vertex_iterator vi, vi_end;
     for (boost::tie(vi, vi_end) = boost::vertices(randomGraph); vi != vi_end; ++vi) {
         mapNodes[*vi] = Node::create(m_document);
@@ -462,7 +424,7 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdg
     }
 
     adjustNodesToCanvas(mapNodes);
-    
+
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei != ei_end; ++ei) {
         EdgePtr edge = Edge::create(mapNodes[boost::source(*ei, randomGraph)], mapNodes[boost::target(*ei, randomGraph)]);
@@ -482,21 +444,20 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
     Graph randomGraph(ergen(gen, nodes, edgeProbability, selfEdges), ergen(), nodes);
 
     // generate distribution topology and apply
-    boost::rectangle_topology< std::mt19937 > topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
+    boost::rectangle_topology<std::mt19937> topology(gen, center.x() - 20 * nodes, center.y() - 20 * nodes, center.x() + 20 * nodes, center.y() + 20 * nodes);
     PositionVec position_vec(boost::num_vertices(randomGraph));
     PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, randomGraph));
     boost::random_graph_layout(randomGraph, positionMap, topology);
 
     // minimize cuts by Fruchtman-Reingold layout algorithm
-    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< std::mt19937 >, Graph, PositionMap >
-    (randomGraph,
-     positionMap,
-     topology,
-     boost::cooling(boost::linear_cooling<double>(100))
-    );
+    boost::fruchterman_reingold_force_directed_layout<boost::rectangle_topology<std::mt19937>, Graph, PositionMap>(
+        randomGraph,
+        positionMap,
+        topology,
+        boost::cooling(boost::linear_cooling<double>(100)));
 
     // put nodes at whiteboard as generated
-    QMap<int, NodePtr > mapNodes;
+    QMap<int, NodePtr> mapNodes;
     boost::graph_traits<Graph>::vertex_iterator vi, vi_end;
     for (boost::tie(vi, vi_end) = boost::vertices(randomGraph); vi != vi_end; ++vi) {
         mapNodes[*vi] = Node::create(m_document);
@@ -506,7 +467,7 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
     }
 
     adjustNodesToCanvas(mapNodes);
-    
+
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei != ei_end; ++ei) {
         EdgePtr edge = Edge::create(mapNodes[boost::source(*ei, randomGraph)], mapNodes[boost::target(*ei, randomGraph)]);
@@ -516,8 +477,7 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
 
 void GenerateGraphWidget::generateRandomTreeGraph(int number)
 {
-
-    if (EdgeType::Unidirectional == m_edgeType->direction()){
+    if (EdgeType::Unidirectional == m_edgeType->direction()) {
         QMessageBox::critical(this, "Incorrect Edge Direction", "Edges in a Tree must be bidirectional.");
         return;
     }
@@ -546,7 +506,7 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
     notAdded.pop_front();
 
     while (!notAdded.empty()) {
-        boost::random::uniform_int_distribution<> dist(0, added.size()-1);
+        boost::random::uniform_int_distribution<> dist(0, added.size() - 1);
 
         int randomIdx = dist(gen);
         int next = notAdded.front();
@@ -565,8 +525,7 @@ void GenerateGraphWidget::generateRandomTreeGraph(int number)
 
 void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbability)
 {
-
-    if (EdgeType::Bidirectional == m_edgeType->direction()){
+    if (EdgeType::Bidirectional == m_edgeType->direction()) {
         QMessageBox::critical(this, i18n("Incorrect Edge Direction"), i18n("Edges in a Directed Acyclical Graph must be directional."));
         return;
     }
@@ -577,16 +536,16 @@ void GenerateGraphWidget::generateRandomDagGraph(int nodes, double edgeProbabili
 
     NodeList nodes_list;
 
-    for (int j=0; j < nodes; j++) {
+    for (int j = 0; j < nodes; j++) {
         NodePtr node = Node::create(m_document);
         node->setType(m_nodeType);
         nodes_list.append(node);
     }
 
     // Create random edges
-    for (int i=0; i < nodes - 1; i++) {
-        for (int j=i+1; j < nodes; j++) {
-            if (dist(gen)< edgeProbability) {
+    for (int i = 0; i < nodes - 1; i++) {
+        for (int j = i + 1; j < nodes; j++) {
+            if (dist(gen) < edgeProbability) {
                 EdgePtr edge = Edge::create(nodes_list.at(i), nodes_list.at(j));
                 edge->setType(m_edgeType);
             }
@@ -602,7 +561,7 @@ void GenerateGraphWidget::generatePathGraph(int pathSize)
 {
     QPointF center = documentCenter();
 
-    QList< QPair<QString, QPointF> > pathNodes;
+    QList<QPair<QString, QPointF>> pathNodes;
 
     NodeList nodes_list;
     for (int i = 1; i <= pathSize; i++) {
@@ -614,7 +573,7 @@ void GenerateGraphWidget::generatePathGraph(int pathSize)
     }
 
     adjustNodesToCanvas(nodes_list);
-    
+
     for (int i = 0; i < pathSize - 1; i++) {
         EdgePtr edge = Edge::create(nodes_list.at(i), nodes_list.at(i + 1));
         edge->setType(m_edgeType);
@@ -629,19 +588,19 @@ void GenerateGraphWidget::generateCompleteGraph(int nodes)
     // circle that border-length of 2*PI*radius
     int radius = 100 * nodes / (2 * boost::math::constants::pi<double>());
 
-    QList< QPair<QString, QPointF> > circleNodes;
+    QList<QPair<QString, QPointF>> circleNodes;
 
     NodeList node_list;
     for (int i = 1; i <= nodes; i++) {
         NodePtr node = Node::create(m_document);
-        node->setX(sin(i * 2 * boost::math::constants::pi<double>() / nodes)*radius + center.x());
-        node->setY(cos(i * 2 * boost::math::constants::pi<double>() / nodes)*radius + center.y());
+        node->setX(sin(i * 2 * boost::math::constants::pi<double>() / nodes) * radius + center.x());
+        node->setY(cos(i * 2 * boost::math::constants::pi<double>() / nodes) * radius + center.y());
         node->setType(m_nodeType);
         node_list.append(node);
     }
 
     adjustNodesToCanvas(node_list);
-    
+
     for (int i = 0; i < nodes - 1; i++) {
         for (int j = i + 1; j < nodes; j++) {
             EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j));
@@ -681,7 +640,7 @@ void GenerateGraphWidget::generateCompleteBipartiteGraph(int nodes_left, int nod
     adjustNodesToCanvas(node_list);
 
     for (int i = 0; i < nodes_left; i++) {
-        for (int j = 0; j < nodes_right; j++){
+        for (int j = 0; j < nodes_right; j++) {
             EdgePtr edge_lr = Edge::create(node_list.at(i), node_list.at(j + nodes_left));
             edge_lr->setType(m_edgeType);
 

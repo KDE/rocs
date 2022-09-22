@@ -10,20 +10,20 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KTar>
 #include <KTextEditor/Document>
 #include <KTextEditor/Editor>
-#include <KTar>
-#include <QUrl>
+#include <QDebug>
 #include <QDir>
 #include <QHash>
-#include <QMap>
-#include <QSaveFile>
-#include <QTemporaryFile>
-#include <QTemporaryDir>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
-#include <QDebug>
+#include <QMap>
+#include <QSaveFile>
+#include <QTemporaryDir>
+#include <QTemporaryFile>
+#include <QUrl>
 
 using namespace GraphTheory;
 
@@ -37,14 +37,13 @@ public:
         , m_activeGraphDocumentIndex(-1)
         , m_activeCodeDocumentIndex(-1)
     {
-
     }
 
     QUrl m_projectUrl; //!< the project's archive file
     QTemporaryDir m_workingDirectory; //!< temporary directory where all project files are organized
-    QList<KTextEditor::Document*> m_codeDocuments;
+    QList<KTextEditor::Document *> m_codeDocuments;
     QList<GraphDocumentPtr> m_graphDocuments;
-    QHash<KTextEditor::Document*,QString> m_documentNames;
+    QHash<KTextEditor::Document *, QString> m_documentNames;
     KTextEditor::Document *m_journal;
     GraphTheory::Editor *m_graphEditor;
     bool m_modified;
@@ -109,7 +108,7 @@ bool ProjectPrivate::loadProject(const QUrl &url)
     m_journal->openUrl(QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + metaInfo["journal.txt"].toString()));
     Q_ASSERT(m_journal != nullptr);
 
-    //TODO save & load open document index
+    // TODO save & load open document index
 
     return true;
 }
@@ -148,8 +147,7 @@ bool ProjectPrivate::writeProjectMetaInfo()
     return true;
 }
 
-
-//TODO make graphEditor singleton
+// TODO make graphEditor singleton
 Project::Project(GraphTheory::Editor *graphEditor)
     : d(new ProjectPrivate)
 {
@@ -158,7 +156,7 @@ Project::Project(GraphTheory::Editor *graphEditor)
     d->m_journal->saveAs(QUrl::fromLocalFile(workingDir() + QChar('/') + QString("journal.txt")));
 }
 
-//TODO make graphEditor singleton
+// TODO make graphEditor singleton
 Project::Project(const QUrl &projectFile, GraphTheory::Editor *graphEditor)
     : d(new ProjectPrivate)
 {
@@ -169,18 +167,14 @@ Project::Project(const QUrl &projectFile, GraphTheory::Editor *graphEditor)
         setModified(false);
         d->m_journal = KTextEditor::Editor::instance()->createDocument(nullptr);
 
-        KMessageBox::error(nullptr,
-                           i18nc("@info",
-                                 "The Rocs project could not be imported because the project file could not be parsed."));
+        KMessageBox::error(nullptr, i18nc("@info", "The Rocs project could not be imported because the project file could not be parsed."));
     }
 
     for (const auto &document : d->m_codeDocuments) {
-        connect(document, &KTextEditor::Document::modifiedChanged,
-            this, &Project::modifiedChanged);
+        connect(document, &KTextEditor::Document::modifiedChanged, this, &Project::modifiedChanged);
     }
     for (const auto &document : d->m_graphDocuments) {
-        connect(document.data(), &GraphDocument::modifiedChanged,
-            this, &Project::modifiedChanged);
+        connect(document.data(), &GraphDocument::modifiedChanged, this, &Project::modifiedChanged);
     }
 }
 
@@ -203,7 +197,7 @@ QString Project::workingDir() const
     return d->m_workingDirectory.path();
 }
 
-KTextEditor::Document* Project::createCodeDocument(const QString& filePath)
+KTextEditor::Document *Project::createCodeDocument(const QString &filePath)
 {
     const QString path = d->m_workingDirectory.path() + QLatin1Char('/') + filePath + QStringLiteral(".js");
 
@@ -220,7 +214,7 @@ KTextEditor::Document* Project::createCodeDocument(const QString& filePath)
     return doc;
 }
 
-KTextEditor::Document* Project::openCodeDocument(const QUrl &url)
+KTextEditor::Document *Project::openCodeDocument(const QUrl &url)
 {
     auto doc = KTextEditor::Editor::instance()->createDocument(nullptr);
     if (!doc->openUrl(url)) {
@@ -242,15 +236,14 @@ bool Project::addCodeDocument(KTextEditor::Document *document)
     }
 
     Q_EMIT codeDocumentAboutToBeAdded(document, d->m_codeDocuments.count());
-    connect(document, &KTextEditor::Document::modifiedChanged,
-        this, &Project::modifiedChanged);
+    connect(document, &KTextEditor::Document::modifiedChanged, this, &Project::modifiedChanged);
     d->m_codeDocuments.append(document);
     Q_EMIT codeDocumentAdded();
     setModified(true);
     return true;
 }
 
-KTextEditor::Document * Project::importCodeDocument(const QUrl &url)
+KTextEditor::Document *Project::importCodeDocument(const QUrl &url)
 {
     return openCodeDocument(url);
 }
@@ -258,12 +251,11 @@ KTextEditor::Document * Project::importCodeDocument(const QUrl &url)
 void Project::tryToRemoveCodeDocument(KTextEditor::Document *document)
 {
     QString path = document->url().toString();
-    if(!document->closeUrl())
+    if (!document->closeUrl())
         return;
     int index = d->m_codeDocuments.indexOf(document);
     Q_EMIT codeDocumentAboutToBeRemoved(index, index);
-    disconnect(document, &KTextEditor::Document::modifiedChanged,
-        this, &Project::modifiedChanged);
+    disconnect(document, &KTextEditor::Document::modifiedChanged, this, &Project::modifiedChanged);
     d->m_codeDocuments.removeAt(index);
     Q_EMIT codeDocumentRemoved();
     if (!path.startsWith(d->m_workingDirectory.path())) {
@@ -280,9 +272,7 @@ void Project::tryToRemoveCodeDocument(KTextEditor::Document *document)
 QString Project::documentName(KTextEditor::Document *document) const
 {
     const QString docName = d->m_documentNames.value(document);
-    return !docName.isEmpty()
-        ? docName
-        : document->documentName();
+    return !docName.isEmpty() ? docName : document->documentName();
 }
 
 void Project::setDocumentName(KTextEditor::Document *document, const QString &name)
@@ -291,7 +281,7 @@ void Project::setDocumentName(KTextEditor::Document *document, const QString &na
     setModified(true);
 }
 
-QList<KTextEditor::Document*> Project::codeDocuments() const
+QList<KTextEditor::Document *> Project::codeDocuments() const
 {
     return d->m_codeDocuments;
 }
@@ -325,16 +315,13 @@ bool Project::addGraphDocument(GraphDocumentPtr document)
             break;
         }
     }
-    QString path = d->m_workingDirectory.path()
-            + QChar('/')
-            + fileName;
+    QString path = d->m_workingDirectory.path() + QChar('/') + fileName;
 
     // put document into working directory
     document->documentSaveAs(QUrl::fromLocalFile(path));
     int index = d->m_graphDocuments.length();
     Q_EMIT graphDocumentAboutToBeAdded(document, index);
-    connect(document.data(), &GraphDocument::modifiedChanged,
-        this, &Project::modifiedChanged);
+    connect(document.data(), &GraphDocument::modifiedChanged, this, &Project::modifiedChanged);
     d->m_graphDocuments.append(document);
     Q_EMIT graphDocumentAdded();
     setModified(true);
@@ -359,9 +346,7 @@ void Project::removeGraphDocument(GraphDocumentPtr document)
     QString path = document->documentUrl().toLocalFile();
     d->m_graphDocuments.removeAll(document);
     if (!path.startsWith(d->m_workingDirectory.path())) {
-        qCritical() << "Aborting removal of graph document with path "
-            << path
-            << ", not in temporary working directory" << d->m_workingDirectory.path();
+        qCritical() << "Aborting removal of graph document with path " << path << ", not in temporary working directory" << d->m_workingDirectory.path();
         return;
     }
     if (!QFile::remove(path)) {
@@ -393,7 +378,7 @@ GraphDocumentPtr Project::activeGraphDocument() const
     return d->m_graphDocuments.at(d->m_activeGraphDocumentIndex);
 }
 
-KTextEditor::Document * Project::journalDocument() const
+KTextEditor::Document *Project::journalDocument() const
 {
     return d->m_journal;
 }

@@ -3,7 +3,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
- 
+
 #include "scriptoutputwidget.h"
 #include <QDebug>
 #include <QIcon>
@@ -29,10 +29,7 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget *parent)
 void ScriptOutputWidget::updateFixOutputButton()
 {
     ui->buttonDisableClear->setIcon(
-        QIcon::fromTheme(
-            ui->buttonDisableClear->isChecked()
-            ? QStringLiteral("document-encrypt")
-            : QStringLiteral("document-decrypt")));
+        QIcon::fromTheme(ui->buttonDisableClear->isChecked() ? QStringLiteral("document-encrypt") : QStringLiteral("document-decrypt")));
 }
 
 void ScriptOutputWidget::clear()
@@ -46,10 +43,9 @@ bool ScriptOutputWidget::isOutputClearEnabled() const
     return !ui->buttonDisableClear->isChecked();
 }
 
-void ScriptOutputWidget::processMessage(const QString& message, Kernel::MessageType type)
+void ScriptOutputWidget::processMessage(const QString &message, Kernel::MessageType type)
 {
-    switch(type)
-    {
+    switch (type) {
     case Kernel::MessageType::InfoMessage:
         ui->txtOutput->append(message);
         ui->dbgOutput->append("<i>" + message + "</i>");

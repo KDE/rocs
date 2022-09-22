@@ -12,7 +12,8 @@
 
 using namespace GraphTheory;
 
-class GraphTheory::NodePropertyModelPrivate {
+class GraphTheory::NodePropertyModelPrivate
+{
 public:
     NodePropertyModelPrivate()
     {
@@ -20,26 +21,22 @@ public:
 
     ~NodePropertyModelPrivate()
     {
-
     }
 
     NodePtr m_node;
-
 };
 
 NodePropertyModel::NodePropertyModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new NodePropertyModelPrivate)
 {
-
 }
 
 NodePropertyModel::~NodePropertyModel()
 {
-
 }
 
-QHash< int, QByteArray > NodePropertyModel::roleNames() const
+QHash<int, QByteArray> NodePropertyModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[NameRole] = "name";
@@ -49,7 +46,7 @@ QHash< int, QByteArray > NodePropertyModel::roleNames() const
     return roles;
 }
 
-void NodePropertyModel::setNode(Node* node)
+void NodePropertyModel::setNode(Node *node)
 {
     if (d->m_node == node->self()) {
         return;
@@ -61,27 +58,22 @@ void NodePropertyModel::setNode(Node* node)
     }
     d->m_node = node->self();
     if (d->m_node) {
-        connect(d->m_node.data(), &Node::dynamicPropertyAboutToBeAdded,
-            this, &NodePropertyModel::onDynamicPropertyAboutToBeAdded);
-        connect(d->m_node.data(), &Node::dynamicPropertyAdded,
-            this, &NodePropertyModel::onDynamicPropertyAdded);
-        connect(d->m_node.data(), &Node::dynamicPropertiesAboutToBeRemoved,
-            this, &NodePropertyModel::onDynamicPropertiesAboutToBeRemoved);
-        connect(d->m_node.data(), &Node::dynamicPropertyRemoved,
-            this, &NodePropertyModel::onDynamicPropertyRemoved);
-        connect(d->m_node.data(), &Node::dynamicPropertyChanged,
-            this, &NodePropertyModel::onDynamicPropertyChanged);
-        connect(d->m_node.data(), &Node::styleChanged,[=]() {
+        connect(d->m_node.data(), &Node::dynamicPropertyAboutToBeAdded, this, &NodePropertyModel::onDynamicPropertyAboutToBeAdded);
+        connect(d->m_node.data(), &Node::dynamicPropertyAdded, this, &NodePropertyModel::onDynamicPropertyAdded);
+        connect(d->m_node.data(), &Node::dynamicPropertiesAboutToBeRemoved, this, &NodePropertyModel::onDynamicPropertiesAboutToBeRemoved);
+        connect(d->m_node.data(), &Node::dynamicPropertyRemoved, this, &NodePropertyModel::onDynamicPropertyRemoved);
+        connect(d->m_node.data(), &Node::dynamicPropertyChanged, this, &NodePropertyModel::onDynamicPropertyChanged);
+        connect(d->m_node.data(), &Node::styleChanged, [=]() {
             QVector<int> changedRoles;
             changedRoles.append(VisibilityRole);
             Q_EMIT dataChanged(index(0), index(d->m_node->dynamicProperties().count() - 1), changedRoles);
-        } );
+        });
     }
     endResetModel();
     Q_EMIT nodeChanged();
 }
 
-Node * NodePropertyModel::node() const
+Node *NodePropertyModel::node() const
 {
     return d->m_node.data();
 }
@@ -100,8 +92,7 @@ QVariant NodePropertyModel::data(const QModelIndex &index, int role) const
 
     QString const property = d->m_node->dynamicProperties().at(index.row());
 
-    switch(role)
-    {
+    switch (role) {
     case NameRole:
         return property;
     case ValueRole:

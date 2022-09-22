@@ -7,15 +7,15 @@
 #include "editorplugins/editorplugininterface.h"
 
 #include "assignvalueswidget.h"
-#include "typenames.h"
-#include "graphdocument.h"
-#include "node.h"
 #include "edge.h"
+#include "graphdocument.h"
 #include "logging_p.h"
+#include "node.h"
+#include "typenames.h"
 #include <KPluginFactory>
+#include <QDialog>
 #include <QString>
 #include <QStringList>
-#include <QDialog>
 
 using namespace GraphTheory;
 

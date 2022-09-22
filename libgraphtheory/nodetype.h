@@ -88,7 +88,7 @@ public:
     /**
      * @return style object of the edge type
      */
-    NodeTypeStyle * style() const;
+    NodeTypeStyle *style() const;
 
     /**
      * @return dynamic properties registered for this node type

@@ -8,10 +8,10 @@
 #define FILEFORMATMANAGER_H
 
 #include "fileformatinterface.h"
-#include "typenames.h"
 #include "graphtheory_export.h"
-#include <QObject>
+#include "typenames.h"
 #include <QList>
+#include <QObject>
 
 #include <memory>
 
@@ -31,10 +31,7 @@ public:
     /**
      * Selector for graph file backend with specific capability.
      */
-    enum PluginType {
-        Import,
-        Export
-    };
+    enum PluginType { Import, Export };
 
     FileFormatManager();
 
@@ -45,7 +42,7 @@ public:
      *
      * \return list of plugin interfaces of loaded backends
      */
-    QList <FileFormatInterface*> backends() const;
+    QList<FileFormatInterface *> backends() const;
 
     /**
      * Returns list of all loaded backends with specified capability (\see PluginType).
@@ -54,7 +51,7 @@ public:
      * \param type specifies capability of the plugin
      * \return list of plugin interfaces of loaded backends
      */
-    QList <FileFormatInterface*> backends(PluginType type) const;
+    QList<FileFormatInterface *> backends(PluginType type) const;
 
     /**
      * Returns an arbitrary loaded plugin that can handle extension \p ext. If no backend specifies
@@ -75,7 +72,7 @@ public:
     FileFormatInterface *defaultBackend() const;
 
 private:
-    static FileFormatManager * instance;
+    static FileFormatManager *instance;
 
     const std::unique_ptr<FileFormatManagerPrivate> d;
 };

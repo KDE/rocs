@@ -5,17 +5,17 @@
  */
 
 #include "nodetypeproperties.h"
-#include "propertieswidget.h"
-#include "node.h"
 #include "graphdocument.h"
+#include "node.h"
 #include "nodetypestyle.h"
+#include "propertieswidget.h"
 
 #include <KColorButton>
 #include <KGuiItem>
 #include <KLocalizedString>
 #include <KStandardGuiItem>
-#include <QComboBox>
 #include <QCheckBox>
+#include <QComboBox>
 #include <QDebug>
 #include <QDialogButtonBox>
 #include <QFormLayout>
@@ -78,15 +78,11 @@ NodeTypeProperties::NodeTypeProperties(QWidget *parent)
     buttons->addButton(m_okButton, QDialogButtonBox::AcceptRole);
     buttons->addButton(cancelButton, QDialogButtonBox::RejectRole);
     mainLayout->addWidget(buttons);
-    connect(m_okButton, &QPushButton::clicked,
-        this, &NodeTypeProperties::accept);
-    connect(cancelButton, &QPushButton::clicked,
-        this, &NodeTypeProperties::reject);
+    connect(m_okButton, &QPushButton::clicked, this, &NodeTypeProperties::accept);
+    connect(cancelButton, &QPushButton::clicked, this, &NodeTypeProperties::reject);
 
-    connect(m_id, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
-        this, &NodeTypeProperties::validateIdInput);
-    connect(this, &QDialog::accepted,
-        this, &NodeTypeProperties::apply);
+    connect(m_id, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &NodeTypeProperties::validateIdInput);
+    connect(this, &QDialog::accepted, this, &NodeTypeProperties::apply);
     setAttribute(Qt::WA_DeleteOnClose);
 }
 

@@ -9,15 +9,14 @@
 #ifndef TESTDOTFILEFORMAT_H
 #define TESTDOTFILEFORMAT_H
 
-#include <QObject>
 #include "typenames.h"
-
+#include <QObject>
 
 class DotFileFormatTest : public QObject
 {
     Q_OBJECT
 
- private:
+private:
     /**
      * Check the nodes of the imported graph
      * \param dataStructure the imported DataStructure

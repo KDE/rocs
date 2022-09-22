@@ -21,9 +21,9 @@ typedef QSharedPointer<GraphDocument> GraphDocumentPtr;
 typedef QSharedPointer<NodeType> NodeTypePtr;
 typedef QSharedPointer<EdgeType> EdgeTypePtr;
 typedef QSharedPointer<Node> NodePtr;
-typedef QVector< QSharedPointer<Node> > NodeList;
+typedef QVector<QSharedPointer<Node>> NodeList;
 typedef QSharedPointer<Edge> EdgePtr;
-typedef QVector< QSharedPointer<Edge> > EdgeList;
+typedef QVector<QSharedPointer<Edge>> EdgeList;
 }
 
 #endif

@@ -7,26 +7,26 @@
 #ifndef EDGETYPESDELEGATE_H
 #define EDGETYPESDELEGATE_H
 
-#include <KWidgetItemDelegate>
-#include "libgraphtheory/typenames.h"
 #include "libgraphtheory/edgetype.h"
+#include "libgraphtheory/typenames.h"
+#include <KWidgetItemDelegate>
 
 class QPushButton;
 
-class  EdgeTypesDelegate : public KWidgetItemDelegate
+class EdgeTypesDelegate : public KWidgetItemDelegate
 {
     Q_OBJECT
 public:
     explicit EdgeTypesDelegate(QAbstractItemView *parent);
     ~EdgeTypesDelegate() override;
     /** reimplemented from QAbstractItemDelegate **/
-    void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     /** reimplemented fromKWidgetItemDelegate **/
-    QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     /** reimplemented fromKWidgetItemDelegate **/
-    QList<QWidget*> createItemWidgets(const QModelIndex &index) const override;
+    QList<QWidget *> createItemWidgets(const QModelIndex &index) const override;
     /** reimplemented fromKWidgetItemDelegate **/
-    void updateItemWidgets(const QList<QWidget*> widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const override;
+    void updateItemWidgets(const QList<QWidget *> widgets, const QStyleOptionViewItem &option, const QPersistentModelIndex &index) const override;
 
 private Q_SLOTS:
     void onColorDialogOpened();

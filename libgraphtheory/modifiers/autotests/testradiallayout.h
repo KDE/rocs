@@ -7,9 +7,9 @@
 #ifndef TESTRADIALLAYOUT_H
 #define TESTRADIALLAYOUT_H
 
+#include "typenames.h"
 #include <QObject>
 #include <QVector>
-#include "typenames.h"
 
 class RadialLayoutTest : public QObject
 {

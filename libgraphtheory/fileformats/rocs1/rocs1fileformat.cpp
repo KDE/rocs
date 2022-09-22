@@ -8,17 +8,17 @@
 */
 
 #include "rocs1fileformat.h"
-#include "graphdocument.h"
-#include "node.h"
 #include "edge.h"
+#include "graphdocument.h"
 #include "logging_p.h"
+#include "node.h"
 #include <KAboutData>
 #include <KLocalizedString>
 #include <KPluginFactory>
 #include <QFile>
+#include <QSaveFile>
 #include <QTextStream>
 #include <QUrl>
-#include <QSaveFile>
 
 using namespace GraphTheory;
 
@@ -39,10 +39,10 @@ const QStringList Rocs1FileFormat::extensions() const
 }
 
 template<typename T>
-void addTypes(QMap<int, T>& map, const QList<T>& list)
+void addTypes(QMap<int, T> &map, const QList<T> &list)
 {
     int id = 0;
-    for (const auto& t : list) {
+    for (const auto &t : list) {
         map.insert(id++, t);
     }
 }
@@ -74,7 +74,6 @@ void Rocs1FileFormat::readFile()
         if (str.startsWith('#')) { //! Ignore it, commented line.
             continue;
         } else if (str.startsWith(QLatin1String("[Document Properties]"))) {
-
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
                 if (dataLine.startsWith(QLatin1String("DataStructurePlugin :"))) {
@@ -107,12 +106,13 @@ void Rocs1FileFormat::readFile()
                     QString iconString = dataLine.section(' ', 2);
                 } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
                     const QStringList properties = dataLine.section(' ', 2).split(',');
-                    for (const QString& property : properties) {
+                    for (const QString &property : properties) {
                         if (!property.isEmpty()) {
-                            nodeTypeMap[tmpDataTypeId]->addDynamicProperty(property.section('=',0,0));
+                            nodeTypeMap[tmpDataTypeId]->addDynamicProperty(property.section('=', 0, 0));
                         }
                     }
-                } else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
+                } else if (!dataLine.isEmpty())
+                    break; // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
         }
@@ -135,19 +135,18 @@ void Rocs1FileFormat::readFile()
                         tmpEdgeType->setDirection(EdgeType::Bidirectional);
                     } else if (dataLine.section(' ', 2) == "unidirectional") {
                         tmpEdgeType->setDirection(EdgeType::Unidirectional);
-                    }
-                    else {
+                    } else {
                         qCCritical(GRAPHTHEORY_FILEFORMAT) << "Direction unset, use default direction of this data type backend.";
                     }
                 } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
                     const QStringList properties = dataLine.section(' ', 2).split(',');
-                    for (const QString& property : properties) {
+                    for (const QString &property : properties) {
                         if (!property.isEmpty()) {
-                            tmpEdgeType->addDynamicProperty(property.section('=',0,0));
+                            tmpEdgeType->addDynamicProperty(property.section('=', 0, 0));
                         }
                     }
                 } else if (!dataLine.isEmpty()) {
-                    break;  // go to the last if and finish populating.
+                    break; // go to the last if and finish populating.
                 }
                 dataLine = in.readLine().simplified();
             }
@@ -164,13 +163,20 @@ void Rocs1FileFormat::readFile()
             QString color = "";
             QString name = "";
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith(QLatin1String("x :")))         posX = dataLine.section(' ', 2).toFloat();
-                else if (dataLine.startsWith(QLatin1String("y :")))         posY = dataLine.section(' ', 2).toFloat();
-                else if (dataLine.startsWith(QLatin1String("type :")))      type = dataLine.section(' ', 2).toInt();
-                else if (dataLine.startsWith(QLatin1String("value :")))     value = dataLine.section(' ', 2);
-                else if (dataLine.startsWith(QLatin1String("color :")))     color = dataLine.section(' ', 2);
-                else if (dataLine.startsWith(QLatin1String("name :")))      name = dataLine.section(' ', 2);
-                else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
+                /**/ if (dataLine.startsWith(QLatin1String("x :")))
+                    posX = dataLine.section(' ', 2).toFloat();
+                else if (dataLine.startsWith(QLatin1String("y :")))
+                    posY = dataLine.section(' ', 2).toFloat();
+                else if (dataLine.startsWith(QLatin1String("type :")))
+                    type = dataLine.section(' ', 2).toInt();
+                else if (dataLine.startsWith(QLatin1String("value :")))
+                    value = dataLine.section(' ', 2);
+                else if (dataLine.startsWith(QLatin1String("color :")))
+                    color = dataLine.section(' ', 2);
+                else if (dataLine.startsWith(QLatin1String("name :")))
+                    name = dataLine.section(' ', 2);
+                else if (!dataLine.isEmpty())
+                    break; // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
             if (nodeTypeMap.contains(type)) {
@@ -205,10 +211,14 @@ void Rocs1FileFormat::readFile()
             int type = 0;
             QString color = "";
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                if (dataLine.startsWith(QLatin1String("value :")))     value = dataLine.section(' ', 2);
-                else if (dataLine.startsWith(QLatin1String("type :")))      type = dataLine.section(' ', 2).toInt();
-                else if (dataLine.startsWith(QLatin1String("color :")))     color = dataLine.section(' ', 2);
-                else if (!dataLine.isEmpty())                break;  // go to the last if and finish populating.
+                if (dataLine.startsWith(QLatin1String("value :")))
+                    value = dataLine.section(' ', 2);
+                else if (dataLine.startsWith(QLatin1String("type :")))
+                    type = dataLine.section(' ', 2).toInt();
+                else if (dataLine.startsWith(QLatin1String("color :")))
+                    color = dataLine.section(' ', 2);
+                else if (!dataLine.isEmpty())
+                    break; // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
             if (edgeTypeMap.contains(type)) {
@@ -228,13 +238,13 @@ void Rocs1FileFormat::readFile()
             }
         }
         // FIXME dynamic properties are not read
-//         else if (str.contains(':')) {
-//             QString propertyName = str.section(':', 0, 0).trimmed();
-//             QString propertyValue = str.section(':', 1, 1).trimmed();
-//             if (!propertyName.isEmpty()) {
-//                 tmpObject->setProperty(propertyName.toUtf8() , propertyValue);
-//             }
-//         }
+        //         else if (str.contains(':')) {
+        //             QString propertyName = str.section(':', 0, 0).trimmed();
+        //             QString propertyValue = str.section(':', 1, 1).trimmed();
+        //             if (!propertyName.isEmpty()) {
+        //                 tmpObject->setProperty(propertyName.toUtf8() , propertyValue);
+        //             }
+        //         }
     }
     setGraphDocument(document);
     setError(None);
@@ -267,24 +277,20 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
 {
     m_buffer.clear();
 
-    m_buffer = QString("[Document Properties] \n")
-              + QString("DataStructurePlugin : Graph") + QChar('\n')
-              + QChar('\n');
+    m_buffer = QString("[Document Properties] \n") + QString("DataStructurePlugin : Graph") + QChar('\n') + QChar('\n');
 
-    for(int typeID = 0; typeID < document->nodeTypes().length(); ++typeID) {
+    for (int typeID = 0; typeID < document->nodeTypes().length(); ++typeID) {
         QStringList properties;
         const auto dynamicProperties = document->nodeTypes().at(typeID)->dynamicProperties();
         for (const QString &property : dynamicProperties) {
             properties.append(property + QString('='));
         }
 
-        m_buffer += QString("[DataType %1]").arg(QString::number(typeID)) + QChar('\n')
-            + QString("Name : ") + document->nodeTypes().at(typeID)->name() + QChar('\n')
-            + QString("Properties : ") + properties.join(QChar(','))
-            + QChar('\n') + QChar('\n');
+        m_buffer += QString("[DataType %1]").arg(QString::number(typeID)) + QChar('\n') + QString("Name : ") + document->nodeTypes().at(typeID)->name()
+            + QChar('\n') + QString("Properties : ") + properties.join(QChar(',')) + QChar('\n') + QChar('\n');
     }
 
-    for(int typeID = 0; typeID < document->edgeTypes().length(); ++typeID) {
+    for (int typeID = 0; typeID < document->edgeTypes().length(); ++typeID) {
         QStringList properties;
         const auto dynamicProperties = document->edgeTypes().at(typeID)->dynamicProperties();
         for (const QString &property : dynamicProperties) {
@@ -292,15 +298,11 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
         }
 
         // set direction identifier
-        QString direction = (document->edgeTypes().at(typeID)->direction() == EdgeType::Bidirectional)
-            ? "bidirectional"
-            : "unidirectional";
+        QString direction = (document->edgeTypes().at(typeID)->direction() == EdgeType::Bidirectional) ? "bidirectional" : "unidirectional";
 
-        m_buffer += QString("[PointerType %1]").arg(QString::number(typeID)) + QChar('\n')
-            + QString("Name : ") + document->edgeTypes().at(typeID)->name() + QChar('\n')
-            + QString("Direction : ") + direction + QChar('\n')
-            + QString("Properties : ") + properties.join(QChar(','))
-            + QChar('\n') + QChar('\n');
+        m_buffer += QString("[PointerType %1]").arg(QString::number(typeID)) + QChar('\n') + QString("Name : ") + document->edgeTypes().at(typeID)->name()
+            + QChar('\n') + QString("Direction : ") + direction + QChar('\n') + QString("Properties : ") + properties.join(QChar(',')) + QChar('\n')
+            + QChar('\n');
     }
 
     m_buffer += QString("[DataStructure 0] \n"); // all in one datastructure now
@@ -316,9 +318,7 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
     }
     const auto edges = document->edges();
     for (const EdgePtr &e : edges) {
-        m_buffer += QString("[Pointer %1->%2]\n").
-            arg(QString::number(e->from()->id())).
-            arg(QString::number(e->to()->id())).toUtf8();
+        m_buffer += QString("[Pointer %1->%2]\n").arg(QString::number(e->from()->id())).arg(QString::number(e->to()->id())).toUtf8();
         m_buffer += QString("type : ") + QString::number(document->edgeTypes().indexOf(e->type())) + QChar('\n');
         const auto dynamicProperties = e->dynamicProperties();
         for (const QString &property : dynamicProperties) {

@@ -5,23 +5,22 @@
     SPDX-License-Identifier: GPL-2.0-only
 */
 
-
 #ifndef GMLGRAMMARHELPER_H
 #define GMLGRAMMARHELPER_H
 
-#include "typenames.h"
 #include "node.h"
-#include <map>
-#include <list>
-#include <string>
-#include <QStringList>
-#include <QMap>
+#include "typenames.h"
 #include <QHash>
+#include <QMap>
+#include <QStringList>
+#include <list>
+#include <map>
+#include <string>
 
 namespace GmlParser
 {
 struct GmlGrammarHelper {
-    enum State {begin, graph, node, edge};
+    enum State { begin, graph, node, edge };
 
     GmlGrammarHelper();
 
@@ -29,10 +28,10 @@ struct GmlGrammarHelper {
     void createEdge();
     void createGraph();
     void endList();
-    void startList(const QString& key);
+    void startList(const QString &key);
 
-    void setAttribute(const QString& key, const QString& value);
-    const QString processKey(const QString& key);
+    void setAttribute(const QString &key, const QString &value);
+    const QString processKey(const QString &key);
     QString edgeSource;
     QString edgeTarget;
 

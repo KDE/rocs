@@ -16,8 +16,9 @@
 #include <KXmlGuiWindow>
 #include <QUrl>
 
-namespace GraphTheory {
-    class Kernel;
+namespace GraphTheory
+{
+class Kernel;
 }
 
 class KRecentFilesAction;
@@ -53,11 +54,10 @@ private:
      *
      * \return created widget
      */
-    QWidget* setupSidePanel();
-    QWidget* setupScriptPanel(); // setup the panel with the editors and stuff
+    QWidget *setupSidePanel();
+    QWidget *setupScriptPanel(); // setup the panel with the editors and stuff
 
-    void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
-                      const char* slot, QObject *parent);
+    void createAction(const QByteArray &iconName, const QString &actionTitle, const QString &actionName, const char *slot, QObject *parent);
 
     /**
      * Returns an absolute and unique filename: /path-to-current-project/basePrefix.suffix
@@ -108,7 +108,7 @@ private Q_SLOTS:
     void quit();
 
 public Q_SLOTS:
-    void openProject(const QUrl& fileName = QUrl());
+    void openProject(const QUrl &fileName = QUrl());
 
 private Q_SLOTS: // script execution
     /**
@@ -150,7 +150,7 @@ private:
     QAction *m_stopScript;
     QAction *m_openDebugger;
 
-    ///Store the recent files.
+    /// Store the recent files.
     KRecentFilesAction *m_recentProjects;
 
     //! Needed to restore the size of the splitter after closing / opening the UI.

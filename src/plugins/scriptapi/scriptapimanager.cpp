@@ -5,10 +5,10 @@
  */
 
 #include "scriptapimanager.h"
-#include "object.h"
-#include "property.h"
 #include "method.h"
+#include "object.h"
 #include "parameter.h"
+#include "property.h"
 
 #include <grantlee/engine.h>
 #include <grantlee/metatype.h>
@@ -47,14 +47,14 @@ void ScriptApiManager::loadLocalData()
     }
 }
 
-QList<Object*> ScriptApiManager::objectApiList() const
+QList<Object *> ScriptApiManager::objectApiList() const
 {
     return m_objectApiList;
 }
 
-Object * ScriptApiManager::objectApi(int index) const
+Object *ScriptApiManager::objectApi(int index) const
 {
-    Q_ASSERT (index >= 0 && index < m_objectApiList.count());
+    Q_ASSERT(index >= 0 && index < m_objectApiList.count());
     return m_objectApiList.at(index);
 }
 
@@ -65,7 +65,7 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     }
 
     // get object API object
-    Object *objectApi {nullptr};
+    Object *objectApi{nullptr};
     for (Object *obj : m_objectApiList) {
         if (obj->id() == identifier) {
             objectApi = obj;
@@ -79,8 +79,7 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
 
     // initialize Grantlee engine
     Grantlee::Engine *engine = new Grantlee::Engine(this);
-    QSharedPointer<Grantlee::FileSystemTemplateLoader> loader =
-        QSharedPointer<Grantlee::FileSystemTemplateLoader>(new Grantlee::FileSystemTemplateLoader);
+    QSharedPointer<Grantlee::FileSystemTemplateLoader> loader = QSharedPointer<Grantlee::FileSystemTemplateLoader>(new Grantlee::FileSystemTemplateLoader);
     loader->setTemplateDirs(QStandardPaths::standardLocations(QStandardPaths::DataLocation));
     engine->addTemplateLoader(loader);
     Grantlee::Template t = engine->loadByName("plugin/apidoc/objectApi.html");
@@ -89,7 +88,7 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     QVariantHash mapping;
 
     // object
-    QVariant objectVar = QVariant::fromValue<QObject*>(objectApi);
+    QVariant objectVar = QVariant::fromValue<QObject *>(objectApi);
     mapping.insert("object", objectVar);
 
     // properties
@@ -97,7 +96,7 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     QHash<QString, QVariant> propertyList;
     const auto properties = objectApi->properties();
     for (Property *property : properties) {
-        propertyList.insert(property->name(), QVariant::fromValue<QObject*>(property));
+        propertyList.insert(property->name(), QVariant::fromValue<QObject *>(property));
     }
     mapping.insert("properties", propertyList.values());
 
@@ -105,7 +104,7 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     QVariantList methodList;
     const auto methods = objectApi->methods();
     for (Method *method : methods) {
-        methodList.append(QVariant::fromValue<QObject*>(method));
+        methodList.append(QVariant::fromValue<QObject *>(method));
     }
     mapping.insert("methods", methodList);
 
@@ -161,28 +160,22 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
     objectApi->setComponentType(root.firstChildElement("componentType").text());
     objectApi->setSyntaxExample(root.firstChildElement("syntax").text());
     QStringList paragraphs;
-    for (QDomElement descriptionNode = root.firstChildElement("description").firstChildElement("para");
-        !descriptionNode.isNull();
-        descriptionNode = descriptionNode.nextSiblingElement())
-    {
+    for (QDomElement descriptionNode = root.firstChildElement("description").firstChildElement("para"); !descriptionNode.isNull();
+         descriptionNode = descriptionNode.nextSiblingElement()) {
         paragraphs.append(i18nc("Scripting API Description", descriptionNode.text().toUtf8()));
     }
     objectApi->setDescription(paragraphs);
 
     // set property documentation
-    for (QDomElement propertyNode = root.firstChildElement("properties").firstChildElement();
-        !propertyNode.isNull();
-        propertyNode = propertyNode.nextSiblingElement())
-    {
+    for (QDomElement propertyNode = root.firstChildElement("properties").firstChildElement(); !propertyNode.isNull();
+         propertyNode = propertyNode.nextSiblingElement()) {
         Property *property = new Property(objectApi);
         property->setName(propertyNode.firstChildElement("name").text());
         property->setType(propertyNode.firstChildElement("type").text());
 
         QStringList paragraphs;
-        for (QDomElement descriptionNode = propertyNode.firstChildElement("description").firstChildElement("para");
-            !descriptionNode.isNull();
-            descriptionNode = descriptionNode.nextSiblingElement())
-        {
+        for (QDomElement descriptionNode = propertyNode.firstChildElement("description").firstChildElement("para"); !descriptionNode.isNull();
+             descriptionNode = descriptionNode.nextSiblingElement()) {
             paragraphs.append(i18nc("Scripting API Description", descriptionNode.text().toUtf8()));
         }
         property->setDescription(paragraphs);
@@ -194,10 +187,7 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
     }
 
     // set method documentation
-    for (QDomElement methodNode = root.firstChildElement("methods").firstChildElement();
-        !methodNode.isNull();
-        methodNode = methodNode.nextSiblingElement())
-    {
+    for (QDomElement methodNode = root.firstChildElement("methods").firstChildElement(); !methodNode.isNull(); methodNode = methodNode.nextSiblingElement()) {
         Method *method = new Method(objectApi);
         method->setName(methodNode.firstChildElement("name").text());
         method->setReturnType(methodNode.firstChildElement("returnType").text());
@@ -206,27 +196,22 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
         }
 
         QStringList paragraphs;
-        for (QDomElement descriptionNode = methodNode.firstChildElement("description").firstChildElement("para");
-            !descriptionNode.isNull();
-            descriptionNode = descriptionNode.nextSiblingElement())
-        {
+        for (QDomElement descriptionNode = methodNode.firstChildElement("description").firstChildElement("para"); !descriptionNode.isNull();
+             descriptionNode = descriptionNode.nextSiblingElement()) {
             paragraphs.append(i18nc("Scripting API Description", descriptionNode.text().toUtf8()));
         }
         method->setDescription(paragraphs);
 
-        for (QDomElement parameterNode = methodNode.firstChildElement("parameters").firstChildElement();
-            !parameterNode.isNull();
-            parameterNode = parameterNode.nextSiblingElement())
-        {
+        for (QDomElement parameterNode = methodNode.firstChildElement("parameters").firstChildElement(); !parameterNode.isNull();
+             parameterNode = parameterNode.nextSiblingElement()) {
             QString typeLink;
             if (m_objectApiCache.contains(parameterNode.firstChildElement("type").text())) {
                 typeLink = parameterNode.firstChildElement("type").text();
             }
-            method->addParameter(
-                parameterNode.firstChildElement("name").text(),
-                parameterNode.firstChildElement("type").text(),
-                parameterNode.firstChildElement("info").text(),
-                typeLink);
+            method->addParameter(parameterNode.firstChildElement("name").text(),
+                                 parameterNode.firstChildElement("type").text(),
+                                 parameterNode.firstChildElement("info").text(),
+                                 typeLink);
         }
 
         objectApi->addMethod(method);
@@ -240,8 +225,7 @@ QString ScriptApiManager::apiOverviewDocument() const
 {
     // initialize Grantlee engine
     Grantlee::Engine engine;
-    QSharedPointer<Grantlee::FileSystemTemplateLoader> loader =
-        QSharedPointer<Grantlee::FileSystemTemplateLoader>(new Grantlee::FileSystemTemplateLoader);
+    QSharedPointer<Grantlee::FileSystemTemplateLoader> loader = QSharedPointer<Grantlee::FileSystemTemplateLoader>(new Grantlee::FileSystemTemplateLoader);
     loader->setTemplateDirs(QStandardPaths::standardLocations(QStandardPaths::DataLocation));
     engine.addTemplateLoader(loader);
     Grantlee::Template t = engine.loadByName("plugin/apidoc/overview.html");
@@ -255,16 +239,16 @@ QString ScriptApiManager::apiOverviewDocument() const
     for (Object *object : m_objectApiList) {
         switch (object->componentType()) {
         case Object::KernelModule:
-            kernelModuleList.append(QVariant::fromValue<QObject*>(object));
+            kernelModuleList.append(QVariant::fromValue<QObject *>(object));
             break;
         case Object::Document:
-            elementList.append(QVariant::fromValue<QObject*>(object));
+            elementList.append(QVariant::fromValue<QObject *>(object));
             break;
         case Object::Edge:
-            elementList.append(QVariant::fromValue<QObject*>(object));
+            elementList.append(QVariant::fromValue<QObject *>(object));
             break;
         case Object::Node:
-            elementList.append(QVariant::fromValue<QObject*>(object));
+            elementList.append(QVariant::fromValue<QObject *>(object));
             break;
         }
     }

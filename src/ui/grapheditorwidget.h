@@ -7,9 +7,9 @@
 #ifndef GRAPHEDITORWIDGET_H
 #define GRAPHEDITORWIDGET_H
 
-#include <QWidget>
-#include "project/project.h"
 #include "libgraphtheory/typenames.h"
+#include "project/project.h"
+#include <QWidget>
 
 namespace GraphTheory
 {

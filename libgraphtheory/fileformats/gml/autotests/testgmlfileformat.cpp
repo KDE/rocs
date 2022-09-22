@@ -7,12 +7,12 @@
 */
 
 #include "testgmlfileformat.h"
-#include "../gmlgrammar.h"
 #include "../gmlfileformat.h"
-#include "typenames.h"
+#include "../gmlgrammar.h"
+#include "edge.h"
 #include "graphdocument.h"
 #include "node.h"
-#include "edge.h"
+#include "typenames.h"
 #include <QTest>
 #include <QUrl>
 

@@ -5,17 +5,18 @@
  */
 
 #include "editor.h"
-#include "typenames.h"
-#include "node.h"
 #include "edge.h"
 #include "fileformats/fileformatmanager.h"
 #include "logging_p.h"
-#include <QUrl>
+#include "node.h"
+#include "typenames.h"
 #include <QFileInfo>
+#include <QUrl>
 
 using namespace GraphTheory;
 
-class GraphTheory::EditorPrivate {
+class GraphTheory::EditorPrivate
+{
 public:
     EditorPrivate()
     {
@@ -23,7 +24,6 @@ public:
 
     ~EditorPrivate()
     {
-
     }
 
     QList<GraphDocumentPtr> m_documents;
@@ -34,12 +34,10 @@ Editor::Editor()
     : QObject()
     , d(new EditorPrivate)
 {
-
 }
 
 Editor::~Editor()
 {
-
 }
 
 QList<GraphDocumentPtr> Editor::documents() const

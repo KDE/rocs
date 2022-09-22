@@ -7,9 +7,9 @@
 #ifndef EDGETYPEPROPERTIES_H
 #define EDGETYPEPROPERTIES_H
 
-#include <QDialog>
-#include "typenames.h"
 #include "graphtheory_export.h"
+#include "typenames.h"
+#include <QDialog>
 
 class KColorButton;
 class QCheckBox;
@@ -18,7 +18,8 @@ class QLineEdit;
 class QSpinBox;
 class QToolButton;
 
-namespace GraphTheory {
+namespace GraphTheory
+{
 
 class PropertiesWidget;
 

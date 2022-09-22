@@ -13,7 +13,6 @@
 namespace GraphTheory
 {
 
-
 /** \brief the Rocs new generation graph file format
  */
 class Rocs2FileFormat : public FileFormatInterface

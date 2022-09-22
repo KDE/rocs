@@ -12,7 +12,6 @@
 
 #include <QAbstractListModel>
 
-
 class QSignalMapper;
 
 namespace GraphTheory
@@ -26,8 +25,8 @@ class GRAPHTHEORY_EXPORT NodeModel : public QAbstractListModel
 
 public:
     enum NodeRoles {
-        IdRole = Qt::UserRole + 1,      //!< unique identifier of node
-        DataRole                        //!< access to Node object
+        IdRole = Qt::UserRole + 1, //!< unique identifier of node
+        DataRole //!< access to Node object
     };
 
     explicit NodeModel(QObject *parent = nullptr);
@@ -35,7 +34,7 @@ public:
     /**
      * Reimplemented from QAbstractListModel::roleNames()
      */
-    QHash<int,QByteArray> roleNames() const override;
+    QHash<int, QByteArray> roleNames() const override;
     void setDocument(GraphDocumentPtr document);
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

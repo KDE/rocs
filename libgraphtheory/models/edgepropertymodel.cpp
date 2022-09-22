@@ -12,7 +12,8 @@
 
 using namespace GraphTheory;
 
-class GraphTheory::EdgePropertyModelPrivate {
+class GraphTheory::EdgePropertyModelPrivate
+{
 public:
     EdgePropertyModelPrivate()
     {
@@ -20,26 +21,22 @@ public:
 
     ~EdgePropertyModelPrivate()
     {
-
     }
 
     EdgePtr m_edge;
-
 };
 
 EdgePropertyModel::EdgePropertyModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new EdgePropertyModelPrivate)
 {
-
 }
 
 EdgePropertyModel::~EdgePropertyModel()
 {
-
 }
 
-QHash< int, QByteArray > EdgePropertyModel::roleNames() const
+QHash<int, QByteArray> EdgePropertyModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[NameRole] = "name";
@@ -61,27 +58,22 @@ void EdgePropertyModel::setEdge(Edge *edge)
     }
     d->m_edge = edge->self();
     if (d->m_edge) {
-        connect(d->m_edge.data(), &Edge::dynamicPropertyAboutToBeAdded,
-            this, &EdgePropertyModel::onDynamicPropertyAboutToBeAdded);
-        connect(d->m_edge.data(), &Edge::dynamicPropertyAdded,
-            this, &EdgePropertyModel::onDynamicPropertyAdded);
-        connect(d->m_edge.data(), &Edge::dynamicPropertiesAboutToBeRemoved,
-            this, &EdgePropertyModel::onDynamicPropertiesAboutToBeRemoved);
-        connect(d->m_edge.data(), &Edge::dynamicPropertyRemoved,
-            this, &EdgePropertyModel::onDynamicPropertyRemoved);
-        connect(d->m_edge.data(), &Edge::dynamicPropertyChanged,
-            this, &EdgePropertyModel::onDynamicPropertyChanged);
-        connect(d->m_edge.data(), &Edge::styleChanged,[=]() {
+        connect(d->m_edge.data(), &Edge::dynamicPropertyAboutToBeAdded, this, &EdgePropertyModel::onDynamicPropertyAboutToBeAdded);
+        connect(d->m_edge.data(), &Edge::dynamicPropertyAdded, this, &EdgePropertyModel::onDynamicPropertyAdded);
+        connect(d->m_edge.data(), &Edge::dynamicPropertiesAboutToBeRemoved, this, &EdgePropertyModel::onDynamicPropertiesAboutToBeRemoved);
+        connect(d->m_edge.data(), &Edge::dynamicPropertyRemoved, this, &EdgePropertyModel::onDynamicPropertyRemoved);
+        connect(d->m_edge.data(), &Edge::dynamicPropertyChanged, this, &EdgePropertyModel::onDynamicPropertyChanged);
+        connect(d->m_edge.data(), &Edge::styleChanged, [=]() {
             QVector<int> changedRoles;
             changedRoles.append(VisibilityRole);
             Q_EMIT dataChanged(index(0), index(d->m_edge->dynamicProperties().count() - 1), changedRoles);
-        } );
+        });
     }
     endResetModel();
     Q_EMIT edgeChanged();
 }
 
-Edge * EdgePropertyModel::edge() const
+Edge *EdgePropertyModel::edge() const
 {
     return d->m_edge.data();
 }
@@ -100,8 +92,7 @@ QVariant EdgePropertyModel::data(const QModelIndex &index, int role) const
 
     QString const property = d->m_edge->dynamicProperties().at(index.row());
 
-    switch(role)
-    {
+    switch (role) {
     case NameRole:
         return property;
     case ValueRole:

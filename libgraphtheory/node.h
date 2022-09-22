@@ -7,12 +7,12 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include "graphdocument.h"
 #include "graphtheory_export.h"
 #include "typenames.h"
-#include "graphdocument.h"
 
-#include <QObject>
 #include <QColor>
+#include <QObject>
 
 class QPointF;
 
@@ -206,7 +206,7 @@ Q_SIGNALS:
      * about a change of the style object.
      **/
     void styleChanged();
-    void dynamicPropertyAboutToBeAdded(const QString&, int);
+    void dynamicPropertyAboutToBeAdded(const QString &, int);
     void dynamicPropertyAdded();
     void dynamicPropertiesAboutToBeRemoved(int, int);
     void dynamicPropertyRemoved();

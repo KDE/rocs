@@ -14,36 +14,37 @@
 
 class Document;
 
-namespace DotParser {
-    /**
-    * Parse the given string \p str that represents the textual representation of a
-    * graph in DOT/Graphviz format. The given document \p graphDoc must
-    * be of plugin type "Graph.
-    */
-    bool parse(const std::string& str, GraphTheory::GraphDocumentPtr document);
+namespace DotParser
+{
+/**
+ * Parse the given string \p str that represents the textual representation of a
+ * graph in DOT/Graphviz format. The given document \p graphDoc must
+ * be of plugin type "Graph.
+ */
+bool parse(const std::string &str, GraphTheory::GraphDocumentPtr document);
 
-    bool parseIntegers(const std::string& str, std::vector<int>& v);
+bool parseIntegers(const std::string &str, std::vector<int> &v);
 
-    void setStrict();
-    void setUndirected();
-    void setDirected();
-    void setGraphId(const std::string &str);
-    void attributeId(const std::string &str);
-    void subGraphId(const std::string &str);
-    void valid(const std::string &str);
-    void insertAttributeIntoAttributeList();
-    void createAttributeList();
-    void removeAttributeList();
-    void createSubGraph();
-    void leaveSubGraph();
-    void createNode(const std::string &str);
-    void setGraphAttributes();
-    void setSubGraphAttributes(char const* first, char const* last);
-    void setNodeAttributes();
-    void applyAttributeList();
-    void checkEdgeOperator(const std::string &str);
-    void edgebound(const std::string &str);
-    void createEdge();
+void setStrict();
+void setUndirected();
+void setDirected();
+void setGraphId(const std::string &str);
+void attributeId(const std::string &str);
+void subGraphId(const std::string &str);
+void valid(const std::string &str);
+void insertAttributeIntoAttributeList();
+void createAttributeList();
+void removeAttributeList();
+void createSubGraph();
+void leaveSubGraph();
+void createNode(const std::string &str);
+void setGraphAttributes();
+void setSubGraphAttributes(char const *first, char const *last);
+void setNodeAttributes();
+void applyAttributeList();
+void checkEdgeOperator(const std::string &str);
+void edgebound(const std::string &str);
+void createEdge();
 }
 
 #endif

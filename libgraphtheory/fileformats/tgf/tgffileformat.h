@@ -15,7 +15,6 @@
 namespace GraphTheory
 {
 
-
 /** \brief class TgfFileFormatPlugin: Import and Export Plugin for TGF
  *
  * This plugin class allows reading and writing of Trivial Graph Format (TGF) files.
@@ -56,10 +55,7 @@ public:
     void readFile() override;
 
 private:
-    enum ReadMode {
-        Nodes,
-        Edges
-    };
+    enum ReadMode { Nodes, Edges };
 };
 }
 

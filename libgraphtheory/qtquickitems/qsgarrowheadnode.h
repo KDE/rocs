@@ -8,8 +8,8 @@
 #define QSGARROWHEADNODE_H
 
 #include "graphtheory_export.h"
-#include <QSGGeometryNode>
 #include <QSGFlatColorMaterial>
+#include <QSGGeometryNode>
 
 class QColor;
 
@@ -17,7 +17,6 @@ namespace GraphTheory
 {
 class QSGArrowHeadNode : public QSGGeometryNode
 {
-
 public:
     explicit QSGArrowHeadNode();
     ~QSGArrowHeadNode() override;

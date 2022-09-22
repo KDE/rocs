@@ -6,16 +6,16 @@
 
 #include "assignvalueswidget.h"
 #include "graphdocument.h"
-#include "modifiers/valueassign.h"
 #include "logging_p.h"
+#include "modifiers/valueassign.h"
 
-#include <limits.h>
 #include <KLocalizedString>
 #include <KStandardGuiItem>
+#include <QDateTime>
+#include <QDialogButtonBox>
 #include <QMap>
 #include <QPair>
-#include <QDialogButtonBox>
-#include <QDateTime>
+#include <limits.h>
 
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int.hpp>
@@ -133,8 +133,7 @@ void AssignValuesWidget::updateApplyButtonStates()
     if (!ui->propertyName->text().isEmpty()) {
         m_applyButton->setEnabled(true);
         m_okButton->setEnabled(true);
-    }
-    else {
+    } else {
         m_applyButton->setEnabled(false);
         m_okButton->setEnabled(false);
     }
@@ -170,7 +169,7 @@ void AssignValuesWidget::assignValues()
         if (typeSelection == -1) {
             edges = m_document->edges();
             const auto edgeTypes = m_document->edgeTypes();
-            for (const EdgeTypePtr& type : edgeTypes) {
+            for (const EdgeTypePtr &type : edgeTypes) {
                 type->addDynamicProperty(property);
             }
         }
@@ -182,7 +181,7 @@ void AssignValuesWidget::assignValues()
 
     // assign values
     ValueAssign modifier;
-    switch ((AssignMethod) ui->comboBoxMethod->currentIndex()) {
+    switch ((AssignMethod)ui->comboBoxMethod->currentIndex()) {
     case ID: {
         int start = ui->spinBoxIDStartValue->value();
 

@@ -6,8 +6,8 @@
 
 #include "edgewrapper.h"
 #include "documentwrapper.h"
-#include "edgetype.h"
 #include "edge.h"
+#include "edgetype.h"
 #include "edgetypestyle.h"
 #include <KLocalizedString>
 #include <QDebug>
@@ -19,9 +19,9 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
     : m_edge(edge)
     , m_documentWrapper(documentWrapper)
 {
-    connect(m_edge.data(), &Edge::styleChanged, this, [=] () {
+    connect(m_edge.data(), &Edge::styleChanged, this, [=]() {
         Q_EMIT colorChanged(m_edge->type()->style()->color());
-    } );
+    });
     connect(m_edge.data(), &Edge::dynamicPropertiesChanged, this, &EdgeWrapper::updateDynamicProperties);
     connect(m_edge.data(), &Edge::typeChanged, this, &EdgeWrapper::typeChanged);
     updateDynamicProperties();
@@ -29,7 +29,6 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
 
 EdgeWrapper::~EdgeWrapper()
 {
-
 }
 
 EdgePtr EdgeWrapper::edge() const
@@ -64,12 +63,12 @@ void EdgeWrapper::setType(int typeId)
     // change signal will be emitted by connection to m_node signal
 }
 
-GraphTheory::NodeWrapper * EdgeWrapper::from() const
+GraphTheory::NodeWrapper *EdgeWrapper::from() const
 {
     return m_documentWrapper->nodeWrapper(m_edge->from());
 }
 
-GraphTheory::NodeWrapper * EdgeWrapper::to() const
+GraphTheory::NodeWrapper *EdgeWrapper::to() const
 {
     return m_documentWrapper->nodeWrapper(m_edge->to());
 }

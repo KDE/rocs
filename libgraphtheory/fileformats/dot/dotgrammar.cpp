@@ -8,18 +8,18 @@
 #include "dotgrammar.h"
 #include "dotgrammarhelper.h"
 #include "graphdocument.h"
-#include "node.h"
 #include "logging_p.h"
+#include "node.h"
 
+#include <boost/spirit/include/phoenix_core.hpp>
+#include <boost/spirit/include/phoenix_operator.hpp>
+#include <boost/spirit/include/phoenix_stl.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/qi_int.hpp>
 #include <boost/spirit/include/qi_real.hpp>
 #include <boost/spirit/include/qi_string.hpp>
-#include <boost/spirit/repository/include/qi_distinct.hpp>
 #include <boost/spirit/repository/include/qi_confix.hpp>
-#include <boost/spirit/include/phoenix_core.hpp>
-#include <boost/spirit/include/phoenix_operator.hpp>
-#include <boost/spirit/include/phoenix_stl.hpp>
+#include <boost/spirit/repository/include/qi_distinct.hpp>
 
 using namespace DotParser;
 using namespace GraphTheory;
@@ -33,7 +33,8 @@ using namespace GraphTheory;
 #define SKIPPER space | confix("//", eol)[*(char_ - eol)] | confix("/*", "*/")[*(char_ - "*/")]
 
 // workaround for linking boost
-namespace boost {
+namespace boost
+{
 void throw_exception(std::exception const &e)
 {
     qCCritical(GRAPHTHEORY_FILEFORMAT) << "Exception:" << e.what();
@@ -43,57 +44,53 @@ void throw_exception(std::exception const &e)
 // create distinct parser for dot keywords
 namespace distinct
 {
-    //[qi_distinct_encapsulation
-    namespace spirit = boost::spirit;
-    namespace standard = boost::spirit::standard;
-    namespace repo = boost::spirit::repository;
+//[qi_distinct_encapsulation
+namespace spirit = boost::spirit;
+namespace standard = boost::spirit::standard;
+namespace repo = boost::spirit::repository;
 
-    // Define metafunctions allowing to compute the type of the distinct()
-    // and standard::char_() constructs
-    namespace traits
-    {
-        // Metafunction allowing to get the type of any repository::distinct(...)
-        // construct
-        template <typename Tail>
-        struct distinct_spec
-          : spirit::result_of::terminal<repo::tag::distinct(Tail)>
-        {};
+// Define metafunctions allowing to compute the type of the distinct()
+// and standard::char_() constructs
+namespace traits
+{
+// Metafunction allowing to get the type of any repository::distinct(...)
+// construct
+template<typename Tail>
+struct distinct_spec : spirit::result_of::terminal<repo::tag::distinct(Tail)> {
+};
 
-        // Metafunction allowing to get the type of any standard::char_(...) construct
-        template <typename String>
-        struct char_spec
-          : spirit::result_of::terminal<spirit::tag::standard::char_(String)>
-        {};
-    };
+// Metafunction allowing to get the type of any standard::char_(...) construct
+template<typename String>
+struct char_spec : spirit::result_of::terminal<spirit::tag::standard::char_(String)> {
+};
+};
 
-    // Define a helper function allowing to create a distinct() construct from
-    // an arbitrary tail parser
-    template <typename Tail>
-    inline typename traits::distinct_spec<Tail>::type
-    distinct_spec(Tail const& tail)
-    {
-        return repo::qi::distinct(tail);
-    }
+// Define a helper function allowing to create a distinct() construct from
+// an arbitrary tail parser
+template<typename Tail>
+inline typename traits::distinct_spec<Tail>::type distinct_spec(Tail const &tail)
+{
+    return repo::qi::distinct(tail);
+}
 
-    // Define a helper function allowing to create a standard::char_() construct
-    // from an arbitrary string representation
-    template <typename String>
-    inline typename traits::char_spec<String>::type
-    char_spec(String const& str)
-    {
-        return standard::char_(str);
-    }
+// Define a helper function allowing to create a standard::char_() construct
+// from an arbitrary string representation
+template<typename String>
+inline typename traits::char_spec<String>::type char_spec(String const &str)
+{
+    return standard::char_(str);
+}
 
-    // the following constructs the type of a distinct_spec holding a
-    // charset("0-9a-zA-Z_") as its tail parser
-    typedef traits::char_spec<std::string>::type charset_tag_type;
-    typedef traits::distinct_spec<charset_tag_type>::type keyword_tag_type;
+// the following constructs the type of a distinct_spec holding a
+// charset("0-9a-zA-Z_") as its tail parser
+typedef traits::char_spec<std::string>::type charset_tag_type;
+typedef traits::distinct_spec<charset_tag_type>::type keyword_tag_type;
 
-    // Define a new Qi 'keyword' directive usable as a shortcut for a
-    // repository::distinct(char_(std::string("0-9a-zA-Z_")))
-    std::string const keyword_spec("0-9a-zA-Z_");
-    keyword_tag_type const keyword = distinct_spec(char_spec(keyword_spec));
-    //]
+// Define a new Qi 'keyword' directive usable as a shortcut for a
+// repository::distinct(char_(std::string("0-9a-zA-Z_")))
+std::string const keyword_spec("0-9a-zA-Z_");
+keyword_tag_type const keyword = distinct_spec(char_spec(keyword_spec));
+//]
 }
 
 // The parser is implemented to fulfill exactly the DOT file specification. For details on the DOT
@@ -129,16 +126,13 @@ namespace distinct
 // * parsing of HTML/XML tags not completely implemented
 // * use of non ascii identifiers can cause parser errors
 
-namespace DotParser {
+namespace DotParser
+{
 
 namespace phx = boost::phoenix;
 
-using boost::phoenix::ref;
 using boost::phoenix::push_back;
-using boost::spirit::standard::alpha;
-using boost::spirit::standard::digit;
-using boost::spirit::standard::string;
-using boost::spirit::standard::space;
+using boost::phoenix::ref;
 using boost::spirit::qi::_1;
 using boost::spirit::qi::_val;
 using boost::spirit::qi::char_;
@@ -149,96 +143,82 @@ using boost::spirit::qi::phrase_parse;
 using boost::spirit::qi::rule;
 using boost::spirit::qi::standard::space_type;
 using boost::spirit::repository::qi::confix;
+using boost::spirit::standard::alpha;
+using boost::spirit::standard::digit;
+using boost::spirit::standard::space;
+using boost::spirit::standard::string;
 
 typedef BOOST_TYPEOF(SKIPPER) skipper_type;
 
-DotGraphParsingHelper* phelper = nullptr;
+DotGraphParsingHelper *phelper = nullptr;
 
-template <typename Iterator, typename Skipper = space_type>
+template<typename Iterator, typename Skipper = space_type>
 struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
-
-    DotGrammar() : DotGrammar::base_type(graph) {
-
-        graph = -distinct::keyword["strict"][&setStrict]
-                >> (distinct::keyword["graph"][&setUndirected] | distinct::keyword["digraph"][&setDirected])
-                >> -ID[&setGraphId]
-                >> '{'
-                >> stmt_list
-                >> '}';
+    DotGrammar()
+        : DotGrammar::base_type(graph)
+    {
+        graph = -distinct::keyword["strict"][&setStrict] >> (distinct::keyword["graph"][&setUndirected] | distinct::keyword["digraph"][&setDirected])
+            >> -ID[&setGraphId] >> '{' >> stmt_list >> '}';
 
         stmt_list = stmt >> -char_(';') >> -stmt_list;
 
-        stmt = (    (ID[&attributeId] >> '=' >> ID[&valid])[&applyAttributeList]
-                    | attr_stmt
-                    | edge_stmt
-                    | node_stmt
-                    | subgraph
-                );
+        stmt = ((ID[&attributeId] >> '=' >> ID[&valid])[&applyAttributeList] | attr_stmt | edge_stmt | node_stmt | subgraph);
 
-        attr_stmt = ( (distinct::keyword["graph"][phx::ref(phelper->attributed)="graph"] >> attr_list[&applyAttributeList])[&setGraphAttributes]
-                    | (distinct::keyword["node"][phx::ref(phelper->attributed)="node"] >> attr_list[&applyAttributeList])
-                    | (distinct::keyword["edge"][phx::ref(phelper->attributed)="edge"] >> attr_list[&applyAttributeList])
-                    );
+        attr_stmt = ((distinct::keyword["graph"][phx::ref(phelper->attributed) = "graph"] >> attr_list[&applyAttributeList])[&setGraphAttributes]
+                     | (distinct::keyword["node"][phx::ref(phelper->attributed) = "node"] >> attr_list[&applyAttributeList])
+                     | (distinct::keyword["edge"][phx::ref(phelper->attributed) = "edge"] >> attr_list[&applyAttributeList]));
 
-        attr_list = '[' >> -a_list >>']';
+        attr_list = '[' >> -a_list >> ']';
 
-        a_list = (ID[&attributeId] >> -('=' >> ID[&valid]))[&insertAttributeIntoAttributeList]
-                 >> -char_(',') >> -a_list;
+        a_list = (ID[&attributeId] >> -('=' >> ID[&valid]))[&insertAttributeIntoAttributeList] >> -char_(',') >> -a_list;
 
-        edge_stmt = (
-                        (node_id[&edgebound] | subgraph) >> edgeRHS >> -(attr_list[phx::ref(phelper->attributed)="edge"])
-                    )[&createAttributeList][&applyAttributeList][&createEdge][&removeAttributeList];
+        edge_stmt = ((node_id[&edgebound] | subgraph) >> edgeRHS
+                     >> -(attr_list[phx::ref(phelper->attributed) = "edge"]))[&createAttributeList][&applyAttributeList][&createEdge][&removeAttributeList];
 
         edgeRHS = edgeop[&checkEdgeOperator] >> (node_id[&edgebound] | subgraph) >> -edgeRHS;
 
-        node_stmt  = (
-                         node_id[&createNode] >> -attr_list
-                     )[phx::ref(phelper->attributed)="node"][&createAttributeList][&applyAttributeList][&setNodeAttributes][&removeAttributeList];
+        node_stmt =
+            (node_id[&createNode]
+             >> -attr_list)[phx::ref(phelper->attributed) = "node"][&createAttributeList][&applyAttributeList][&setNodeAttributes][&removeAttributeList];
 
         node_id = ID >> -port;
 
-        port = (':' >> ID >> -(':' >> compass_pt))
-               | (':' >> compass_pt);
+        port = (':' >> ID >> -(':' >> compass_pt)) | (':' >> compass_pt);
 
-        subgraph = -(distinct::keyword["subgraph"] >> -ID[&subGraphId])
-                   >> char_('{')[&createSubGraph][&createAttributeList]
-                   >> stmt_list
-                   >> char_('}')[&leaveSubGraph][&removeAttributeList];
+        subgraph = -(distinct::keyword["subgraph"] >> -ID[&subGraphId]) >> char_('{')[&createSubGraph][&createAttributeList] >> stmt_list
+            >> char_('}')[&leaveSubGraph][&removeAttributeList];
 
-        compass_pt  = (distinct::keyword["n"] | distinct::keyword["ne"] | distinct::keyword["e"]
-                    | distinct::keyword["se"] | distinct::keyword["s"] | distinct::keyword["sw"]
-                    | distinct::keyword["w"] | distinct::keyword["nw"]);
+        compass_pt = (distinct::keyword["n"] | distinct::keyword["ne"] | distinct::keyword["e"] | distinct::keyword["se"] | distinct::keyword["s"]
+                      | distinct::keyword["sw"] | distinct::keyword["w"] | distinct::keyword["nw"]);
 
         edgeop = string("->") | string("--");
 
         ID = lexeme[
-                // parse alpha-numeric sequence that is not a keyword
-                ( !(distinct::keyword["graph"] | distinct::keyword["edge"] | distinct::keyword["node"])
-                    >> char_("a-zA-Z0-9") >> *char_("a-zA-Z0-9_")
-                )
-                // parse number
-                | (-char_('-') >> ('.' >> +digit) | (+digit >> -('.' >> *digit)))
-                // parse anything that is in quotation marks
-                | ('"' >>  *(char_ - '"') >>  '"')
-                // parse XML attribute sequence
-                | ('<' >>  *(char_ - '>')  >>  '>') //TODO xml parser does not parse interlaced tags
-             ];
+            // parse alpha-numeric sequence that is not a keyword
+            (!(distinct::keyword["graph"] | distinct::keyword["edge"] | distinct::keyword["node"]) >> char_("a-zA-Z0-9") >> *char_("a-zA-Z0-9_"))
+            // parse number
+            | (-char_('-') >> ('.' >> +digit) | (+digit >> -('.' >> *digit)))
+            // parse anything that is in quotation marks
+            | ('"' >> *(char_ - '"') >> '"')
+            // parse XML attribute sequence
+            | ('<' >> *(char_ - '>') >> '>') // TODO xml parser does not parse interlaced tags
+        ];
     }
 
-    rule<Iterator,                Skipper> graph;
+    rule<Iterator, Skipper> graph;
     rule<Iterator, std::string(), Skipper> ID;
-    rule<Iterator,                Skipper> stmt_list;
-    rule<Iterator,                Skipper> stmt;
-    rule<Iterator,                Skipper> attr_stmt;
-    rule<Iterator,                Skipper> attr_list;
-    rule<Iterator,                Skipper> a_list;
-    rule<Iterator,                Skipper> edge_stmt;
+    rule<Iterator, Skipper> stmt_list;
+    rule<Iterator, Skipper> stmt;
+    rule<Iterator, Skipper> attr_stmt;
+    rule<Iterator, Skipper> attr_list;
+    rule<Iterator, Skipper> a_list;
+    rule<Iterator, Skipper> edge_stmt;
     rule<Iterator, std::string(), Skipper> edgeop;
-    rule<Iterator,                Skipper> edgeRHS;
-    rule<Iterator,                Skipper> node_stmt;
+    rule<Iterator, Skipper> edgeRHS;
+    rule<Iterator, Skipper> node_stmt;
     rule<Iterator, std::string(), Skipper> node_id;
     rule<Iterator, std::string(), Skipper> port;
-    rule<Iterator,                Skipper> subgraph;
+    rule<Iterator, Skipper> subgraph;
     rule<Iterator, std::string(), Skipper> compass_pt;
 };
 
@@ -265,14 +245,14 @@ void setDirected()
     phelper->document->edgeTypes().first()->setDirection(EdgeType::Unidirectional);
 }
 
-void setGraphId(const std::string& str)
+void setGraphId(const std::string &str)
 {
     QString name = QString::fromStdString(str);
     qCCritical(GRAPHTHEORY_FILEFORMAT) << "Graph ID not supported, _not_ setting: " << name;
-    //TODO not implemented
+    // TODO not implemented
 }
 
-void attributeId(const std::string& str)
+void attributeId(const std::string &str)
 {
     if (!phelper) {
         return;
@@ -280,7 +260,7 @@ void attributeId(const std::string& str)
     // remove quotation marks
     QString id = QString::fromStdString(str);
     if (id.endsWith('"')) {
-        id.remove(id.length()-1, 1);
+        id.remove(id.length() - 1, 1);
     }
     if (id.startsWith('"')) {
         id.remove(0, 1);
@@ -289,7 +269,7 @@ void attributeId(const std::string& str)
     phelper->valid.clear();
 }
 
-void subGraphId(const std::string& str)
+void subGraphId(const std::string &str)
 {
     if (!phelper) {
         return;
@@ -297,7 +277,7 @@ void subGraphId(const std::string& str)
     // remove quotation marks
     QString id = QString::fromStdString(str);
     if (id.endsWith('"')) {
-        id.remove(id.length()-1, 1);
+        id.remove(id.length() - 1, 1);
     }
     if (id.startsWith('"')) {
         id.remove(0, 1);
@@ -305,7 +285,7 @@ void subGraphId(const std::string& str)
     phelper->setSubGraphId(id);
 }
 
-void valid(const std::string& str)
+void valid(const std::string &str)
 {
     if (!phelper) {
         return;
@@ -313,7 +293,7 @@ void valid(const std::string& str)
     // remove quotation marks
     QString id = QString::fromStdString(str);
     if (id.endsWith('"')) {
-        id.remove(id.length()-1, 1);
+        id.remove(id.length() - 1, 1);
     }
     if (id.startsWith('"')) {
         id.remove(0, 1);
@@ -352,7 +332,7 @@ void removeAttributeList()
     phelper->edgeAttributeStack.pop_back();
 }
 
-void createNode(const std::string& str)
+void createNode(const std::string &str)
 {
     QString label = QString::fromStdString(str);
     if (!phelper || label.length() == 0) {
@@ -360,7 +340,7 @@ void createNode(const std::string& str)
     }
     // remove quotation marks
     if (label.endsWith('"')) {
-        label.remove(label.length()-1, 1);
+        label.remove(label.length() - 1, 1);
     }
     if (label.startsWith('"')) {
         label.remove(0, 1);
@@ -402,22 +382,21 @@ void applyAttributeList()
     phelper->applyAttributedList();
 }
 
-void checkEdgeOperator(const std::string& str)
+void checkEdgeOperator(const std::string &str)
 {
     if (!phelper) {
         return;
     }
 
-    if (((phelper->document->edgeTypes().first()->direction() == EdgeType::Unidirectional) && (str.compare("->") == 0)) ||
-            ((phelper->document->edgeTypes().first()->direction() == EdgeType::Bidirectional) && (str.compare("--") == 0)))
-    {
+    if (((phelper->document->edgeTypes().first()->direction() == EdgeType::Unidirectional) && (str.compare("->") == 0))
+        || ((phelper->document->edgeTypes().first()->direction() == EdgeType::Bidirectional) && (str.compare("--") == 0))) {
         return;
     }
 
     qCCritical(GRAPHTHEORY_FILEFORMAT) << "Error: incoherent edge direction relation";
 }
 
-void edgebound(const std::string& str)
+void edgebound(const std::string &str)
 {
     if (!phelper) {
         return;
@@ -425,7 +404,7 @@ void edgebound(const std::string& str)
     // remove quotation marks
     QString id = QString::fromStdString(str);
     if (id.endsWith('"')) {
-        id.remove(id.length()-1, 1);
+        id.remove(id.length() - 1, 1);
     }
     if (id.startsWith('"')) {
         id.remove(0, 1);
@@ -441,20 +420,17 @@ void createEdge()
     phelper->createEdge();
 }
 
-bool parseIntegers(const std::string& str, std::vector<int>& v)
+bool parseIntegers(const std::string &str, std::vector<int> &v)
 {
-    return phrase_parse(str.begin(), str.end(),
-        //  Begin grammar
-        (
-            int_[phx::push_back(phx::ref(v), _1)]
-                >> *(',' >> int_[phx::push_back(phx::ref(v), _1)])
-        )
-        ,
-        //  End grammar
-        space);
+    return phrase_parse(str.begin(),
+                        str.end(),
+                        //  Begin grammar
+                        (int_[phx::push_back(phx::ref(v), _1)] >> *(',' >> int_[phx::push_back(phx::ref(v), _1)])),
+                        //  End grammar
+                        space);
 }
 
-bool parse(const std::string& str, GraphDocumentPtr document)
+bool parse(const std::string &str, GraphDocumentPtr document)
 {
     delete phelper;
     phelper = new DotGraphParsingHelper;

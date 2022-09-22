@@ -8,17 +8,17 @@
 #include "edge.h"
 #include "graphdocument.h"
 
-#include <KLocalizedString>
 #include <KGuiItem>
+#include <KLocalizedString>
 #include <KStandardGuiItem>
+#include <QDebug>
 #include <QDialogButtonBox>
 #include <QPointer>
 #include <QPushButton>
-#include <QDebug>
 
 using namespace GraphTheory;
 
-EdgeProperties::EdgeProperties(QWidget* parent)
+EdgeProperties::EdgeProperties(QWidget *parent)
     : QDialog(parent)
     , m_edge(EdgePtr())
 {
@@ -99,7 +99,7 @@ void EdgeProperties::apply()
 
     for (int i = 0; i < ui->dynamicProperties->rowCount(); ++i) {
         QString name = ui->dynamicProperties->item(i, 0)->data(Qt::DisplayRole).toString();
-        QVariant value =ui->dynamicProperties->item(i, 1)->data(Qt::DisplayRole);
+        QVariant value = ui->dynamicProperties->item(i, 1)->data(Qt::DisplayRole);
         m_edge->setDynamicProperty(name, value);
     }
 }

@@ -4,13 +4,11 @@
  *  SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
-
 #include "parameter.h"
 
-Parameter::Parameter(QObject* parent)
+Parameter::Parameter(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 QString Parameter::name() const
@@ -43,7 +41,7 @@ void Parameter::setType(const QString &type)
     m_type = type;
 }
 
-void Parameter::setTypeLink(const QString& link)
+void Parameter::setTypeLink(const QString &link)
 {
     m_typeLink = link;
 }

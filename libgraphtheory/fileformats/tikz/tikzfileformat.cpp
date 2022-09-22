@@ -5,15 +5,15 @@
  */
 
 #include "tikzfileformat.h"
-#include "graphdocument.h"
-#include "node.h"
 #include "edge.h"
+#include "graphdocument.h"
 #include "logging_p.h"
+#include "node.h"
 #include <KAboutData>
-#include <KPluginFactory>
 #include <KLocalizedString>
-#include <QTextStream>
+#include <KPluginFactory>
 #include <QFile>
+#include <QTextStream>
 #include <QUrl>
 
 using namespace GraphTheory;
@@ -70,8 +70,7 @@ void TikzFileFormat::writeFile(GraphDocumentPtr graph)
     for (int i = 0; i < nodeTypes.size(); ++i) {
         nodeTypeIdMap.insert(nodeTypes.at(i), i);
         // TODO set type specific style information
-        QString dataTypeStyle = QString("\\tikzstyle{nodetype%1}=[circle,thin,fill=black!25,minimum size=20pt,inner sep=0pt]").
-            arg(i);
+        QString dataTypeStyle = QString("\\tikzstyle{nodetype%1}=[circle,thin,fill=black!25,minimum size=20pt,inner sep=0pt]").arg(i);
         out << dataTypeStyle << "\n";
     }
     const auto edgeTypes = graph->edgeTypes();
@@ -99,13 +98,13 @@ void TikzFileFormat::writeFile(GraphDocumentPtr graph)
     for (const NodeTypePtr &type : nodeTypes) {
         const auto nodes = graph->nodes(type);
         for (const NodePtr &node : nodes) {
-            QString nodeStr = QString("\\node[nodetype%1] (%2) at (%3,%4) [label=left:%5]  {%6};").
-                arg(nodeTypeIdMap[type]).
-                arg(node->id()).
-                arg(node->x()/resize).
-                arg(node->y()*(-1)/resize).
-                arg(node->property("name").toString()).
-                arg(node->property("value").toString());
+            QString nodeStr = QString("\\node[nodetype%1] (%2) at (%3,%4) [label=left:%5]  {%6};")
+                                  .arg(nodeTypeIdMap[type])
+                                  .arg(node->id())
+                                  .arg(node->x() / resize)
+                                  .arg(node->y() * (-1) / resize)
+                                  .arg(node->property("name").toString())
+                                  .arg(node->property("value").toString());
             out << nodeStr;
             out << '\n';
         }
@@ -115,11 +114,11 @@ void TikzFileFormat::writeFile(GraphDocumentPtr graph)
     for (const EdgeTypePtr &type : edgeTypes) {
         const auto edges = graph->edges(type);
         for (const EdgePtr &edge : edges) {
-            QString edgeStr = QString("\\path[edgetype%1] (%2) -- node[value] {%3} (%4);").
-                arg(edgeTypeIdMap[type]).
-                arg(edge->from()->id()).
-                arg(edge->property("value").toString()).
-                arg(edge->to()->id());
+            QString edgeStr = QString("\\path[edgetype%1] (%2) -- node[value] {%3} (%4);")
+                                  .arg(edgeTypeIdMap[type])
+                                  .arg(edge->from()->id())
+                                  .arg(edge->property("value").toString())
+                                  .arg(edge->to()->id());
             out << edgeStr;
             out << '\n';
         }

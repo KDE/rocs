@@ -5,8 +5,8 @@
  */
 
 #include "nodetype.h"
-#include "nodetypestyle.h"
 #include "graphdocument.h"
+#include "nodetypestyle.h"
 #include <QDebug>
 
 using namespace GraphTheory;
@@ -14,7 +14,8 @@ using namespace GraphTheory;
 // initialize number of node type objects
 uint NodeType::objectCounter = 0;
 
-class GraphTheory::NodeTypePrivate {
+class GraphTheory::NodeTypePrivate
+{
 public:
     NodeTypePrivate()
         : m_id(-1)
@@ -45,8 +46,7 @@ NodeType::NodeType()
 {
     ++NodeType::objectCounter;
 
-    connect(d->m_style, &NodeTypeStyle::colorChanged,
-        this, &NodeType::colorChanged);
+    connect(d->m_style, &NodeTypeStyle::colorChanged, this, &NodeType::colorChanged);
 }
 
 NodeType::~NodeType()
@@ -91,7 +91,7 @@ GraphDocumentPtr NodeType::document() const
     return d->m_document;
 }
 
-void NodeType::setName(const QString& name)
+void NodeType::setName(const QString &name)
 {
     if (d->m_name == name) {
         return;
@@ -119,7 +119,7 @@ void NodeType::setId(int id)
     Q_EMIT idChanged(id);
 }
 
-NodeTypeStyle * NodeType::style() const
+NodeTypeStyle *NodeType::style() const
 {
     return d->m_style;
 }
@@ -129,7 +129,7 @@ QStringList NodeType::dynamicProperties() const
     return d->m_dynamicProperties;
 }
 
-void NodeType::addDynamicProperty(const QString& property)
+void NodeType::addDynamicProperty(const QString &property)
 {
     if (d->m_dynamicProperties.contains(property)) {
         return;
@@ -139,7 +139,7 @@ void NodeType::addDynamicProperty(const QString& property)
     Q_EMIT dynamicPropertyAdded();
 }
 
-void NodeType::removeDynamicProperty(const QString& property)
+void NodeType::removeDynamicProperty(const QString &property)
 {
     if (!d->m_dynamicProperties.contains(property)) {
         return;
@@ -150,7 +150,7 @@ void NodeType::removeDynamicProperty(const QString& property)
     Q_EMIT dynamicPropertyRemoved(property);
 }
 
-void NodeType::renameDynamicProperty(const QString& oldProperty, const QString& newProperty)
+void NodeType::renameDynamicProperty(const QString &oldProperty, const QString &newProperty)
 {
     Q_ASSERT(d->m_dynamicProperties.contains(oldProperty));
     Q_ASSERT(!d->m_dynamicProperties.contains(newProperty));

@@ -7,8 +7,8 @@
 #ifndef ASSIGNVALUESWIDGET_H
 #define ASSIGNVALUESWIDGET_H
 
-#include "ui_assignvalueswidget.h"
 #include "typenames.h"
+#include "ui_assignvalueswidget.h"
 #include <KLineEdit>
 #include <QDialog>
 
@@ -16,20 +16,14 @@ class QGridLayout;
 class Document;
 class DataStructure;
 
-namespace GraphTheory {
+namespace GraphTheory
+{
 
 class AssignValuesWidget : public QDialog
 {
     Q_OBJECT
 
-    enum AssignMethod {
-        ID,
-        ALPHA,
-        ID_ALPHA,
-        UNIFORM_INTEGER,
-        UNIFORM_FLOAT,
-        CONSTANT
-    };
+    enum AssignMethod { ID, ALPHA, ID_ALPHA, UNIFORM_INTEGER, UNIFORM_FLOAT, CONSTANT };
 
 public:
     explicit AssignValuesWidget(GraphDocumentPtr document, QWidget *parent = nullptr);

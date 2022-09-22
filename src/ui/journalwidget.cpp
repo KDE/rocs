@@ -6,14 +6,14 @@
 
 #include "journalwidget.h"
 #include "project/project.h"
-#include <QSaveFile>
-#include <QDebug>
-#include <QTextStream>
-#include <QFile>
-#include <QUrl>
 #include <KTextEditor/Document>
+#include <QDebug>
+#include <QFile>
+#include <QSaveFile>
+#include <QTextStream>
+#include <QUrl>
 
-JournalEditorWidget::JournalEditorWidget(QWidget* parent)
+JournalEditorWidget::JournalEditorWidget(QWidget *parent)
     : QWidget(parent)
     , m_currentProject(nullptr)
     , m_modified(false)
@@ -21,8 +21,7 @@ JournalEditorWidget::JournalEditorWidget(QWidget* parent)
     ui = new Ui::JournalEditorWidget;
     ui->setupUi(this);
 
-    connect(ui->editor, &KRichTextWidget::textChanged,
-        this, &JournalEditorWidget::setModified);
+    connect(ui->editor, &KRichTextWidget::textChanged, this, &JournalEditorWidget::setModified);
 }
 
 void JournalEditorWidget::openJournal(Project *project)

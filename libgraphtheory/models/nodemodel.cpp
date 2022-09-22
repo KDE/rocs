@@ -12,7 +12,8 @@
 
 using namespace GraphTheory;
 
-class GraphTheory::NodeModelPrivate {
+class GraphTheory::NodeModelPrivate
+{
 public:
     NodeModelPrivate()
         : m_signalMapper(new QSignalMapper)
@@ -45,10 +46,9 @@ NodeModel::NodeModel(QObject *parent)
 
 NodeModel::~NodeModel()
 {
-
 }
 
-QHash< int, QByteArray > NodeModel::roleNames() const
+QHash<int, QByteArray> NodeModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
@@ -91,12 +91,11 @@ QVariant NodeModel::data(const QModelIndex &index, int role) const
 
     NodePtr const node = d->m_document->nodes().at(index.row());
 
-    switch(role)
-    {
+    switch (role) {
     case IdRole:
         return node->id();
     case DataRole:
-        return QVariant::fromValue<QObject*>(node.data());
+        return QVariant::fromValue<QObject *>(node.data());
     default:
         return QVariant();
     }
@@ -118,7 +117,7 @@ int NodeModel::rowCount(const QModelIndex &parent) const
 void NodeModel::onNodeAboutToBeAdded(NodePtr node, int index)
 {
     Q_UNUSED(node)
-    //TODO add missing signals
+    // TODO add missing signals
     beginInsertRows(QModelIndex(), index, index);
 }
 

@@ -7,8 +7,8 @@
 #ifndef TOPOLOGY_H
 #define TOPOLOGY_H
 
-#include "typenames.h"
 #include "graphtheory_export.h"
+#include "typenames.h"
 
 #define BOOST_MATH_DISABLE_FLOAT128 1
 
@@ -48,7 +48,7 @@ public:
      * \param radius to optionally specify target radius
      * \return void
      */
-    static void applyCircleAlignment(const NodeList &nodes, qreal radius=0);
+    static void applyCircleAlignment(const NodeList &nodes, qreal radius = 0);
 
     /** \brief applies a default topology for undirected graphs
      *
@@ -65,7 +65,6 @@ public:
      * I.e., no possible present coordinates are respected.
      */
     static void undirectedGraphDefaultTopology(GraphDocumentPtr document);
-
 
     /**
      * Applies a force based graph layout algorithm to the graph.
@@ -90,11 +89,14 @@ public:
      *                                  random layout.
      * @param seed Seed used for generating random numbers.
      */
-    static void applyForceBasedLayout(GraphDocumentPtr document, const qreal nodeRadius,
-                                      const qreal margin, const qreal areaFactor,
-                                      const qreal repellingForce, const qreal attractionForce,
-                                      const bool randomizeInitialPositions, const quint32 seed);
-
+    static void applyForceBasedLayout(GraphDocumentPtr document,
+                                      const qreal nodeRadius,
+                                      const qreal margin,
+                                      const qreal areaFactor,
+                                      const qreal repellingForce,
+                                      const qreal attractionForce,
+                                      const bool randomizeInitialPositions,
+                                      const quint32 seed);
 
     /**
      * Applies a radial layout to a tree.
@@ -111,9 +113,12 @@ public:
      * @return true if the layout can be applied and false otherwise. The layout can be applied if
      *         @p document represents a tree.
      */
-    static bool applyRadialLayoutToTree(GraphDocumentPtr document, const qreal nodeRadius,
-                                        const qreal margin, const qreal nodeSeparation,
-                                        const NodePtr root, const qreal wedgeAngle,
+    static bool applyRadialLayoutToTree(GraphDocumentPtr document,
+                                        const qreal nodeRadius,
+                                        const qreal margin,
+                                        const qreal nodeSeparation,
+                                        const NodePtr root,
+                                        const qreal wedgeAngle,
                                         const qreal rotationAngle);
 };
 }

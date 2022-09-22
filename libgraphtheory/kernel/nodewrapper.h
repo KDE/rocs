@@ -7,15 +7,15 @@
 #ifndef NODEWRAPPER_H
 #define NODEWRAPPER_H
 
+#include "documentwrapper.h"
+#include "graphdocument.h"
 #include "graphtheory_export.h"
 #include "kernel.h"
-#include "typenames.h"
 #include "node.h"
-#include "graphdocument.h"
-#include "documentwrapper.h"
+#include "typenames.h"
 
-#include <QObject>
 #include <QColor>
+#include <QObject>
 
 class QEvent;
 
@@ -95,19 +95,19 @@ public:
     /**
      * @return list of all edges adjacent to this node
      */
-    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> edges() const;
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper *> edges() const;
 
     /**
      * Method returns empty list if invalid or non-existing ID \p type is used.
      * @param type is the ID of an existing EdgeType
      * @return list of all edges adjacent to this node of type with ID \p type
      */
-    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> edges(int type) const;
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper *> edges(int type) const;
 
     /**
      * @return list of all edges that are either bidirectional or unidirectional and point to this node
      */
-    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> inEdges() const;
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper *> inEdges() const;
 
     /**
      * Method returns empty list if invalid or non-existing ID \p type is used.
@@ -115,12 +115,12 @@ public:
      * @return list of all edges that are either bidirectional or unidirectional and point to this node
      *         with ID \p type
      */
-    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> inEdges(int type) const;
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper *> inEdges(int type) const;
 
     /**
      * @return list of all edges that are either bidirectional or unidirectional and point from this node
      */
-    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> outEdges() const;
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper *> outEdges() const;
 
     /**
      * Method returns empty list if invalid or non-existing ID \p type is used.
@@ -128,45 +128,45 @@ public:
      * @return list of all edges that are either bidirectional or unidirectional and point from this node
      *          with ID \p type
      */
-    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> outEdges(int type) const;
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper *> outEdges(int type) const;
 
     /**
      * @return list of all neighbors connected to this node
      */
-    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> neighbors() const;
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper *> neighbors() const;
 
     /**
      * @param type is the ID of an existing EdgeType
      * @return list of all neighbors connected to this node via an edge of type \p type
      */
-    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> neighbors(int type) const;
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper *> neighbors(int type) const;
 
     /**
      * @return list of all neighbors connected by an incoming edge
      */
-    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> predecessors() const;
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper *> predecessors() const;
 
     /**
      * @param type is the ID of an existing EdgeType
      * @return list of all neighbors connected by an incoming edge of type \p type
      */
-    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> predecessors(int type) const;
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper *> predecessors(int type) const;
 
     /**
      * @return list of all neighbors connected by an outgoing edge
      */
-    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> successors() const;
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper *> successors() const;
 
     /**
      * @param type is the ID of an existing EdgeType
      * @return list of all neighbors connected by an outgoing edge of type \p type
      */
-    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> successors(int type) const;
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper *> successors(int type) const;
 
     /**
      * @return array of distances to given set of nodes
      */
-    Q_INVOKABLE QScriptValue distance(const QString &lengthProperty, QList<GraphTheory::NodeWrapper*> targets);
+    Q_INVOKABLE QScriptValue distance(const QString &lengthProperty, QList<GraphTheory::NodeWrapper *> targets);
 
     /** reimplemented from QObject **/
     bool event(QEvent *e) override;
@@ -188,6 +188,6 @@ private:
 };
 }
 
-Q_DECLARE_METATYPE(GraphTheory::NodeWrapper*)
+Q_DECLARE_METATYPE(GraphTheory::NodeWrapper *)
 
 #endif

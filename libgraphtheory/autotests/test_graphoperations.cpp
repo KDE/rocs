@@ -5,11 +5,11 @@
  */
 
 #include "test_graphoperations.h"
-#include "libgraphtheory/graphdocument.h"
-#include "libgraphtheory/nodetype.h"
-#include "libgraphtheory/edgetype.h"
-#include "libgraphtheory/node.h"
 #include "libgraphtheory/edge.h"
+#include "libgraphtheory/edgetype.h"
+#include "libgraphtheory/graphdocument.h"
+#include "libgraphtheory/node.h"
+#include "libgraphtheory/nodetype.h"
 
 #include <QTest>
 
@@ -158,7 +158,7 @@ void TestGraphOperations::testEdgeTypeCreateDelete()
     edge->setType(typeB);
     QCOMPARE(edge->type(), typeB);
     QCOMPARE(document->edges(typeA).length(), 0);
-    QCOMPARE(document->edges(typeB).length(),  1);
+    QCOMPARE(document->edges(typeB).length(), 1);
 
     typeB->destroy();
     QCOMPARE(document->edgeTypes().length(), 2);

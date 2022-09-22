@@ -8,12 +8,13 @@
 #ifndef GENERATEGRAPHWIDGET_H
 #define GENERATEGRAPHWIDGET_H
 
-#include "ui_generategraphwidget.h"
 #include "typenames.h"
-#include <QWidget>
+#include "ui_generategraphwidget.h"
 #include <QDialog>
+#include <QWidget>
 
-namespace GraphTheory {
+namespace GraphTheory
+{
 
 class GenerateGraphWidget : public QDialog
 {
@@ -154,7 +155,6 @@ private:
      * \param nodes is the number of nodes of the generated graph
      */
     void generateCompleteGraph(int nodes);
-
 
     /**
      * Generate a complete bipartite graph with specified number of nodes.

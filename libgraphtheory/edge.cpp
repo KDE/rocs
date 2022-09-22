@@ -14,7 +14,8 @@ using namespace GraphTheory;
 // initialize number of edge objects
 uint Edge::objectCounter = 0;
 
-class GraphTheory::EdgePrivate {
+class GraphTheory::EdgePrivate
+{
 public:
     EdgePrivate()
         : m_valid(false)
@@ -112,22 +113,14 @@ void Edge::setType(EdgeTypePtr type)
         d->m_type->style()->disconnect(this);
     }
     d->m_type = type;
-    connect(type.data(), &EdgeType::dynamicPropertyAboutToBeAdded,
-        this, &Edge::dynamicPropertyAboutToBeAdded);
-    connect(type.data(), &EdgeType::dynamicPropertyAdded,
-        this, &Edge::dynamicPropertyAdded);
-    connect(type.data(), &EdgeType::dynamicPropertiesAboutToBeRemoved,
-        this, &Edge::dynamicPropertiesAboutToBeRemoved);
-    connect(type.data(), &EdgeType::dynamicPropertyRemoved,
-        this, &Edge::dynamicPropertyRemoved);
-    connect(type.data(), &EdgeType::dynamicPropertyRemoved,
-        this, &Edge::updateDynamicProperty);
-    connect(type.data(), &EdgeType::directionChanged,
-        this, &Edge::directionChanged);
-    connect(type.data(), &EdgeType::dynamicPropertyRenamed,
-        this, &Edge::renameDynamicProperty);
-    connect(type->style(), &EdgeTypeStyle::changed,
-        this, &Edge::styleChanged);
+    connect(type.data(), &EdgeType::dynamicPropertyAboutToBeAdded, this, &Edge::dynamicPropertyAboutToBeAdded);
+    connect(type.data(), &EdgeType::dynamicPropertyAdded, this, &Edge::dynamicPropertyAdded);
+    connect(type.data(), &EdgeType::dynamicPropertiesAboutToBeRemoved, this, &Edge::dynamicPropertiesAboutToBeRemoved);
+    connect(type.data(), &EdgeType::dynamicPropertyRemoved, this, &Edge::dynamicPropertyRemoved);
+    connect(type.data(), &EdgeType::dynamicPropertyRemoved, this, &Edge::updateDynamicProperty);
+    connect(type.data(), &EdgeType::directionChanged, this, &Edge::directionChanged);
+    connect(type.data(), &EdgeType::dynamicPropertyRenamed, this, &Edge::renameDynamicProperty);
+    connect(type->style(), &EdgeTypeStyle::changed, this, &Edge::styleChanged);
 
     Q_EMIT typeChanged(type);
     Q_EMIT styleChanged();

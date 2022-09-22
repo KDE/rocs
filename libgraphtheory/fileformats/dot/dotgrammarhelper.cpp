@@ -5,38 +5,37 @@
     SPDX-License-Identifier: GPL-2.0-only
 */
 
-
 #include "dotgrammarhelper.h"
 #include "dotgrammar.h"
-#include "graphdocument.h"
-#include "node.h"
 #include "edge.h"
+#include "graphdocument.h"
 #include "logging_p.h"
+#include "node.h"
 
 #include <QFile>
 
-extern DotParser::DotGraphParsingHelper* phelper;
+extern DotParser::DotGraphParsingHelper *phelper;
 
 using namespace GraphTheory;
 
 namespace DotParser
 {
 
-DotGraphParsingHelper::DotGraphParsingHelper():
-    attributeId(),
-    valid(),
-    attributed(),
-    unprocessedAttributes(),
-    graphAttributes(),
-    nodeAttributes(),
-    edgeAttributes(),
-    graphAttributeStack(),
-    nodeAttributeStack(),
-    edgeAttributeStack(),
-    edgebounds(),
-    currentNode(),
-    currentEdge(),
-    nodeMap()
+DotGraphParsingHelper::DotGraphParsingHelper()
+    : attributeId()
+    , valid()
+    , attributed()
+    , unprocessedAttributes()
+    , graphAttributes()
+    , nodeAttributes()
+    , edgeAttributes()
+    , graphAttributeStack()
+    , nodeAttributeStack()
+    , edgeAttributeStack()
+    , edgebounds()
+    , currentNode()
+    , currentEdge()
+    , nodeMap()
 {
 }
 
@@ -103,11 +102,11 @@ void DotGraphParsingHelper::applyAttributedList()
 {
     if (attributed == "graph") {
         if (unprocessedAttributes.find("bb") != unprocessedAttributes.end()) {
-            std::vector< int > v;
+            std::vector<int> v;
             parseIntegers(unprocessedAttributes["bb"].toStdString().c_str(), v);
-//             if (v.size() >= 4) {
-//                 qCDebug(GRAPHTHEORY_FILEFORMAT) << "setting width and height to " << v[2] << v[3];
-//             }
+            //             if (v.size() >= 4) {
+            //                 qCDebug(GRAPHTHEORY_FILEFORMAT) << "setting width and height to " << v[2] << v[3];
+            //             }
         }
         AttributesMap::const_iterator it, it_end;
         it = unprocessedAttributes.constBegin();
@@ -135,10 +134,10 @@ void DotGraphParsingHelper::applyAttributedList()
 
 void DotGraphParsingHelper::createNode(const QString &name)
 {
-    edgebounds.clear(); //TODO explain meaning of this
+    edgebounds.clear(); // TODO explain meaning of this
 
     if (nodeMap.contains(name)) {
-        qCCritical(GRAPHTHEORY_FILEFORMAT) << "Omitting data element, identifying label is already used: "<< name;
+        qCCritical(GRAPHTHEORY_FILEFORMAT) << "Omitting data element, identifying label is already used: " << name;
         return;
     }
     currentNode = GraphTheory::Node::create(document);
@@ -205,7 +204,7 @@ void DotGraphParsingHelper::createEdge()
         NodePtr to = nodeMap[toId];
 
         currentEdge = Edge::create(from, to);
-//         qCDebug(GRAPHTHEORY_FILEFORMAT) << "Creating new edge: " << from->identifier() << " -> " << to->identifier();
+        //         qCDebug(GRAPHTHEORY_FILEFORMAT) << "Creating new edge: " << from->identifier() << " -> " << to->identifier();
         setEdgeAttributes();
 
         fromId = toId;

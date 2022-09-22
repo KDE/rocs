@@ -6,18 +6,17 @@
 
 #include "testrocs1fileformat.h"
 #include "../rocs1fileformat.h"
-#include "typenames.h"
+#include "edge.h"
 #include "fileformats/fileformatinterface.h"
 #include "graphdocument.h"
 #include "node.h"
-#include "edge.h"
+#include "typenames.h"
 #include <QTest>
 
 using namespace GraphTheory;
 
 TestRocs1FileFormat::TestRocs1FileFormat()
 {
-
 }
 
 void TestRocs1FileFormat::serializeUnserializeTest()
@@ -63,10 +62,10 @@ void TestRocs1FileFormat::serializeUnserializeTest()
     }
 }
 
-static void logEdgeTypes(const QList<EdgeTypePtr>& types)
+static void logEdgeTypes(const QList<EdgeTypePtr> &types)
 {
     qDebug() << "Edge types:";
-    for (const auto& t : types) {
+    for (const auto &t : types) {
         qDebug() << ".." << t->name() << t->direction();
     }
 }
@@ -79,7 +78,7 @@ void TestRocs1FileFormat::serializeUnserializeTypesTest()
     EdgeTypePtr edgeType2 = EdgeType::create(document);
 
     logEdgeTypes(document->edgeTypes());
-    
+
     // add test data
     nodes.insert("a", Node::create(document));
     nodes["a"]->setDynamicProperty("label", "first node");
@@ -105,37 +104,37 @@ void TestRocs1FileFormat::serializeUnserializeTypesTest()
     QCOMPARE(document->edgeTypes().count(), 3);
 }
 
-//TODO move to Rocs project file test
-// void TestRocs1FileFormat::projectLoadSaveTest()
-// {
-//     QTemporaryFile temp;
-//     temp.setAutoRemove(false);
-//     temp.open();
+// TODO move to Rocs project file test
+//  void TestRocs1FileFormat::projectLoadSaveTest()
+//  {
+//      QTemporaryFile temp;
+//      temp.setAutoRemove(false);
+//      temp.open();
 //
-//     // prepare project and save
-//     Project* testProject = new Project(QUrl::fromLocalFile(temp.fileName()));
-//     testProject->setName("new test name");
-//     testProject->addCodeFile(QUrl::fromLocalFile("/path/to/code.js"));
-//     GraphTheory::GraphDocumentPtr graph = testProject->createGraphDocument();
-//     graph->setDocumentUrl(QUrl::fromLocalFile("/path/to/graph.graph"));
-//     testProject->writeProjectFile();
+//      // prepare project and save
+//      Project* testProject = new Project(QUrl::fromLocalFile(temp.fileName()));
+//      testProject->setName("new test name");
+//      testProject->addCodeFile(QUrl::fromLocalFile("/path/to/code.js"));
+//      GraphTheory::GraphDocumentPtr graph = testProject->createGraphDocument();
+//      graph->setDocumentUrl(QUrl::fromLocalFile("/path/to/graph.graph"));
+//      testProject->writeProjectFile();
 //
-//     // load project
-//     Project* testProject2 = new Project(QUrl::fromLocalFile(temp.fileName()));
-//     QVERIFY2(testProject2->name().compare("new test name") == 0, "ERROR: project name changed");
-//     QVERIFY(testProject2->codeFiles().count() == 1);
-//     QVERIFY2(
-//         testProject2->codeFiles().at(0).toLocalFile() == "/path/to/code.js",
-//         "ERROR: path of code file changed"
-//     );
-//     QVERIFY2(
-//         false,
-// //         testProject2->graphFiles().at(0).toLocalFile() == "/path/to/graph.graph",
-//         "ERROR: path of graph file changed"
-//     );
+//      // load project
+//      Project* testProject2 = new Project(QUrl::fromLocalFile(temp.fileName()));
+//      QVERIFY2(testProject2->name().compare("new test name") == 0, "ERROR: project name changed");
+//      QVERIFY(testProject2->codeFiles().count() == 1);
+//      QVERIFY2(
+//          testProject2->codeFiles().at(0).toLocalFile() == "/path/to/code.js",
+//          "ERROR: path of code file changed"
+//      );
+//      QVERIFY2(
+//          false,
+//  //         testProject2->graphFiles().at(0).toLocalFile() == "/path/to/graph.graph",
+//          "ERROR: path of graph file changed"
+//      );
 //
-//     delete testProject;
-//     delete testProject2;
-// }
+//      delete testProject;
+//      delete testProject2;
+//  }
 
 QTEST_MAIN(TestRocs1FileFormat)

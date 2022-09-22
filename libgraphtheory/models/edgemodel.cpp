@@ -9,12 +9,13 @@
 #include "graphdocument.h"
 
 #include <KLocalizedString>
-#include <QSignalMapper>
 #include <QDebug>
+#include <QSignalMapper>
 
 using namespace GraphTheory;
 
-class GraphTheory::EdgeModelPrivate {
+class GraphTheory::EdgeModelPrivate
+{
 public:
     EdgeModelPrivate()
         : m_signalMapper(new QSignalMapper)
@@ -42,16 +43,14 @@ EdgeModel::EdgeModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new EdgeModelPrivate)
 {
-    connect(d->m_signalMapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped),
-        this, &EdgeModel::emitEdgeChanged);
+    connect(d->m_signalMapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &EdgeModel::emitEdgeChanged);
 }
 
 EdgeModel::~EdgeModel()
 {
-
 }
 
-QHash< int, QByteArray > EdgeModel::roleNames() const
+QHash<int, QByteArray> EdgeModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
@@ -72,14 +71,10 @@ void EdgeModel::setDocument(GraphDocumentPtr document)
     }
     d->m_document = document;
     if (d->m_document) {
-        connect(d->m_document.data(), &GraphDocument::edgeAboutToBeAdded,
-            this, &EdgeModel::onEdgeAboutToBeAdded);
-        connect(d->m_document.data(), &GraphDocument::edgeAdded,
-            this, &EdgeModel::onEdgeAdded);
-        connect(d->m_document.data(), &GraphDocument::edgesAboutToBeRemoved,
-            this, &EdgeModel::onEdgesAboutToBeRemoved);
-        connect(d->m_document.data(), &GraphDocument::edgesRemoved,
-            this, &EdgeModel::onEdgesRemoved);
+        connect(d->m_document.data(), &GraphDocument::edgeAboutToBeAdded, this, &EdgeModel::onEdgeAboutToBeAdded);
+        connect(d->m_document.data(), &GraphDocument::edgeAdded, this, &EdgeModel::onEdgeAdded);
+        connect(d->m_document.data(), &GraphDocument::edgesAboutToBeRemoved, this, &EdgeModel::onEdgesAboutToBeRemoved);
+        connect(d->m_document.data(), &GraphDocument::edgesRemoved, this, &EdgeModel::onEdgesRemoved);
     }
     endResetModel();
 }
@@ -98,10 +93,9 @@ QVariant EdgeModel::data(const QModelIndex &index, int role) const
 
     EdgePtr const edge = d->m_document->edges().at(index.row());
 
-    switch(role)
-    {
+    switch (role) {
     case DataRole:
-        return QVariant::fromValue<QObject*>(edge.data());
+        return QVariant::fromValue<QObject *>(edge.data());
     default:
         return QVariant();
     }
@@ -123,7 +117,7 @@ int EdgeModel::rowCount(const QModelIndex &parent) const
 void EdgeModel::onEdgeAboutToBeAdded(EdgePtr edge, int index)
 {
     Q_UNUSED(edge)
-    //TODO add missing signals
+    // TODO add missing signals
     beginInsertRows(QModelIndex(), index, index);
 }
 

@@ -28,10 +28,7 @@ class GRAPHTHEORY_EXPORT EdgeType : public QObject
     Q_PROPERTY(int id READ id WRITE setId NOTIFY idChanged)
 
 public:
-    enum Direction {
-        Unidirectional = 0,
-        Bidirectional = 1
-    };
+    enum Direction { Unidirectional = 0, Bidirectional = 1 };
 
     /**
      * Creates a new edge type and registers it at @p document.
@@ -129,7 +126,7 @@ public:
     /**
      * @return style object of the edge type
      */
-    EdgeTypeStyle * style() const;
+    EdgeTypeStyle *style() const;
 
     /**
      * Debug method that tracks how many edge objects exist.

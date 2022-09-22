@@ -36,7 +36,6 @@ FileFormatInterface::FileFormatInterface(QObject *parent, const KPluginMetaData 
 
 FileFormatInterface::~FileFormatInterface()
 {
-
 }
 
 FileFormatInterface::PluginType FileFormatInterface::pluginCapability() const
@@ -86,7 +85,7 @@ void FileFormatInterface::setFile(const QUrl &file)
     d->file = file;
 }
 
-const QUrl& FileFormatInterface::file() const
+const QUrl &FileFormatInterface::file() const
 {
     return d->file;
 }

@@ -8,10 +8,10 @@
 #define EDITORPLUGINMANAGER_H
 
 #include "editorplugininterface.h"
-#include "typenames.h"
 #include "graphtheory_export.h"
-#include <QObject>
+#include "typenames.h"
 #include <QList>
+#include <QObject>
 
 #include <memory>
 
@@ -39,10 +39,10 @@ public:
      *
      * \return list of plugin interfaces of loaded plugins
      */
-    QList <EditorPluginInterface*> plugins() const;
+    QList<EditorPluginInterface *> plugins() const;
 
 private:
-    static EditorPluginManager * instance;
+    static EditorPluginManager *instance;
 
     const std::unique_ptr<EditorPluginManagerPrivate> d;
 };

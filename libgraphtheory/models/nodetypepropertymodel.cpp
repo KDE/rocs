@@ -11,7 +11,8 @@
 
 using namespace GraphTheory;
 
-class GraphTheory::NodeTypePropertyModelPrivate {
+class GraphTheory::NodeTypePropertyModelPrivate
+{
 public:
     NodeTypePropertyModelPrivate()
     {
@@ -19,7 +20,6 @@ public:
 
     ~NodeTypePropertyModelPrivate()
     {
-
     }
 
     NodeTypePtr m_type;
@@ -29,15 +29,13 @@ NodeTypePropertyModel::NodeTypePropertyModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new NodeTypePropertyModelPrivate)
 {
-
 }
 
 NodeTypePropertyModel::~NodeTypePropertyModel()
 {
-
 }
 
-QHash< int, QByteArray > NodeTypePropertyModel::roleNames() const
+QHash<int, QByteArray> NodeTypePropertyModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[NameRole] = "name";
@@ -57,22 +55,17 @@ void NodeTypePropertyModel::setNodeType(NodeType *type)
     }
     d->m_type = type->self();
     if (d->m_type) {
-        connect(d->m_type.data(), &NodeType::dynamicPropertyAboutToBeAdded,
-            this, &NodeTypePropertyModel::onDynamicPropertyAboutToBeAdded);
-        connect(d->m_type.data(), &NodeType::dynamicPropertyAdded,
-            this, &NodeTypePropertyModel::onDynamicPropertyAdded);
-        connect(d->m_type.data(), &NodeType::dynamicPropertiesAboutToBeRemoved,
-            this, &NodeTypePropertyModel::onDynamicPropertiesAboutToBeRemoved);
-        connect(d->m_type.data(), &NodeType::dynamicPropertyRemoved,
-            this, &NodeTypePropertyModel::onDynamicPropertyRemoved);
-        connect(d->m_type.data(), &NodeType::dynamicPropertyChanged,
-            this, &NodeTypePropertyModel::onDynamicPropertyChanged);
+        connect(d->m_type.data(), &NodeType::dynamicPropertyAboutToBeAdded, this, &NodeTypePropertyModel::onDynamicPropertyAboutToBeAdded);
+        connect(d->m_type.data(), &NodeType::dynamicPropertyAdded, this, &NodeTypePropertyModel::onDynamicPropertyAdded);
+        connect(d->m_type.data(), &NodeType::dynamicPropertiesAboutToBeRemoved, this, &NodeTypePropertyModel::onDynamicPropertiesAboutToBeRemoved);
+        connect(d->m_type.data(), &NodeType::dynamicPropertyRemoved, this, &NodeTypePropertyModel::onDynamicPropertyRemoved);
+        connect(d->m_type.data(), &NodeType::dynamicPropertyChanged, this, &NodeTypePropertyModel::onDynamicPropertyChanged);
     }
     endResetModel();
     Q_EMIT nodeChanged();
 }
 
-NodeType * NodeTypePropertyModel::node() const
+NodeType *NodeTypePropertyModel::node() const
 {
     return d->m_type.data();
 }
@@ -91,8 +84,7 @@ QVariant NodeTypePropertyModel::data(const QModelIndex &index, int role) const
 
     QString const property = d->m_type->dynamicProperties().at(index.row());
 
-    switch(role)
-    {
+    switch (role) {
     case NameRole:
         return property;
     default:

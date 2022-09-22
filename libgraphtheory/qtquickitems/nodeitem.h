@@ -18,14 +18,14 @@ class NodeItemPrivate;
 class NodeItem : public QQuickPaintedItem
 {
     Q_OBJECT
-    Q_PROPERTY(GraphTheory::Node * node READ node WRITE setNode NOTIFY nodeChanged)
+    Q_PROPERTY(GraphTheory::Node *node READ node WRITE setNode NOTIFY nodeChanged)
     Q_PROPERTY(QPointF origin READ origin WRITE setOrigin)
     Q_PROPERTY(bool highlighted READ isHighlighted WRITE setHighlighted NOTIFY highlightedChanged)
 
 public:
     explicit NodeItem(QQuickPaintedItem *parent = nullptr);
     ~NodeItem() override;
-    Node * node() const;
+    Node *node() const;
     void setNode(Node *node);
     /** translation of global origin (0,0) into scene coordinates **/
     QPointF origin() const;

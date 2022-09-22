@@ -7,14 +7,17 @@
 #ifndef TESTPROJECT_H
 #define TESTPROJECT_H
 
-#include <QObject>
 #include <QCoreApplication>
+#include <QObject>
 
 class TestProject : public QObject
 {
     Q_OBJECT
 public:
-    TestProject() { QCoreApplication::addLibraryPath(ADDITIONAL_PLUGIN_DIR); }
+    TestProject()
+    {
+        QCoreApplication::addLibraryPath(ADDITIONAL_PLUGIN_DIR);
+    }
 
 private Q_SLOTS:
     void projectOperations();

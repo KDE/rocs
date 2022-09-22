@@ -26,10 +26,10 @@ class GRAPHTHEORY_EXPORT NodeTypeModel : public QAbstractListModel
 
 public:
     enum NodeRoles {
-        IdRole = Qt::UserRole + 1,      //!< unique identifier of node type
-        TitleRole,                      //!< title of node type
-        ColorRole,                      //!< color of node type
-        DataRole                        //!< access to NodeType object
+        IdRole = Qt::UserRole + 1, //!< unique identifier of node type
+        TitleRole, //!< title of node type
+        ColorRole, //!< color of node type
+        DataRole //!< access to NodeType object
     };
 
     explicit NodeTypeModel(QObject *parent = nullptr);
@@ -37,7 +37,7 @@ public:
     /**
      * Reimplemented from QAbstractListModel::roleNames()
      */
-    QHash<int,QByteArray> roleNames() const override;
+    QHash<int, QByteArray> roleNames() const override;
     GraphDocumentPtr document() const;
     void setDocument(GraphDocumentPtr document);
     NodeTypePtr type(int index) const;

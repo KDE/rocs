@@ -7,8 +7,8 @@
 #ifndef SCRIPTOUTPUTWIDGET_H
 #define SCRIPTOUTPUTWIDGET_H
 
-#include "ui_scriptoutputwidget.h"
 #include "libgraphtheory/kernel/kernel.h"
+#include "ui_scriptoutputwidget.h"
 #include <QWidget>
 
 /**
@@ -34,7 +34,7 @@ private Q_SLOTS:
     void updateFixOutputButton();
 
 private:
-    Ui::ScriptOutputWidget* ui;
+    Ui::ScriptOutputWidget *ui;
 };
 
 #endif

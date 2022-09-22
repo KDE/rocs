@@ -5,14 +5,14 @@
  */
 
 #include "transformedgeswidget.h"
-#include "graphdocument.h"
 #include "edge.h"
+#include "graphdocument.h"
 #include "modifiers/topology.h"
 
 #include <KLocalizedString>
+#include <QDebug>
 #include <QMap>
 #include <QPair>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -60,7 +60,7 @@ void TransformEdgesWidget::transform()
 
 void TransformEdgesWidget::makeComplete()
 {
-    //TODO only default edge type considered
+    // TODO only default edge type considered
     const auto edges = m_document->edges();
     for (const EdgePtr &e : edges) {
         e->destroy();
@@ -78,7 +78,7 @@ void TransformEdgesWidget::makeComplete()
 
 void TransformEdgesWidget::removeAllEdges()
 {
-    //TODO only default edge type considered
+    // TODO only default edge type considered
     const auto edges = m_document->edges();
     for (const EdgePtr &e : edges) {
         e->destroy();
@@ -92,10 +92,10 @@ void TransformEdgesWidget::reverseAllEdges()
         if (type->direction() == EdgeType::Bidirectional) {
             continue;
         }
-        QList< QPair< NodePtr, NodePtr > > newEdges;
+        QList<QPair<NodePtr, NodePtr>> newEdges;
         const auto edges = m_document->edges(type);
         for (const EdgePtr &e : edges) {
-            newEdges << QPair< NodePtr, NodePtr >(e->to(), e->from());
+            newEdges << QPair<NodePtr, NodePtr>(e->to(), e->from());
             e->destroy();
         }
 
@@ -112,7 +112,7 @@ qreal TransformEdgesWidget::makeSpanningTree()
     int n = nodes.size();
 
     // the resulting spanning tree (MST)
-    QList< QPair<int, int> > MST;
+    QList<QPair<int, int>> MST;
 
     /*
      * distance[i] denotes the distance between node i and the minimum spanning
@@ -137,11 +137,12 @@ qreal TransformEdgesWidget::makeSpanningTree()
      * path is present between i and j in the previous tree the weight
      * must be set to 0.
      */
-    QMap< QPair<int, int>, qreal> weight;
+    QMap<QPair<int, int>, qreal> weight;
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            if (i == j)   weight[QPair<int, int>(i, j)] = 0;
+            if (i == j)
+                weight[QPair<int, int>(i, j)] = 0;
 
             EdgeList out;
             out = nodes[i]->edges();
@@ -152,7 +153,6 @@ qreal TransformEdgesWidget::makeSpanningTree()
                         weight[QPair<int, int>(i, j)] = out[k]->property("value").toDouble();
                     else
                         weight[QPair<int, int>(i, j)] = 1;
-
                 }
             }
         }
@@ -162,7 +162,7 @@ qreal TransformEdgesWidget::makeSpanningTree()
      * successor[i] denotes the index of the node, to which i must be
      * linked to in order to get distance distance[i]
      */
-    QMap< int, int> successor;
+    QMap<int, int> successor;
 
     // start with first graph node
     inTree[0] = true;
@@ -170,7 +170,7 @@ qreal TransformEdgesWidget::makeSpanningTree()
     // update distances
     for (int i = 0; i < n; ++i) {
         if ((weight[QPair<int, int>(0, i)] != 0) && (distance[i] > weight[QPair<int, int>(0, i)])) {
-            distance[i] = weight[QPair<int, int>(0, i)] ;
+            distance[i] = weight[QPair<int, int>(0, i)];
             successor[i] = 0;
         }
     }
@@ -194,7 +194,7 @@ qreal TransformEdgesWidget::makeSpanningTree()
 
         // update distances
         for (int i = 0; i < n; ++i) {
-            if ((weight[QPair<int, int>(min, i)]  != 0) && (distance[i] > weight[QPair<int, int>(min, i)])) {
+            if ((weight[QPair<int, int>(min, i)] != 0) && (distance[i] > weight[QPair<int, int>(min, i)])) {
                 distance[i] = weight[QPair<int, int>(min, i)];
                 successor[i] = min;
             }

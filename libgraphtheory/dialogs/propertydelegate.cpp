@@ -7,26 +7,24 @@
 #include "propertydelegate.h"
 #include "models/nodetypepropertymodel.h"
 #include <KLocalizedString>
-#include <QToolButton>
-#include <QLineEdit>
-#include <QPainter>
 #include <QApplication>
 #include <QDebug>
+#include <QLineEdit>
+#include <QPainter>
+#include <QToolButton>
 
 using namespace GraphTheory;
 
 PropertyDelegate::PropertyDelegate(QAbstractItemView *parent)
     : KWidgetItemDelegate(parent)
 {
-
 }
 
 PropertyDelegate::~PropertyDelegate()
 {
-
 }
 
-void PropertyDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void PropertyDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (!index.isValid()) {
         return;
@@ -34,15 +32,15 @@ void PropertyDelegate::paint(QPainter* painter, const QStyleOptionViewItem &opti
     QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, nullptr);
 }
 
-QSize PropertyDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
+QSize PropertyDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     Q_UNUSED(index);
-    int iconHeight = option.decorationSize.height() + (m_vPadding * 2); //icon height + padding either side
-    int textHeight = option.fontMetrics.height()*2 + (m_vPadding * 2) + 10; // text height * 2 + padding + some space between the lines
+    int iconHeight = option.decorationSize.height() + (m_vPadding * 2); // icon height + padding either side
+    int textHeight = option.fontMetrics.height() * 2 + (m_vPadding * 2) + 10; // text height * 2 + padding + some space between the lines
     return QSize(-1, qMax(iconHeight, textHeight)); // any width, he view should give us the whole thing
 }
 
-QList< QWidget* > PropertyDelegate::createItemWidgets(const QModelIndex &index) const
+QList<QWidget *> PropertyDelegate::createItemWidgets(const QModelIndex &index) const
 {
     // items created by this method and added to the return-list will be
     // deleted by KWidgetItemDelegate
@@ -52,19 +50,14 @@ QList< QWidget* > PropertyDelegate::createItemWidgets(const QModelIndex &index) 
     QLineEdit *nameEdit = new QLineEdit(index.data(NodeTypePropertyModel::NameRole).toString());
 
     // change temporary name-input value whenever text is changed (not necessarily by user), and apply when finished is emitted
-    connect(nameEdit, &QLineEdit::textChanged,
-        this, &PropertyDelegate::onNameInputChanged);
-    connect(nameEdit, &QLineEdit::editingFinished,
-        this, &PropertyDelegate::onNameEditingFinished);
-    connect(deleteButton, &QToolButton::clicked,
-        this, &PropertyDelegate::onDelete);
+    connect(nameEdit, &QLineEdit::textChanged, this, &PropertyDelegate::onNameInputChanged);
+    connect(nameEdit, &QLineEdit::editingFinished, this, &PropertyDelegate::onNameEditingFinished);
+    connect(deleteButton, &QToolButton::clicked, this, &PropertyDelegate::onDelete);
 
-    return QList<QWidget*>()
-        << nameEdit
-        << deleteButton;
+    return QList<QWidget *>() << nameEdit << deleteButton;
 }
 
-void PropertyDelegate::updateItemWidgets(const QList< QWidget* > widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const
+void PropertyDelegate::updateItemWidgets(const QList<QWidget *> widgets, const QStyleOptionViewItem &option, const QPersistentModelIndex &index) const
 {
     // widgets:
     // Name || DeleteButton
@@ -75,8 +68,8 @@ void PropertyDelegate::updateItemWidgets(const QList< QWidget* > widgets, const 
 
     Q_ASSERT(widgets.size() == 2);
 
-    QLineEdit *name = qobject_cast<QLineEdit*>(widgets.at(0));
-    QToolButton *deleteButton = qobject_cast<QToolButton*>(widgets.at(1));
+    QLineEdit *name = qobject_cast<QLineEdit *>(widgets.at(0));
+    QToolButton *deleteButton = qobject_cast<QToolButton *>(widgets.at(1));
 
     Q_ASSERT(name);
     Q_ASSERT(deleteButton);

@@ -7,19 +7,19 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-#include "graphtheory_export.h"
-#include "typenames.h"
+#include "edge.h"
+#include "edgetype.h"
 #include "editor.h"
 #include "graphdocument.h"
-#include "edge.h"
+#include "graphtheory_export.h"
 #include "node.h"
-#include "edgetype.h"
 #include "nodetype.h"
+#include "typenames.h"
 
+#include <QList>
 #include <QObject>
 #include <QQuickWidget>
 #include <QSharedPointer>
-#include <QList>
 
 namespace GraphTheory
 {
@@ -41,7 +41,7 @@ public:
 
 private Q_SLOTS:
     void createNode(qreal x, qreal y, int typeIndex);
-    void createEdge(GraphTheory::Node* from, GraphTheory::Node* to, int typeIndex);
+    void createEdge(GraphTheory::Node *from, GraphTheory::Node *to, int typeIndex);
     void deleteNode(GraphTheory::Node *node);
     void deleteEdge(GraphTheory::Edge *edge);
     void showNodePropertiesDialog(GraphTheory::Node *node);

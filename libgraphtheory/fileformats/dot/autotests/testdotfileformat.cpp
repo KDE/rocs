@@ -9,30 +9,31 @@
 #include "testdotfileformat.h"
 #include "../dotfileformat.h"
 #include "../dotgrammar.h"
+#include "edge.h"
 #include "fileformats/fileformatinterface.h"
 #include "graphdocument.h"
-#include "node.h"
-#include "edge.h"
 #include "logging_p.h"
-#include <string>
+#include "node.h"
+#include <QTemporaryFile>
 #include <QTest>
 #include <QUrl>
-#include <QTemporaryFile>
+#include <string>
 
 using namespace GraphTheory;
 
 static const std::string simple = "digraph simple {a_2 -> b; c; d -> e /* error -> comment*/}";
 
-static const std::string subgraph = "digraph trees {"
-                                        "  subgraph t {"
-                                        "    0 -> \"1\" [label = \"A\"];"
-                                        "    0 -> \"2\" [label = \"B\"];"
-                                        "  }"
-                                        "  subgraph u {"
-                                        "    Animal -> Cat [label = \"feline\"];"
-                                        "    Animal -> Dot [label = \"canine\"];"
-                                        "  }"
-                                        "}";
+static const std::string subgraph =
+    "digraph trees {"
+    "  subgraph t {"
+    "    0 -> \"1\" [label = \"A\"];"
+    "    0 -> \"2\" [label = \"B\"];"
+    "  }"
+    "  subgraph u {"
+    "    Animal -> Cat [label = \"feline\"];"
+    "    Animal -> Dot [label = \"canine\"];"
+    "  }"
+    "}";
 
 void DotFileFormatTest::checkNodes(GraphDocumentPtr document, QList<QString> nodeNames)
 {
@@ -45,7 +46,7 @@ void DotFileFormatTest::checkNodes(GraphDocumentPtr document, QList<QString> nod
         QString name = node->dynamicProperty("name").toString();
         int index = nodeNames.indexOf(name);
         if (index == -1) {
-            qCDebug(GRAPHTHEORY_FILEFORMAT) << "Node "<< name << " was created unnecessarily.";
+            qCDebug(GRAPHTHEORY_FILEFORMAT) << "Node " << name << " was created unnecessarily.";
         }
         QVERIFY(index != -1);
         nodeNames.removeAt(index);
@@ -55,7 +56,6 @@ void DotFileFormatTest::checkNodes(GraphDocumentPtr document, QList<QString> nod
 
 void DotFileFormatTest::init()
 {
-
 }
 
 void DotFileFormatTest::simpleGraphParsing()
@@ -84,7 +84,18 @@ void DotFileFormatTest::parseFileER()
 
     // Check that all of the node names were imported, and that there are no extras.
     QList<QString> nodeNames;
-    nodeNames << "course" << "institute" << "student" << "name0" << "name1" << "name2" << "code" << "grade" << "number" << "C-I" << "S-C" << "S-I";
+    nodeNames << "course"
+              << "institute"
+              << "student"
+              << "name0"
+              << "name1"
+              << "name2"
+              << "code"
+              << "grade"
+              << "number"
+              << "C-I"
+              << "S-C"
+              << "S-I";
     checkNodes(document, nodeNames);
 
     // Check the numbers of edges
@@ -105,8 +116,8 @@ void DotFileFormatTest::parseFileER()
             QVERIFY(node->dynamicProperty("label").toString() == "name");
         }
     }
-//     EdgePtr connection = from->edges(to).at(0); //FIXME API missing
-//     QVERIFY(connection->property("label") == "m");
+    //     EdgePtr connection = from->edges(to).at(0); //FIXME API missing
+    //     QVERIFY(connection->property("label") == "m");
 }
 
 void DotFileFormatTest::parseFileHeawood()
@@ -310,8 +321,8 @@ void DotFileFormatTest::parseFileFsm()
             QVERIFY(node->property("shape").toString() == "circle");
         }
     }
-//     EdgePtr connection = from->edges(to).at(0); //FIXME API missing
-//     QVERIFY(connection->property("label") == "SS(B)");
+    //     EdgePtr connection = from->edges(to).at(0); //FIXME API missing
+    //     QVERIFY(connection->property("label") == "SS(B)");
 }
 
 void DotFileFormatTest::parseFileKW91()
@@ -645,13 +656,47 @@ void DotFileFormatTest::parseFileUnix()
 
     // check that all of the node names were imported, and that there are no extra nodes
     QStringList nodeNames;
-    nodeNames << "5th Edition" << "6th Edition" << "PWB 1.0" << "LSX" << "1 BSD" << "Mini Unix"
-        << "Wollongong" << "Interdata" << "Unix/TS 3.0" << "PWB 2.0" << "7th Edition"
-        << "8th Edition" << "32V" << "V7M" << "Ultrix-11" << "Xenix" << "UniPlus+" << "9th Edition"
-        << "2 BSD" << "2.8 BSD" << "2.9 BSD" << "3 BSD" << "4 BSD" << "4.1 BSD" << "4.2 BSD"
-        << "4.3 BSD" << "Ultrix-32" << "PWB 1.2" << "USG 1.0" << "CB Unix 1" << "USG 2.0" <<
-        "CB Unix 2" << "CB Unix 3" << "Unix/TS++" << "PDP-11 Sys V" << "USG 3.0" << "Unix/TS 1.0"
-        << "TS 4.0" << "System V.0" << "System V.2" << "System V.3";
+    nodeNames << "5th Edition"
+              << "6th Edition"
+              << "PWB 1.0"
+              << "LSX"
+              << "1 BSD"
+              << "Mini Unix"
+              << "Wollongong"
+              << "Interdata"
+              << "Unix/TS 3.0"
+              << "PWB 2.0"
+              << "7th Edition"
+              << "8th Edition"
+              << "32V"
+              << "V7M"
+              << "Ultrix-11"
+              << "Xenix"
+              << "UniPlus+"
+              << "9th Edition"
+              << "2 BSD"
+              << "2.8 BSD"
+              << "2.9 BSD"
+              << "3 BSD"
+              << "4 BSD"
+              << "4.1 BSD"
+              << "4.2 BSD"
+              << "4.3 BSD"
+              << "Ultrix-32"
+              << "PWB 1.2"
+              << "USG 1.0"
+              << "CB Unix 1"
+              << "USG 2.0"
+              << "CB Unix 2"
+              << "CB Unix 3"
+              << "Unix/TS++"
+              << "PDP-11 Sys V"
+              << "USG 3.0"
+              << "Unix/TS 1.0"
+              << "TS 4.0"
+              << "System V.0"
+              << "System V.2"
+              << "System V.3";
     checkNodes(document, nodeNames);
 
     // check number of pointers

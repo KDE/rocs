@@ -11,16 +11,16 @@
 #include "libgraphtheory/typenames.h"
 
 #include <QList>
-#include <QString>
 #include <QScopedPointer>
+#include <QString>
 
 class QUrl;
 class ProjectPrivate;
 
 namespace KTextEditor
 {
-    class Document;
-    class Editor;
+class Document;
+class Editor;
 }
 
 /**
@@ -63,26 +63,26 @@ public:
      * @return the project's journal document
      * Note that the pointer may be 0.
      */
-    KTextEditor::Document * journalDocument() const;
+    KTextEditor::Document *journalDocument() const;
 
-  /*
-   * Handling of script documents.
-   */
+    /*
+     * Handling of script documents.
+     */
 public:
     /**
      * @return list of all scripts contained in this project
      */
-    QList<KTextEditor::Document*> codeDocuments() const;
+    QList<KTextEditor::Document *> codeDocuments() const;
 
     /**
      * Creates a code document based on a given file path
      */
-    KTextEditor::Document* createCodeDocument(const QString& filePath);
+    KTextEditor::Document *createCodeDocument(const QString &filePath);
 
     /**
      * Returns a document of a given url (path)
      */
-    KTextEditor::Document* openCodeDocument(const QUrl &url);
+    KTextEditor::Document *openCodeDocument(const QUrl &url);
 
     /**
      * Add code document @p document to project. This updates the document's url.
@@ -93,7 +93,7 @@ public:
      * Import the script given in file @p url to the project. This creates a copy
      * of the original document.
      */
-    KTextEditor::Document * importCodeDocument(const QUrl &url);
+    KTextEditor::Document *importCodeDocument(const QUrl &url);
 
     /**
      * Remove the script file @p document from the project
@@ -119,16 +119,16 @@ public Q_SLOTS:
     void setActiveCodeDocument(int index);
 
 Q_SIGNALS:
-    void codeDocumentAboutToBeAdded(KTextEditor::Document*,int);
+    void codeDocumentAboutToBeAdded(KTextEditor::Document *, int);
     void codeDocumentAdded();
-    void codeDocumentAboutToBeRemoved(int,int);
+    void codeDocumentAboutToBeRemoved(int, int);
     void codeDocumentRemoved();
     void activeCodeDocumentChanged(int index);
     void modifiedChanged();
 
-  /*
-   * Handling of graph documents.
-   */
+    /*
+     * Handling of graph documents.
+     */
 public:
     /**
      * @return list of all graph documents contained in this project
@@ -163,15 +163,15 @@ public Q_SLOTS:
 Q_SIGNALS:
     void graphDocumentAboutToBeAdded(GraphTheory::GraphDocumentPtr, int);
     void graphDocumentAdded();
-    void graphDocumentAboutToBeRemoved(int,int);
+    void graphDocumentAboutToBeRemoved(int, int);
     void graphDocumentRemoved();
     void activeGraphDocumentChanged(int index);
     void activeGraphDocumentChanged(GraphTheory::GraphDocumentPtr document);
 
-  /*
-   * General file related actions.
-   * None of these actions cause user interaction.
-   */
+    /*
+     * General file related actions.
+     * None of these actions cause user interaction.
+     */
 public:
     /**
      * Save project to path as given by projectUrl().

@@ -4,19 +4,19 @@
  *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
-#include "typenames.h"
-#include "graphdocument.h"
-#include "node.h"
 #include "edge.h"
 #include "editor.h"
+#include "graphdocument.h"
+#include "node.h"
+#include "typenames.h"
 #include "view.h"
 #include <QApplication>
+#include <QDebug>
 #include <QObject>
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickWidget>
-#include <QDebug>
 #include <QStandardPaths>
 
 using namespace GraphTheory;

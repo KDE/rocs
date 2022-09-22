@@ -13,7 +13,6 @@
 namespace GraphTheory
 {
 
-
 /** \brief class RocsGraphFileFormatPlugin: Import and Export Plugin for internal graph format.
  *
  * A Document Internal format may look like this:
@@ -100,8 +99,6 @@ namespace GraphTheory
  * property2 : propertyValue2
  * property3 : propertyValue3
  */
-
-
 
 class Rocs1FileFormat : public FileFormatInterface
 {

@@ -8,12 +8,12 @@
 */
 
 #include "gmlfileformat.h"
-#include "gmlgrammarhelper.h"
-#include "gmlgrammar.h"
-#include "modifiers/topology.h"
-#include "graphdocument.h"
-#include "node.h"
 #include "edge.h"
+#include "gmlgrammar.h"
+#include "gmlgrammarhelper.h"
+#include "graphdocument.h"
+#include "modifiers/topology.h"
+#include "node.h"
 #include <KLocalizedString>
 #include <KPluginFactory>
 #include <QFile>
@@ -26,7 +26,7 @@ using namespace GraphTheory;
 static QString processEdge(const EdgePtr &e);
 static QString processNode(const NodePtr &n);
 
-extern GmlParser::GmlGrammarHelper* phelper;
+extern GmlParser::GmlGrammarHelper *phelper;
 
 K_PLUGIN_CLASS_WITH_JSON(GmlFileFormat, "gmlfileformat.json")
 
@@ -56,7 +56,7 @@ void GmlFileFormat::readFile()
         return;
     }
     QString content = fileHandle.readAll();
-    if (!GmlParser::parse(content, document)) { //TODO change interface and pass graph structure
+    if (!GmlParser::parse(content, document)) { // TODO change interface and pass graph structure
         setError(EncodingProblem, i18n("Could not parse file \"%1\".", file().toLocalFile()));
         document->destroy();
         return;
@@ -75,16 +75,15 @@ void GmlFileFormat::writeFile(GraphDocumentPtr document)
         return;
     } else {
         QTextStream out(&fileHandle);
-//FIXME uncommented following directed() check since this is moved to subclass
-//need to add toggle
-//             out << QString("graph [\n directed %1 \n").arg(g->directed()?"1":"0");
-        out << QString("id \"%1\" \n").arg("graph"); //TODO support export of name
+        // FIXME uncommented following directed() check since this is moved to subclass
+        // need to add toggle
+        //              out << QString("graph [\n directed %1 \n").arg(g->directed()?"1":"0");
+        out << QString("id \"%1\" \n").arg("graph"); // TODO support export of name
 
-        for(const NodePtr &n : document->nodes()) {
+        for (const NodePtr &n : document->nodes()) {
             out << QString("node [\n id \"%1\" \n").arg(n->dynamicProperty("name").toString());
             out << processNode(n);
             out << "]\n";
-
         }
         for (auto const &edge : document->edges()) {
             out << "edge [\n";
@@ -97,14 +96,13 @@ void GmlFileFormat::writeFile(GraphDocumentPtr document)
     return;
 }
 
-
 static QString processEdge(const EdgePtr &e)
 {
     QString edge;
     edge.append(QString("source \"%1\"\n target \"%2\"\n").arg(e->from()->dynamicProperty("name").toString(), e->to()->dynamicProperty("name").toString()));
-//     edge.append (QString(" color \"%1\"\n").arg(e->color())); //Problem with comments (both starts by '#')
+    //     edge.append (QString(" color \"%1\"\n").arg(e->color())); //Problem with comments (both starts by '#')
 
-    for(const QString &property : e->dynamicProperties()) {
+    for (const QString &property : e->dynamicProperties()) {
         edge.append(QString("%1 %2\n").arg(property).arg(e->dynamicProperty(property).toString()));
     }
 
@@ -115,9 +113,9 @@ static QString processNode(const NodePtr &n)
 {
     QString node;
     node.append(QString("  x %1 \n  y %2 \n").arg(n->x()).arg(n->y()));
-//       node.append (QString(" color \"%1\"\n").arg(n->color())); //Problem with comments (both starts by '#')
+    //       node.append (QString(" color \"%1\"\n").arg(n->color())); //Problem with comments (both starts by '#')
 
-    for(const QString &property : n->dynamicProperties()) {
+    for (const QString &property : n->dynamicProperties()) {
         node.append(QString("%1 %2\n").arg(property).arg(n->dynamicProperty(property).toString()));
     }
 

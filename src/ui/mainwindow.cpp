@@ -15,45 +15,45 @@
 #include "libgraphtheory/kernel/kernel.h"
 #include "libgraphtheory/view.h"
 
+#include <QActionGroup>
 #include <QApplication>
 #include <QCloseEvent>
+#include <QDebug>
+#include <QFileDialog>
 #include <QGraphicsView>
+#include <QGridLayout>
+#include <QIcon>
+#include <QInputDialog>
 #include <QLabel>
 #include <QLayout>
+#include <QPointer>
+#include <QPushButton>
+#include <QQuickWidget>
 #include <QSplitter>
 #include <QToolButton>
-#include <QGridLayout>
-#include <QDebug>
-#include <QIcon>
-#include <QPushButton>
-#include <QInputDialog>
-#include <QActionGroup>
-#include <QFileDialog>
-#include <QQuickWidget>
-#include <QPointer>
 
 #include <KActionCollection>
-#include <KRecentFilesAction>
 #include <KActionMenu>
-#include <KTar>
-#include <KMessageBox>
-#include <KLocalizedString>
 #include <KConfigDialog>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KRecentFilesAction>
+#include <KTar>
 #include <KToolBar>
 #include <ktexteditor/configpage.h>
-#include <ktexteditor/view.h>
-#include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
+#include <ktexteditor/editor.h>
+#include <ktexteditor/view.h>
 
-#include "ui/documenttypeswidget.h"
-#include "ui/codeeditorwidget.h"
-#include "ui/scriptoutputwidget.h"
-#include "ui/sidedockwidget.h"
-#include "ui/fileformatdialog.h"
-#include "ui/journalwidget.h"
 #include "grapheditorwidget.h"
 #include "plugins/scriptapi/scriptapiwidget.h"
 #include "project/project.h"
+#include "ui/codeeditorwidget.h"
+#include "ui/documenttypeswidget.h"
+#include "ui/fileformatdialog.h"
+#include "ui/journalwidget.h"
+#include "ui/scriptoutputwidget.h"
+#include "ui/sidedockwidget.h"
 
 using namespace GraphTheory;
 
@@ -97,12 +97,12 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {
-    Settings::setVSplitterSizeTop(m_vSplitter->sizes() [0]);
-    Settings::setVSplitterSizeBottom(m_vSplitter->sizes() [1]);
-    Settings::setHSplitterSizeLeft(m_hSplitter->sizes() [0]);
-    Settings::setHSplitterSizeRight(m_hSplitter->sizes() [1]);
-    Settings::setHScriptSplitterSizeLeft(m_hScriptSplitter->sizes() [0]);
-    Settings::setHScriptSplitterSizeRight(m_hScriptSplitter->sizes() [1]);
+    Settings::setVSplitterSizeTop(m_vSplitter->sizes()[0]);
+    Settings::setVSplitterSizeBottom(m_vSplitter->sizes()[1]);
+    Settings::setHSplitterSizeLeft(m_hSplitter->sizes()[0]);
+    Settings::setHSplitterSizeRight(m_hSplitter->sizes()[1]);
+    Settings::setHScriptSplitterSizeLeft(m_hScriptSplitter->sizes()[0]);
+    Settings::setHScriptSplitterSizeRight(m_hScriptSplitter->sizes()[1]);
     m_recentProjects->saveEntries(Settings::self()->config()->group("RecentFiles"));
 
     Settings::self()->save();
@@ -140,36 +140,26 @@ void MainWindow::setupWidgets()
     m_hSplitter->addWidget(sidePanel);
 
     // set sizes for script panel
-    m_hScriptSplitter->setSizes({
-        Settings::hScriptSplitterSizeLeft(),
-        Settings::hScriptSplitterSizeRight(),
-        80
-    });
+    m_hScriptSplitter->setSizes({Settings::hScriptSplitterSizeLeft(), Settings::hScriptSplitterSizeRight(), 80});
 
     // set sizes for vertical splitter
-    m_vSplitter->setSizes({
-        Settings::vSplitterSizeTop(),
-        Settings::vSplitterSizeBottom()
-    });
+    m_vSplitter->setSizes({Settings::vSplitterSizeTop(), Settings::vSplitterSizeBottom()});
 
     // set sizes for side panel
     // the following solves the setting of the panel width if it was closed at previous session
     int panelWidth = Settings::hSplitterSizeRight();
     if (panelWidth == 0) {
-        //FIXME this is only a workaround
-        // that fixes the wrong saving of hSplitterSizeRight
+        // FIXME this is only a workaround
+        //  that fixes the wrong saving of hSplitterSizeRight
         panelWidth = 400;
     }
 
-    m_hSplitter->setSizes({
-        Settings::hSplitterSizeLeft(),
-        panelWidth
-    });
+    m_hSplitter->setSizes({Settings::hSplitterSizeLeft(), panelWidth});
 
     setCentralWidget(m_hSplitter);
 }
 
-QWidget* MainWindow::setupScriptPanel()
+QWidget *MainWindow::setupScriptPanel()
 {
     m_hScriptSplitter = new QSplitter(this);
     m_hScriptSplitter->setOrientation(Qt::Horizontal);
@@ -208,10 +198,10 @@ QWidget* MainWindow::setupScriptPanel()
     return scriptInterface;
 }
 
-QWidget* MainWindow::setupSidePanel()
+QWidget *MainWindow::setupSidePanel()
 {
     // add sidebar
-    SidedockWidget* sideDock = new SidedockWidget(this);
+    SidedockWidget *sideDock = new SidedockWidget(this);
     addToolBar(Qt::RightToolBarArea, sideDock->toolbar());
 
     // add widgets to dock
@@ -228,7 +218,7 @@ QWidget* MainWindow::setupSidePanel()
     sideDock->addDock(m_journalWidget, i18nc("@title", "Journal"), QIcon::fromTheme("story-editor"));
 
     // Rocs scripting API documentation
-    ScriptApiWidget* apiDoc = new ScriptApiWidget(this);
+    ScriptApiWidget *apiDoc = new ScriptApiWidget(this);
     sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), QIcon::fromTheme("documentation"));
 
     return sideDock;
@@ -246,10 +236,11 @@ void MainWindow::setProject(Project *project)
         m_currentProject->deleteLater();
     }
 
-    connect(project, static_cast<void (Project::*)(GraphTheory::GraphDocumentPtr)>(&Project::activeGraphDocumentChanged),
-        this, &MainWindow::graphDocumentChanged);
-    connect(project, &Project::modifiedChanged,
-        this, &MainWindow::updateCaption);
+    connect(project,
+            static_cast<void (Project::*)(GraphTheory::GraphDocumentPtr)>(&Project::activeGraphDocumentChanged),
+            this,
+            &MainWindow::graphDocumentChanged);
+    connect(project, &Project::modifiedChanged, this, &MainWindow::updateCaption);
     m_currentProject = project;
     Q_EMIT graphDocumentChanged(m_currentProject->activeGraphDocument());
 }
@@ -260,7 +251,7 @@ void MainWindow::setupActions()
     KStandardAction::preferences(this, SLOT(showConfigurationDialog()), actionCollection());
 
     // setup graph visual editor actions and add them to mainwindow action collection
-//     m_graphEditor->setupActions(actionCollection()); //FIXME add editor actions to main action collection
+    //     m_graphEditor->setupActions(actionCollection()); //FIXME add editor actions to main action collection
 
     // Menu actions
     QAction *newProjectAction = new QAction(QIcon::fromTheme("document-new"), i18nc("@action:inmenu", "New Project"), this);
@@ -279,27 +270,27 @@ void MainWindow::setupActions()
     projectOpenAction->setShortcutContext(Qt::ApplicationShortcut);
     actionCollection()->addAction("open-project", projectOpenAction);
     actionCollection()->setDefaultShortcut(projectOpenAction, QKeySequence::Open);
-    connect(projectOpenAction, &QAction::triggered, this, [=] () { openProject(); });
+    connect(projectOpenAction, &QAction::triggered, this, [=]() {
+        openProject();
+    });
 
-    m_recentProjects = new KRecentFilesAction(QIcon ("document-open"), i18nc("@action:inmenu","Recent Projects"), this);
-    connect(m_recentProjects, &KRecentFilesAction::urlSelected,
-        this, &MainWindow::openProject);
+    m_recentProjects = new KRecentFilesAction(QIcon("document-open"), i18nc("@action:inmenu", "Recent Projects"), this);
+    connect(m_recentProjects, &KRecentFilesAction::urlSelected, this, &MainWindow::openProject);
     actionCollection()->addAction("recent-project", m_recentProjects);
     m_recentProjects->loadEntries(Settings::self()->config()->group("RecentFiles"));
 
-    createAction("document-save-as",     i18nc("@action:inmenu", "Save Project As..."),   "save-project-as",    SLOT(saveProjectAs()), this);
-    createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(createGraphDocument()), this);
-    createAction("document-new",        i18nc("@action:inmenu", "New Script File..."),    "new-script",        SLOT(tryToCreateCodeDocument()),    this);
-    createAction("document-import",     i18nc("@action:inmenu", "Import Graph..."),       "import-graph",      SLOT(importGraphDocument()),   this);
-    createAction("document-export",     i18nc("@action:inmenu", "Export Graph As..."),    "export-graph-as",      SLOT(exportGraphDocument()), this);
-    createAction("document-import",  i18nc("@action:inmenu", "Import Script..."),       "add-script",          SLOT(importCodeDocument()),   this);
-    createAction("document-export", i18nc("@action:inmenu", "Export Script..."),      "export-script",      SLOT(exportCodeDocument()), this);
+    createAction("document-save-as", i18nc("@action:inmenu", "Save Project As..."), "save-project-as", SLOT(saveProjectAs()), this);
+    createAction("document-new", i18nc("@action:inmenu", "New Graph Document"), "new-graph", SLOT(createGraphDocument()), this);
+    createAction("document-new", i18nc("@action:inmenu", "New Script File..."), "new-script", SLOT(tryToCreateCodeDocument()), this);
+    createAction("document-import", i18nc("@action:inmenu", "Import Graph..."), "import-graph", SLOT(importGraphDocument()), this);
+    createAction("document-export", i18nc("@action:inmenu", "Export Graph As..."), "export-graph-as", SLOT(exportGraphDocument()), this);
+    createAction("document-import", i18nc("@action:inmenu", "Import Script..."), "add-script", SLOT(importCodeDocument()), this);
+    createAction("document-export", i18nc("@action:inmenu", "Export Script..."), "export-script", SLOT(exportCodeDocument()), this);
 }
 
-void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
-                              const char* slot, QObject *parent)
+void MainWindow::createAction(const QByteArray &iconName, const QString &actionTitle, const QString &actionName, const char *slot, QObject *parent)
 {
-    QAction* action = new QAction(QIcon::fromTheme(iconName), actionTitle, parent);
+    QAction *action = new QAction(QIcon::fromTheme(iconName), actionTitle, parent);
     actionCollection()->addAction(actionName, action);
     connect(action, SIGNAL(triggered(bool)), parent, slot);
 }
@@ -310,24 +301,20 @@ void MainWindow::showConfigurationDialog()
     KTextEditor::Editor *editor = KTextEditor::Editor::instance();
     for (int index = 0; index < editor->configPages(); ++index) {
         KTextEditor::ConfigPage *page = editor->configPage(index, dialog);
-        dialog->addPage(page,
-            page->name(),
-            page->icon().name(),
-            page->fullName());
+        dialog->addPage(page, page->name(), page->icon().name(), page->fullName());
     }
     dialog->exec();
 }
 
 void MainWindow::setupToolsPluginsAction()
 {
-    QList<EditorPluginInterface*> availablePlugins =  m_graphEditorPluginManager.plugins();
-    QList<QAction*> actions;
+    QList<EditorPluginInterface *> availablePlugins = m_graphEditorPluginManager.plugins();
+    QList<QAction *> actions;
     int count = 0;
     for (auto plugin : availablePlugins) {
         auto *action = new QAction(plugin->displayName(), this);
         action->setData(count++);
-        connect(action, &QAction::triggered,
-            this, &MainWindow::showEditorPluginDialog);
+        connect(action, &QAction::triggered, this, &MainWindow::showEditorPluginDialog);
         actions << action;
     }
     unplugActionList("tools_plugins");
@@ -337,9 +324,7 @@ void MainWindow::setupToolsPluginsAction()
 void MainWindow::importCodeDocument()
 {
     QString startDirectory = Settings::lastOpenedDirectory();
-    QUrl fileUrl = QUrl::fromLocalFile(QFileDialog::getOpenFileName(this,
-        i18nc("@title:window", "Import Script into Project"),
-        startDirectory));
+    QUrl fileUrl = QUrl::fromLocalFile(QFileDialog::getOpenFileName(this, i18nc("@title:window", "Import Script into Project"), startDirectory));
 
     if (fileUrl.isEmpty()) {
         return;
@@ -352,10 +337,7 @@ void MainWindow::importCodeDocument()
 void MainWindow::exportCodeDocument()
 {
     QString startDirectory = Settings::lastOpenedDirectory();
-    QUrl fileUrl = QUrl::fromLocalFile(QFileDialog::getSaveFileName(this,
-        i18nc("@title:window", "Export Script"),
-        startDirectory,
-        i18n("JavaScript (*.js)")));
+    QUrl fileUrl = QUrl::fromLocalFile(QFileDialog::getSaveFileName(this, i18nc("@title:window", "Export Script"), startDirectory, i18n("JavaScript (*.js)")));
     m_codeEditorWidget->activeDocument()->saveAs(fileUrl);
 }
 
@@ -389,10 +371,7 @@ void MainWindow::saveProject()
 void MainWindow::saveProjectAs()
 {
     QString startDirectory = Settings::lastOpenedDirectory();
-    QString file = QFileDialog::getSaveFileName(this,
-                        i18nc("@title:window", "Save Project As"),
-                        startDirectory,
-                        i18n("Rocs Projects (*.rocs)"));
+    QString file = QFileDialog::getSaveFileName(this, i18nc("@title:window", "Save Project As"), startDirectory, i18n("Rocs Projects (*.rocs)"));
 
     if (file.isEmpty()) {
         qCritical() << "Filename is empty and no script file was created.";
@@ -400,11 +379,11 @@ void MainWindow::saveProjectAs()
     }
     QFileInfo fi(file);
     if (fi.exists()) {
-        const int btnCode = KMessageBox::warningContinueCancel(
-            this,
-            i18nc("@info", "A file named \"%1\" already exists. Are you sure you want to overwrite it?", fi.fileName()),
-            i18nc("@title:window", "Overwrite File?"),
-            KStandardGuiItem::overwrite());
+        const int btnCode =
+            KMessageBox::warningContinueCancel(this,
+                                               i18nc("@info", "A file named \"%1\" already exists. Are you sure you want to overwrite it?", fi.fileName()),
+                                               i18nc("@title:window", "Overwrite File?"),
+                                               KStandardGuiItem::overwrite());
         if (btnCode == KMessageBox::Cancel) {
             return; // cancel saving
         }
@@ -424,11 +403,9 @@ void MainWindow::openProject(const QUrl &fileName)
     QString startDirectory = Settings::lastOpenedDirectory();
     QUrl file = fileName;
     if (file.isEmpty()) {
-    // show open dialog
-         file = QUrl::fromLocalFile(QFileDialog::getOpenFileName(this,
-                    i18nc("@title:window", "Open Project Files"),
-                    startDirectory,
-                    i18n("Rocs projects (*.rocs)")));
+        // show open dialog
+        file = QUrl::fromLocalFile(
+            QFileDialog::getOpenFileName(this, i18nc("@title:window", "Open Project Files"), startDirectory, i18n("Rocs projects (*.rocs)")));
     }
     if (file.isEmpty()) {
         return;
@@ -459,7 +436,8 @@ void MainWindow::updateCaption()
     }
 }
 
-QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suffix) {
+QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suffix)
+{
     QFile targetFile;
     QString basePath = m_currentProject->projectUrl().path();
     QString fullSuffix = '.' + suffix;
@@ -472,7 +450,7 @@ QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suf
     }
 
     targetFile.setFileName(basePath + fullPrefix + fullSuffix);
-    for(int i = 1; targetFile.exists(); i++) {
+    for (int i = 1; targetFile.exists(); i++) {
         targetFile.setFileName(basePath + fullPrefix + QString::number(i) + fullSuffix);
     }
 
@@ -481,9 +459,7 @@ QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suf
 
 void MainWindow::tryToCreateCodeDocument()
 {
-    QString basePrefix = QInputDialog::getText(this,
-                            i18n("ScriptName"),
-                            i18n("Enter the name of your new script"));
+    QString basePrefix = QInputDialog::getText(this, i18n("ScriptName"), i18n("Enter the name of your new script"));
     if (basePrefix.isNull()) {
         qDebug() << "Filename is empty and no script file was created.";
         return;
@@ -513,9 +489,7 @@ bool MainWindow::queryClose()
     if (!m_currentProject->isModified()) {
         return true;
     }
-    const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
-                            "@info",
-                            "Changes on your project are unsaved. Do you want to save your changes?"));
+    const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc("@info", "Changes on your project are unsaved. Do you want to save your changes?"));
 
     if (btnCode == KMessageBox::Cancel) {
         return false;
@@ -554,12 +528,12 @@ void MainWindow::exportGraphDocument()
 
 void MainWindow::showEditorPluginDialog()
 {
-    QAction *action = qobject_cast<QAction *> (sender());
+    QAction *action = qobject_cast<QAction *>(sender());
 
     if (!action) {
         return;
     }
-    if (EditorPluginInterface *plugin =  m_graphEditorPluginManager.plugins().value(action->data().toInt())) {
+    if (EditorPluginInterface *plugin = m_graphEditorPluginManager.plugins().value(action->data().toInt())) {
         plugin->showDialog(m_currentProject->activeGraphDocument());
     }
 }

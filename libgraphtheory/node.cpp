@@ -5,10 +5,10 @@
  */
 
 #include "node.h"
-#include "nodetype.h"
 #include "edge.h"
-#include "nodetypestyle.h"
 #include "logging_p.h"
+#include "nodetype.h"
+#include "nodetypestyle.h"
 
 #include <QPointF>
 
@@ -17,7 +17,8 @@ using namespace GraphTheory;
 // initialize number of edge objects
 uint Node::objectCounter = 0;
 
-class GraphTheory::NodePrivate {
+class GraphTheory::NodePrivate
+{
 public:
     NodePrivate()
         : m_valid(false)
@@ -47,10 +48,8 @@ Node::Node()
     : QObject()
     , d(new NodePrivate)
 {
-    connect(this, &Node::dynamicPropertyAdded,
-        this, &Node::dynamicPropertiesChanged);
-    connect(this, &Node::dynamicPropertyRemoved,
-        this, &Node::dynamicPropertiesChanged);
+    connect(this, &Node::dynamicPropertyAdded, this, &Node::dynamicPropertiesChanged);
+    connect(this, &Node::dynamicPropertyRemoved, this, &Node::dynamicPropertiesChanged);
 
     ++Node::objectCounter;
 }
@@ -120,20 +119,13 @@ void Node::setType(NodeTypePtr type)
         d->m_type->style()->disconnect(this);
     }
     d->m_type = type;
-    connect(type.data(), &NodeType::dynamicPropertyAboutToBeAdded,
-        this, &Node::dynamicPropertyAboutToBeAdded);
-    connect(type.data(), &NodeType::dynamicPropertyAdded,
-        this, &Node::dynamicPropertyAdded);
-    connect(type.data(), &NodeType::dynamicPropertiesAboutToBeRemoved,
-        this, &Node::dynamicPropertiesAboutToBeRemoved);
-    connect(type.data(), &NodeType::dynamicPropertyRemoved,
-        this, &Node::dynamicPropertyRemoved);
-    connect(type.data(), &NodeType::dynamicPropertyRemoved,
-        this, &Node::updateDynamicProperty);
-    connect(type.data(), &NodeType::dynamicPropertyRenamed,
-        this, &Node::renameDynamicProperty);
-    connect(type->style(), &NodeTypeStyle::changed,
-        this, &Node::styleChanged);
+    connect(type.data(), &NodeType::dynamicPropertyAboutToBeAdded, this, &Node::dynamicPropertyAboutToBeAdded);
+    connect(type.data(), &NodeType::dynamicPropertyAdded, this, &Node::dynamicPropertyAdded);
+    connect(type.data(), &NodeType::dynamicPropertiesAboutToBeRemoved, this, &Node::dynamicPropertiesAboutToBeRemoved);
+    connect(type.data(), &NodeType::dynamicPropertyRemoved, this, &Node::dynamicPropertyRemoved);
+    connect(type.data(), &NodeType::dynamicPropertyRemoved, this, &Node::updateDynamicProperty);
+    connect(type.data(), &NodeType::dynamicPropertyRenamed, this, &Node::renameDynamicProperty);
+    connect(type->style(), &NodeTypeStyle::changed, this, &Node::styleChanged);
     Q_EMIT typeChanged(type);
     Q_EMIT styleChanged();
 }
@@ -190,9 +182,7 @@ EdgeList Node::inEdges(EdgeTypePtr type) const
             inEdges.append(edge);
             continue;
         }
-        if (edge->type()->direction() == EdgeType::Unidirectional
-            && edge->to() == self()
-        ) {
+        if (edge->type()->direction() == EdgeType::Unidirectional && edge->to() == self()) {
             inEdges.append(edge);
         }
     }
@@ -210,9 +200,7 @@ EdgeList Node::outEdges(EdgeTypePtr type) const
             outEdges.append(edge);
             continue;
         }
-        if (edge->type()->direction() == EdgeType::Unidirectional
-            && edge->from() == self()
-        ) {
+        if (edge->type()->direction() == EdgeType::Unidirectional && edge->from() == self()) {
             outEdges.append(edge);
         }
     }

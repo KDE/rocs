@@ -10,7 +10,8 @@
 
 using namespace GraphTheory;
 
-class GraphTheory::EdgeTypeStylePrivate {
+class GraphTheory::EdgeTypeStylePrivate
+{
 public:
     EdgeTypeStylePrivate()
         : m_color(77, 77, 77) // dark gray
@@ -32,17 +33,13 @@ EdgeTypeStyle::EdgeTypeStyle()
     : QObject()
     , d(new EdgeTypeStylePrivate)
 {
-    connect(this, &EdgeTypeStyle::colorChanged,
-        this, &EdgeTypeStyle::changed);
-    connect(this, &EdgeTypeStyle::visibilityChanged,
-        this, &EdgeTypeStyle::changed);
-    connect(this, &EdgeTypeStyle::propertyNamesVisibilityChanged,
-        this, &EdgeTypeStyle::changed);
+    connect(this, &EdgeTypeStyle::colorChanged, this, &EdgeTypeStyle::changed);
+    connect(this, &EdgeTypeStyle::visibilityChanged, this, &EdgeTypeStyle::changed);
+    connect(this, &EdgeTypeStyle::propertyNamesVisibilityChanged, this, &EdgeTypeStyle::changed);
 }
 
 EdgeTypeStyle::~EdgeTypeStyle()
 {
-
 }
 
 void EdgeTypeStyle::setColor(const QColor &color)

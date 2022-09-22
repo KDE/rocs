@@ -7,15 +7,15 @@
 #ifndef GRAPHDOCUMENT_H
 #define GRAPHDOCUMENT_H
 
-#include "graphtheory_export.h"
-#include "typenames.h"
-#include "node.h"
 #include "edgetype.h"
+#include "graphtheory_export.h"
+#include "node.h"
 #include "nodetype.h"
+#include "typenames.h"
 
+#include <QList>
 #include <QObject>
 #include <QSharedPointer>
-#include <QList>
 
 namespace GraphTheory
 {
@@ -51,7 +51,7 @@ public:
      */
     void destroy();
 
-    View * createView(QWidget *parent);
+    View *createView(QWidget *parent);
 
     /**
      * @return list of nodes contained at the document
@@ -161,26 +161,26 @@ public:
     }
 
 Q_SIGNALS:
-    void nodeAboutToBeAdded(NodePtr,int);
+    void nodeAboutToBeAdded(NodePtr, int);
     void nodeAdded();
-    void nodesAboutToBeRemoved(int,int);
+    void nodesAboutToBeRemoved(int, int);
     void nodesRemoved();
-    void edgeAboutToBeAdded(EdgePtr,int);
+    void edgeAboutToBeAdded(EdgePtr, int);
     void edgeAdded();
-    void edgesAboutToBeRemoved(int,int);
+    void edgesAboutToBeRemoved(int, int);
     void edgesRemoved();
-    void nodeTypeAboutToBeAdded(NodeTypePtr,int);
+    void nodeTypeAboutToBeAdded(NodeTypePtr, int);
     void nodeTypeAdded();
-    void nodeTypesAboutToBeRemoved(int,int);
+    void nodeTypesAboutToBeRemoved(int, int);
     void nodeTypesRemoved();
-    void edgeTypeAboutToBeAdded(EdgeTypePtr,int);
+    void edgeTypeAboutToBeAdded(EdgeTypePtr, int);
     void edgeTypeAdded();
-    void edgeTypesAboutToBeRemoved(int,int);
+    void edgeTypesAboutToBeRemoved(int, int);
     void edgeTypesRemoved();
 
-  /*
-   * General document related properties
-   */
+    /*
+     * General document related properties
+     */
 public:
     /**
      * Get this document's name.
@@ -193,14 +193,13 @@ public:
     void setDocumentName(const QString &name);
 
 Q_SIGNALS:
-    void documentNameChanged(const QString&);
+    void documentNameChanged(const QString &);
 
-  /*
-   * General file related actions.
-   * None of these actions cause user interaction.
-   */
+    /*
+     * General file related actions.
+     * None of these actions cause user interaction.
+     */
 public:
-
     /**
      * Reload the current document.
      * @return @e true on success, i.e. the document was reloaded, otherwise

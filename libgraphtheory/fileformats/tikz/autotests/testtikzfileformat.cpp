@@ -6,10 +6,10 @@
 
 #include "testtikzfileformat.h"
 #include "../tikzfileformat.h"
+#include "edge.h"
 #include "fileformats/fileformatinterface.h"
 #include "graphdocument.h"
 #include "node.h"
-#include "edge.h"
 #include <QTest>
 
 using namespace GraphTheory;

@@ -5,9 +5,9 @@
  */
 
 #include "documentwrapper.h"
-#include "nodewrapper.h"
 #include "edgewrapper.h"
 #include "nodetype.h"
+#include "nodewrapper.h"
 #include <KLocalizedString>
 #include <QDebug>
 
@@ -36,7 +36,7 @@ DocumentWrapper::~DocumentWrapper()
     qDeleteAll(m_nodeMap);
 }
 
-QScriptEngine* DocumentWrapper::engine() const
+QScriptEngine *DocumentWrapper::engine() const
 {
     return m_engine;
 }
@@ -63,13 +63,13 @@ void DocumentWrapper::registerWrapper(EdgePtr edge)
     return;
 }
 
-NodeWrapper * DocumentWrapper::nodeWrapper(NodePtr node) const
+NodeWrapper *DocumentWrapper::nodeWrapper(NodePtr node) const
 {
     Q_ASSERT(m_nodeMap.contains(node));
     return m_nodeMap.value(node);
 }
 
-EdgeWrapper * DocumentWrapper::edgeWrapper(EdgePtr edge) const
+EdgeWrapper *DocumentWrapper::edgeWrapper(EdgePtr edge) const
 {
     Q_ASSERT(m_edgeMap.contains(edge));
     return m_edgeMap.value(edge);
@@ -77,13 +77,11 @@ EdgeWrapper * DocumentWrapper::edgeWrapper(EdgePtr edge) const
 
 QScriptValue DocumentWrapper::node(int id) const
 {
-    //TODO average access time is linear, which might drastically be improved by
-    //     using proper caching mechanisms at Document objects
+    // TODO average access time is linear, which might drastically be improved by
+    //      using proper caching mechanisms at Document objects
     for (auto const &node : m_document->nodes()) {
         if (node->id() == id) {
-            return m_engine->newQObject(nodeWrapper(node),
-                                        QScriptEngine::QtOwnership,
-                                        QScriptEngine::AutoCreateDynamicProperties);
+            return m_engine->newQObject(nodeWrapper(node), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
         }
     }
     QString command = QString("Document.node(%1)").arg(id);
@@ -96,9 +94,7 @@ QScriptValue DocumentWrapper::nodes() const
     NodeList nodes = m_document->nodes();
     QScriptValue array = m_engine->newArray(nodes.length());
     for (int i = 0; i < nodes.length(); ++i) {
-        QScriptValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)),
-                                                            QScriptEngine::QtOwnership,
-                                                            QScriptEngine::AutoCreateDynamicProperties);
+        QScriptValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
         array.setProperty(i, nodeScriptValue);
     }
     return array;
@@ -122,9 +118,7 @@ QScriptValue DocumentWrapper::nodes(int type) const
     NodeList nodes = m_document->nodes(typePtr);
     QScriptValue array = m_engine->newArray(nodes.length());
     for (int i = 0; i < nodes.length(); ++i) {
-        QScriptValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)),
-                                                            QScriptEngine::QtOwnership,
-                                                            QScriptEngine::AutoCreateDynamicProperties);
+        QScriptValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
         array.setProperty(i, nodeScriptValue);
     }
     return array;
@@ -135,9 +129,7 @@ QScriptValue DocumentWrapper::edges() const
     EdgeList edges = m_document->edges();
     QScriptValue array = m_engine->newArray(edges.length());
     for (int i = 0; i < edges.length(); ++i) {
-        QScriptValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)),
-                                                            QScriptEngine::QtOwnership,
-                                                            QScriptEngine::AutoCreateDynamicProperties);
+        QScriptValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
         array.setProperty(i, edgeScriptValue);
     }
     return array;
@@ -161,9 +153,7 @@ QScriptValue DocumentWrapper::edges(int type) const
     EdgeList edges = m_document->edges(typePtr);
     QScriptValue array = m_engine->newArray(edges.length());
     for (int i = 0; i < edges.length(); ++i) {
-        QScriptValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)),
-                                                            QScriptEngine::QtOwnership,
-                                                            QScriptEngine::AutoCreateDynamicProperties);
+        QScriptValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
         array.setProperty(i, edgeScriptValue);
     }
     return array;
@@ -174,9 +164,7 @@ QScriptValue DocumentWrapper::createNode(int x, int y)
     NodePtr node = Node::create(m_document);
     node->setX(x);
     node->setY(y);
-    return m_engine->newQObject(nodeWrapper(node),
-                                QScriptEngine::QtOwnership,
-                                QScriptEngine::AutoCreateDynamicProperties);
+    return m_engine->newQObject(nodeWrapper(node), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
 }
 
 QScriptValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
@@ -192,9 +180,7 @@ QScriptValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
         return QScriptValue();
     }
     EdgePtr edge = Edge::create(from->node(), to->node());
-    return m_engine->newQObject(edgeWrapper(edge),
-                                QScriptEngine::QtOwnership,
-                                QScriptEngine::AutoCreateDynamicProperties);
+    return m_engine->newQObject(edgeWrapper(edge), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
 }
 
 void DocumentWrapper::remove(NodeWrapper *node)

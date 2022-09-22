@@ -7,8 +7,8 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include <QObject>
 #include <QList>
+#include <QObject>
 #include <QStringList>
 
 class Property;
@@ -23,18 +23,13 @@ class Object : public QObject
     Q_PROPERTY(QVariantList description READ description)
 
 public:
-    enum ComponentType {
-        Document,
-        Edge,
-        Node,
-        KernelModule
-    };
+    enum ComponentType { Document, Edge, Node, KernelModule };
 
     explicit Object(QObject *parent = nullptr);
     ~Object() override;
 
     QString id() const;
-    void setId(const QString& id);
+    void setId(const QString &id);
     ComponentType componentType() const;
     void setComponentType(const QString &compenentTypeName);
     QString title() const;
@@ -43,9 +38,9 @@ public:
     void setDescription(const QStringList &description);
     QString syntaxExample() const;
     void setSyntaxExample(const QString &syntaxExample);
-    QList<Property*> properties() const;
+    QList<Property *> properties() const;
     void addProperty(Property *property);
-    QList<Method*> methods() const;
+    QList<Method *> methods() const;
     void addMethod(Method *method);
     QString objectParent() const;
     void setObjectParent(const QString &id);
@@ -60,8 +55,8 @@ private:
     QString m_objectParent;
     QStringList m_description;
     QString m_syntaxExample;
-    QList<Property*> m_properties;
-    QList<Method*> m_methods;
+    QList<Property *> m_properties;
+    QList<Method *> m_methods;
 };
 
 #endif

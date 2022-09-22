@@ -4,13 +4,12 @@
  *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
-
 #include "testradiallayout.h"
-#include "graphdocument.h"
-#include "node.h"
 #include "edge.h"
 #include "editor.h"
+#include "graphdocument.h"
 #include "modifiers/topology.h"
+#include "node.h"
 #include <QTest>
 #include <QVector2D>
 #include <math.h>
@@ -33,9 +32,7 @@ void RadialLayoutTest::testMargin()
     const NodePtr root = nullptr;
     const qreal wedgeAngle = M_PI * 2.;
     const qreal rotationAngle = 0.;
-    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius,  margin,
-                                                          nodeSeparation, root, wedgeAngle,
-                                                          rotationAngle);
+    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius, margin, nodeSeparation, root, wedgeAngle, rotationAngle);
     QVERIFY(status);
 
     const auto nodes = document->nodes();
@@ -43,7 +40,6 @@ void RadialLayoutTest::testMargin()
         QVERIFY(node->x() - EPS >= margin);
         QVERIFY(node->y() - EPS >= margin);
     }
-
 }
 
 void RadialLayoutTest::emptyGraph()
@@ -57,9 +53,7 @@ void RadialLayoutTest::emptyGraph()
     const NodePtr root = nullptr;
     const qreal wedgeAngle = M_PI * 2.;
     const qreal rotationAngle = 0.;
-    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius,  margin,
-                                                          nodeSeparation, root, wedgeAngle,
-                                                          rotationAngle);
+    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius, margin, nodeSeparation, root, wedgeAngle, rotationAngle);
     QVERIFY(status);
 }
 
@@ -75,9 +69,7 @@ void RadialLayoutTest::singleNode()
     const NodePtr root = nullptr;
     const qreal wedgeAngle = M_PI * 2.;
     const qreal rotationAngle = 0.;
-    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius,  margin,
-                                                          nodeSeparation, root, wedgeAngle,
-                                                          rotationAngle);
+    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius, margin, nodeSeparation, root, wedgeAngle, rotationAngle);
     QVERIFY(status);
 }
 
@@ -102,9 +94,7 @@ void RadialLayoutTest::cycleGraph()
     const NodePtr root = nullptr;
     const qreal wedgeAngle = M_PI * 2.;
     const qreal rotationAngle = 0.;
-    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius,  margin,
-                                                          nodeSeparation, root, wedgeAngle,
-                                                          rotationAngle);
+    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius, margin, nodeSeparation, root, wedgeAngle, rotationAngle);
     QVERIFY(not status);
 }
 
@@ -121,9 +111,7 @@ void RadialLayoutTest::disconnectedGraph()
     const NodePtr root = nullptr;
     const qreal wedgeAngle = M_PI * 2.;
     const qreal rotationAngle = 0.;
-    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius,  margin,
-                                                          nodeSeparation, root, wedgeAngle,
-                                                          rotationAngle);
+    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius, margin, nodeSeparation, root, wedgeAngle, rotationAngle);
     QVERIFY(not status);
 }
 
@@ -145,9 +133,7 @@ void RadialLayoutTest::unidirectionalEdge()
     const NodePtr root = nullptr;
     const qreal wedgeAngle = M_PI * 2.;
     const qreal rotationAngle = 0.;
-    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius,  margin,
-                                                          nodeSeparation, root, wedgeAngle,
-                                                          rotationAngle);
+    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius, margin, nodeSeparation, root, wedgeAngle, rotationAngle);
     QVERIFY(not status);
 }
 
@@ -171,9 +157,7 @@ void RadialLayoutTest::minimumNodeDistance()
     const NodePtr root = nullptr;
     const qreal wedgeAngle = M_PI * 2.;
     const qreal rotationAngle = 0.;
-    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius,  margin,
-                                                          nodeSeparation, root, wedgeAngle,
-                                                          rotationAngle);
+    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius, margin, nodeSeparation, root, wedgeAngle, rotationAngle);
     QVERIFY(status);
 
     const QVector2D positionA(nodeA->x(), nodeA->y());
@@ -181,6 +165,5 @@ void RadialLayoutTest::minimumNodeDistance()
     const qreal distance = (positionA - positionB).length();
     QVERIFY(distance + EPS >= 2. * nodeRadius + nodeSeparation);
 }
-
 
 QTEST_MAIN(RadialLayoutTest)

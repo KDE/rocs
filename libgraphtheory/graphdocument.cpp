@@ -5,20 +5,21 @@
  */
 
 #include "graphdocument.h"
-#include "view.h"
 #include "edge.h"
 #include "fileformats/fileformatmanager.h"
 #include "logging_p.h"
+#include "view.h"
 #include <KLocalizedString>
-#include <QSurfaceFormat>
 #include <QString>
+#include <QSurfaceFormat>
 
 using namespace GraphTheory;
 
 // initialize number of edge objects
 uint GraphDocument::objectCounter = 0;
 
-class GraphTheory::GraphDocumentPrivate {
+class GraphTheory::GraphDocumentPrivate
+{
 public:
     GraphDocumentPrivate()
         : m_valid(false)
@@ -90,11 +91,10 @@ GraphDocument::GraphDocument()
 
 GraphDocument::~GraphDocument()
 {
-
     --GraphDocument::objectCounter;
 }
 
-View * GraphDocument::createView(QWidget *parent)
+View *GraphDocument::createView(QWidget *parent)
 {
     if (d->m_view) {
         return d->m_view;
@@ -233,7 +233,7 @@ void GraphDocument::remove(NodePtr node)
     }
     int index = d->m_nodes.indexOf(node);
     if (index >= 0) {
-        Q_EMIT nodesAboutToBeRemoved(index,index);
+        Q_EMIT nodesAboutToBeRemoved(index, index);
         d->m_nodes.removeAt(index);
         Q_EMIT nodesRemoved();
     }
@@ -247,7 +247,7 @@ void GraphDocument::remove(EdgePtr edge)
     }
     int index = d->m_edges.indexOf(edge);
     if (index >= 0) {
-        Q_EMIT edgesAboutToBeRemoved(index,index);
+        Q_EMIT edgesAboutToBeRemoved(index, index);
         d->m_edges.removeAt(index);
         Q_EMIT edgesRemoved();
     }
@@ -288,12 +288,12 @@ void GraphDocument::remove(EdgeTypePtr type)
     setModified(true);
 }
 
-QList< EdgeTypePtr > GraphDocument::edgeTypes() const
+QList<EdgeTypePtr> GraphDocument::edgeTypes() const
 {
     return d->m_edgeTypes;
 }
 
-QList< NodeTypePtr > GraphDocument::nodeTypes() const
+QList<NodeTypePtr> GraphDocument::nodeTypes() const
 {
     return d->m_nodeTypes;
 }
@@ -308,7 +308,7 @@ void GraphDocument::setQpointer(GraphDocumentPtr q)
     d->q = q;
 }
 
-//BEGIN file stuff
+// BEGIN file stuff
 QString GraphDocument::documentName() const
 {
     if (d->m_name.isEmpty()) {
@@ -317,7 +317,7 @@ QString GraphDocument::documentName() const
     return d->m_name;
 }
 
-void GraphDocument::setDocumentName(const QString& name)
+void GraphDocument::setDocumentName(const QString &name)
 {
     if (name == d->m_name) {
         return;
@@ -326,14 +326,13 @@ void GraphDocument::setDocumentName(const QString& name)
     Q_EMIT documentNameChanged(name);
     setModified(true);
 }
-//END file stuff
+// END file stuff
 
-
-//BEGIN file stuff
+// BEGIN file stuff
 bool GraphDocument::documentReload()
 {
     qCCritical(GRAPHTHEORY_GENERAL) << "graph reloading not implemented!";
-    //FIXME reload document
+    // FIXME reload document
     setModified(false);
     return true;
 }
@@ -394,4 +393,4 @@ void GraphDocument::setModified(bool modified)
     Q_EMIT modifiedChanged();
 }
 
-//END
+// END

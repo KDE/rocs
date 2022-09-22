@@ -5,19 +5,17 @@
  */
 
 #include "test_kernelscriptapi.h"
-#include <QXmlSchema>
-#include <QXmlSchemaValidator>
 #include <QString>
 #include <QTest>
+#include <QXmlSchema>
+#include <QXmlSchemaValidator>
 
 void TestKernelScriptApi::initTestCase()
 {
-
 }
 
 void TestKernelScriptApi::cleanupTestCase()
 {
-
 }
 
 void TestKernelScriptApi::xmlValidity()

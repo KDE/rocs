@@ -7,11 +7,12 @@
 #ifndef NODEPROPERTIES_H
 #define NODEPROPERTIES_H
 
-#include <QDialog>
 #include "typenames.h"
 #include "ui_nodeproperties.h"
+#include <QDialog>
 
-namespace GraphTheory {
+namespace GraphTheory
+{
 
 class NodeProperties : public QDialog
 {

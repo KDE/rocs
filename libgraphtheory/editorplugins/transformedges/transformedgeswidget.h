@@ -7,11 +7,12 @@
 #ifndef TRANSFORMEDGESWIDGET_H
 #define TRANSFORMEDGESWIDGET_H
 
-#include "ui_transformedgeswidget.h"
 #include "typenames.h"
+#include "ui_transformedgeswidget.h"
 #include <QDialog>
 
-namespace GraphTheory {
+namespace GraphTheory
+{
 
 class TransformEdgesWidget : public QDialog
 {
@@ -53,7 +54,6 @@ private:
      * Remove all self-edges.
      */
     void removeAllSelfEdges();
-
 
     GraphDocumentPtr m_document;
     Ui::TransformEdgesWidget *ui;

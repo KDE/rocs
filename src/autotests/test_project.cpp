@@ -5,19 +5,19 @@
  */
 
 #include "test_project.h"
-#include "libgraphtheory/typenames.h"
+#include "libgraphtheory/edge.h"
+#include "libgraphtheory/edgetype.h"
 #include "libgraphtheory/editor.h"
 #include "libgraphtheory/graphdocument.h"
-#include "libgraphtheory/nodetype.h"
-#include "libgraphtheory/edgetype.h"
 #include "libgraphtheory/node.h"
-#include "libgraphtheory/edge.h"
+#include "libgraphtheory/nodetype.h"
+#include "libgraphtheory/typenames.h"
 #include "project/project.h"
-#include <QTemporaryFile>
-#include <QUrl>
-#include <QTest>
 #include <KTextEditor/Document>
 #include <KTextEditor/Editor>
+#include <QTemporaryFile>
+#include <QTest>
+#include <QUrl>
 
 using namespace GraphTheory;
 
@@ -38,14 +38,14 @@ void TestProject::projectOperations()
     project.setDocumentName(codeDoc1, "Test");
 
     QCOMPARE(project.codeDocuments().length(), 2); // check correct adding
-    
+
     qDebug() << "Project working dir  =" << project.workingDir();
     qDebug() << "Project document path=" << project.codeDocuments().first()->url().toLocalFile();
     qDebug() << "Test working dir     =" << QDir::currentPath();
-    
+
     QVERIFY(project.codeDocuments().first()->url().toLocalFile().startsWith(QDir::currentPath())); // check working dir
     QVERIFY(codeDoc1->url().toLocalFile() != codeDoc2->url().toLocalFile()); // check for distinct names
-    project.tryToRemoveCodeDocument(codeDoc1);     // check removal
+    project.tryToRemoveCodeDocument(codeDoc1); // check removal
     QCOMPARE(project.codeDocuments().length(), 1);
     QCOMPARE(project.documentName(codeDoc1), QString("Test"));
 
@@ -59,7 +59,7 @@ void TestProject::projectOperations()
     project.removeGraphDocument(graphDoc);
     QCOMPARE(project.graphDocuments().length(), 0);
 
-    //cleanup
+    // cleanup
     graphEditor->deleteLater();
 }
 
@@ -82,22 +82,22 @@ void TestProject::loadSave()
 
     // Now the documents live in the test dir
     const auto docs = project.codeDocuments();
-    for (const auto& d : docs) {
+    for (const auto &d : docs) {
         qDebug() << "Code document path=" << d->url().toLocalFile();
         QVERIFY(d->url().toLocalFile().startsWith(QDir::currentPath()));
     }
-    
+
     Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), graphEditor);
     QCOMPARE(loadedProject.codeDocuments().count(), project.codeDocuments().count());
     QCOMPARE(loadedProject.graphDocuments().count(), project.graphDocuments().count());
 
     // After load, they live in the project dir
     const auto loadedDocs = loadedProject.codeDocuments();
-    for (const auto& d : loadedDocs) {
+    for (const auto &d : loadedDocs) {
         qDebug() << "Code document path=" << d->url().toLocalFile();
         QVERIFY(d->url().toLocalFile().startsWith(loadedProject.workingDir()));
     }
-    
+
     graphEditor->deleteLater();
 }
 
@@ -144,13 +144,13 @@ void TestProject::loadSaveMultipleScriptDocuments()
     QTemporaryFile codeFileA, codeFileB;
     codeFileA.setFileTemplate("XXXXXXX.js");
     codeFileA.open();
-    KTextEditor::Document* docA = project.importCodeDocument(QUrl::fromLocalFile(codeFileA.fileName()));
+    KTextEditor::Document *docA = project.importCodeDocument(QUrl::fromLocalFile(codeFileA.fileName()));
     project.setDocumentName(docA, "A");
     docA->setText("1");
 
     codeFileB.setFileTemplate("XXXXXXX.js");
     codeFileB.open();
-    KTextEditor::Document* docB = project.importCodeDocument(QUrl::fromLocalFile(codeFileB.fileName()));
+    KTextEditor::Document *docB = project.importCodeDocument(QUrl::fromLocalFile(codeFileB.fileName()));
     project.setDocumentName(docB, "B");
     docB->setText("2");
 

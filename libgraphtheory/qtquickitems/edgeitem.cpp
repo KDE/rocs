@@ -8,13 +8,14 @@
 #include "edgetypestyle.h"
 #include "nodetypestyle.h"
 #include "qsglinenode.h"
-#include <QSGSimpleRectNode>
 #include <QPainter>
 #include <QPointF>
+#include <QSGSimpleRectNode>
 
 using namespace GraphTheory;
 
-class GraphTheory::EdgeItemPrivate {
+class GraphTheory::EdgeItemPrivate
+{
 public:
     EdgeItemPrivate()
         : m_edge(nullptr)
@@ -49,10 +50,9 @@ EdgeItem::EdgeItem(QQuickItem *parent)
 
 EdgeItem::~EdgeItem()
 {
-
 }
 
-Edge * EdgeItem::edge() const
+Edge *EdgeItem::edge() const
 {
     return d->m_edge;
 }
@@ -69,23 +69,17 @@ void EdgeItem::setEdge(Edge *edge)
     }
     d->m_edge = edge;
     d->m_visible = edge->type()->style()->isVisible();
-    connect(edge->from().data(), &Node::positionChanged,
-        this, &EdgeItem::updatePosition);
-    connect(edge->to().data(), &Node::positionChanged,
-        this, &EdgeItem::updatePosition);
-    connect(edge, &Edge::typeChanged,
-        this, [&](EdgeTypePtr) { update(); });
-    connect(edge, &Edge::styleChanged,
-        this, &EdgeItem::updateColor);
-    connect(edge, &Edge::directionChanged,
-        this, &EdgeItem::updateDirection);
+    connect(edge->from().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
+    connect(edge->to().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
+    connect(edge, &Edge::typeChanged, this, [&](EdgeTypePtr) {
+        update();
+    });
+    connect(edge, &Edge::styleChanged, this, &EdgeItem::updateColor);
+    connect(edge, &Edge::directionChanged, this, &EdgeItem::updateDirection);
 
-    connect(edge, &Edge::styleChanged,
-        this, &EdgeItem::updateVisibility);
-    connect(edge->from().data(), &Node::styleChanged,
-        this, &EdgeItem::updateVisibility);
-    connect(edge->to().data(), &Node::styleChanged,
-        this, &EdgeItem::updateVisibility);
+    connect(edge, &Edge::styleChanged, this, &EdgeItem::updateVisibility);
+    connect(edge->from().data(), &Node::styleChanged, this, &EdgeItem::updateVisibility);
+    connect(edge->to().data(), &Node::styleChanged, this, &EdgeItem::updateVisibility);
 
     updatePosition();
     updateVisibility();
@@ -106,7 +100,7 @@ void EdgeItem::setOrigin(const QPointF &origin)
     updatePosition();
 }
 
-QSGNode * EdgeItem::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *)
+QSGNode *EdgeItem::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *)
 {
     QSGLineNode *n = static_cast<QSGLineNode *>(node);
     if (!n) {
@@ -143,12 +137,8 @@ void EdgeItem::updatePosition()
     setHeight(boxHeight);
 
     // set from/to values relative to box x/y position
-    d->m_pointFrom = QPointF(d->m_edge->from()->x(), d->m_edge->from()->y())
-                        - d->m_origin
-                        - QPointF(x(), y());
-    d->m_pointTo = QPointF(d->m_edge->to()->x(), d->m_edge->to()->y())
-                        - d->m_origin
-                        - QPointF(x(), y());
+    d->m_pointFrom = QPointF(d->m_edge->from()->x(), d->m_edge->from()->y()) - d->m_origin - QPointF(x(), y());
+    d->m_pointTo = QPointF(d->m_edge->to()->x(), d->m_edge->to()->y()) - d->m_origin - QPointF(x(), y());
     update();
 }
 
@@ -166,9 +156,7 @@ void EdgeItem::updateDirection()
 
 void EdgeItem::updateVisibility()
 {
-    bool visible = d->m_edge->type()->style()->isVisible() &&
-        d->m_edge->from()->type()->style()->isVisible() &&
-        d->m_edge->to()->type()->style()->isVisible();
+    bool visible = d->m_edge->type()->style()->isVisible() && d->m_edge->from()->type()->style()->isVisible() && d->m_edge->to()->type()->style()->isVisible();
     d->m_visible = visible;
     if (d->m_visible) {
         setOpacity(1);

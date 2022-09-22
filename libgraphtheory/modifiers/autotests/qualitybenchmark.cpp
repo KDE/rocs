@@ -4,23 +4,22 @@
  *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  */
 
-
-#include <QVector>
-#include <QRandomGenerator>
-#include "graphdocument.h"
-#include "node.h"
 #include "edge.h"
 #include "edgetype.h"
 #include "editor.h"
-#include "modifiers/topology.h"
+#include "graphdocument.h"
 #include "layoutevaluator.h"
+#include "modifiers/topology.h"
+#include "node.h"
+#include <QRandomGenerator>
+#include <QVector>
 #include <iostream>
 
 using namespace GraphTheory;
 
 constexpr int REPETITIONS = 30;
 
-//Applies the force based layout algorithm with fixed parameters
+// Applies the force based layout algorithm with fixed parameters
 void applyForceBasedLayout(GraphDocumentPtr document, const quint32 seed)
 {
     constexpr qreal nodeRadius = 10.;
@@ -29,11 +28,10 @@ void applyForceBasedLayout(GraphDocumentPtr document, const quint32 seed)
     constexpr qreal repellingForce = 1.;
     constexpr qreal attractionForce = 1.;
     const bool randomizeInitialPositions = true;
-    Topology::applyForceBasedLayout(document, nodeRadius, margin, areaFactor, repellingForce,
-                                    attractionForce, randomizeInitialPositions, seed);
+    Topology::applyForceBasedLayout(document, nodeRadius, margin, areaFactor, repellingForce, attractionForce, randomizeInitialPositions, seed);
 }
 
-//Applies the radial tree layout algorithm with fixed parameters.
+// Applies the radial tree layout algorithm with fixed parameters.
 void applyRadialLayout(GraphDocumentPtr document, const quint32 seed)
 {
     constexpr qreal nodeRadius = 10.;
@@ -42,9 +40,7 @@ void applyRadialLayout(GraphDocumentPtr document, const quint32 seed)
     constexpr qreal wedgeAngle = 2. * M_PI;
     constexpr qreal rotationAngle = 0.;
     const NodePtr root = nullptr;
-    const bool status =  Topology::applyRadialLayoutToTree(document, nodeRadius, margin,
-                                                           nodeSeparation, root, wedgeAngle,
-                                                           rotationAngle);
+    const bool status = Topology::applyRadialLayoutToTree(document, nodeRadius, margin, nodeSeparation, root, wedgeAngle, rotationAngle);
     Q_ASSERT(status);
 }
 
@@ -67,14 +63,14 @@ GraphDocumentPtr generatePath(const int numberOfNodes)
 }
 
 template<typename F>
-void benchmarkOnPaths(const quint32 runSeed, F applyLayout, const char* name)
+void benchmarkOnPaths(const quint32 runSeed, F applyLayout, const char *name)
 {
     QRandomGenerator runSeedGenerator(runSeed);
     for (int numberOfNodes = 10; numberOfNodes <= 50; numberOfNodes += 10) {
         GraphDocumentPtr document = generatePath(numberOfNodes);
-        
+
         LayoutEvaluator evaluator;
-        for (int repetition = 0; repetition < REPETITIONS; repetition++) { 
+        for (int repetition = 0; repetition < REPETITIONS; repetition++) {
             applyLayout(document, runSeedGenerator.generate());
             evaluator.evaluateLayout(document);
         }
@@ -91,7 +87,7 @@ GraphDocumentPtr generateCompleteGraph(const int numberOfNodes)
     GraphDocumentPtr document = editor.createDocument();
     EdgeTypePtr edgeType = EdgeType::create(document);
     edgeType->setDirection(EdgeType::Bidirectional);
-    
+
     for (int i = 0; i < numberOfNodes; i++) {
         const NodePtr nodeA = Node::create(document);
         const auto nodes = document->nodes();
@@ -106,7 +102,6 @@ GraphDocumentPtr generateCompleteGraph(const int numberOfNodes)
     return document;
 }
 
-
 void benchmarkOnCompleteGraphs(const quint32 runSeed)
 {
     QRandomGenerator runSeedGenerator(runSeed);
@@ -119,8 +114,7 @@ void benchmarkOnCompleteGraphs(const quint32 runSeed)
             evaluator.evaluateLayout(document);
         }
 
-        std::cout << "[Force based layout on complete graphs with " << numberOfNodes << 
-                  " ndoes.] {" << std::endl;
+        std::cout << "[Force based layout on complete graphs with " << numberOfNodes << " ndoes.] {" << std::endl;
         evaluator.showResults(std::cout);
         std::cout << "} " << std::endl << std::endl;
     }
@@ -150,9 +144,9 @@ void benchmarkOnCircles(const quint32 runSeed)
     QRandomGenerator runSeedGenerator(runSeed);
     for (int numberOfNodes = 10; numberOfNodes <= 50; numberOfNodes += 10) {
         GraphDocumentPtr document = generateCircle(numberOfNodes);
-        
+
         LayoutEvaluator evaluator;
-        for (int repetition = 0; repetition < REPETITIONS; repetition++) { 
+        for (int repetition = 0; repetition < REPETITIONS; repetition++) {
             applyForceBasedLayout(document, runSeedGenerator.generate());
             evaluator.evaluateLayout(document);
         }
@@ -162,7 +156,6 @@ void benchmarkOnCircles(const quint32 runSeed)
         std::cout << "} " << std::endl << std::endl;
     }
 }
-
 
 GraphDocumentPtr generateRandomTree(const int numberOfNodes, const quint32 seed)
 {
@@ -184,34 +177,33 @@ GraphDocumentPtr generateRandomTree(const int numberOfNodes, const quint32 seed)
     return document;
 }
 
-template<typename F> 
-void benchmarkOnTrees(const quint32 genSeed, const quint32 runSeed, F applyLayout, const char* name)
+template<typename F>
+void benchmarkOnTrees(const quint32 genSeed, const quint32 runSeed, F applyLayout, const char *name)
 {
     QRandomGenerator genSeedGenerator(genSeed);
     QRandomGenerator runSeedGenerator(runSeed);
     for (int numberOfNodes = 10; numberOfNodes <= 50; numberOfNodes += 10) {
         LayoutEvaluator evaluator;
         for (int repetition = 0; repetition < REPETITIONS; repetition++) {
-            GraphDocumentPtr document = generateRandomTree(numberOfNodes,
-                                                           genSeedGenerator.generate());
+            GraphDocumentPtr document = generateRandomTree(numberOfNodes, genSeedGenerator.generate());
             applyLayout(document, runSeedGenerator.generate());
             evaluator.evaluateLayout(document);
         }
-    
+
         std::cout << "[" << name << " on trees with " << numberOfNodes << " nodes.] {" << std::endl;
         evaluator.showResults(std::cout);
         std::cout << "} " << std::endl << std::endl;
     }
 }
 
-int main(int argc, char* argv[]) {
-    
-    //Gets different random number generators seeds for each graph class,
-    //making sure that we always generate the same graphs for each class.
+int main(int argc, char *argv[])
+{
+    // Gets different random number generators seeds for each graph class,
+    // making sure that we always generate the same graphs for each class.
     QRandomGenerator seedGenerator(0);
     const quint32 treesGenSeed = seedGenerator.generate();
-    
-    //Get different random number generator seeds to run the layout algorithms for each class.
+
+    // Get different random number generator seeds to run the layout algorithms for each class.
     const quint32 pathsRunSeed = seedGenerator.generate();
     const quint32 completeGraphsRunSeed = seedGenerator.generate();
     const quint32 circlesRunSeed = seedGenerator.generate();
@@ -224,4 +216,3 @@ int main(int argc, char* argv[]) {
     benchmarkOnTrees(treesGenSeed, treesRunSeed, applyForceBasedLayout, "Force based layout");
     benchmarkOnTrees(treesGenSeed, treesRunSeed, applyRadialLayout, "Radial layout");
 }
-

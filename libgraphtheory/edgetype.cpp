@@ -14,7 +14,8 @@ using namespace GraphTheory;
 // initialize number of edge type objects
 uint EdgeType::objectCounter = 0;
 
-class GraphTheory::EdgeTypePrivate {
+class GraphTheory::EdgeTypePrivate
+{
 public:
     EdgeTypePrivate()
         : m_id(-1)
@@ -23,7 +24,6 @@ public:
         , m_name(QString())
         , m_valid(false)
     {
-
     }
 
     ~EdgeTypePrivate()
@@ -90,7 +90,7 @@ GraphDocumentPtr EdgeType::document() const
     return d->m_document;
 }
 
-void EdgeType::setName(const QString& name)
+void EdgeType::setName(const QString &name)
 {
     if (d->m_name == name) {
         return;
@@ -118,7 +118,7 @@ void EdgeType::setId(int id)
     Q_EMIT idChanged(id);
 }
 
-EdgeTypeStyle * EdgeType::style() const
+EdgeTypeStyle *EdgeType::style() const
 {
     return d->m_style;
 }
@@ -128,7 +128,7 @@ QStringList EdgeType::dynamicProperties() const
     return d->m_dynamicProperties;
 }
 
-void EdgeType::addDynamicProperty(const QString& property)
+void EdgeType::addDynamicProperty(const QString &property)
 {
     if (d->m_dynamicProperties.contains(property)) {
         return;
@@ -138,7 +138,7 @@ void EdgeType::addDynamicProperty(const QString& property)
     Q_EMIT dynamicPropertyAdded();
 }
 
-void EdgeType::removeDynamicProperty(const QString& property)
+void EdgeType::removeDynamicProperty(const QString &property)
 {
     if (!d->m_dynamicProperties.contains(property)) {
         return;
@@ -149,7 +149,7 @@ void EdgeType::removeDynamicProperty(const QString& property)
     Q_EMIT dynamicPropertyRemoved(property);
 }
 
-void EdgeType::renameDynamicProperty(const QString& oldProperty, const QString& newProperty)
+void EdgeType::renameDynamicProperty(const QString &oldProperty, const QString &newProperty)
 {
     Q_ASSERT(d->m_dynamicProperties.contains(oldProperty));
     Q_ASSERT(!d->m_dynamicProperties.contains(newProperty));

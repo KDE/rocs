@@ -5,18 +5,18 @@
  */
 
 #include "propertieswidget.h"
-#include "propertydelegate.h"
 #include "edgetype.h"
-#include "nodetype.h"
 #include "models/edgetypepropertymodel.h"
 #include "models/nodetypepropertymodel.h"
+#include "nodetype.h"
+#include "propertydelegate.h"
 #include <KLocalizedString>
-#include <QLayout>
+#include <QDebug>
 #include <QGridLayout>
-#include <QPushButton>
+#include <QLayout>
 #include <QListView>
 #include <QModelIndex>
-#include <QDebug>
+#include <QPushButton>
 
 using namespace GraphTheory;
 
@@ -31,17 +31,14 @@ PropertiesWidget::PropertiesWidget(QWidget *parent)
     setLayout(new QGridLayout(this));
     layout()->addWidget(m_view);
     QPushButton *addPropertyButton = new QPushButton(i18n("Add Property"));
-    connect(addPropertyButton, &QPushButton::clicked,
-        this, &PropertiesWidget::addProperty);
+    connect(addPropertyButton, &QPushButton::clicked, this, &PropertiesWidget::addProperty);
     layout()->addWidget(addPropertyButton);
 
     PropertyDelegate *delegate = new PropertyDelegate(m_view);
     m_view->setItemDelegate(delegate);
 
-    connect(delegate, &PropertyDelegate::deleteProperty,
-        this, &PropertiesWidget::deleteProperty);
-    connect(delegate, &PropertyDelegate::nameChanged,
-        this, &PropertiesWidget::renameProperty);
+    connect(delegate, &PropertyDelegate::deleteProperty, this, &PropertiesWidget::deleteProperty);
+    connect(delegate, &PropertyDelegate::nameChanged, this, &PropertiesWidget::renameProperty);
 }
 
 void PropertiesWidget::setType(NodeTypePtr type)
@@ -95,7 +92,7 @@ void PropertiesWidget::deleteProperty(const QModelIndex &index)
     }
 }
 
-void PropertiesWidget::renameProperty(const QModelIndex& index, const QString& name)
+void PropertiesWidget::renameProperty(const QModelIndex &index, const QString &name)
 {
     if (m_nodeType) {
         m_nodeType->renameDynamicProperty(m_nodeModel->data(index, NodeTypePropertyModel::NameRole).toString(), name);

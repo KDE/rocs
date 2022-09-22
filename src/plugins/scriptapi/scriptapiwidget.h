@@ -26,7 +26,7 @@ public:
     /**
      * Default constructor.
      */
-    explicit ScriptApiWidget(QWidget* parent);
+    explicit ScriptApiWidget(QWidget *parent);
     void showHtmlOutline(bool logHistory);
 
 public Q_SLOTS:

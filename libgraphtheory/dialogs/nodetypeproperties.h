@@ -7,9 +7,9 @@
 #ifndef NODETYPEPROPERTIES_H
 #define NODETYPEPROPERTIES_H
 
-#include <QDialog>
-#include "typenames.h"
 #include "graphtheory_export.h"
+#include "typenames.h"
+#include <QDialog>
 
 class KColorButton;
 class QCheckBox;
@@ -17,7 +17,8 @@ class QComboBox;
 class QLineEdit;
 class QSpinBox;
 
-namespace GraphTheory {
+namespace GraphTheory
+{
 
 class PropertiesWidget;
 

@@ -10,14 +10,14 @@
 #include <QVector2D>
 #include <iomanip>
 
-void LayoutEvaluator::showMetric(const MetricSummarizer& metric, std::ostream& outputStream) const
+void LayoutEvaluator::showMetric(const MetricSummarizer &metric, std::ostream &outputStream) const
 {
     outputStream << "\tminimum: " << metric.minimum() << std::endl;
     outputStream << "\tmaximum: " << metric.maximum() << std::endl;
     outputStream << "\taverage: " << metric.average() << std::endl;
 }
 
-QPointF LayoutEvaluator::projectOntoSegment(const QLineF& segment, const QPointF& point) const
+QPointF LayoutEvaluator::projectOntoSegment(const QLineF &segment, const QPointF &point) const
 {
     const QPointF p1p2 = segment.p1() - segment.p2();
     const QPointF pointp2 = point - segment.p2();
@@ -27,12 +27,12 @@ QPointF LayoutEvaluator::projectOntoSegment(const QLineF& segment, const QPointF
     return segment.p1() * lambda + segment.p2() * (1. - lambda);
 }
 
-qreal LayoutEvaluator::squaredDistance(const QPointF& pointA, const QPointF& pointB) const
+qreal LayoutEvaluator::squaredDistance(const QPointF &pointA, const QPointF &pointB) const
 {
     return QPointF::dotProduct(pointA - pointB, pointA - pointB);
 }
 
-bool LayoutEvaluator::doSegmentsIntersect(const QLineF& segmentA, const QLineF& segmentB) const
+bool LayoutEvaluator::doSegmentsIntersect(const QLineF &segmentA, const QLineF &segmentB) const
 {
     constexpr qreal EPS = 1.e-1;
 
@@ -54,9 +54,7 @@ bool LayoutEvaluator::doSegmentsIntersect(const QLineF& segmentA, const QLineF& 
 
 bool LayoutEvaluator::crosses(const EdgePtr a, const EdgePtr b) const
 {
-    if (a->from() == b->from() or a->from() == b->to() or 
-        a->to() == b->from() or a->to() == b->to()) {
-
+    if (a->from() == b->from() or a->from() == b->to() or a->to() == b->from() or a->to() == b->to()) {
         return false;
     }
 
@@ -67,7 +65,7 @@ bool LayoutEvaluator::crosses(const EdgePtr a, const EdgePtr b) const
 
     QLineF segmentA(aFrom, aTo);
     QLineF segmentB(bFrom, bTo);
-    
+
     return doSegmentsIntersect(segmentA, segmentB);
 }
 
@@ -96,7 +94,7 @@ int LayoutEvaluator::calculateNumberOfEdgesWithCrosses(GraphDocumentPtr document
                 break;
             }
         }
-    } 
+    }
     return numberOfEdgesWithCrosses;
 }
 
@@ -107,9 +105,8 @@ bool LayoutEvaluator::intersects(const NodePtr a, const NodePtr b) const
     const QPointF pA(a->x(), a->y());
     const QPointF pB(b->x(), b->y());
     const QVector2D distance(pA - pB);
-    return distance.length() <  2. * nodeRadius - EPS;
+    return distance.length() < 2. * nodeRadius - EPS;
 }
-
 
 int LayoutEvaluator::calculateNumberOfNodeIntersections(GraphDocumentPtr document)
 {
@@ -143,16 +140,15 @@ int LayoutEvaluator::calculateNumberOfNodesWithIntersections(GraphDocumentPtr do
 void LayoutEvaluator::evaluateLayout(GraphDocumentPtr document)
 {
     numberOfEdgeCrossesMetric_m.addValue(calculateNumberOfEdgeCrosses(document));
-    
+
     numberOfEdgesWithCrossesMetric_m.addValue(calculateNumberOfEdgesWithCrosses(document));
-    
+
     numberOfNodeIntersectionsMetric_m.addValue(calculateNumberOfNodeIntersections(document));
-    
-    numberOfNodesWithIntersectionsMetric_m.addValue(calculateNumberOfNodesWithIntersections(
-        document));
+
+    numberOfNodesWithIntersectionsMetric_m.addValue(calculateNumberOfNodesWithIntersections(document));
 }
 
-void LayoutEvaluator::showResults(std::ostream& outputStream) const
+void LayoutEvaluator::showResults(std::ostream &outputStream) const
 {
     outputStream << "Number of edge crosses:" << std::endl;
     showMetric(numberOfEdgeCrossesMetric_m, outputStream);

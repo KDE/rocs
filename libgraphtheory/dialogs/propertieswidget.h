@@ -7,13 +7,14 @@
 #ifndef PROPERTIESWIDGET_H
 #define PROPERTIESWIDGET_H
 
-#include <QWidget>
 #include "typenames.h"
+#include <QWidget>
 
 class QListView;
 class QModelIndex;
 
-namespace GraphTheory {
+namespace GraphTheory
+{
 
 class NodeTypePropertyModel;
 class EdgeTypePropertyModel;

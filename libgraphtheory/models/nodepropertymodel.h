@@ -25,9 +25,9 @@ class GRAPHTHEORY_EXPORT NodePropertyModel : public QAbstractListModel
 
 public:
     enum NodePropertyRoles {
-        NameRole = Qt::UserRole + 1,      //!< unique identifier of node
-        ValueRole,                        //!< access to property value
-        VisibilityRole                    //!< is property name visible
+        NameRole = Qt::UserRole + 1, //!< unique identifier of node
+        ValueRole, //!< access to property value
+        VisibilityRole //!< is property name visible
     };
 
     explicit NodePropertyModel(QObject *parent = nullptr);
@@ -35,9 +35,9 @@ public:
     /**
      * Reimplemented from QAbstractListModel::roleNames()
      */
-    QHash<int,QByteArray> roleNames() const override;
+    QHash<int, QByteArray> roleNames() const override;
     void setNode(Node *node);
-    Node * node() const;
+    Node *node() const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
@@ -47,7 +47,7 @@ Q_SIGNALS:
     void propertyChanged(int index);
 
 private Q_SLOTS:
-    void onDynamicPropertyAboutToBeAdded(const QString&, int index);
+    void onDynamicPropertyAboutToBeAdded(const QString &, int index);
     void onDynamicPropertyAdded();
     void onDynamicPropertiesAboutToBeRemoved(int first, int last);
     void onDynamicPropertyRemoved();

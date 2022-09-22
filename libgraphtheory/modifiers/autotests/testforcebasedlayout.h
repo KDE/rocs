@@ -7,20 +7,23 @@
 #ifndef TESTFORCEBASEDLAYOUT_H
 #define TESTFORCEBASEDLAYOUT_H
 
-#include <QObject>
-#include <QCoreApplication>
-#include <QVector>
-#include <QUrl>
 #include "typenames.h"
+#include <QCoreApplication>
+#include <QObject>
+#include <QUrl>
+#include <QVector>
 
 class ForceBasedLayoutTest : public QObject
 {
     Q_OBJECT
 public:
-    ForceBasedLayoutTest() { QCoreApplication::addLibraryPath(ADDITIONAL_PLUGIN_DIR); }
+    ForceBasedLayoutTest()
+    {
+        QCoreApplication::addLibraryPath(ADDITIONAL_PLUGIN_DIR);
+    }
 
 private:
-    void findGraphFiles(const QString& path, QVector<QUrl>& files);
+    void findGraphFiles(const QString &path, QVector<QUrl> &files);
 private Q_SLOTS:
     void testMargin_data();
     void testMargin();

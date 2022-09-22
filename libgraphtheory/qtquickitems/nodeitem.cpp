@@ -12,11 +12,12 @@
 
 using namespace GraphTheory;
 
-class GraphTheory::NodeItemPrivate {
+class GraphTheory::NodeItemPrivate
+{
 public:
     NodeItemPrivate()
         : m_node(nullptr)
-        , m_origin(0,0)
+        , m_origin(0, 0)
         , m_visible(true)
         , m_highlighted(false)
         , m_updating(false)
@@ -45,10 +46,9 @@ NodeItem::NodeItem(QQuickPaintedItem *parent)
 
 NodeItem::~NodeItem()
 {
-
 }
 
-Node * NodeItem::node() const
+Node *NodeItem::node() const
 {
     return d->m_node;
 }
@@ -63,20 +63,19 @@ void NodeItem::setNode(Node *node)
     }
     d->m_node = node;
     setGlobalPosition(QPointF(node->x(), node->y()));
-    connect(node, &Node::positionChanged,
-        this, &NodeItem::setGlobalPosition);
-    connect(node, &Node::styleChanged,
-        this, [&] () { update(); });
-    connect(node, &Node::colorChanged,
-        this, [&] (QColor) { update(); });
-    connect(node, &Node::typeChanged,
-        this, [&] (NodeTypePtr) { update(); });
-    connect(node, &Node::styleChanged,
-        this, &NodeItem::updateVisibility);
-    connect(this, &NodeItem::xChanged,
-        this, &NodeItem::updatePositionfromScene);
-    connect(this, &NodeItem::yChanged,
-        this, &NodeItem::updatePositionfromScene);
+    connect(node, &Node::positionChanged, this, &NodeItem::setGlobalPosition);
+    connect(node, &Node::styleChanged, this, [&]() {
+        update();
+    });
+    connect(node, &Node::colorChanged, this, [&](QColor) {
+        update();
+    });
+    connect(node, &Node::typeChanged, this, [&](NodeTypePtr) {
+        update();
+    });
+    connect(node, &Node::styleChanged, this, &NodeItem::updateVisibility);
+    connect(this, &NodeItem::xChanged, this, &NodeItem::updatePositionfromScene);
+    connect(this, &NodeItem::yChanged, this, &NodeItem::updatePositionfromScene);
 
     Q_EMIT nodeChanged();
     updateVisibility();
@@ -131,9 +130,9 @@ void NodeItem::paint(QPainter *painter)
 bool NodeItem::contains(const QPointF &point) const
 {
     // test for round objects
-    QPointF center(x() + width()/2, y() + height()/2);
+    QPointF center(x() + width() / 2, y() + height() / 2);
     QPointF distance = point - center;
-    if (qSqrt(distance.x()*distance.x() + distance.y() * distance.y()) < width()/2) {
+    if (qSqrt(distance.x() * distance.x() + distance.y() * distance.y()) < width() / 2) {
         return true;
     }
     return false;
@@ -141,14 +140,12 @@ bool NodeItem::contains(const QPointF &point) const
 
 void NodeItem::updatePositionfromScene()
 {
-    if (d->m_node->x() == x() + d->m_origin.x()
-        && d->m_node->y() == y() + d->m_origin.y()
-    ) {
+    if (d->m_node->x() == x() + d->m_origin.x() && d->m_node->y() == y() + d->m_origin.y()) {
         return;
     }
     d->m_updating = true;
-    d->m_node->setX(x() + d->m_origin.x() + width()/2);
-    d->m_node->setY(y() + d->m_origin.y() + height()/2);
+    d->m_node->setX(x() + d->m_origin.x() + width() / 2);
+    d->m_node->setY(y() + d->m_origin.y() + height() / 2);
     d->m_updating = false;
 }
 
@@ -157,8 +154,8 @@ void NodeItem::setGlobalPosition(const QPointF &position)
     if (d->m_updating) {
         return;
     }
-    setX(position.x() - d->m_origin.x() - width()/2);
-    setY(position.y() - d->m_origin.y() - height()/2);
+    setX(position.x() - d->m_origin.x() - width() / 2);
+    setY(position.y() - d->m_origin.y() - height() / 2);
     update();
 }
 

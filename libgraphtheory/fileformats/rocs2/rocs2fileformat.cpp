@@ -5,21 +5,21 @@
  */
 
 #include "rocs2fileformat.h"
-#include "modifiers/topology.h"
-#include "graphdocument.h"
-#include "node.h"
 #include "edge.h"
 #include "edgetypestyle.h"
-#include "nodetypestyle.h"
+#include "graphdocument.h"
 #include "logging_p.h"
-#include <algorithm>
+#include "modifiers/topology.h"
+#include "node.h"
+#include "nodetypestyle.h"
 #include <KLocalizedString>
 #include <KPluginFactory>
+#include <QFile>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
-#include <QFile>
 #include <QUrl>
+#include <algorithm>
 
 using namespace GraphTheory;
 
@@ -125,7 +125,7 @@ void Rocs2FileFormat::readFile()
 
         // set type
         NodeTypePtr typeToSet;
-        //TODO this is not very efficient for big files: use table instead to cache IDs
+        // TODO this is not very efficient for big files: use table instead to cache IDs
         const auto nodeTypes = document->nodeTypes();
         for (const NodeTypePtr &type : nodeTypes) {
             if (type->id() == nodeJson["Type"].toInt()) {
@@ -159,7 +159,7 @@ void Rocs2FileFormat::readFile()
 
         // find nodes to connect to
         NodePtr fromNode, toNode;
-        //TODO this is not very efficient for big files: use table instead to cache IDs
+        // TODO this is not very efficient for big files: use table instead to cache IDs
         const auto nodes = document->nodes();
         for (const NodePtr &node : nodes) {
             if (node->id() == edgeJson["From"].toInt()) {
@@ -170,15 +170,15 @@ void Rocs2FileFormat::readFile()
             }
         }
         if (!fromNode || !toNode) {
-            qCCritical(GRAPHTHEORY_FILEFORMAT) << "No type found with this ID, aborting edge from"
-                << edgeJson["From"].toInt() << "to" << edgeJson["To"].toInt();
+            qCCritical(GRAPHTHEORY_FILEFORMAT) << "No type found with this ID, aborting edge from" << edgeJson["From"].toInt() << "to"
+                                               << edgeJson["To"].toInt();
             continue;
         }
         EdgePtr edge = Edge::create(fromNode, toNode);
 
         // set type
         EdgeTypePtr typeToSet;
-        //TODO this is not very efficient for big files: use table instead to cache IDs
+        // TODO this is not very efficient for big files: use table instead to cache IDs
         const auto edgeTypes = document->edgeTypes();
         for (const EdgeTypePtr &type : edgeTypes) {
             if (type->id() == edgeJson["Type"].toInt()) {

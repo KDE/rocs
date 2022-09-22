@@ -7,10 +7,10 @@
 #ifndef EDGE_H
 #define EDGE_H
 
-#include "graphtheory_export.h"
-#include "typenames.h"
 #include "edgetype.h"
+#include "graphtheory_export.h"
 #include "node.h"
+#include "typenames.h"
 
 #include <QObject>
 #include <QSharedPointer>
@@ -127,7 +127,7 @@ public:
 Q_SIGNALS:
     void typeChanged(EdgeTypePtr type);
     void directionChanged(EdgeType::Direction direction);
-    void dynamicPropertyAboutToBeAdded(const QString&, int);
+    void dynamicPropertyAboutToBeAdded(const QString &, int);
     void dynamicPropertyAdded();
     void dynamicPropertiesAboutToBeRemoved(int, int);
     void dynamicPropertyRemoved();

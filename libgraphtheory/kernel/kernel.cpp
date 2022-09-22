@@ -6,21 +6,22 @@
 
 #include "kernel.h"
 #include "documentwrapper.h"
-#include "nodewrapper.h"
 #include "edgewrapper.h"
-#include "logging_p.h"
 #include "kernel/modules/console/consolemodule.h"
+#include "logging_p.h"
+#include "nodewrapper.h"
 
 #include <KLocalizedString>
 #include <QScriptEngineDebugger>
 
 using namespace GraphTheory;
 
-class GraphTheory::KernelPrivate {
+class GraphTheory::KernelPrivate
+{
 public:
     KernelPrivate()
-        : m_engine(new QScriptEngine),
-          m_debugger(new QScriptEngineDebugger)
+        : m_engine(new QScriptEngine)
+        , m_debugger(new QScriptEngineDebugger)
     {
     }
 
@@ -48,8 +49,7 @@ QScriptValue KernelPrivate::registerGlobalObject(QObject *qobject, const QString
     return globalObject;
 }
 
-
-///BEGIN: Kernel
+/// BEGIN: Kernel
 Kernel::Kernel()
     : d(new KernelPrivate)
 {
@@ -58,17 +58,15 @@ Kernel::Kernel()
 
 Kernel::~Kernel()
 {
-
 }
 
 QScriptValue Kernel::execute(GraphDocumentPtr document, const QString &script)
 {
-
     // register meta types
-    qScriptRegisterSequenceMetaType<QList<GraphTheory::NodeWrapper*> >(d->m_engine);
-    qScriptRegisterSequenceMetaType<QList<GraphTheory::EdgeWrapper*> >(d->m_engine);
-    qRegisterMetaType<GraphTheory::NodeWrapper*>();
-    qRegisterMetaType<GraphTheory::EdgeWrapper*>();
+    qScriptRegisterSequenceMetaType<QList<GraphTheory::NodeWrapper *>>(d->m_engine);
+    qScriptRegisterSequenceMetaType<QList<GraphTheory::EdgeWrapper *>>(d->m_engine);
+    qRegisterMetaType<GraphTheory::NodeWrapper *>();
+    qRegisterMetaType<GraphTheory::EdgeWrapper *>();
 
     if (d->m_engine->isEvaluating()) {
         d->m_engine->abortEvaluation();
@@ -79,8 +77,7 @@ QScriptValue Kernel::execute(GraphDocumentPtr document, const QString &script)
     // add document
     DocumentWrapper documentWrapper(document, d->m_engine);
     d->m_engine->globalObject().setProperty("Document", d->m_engine->newQObject(&documentWrapper));
-    connect(&documentWrapper, &DocumentWrapper::message,
-        this, &Kernel::processMessage);
+    connect(&documentWrapper, &DocumentWrapper::message, this, &Kernel::processMessage);
 
     // set modules
     d->m_engine->globalObject().setProperty("Console", d->m_engine->newQObject(&d->m_consoleModule));
@@ -133,4 +130,4 @@ void Kernel::triggerInterruptAction()
     d->m_debugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
 }
 
-//END: Kernel
+// END: Kernel

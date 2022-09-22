@@ -7,8 +7,8 @@
 #ifndef CODEEDITORWIDGET_H
 #define CODEEDITORWIDGET_H
 
-#include <QWidget>
 #include "project/project.h"
+#include <QWidget>
 
 namespace KTextEditor
 {

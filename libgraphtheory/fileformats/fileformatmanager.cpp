@@ -7,24 +7,24 @@
 #include "fileformatmanager.h"
 #include "logging_p.h"
 
+#include <KLocalizedString>
 #include <KPluginFactory>
 #include <KPluginMetaData>
-#include <KLocalizedString>
 
 #include <QCoreApplication>
-#include <QString>
 #include <QDir>
 #include <QDirIterator>
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QMessageBox>
+#include <QString>
 
 using namespace GraphTheory;
 
 class GraphTheory::FileFormatManagerPrivate
 {
 public:
-    QList<FileFormatInterface*> backends;
+    QList<FileFormatInterface *> backends;
     FileFormatInterface *defaultGraphFilePlugin = nullptr;
 };
 
@@ -33,7 +33,6 @@ FileFormatManager::FileFormatManager()
 {
     const QVector<KPluginMetaData> metadataList = KPluginMetaData::findPlugins("rocs/fileformats");
     for (const auto &metadata : metadataList) {
-
         const auto result = KPluginFactory::instantiatePlugin<FileFormatInterface>(metadata, this);
         if (result) {
             d->backends.append(result.plugin);
@@ -63,32 +62,28 @@ FileFormatManager::FileFormatManager()
 
 FileFormatManager::~FileFormatManager() = default;
 
-QList<FileFormatInterface*> FileFormatManager::backends() const
+QList<FileFormatInterface *> FileFormatManager::backends() const
 {
     return d->backends;
 }
 
-QList<FileFormatInterface*> FileFormatManager::backends(PluginType type) const
+QList<FileFormatInterface *> FileFormatManager::backends(PluginType type) const
 {
-    QList<FileFormatInterface*> backends;
+    QList<FileFormatInterface *> backends;
     for (FileFormatInterface *backend : std::as_const(d->backends)) {
-        switch(type) {
-            case Import:
-                if (backend->pluginCapability() == FileFormatInterface::ImportOnly
-                    || backend->pluginCapability() == FileFormatInterface::ImportAndExport)
-                {
-                    backends.append(backend);
-                }
-                break;
-            case Export:
-                if (backend->pluginCapability() == FileFormatInterface::ExportOnly
-                    || backend->pluginCapability() == FileFormatInterface::ImportAndExport)
-                {
-                    backends.append(backend);
-                }
-                break;
-            default:
-                break;
+        switch (type) {
+        case Import:
+            if (backend->pluginCapability() == FileFormatInterface::ImportOnly || backend->pluginCapability() == FileFormatInterface::ImportAndExport) {
+                backends.append(backend);
+            }
+            break;
+        case Export:
+            if (backend->pluginCapability() == FileFormatInterface::ExportOnly || backend->pluginCapability() == FileFormatInterface::ImportAndExport) {
+                backends.append(backend);
+            }
+            break;
+        default:
+            break;
         }
     }
     return backends;
@@ -101,7 +96,7 @@ FileFormatInterface *FileFormatManager::backendByExtension(const QString &ext) c
         qCWarning(GRAPHTHEORY_FILEFORMAT) << "File does not contain extension, falling back to default file format";
         return defaultBackend();
     }
-    for (FileFormatInterface * p :  std::as_const(d->backends)) {
+    for (FileFormatInterface *p : std::as_const(d->backends)) {
         if (p->extensions().join(";").contains(suffix, Qt::CaseInsensitive)) {
             return p;
         }

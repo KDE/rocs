@@ -7,9 +7,9 @@
 #ifndef SCRIPTAPIMANAGER_H
 #define SCRIPTAPIMANAGER_H
 
-#include <QObject>
-#include <QMap>
 #include <QHash>
+#include <QMap>
+#include <QObject>
 
 class Object;
 class QUrl;
@@ -39,7 +39,7 @@ public:
      */
     QList<Object *> objectApiList() const;
 
-    Object * objectApi(int index) const;
+    Object *objectApi(int index) const;
 
     /**
      * Generates HTML document with the API documentation for the specified object.
@@ -68,9 +68,9 @@ public:
 
 Q_SIGNALS:
     void objectApiAdded();
-    void objectApiAboutToBeAdded(Object*,int);
+    void objectApiAboutToBeAdded(Object *, int);
     void objectApiRemoved();
-    void objectApiAboutToBeRemoved(int,int);
+    void objectApiAboutToBeRemoved(int, int);
 
 private:
     /**
@@ -91,7 +91,7 @@ private:
      */
     QDomDocument loadDomDocument(const QUrl &path, const QXmlSchema &schema) const;
 
-    QList<Object*> m_objectApiList;
+    QList<Object *> m_objectApiList;
     QHash<QString, QString> m_objectApiDocuments;
     QList<QString> m_objectApiCache; // list of all objects available
 };

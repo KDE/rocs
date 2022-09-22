@@ -25,8 +25,8 @@ class GRAPHTHEORY_EXPORT EdgeModel : public QAbstractListModel
 
 public:
     enum EdgeRoles {
-        IdRole = Qt::UserRole + 1,      //!< unique identifier of node
-        DataRole                        //!< access to Edge object
+        IdRole = Qt::UserRole + 1, //!< unique identifier of node
+        DataRole //!< access to Edge object
     };
 
     explicit EdgeModel(QObject *parent = nullptr);
@@ -34,9 +34,9 @@ public:
     /**
      * Reimplemented from QAbstractListModel::roleNames()
      */
-    QHash<int,QByteArray> roleNames() const override;
+    QHash<int, QByteArray> roleNames() const override;
     void setDocument(GraphDocumentPtr document);
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const  override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 

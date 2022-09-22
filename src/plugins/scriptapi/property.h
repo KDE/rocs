@@ -7,8 +7,8 @@
 #ifndef PROPERTY_H
 #define PROPERTY_H
 
-#include <QObject>
 #include <QList>
+#include <QObject>
 #include <QStringList>
 
 class Property : public QObject

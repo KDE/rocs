@@ -5,12 +5,12 @@
  */
 
 #include "test_kernel.h"
-#include "libgraphtheory/kernel/kernel.h"
-#include "libgraphtheory/graphdocument.h"
-#include "libgraphtheory/nodetype.h"
-#include "libgraphtheory/edgetype.h"
-#include "libgraphtheory/node.h"
 #include "libgraphtheory/edge.h"
+#include "libgraphtheory/edgetype.h"
+#include "libgraphtheory/graphdocument.h"
+#include "libgraphtheory/kernel/kernel.h"
+#include "libgraphtheory/node.h"
+#include "libgraphtheory/nodetype.h"
 
 #include <QTest>
 

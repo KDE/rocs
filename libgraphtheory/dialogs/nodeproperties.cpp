@@ -8,17 +8,17 @@
 #include "node.h"
 #include <graphdocument.h>
 
-#include <KLocalizedString>
 #include <KGuiItem>
+#include <KLocalizedString>
 #include <KStandardGuiItem>
+#include <QDebug>
 #include <QDialogButtonBox>
 #include <QPointer>
 #include <QPushButton>
-#include <QDebug>
 
 using namespace GraphTheory;
 
-NodeProperties::NodeProperties(QWidget* parent)
+NodeProperties::NodeProperties(QWidget *parent)
     : QDialog(parent)
     , m_node(NodePtr())
     , m_okButton(new QPushButton)
@@ -46,15 +46,11 @@ NodeProperties::NodeProperties(QWidget* parent)
     buttons->addButton(m_okButton, QDialogButtonBox::AcceptRole);
     buttons->addButton(cancelButton, QDialogButtonBox::RejectRole);
     mainLayout->addWidget(buttons);
-    connect(m_okButton, &QPushButton::clicked,
-        this, &NodeProperties::accept);
-    connect(cancelButton, &QPushButton::clicked,
-        this, &NodeProperties::reject);
+    connect(m_okButton, &QPushButton::clicked, this, &NodeProperties::accept);
+    connect(cancelButton, &QPushButton::clicked, this, &NodeProperties::reject);
 
-    connect(ui->id, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
-        this, &NodeProperties::validateIdInput);
-    connect(this, &NodeProperties::accepted,
-        this, &NodeProperties::apply);
+    connect(ui->id, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &NodeProperties::validateIdInput);
+    connect(this, &NodeProperties::accepted, this, &NodeProperties::apply);
 
     setAttribute(Qt::WA_DeleteOnClose);
 }
@@ -111,7 +107,7 @@ void NodeProperties::apply()
 
     for (int i = 0; i < ui->dynamicProperties->rowCount(); ++i) {
         QString name = ui->dynamicProperties->item(i, 0)->data(Qt::DisplayRole).toString();
-        QVariant value =ui->dynamicProperties->item(i, 1)->data(Qt::DisplayRole);
+        QVariant value = ui->dynamicProperties->item(i, 1)->data(Qt::DisplayRole);
         m_node->setDynamicProperty(name, value);
     }
 }

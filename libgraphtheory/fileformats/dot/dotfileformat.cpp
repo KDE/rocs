@@ -8,21 +8,21 @@
 */
 
 #include "dotfileformat.h"
-#include "modifiers/topology.h"
-#include "graphdocument.h"
-#include "node.h"
+#include "dotgrammar.h"
+#include "dotgrammarhelper.h"
 #include "edge.h"
+#include "graphdocument.h"
+#include "modifiers/topology.h"
+#include "node.h"
 #include <KLocalizedString>
 #include <KPluginFactory>
 #include <QFile>
+#include <QHash>
 #include <QTextStream>
 #include <QUrl>
-#include <QHash>
 #include <QVector>
-#include "dotgrammarhelper.h"
-#include "dotgrammar.h"
 
-extern DotParser::DotGraphParsingHelper* phelper;
+extern DotParser::DotGraphParsingHelper *phelper;
 
 using namespace GraphTheory;
 
@@ -62,7 +62,7 @@ void DotFileFormat::readFile()
     }
 
     Topology::directedGraphDefaultTopology(document);
-     setError(None);
+    setError(None);
 }
 
 void DotFileFormat::writeFile(GraphDocumentPtr document)
@@ -96,9 +96,7 @@ void DotFileFormat::writeFile(GraphDocumentPtr document)
 static QString processEdge(const EdgePtr &edge)
 {
     QString edgeStr;
-    edgeStr.append(QString(" %1 -> %2 ")
-                .arg(edge->from()->id())
-                .arg(edge->to()->id()));
+    edgeStr.append(QString(" %1 -> %2 ").arg(edge->from()->id()).arg(edge->to()->id()));
 
     // process properties if present
     bool firstProperty = true;
@@ -107,12 +105,12 @@ static QString processEdge(const EdgePtr &edge)
         edgeStr.append("[");
         edgeStr.append(QString(" label = \"%2\" ").arg(edge->property("name").toString()));
     }
-    for(const QByteArray &property : edge->dynamicPropertyNames()) {
+    for (const QByteArray &property : edge->dynamicPropertyNames()) {
         if (firstProperty == true) {
-                firstProperty = false;
-                edgeStr.append("[");
-            } else {
-                edgeStr.append(", ");
+            firstProperty = false;
+            edgeStr.append("[");
+        } else {
+            edgeStr.append(", ");
         }
         edgeStr.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(edge->property(property).toString()));
     }
@@ -133,7 +131,7 @@ static QString processNode(const NodePtr &node)
         nodeStr.append(QString("label=\"%1\" ").arg(node->dynamicProperty("name").toString()));
     }
 
-    for(const QByteArray &property : node->dynamicPropertyNames()) {
+    for (const QByteArray &property : node->dynamicPropertyNames()) {
         nodeStr.append(", ");
         nodeStr.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(node->property(property).toString()));
     }

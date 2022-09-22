@@ -5,29 +5,30 @@
  */
 
 #include "view.h"
-#include "models/nodemodel.h"
-#include "models/edgemodel.h"
-#include "models/nodepropertymodel.h"
-#include "models/edgepropertymodel.h"
-#include "models/nodetypemodel.h"
-#include "models/edgetypemodel.h"
-#include "qtquickitems/nodeitem.h"
-#include "qtquickitems/edgeitem.h"
-#include "dialogs/nodeproperties.h"
 #include "dialogs/edgeproperties.h"
+#include "dialogs/nodeproperties.h"
 #include "logging_p.h"
+#include "models/edgemodel.h"
+#include "models/edgepropertymodel.h"
+#include "models/edgetypemodel.h"
+#include "models/nodemodel.h"
+#include "models/nodepropertymodel.h"
+#include "models/nodetypemodel.h"
+#include "qtquickitems/edgeitem.h"
+#include "qtquickitems/nodeitem.h"
 
-#include <QQmlApplicationEngine>
 #include <KLocalizedContext>
+#include <QPointer>
+#include <QQmlApplicationEngine>
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQmlEngine>
-#include <QPointer>
 #include <QStandardPaths>
 
 using namespace GraphTheory;
 
-class GraphTheory::ViewPrivate {
+class GraphTheory::ViewPrivate
+{
 public:
     ViewPrivate()
         : m_edgeModel(new EdgeModel())
@@ -51,7 +52,6 @@ public:
     EdgeTypeModel *m_edgeTypeModel;
     NodeTypeModel *m_nodeTypeModel;
 };
-
 
 View::View(QWidget *parent)
     : QQuickWidget(parent)
@@ -83,7 +83,7 @@ View::View(QWidget *parent)
     QUrl path = QUrl("qrc:/libgraphtheory/qml/Scene.qml");
     QQmlComponent *component = new QQmlComponent(engine());
     component->loadUrl(path);
-    if (!component->isReady() ) {
+    if (!component->isReady()) {
         qCWarning(GRAPHTHEORY_GENERAL) << component->errorString();
         return;
     }
@@ -98,18 +98,12 @@ View::View(QWidget *parent)
     QObject *topLevel = component->create();
 
     // connections to QML signals
-    connect(topLevel, SIGNAL(createNode(qreal,qreal,int)),
-            this, SLOT(createNode(qreal,qreal,int)));
-    connect(topLevel, SIGNAL(createEdge(GraphTheory::Node*,GraphTheory::Node*,int)),
-            this, SLOT(createEdge(GraphTheory::Node*,GraphTheory::Node*,int)));
-    connect(topLevel, SIGNAL(deleteNode(GraphTheory::Node*)),
-            this, SLOT(deleteNode(GraphTheory::Node*)));
-    connect(topLevel, SIGNAL(deleteEdge(GraphTheory::Edge*)),
-            this, SLOT(deleteEdge(GraphTheory::Edge*)));
-    connect(topLevel, SIGNAL(showNodePropertiesDialog(GraphTheory::Node*)),
-            this, SLOT(showNodePropertiesDialog(GraphTheory::Node*)));
-    connect(topLevel, SIGNAL(showEdgePropertiesDialog(GraphTheory::Edge*)),
-            this, SLOT(showEdgePropertiesDialog(GraphTheory::Edge*)));
+    connect(topLevel, SIGNAL(createNode(qreal, qreal, int)), this, SLOT(createNode(qreal, qreal, int)));
+    connect(topLevel, SIGNAL(createEdge(GraphTheory::Node *, GraphTheory::Node *, int)), this, SLOT(createEdge(GraphTheory::Node *, GraphTheory::Node *, int)));
+    connect(topLevel, SIGNAL(deleteNode(GraphTheory::Node *)), this, SLOT(deleteNode(GraphTheory::Node *)));
+    connect(topLevel, SIGNAL(deleteEdge(GraphTheory::Edge *)), this, SLOT(deleteEdge(GraphTheory::Edge *)));
+    connect(topLevel, SIGNAL(showNodePropertiesDialog(GraphTheory::Node *)), this, SLOT(showNodePropertiesDialog(GraphTheory::Node *)));
+    connect(topLevel, SIGNAL(showEdgePropertiesDialog(GraphTheory::Edge *)), this, SLOT(showEdgePropertiesDialog(GraphTheory::Edge *)));
 
     // create widget
     setContent(path, component, topLevel);
@@ -117,7 +111,6 @@ View::View(QWidget *parent)
 
 View::~View()
 {
-
 }
 
 void View::setGraphDocument(GraphDocumentPtr document)

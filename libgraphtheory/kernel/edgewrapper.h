@@ -7,14 +7,14 @@
 #ifndef EDGEWRAPPER_H
 #define EDGEWRAPPER_H
 
+#include "graphdocument.h"
 #include "graphtheory_export.h"
 #include "kernel.h"
-#include "typenames.h"
 #include "node.h"
-#include "graphdocument.h"
+#include "typenames.h"
 
-#include <QObject>
 #include <QColor>
+#include <QObject>
 
 class QEvent;
 
@@ -52,8 +52,8 @@ public:
      */
     void setType(int typeId);
 
-    Q_INVOKABLE GraphTheory::NodeWrapper * from() const;
-    Q_INVOKABLE GraphTheory::NodeWrapper * to() const;
+    Q_INVOKABLE GraphTheory::NodeWrapper *from() const;
+    Q_INVOKABLE GraphTheory::NodeWrapper *to() const;
     Q_INVOKABLE bool directed() const;
 
     /** reimplemented from QObject **/
@@ -74,6 +74,6 @@ private:
 };
 }
 
-Q_DECLARE_METATYPE(GraphTheory::EdgeWrapper*)
+Q_DECLARE_METATYPE(GraphTheory::EdgeWrapper *)
 
 #endif

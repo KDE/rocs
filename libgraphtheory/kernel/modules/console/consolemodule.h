@@ -9,8 +9,8 @@
 
 #include "graphtheory_export.h"
 #include "kernel/kernel.h"
-#include <QObject>
 #include <QList>
+#include <QObject>
 #include <QPair>
 
 namespace GraphTheory
@@ -38,7 +38,7 @@ public:
      * Get all backlog since last clear.
      * \return the backlog
      */
-    QList< QPair<GraphTheory::Kernel::MessageType, QString> > backlog() const;
+    QList<QPair<GraphTheory::Kernel::MessageType, QString>> backlog() const;
 
 public Q_SLOTS:
     /**
@@ -61,7 +61,7 @@ Q_SIGNALS:
 
 private:
     Q_DISABLE_COPY(ConsoleModule)
-    QList< QPair<GraphTheory::Kernel::MessageType, QString> > m_backlog;
+    QList<QPair<GraphTheory::Kernel::MessageType, QString>> m_backlog;
 };
 }
 

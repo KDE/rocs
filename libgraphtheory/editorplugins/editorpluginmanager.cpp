@@ -7,21 +7,21 @@
 #include "editorpluginmanager.h"
 #include "logging_p.h"
 
-#include <KPluginMetaData>
 #include <KPluginFactory>
-#include <QString>
+#include <KPluginMetaData>
 #include <QCoreApplication>
 #include <QDir>
 #include <QDirIterator>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QString>
 
 using namespace GraphTheory;
 
 class GraphTheory::EditorPluginManagerPrivate
 {
 public:
-    QList<EditorPluginInterface*> m_plugins;
+    QList<EditorPluginInterface *> m_plugins;
 };
 
 EditorPluginManager::EditorPluginManager()

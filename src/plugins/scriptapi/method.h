@@ -7,8 +7,8 @@
 #ifndef METHOD_H
 #define METHOD_H
 
-#include <QObject>
 #include <QList>
+#include <QObject>
 #include <QStringList>
 #include <QVariantList>
 
@@ -34,7 +34,7 @@ public:
     QString returnType() const;
     void setReturnType(const QString &type);
     QVariant parametersVar() const;
-    QList<Parameter*> parameters() const;
+    QList<Parameter *> parameters() const;
     void addParameter(const QString &name, const QString &type, const QString &info, const QString &typeLink);
     QString apiDocumentAnchor();
     QString returnTypeLink() const;
@@ -46,7 +46,7 @@ private:
     QStringList m_description;
     QString m_returnType;
     QString m_returnTypeLink;
-    QList<Parameter*> m_parameters;
+    QList<Parameter *> m_parameters;
 };
 
 // Q_DECLARE_METATYPE(QList<ParameterDocumentation*>);

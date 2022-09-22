@@ -7,10 +7,10 @@
 #include "editorplugins/editorplugininterface.h"
 
 #include "generategraphwidget.h"
-#include "typenames.h"
 #include "graphdocument.h"
-#include "modifiers/valueassign.h"
 #include "logging_p.h"
+#include "modifiers/valueassign.h"
+#include "typenames.h"
 #include <KPluginFactory>
 #include <QDialog>
 

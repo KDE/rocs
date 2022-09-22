@@ -25,11 +25,11 @@ class GRAPHTHEORY_EXPORT EdgeTypeModel : public QAbstractListModel
 
 public:
     enum EdgeRoles {
-        IdRole = Qt::UserRole + 1,      //!< unique identifier of edge
-        TitleRole,                      //!< title of edge type
-        ColorRole,                      //!< color of edge type
-        DirectionRole,                  //!< direction of edge type
-        DataRole                        //!< access to EdgeType object
+        IdRole = Qt::UserRole + 1, //!< unique identifier of edge
+        TitleRole, //!< title of edge type
+        ColorRole, //!< color of edge type
+        DirectionRole, //!< direction of edge type
+        DataRole //!< access to EdgeType object
     };
 
     explicit EdgeTypeModel(QObject *parent = nullptr);
@@ -37,7 +37,7 @@ public:
     /**
      * Reimplemented from QAbstractListModel::roleNames()
      */
-    QHash<int,QByteArray> roleNames() const override;
+    QHash<int, QByteArray> roleNames() const override;
     void setDocument(GraphDocumentPtr document);
     EdgeTypePtr type(int index) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;

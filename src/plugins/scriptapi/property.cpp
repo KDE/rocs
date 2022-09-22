@@ -7,10 +7,9 @@
 #include "property.h"
 #include <QVariant>
 
-Property::Property(QObject* parent)
+Property::Property(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 void Property::setName(const QString &name)
@@ -47,7 +46,7 @@ QString Property::type() const
     return m_type;
 }
 
-void Property::setTypeLink(const QString& link)
+void Property::setTypeLink(const QString &link)
 {
     m_typeLink = link;
 }

@@ -7,16 +7,16 @@
 #ifndef DOCUMENTWRAPPER_H
 #define DOCUMENTWRAPPER_H
 
-#include "graphtheory_export.h"
-#include "kernel.h"
-#include "typenames.h"
-#include "node.h"
 #include "edge.h"
 #include "graphdocument.h"
+#include "graphtheory_export.h"
+#include "kernel.h"
+#include "node.h"
+#include "typenames.h"
 
-#include <QScriptEngine>
-#include <QObject>
 #include <QColor>
+#include <QObject>
+#include <QScriptEngine>
 
 namespace GraphTheory
 {
@@ -36,17 +36,17 @@ public:
     DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engine);
     ~DocumentWrapper() override;
 
-    QScriptEngine * engine() const;
+    QScriptEngine *engine() const;
 
     /**
      * \return wrapper for \p node
      */
-    NodeWrapper * nodeWrapper(NodePtr node) const;
+    NodeWrapper *nodeWrapper(NodePtr node) const;
 
     /**
      * \return wrapper for \p edge
      */
-    EdgeWrapper * edgeWrapper(EdgePtr edge) const;
+    EdgeWrapper *edgeWrapper(EdgePtr edge) const;
 
     Q_INVOKABLE QScriptValue node(int id) const;
     Q_INVOKABLE QScriptValue nodes() const;
@@ -69,8 +69,8 @@ private:
     Q_DISABLE_COPY(DocumentWrapper)
     const GraphDocumentPtr m_document;
     QScriptEngine *m_engine;
-    QMap<NodePtr, NodeWrapper*> m_nodeMap;
-    QMap<EdgePtr, EdgeWrapper*> m_edgeMap;
+    QMap<NodePtr, NodeWrapper *> m_nodeMap;
+    QMap<EdgePtr, EdgeWrapper *> m_edgeMap;
 };
 }
 

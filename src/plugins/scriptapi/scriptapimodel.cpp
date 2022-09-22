@@ -5,12 +5,12 @@
  */
 
 #include "scriptapimodel.h"
-#include "object.h"
 #include "method.h"
+#include "object.h"
 #include "property.h"
 
-#include <QDebug>
 #include <KLocalizedString>
+#include <QDebug>
 
 class Item
 {
@@ -31,7 +31,7 @@ public:
     Item *parent();
 
 private:
-    QList<Item*> _childItems;
+    QList<Item *> _childItems;
     QList<QVariant> _itemData;
     QString _anchor;
     QString _document;
@@ -54,7 +54,7 @@ void Item::appendChild(Item *item)
     _childItems.append(item);
 }
 
-Item * Item::child(int row)
+Item *Item::child(int row)
 {
     return _childItems.value(row);
 }
@@ -67,7 +67,7 @@ int Item::childCount() const
 int Item::row() const
 {
     if (_parentItem) {
-        return _parentItem->_childItems.indexOf(const_cast<Item*>(this));
+        return _parentItem->_childItems.indexOf(const_cast<Item *>(this));
     }
     return 0;
 }
@@ -82,7 +82,7 @@ QVariant Item::data(int column) const
     return _itemData.value(column);
 }
 
-void Item::setDocumentAnchor(const QString& document, const QString& anchor)
+void Item::setDocumentAnchor(const QString &document, const QString &anchor)
 {
     _anchor = anchor;
     _document = document;
@@ -98,14 +98,13 @@ QString Item::document()
     return _document;
 }
 
-Item * Item::parent()
+Item *Item::parent()
 {
     return _parentItem;
 }
 
-
 // ScriptApiModel methods
-ScriptApiModel::ScriptApiModel(QList<Object*> dataList, QObject *parent)
+ScriptApiModel::ScriptApiModel(QList<Object *> dataList, QObject *parent)
     : QAbstractItemModel(parent)
 {
     QList<QVariant> rootData;
@@ -128,16 +127,14 @@ QModelIndex ScriptApiModel::index(int row, int column, const QModelIndex &parent
     Item *parentItem;
     if (!parent.isValid()) {
         parentItem = rootItem;
-    }
-    else {
-        parentItem = static_cast<Item*>(parent.internalPointer());
+    } else {
+        parentItem = static_cast<Item *>(parent.internalPointer());
     }
 
     Item *childItem = parentItem->child(row);
     if (childItem) {
         return createIndex(row, column, childItem);
-    }
-    else {
+    } else {
         return QModelIndex();
     }
 }
@@ -148,7 +145,7 @@ QModelIndex ScriptApiModel::parent(const QModelIndex &index) const
         return QModelIndex();
     }
 
-    Item *childItem = static_cast<Item*>(index.internalPointer());
+    Item *childItem = static_cast<Item *>(index.internalPointer());
     Item *parentItem = childItem->parent();
 
     if (parentItem == rootItem) {
@@ -167,9 +164,8 @@ int ScriptApiModel::rowCount(const QModelIndex &parent) const
 
     if (!parent.isValid()) {
         parentItem = rootItem;
-    }
-    else {
-        parentItem = static_cast<Item*>(parent.internalPointer());
+    } else {
+        parentItem = static_cast<Item *>(parent.internalPointer());
     }
 
     return parentItem->childCount();
@@ -178,9 +174,8 @@ int ScriptApiModel::rowCount(const QModelIndex &parent) const
 int ScriptApiModel::columnCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
-        return static_cast<Item*>(parent.internalPointer())->columnCount();
-    }
-    else {
+        return static_cast<Item *>(parent.internalPointer())->columnCount();
+    } else {
         return rootItem->columnCount();
     }
 }
@@ -191,7 +186,7 @@ QVariant ScriptApiModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    Item *item = static_cast<Item*>(index.internalPointer());
+    Item *item = static_cast<Item *>(index.internalPointer());
     if (role == DocumentRole) {
         return QVariant::fromValue<QString>(item->document());
     }
@@ -221,7 +216,7 @@ QVariant ScriptApiModel::headerData(int section, Qt::Orientation orientation, in
     return QVariant();
 }
 
-void ScriptApiModel::setupModelData(QList<Object*> dataList, Item *parent)
+void ScriptApiModel::setupModelData(QList<Object *> dataList, Item *parent)
 {
     for (Object *object : std::as_const(dataList)) {
         QList<QVariant> columnData;
@@ -240,8 +235,7 @@ void ScriptApiModel::setupModelData(QList<Object*> dataList, Item *parent)
             QList<QVariant> columnData;
             columnData << property->name();
             Item *propertyItem = new Item(columnData, propertyContainer);
-            propertyItem->setDocumentAnchor(object->apiDocumentIdentifier(),
-                property->apiDocumentAnchor());
+            propertyItem->setDocumentAnchor(object->apiDocumentIdentifier(), property->apiDocumentAnchor());
             propertyContainer->appendChild(propertyItem);
         }
 
@@ -255,8 +249,7 @@ void ScriptApiModel::setupModelData(QList<Object*> dataList, Item *parent)
             QList<QVariant> columnData;
             columnData << method->name();
             Item *methodProperty = new Item(columnData, methodContainer);
-            methodProperty->setDocumentAnchor(object->apiDocumentIdentifier(),
-                method->apiDocumentAnchor());
+            methodProperty->setDocumentAnchor(object->apiDocumentIdentifier(), method->apiDocumentAnchor());
             methodContainer->appendChild(methodProperty);
         }
     }
