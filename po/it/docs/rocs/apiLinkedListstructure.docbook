@@ -1,0 +1,209 @@
+<sect1>
+<title
+>API di scripting per il motore a liste collegate</title>
+<sect2>
+<title
+>Struttura di dati a lista collegata</title>
+<para
+>Un oggetto lista contiene le informazioni di una struttura di dati del tipo <quote
+>Lista collegata</quote
+>. </para>
+
+<sect3>
+<title
+>Proprietà</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>name</emphasis
+>: </para>
+        <para
+>Il nome univoco di questa struttura di dati.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Metodi</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>head()</term>
+    <listitem>
+        <para
+>Restituisci il nodo di testa della lista.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>head</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>setHead(nodo)</term>
+    <listitem>
+        <para
+>Imposta la testa della lista.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>setHead</function
+></funcdef
+> <paramdef
+>ListNode <parameter
+><replaceable
+>nodo</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode(tipo)</term>
+    <listitem>
+        <para
+>Crea un nuovo nodo del tipo specificato e restituiscilo. Se il tipo non è registrato, non viene creato nessun nodo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>createNode</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tipo</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode()</term>
+    <listitem>
+        <para
+>Crea un nuovo nodo di tipo predefinito e restituiscilo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>createNode</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+
+<sect2>
+<title
+>Nodo di lista</title>
+<para
+>Un nodo è l'elemento di dati di una lista collegata. </para>
+
+<sect3>
+<title
+>Proprietà</title>
+<itemizedlist>
+
+    <listitem>
+        <para
+><emphasis
+>width</emphasis
+>: </para>
+        <para
+>La dimensione di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>x</emphasis
+>: </para>
+        <para
+>La coordinata X di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>y</emphasis
+>: </para>
+        <para
+>La coordinata Y di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>id</emphasis
+>: </para>
+        <para
+>L'identificativo univoco di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+>: </para>
+        <para
+>Il colore di questo elemento di dati, indicato come valore esadecimale.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Metodi</title>
+<variablelist>
+    <varlistentry>
+    <term
+>pointTo(destinazione)</term>
+    <listitem>
+        <para
+>Imposta il puntatore di questo nodo di lista al nodo di destinazione.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>pointTo</function
+></funcdef
+> <paramdef
+>ListNode <parameter
+><replaceable
+>destinazione</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+</sect1>

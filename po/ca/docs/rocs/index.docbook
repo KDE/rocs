@@ -1,0 +1,806 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Catalan  "INCLUDE">
+
+]>
+<book id="rocs" lang="&language;">
+
+<bookinfo>
+<title
+>El manual del &rocs;</title>
+<authorgroup>
+<author
+><personname
+> <firstname
+>Tomaz</firstname
+> <surname
+>Canabrava</surname
+> </personname
+> <email
+>tomaz.canabrava@gmail.com</email
+> </author>
+<author
+><personname
+> <firstname
+>Andreas</firstname
+> <surname
+>Cord-Landwehr</surname
+> </personname
+> <email
+>cordlandwehr@kde.org</email
+> </author>
+
+&traductor.Antoni.Bella; 
+</authorgroup>
+
+<date
+>23 d'octubre de 2021</date>
+<releaseinfo
+>KDE Gear 21.08</releaseinfo>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<abstract>
+<para
+>El &rocs; és una eina de teoria de grafs. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdeedu</keyword>
+<keyword
+>matemàtiques</keyword>
+<keyword
+>matemàtica</keyword>
+<keyword
+>grafs</keyword>
+<keyword
+>node</keyword>
+<keyword
+>aresta</keyword>
+<keyword
+>Rocs</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introducció</title>
+<para
+>En aquest capítol s'ofereix una visió general de les principals característiques i el flux de treball típic. Les parts més importants són <xref linkend="introduction-nutshell"/> i <xref linkend="scripting"/>, que en el seu conjunt han de permetre que cada nou usuari comenci directament a emprar el &rocs;. </para>
+
+<sect1 id="introduction-goals">
+<title
+>Objectius, destinataris i flux de treball</title>
+<para
+>El &rocs; és una eina per a la teoria de grafs per a tothom interessat en el disseny i anàlisi d'algorismes de graf. En particular, aquests són</para>
+<itemizedlist>
+    <listitem
+><para
+>professors, que volen demostrar algorismes als seus estudiants,</para
+></listitem>
+    <listitem
+><para
+>estudiants i investigadors, que volen entendre i veure com actua el seu algorisme,</para
+></listitem>
+    <listitem
+><para
+>i tothom que estigui interessat en les estructures de dades i algorismes.</para
+></listitem>
+</itemizedlist>
+<para
+>Per a tots ells, el &rocs; proporciona un fàcil editor gràfic per a la creació de grafs, un poderós motor per a la creació de scripts per a executar algorismes, i diverses eines d'ajuda per a les simulacions, experiments i exportacions dels grafs. La forma típica d'usar el &rocs; és crear un graf, ja sigui a mà (&ead;, arrossegant els nodes i arestes a la pissarra) o emprant un dels generadors de grafs. Els algorismes de grafs després es poden implementar i executar en el graf creat, i tots els canvis que realitzi l'algorisme, seran visibles immediatament en l'editor de grafs. </para>
+
+<screenshot>
+  <screeninfo
+>Una captura de pantalla del &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-screenshot.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Una captura de pantalla del &rocs;</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+</sect1>
+
+<sect1 id="introduction-nutshell">
+<title
+>El &rocs; en poques paraules</title>
+<para
+>Cada sessió del &rocs; és un projecte: en obrir el &rocs; es crea un projecte buit, en carregar algun projecte es convertirà en el projecte actual. En si, un projecte consisteix en <emphasis
+>documents de graf</emphasis
+>, <emphasis
+>scripts/algorismes</emphasis
+> i <emphasis
+>scripts</emphasis
+>. </para>
+
+<sect2>
+<title
+>Documents de graf</title>
+<para
+>Un document de graf representa el contingut d'una pissarra en l'editor de grafs. Conté informació sobre els tipus de nodes i arestes definits per l'usuari, les seves propietats, i sobre els nodes i arestes ja creats. És a dir, el &rocs; entén el conjunt de tots els nodes i arestes d'un document de graf per a formar un (no necessàriament connectat) graf. Tot el que pertany a un document de graf és accessible des del motor de scripts mitjançant l'objecte global <userinput
+><command
+>Document</command
+></userinput
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Tipus d'arestes</title>
+<para
+>En alguns escenaris, els grafs consisteixen en diferents tipus d'arestes (&pex;, un graf no dirigit, a més de les tres arestes calculades per un algoritme de cerca en amplada) que s'han de manegar i mostrar de forma diferent. Per això, a més d'un tipus d'aresta predeterminat, podeu definir altres tipus d'arestes arbitràries. Cada tipus d'aresta té la seva representació visual individual, propietats dinàmiques, i es pot canviar de no dirigit o dirigit. La interfície per a la creació de scripts proporciona mètodes convenients per a només accedir específicament als tipus específics d'arestes. </para>
+</sect2>
+
+<sect2>
+<title
+>Tipus de nodes</title>
+<para
+>De la mateixa manera que per als tipus d'arestes, podeu definir diferents tipus de nodes d'un graf (&pex;, per a donar un paper especial a alguns nodes). Cada tipus de node posseeix la seva pròpia representació visual i propietats dinàmiques. </para>
+</sect2>
+
+<sect2>
+<title
+>Propietats</title>
+<para
+>Cada element (node o aresta) pot tenir propietats. Aquestes propietats s'han de configurar en el corresponent tipus de node o aresta. Les propietats s'identifiquen i accedeix mitjançant els seus noms i poden contenir qualsevol valor. Per a crear una propietat nova o per a modificar una d'existent, empreu la barra lateral <guilabel
+>Tipus d'elements</guilabel
+> i empreu el botó <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Propietats</guibutton
+> per a obrir el diàleg. </para>
+<para
+>També podeu emprar el motor de crear scripts per a accedir a les propietats registrades i canviar els seus valors. En el següent exemple se suposa que la propietat <quote
+>weight</quote
+> està registrada per al tipus d'aresta predeterminat. <programlisting
+>var nodes = Document.nodes()
+for (var i = 0; i &lt; nodes.length; ++i){
+    nodes[i].weight = i;
+}
+for (var i = 0; i &lt; nodes.length; ++i){
+    Console.log("weight of node " + i + ": " + nodes[i].weight);
+}
+</programlisting>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="introduction-tutorial">
+<title
+>Guia d'aprenentatge</title>
+<para
+>En aquesta secció volem crear un projecte d'exemple per a explorar algunes de les característiques més importants del &rocs;. L'objectiu és crear un graf i un script que il·lustri un algorisme d'aproximació a 2 simple per al problema <emphasis
+>cobertura de vèrtexs mínima</emphasis
+>. En aquest problema s'han de trobar un subconjunt de nodes del graf C de mida mínima, de manera que cada aresta del graf estarà connectada a almenys un node de C. Se sap que aquest problema és NP-complex i volem il·lustrar com trobar una aproximació de factor 2 cercant una coincidència en el graf donat. </para>
+<para
+>El nostre objectiu és visualitzar la relació de les coincidències i la cobertura de vèrtexs mínima. Per això, volem especificar dos tipus d'arestes, un per a mostrar les arestes coincidents i un per a mostrar les arestes <quote
+>comunes</quote
+>, així com dos tipus de nodes que utilitzarem per a distingir els nodes continguts en C i els que no estan continguts en C. </para>
+
+<sect2>
+<title
+>Generar el graf</title>
+<para
+>Per a crear el graf, emprarem un generador de grafs predeterminat proporcionat pel &rocs;. El trobareu al menú principal a <menuchoice
+><guimenu
+>Document de graf</guimenu
+> <guisubmenu
+>Eines</guisubmenu
+> <guimenuitem
+>Genera el graf</guimenuitem
+></menuchoice
+>. Després, seleccionarem un <guilabel
+>Graf aleatori</guilabel
+> amb 30 nodes, 90 arestes i amb 1 llavor (la llavor és la llavor inicial per al generador de grafs aleatoris; si s'utilitza la mateixa llavor diverses vegades es tornaran a reproduir els mateixos grafs). </para>
+</sect2>
+
+<sect2>
+<title
+>Crear els tipus d'elements</title>
+<para
+>Emprarem els <guilabel
+>Tipus d'elements</guilabel
+> per a crear un segon tipus de node i un segon tipus d'aresta. Per a aquests dos nous tipus, obrirem el diàleg de propietats amb els respectius botons de <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Propietats</guibutton
+> i establirem els seus ID a <literal
+>2</literal
+>. A més, canviarem els colors dels elements d'aquests dos tipus nous (per a distingir els tipus predeterminat). Finalment, establirem que tots els tipus d'arestes són bidireccionals i establirem els ID del tipus predeterminat a <literal
+>1</literal
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>L'algorisme</title>
+<para
+>Per a acabar, hem d'implementar l'algorisme d'aproximació. Per a això utilitzarem la següent implementació: </para>
+<programlisting
+>for (var i=0; i &lt; Document.nodes.length; i++) {
+    Document.nodes[i].type = 1;
+}
+for (var i=0; i &lt; Document.edges.length; i++) {
+    Document.edges[i].type = 1;
+}
+
+var E = Document.edges(); // conjunt d'arestes sense processar
+var C = new Array();      // arestes coincidents
+while (E.length 
+> 0) {
+    var e = E[0];         // prenem la primera aresta e={u,v}
+    var u = e.from();
+    var v = e.to();
+    e.type = 2;           // establim l'aresta com a coincident
+    E.shift();            // eliminem «e» (és a dir, E[0]) des de la llista d'arestes
+    C.push(u);            // afegim «u» a «C»
+    C.push(v);            // afegim «v» a «C»
+
+    // marquem «u,v» com a nodes en «C»
+    u.type = 2;
+    v.type = 2;
+
+    // eliminem de «E» totes les arestes adjacents a «u» o «v»
+    var adjacent = u.edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // troba l'índex
+        if (index != -1) {
+            E.splice(index, 1); // l'elimina si ja s'ha trobat
+        }
+    }
+    var adjacent = v.edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // troba l'índex
+        if (index != -1) {
+            E.splice(index, 1); // l'elimina si ja s'ha trobat
+        }
+    }
+}
+Console.log("Vertex Cover contains " + C.length + " nodes.");
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Executar l'algorisme</title>
+<para
+>L'algorisme es pot executar amb el botó <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Executa</guibutton
+> al plafó de control de l'script. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="user-interface">
+<title
+>La interfície d'usuari del &rocs;</title>
+
+<sect1 id="user-interface-all">
+<title
+>Elements principals de la interfície d'usuari</title>
+<para
+>La interfície d'usuari es divideix en diverses parts lògiques que es presenten en la següent captura de pantalla. </para>
+
+<screenshot>
+  <screeninfo
+>Elements de la &IGU; en la interfície del &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-interfaces.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Elements de la &IGU; en la interfície del &rocs;.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Editor de grafs</term>
+    <listitem
+><para
+>L'editor proporciona una pissarra en blanc on es poden situar els nodes i les arestes. En fer doble clic a qualsevol dels seus elements obrirà un menú adequat. Podeu utilitzar les eines des de les <emphasis
+>pestanyes en la Barra lateral</emphasis
+> per a crear i modificar els grafs.</para>
+    <para
+>Eines disponibles:</para>
+      <itemizedlist>
+        <listitem
+><para
+>A dalt a l'esquerra del quadre, trobareu les icones d'acció següents. Fer clic sobre una acció significa que el punter del ratolí aplicarà aquesta acció a la pissarra de l'editor de grafs:</para>
+          <itemizedlist>
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsselect.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Selecciona i mou</guiicon
+>: Per a seleccionar elements, o bé feu clic sobre l'espai sense utilitzar a la pissarra, manteniu premut el ratolí i dibuixeu un rectangle que contingui alguns elements de dades i/o arestes per a seleccionar aquests elements o en cas contrari feu clic directament sobre un element sense seleccionar per a seleccionar-lo. Si feu clic sobre un element o conjunt d'elements seleccionats, respectivament, els podreu moure mantenint premut el ratolí i movent-lo. També és possible moure els elements seleccionats amb les tecles del cursor.</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsnode.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Crea un node</guiicon
+>: Feu clic sobre una posició arbitrària a la pissarra de l'editor de grafs per a crear un element de dades nou que pertanyi a l'estructura de dades actualment seleccionada. Si manteniu premut el punter del ratolí sobre el botó, es mostrarà un menú des d'on es podran seleccionar (només si hi ha diferents tipus de dades) els tipus de dades dels elements de dades creats.</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsedge.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Crea una aresta</guiicon
+>: Feu clic sobre un element de dades, manteniu premut el ratolí i dibuixeu una línia cap a un altre element de dades al qual apunti l'aresta. Aquesta acció només té èxit si el graf actual permet afegir aquesta aresta (&pex;, en un graf no dirigit no podreu afegir múltiples arestes entre dos elements de dades). Si manteniu premut el punter del ratolí sobre el botó, es mostrarà un menú des d'on es podran seleccionar (només si hi ha diferents tipus d'arestes) els tipus d'arestes dels nous elements de dades creats.</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsdelete.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Elimina l'element</guiicon
+>: Feu clic sobre un element per a eliminar-lo. Si elimineu un node, totes les arestes adjacents també s'eliminaran.</para
+></listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Barra lateral</term>
+    <listitem
+><para
+>A la dreta, trobareu la barra lateral que proporciona diverses eines per al vostre flux de treball:</para>
+      <itemizedlist>
+        <listitem
+><para
+><guilabel
+>Tipus d'element</guilabel
+>: Aquest giny permet accedir directament a les arestes i tipus de node disponibles.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>Diari</guilabel
+>: Cada projecte disposa del seu propi diari que es pot utilitzar per a, &pex;, anotar tasques, resultats o observacions.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>API de creació de scripts</guilabel
+>: Per a obtenir accés directe a la documentació dels scripts, podeu obrir aquest giny.</para
+></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Editor de scripts</term>
+    <listitem
+><para
+>En aquest editor de text podeu escriure algorismes com s'explica en detall en <xref linkend="scripting"/>. Podeu treballar sobre diversos documents de script simultàniament utilitzant diverses pestanyes.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Sortida de l'script:</term>
+    <listitem
+><para
+>Aquesta àrea de text bé mostra informació de depuració o la sortida de l'script del vostre algorisme, depenent de l'opció indicada a la part superior d'aquest giny. Si l'script retorna un error, automàticament es presentarà la sortida de depuració.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Controls</term>
+    <listitem
+><para
+>Aquí trobareu els controls per a l'execució de scripts. Podeu executar l'script que està obert a l'editor de scripts prement <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Executa</guibutton
+>. Mentre s'executa l'script, és possible aturar l'execució prement el botó <inlinemediaobject
+><imageobject
+><imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Atura</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<!--FIXME nop alignment action any more?-->
+</chapter>
+
+<chapter id="scripting">
+<title
+>Crear scripts</title>
+<sect1>
+    <title
+>Executar algorismes en el &rocs;</title>
+<para
+>El &rocs; empra internament el motor &javascript; de QtScript. Això vol dir, que tots els algorismes que implementeu empraran &javascript;. A continuació, us expliquem com accedir i canviar els elements d'un document de graf des del motor per a la creació de scripts. És important tenir en compte que els canvis realitzats pel motor per a la creació de scripts es reflecteixen directament en les propietats dels elements a l'editor de grafs. </para>
+
+<sect2>
+<title
+>Controlar l'execució de l'script</title>
+<para
+>Hi ha diferents modes d'execució per als vostres algorismes: </para>
+<itemizedlist>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Executa</guibutton
+>: Executa l'script fins a finalitzar.</para
+></listitem>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Atura</guibutton
+>: Atura l'execució de l'script (només disponible quan s'executa un script).</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2>
+<title
+>Sortida de l'script</title>
+<para
+>Durant l'execució d'un algorisme, la sortida de depuració i del programa es mostren a la <emphasis
+>depuració i sortida de l'script</emphasis
+>. Si el motor de creació de scripts detecta un error de sintaxi, l'error també es mostrarà com a missatge de depuració. Cal tenir en compte que tots els missatges del programa també es mostraran a la sortida de depuració (com a text en negreta). </para>
+<para
+>Podeu controlar el text que es mostrarà a la sortida de l'script mitjançant les següents funcions: </para>
+<programlisting
+>Console.log(string message);            // mostra el missatge com a sortida de l'script
+    Console.debug(string message);      // mostra el missatge com a sortida de depuració
+    Console.error(string message);          // mostra el missatge com a sortida d'error
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>L'API de creació de scripts</title>
+<para
+>Les diferents parts del &rocs; proporcionen un element estàtic al qual es pot accedir des del motor per a la creació de scripts. Aquests són: <itemizedlist
+> <listitem
+><para
+><userinput
+><command
+>Document</command
+></userinput
+> per al document de grafs</para
+></listitem
+> <listitem
+><para
+><userinput
+><command
+>Consola</command
+></userinput
+> per a la sortida de registre de la consola</para
+></listitem
+> </itemizedlist
+> Per a l'ús explícit de l'API i per a un mètode de referència, si us plau, vegeu l'ajuda en línia a la barra lateral del &rocs;. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="import-export">
+<title
+>Importar i exportar</title>
+<sect1 id="import-export-projects">
+    <title
+>Intercanviar projectes del &rocs;</title>
+    <para
+>Els projectes del &rocs; es poden importar i exportar com fitxers d'arxiu <literal role="extension"
+>.tar.gz</literal
+>. Aquests arxius es poden utilitzar per a intercanviar projectes. Podeu importar i exportar amb els elements de menú <menuchoice
+><guimenu
+>Document de graf</guimenu
+> <guimenuitem
+>Importa un graf...</guimenuitem
+></menuchoice
+> i <menuchoice
+><guimenu
+>Document de graf</guimenu
+> <guimenuitem
+>Exporta el graf com a...</guimenuitem
+></menuchoice
+>, respectivament. </para>
+
+<sect2 id="import-export-graphs">
+    <title
+>Importar i exportar documents de graf</title>
+    <para
+>El &rocs; actualment admet la importació i exportació dels següents formats de fitxer:</para>
+    <itemizedlist>
+        <listitem
+><para
+>Fitxers &DOT;, també coneguts com a fitxers Graphviz</para
+></listitem>
+        <listitem
+><para
+>Fitxers <acronym
+>GML</acronym
+></para
+></listitem>
+        <listitem
+><para
+>Fitxers en el format de grafs trivial</para
+></listitem>
+        <listitem
+><para
+>Format del llenguatge de marques Keyhole</para
+></listitem>
+    </itemizedlist>
+
+<sect3 id="format-specification-tgf">
+<title
+>Format de grafs trivial</title>
+<para
+>El <emphasis
+>format de grafs trivial</emphasis
+> (<acronym
+>TGF</acronym
+>) és un format de fitxer basat en text simple per a la descripció dels grafs. Un fitxer <acronym
+>TGF</acronym
+> consta d'una llista de definicions de node, que assignen els identificadors dels nodes a les etiquetes, seguits per una llista de les arestes. En aquest format, és possible tenir més d'una etiqueta per node i un valor per a cada aresta. El &rocs; interpreta grafs importats com a grafs no dirigits. Els grafs exportats contindran dues arestes per connexió si les connexions són bidireccionals. </para>
+
+<sect4>
+<title
+>Especificació del format</title>
+    <itemizedlist>
+        <listitem
+><para
+>El fitxer comença amb una llista de nodes (un node per línia), seguit per una línia amb el caràcter únic <quote
+>#</quote
+>, seguit per una llista d'arestes (una aresta per línia).</para
+></listitem>
+        <listitem
+><para
+>Un node consisteix d'un nombre enter (identificador), seguit d'un espai, seguit per una cadena arbitrària.</para
+></listitem>
+        <listitem
+><para
+>Un aresta es compon de dos nombres enters (identificadors) separats per un espai, seguit per un espai, seguit per una cadena arbitrària. Se suposa que l'aresta dirigida apunta des del primer identificador fins al segon.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Exemple</title>
+<programlisting
+>1 node inicial
+2 transmissor
+3 pila
+#
+1 2 blau
+2 1 vermell
+2 3 verd
+</programlisting>
+</sect4>
+</sect3>
+
+<sect3 id="format-specification-dot">
+<title
+>Llenguatge &DOT; / Format de fitxer de grafs Graphviz</title>
+<para
+>El llenguatge &DOT; és un llenguatge de descripció de grafs de text net, que permet, tant una representació de grafs llegible, així com un processament eficient per als programes de disseny de grafs. &DOT; és el format de fitxer predeterminat per a la suite de visualització de grafs Graphviz, però també és àmpliament utilitzat per altres eines de graf. Les extensions de fitxer habituals per a &DOT; són <literal role="extension"
+>.gv</literal
+> i <literal role="extension"
+>.dot</literal
+>. </para>
+
+<sect4>
+<title
+>Característiques no implementades</title>
+<para
+>El &rocs; pot analitzar cada fitxer de grafs que contingui un graf especificat d'acord amb l'especificació del llenguatge &DOT;<footnote
+><para
+>https://graphviz.org/doc/info/lang.html</para
+></footnote
+>. La implementació de les característiques del llenguatge és completa, tot i les excepcions següents: </para>
+    <itemizedlist>
+        <listitem
+><para
+>subgraf: A causa de la manca d'un concepte de subgraf en el &rocs;, els subgrafs només s'importen com un conjunt d'elements de dades i connexions. En especial, no s'importaran les connexions cap o des dels subgrafs.</para
+></listitem>
+        <listitem
+><para
+>Els atributs &HTML; i &XML;: Els atributs (com les etiquetes) que contenen la sintaxi &HTML; o &XML; es llegeixen sense canvis. En especial, no es llegeix cap atribut com el tipus de lletra i estil.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Exemple</title>
+<programlisting
+>digraph myGraph {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect4>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="graph-layout">
+    <title
+>Disposició del graf</title>
+
+    <sect1>
+        <title
+>Traçar gràfics automàticament en el &rocs;</title>
+        <para
+>El &rocs; pot traçar gràfics automàticament. L'eina de disposició de grafs del &rocs; es troba en el menú principal a <menuchoice
+><guimenu
+>Document de graf</guimenu
+> <guisubmenu
+>Eines</guisubmenu
+> <guimenuitem
+>Disposició del graf</guimenuitem
+></menuchoice
+>. Hi ha dos algoritmes de disposició diferents que es poden aplicar: disposició Basada en la força i disposició d'Arbre radial. Per a aplicar-ne una, seleccioneu la pestanya corresponent de l'eina de disposició de grafs, trieu els paràmetres desitjats i executeu l'algoritme prement el botó <guibutton
+>D'acord</guibutton
+>. Els detalls que són específics de cadascun dels algoritmes de disposició es proporcionen en les seccions següents. </para>
+
+    <sect2>
+        <title
+>Disposició basada en forces</title>
+
+        <para
+>La Disposició basada en la força es pot aplicar a qualsevol graf. De manera intuïtiva, aquest algoritme simula les forces que actuen en cada node. Hi ha forces repel·lents entre parells de nodes i forces d'atracció entre parells de nodes veïns. La magnitud d'aquestes forces es pot especificar movent els controls lliscants corresponents a la interfície d'usuari. </para>
+
+        <screenshot>
+          <screeninfo
+>Una captura de pantalla de la pestanya de Disposició basada en forces de l'eina de disposició de grafs del &rocs;.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Una captura de pantalla de la pestanya de Disposició basada en forces de l'eina de disposició de grafs del &rocs;.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>Un altre paràmetre que es pot controlar és el Factor d'àrea. Aquest paràmetre controla com es distribueixen els nodes. Les disposicions generades amb valors alts de Factor d'àrea tendeixen a tenir grans distàncies entre els nodes. </para>
+
+    <sect3>
+        <title
+>Disposició d'arbre radial</title>
+        <para
+>La Disposició d'arbre radial només es pot aplicar als arbres. Qualsevol intent d'aplicar aquest algoritme de disposició a altres tipus de grafs produirà un missatge d'error. Els paràmetres per a la Disposició d'arbre radial es poden seleccionar utilitzant la interfície d'usuari proporcionada. </para>
+
+
+        <screenshot>
+          <screeninfo
+>Una captura de pantalla de la pestanya de Disposició d'arbre radial de l'eina de disposició de grafs del &rocs;.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Una captura de pantalla de la pestanya de Disposició d'arbre radial de l'eina de disposició de grafs del &rocs;.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>El paràmetre de tipus d'arbre selecciona entre una disposició d'arbre lliure i una disposició d'arbre amb arrel. En una disposició d'arbre lliure, els nodes es col·loquen lliurement sense cap jerarquia aparent entre ells. En una disposició d'arbre amb arrel, el node arrel es col·loca a la part superior i els subarbres es col·loquen a sota, el qual dona una idea d'una jerarquia entre els nodes. </para>
+
+        <para
+>El paràmetre centre/arrel defineix quin node s'utilitzarà com a arrel per a la disposició de l'arbre amb arrel o com a centre per a la disposició de l'arbre lliure. El centre d'una disposició d'arbre lliure és el primer node que col·loca l'algoritme. Tots els altres nodes es col·locaran en cercles centrats en el node central. L'algorisme de la disposició pot seleccionar automàticament un centre/arrel. </para>
+
+        <para
+>El paràmetre de separació dels nodes controla la distància entre els nodes. En fer augmentar el valor d'aquest paràmetre, augmentarà la distància entre els nodes. De manera similar, fer disminuir el valor d'aquest paràmetre farà que la distància entre els nodes disminueixi. </para>
+    </sect3>
+    </sect2>
+    </sect1>
+</chapter>
+
+<chapter id="credits">
+<title
+>Crèdits i llicència</title>
+
+<para
+>&rocs; </para>
+<para
+>Copyright del programa:</para>
+<itemizedlist>
+	<listitem
+><para
+>Copyright 2008 Ugo Sangiori (ugorox AT gmail.com)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2008-2012 Tomaz Canabrava (tcanabrava AT kde.org)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2008-2012 Wagner Reck (wagner.reck AT gmail.com)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2011-2015 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Copyright de la documentació:</para>
+<itemizedlist>
+	<listitem
+><para
+>Copyright de la documentació 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para
+></listitem>
+	<listitem
+><para
+>Copyright de la documentació 2009 Tomaz Canabrava (tcanabrava AT kde.org)</para
+></listitem>
+	<listitem
+><para
+>Copyright de la documentació 2011-2015 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Traductor de la documentació: &credits.Antoni.Bella;</para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes: nil
+sgml-general-insert-case: lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

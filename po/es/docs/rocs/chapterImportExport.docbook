@@ -1,0 +1,133 @@
+<chapter id="import-export">
+<title
+>Importar y exportar</title>
+<sect1 id="import-export-projects">
+    <title
+>Intercambiar proyectos de &rocs;</title>
+    <para
+>Los proyectos de &rocs; se pueden importar y exportar como archivos comprimidos <literal
+>.tar.gz</literal
+>. Estos archivos se puede usar para intercambiar proyectos. La importación y la exportación se pueden llevar a cabo con <menuchoice
+><guimenu
+>Documento de grafo</guimenu
+> <guimenuitem
+>Importar grafo</guimenuitem
+></menuchoice
+> y <menuchoice
+><guimenu
+>Document de grafo</guimenu
+> <guimenuitem
+>Exportar grafo como</guimenuitem
+></menuchoice
+>, respectivamente. </para>
+</sect1>
+
+<sect1 id="import-export-graphs">
+    <title
+>Importar y exportar documentos de grafos</title>
+    <para
+>En la actualidad, &rocs; permite importar y exportar en los siguientes formatos de archivos:</para>
+    <itemizedlist>
+        <listitem
+><para
+>Archivos DOT, también conocidos como archivos Graphviz</para
+></listitem>
+        <listitem
+><para
+>Archivos GML</para
+></listitem>
+        <listitem
+><para
+>Archivos en formato de grafos Trivial</para
+></listitem>
+        <listitem
+><para
+>El formato del lenguaje de marcas Keyhole</para
+></listitem>
+    </itemizedlist>
+
+<sect2 id="format-specification-tgf">
+<title
+>El formato de archivo de grafos Trivial</title>
+<para
+>El <emphasis
+>Formato de grafo trivial</emphasis
+> (TGF) es un formato de archivo sencillo basado en texto para describir grafos. Un archivo TGF consiste en una lista de definiciones de nodos, que enlazan los ID de los nodos con etiquetas, seguida por una lista de las aristas. En este formato solamente se puede tener una etiqueta por nodo y un valor por arista. &rocs; interpreta los grafos importados como grafos no dirigidos. Los grafos exportados contendrán dos aristas por conexión si la conexiones son bidireccionales. </para>
+
+<sect3>
+<title
+>Especificación del formato</title>
+    <itemizedlist>
+        <listitem
+><para
+>El archivo comienza con una lista de nodos (un nodo por línea), seguida por una línea que contiene únicamente el carácter «#», seguida por una lista de aristas (una arista por línea).</para
+></listitem>
+        <listitem
+><para
+>Un nodo consta de un entero (identificador), seguido por un espacio y por una cadena de texto.</para
+></listitem>
+        <listitem
+><para
+>Una arista consta de dos enteros (identificadores) separados por un espacio, seguidos por un espacio y una cadena de texto. Se supone que la arista dirigida apunta desde el primer identificador hasta el segundo.</para
+></listitem>
+    </itemizedlist>
+</sect3>
+<sect3>
+<title
+>Ejemplo</title>
+<programlisting
+>1 nodo inicial
+2 transmisor
+3 pila
+#
+1 2 azul
+2 1 rojo
+2 3 verde
+</programlisting>
+</sect3>
+</sect2>
+
+<sect2 id="format-specification-dot">
+<title
+>Lenguaje DOT / Formato de archivo de grafos Graphviz</title>
+<para
+>El lenguaje DOT es un lenguaje de descripción de grafos en texto sin formato que permite tanto una representación de grafos muy legible para humanos como de proceso eficiente para los programas de diseño de grafos. DOT es el formato de archivo predeterminado para la suite de visualización de grafos Graphviz, pero también se usa ampliamente por otras herramientas de grafos. Las extensiones de archivo típicas para DOT son <emphasis
+>.gv</emphasis
+> y <emphasis
+>.dot</emphasis
+>. </para>
+
+<sect3>
+<title
+>Funcionalidades no permitidas</title>
+<para
+>&rocs; puede analizar cualquier archivo de grafos que contenga un grafo definido conforme a la especificación del lenguaje DOT<footnote
+><para
+>http://www.graphviz.org/content/dot-language</para
+></footnote
+>. La implementación de las funcionalidades de este lenguaje es completa, a pesar de las siguientes excepciones: </para>
+    <itemizedlist>
+        <listitem
+><para
+>subgrafo: debido a la falta del concepto de subgrafo en &rocs;, los subgrafos solo se importan como un conjunto de elementos de datos y conexiones. En especial, no se importan las conexiones hacia o desde subgrafos.</para
+></listitem>
+        <listitem
+><para
+>Atributos &HTML; y &XML;: los atributos (como las etiquetas) que contienen sintaxis &HTML; o &XML; se leen sin cambios. En especial, no se lee de estos atributos ninguna información sobre ajustes de tipos de letra ni estilos.</para
+></listitem>
+    </itemizedlist>
+</sect3>
+<sect3>
+<title
+>Ejemplo</title>
+<programlisting
+>digraph miGrafo {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect3>
+</sect2>
+
+</sect1>
+</chapter>

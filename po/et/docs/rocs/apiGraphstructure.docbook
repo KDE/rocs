@@ -1,0 +1,644 @@
+<sect1>
+<title
+>Graafi taustaprogrammi skriptimise API</title>
+
+<para
+>Andmestruktuuri omaduste dialoog võimaldab kasutada graafi taustaprogrammile eripäraseid seadistusi. <guilabel
+>Graafi tüüp</guilabel
+> võimaldab valida graafi tüübi. See võib olla üks järgmistest: </para>
+<itemizedlist>
+    <listitem
+><para
+><guilabel
+>Graaf</guilabel
+>: graaf, milles ei saa mitu korda esineda samad seosed (mis on määratud algus- ja lõpp-punktiga). </para
+></listitem>
+    <listitem
+><para
+><guilabel
+>Multigraaf</guilabel
+>: graaf, milles saavad mitu korda esineda samad seosed (mis on määratud algus- ja lõpp-punktiga). </para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Graafi andmestruktuur</title>
+<para
+>Graafi objektid sisaldavad teavet andmestruktuurist tüübiga <quote
+>Graph</quote
+>. </para>
+
+<sect3>
+<title
+>Omadused</title>
+<itemizedlist>
+
+    <listitem>
+        <para
+><emphasis
+>name</emphasis
+> : </para>
+        <para
+>Andmestruktuuri unikaalne nimi.</para>
+    </listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3>
+<title
+>Meetodid</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>nodes()</term>
+    <listitem>
+        <para
+>Graafi kõigi tippude loendi tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>nodes</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>nodes(tüüp)</term>
+    <listitem>
+        <para
+>Graafi kõigi määratud tüübiga tippude loendi tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>nodes</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tüüp</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges()</term>
+    <listitem>
+        <para
+>Graafi kõigi seoste loendi tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges(tüüp)</term>
+    <listitem>
+        <para
+>Graafi kõigi määratud tüübiga seoste loendi tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tüüp</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode(tüüp)</term>
+    <listitem>
+        <para
+>Uue määratud tüübiga tipu loomine ja loodud tipu tagastamine. Kui tüüp ei ole registreeritud, tippu ei looda.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphNode <function
+>createNode</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tüüp</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode()</term>
+    <listitem>
+        <para
+>Uue vaikimisi tüübiga tipu loomine ja loodud tipu tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphNode <function
+>createNode</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createEdge(algus, lõpp, tüüp)</term>
+    <listitem>
+        <para
+>Määratud tüübiga seose loomine tipust "algus" tipuni "lõpp" ja loodud seose tagastamine. Kui tüüp ei ole registreeritud, seost ei looda.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphEdge <function
+>createEdge</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>algus</replaceable
+></parameter
+></paramdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>lõpp</replaceable
+></parameter
+></paramdef
+> <paramdef
+>int <parameter
+><replaceable
+>tüüp</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createEdge(algus, lõpp)</term>
+    <listitem>
+        <para
+>Vaikimis tüübiga seose loomine tipust "algus" tipuni "lõpp" ja loodud seose tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphEdge <function
+>createEdge</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>algus</replaceable
+></parameter
+></paramdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>lõpp</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>distances(algus)</term>
+    <listitem>
+        <para
+>Lühimate vahemaade massiivi tagastamine sellest tipust graafi kõigi teiste tippudeni.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>Array <function
+>distances</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>algus</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Graafi tipp</title>
+<para
+>Tipp on graafi andmeelement. </para>
+
+<sect3>
+<title
+>Omadused</title>
+<itemizedlist>
+
+    <listitem>
+        <para
+><emphasis
+>width</emphasis
+> : </para>
+        <para
+>Andmeelemendi suurus.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>x</emphasis
+> : </para>
+        <para
+>Andmeelemendi X-koordinaat.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>y</emphasis
+> : </para>
+        <para
+>Andmeelemendi Y-koordinaat.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>id</emphasis
+> : </para>
+        <para
+>Andmeelemendi unikaalne identifikaator.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+> : </para>
+        <para
+>Andmeelemendi värv kuueteistkümnendkoodis väärtusena.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+<sect3>
+<title
+>Meetodid</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>neighbors()</term>
+    <listitem>
+        <para
+>Kõigi selle tipuga seotud tippude loendi tagastamine. Meetod arvestab, kas seosed on orienteeritud.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>neighbors</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges()</term>
+    <listitem>
+        <para
+>Selle tipu kõigi seoste (sisenevate ja väljuvate) loendi tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges(tüüp)</term>
+    <listitem>
+        <para
+>Selle määratud tüübiga tipu kõigi seoste (sisenevate ja väljuvate) loendi tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tüüp</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>inEdges()</term>
+    <listitem>
+        <para
+>Selle tipu sisenevate seoste loendi tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>inEdges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>inEdges(tüüp)</term>
+    <listitem>
+        <para
+>Selle määratud tüübiga tipu kõigi sisenevate seoste loendi tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>inEdges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tüüp</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>outEdges()</term>
+    <listitem>
+        <para
+>Selle tipu väljuvate seoste loendi tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>outEdges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>outEdges(tüüp)</term>
+    <listitem>
+        <para
+>Selle määratud tüübiga tipu kõigi väljuvate seoste loendi tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>outEdges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tüüp</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edgesTo(siht)</term>
+    <listitem>
+        <para
+>Selle tipu ja määratud tipu kõigi seoste loendi tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edgesTo</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>siht</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+
+<sect2>
+<title
+>Graafi seos</title>
+<para
+>Seos on kahe graafitipu ühendus. Seosed võivad sõltuvalt tüübist olla orienteeritud või orienteerimata. </para>
+
+<sect3>
+<title
+>Omadused</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>width</emphasis
+> : </para>
+        <para
+>Ühenduse laius.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>directed</emphasis
+> : </para>
+        <para
+>Kui see on tõene, on ühendus orienteeritud, vastasel juhul orienteerimata.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>from</emphasis
+> : </para>
+        <para
+>Ühenduse algus.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>to</emphasis
+> : </para>
+        <para
+>Ühenduse lõpp.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+> : </para>
+        <para
+>Ühenduse tüübi ID.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Meetodid</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>remove()</term>
+    <listitem>
+        <para
+>Ühenduse eemaldamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>add_property(nimi, väärtus)</term>
+    <listitem>
+        <para
+>Uue omaduse lisamine ühendusele.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>add_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>nimi</replaceable
+></parameter
+></paramdef
+> <paramdef
+>string <parameter
+><replaceable
+>väärtus</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>remove_property(nimi)</term>
+    <listitem>
+        <para
+>Olemasoleva omaduse eemaldamine ühenduselt.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>nimi</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+</variablelist>
+</sect3>
+</sect2>
+
+</sect1>

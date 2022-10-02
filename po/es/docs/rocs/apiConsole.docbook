@@ -1,0 +1,78 @@
+<sect1 id="include-scripting-interface">
+<title
+>Interfaces de guiones</title>
+<sect2>
+<title
+>El objeto Console</title>
+<para
+>El objeto Console le permite imprimir mensajes de distinta importancia en un registro. </para>
+<para
+>Console no es un constructor. Todas las propiedades y métodos de Console se pueden llamar usando Console como un objeto, sin necesidad de crearlo. </para>
+</sect2>
+<sect2>
+<title
+>Sintaxis</title>
+<programlisting
+>Console.log("Esto es un mensaje del programa."); // imprimir un mensaje del programa
+Console.debug("Un mensaje de depuración."); // imprimir un mensaje de depuración
+</programlisting>
+</sect2>
+<sect2>
+<title
+>Métodos del objeto Console</title>
+<sect3>
+<title
+>log()</title>
+<para
+>Imprimir el mensaje indicado de severidad normal. </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>log</function
+></funcdef
+> <paramdef
+>string <parameter
+>mensaje</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+<sect3>
+<title
+>debug()</title>
+<para
+>Imprimir el mensaje de depuración indicado. </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>debug</function
+></funcdef
+> <paramdef
+>string <parameter
+>mensaje</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+<sect3>
+<title
+>error()</title>
+<para
+>Imprimir el mensaje de error indicado de severidad alta. </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>error</function
+></funcdef
+> <paramdef
+>string <parameter
+>mensaje</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+</sect2>
+</sect1>

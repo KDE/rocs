@@ -1,0 +1,2103 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Andrew Coles <andrew_coles@yahoo.co.uk>, 2009, 2010, 2011.
+# Steve Allewell <steve.allewell@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2019, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2022-01-01 15:57+0000\n"
+"Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
+"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.12.0\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Andrew Coles, Steve Allewell"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "andrew_coles@yahoo.co.uk, steve.allewell@gmail.com"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, kde-format
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "Graph Theory Simulator"
+
+#: main.cpp:32
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr "(c) 2008-2016 Rocs Developers"
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr "Maintainer"
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr "Original Author"
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "Developer"
+
+#: main.cpp:57
+#, kde-format
+msgid "Project to open."
+msgstr "Project to open."
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "Syntax"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "Properties"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "Parameters"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "Parameter"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "Methods"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "Type"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr "Return Type"
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr "Detailed Description"
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "Description"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "Script Engine API"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, kde-format
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "The Graph Document"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "Objects"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "Script Engine Modules"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr "Script Objects"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "Properties"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "Methods"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "Rocs Scripting API"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Show text beside icon"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Path where include manager seek for includes."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Project"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Script Document"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Graph Document"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Graph File"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Edit Selected Data"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Layout"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Tools"
+
+#: ui/codeeditorwidget.cpp:81
+#, kde-format
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "Code Document Name"
+
+#: ui/codeeditorwidget.cpp:82
+#, kde-format
+msgid "Enter the name of your code document"
+msgstr "Enter the name of your code document"
+
+#: ui/documenttypeswidget.cpp:29
+#, kde-format
+msgctxt "@title"
+msgid "Node Types"
+msgstr "Node Types"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, kde-format
+msgid "Create Type"
+msgstr "Create Type"
+
+#: ui/documenttypeswidget.cpp:45
+#, kde-format
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "Edge Types"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr "unnamed"
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr "Direction of edges of edge type."
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr "Unique ID of edge type."
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "Export"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "File Exists"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|All files"
+
+#: ui/fileformatdialog.cpp:116
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "Import Graph File into Project"
+
+#: ui/grapheditorwidget.cpp:79
+#, kde-format
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "Graph Document Name"
+
+#: ui/grapheditorwidget.cpp:80
+#, kde-format
+msgid "Enter the name of your graph document"
+msgstr "Enter the name of your graph document"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Project Journal"
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "Run"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr "Execute currently active script on active graph document."
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "Stop"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr "Stop script execution."
+
+#: ui/mainwindow.cpp:175
+#, kde-format
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "Debugger"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr "Open the Javascript code debugger."
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr "Element Types"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "Journal"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "Scripting API"
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "New Project"
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "Save Project"
+
+#: ui/mainwindow.cpp:269
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "Open Project..."
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "Recent Projects"
+
+#: ui/mainwindow.cpp:282
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "Save Project As..."
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "New Graph Document"
+
+#: ui/mainwindow.cpp:284
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "New Script File..."
+
+#: ui/mainwindow.cpp:285
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "Import Graph..."
+
+#: ui/mainwindow.cpp:286
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "Export Graph As..."
+
+#: ui/mainwindow.cpp:287
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "Import Script..."
+
+#: ui/mainwindow.cpp:288
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "Export Script..."
+
+#: ui/mainwindow.cpp:327
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "Import Script into Project"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "Export Script"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgid "JavaScript (*.js)"
+msgstr "JavaScript (*.js)"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "untitled"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "Save Project As"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr "Rocs Projects (*.rocs)"
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+
+#: ui/mainwindow.cpp:385
+#, kde-format
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "Overwrite File?"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "Open Project Files"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr "Rocs projects (*.rocs)"
+
+#: ui/mainwindow.cpp:433
+#, kde-format
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "[ untitled ]%1"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr "ScriptName"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr "Enter the name of your new script"
+
+#: ui/mainwindow.cpp:471
+#, kde-format
+msgid "File already exists."
+msgstr "File already exists."
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr "Changes on your project are unsaved. Do you want to save your changes?"
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr "Unique ID of the node type."
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, kde-format
+msgid "Script output:"
+msgstr "Script output:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Clear program output with each execution."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Show debug output."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Clear output."
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "Side Toolbar"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr "Toggle '%1' view."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Save Project as"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Overwrite"
+#~ msgstr "Overwrite"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Main Toolbar"
+
+#~ msgid "Align Toolbar"
+#~ msgstr "Align Toolbar"
+
+#~ msgid "Rocs Handbook"
+#~ msgstr "Rocs Handbook"
+
+#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+#~ msgstr "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "Handbook"
+
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "Data Structures"
+
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs - Data Structure Analysis"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr "No Data Structure plugins found on your system. Exiting."
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr "Position where name and value of a node shall be shown."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Position where name and value of an edge shall be shown."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+
+#~ msgid "Script File"
+#~ msgstr "Script File"
+
+#~ msgid "Convert To"
+#~ msgstr "Convert To"
+
+#~ msgid "Settings"
+#~ msgstr "Settings"
+
+#~ msgid "Help"
+#~ msgstr "Help"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+
+#~ msgid "Display of Element Properties"
+#~ msgstr "Display of Element Properties"
+
+#~ msgid "Data Properties"
+#~ msgstr "Data Properties"
+
+#~ msgid "centered"
+#~ msgstr "centred"
+
+#~ msgid "below"
+#~ msgstr "below"
+
+#~ msgid "above"
+#~ msgstr "above"
+
+#~ msgid "Connection Properties"
+#~ msgstr "Connection Properties"
+
+#~ msgid "Execution Controls"
+#~ msgstr "Execution Controls"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Show Debug Execution"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Show One Step Execution"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Properties"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Set visibility of pointers"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Export graphs to file"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "Loaded Plugins"
+
+#~ msgid "Graph File Plugins loaded for %1"
+#~ msgstr "Graph File Plugins loaded for %1"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|Script files"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Rocs Script Files"
+
+#~ msgid "Add your description here."
+#~ msgstr "Add your description here."
+
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "One Step"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Debug run"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "Interrupt at first line"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Download Examples"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Upload project"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Possible Includes"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "Loaded Plugins"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Code Editor..."
+#~ msgstr "Configure Code Editor..."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Include Manager"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Default Settings"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Add Existing Script File to Project"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "This does not seem to be a graph file."
+
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Invalid File"
+
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Save Project"
+
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Save Graph Document"
+
+#~ msgid "Graph name"
+#~ msgstr "Graph name"
+
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Enter the name of the Graph"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Possible Includes for Script Engine"
+
+#, fuzzy
+#~| msgid "Debugger"
+#~ msgid "Display debug messages."
+#~ msgstr "Debugger"
+
+#~ msgid "Untitled"
+#~ msgstr "Untitled"
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "Layout Toolbar"
+
+#, fuzzy
+#~| msgid "Data"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "Data"
+
+#, fuzzy
+#~| msgid "Data"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Data"
+#~ msgstr "Data"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "Show values in:"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Connection"
+#~ msgstr "Connection Type"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Connection"
+#~ msgstr "Connection Type"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Circular"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "Circular"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "Delete"
+
+#, fuzzy
+#~| msgid "Add Edge"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "Add Edge"
+
+#, fuzzy
+#~| msgid "Creates a new edge between 2 nodes"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new edge between 2 nodes"
+#~ msgstr "Creates a new edge between 2 nodes"
+
+#, fuzzy
+#~| msgid "Creates a new node at the click position on the drawing area."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position."
+#~ msgstr "Creates a new node at the click position on the drawing area."
+
+#, fuzzy
+#~| msgid "Creates a new node at the click position on the drawing area."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position on the drawing area."
+#~ msgstr "Creates a new node at the click position on the drawing area."
+
+#, fuzzy
+#~| msgid "Delete items by clicking on them."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "Delete items by clicking on them."
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "Edge Properties"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Node Properties"
+
+#, fuzzy
+#~| msgid "Move Node"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "Move Node"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "Node Properties"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "New Graph"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Data Structure:"
+#~ msgstr "Graph Structure"
+
+#, fuzzy
+#~| msgid "Name of Data Structure Here"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new data structure."
+#~ msgstr "Name of Data Structure Here"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "Select"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Edit Data Types"
+#~ msgstr "Select"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Static Properties"
+#~ msgstr "Node Properties"
+
+#~ msgid "Node color"
+#~ msgstr "Node colour"
+
+#~ msgid "Color:"
+#~ msgstr "Colour:"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type:"
+#~ msgstr "Type"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Dynamic Properties"
+#~ msgstr "Node Properties"
+
+#~ msgid "Name:"
+#~ msgstr "Name:"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "Graph Structure"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "Graph Structure"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Structure"
+#~ msgstr "Graph Structure"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Types"
+#~ msgstr "Select"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "Graph Structure"
+
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#, fuzzy
+#~| msgid "Data Color:"
+#~ msgid "Default Value"
+#~ msgstr "Data Colour:"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "Property"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Select Data Type:"
+#~ msgstr "Select"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Remove selected data type."
+#~ msgstr "Select"
+
+#, fuzzy
+#~| msgid "Name of Data Structure Here"
+#~ msgid "Add new data type."
+#~ msgstr "Name of Data Structure Here"
+
+#, fuzzy
+#~| msgid "Data Color:"
+#~ msgid "Default Color:"
+#~ msgstr "Data Colour:"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgid "Data Type Properties"
+#~ msgstr "Edge Properties"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "Node Properties"
+
+#~ msgid "Property"
+#~ msgstr "Property"
+
+#~ msgid "Value"
+#~ msgstr "Value"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Edit Pointer Types"
+#~ msgstr "Node Properties"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "Node Properties"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Pointer Properties"
+#~ msgstr "Node Properties"
+
+#~ msgid "Width:"
+#~ msgstr "Width:"
+
+#, fuzzy
+#~| msgid "solid"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "solid"
+
+#, fuzzy
+#~| msgid "dash"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "dash"
+
+#, fuzzy
+#~| msgid "dash dot"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash dot line"
+#~ msgstr "dash dot"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "Connection Type"
+
+#, fuzzy
+#~| msgid "Add Property"
+#~ msgid "Add new pointer type."
+#~ msgstr "Add Property"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Select Pointer Type:"
+#~ msgstr "Select"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Remove selected pointer type."
+#~ msgstr "Select"
+
+#~ msgid "Style:"
+#~ msgstr "Style:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Node Properties"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "Graph Structure"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@title:menu"
+#~ msgid "Selected"
+#~ msgstr "Select"
+
+#, fuzzy
+#~| msgid "Output"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Out"
+#~ msgstr "Output"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu align elements at center"
+#~ msgid "Center"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Circular"
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Circular"
+
+#, fuzzy
+#~| msgid "Value"
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "Value"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Enumerate"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Integers"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Reals"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "Delete"
+
+#, fuzzy
+#~| msgid "Edge value"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "Edge value"
+
+#~ msgid "Nodes"
+#~ msgstr "Nodes"
+
+#~ msgid "Edges"
+#~ msgstr "Edges"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Generator Seed"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Enumerate Items"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Assign Random Reals"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@title:window"
+#~ msgid "Generate Graph"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgid "Mesh Graph"
+#~ msgstr "New Graph"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Star Graph"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgid "Circle Graph"
+#~ msgstr "New Graph"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "RandomGraph"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Generate Graph"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Graph Files"
+#~ msgid "Graph Type:"
+#~ msgstr "Graph Files"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Random Graph"
+#~ msgstr "Save Graph"
+
+#~ msgid "Nodes:"
+#~ msgstr "Nodes:"
+
+#, fuzzy
+#~| msgid "Edges"
+#~ msgid "Edges:"
+#~ msgstr "Edges"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Generator Seed:"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Nodes:"
+#~ msgid "Nodes (n):"
+#~ msgstr "Nodes:"
+
+#, fuzzy
+#~| msgid "Complete"
+#~ msgid "Complete Graph"
+#~ msgstr "Complete"
+
+#, fuzzy
+#~| msgid " Documents "
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr " Documents "
+
+#, fuzzy
+#~| msgid "Unique"
+#~ msgctxt "dynamic property that is present exactly once"
+#~ msgid "Unique"
+#~ msgstr "Unique"
+
+#, fuzzy
+#~| msgid "Multiple"
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "Multiple"
+
+#, fuzzy
+#~| msgid "Global"
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "Global"
+
+#, fuzzy
+#~| msgid "None"
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "None"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgid "Connection"
+#~ msgstr "Connection Type"
+
+#, fuzzy
+#~| msgid "Debugger"
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "Debugger"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "Read and write Graphviz graph files."
+#~ msgstr "No active graph in this document."
+
+#, fuzzy
+#~| msgid "*.dot|Graphviz Files"
+#~ msgid "*.dot *.gv|Graphviz Format"
+#~ msgstr "*.dot|Graphviz Files"
+
+#, fuzzy
+#~| msgid "Import"
+#~ msgid "Import"
+#~ msgstr "Import"
+
+#, fuzzy
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Could not open file \"%1\" in read mode: %2"
+#~ msgstr "Cannot open file %1: %2"
+
+#, fuzzy
+#~| msgid "cannot parse the file %1."
+#~ msgid "Could not parse file \"%1\"."
+#~ msgstr "cannot parse the file %1."
+
+#~ msgid "No active graph in this document."
+#~ msgstr "No active graph in this document."
+
+#~ msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgstr "Cannot open file %1 to write document. Error: %2"
+
+#, fuzzy
+#~| msgid "Open and Save Keyhole Markup Language files"
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "Open and Save Keyhole Markup Language files"
+
+#, fuzzy
+#~| msgid "*.gml|Graph Markup Language Files"
+#~ msgid "*.gml|Graph Markup Language Format"
+#~ msgstr "*.gml|Graph Markup Language Files"
+
+#, fuzzy
+#~| msgid "Open and Save Keyhole Markup Language files"
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "Open and Save Keyhole Markup Language files"
+
+#, fuzzy
+#~| msgid "*.kml|Keyhole Markup Language Files"
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "*.kml|Keyhole Markup Language Files"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "Cannot open file %1: %2"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "Read and write Trivial Graph Format (TGF) files."
+#~ msgstr "No active graph in this document."
+
+#, fuzzy
+#~| msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgid "Could not open file \"%1\" in write mode: %2"
+#~ msgstr "Cannot open file %1 to write document. Error: %2"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "No data structure specified for output in this document."
+#~ msgstr "No active graph in this document."
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*|All files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+
+#, fuzzy
+#~| msgid "Open and Save Graphviz files"
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "Open and Save Graphviz files"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*|All files"
+#~ msgid "*.graph|Rocs Graph File Format"
+#~ msgstr ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "Graph Structure"
+
+#, fuzzy
+#~| msgid "x"
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "x"
+
+#, fuzzy
+#~| msgid "y"
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "y"
+
+#~ msgid "Size"
+#~ msgstr "Size"
+
+#, fuzzy
+#~| msgid "Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Graph"
+#~ msgstr "Graph"
+
+#, fuzzy
+#~| msgid "Multiple"
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "Multiple"
+
+#, fuzzy
+#~| msgid "Linked List Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Linked List Structure"
+#~ msgstr "Linked List Structure"
+
+#~ msgid "Front value"
+#~ msgstr "Front value"
+
+#, fuzzy
+#~| msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgid "Cannot convert document '%1'"
+#~ msgstr "Cannot open file %1 to write document. Error: %2"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "RootedTree Structure"
+#~ msgstr "Graph Structure"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgctxt "@option:check"
+#~ msgid "Show all pointers"
+#~ msgstr "Show values in:"
+
+#, fuzzy
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Cannot open file %1."
+#~ msgstr "Cannot open file %1: %2"
+
+#, fuzzy
+#~| msgid ""
+#~| "debug(\"Invalid include directive: %1. Cannot find file in directive.\")"
+#~ msgid "Invalid include directive: %1. Cannot find file in directive."
+#~ msgstr ""
+#~ "debug(\"Invalid include directive: %1. Cannot find file in directive.\")"
+
+#~ msgid "New File"
+#~ msgstr "New File"
+
+#~ msgid "Untitled%1"
+#~ msgstr "Untitled%1"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Data structure name"
+#~ msgstr "Graph Structure"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Delete this data structure"
+#~ msgstr "Graph Structure"
+
+#, fuzzy
+#~| msgid "Delete the current active graph: delete all nodes and edges"
+#~ msgid ""
+#~ "Delete the current data structure: delete all data elements and all "
+#~ "pointers"
+#~ msgstr "Delete the current active graph: delete all nodes and edges"
+
+#, fuzzy
+#~| msgid "Single Select"
+#~ msgid "rocsdeletegrey"
+#~ msgstr "Single Select"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@action:button"
+#~ msgid "Add Data Structure"
+#~ msgstr "Graph Structure"
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "Open Script..."
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "Open Script..."
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "Name"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "Save Script"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "Save Script"
+
+#, fuzzy
+#~| msgid "Name:"
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "Name:"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "Save Script"
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "Open Script..."
+
+#~ msgid "Edge Properties"
+#~ msgstr "Edge Properties"
+
+#~ msgid "Edge name"
+#~ msgstr "Edge name"
+
+#~ msgid "Edge color"
+#~ msgstr "Edge colour"
+
+#~ msgid "Value:"
+#~ msgstr "Value:"
+
+#~ msgid "Edge value"
+#~ msgstr "Edge value"
+
+#~ msgid "Edge width"
+#~ msgstr "Edge width"
+
+#~ msgid "Show"
+#~ msgstr "Show"
+
+#~ msgid "Show/hide edge name"
+#~ msgstr "Show/hide edge name"
+
+#~ msgid "Show/add edge value"
+#~ msgstr "Show/add edge value"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgid "Add Property"
+#~ msgstr "Property"
+
+#~ msgid "Global"
+#~ msgstr "Global"
+
+#~ msgid "add"
+#~ msgstr "add"
+
+#, fuzzy
+#~| msgid "Untitled%1"
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "Untitled%1"
+
+#, fuzzy
+#~| msgid "Data Color:"
+#~ msgid "Enable Color"
+#~ msgstr "Data Colour:"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "Graph Structure"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of data elements"
+#~ msgstr "Show values in:"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of data elements"
+#~ msgstr "Show values in:"
+
+#, fuzzy
+#~| msgid "Show names in:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of pointers"
+#~ msgstr "Show names in:"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of pointers"
+#~ msgstr "Show values in:"
+
+#~ msgid "Delete"
+#~ msgstr "Delete"
+
+#~ msgid "dot"
+#~ msgstr "dot"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "New Graph"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "New Graph"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt ""
+#~ "@label:inlistbox Undirected graph for which several edges between same "
+#~ "nodes may exist"
+#~ msgid "Undirected Multigraph"
+#~ msgstr "New Graph"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt ""
+#~ "@label:inlistbox Directed graph for which several same orientated edges "
+#~ "between same nodes may exist"
+#~ msgid "Directed Multigraph"
+#~ msgstr "New Graph"
+
+#, fuzzy
+#~| msgid "Open and Save GML files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save GML files"
+#~ msgstr "Open and Save GML files"
+
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+
+#, fuzzy
+#~| msgid "Complete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "Complete"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "Save Graph"
+
+#~ msgid "Cannot open the file: %1. Error %2"
+#~ msgstr "Cannot open the file: %1. Error %2"
+
+#, fuzzy
+#~| msgid "Open and Save Plain TXT files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save Plain TXT files"
+#~ msgstr "Open and Save Plain TXT files"
+
+#~ msgid "*.txt|Plain TXT Files"
+#~ msgstr "*.txt|Plain TXT Files"
+
+#, fuzzy
+#~| msgid "Add"
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "Add"
+
+#~ msgid "Add Node"
+#~ msgstr "Add Node"
+
+#, fuzzy
+#~| msgid "Name:"
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "Name:"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "Save Graph"
+
+#, fuzzy
+#~| msgid "Circular"
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Circular"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type Icon:"
+#~ msgstr "Type"
+
+#, fuzzy
+#~| msgid "Export graphs to file"
+#~ msgid "Export as new Type"
+#~ msgstr "Export graphs to file"
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgid "Open Script"
+#~ msgstr "Open Script..."
+
+#, fuzzy
+#~| msgid "Editor"
+#~ msgid "Edit"
+#~ msgstr "Editor"
+
+#, fuzzy
+#~| msgid "Pointers"
+#~ msgid "Pointer"
+#~ msgstr "Pointers"
+
+#~ msgid "Delete the active graph"
+#~ msgstr "Delete the active graph"
+
+#, fuzzy
+#~| msgid "x"
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "x"
+
+#, fuzzy
+#~| msgid "Apply the current color to all nodes"
+#~ msgid "Apply to all nodes"
+#~ msgstr "Apply the current colour to all nodes"
+
+#, fuzzy
+#~| msgid "Clear"
+#~ msgid "Close"
+#~ msgstr "Clear"
+
+#~ msgid "Image"
+#~ msgstr "Image"
+
+#~ msgid "Untitled0"
+#~ msgstr "Untitled0"
+
+#, fuzzy
+#~| msgid "Open Graph..."
+#~ msgid "Open Graph"
+#~ msgstr "Open Graph..."
+
+#~ msgid "Color for new nodes"
+#~ msgstr "Colour for new nodes"
+
+#~ msgid "Pointer Color:"
+#~ msgstr "Pointer Colour:"
+
+#~ msgid "Color for new edges"
+#~ msgstr "Colour for new edges"
+
+#~ msgid "Apply the current color to all nodes"
+#~ msgstr "Apply the current colour to all nodes"
+
+#~ msgid "Apply the current color to all nodes on the drawing area"
+#~ msgstr "Apply the current colour to all nodes on the drawing area"
+
+#~ msgid "All"
+#~ msgstr "All"
+
+#~ msgid "Apply the current color to all edges"
+#~ msgstr "Apply the current colour to all edges"
+
+#~ msgid "Apply the current color to all edges on the drawing area"
+#~ msgstr "Apply the current colour to all edges on the drawing area"
+
+#~ msgid "Align on the base"
+#~ msgstr "Align on the base"
+
+#~ msgid "Align on the center"
+#~ msgstr "Align on the centre"
+
+#~ msgid "Align on the top"
+#~ msgstr "Align on the top"
+
+#~ msgid "Align on the left"
+#~ msgstr "Align on the left"
+
+#~ msgid "Align on the right"
+#~ msgstr "Align on the right"
+
+#, fuzzy
+#~| msgid "Align on the left"
+#~ msgid "Align on a circle"
+#~ msgstr "Align on the left"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Ignoring line: %1"
+#~ msgstr "Ignoring line: %1"
+
+#~ msgid "debug(\"Cannot open file %1.\")"
+#~ msgstr "debug(\"Cannot open file %1.\")"
+
+#~ msgid "debug(\"Cannot open file %1.\")\n"
+#~ msgstr "debug(\"Cannot open file %1.\")\n"
+
+#~ msgid "(c) 2009"
+#~ msgstr "(c) 2009"
+
+#~ msgid "Do you want to save your unsaved document?"
+#~ msgstr "Do you want to save your unsaved document?"
+
+#~ msgid "Select Items by clicking on them."
+#~ msgstr "Select Items by clicking on them."
+
+#~ msgid "Moves a node around the drawing area."
+#~ msgstr "Moves a node around the drawing area."
+
+#~ msgid "Make Complete"
+#~ msgstr "Make Complete"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialogue"
+
+#~ msgid "Radius:"
+#~ msgstr "Radius:"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Complete"
+#~ msgstr "Complete"
+
+#~ msgctxt "Do not translate, X is for delete"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Graph is oriented"
+#~ msgstr "Graph is oriented"
+
+#~ msgid "Name: %1"
+#~ msgstr "Name: %1"
+
+#~ msgid "Value: %1"
+#~ msgstr "Value: %1"
+
+#~ msgid "Save Graph As..."
+#~ msgstr "Save Graph As..."
+
+#~ msgid "Save Script As..."
+#~ msgstr "Save Script As..."
+
+#, fuzzy
+#~| msgid " Graph "
+#~ msgid "Ring Graph"
+#~ msgstr " Graph "
+
+#~ msgid "UntitledDoc"
+#~ msgstr "UntitledDoc"
+
+#~ msgid "Thanks to Ugo Sangiori"
+#~ msgstr "Thanks to Ugo Sangiori"
+
+#~ msgid "Edge Color:"
+#~ msgstr "Edge Colour:"
+
+#~ msgid "X-coordinate "
+#~ msgstr "X-coordinate "
+
+#~ msgid "Y-coordinate "
+#~ msgstr "Y-coordinate "
+
+#~ msgid "Node size"
+#~ msgstr "Node size"
+
+#~ msgid "Begin"
+#~ msgstr "Begin"
+
+#~ msgid "End"
+#~ msgstr "End"
+
+#~ msgid "Graph is Automate"
+#~ msgstr "Graph is Automate"
+
+#~ msgid " Is begin"
+#~ msgstr " Is begin"
+
+#~ msgid " Is End"
+#~ msgstr " Is End"
+
+#~ msgid ""
+#~ "<html><p>KPluginFactory could not load the plugin:<br/><i>%1</i></p></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><p>KPluginFactory could not load the plugin:<br/><i>%1</i></p></"
+#~ "html>"
+
+#~ msgid "Wagner Reck - wagner.reck@gmail.com"
+#~ msgstr "Wagner Reck - wagner.reck@gmail.com"
+
+#~ msgid "Add Components"
+#~ msgstr "Add Components"
+
+#~ msgid ""
+#~ "Remove all the edges from a graph, and add new ones to make it complete."
+#~ msgstr ""
+#~ "Remove all the edges from a graph, and add new ones to make it complete."
+
+#~ msgid "Add edges and make graph complete."
+#~ msgstr "Add edges and make graph complete."
+
+#~ msgid "Oriented graph"
+#~ msgstr "Oriented graph"
+
+#~ msgid "Enabling this button will make the graph oriented."
+#~ msgstr "Enabling this button will make the graph oriented."
+
+#~ msgid "Automaton Graph"
+#~ msgstr "Automaton Graph"
+
+#~ msgid "Enabling this button will make the graph an automaton graph."
+#~ msgstr "Enabling this button will make the graph an automaton graph."
+
+#~ msgid "Enabling this button will show the names of all nodes."
+#~ msgstr "Enabling this button will show the names of all nodes."
+
+#~ msgid "Show all edges' names"
+#~ msgstr "Show all edges' names"
+
+#~ msgid "Enabling this button will show the names of all edges."
+#~ msgstr "Enabling this button will show the names of all edges."
+
+#~ msgid "Show all nodes' values"
+#~ msgstr "Show all nodes' values"
+
+#~ msgid "Enabling this button will show the values of all nodes."
+#~ msgstr "Enabling this button will show the values of all nodes."
+
+#~ msgid "Show all edges' values"
+#~ msgstr "Show all edges' values"
+
+#~ msgid "Enabling this button will show the values of edges."
+#~ msgstr "Enabling this button will show the values of edges."
+
+#~ msgid "Double Linked List"
+#~ msgstr "Double Linked List"
+
+#~ msgid "Binary Tree"
+#~ msgstr "Binary Tree"
+
+#~ msgctxt "X-coordinate "
+#~ msgid "x:"
+#~ msgstr "x:"
+
+#~ msgid "Node name"
+#~ msgstr "Node name"
+
+#~ msgid "Draw the graphics using the fastest (but ugliest) method. "
+#~ msgstr "Draw the graphics using the fastest (but ugliest) method. "
+
+#~ msgid "long explanation needed. "
+#~ msgstr "long explanation needed. "
+
+#~ msgid " The Right Size of the Cell "
+#~ msgstr " The Right Size of the Cell "
+
+#~ msgid " long  explanation needed "
+#~ msgstr " long  explanation needed "
+
+#~ msgid " the Top Size of the cell "
+#~ msgstr " the Top Size of the cell "
+
+#~ msgid " long explanation needed "
+#~ msgstr " long explanation needed "
+
+#~ msgid "show"
+#~ msgstr "show"
+
+#~ msgid "Enabling this button will show all names in edges"
+#~ msgstr "Enabling this button will show all names in edges"
+
+#, fuzzy
+#~ msgid "enabling this button will show all values in nodes"
+#~ msgstr "enabling this button will show all values in nodes"
+
+#~ msgid ""
+#~ "Creates a simple Graph, without multiple edges and without an edge to a "
+#~ "note from the same node."
+#~ msgstr ""
+#~ "Creates a simple Graph, without multiple edges and without an edge to a "
+#~ "note from the same node."
+
+#~ msgid "KSqueezedTextLabel"
+#~ msgstr "KSqueezedTextLabel"
+
+#~ msgid "X"
+#~ msgstr "X"
+
+#~ msgid "Node:"
+#~ msgstr "Node:"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "ok"
+#~ msgstr "ok"
+
+#~ msgid "Smart Tool"
+#~ msgstr "Smart Tool"
+
+#~ msgid "Tries to do what it thinks that's good for the soul."
+#~ msgstr "Tries to do what it thinks that's good for the soul."
+
+#~ msgid "Does Nothing."
+#~ msgstr "Does Nothing."
+
+#~ msgid " main menubar "
+#~ msgstr " main menubar "
+
+#~ msgid " &File "
+#~ msgstr " &File "
+
+#~ msgid " &Edit "
+#~ msgstr " &Edit "
+
+#~ msgid " &View "
+#~ msgstr " &View "

@@ -1,0 +1,2256 @@
+# Burkhard Lück <lueck@hube-lueck.de>, 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019.
+# Frederik Schwarzer <schwarzer@kde.org>, 2009, 2010, 2011, 2012, 2013, 2017.
+# Panagiotis Papadopoulos <pano_90@gmx.net>, 2010, 2011.
+# Peter Rüthemann <peter.ruethemann@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: rocs\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2019-09-23 11:02+0200\n"
+"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Frederik Schwarzer, Torbjörn Klatt"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "schwarzer@kde.org, torbjoern.k@googlemail.com"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, kde-format
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "Graphentheorie-Simulator"
+
+#: main.cpp:32
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr "© 2008–2016, die Rocs-Entwickler"
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr "Betreuer"
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr "Ursprünglicher Autor"
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "Entwickler"
+
+#: main.cpp:57
+#, kde-format
+msgid "Project to open."
+msgstr "Zu öffnendes Projekt."
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "Syntax"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "Eigenschaften"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "Parameter"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "Parameter"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "Methoden"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "Typ"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr "Rückgabetyp"
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr "Genaue Beschreibung"
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "Beschreibung"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "Skriptmodul-API"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, kde-format
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "Das Graphendokument"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "Objekte"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "Skripttreibermodul"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr "Skriptobjekte"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "Eigenschaften"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "Methoden"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "Rocs-Skript-API"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+"Das Rocs-Projekt kann nicht importiert werden, weil die Projektdatei nicht "
+"eingelesen werden kann."
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Text neben Symbol anzeigen"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Pfad, in dem die Include-Verwaltung nach Includes sucht."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Projekt"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Skriptdokument"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Graphendokument"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Graphendatei"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Ausgewählte Daten bearbeiten"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Layout"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Extras"
+
+#: ui/codeeditorwidget.cpp:81
+#, kde-format
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "Name des Quelltextdokuments"
+
+#: ui/codeeditorwidget.cpp:82
+#, kde-format
+msgid "Enter the name of your code document"
+msgstr "Geben Sie den Namen für das Quelltextdokument ein"
+
+#: ui/documenttypeswidget.cpp:29
+#, kde-format
+msgctxt "@title"
+msgid "Node Types"
+msgstr "Knotentypen"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, kde-format
+msgid "Create Type"
+msgstr "Typ erstellen"
+
+#: ui/documenttypeswidget.cpp:45
+#, kde-format
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "Kantentyp"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr "Unbenannt"
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr "Richtung der Kanten des Kantentyps."
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr "Eindeutige Kennung des Kantentyps."
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "Exportieren"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+"<p>Die Datei <br />„<strong>%1</strong>“<br />existiert bereits. Falls die "
+"Datei nicht überschrieben werden soll, ändern Sie den Dateinamen.</p>"
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "Die Datei existiert bereits"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+"<p>Für die Erweiterung der Datei <strong>%1</strong> wurde kein passendes "
+"Dateimodul gefunden. Der Export wird abgebrochen.</p>"
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr ""
+"<p>Beim Schreiben der Datei <strong>„%1“</strong> ist ein Fehler "
+"aufgetreten</p>"
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|Alle Dateien"
+
+#: ui/fileformatdialog.cpp:116
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "Graphendatei in Projekt importieren"
+
+#: ui/grapheditorwidget.cpp:79
+#, kde-format
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "Name des Graphendokuments"
+
+#: ui/grapheditorwidget.cpp:80
+#, kde-format
+msgid "Enter the name of your graph document"
+msgstr "Geben Sie den Namen für das Graphendokument ein"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Projektjournal"
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "Ausführen"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr "Das aktive Skript für das aktuelle Graphendokument ausführen."
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "Anhalten"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr "Skriptausführung anhalten"
+
+#: ui/mainwindow.cpp:175
+#, kde-format
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "Debugger"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr "Öffnet den Debugger für JavaScript-Quelltext."
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr "Elementtypen"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "Journal"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "Skript-API"
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "Neues Projekt"
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "Projekt speichern"
+
+#: ui/mainwindow.cpp:269
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Open Project"
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "Projekt öffnen"
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "Zuletzt geöffnete Projekte"
+
+#: ui/mainwindow.cpp:282
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Save Project As"
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "Projekt speichern unter"
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "Neues Graphendokument"
+
+#: ui/mainwindow.cpp:284
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "New Script File"
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "Neue Skriptdatei"
+
+#: ui/mainwindow.cpp:285
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Graph"
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "Graphen importieren"
+
+#: ui/mainwindow.cpp:286
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Graph as"
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "Graphen exportieren unter ..."
+
+#: ui/mainwindow.cpp:287
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Script"
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "Skript importieren"
+
+#: ui/mainwindow.cpp:288
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Script"
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "Skript exportieren"
+
+#: ui/mainwindow.cpp:327
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "Skript in Projekt importieren"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "Skript exportieren"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgid "JavaScript (*.js)"
+msgstr "JavaScript (*.js)"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "Unbenannt"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "Projekt speichern unter"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr "Rocs-Projekte (*.rocs)"
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+"Eine Datei mit dem Namen „%1“ existiert bereits. Möchten Sie diese "
+"überschreiben?"
+
+#: ui/mainwindow.cpp:385
+#, kde-format
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "Datei überschreiben?"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "Projektdateien öffnen"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr "Rocs-Projekte (*.rocs)"
+
+#: ui/mainwindow.cpp:433
+#, kde-format
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "[ unbenannt ]%1"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr "Skriptname"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr "Geben Sie den Namen für das neue Skript ein"
+
+#: ui/mainwindow.cpp:471
+#, kde-format
+msgid "File already exists."
+msgstr "Datei existiert bereits."
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr ""
+"Die Änderungen an Ihrem Projekt sind nicht gespeichert. Möchten Sie Ihre "
+"Änderungen speichern?"
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr "Eindeutige Kennung des Knotentyps."
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, fuzzy, kde-format
+#| msgid "Script Output:"
+msgid "Script output:"
+msgstr "Skriptausgabe:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Löscht die Programmausgabe mit jeder Ausführung."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Debug-Ausgabe anzeigen."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Ausgabe löschen"
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "Seiten-Werkzeugleiste"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr "Ansicht „%1“ umschalten."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Projekt speichern unter ..."
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Overwrite"
+#~ msgstr "Überschreiben"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Haupt-Werkzeugleiste"
+
+#~ msgid "Align Toolbar"
+#~ msgstr "Ausrichtungs-Werkzeugleiste"
+
+#~ msgid "Rocs Handbook"
+#~ msgstr "Handbuch zu Rocs"
+
+#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+#~ msgstr "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "Handbuch"
+
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "Datenstrukturen"
+
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs - Datenstruktur-Analyse"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr ""
+#~ "Keine Datenstrukturmodule in Ihrem System gefunden. Rocs wird beendet."
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Rocs benötigt mindestens ein Datenstrukturmodul um fortzufahren.\n"
+#~ "Versuchen Sie kbuildsycoca4 von der Konsole auszuführen und Rocs "
+#~ "anschließend neu zu starten."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr ""
+#~ "Position, an der Name und Wert eines Knoten angezeigt werden sollen."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Position, an der Name und Wert einer Kante angezeigt werden sollen."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr "Legt fest, ob der Knopf für die Debug-Ausführung angezeigt wird."
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr ""
+#~ "Legt fest, ob der Knopf für die Einzelschrittausführung angezeigt wird."
+
+#~ msgid "Script File"
+#~ msgstr "Skriptdatei"
+
+#~ msgid "Convert To"
+#~ msgstr "Umwandeln in"
+
+#~ msgid "Settings"
+#~ msgstr "Einstellungen"
+
+#~ msgid "Help"
+#~ msgstr "Hilfe"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "Es wurde kein KDE-Editor gefunden.\n"
+#~ "Bitte überprüfen Sie Ihre Installation."
+
+#~ msgid "Display of Element Properties"
+#~ msgstr "Anzeige der Elementeigenschaften"
+
+#~ msgid "Data Properties"
+#~ msgstr "Dateneigenschaften"
+
+#~ msgid "centered"
+#~ msgstr "Zentriert"
+
+#~ msgid "below"
+#~ msgstr "Unter"
+
+#~ msgid "above"
+#~ msgstr "Über"
+
+#~ msgid "Connection Properties"
+#~ msgstr "Verbindungseigenschaften"
+
+#~ msgid "Execution Controls"
+#~ msgstr "Ausführungskontrolle"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Debug-Ausführung anzeigen"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Einzelschrittausführung anzeigen"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Eigenschaften"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Sichtbarkeit der Zeiger festlegen"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Graphen in Datei exportieren"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "Geladene Module"
+
+#~ msgid "Graph File Plugins loaded for %1"
+#~ msgstr "Graphendatei-Modul geladen für %1"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|Skriptdateien"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Rocs-Skriptdateien"
+
+#~ msgid "Add your description here."
+#~ msgstr "Fügen Sie Ihre Beschreibung hier ein."
+
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "Einzelschritt"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Debug-Ausführung"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "An erster Zeile unterbrechen"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Beispiele herunterladen"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Projekt hochladen"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Mögliche Includes"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "Geladene Module"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Code Editor..."
+#~ msgstr "Quelltexteditor einrichten ..."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Include-Verwaltung"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Voreinstellungen"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Bestehende Skriptdatei zu Projekt hinzufügen"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "Die Datei scheint keine gültige Graphendatei zu sein."
+
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Ungültige Datei"
+
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs|Rocs-Projektdateien\n"
+#~ "*.rocsz|Komprimierte Rocs-Projektdateien\n"
+#~ "*|Alle Dateien"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Projekt speichern"
+
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs *.rocsz|Alle Rocs-Projektdateien\n"
+#~ "*.rocs|Rocs-Projektdateien\n"
+#~ "*.rocsz|Komprimierte Rocs-Projektdateien\n"
+#~ "*|Alle Dateien"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Rocs-Graphendokumente\n"
+#~ "*|Alle Dateien"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Graphendokument speichern"
+
+# Platzhalter?
+#~ msgid "Graph name"
+#~ msgstr "Graphenname"
+
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Geben Sie den Namen für den Graphen ein"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Mögliche Includes für das Skriptmodul"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your graph document are unsaved. Do you want to save your "
+#~ "changes?"
+#~ msgstr ""
+#~ "Die Änderungen an Ihrem Graphen sind nicht gespeichert. Möchten Sie Ihre "
+#~ "Änderungen speichern?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files are unsaved. Do you want to save all unsaved "
+#~ "scripts?"
+#~ msgstr ""
+#~ "Die Änderungen an Ihren Skriptdateien sind nicht gespeichert. Möchten Sie "
+#~ "Ihre Änderungen speichern?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files and on your graph document are unsaved. Do "
+#~ "you want to save your graph document and all unsaved scripts?"
+#~ msgstr ""
+#~ "Die Änderungen an Ihren Skriptdateien und Ihrem Graphen sind nicht "
+#~ "gespeichert. Möchten Sie Ihren Graphen und alle ungespeicherten Skript-"
+#~ "Dateien speichern?"
+
+#~ msgid "Default Information Display"
+#~ msgstr "Standard-Informationsanzeige"
+
+#~ msgid "Node Information"
+#~ msgstr "Knoteninformationen"
+
+#~ msgid "Edge Information"
+#~ msgstr "Kanteninformationen"
+
+#, fuzzy
+#~| msgctxt "@item:inlistbox Select output"
+#~| msgid "Debug Messages"
+#~ msgid "Display debug messages."
+#~ msgstr "Fehler-Meldungen"
+
+#~ msgid "Untitled"
+#~ msgstr "Unbenannt"
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "Layout-Werkzeugleiste"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "Daten hinzufügen"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Data"
+#~ msgstr "Daten hinzufügen"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "Neues Datenelement hinzufügen"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Add Connection"
+#~ msgstr "Verbindung hinzufügen"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Connection"
+#~ msgstr "Verbindung hinzufügen"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new connection between two data elements of selected type"
+#~ msgstr ""
+#~ "Eine neue Verbindung zwischen zwei Datenelementen des gewählten Typs "
+#~ "hinzufügen"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Base"
+#~ msgstr "Unten"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "Mittig"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Top"
+#~ msgstr "Oben"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Left"
+#~ msgstr "Links"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Right"
+#~ msgstr "Rechts"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "Kreis"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Kreuzende Kanten minimieren"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "Löschen"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "Kante hinzufügen"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new edge between 2 nodes"
+#~ msgstr "Erstellt eine neue Kante zwischen zwei Knoten"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add %1"
+#~ msgstr "%1 hinzufügen"
+
+# etwas besseres als Klickposition?
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position."
+#~ msgstr "Erstellt einen neuen Knoten an der Klickposition."
+
+# etwas besseres als Klickposition?
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position on the drawing area."
+#~ msgstr "Erstellt einen neuen Knoten an der Klickposition im Zeichenbereich."
+
+#~ msgid "Add %1"
+#~ msgstr "%1 hinzufügen"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "Elemente durch Anklicken löschen."
+
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "Eigenschaften des Datentyps"
+
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Eigenschaften des Zeigertyps"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "Verschieben"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Select and move items."
+#~ msgstr "Elemente auswählen und verschieben."
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Zoom"
+#~ msgstr "Vergrößerung"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom the canvas by the wheel, or by dragging."
+#~ msgstr "Vergrößern der Zeichenfläche mit dem Mausrad oder durch Ziehen."
+
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "Eigenschaften"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "Graphendokument:"
+
+#~ msgid "Data Structure:"
+#~ msgstr "Datenstruktur:"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Add a new data structure with the specified name"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new data structure."
+#~ msgstr "Eine neue Datenstruktur mit dem angegebenen Namen hinzufügen"
+
+#, fuzzy
+#~| msgid "Select Data Type:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "Datentyp auswählen:"
+
+#~ msgid "Edit Data Types"
+#~ msgstr "Datentypen bearbeiten"
+
+#, fuzzy
+#~| msgid "Dynamic Properties"
+#~ msgid "Static Properties"
+#~ msgstr "Dynamische Eigenschaften"
+
+#~ msgid "Node color"
+#~ msgstr "Knotenfarbe"
+
+#~ msgid "Color:"
+#~ msgstr "Farbe:"
+
+#~ msgid "Type:"
+#~ msgstr "Typ:"
+
+#~ msgid "Dynamic Properties"
+#~ msgstr "Dynamische Eigenschaften"
+
+#~ msgid "Name:"
+#~ msgstr "Name:"
+
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "Datenstruktur-Modul:"
+
+#, fuzzy
+#~| msgctxt "@title:window"
+#~| msgid "Data Structure Properties"
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "Eigenschaften der Datenstruktur"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Data Structure"
+#~ msgstr "Datenstruktur"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Data Types"
+#~ msgstr "Datentypen"
+
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "Eigenschaften der Datenstruktur"
+
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#, fuzzy
+#~| msgid "Default Color:"
+#~ msgid "Default Value"
+#~ msgstr "Standardfarbe:"
+
+#, fuzzy
+#~| msgid "Display Options"
+#~ msgid "Display"
+#~ msgstr "Anzeigeeinstellungen"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "Eigenschaft"
+
+#, fuzzy
+#~| msgctxt "@title:tab"
+#~| msgid "Data Types"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Data Type"
+#~ msgstr "Datentypen"
+
+#~ msgid "Select Data Type:"
+#~ msgstr "Datentyp auswählen:"
+
+#, fuzzy
+#~| msgid "Select Data Type:"
+#~ msgid "Remove selected data type."
+#~ msgstr "Datentyp auswählen:"
+
+#, fuzzy
+#~| msgctxt "@info:tooltip"
+#~| msgid "Add a new data structure with the specified name"
+#~ msgid "Add new data type."
+#~ msgstr "Eine neue Datenstruktur mit dem angegebenen Namen hinzufügen"
+
+#~ msgid "Insert a name for this type"
+#~ msgstr "Geben Sie einen Namen für diesen Typ ein"
+
+#~ msgid "Default Color:"
+#~ msgstr "Standardfarbe:"
+
+#, fuzzy
+#~| msgctxt "@title:window"
+#~| msgid "Data Type Properties"
+#~ msgid "Data Type Properties"
+#~ msgstr "Eigenschaften des Datentyps"
+
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "Dokument-Eigenschaften"
+
+#~ msgid "Property"
+#~ msgstr "Eigenschaft"
+
+#~ msgid "Value"
+#~ msgstr "Wert"
+
+#, fuzzy
+#~| msgctxt "@title:tab"
+#~| msgid "Pointer Types"
+#~ msgid "Edit Pointer Types"
+#~ msgstr "Zeigertypen"
+
+#, fuzzy
+#~| msgid "Pointer Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "Eigenschaften des Zeigers"
+
+#~ msgid "Pointer Properties"
+#~ msgstr "Eigenschaften des Zeigers"
+
+#~ msgid "Width:"
+#~ msgstr "Breite:"
+
+#, fuzzy
+#~| msgid "solid"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "Durchgehend"
+
+#, fuzzy
+#~| msgid "dash"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "Gestrichelt"
+
+#, fuzzy
+#~| msgid "dash dot"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash dot line"
+#~ msgstr "Strich-Punkt"
+
+#, fuzzy
+#~| msgid "Connection"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "Verbindung"
+
+#, fuzzy
+#~| msgid "Add Property"
+#~ msgid "Add new pointer type."
+#~ msgstr "Eigenschaft hinzufügen"
+
+#~ msgid "Select Pointer Type:"
+#~ msgstr "Zeigertyp auswählen:"
+
+#, fuzzy
+#~| msgid "Select Pointer Type:"
+#~ msgid "Remove selected pointer type."
+#~ msgstr "Zeigertyp auswählen:"
+
+#~ msgid "Style:"
+#~ msgstr "Stil:"
+
+#, fuzzy
+#~| msgctxt "@title:window"
+#~| msgid "Pointer Type Properties"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Eigenschaften des Zeigertyps"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "Datenstruktur"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Selected"
+#~ msgstr "Ausgewählt"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Zoom"
+#~ msgstr "Vergrößerung"
+
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "In"
+#~ msgstr "Vergrößern"
+
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Out"
+#~ msgstr "Verkleinern"
+
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Reset"
+#~ msgstr "Zurücksetzen"
+
+#~ msgid "Align"
+#~ msgstr "Ausrichten"
+
+#~ msgctxt "@action:inmenu align elements at bottom"
+#~ msgid "Bottom"
+#~ msgstr "Unten"
+
+#~ msgctxt "@action:inmenu align elements at center"
+#~ msgid "Center"
+#~ msgstr "Mittig"
+
+#~ msgctxt "@action:inmenu align elements at top"
+#~ msgid "Top"
+#~ msgstr "Oben"
+
+#~ msgctxt "@action:inmenu align elements left"
+#~ msgid "Left"
+#~ msgstr "Links"
+
+#~ msgctxt "@action:inmenu align elements right"
+#~ msgid "Right"
+#~ msgstr "Rechts"
+
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Kreis"
+
+#~ msgctxt ""
+#~ "@action:inmenu align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Kreuzende Kanten minimieren"
+
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "Werte"
+
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Enumerate"
+#~ msgstr "Aufzählen"
+
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Integers"
+#~ msgstr "Ganzzahlige Zufallswerte"
+
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Reals"
+#~ msgstr "Reelle Zufallswerte"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "Löschen"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "Werte zuweisen"
+
+#~ msgid "Assign Values"
+#~ msgstr "Werte zuweisen"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">List of all data "
+#~ "structures that are of type <span style=\" font-style:italic;\">Graph</"
+#~ "span>.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Liste aller "
+#~ "Datenstrukturen vom Typ <span style=\" font-style:italic;\">Graph</span>."
+#~ "</p></body></html>"
+
+#~ msgid "Nodes"
+#~ msgstr "Knoten"
+
+#~ msgid "Edges"
+#~ msgstr "Kanten"
+
+#~ msgid "Start ID"
+#~ msgstr "Startkennung"
+
+#~ msgid "Lower Limit"
+#~ msgstr "Untere Grenze"
+
+#~ msgid "Upper Limit"
+#~ msgstr "Obere Grenze"
+
+#~ msgid "Generator Seed"
+#~ msgstr "Seed für den Generator"
+
+#~ msgid "Enumerate Items"
+#~ msgstr "Elemente aufzählen"
+
+#~ msgid "Assign Random Integers"
+#~ msgstr "Ganzzahlige Zufallswerte zuweisen"
+
+#~ msgid "Assign Random Reals"
+#~ msgstr "Reelle Zufallswerte zuweisen"
+
+#~ msgid "Overwrite existing values"
+#~ msgstr "Bestehende Werte überschreiben"
+
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "Graphen erzeugen"
+
+#~ msgctxt "@title:window"
+#~ msgid "Generate Graph"
+#~ msgstr "Graphen erzeugen"
+
+#~ msgid "Mesh Graph"
+#~ msgstr "Netzgraph"
+
+#~ msgid "Star Graph"
+#~ msgstr "Sterngraph"
+
+#~ msgid "Circle Graph"
+#~ msgstr "Ringgraph"
+
+#~ msgid "RandomGraph"
+#~ msgstr "Zufälliger Graph"
+
+#~ msgid "Generate Graph"
+#~ msgstr "Graphen erzeugen"
+
+#~ msgid "Graph Type:"
+#~ msgstr "Graphentyp:"
+
+#~ msgid "Random Graph"
+#~ msgstr "Zufälliger Graph"
+
+#~ msgid "Erdös-Renyi Graph"
+#~ msgstr "Erdös-Renyi-Graph"
+
+#~ msgid "Number of Columns:"
+#~ msgstr "Anzahl der Spalten:"
+
+#~ msgid "Number of Rows:"
+#~ msgstr "Anzahl der Zeilen:"
+
+#~ msgid "Satellite Nodes:"
+#~ msgstr "Satellitenknoten:"
+
+#~ msgid "Number of Nodes:"
+#~ msgstr "Anzahl der Knoten:"
+
+#~ msgid "Nodes:"
+#~ msgstr "Knoten:"
+
+#~ msgid "Edges:"
+#~ msgstr "Kanten:"
+
+#~ msgid "Allow self-edges:"
+#~ msgstr "Kanten auf sich selbst erlauben:"
+
+#~ msgid "Generator Seed:"
+#~ msgstr "Seed für den Generator:"
+
+#~ msgid "Nodes (n):"
+#~ msgstr "Knoten (n):"
+
+#~ msgid "Edge Probability (p):"
+#~ msgstr "Kanten-Wahrscheinlichkeit (p):"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Transform Edges"
+#~ msgstr "Kanten umformen"
+
+#~ msgctxt "@title:window"
+#~ msgid "Transform Edges"
+#~ msgstr "Kanten umformen"
+
+#~ msgid "Transform Edges"
+#~ msgstr "Kanten umformen"
+
+#~ msgid ""
+#~ "This option connects all nodes of the given graph. The new edges do not "
+#~ "have any preset weights."
+#~ msgstr ""
+#~ "Diese Option verbindet alle Knoten des Graphen. Die neuen Kanten haben "
+#~ "keine voreingestellten Gewichtungen."
+
+#~ msgid "Complete Graph"
+#~ msgstr "Graphen vervollständigen"
+
+#~ msgid "This option removes all edges from the given graph."
+#~ msgstr "Diese Option entfernt alle Kanten aus dem Graphen."
+
+#~ msgid "Remove all Edges"
+#~ msgstr "Alle Kanten entfernen"
+
+#~ msgid ""
+#~ "This option reverses all edges of a directed graph. Note that this does "
+#~ "not apply to undirected graphs."
+#~ msgstr ""
+#~ "Diese Option kehrt alle Kanten eines gerichteten Graphen um. Beachten "
+#~ "Sie, dass dies nicht für ungerichtete Graphen gilt."
+
+#~ msgid "Reverse all Edges"
+#~ msgstr "Alle Kanten umkehren"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
+#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
+#~ "Algorithm</span> at the graph. All edges without given weights are "
+#~ "assumed to have weights equals 1. Directed and undirected graphs are "
+#~ "processed accordingly.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Diese Option führt "
+#~ "<span style=\" font-style:italic;\">Prims Minimaler-Spannbaum-"
+#~ "Algorithmus</span> für diesen Graphen aus. Für Kanten ohne Gewichtungen "
+#~ "wird eine Gewichtung von 1 angenommen. Gerichtete und ungerichtete "
+#~ "Graphen werden gleichermaßen behandelt.</p></body></html>"
+
+#~ msgid "Spanning Tree Transformation"
+#~ msgstr "Spannbaumtransformation "
+
+#~ msgid "Element"
+#~ msgstr "Element"
+
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "Dokument"
+
+#~ msgctxt "dynamic property that is present exactly once"
+#~ msgid "Unique"
+#~ msgstr "Eindeutig"
+
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "Mehrfach"
+
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "Global"
+
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "Keine"
+
+#~ msgid "Connection"
+#~ msgstr "Verbindung"
+
+#~ msgid "Rocs Console script"
+#~ msgstr "Rocs-Konsolenskript"
+
+#~ msgid "<b style=\"color: red\"> Error in include file %1</b>"
+#~ msgstr "<b style=\"color: red\"> Fehler in Include-Datei %1</b>"
+
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "Programm-Meldungen"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "Read and write Graphviz graph files."
+#~ msgstr "Dieses Dokument enthält keinen aktiven Graphen."
+
+#, fuzzy
+#~| msgid "*.dot|Graphviz Files"
+#~ msgid "*.dot *.gv|Graphviz Format"
+#~ msgstr "*.dot|Graphviz-Dateien"
+
+#, fuzzy
+#~| msgid "dotImport"
+#~ msgid "Import"
+#~ msgstr "dotImport"
+
+#, fuzzy
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Could not open file \"%1\" in read mode: %2"
+#~ msgstr "Die Datei %1 lässt sich nicht öffnen: %2"
+
+#, fuzzy
+#~| msgid "cannot parse the file %1."
+#~ msgid "Could not parse file \"%1\"."
+#~ msgstr "Die Datei %1 lässt sich nicht einlesen."
+
+#~ msgid "No active graph in this document."
+#~ msgstr "Dieses Dokument enthält keinen aktiven Graphen."
+
+#~ msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgstr ""
+#~ "Die Datei %1 kann zum Schreiben des Dokuments nicht geöffnet werden. "
+#~ "Fehler: %2"
+
+#, fuzzy
+#~| msgctxt "@title Displayed plugin name"
+#~| msgid "Open and Save Keyhole Markup Language files"
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "Keyhole-Markup-Sprachdateien öffnen und speichern"
+
+#, fuzzy
+#~| msgid "*.gml|Graph Markup Language Files"
+#~ msgid "*.gml|Graph Markup Language Format"
+#~ msgstr "*.gml|Graph-Markup-Sprachdateien"
+
+#, fuzzy
+#~| msgctxt "@title Displayed plugin name"
+#~| msgid "Open and Save Keyhole Markup Language files"
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "Keyhole-Markup-Sprachdateien öffnen und speichern"
+
+#, fuzzy
+#~| msgid "*.kml|Keyhole Markup Language Files"
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "*.kml|Keyhole-Markup-Sprachdateien"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "Die Datei %1 lässt sich nicht öffnen: %2"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "Read and write Trivial Graph Format (TGF) files."
+#~ msgstr "Dieses Dokument enthält keinen aktiven Graphen."
+
+#, fuzzy
+#~| msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgid "Could not open file \"%1\" in write mode: %2"
+#~ msgstr ""
+#~ "Die Datei %1 kann zum Schreiben des Dokuments nicht geöffnet werden. "
+#~ "Fehler: %2"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "No data structure specified for output in this document."
+#~ msgstr "Dieses Dokument enthält keinen aktiven Graphen."
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Rocs graph documents\n"
+#~| "*|All files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr ""
+#~ "*.graph|Rocs-Graphendokumente\n"
+#~ "*|Alle Dateien"
+
+#, fuzzy
+#~| msgctxt "@title Displayed plugin name"
+#~| msgid "Open and Save Graphviz files"
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "Graphviz-Dateien öffnen und speichern"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Rocs graph documents\n"
+#~| "*|All files"
+#~ msgid "*.graph|Rocs Graph File Format"
+#~ msgstr ""
+#~ "*.graph|Rocs-Graphendokumente\n"
+#~ "*|Alle Dateien"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "Graphenstruktur"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "y"
+
+#~ msgid "Size"
+#~ msgstr "Größe"
+
+#, fuzzy
+#~| msgid "Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Graph"
+#~ msgstr "Graph"
+
+#, fuzzy
+#~| msgid "Multigraph"
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "Mehrfachgraph"
+
+#~ msgid ""
+#~ "This action will probably remove some edges. Do you want to continue?"
+#~ msgstr ""
+#~ "Diese Aktion wird vermutlich einige Kanten entfernen. Möchten Sie "
+#~ "fortfahren?"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Linked List Structure"
+#~ msgstr "Linked-List-Struktur"
+
+#~ msgid "Front value"
+#~ msgstr "Frontwert"
+
+#, fuzzy
+#~| msgid "Data '%1' had more than one(1) out pointers;"
+#~ msgid "Data '%1' has more than one out pointer."
+#~ msgstr "Datensatz „%1“ hat mehr als einen (1) ausgehenden Zeiger;"
+
+#~ msgid "Cannot convert document '%1'"
+#~ msgstr "Das Dokument „%1“ kann nicht umgewandelt werden."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "RootedTree Structure"
+#~ msgstr "Wurzelbaum-Struktur"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show all pointers"
+#~ msgstr "Alle Zeiger anzeigen"
+
+#~ msgid "Cannot open file %1."
+#~ msgstr "Die Datei „%1“ kann nicht geöffnet werden."
+
+#~ msgid "Invalid include directive: %1. Cannot find file in directive."
+#~ msgstr ""
+#~ "Ungültige Einfügeanweisung: %1. Datei kann in der Anweisung nicht "
+#~ "gefunden werden."
+
+#~ msgid "New File"
+#~ msgstr "Neue Datei"
+
+#~ msgid "Untitled%1"
+#~ msgstr "Unbenannt%1"
+
+#~ msgid "Visible"
+#~ msgstr "Sichtbar"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgid "Data structure name"
+#~ msgstr "Datenstruktur"
+
+#~ msgid "Delete this data structure"
+#~ msgstr "Diese Datenstruktur löschen"
+
+#~ msgid ""
+#~ "Delete the current data structure: delete all data elements and all "
+#~ "pointers"
+#~ msgstr ""
+#~ "Die aktuelle Datenstruktur entfernen: alle Datenelemente und Zeiger "
+#~ "löschen"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgid "rocsdeletegrey"
+#~ msgstr "Löschen"
+
+#, fuzzy
+#~| msgid "Display Options"
+#~ msgid "Display Options:"
+#~ msgstr "Anzeigeeinstellungen"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgctxt "@action:button"
+#~ msgid "Add Data Structure"
+#~ msgstr "Datenstruktur"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "Projekt exportieren"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "Projekt importieren"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "Namen eingeben"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "Graphen speichern"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "Skript speichern"
+
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "Projektnamen eingeben"
+
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "Name:"
+
+#~ msgid ""
+#~ "*.js|Rocs script documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.js|Rocs-Scriptdokumente\n"
+#~ "*|Alle Dateien"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "Skriptdokument speichern"
+
+#, fuzzy
+#~| msgid "*.tar.gz|Export as tar.gz Archive"
+#~ msgid "*.tar.gz|Import from tar.gz Archive"
+#~ msgstr "*.tar.gz|Als tar.gz-Archiv exportieren"
+
+#~ msgctxt "@title:window"
+#~ msgid "Project Archive to Import"
+#~ msgstr "Zu importierendes Projektarchiv"
+
+#~ msgctxt "@title:window"
+#~ msgid "Select Project Directory for Import"
+#~ msgstr "Zu importierenden Projektordner auswählen"
+
+#~ msgid "*.tar.gz|Export as tar.gz Archive"
+#~ msgstr "*.tar.gz|Als tar.gz-Archiv exportieren"
+
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "Projekt exportieren"
+
+#~ msgid "Edge Properties"
+#~ msgstr "Kanten-Eigenschaften"
+
+#~ msgid "Edge name"
+#~ msgstr "Kantenname"
+
+#~ msgid "Edge color"
+#~ msgstr "Kantenfarbe"
+
+#~ msgid "Value:"
+#~ msgstr "Wert:"
+
+#~ msgid "Edge value"
+#~ msgstr "Kantenwert"
+
+#~ msgid "Edge width"
+#~ msgstr "Kantenbreite"
+
+#~ msgid "Show"
+#~ msgstr "Anzeigen"
+
+#~ msgid "Show/hide edge name"
+#~ msgstr "Namen der Kante anzeigen/ausblenden"
+
+#~ msgid "Show/add edge value"
+#~ msgstr "Kantenwert anzeigen/hinzufügen"
+
+#~ msgid "Add Property"
+#~ msgstr "Eigenschaft hinzufügen"
+
+#~ msgid "Global"
+#~ msgstr "Global"
+
+#~ msgid "add"
+#~ msgstr "Hinzufügen"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid "v=%1"
+#~ msgstr "v=%1"
+
+#, fuzzy
+#~| msgid "untitled %1"
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "Unbenannt %1"
+
+#~ msgid "Main Definitions"
+#~ msgstr "Hauptdefinitionen"
+
+#~ msgid "Appearance"
+#~ msgstr "Erscheinungsbild"
+
+#~ msgid "Enable Color"
+#~ msgstr "Farben aktivieren"
+
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "Datenstrukturspezifische Einstellungen"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Add new dynamic property to data element.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Eine neue dynamische Eigenschaft zum Datenelement "
+#~ "hinzufügen.</p></body></html>"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of data elements"
+#~ msgstr "Namen der Datenelemente anzeigen"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of data elements"
+#~ msgstr "Werte der Datenelemente anzeigen"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of pointers"
+#~ msgstr "Namen der Zeiger anzeigen"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of pointers"
+#~ msgstr "Werte der Zeiger anzeigen"
+
+#~ msgid "Identifier:"
+#~ msgstr "Bezeichner:"
+
+#~ msgid "This is the unique identifier for the data type."
+#~ msgstr "Dies ist der eindeutige Bezeichner für den Datentyp."
+
+#~ msgid "Icon:"
+#~ msgstr "Symbol:"
+
+#~ msgid "Delete"
+#~ msgstr "Löschen"
+
+#~ msgid "This is the unique identifier for the pointer type."
+#~ msgstr "Dies ist der eindeutige Bezeichner für den Zeigertyp."
+
+#~ msgid "Create new Pointer Type"
+#~ msgstr "Neuen Zeigertyp erstellen"
+
+#~ msgid "dot"
+#~ msgstr "Punktiert"
+
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "Ungerichteter Graph"
+
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "Gerichteter Graph"
+
+#~ msgctxt ""
+#~ "@label:inlistbox Undirected graph for which several edges between same "
+#~ "nodes may exist"
+#~ msgid "Undirected Multigraph"
+#~ msgstr "Ungerichteter Mehrfachgraph"
+
+#~ msgctxt ""
+#~ "@label:inlistbox Directed graph for which several same orientated edges "
+#~ "between same nodes may exist"
+#~ msgid "Directed Multigraph"
+#~ msgstr "Gerichteter Mehrfachgraph"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save GML files"
+#~ msgstr "GML-Dateien öffnen und speichern"
+
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Graphendateien\n"
+#~ "*|Alle Dateien"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Graph File to Project"
+#~ msgstr "Bestehende Graphendatei zu Projekt hinzufügen"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "Rocs-Graphen importieren"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "Graphen speichern unter"
+
+#~ msgid "Cannot open the file: %1. Error %2"
+#~ msgstr "Die Datei %1 lässt sich nicht öffnen. Fehler: %2"
+
+#~ msgid "Could not parse Graphviz file due to syntax errors."
+#~ msgstr ""
+#~ "Die Graphviz-Datei kann wegen Syntaxfehlern nicht analysiert werden."
+
+#~ msgid "Graphviz parser returned unsuccessfully for file."
+#~ msgstr "Die Graphviz-Analyse der Datei ist fehlgeschlagen."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save Plain TXT files"
+#~ msgstr "Einfache Textdateien öffnen und speichern"
+
+#~ msgid "*.txt|Plain TXT Files"
+#~ msgstr "*.txt|Einfache Textdateien"
+
+#~| msgid "Add"
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "Hinzufügen"
+
+#~ msgid "Identifier for new Data Structure"
+#~ msgstr "Kennung der neuen Datenstruktur"
+
+#~ msgid "Add Node"
+#~ msgstr "Knoten hinzufügen"
+
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "Name:"
+
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "Zentriert"
+
+#~ msgctxt "align elements at top"
+#~ msgid "Top"
+#~ msgstr "Oben"
+
+#~ msgctxt "align elements left"
+#~ msgid "Left"
+#~ msgstr "Links"
+
+#~ msgctxt "align elements right"
+#~ msgid "Right"
+#~ msgstr "Rechts"
+
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Im Kreis"
+
+#~ msgctxt "align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Kreuzende Kanten minimieren"
+
+#~ msgid ""
+#~ "*.js|Rocs script document\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.js|Rocs-Scriptdokumente\n"
+#~ "*|Alle Dateien"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type Icon:"
+#~ msgstr "Typ"
+
+#, fuzzy
+#~| msgid "Export graphs to file"
+#~ msgid "Export as new Type"
+#~ msgstr "Graphen in Datei exportieren"
+
+#~ msgid "Open Script"
+#~ msgstr "Skript öffnen"
+
+#~ msgid "Edit"
+#~ msgstr "Bearbeiten"
+
+#, fuzzy
+#~| msgid "Pointers"
+#~ msgid "Pointer"
+#~ msgstr "Zeiger"
+
+#~ msgid "Delete the active graph"
+#~ msgstr "Den aktiven Graphen entfernen"
+
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Apply to all nodes"
+#~ msgstr "Auf alle Knoten anwenden"
+
+#~ msgid "Close"
+#~ msgstr "Schließen"
+
+#~ msgid "Image"
+#~ msgstr "Bild"
+
+#~ msgid "Untitled0"
+#~ msgstr "Unbenannt0"
+
+#~ msgid "Open Graph"
+#~ msgstr "Graphen öffnen"
+
+#~ msgid "Save All"
+#~ msgstr "Alle speichern"
+
+#~ msgid "New"
+#~ msgstr "Neu "
+
+#~ msgid "Color for new nodes"
+#~ msgstr "Farbe für neue Knoten"
+
+#~ msgid "Pointer Color:"
+#~ msgstr "Zeigerfarbe:"
+
+#~ msgid "Color for new edges"
+#~ msgstr "Farbe für neue Kanten"
+
+#~ msgid "Apply the current color to all nodes"
+#~ msgstr "Die aktuelle Farbe auf alle Knoten anwenden"
+
+#~ msgid "Apply the current color to all nodes on the drawing area"
+#~ msgstr "Die aktuelle Farbe auf alle Knoten im Zeichenbereich anwenden"
+
+#~ msgid "All"
+#~ msgstr "Alle"
+
+#~ msgid "Apply the current color to all edges"
+#~ msgstr "Die aktuelle Farbe auf alle Kanten anwenden"
+
+#~ msgid "Apply the current color to all edges on the drawing area"
+#~ msgstr "Die aktuelle Farbe auf alle Kanten im Zeichenbereich anwenden"
+
+#~ msgid "Align on the base"
+#~ msgstr "Unten ausrichten"
+
+#~ msgid "Align on the center"
+#~ msgstr "Mittig ausrichten"
+
+#~ msgid "Align on the top"
+#~ msgstr "Oben ausrichten"
+
+#~ msgid "Align on the left"
+#~ msgstr "Links ausrichten"
+
+#~ msgid "Align on the right"
+#~ msgstr "Rechts ausrichten"
+
+#~ msgid "Align on a circle"
+#~ msgstr "Auf einem Kreis ausrichten"
+
+#~ msgid "Tree"
+#~ msgstr "Baum"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Ignoring line: %1"
+#~ msgstr "Folgende Zeile wird ignoriert: %1"
+
+#~ msgid "debug(\"Cannot open file %1.\")"
+#~ msgstr "debug(\"Die Datei „%1“ kann nicht geöffnet werden.\")"
+
+#~ msgid "debug(\"Cannot open file %1.\")\n"
+#~ msgstr "debug(\"Die Datei %1 kann nicht geöffnet werden.\")\n"
+
+#~ msgid "Add Random Integer Values"
+#~ msgstr "Ganzzahlige Zufallswerte hinzufügen"
+
+#~ msgid "Add Random Float Values"
+#~ msgstr "Zufällige Fließkommawerte hinzufügen"
+
+#~ msgid "(c) 2009"
+#~ msgstr "© 2009"
+
+#~ msgid "Do you want to save your unsaved document?"
+#~ msgstr "Möchten Sie das ungespeicherte Dokument speichern?"
+
+#~ msgid "Select Items by clicking on them."
+#~ msgstr "Elemente durch anklicken auswählen."
+
+#~ msgid "Moves a node around the drawing area."
+#~ msgstr "Bewegt einen Knoten im Zeichenbereich herum."
+
+#~ msgid "Make Complete"
+#~ msgstr "Vervollständigen"
+
+#~ msgid "cancel"
+#~ msgstr "Abbrechen"
+
+#~ msgid "assign values"
+#~ msgstr "Werte zuweisen"
+
+#~ msgid "start transform"
+#~ msgstr "Umwandlung starten"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialog"
+
+#~ msgid "Radius:"
+#~ msgstr "Radius:"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Complete"
+#~ msgstr "Vollständig"
+
+#~ msgctxt "Do not translate, X is for delete"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Graph is oriented"
+#~ msgstr "Der Graph ist gerichtet"
+
+#~ msgid "Name: %1"
+#~ msgstr "Name: %1"
+
+#~ msgid "Value: %1"
+#~ msgstr "Wert: %1"
+
+#~ msgid "Save Graph As..."
+#~ msgstr "Graphen speichern unter ..."
+
+#~ msgid "Save Script As..."
+#~ msgstr "Skript speichern unter ..."
+
+#~ msgid "cola@uni-paderborn.de"
+#~ msgstr "cola@uni-paderborn.de"
+
+#, fuzzy
+#~| msgid " Graph "
+#~ msgid "Ring Graph"
+#~ msgstr " Graph "
+
+#~ msgid "UntitledDoc"
+#~ msgstr "UnbenanntesDoc"
+
+#~ msgid "Thanks to Ugo Sangiori"
+#~ msgstr "Dank an Ugo Sangiori"
+
+#~ msgid "Edge Color:"
+#~ msgstr "Kantenfarbe:"
+
+#~ msgid "X-coordinate "
+#~ msgstr "X-Koordinate "
+
+#~ msgid "Y-coordinate "
+#~ msgstr "Y-Koordinate "
+
+#~ msgid "Node size"
+#~ msgstr "Knotengröße"
+
+#, fuzzy
+#~| msgid "End"
+#~ msgid "End"
+#~ msgstr "Ende"
+
+#, fuzzy
+#~ msgid "Graph is Automate"
+#~ msgstr "Automatisierter Graph"
+
+#~ msgid " Is begin"
+#~ msgstr "Ist Anfang"
+
+#~ msgid " Is End"
+#~ msgstr "Ist Ende"
+
+#~ msgid "Oriented graph"
+#~ msgstr "Gerichteter Graph"
+
+#~ msgid "Enabling this button will make the graph oriented."
+#~ msgstr ""
+#~ "Durch anklicken dieses Knopfes, wird der Graph zu einem gerichteten "
+#~ "Graphen."
+
+#, fuzzy
+#~| msgid "Automate:"
+#~ msgid "Automaton Graph"
+#~ msgstr "Automatisch:"
+
+# „Automaton“ muss noch übersetzt werden
+#, fuzzy
+#~ msgid "Enabling this button will make the graph an automaton graph."
+#~ msgstr ""
+#~ "Durch anklicken dieses Knopfes, wird der Graph zu einem Automaton-Graphen."
+
+#~ msgid "Enabling this button will show the names of all nodes."
+#~ msgstr ""
+#~ "Durch anklicken dieses Knopfes, werden die Namen aller Knoten angezeigt."
+
+#~ msgid "Show all edges' names"
+#~ msgstr "Alle Kantennamen anzeigen"
+
+#~ msgid "Enabling this button will show the names of all edges."
+#~ msgstr ""
+#~ "Durch anklicken dieses Knopfes, werden die Namen aller Kanten angezeigt."
+
+#~ msgid "Show all nodes' values"
+#~ msgstr "Alle Knotenwerte anzeigen"
+
+#~ msgid "Enabling this button will show the values of all nodes."
+#~ msgstr ""
+#~ "Durch anklicken dieses Knopfes, werden die Werte aller Knoten angezeigt."
+
+#~ msgid "Show all edges' values"
+#~ msgstr "Alle Kantenwerte anzeigen"
+
+#~ msgid "Enabling this button will show the values of edges."
+#~ msgstr ""
+#~ "Durch anklicken dieses Knopfes, werden die Werte aller Kanten angezeigt."
+
+#, fuzzy
+#~| msgid "Node:"
+#~ msgid "Node name"
+#~ msgstr "Knoten:"
+
+#~ msgid "KSqueezedTextLabel"
+#~ msgstr "KSqueezedTextLabel"
+
+#~ msgid "X"
+#~ msgstr "X"
+
+#~ msgid "Node:"
+#~ msgstr "Knoten:"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "ok"
+#~ msgstr "OK"

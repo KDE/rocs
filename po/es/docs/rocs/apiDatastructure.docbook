@@ -1,0 +1,225 @@
+<sect1 id="scripting-data-structure">
+<title
+>Interfaz de programación de guiones para todas las estructuras de datos</title>
+<sect2>
+<title
+>Objeto de estructura de datos abstractos</title>
+<para
+>La estructura de datos abstractos define una conjunto de elementos de datos y posibles conexiones entre ellos; este es el prototipo para cualquier otra estructura de datos. Las estructuras de datos se identifican por sus nombres. Suponiendo que ha creado una estructura de datos con el nombre <literal
+>testgraph</literal
+>, puede acceder a ella escribiendo su identificador. Por ejemplo, para obtener un array con todos los elementos de datos de la estructura de datos indicada, puede escribir <literal
+>testgraph.list_nodes()</literal
+> en el guion. </para>
+
+<sect3>
+<title
+>Propiedades</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>nombre</emphasis
+> : </para>
+        <para
+>El nombre único de esta estructura de datos.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Datos abstractos</title>
+<para
+>Un elemento de datos abstractos es una unidad de información que pertenece a una estructura de datos abstractos y está posiblemente conectado a otros elementos de datos mediante punteros. </para>
+
+<sect3>
+<title
+>Propiedades</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>anchura</emphasis
+> : </para>
+        <para
+>El tamaño de este elemento de datos.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>x</emphasis
+> : </para>
+        <para
+>La coordenada X de este elemento de datos.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>y</emphasis
+> : </para>
+        <para
+>La coordenada Y de este elemento de datos.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>id</emphasis
+> : </para>
+        <para
+>El identificador único de este elemento de datos.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+> : </para>
+        <para
+>El color de este elemento de datos indicado como valor hexadecimal.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+</sect2>
+
+
+<sect2>
+<title
+>Puntero abstracto</title>
+<para
+>Un puntero conecta dos elementos de datos y puede contener información en sus propiedades. </para>
+<sect3>
+<title
+>Propiedades</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>anchura</emphasis
+> : </para>
+        <para
+>El ancho de la conexión.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>dirigido</emphasis
+> : </para>
+        <para
+>Si es «true», la conexión está dirigida. En caso contrario, la conexión no está dirigida.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>desde</emphasis
+> : </para>
+        <para
+>Inicio de la conexión.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>hasta</emphasis
+> : </para>
+        <para
+>Fin de la conexión</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+> : </para>
+        <para
+>ID del tipo de conexión.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Métodos</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>remove()</term>
+    <listitem>
+        <para
+>Eliminar esta conexión.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>add_property(nombre, valor)</term>
+    <listitem>
+        <para
+>Añadir una nueva propiedad a la conexión.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>add_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>nombre</replaceable
+></parameter
+></paramdef
+> <paramdef
+>string <parameter
+><replaceable
+>valor</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>remove_property(nombre)</term>
+    <listitem>
+        <para
+>Eliminar una propiedad existente de la conexión.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>nombre</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+
+</sect2>
+</sect1>

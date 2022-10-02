@@ -1,0 +1,1767 @@
+# Slovenian translation of libgraphtheory
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Jure Repinc <jlp@holodeck1.com>, 2010.
+# Andrej Mernik <andrejm@ubuntu.si>, 2013, 2014, 2015, 2016.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2021-10-25 07:41+0200\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"X-Generator: Lokalize 20.12.2\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Jure Repinc,Andrej Mernik,Matjaž Jeran"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "jlp@holodeck1.com,andrejm@ubuntu.si,matjaz.jeran@amis.net"
+
+#: dialogs/edgeproperties.cpp:25
+#, kde-format
+msgctxt "@title:window"
+msgid "Edge Properties"
+msgstr "Lastnosti povezave"
+
+#: dialogs/edgeproperties.cpp:80 dialogs/nodeproperties.cpp:86
+#, kde-format
+msgid "Name"
+msgstr "Ime"
+
+#: dialogs/edgeproperties.cpp:81 dialogs/nodeproperties.cpp:87
+#, kde-format
+msgid "Value"
+msgstr "Vrednost"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
+#: dialogs/edgeproperties.ui:26
+#, kde-format
+msgid "Edge Properties"
+msgstr "Lastnosti povezave"
+
+#. i18n: ectx: property (text), widget (QLabel, labelType)
+#: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
+#, kde-format
+msgid "Type:"
+msgstr "Vrsta:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
+#: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
+#, kde-format
+msgid "Dynamic Properties"
+msgstr "Dinamične lastnosti"
+
+#: dialogs/edgetypeproperties.cpp:37
+#, kde-format
+msgid "Edges"
+msgstr "Povezave"
+
+#: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
+#, kde-format
+msgid "Property names"
+msgstr "Imena lastnosti"
+
+#: dialogs/edgetypeproperties.cpp:43
+#, kde-format
+msgctxt "@title:window"
+msgid "Edge Type Properties"
+msgstr "Lastnosti vrste povezave"
+
+#: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
+#, kde-format
+msgid "Name:"
+msgstr "Ime:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelId)
+#. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
+#: dialogs/edgetypeproperties.cpp:49 dialogs/nodeproperties.ui:119
+#: dialogs/nodetypeproperties.cpp:49
+#: editorplugins/generategraph/generategraphwidget.ui:129
+#, kde-format
+msgid "Identifier:"
+msgstr "Določilnik:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelColor)
+#: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
+#: dialogs/nodetypeproperties.cpp:52
+#, kde-format
+msgid "Color:"
+msgstr "Barva:"
+
+#: dialogs/edgetypeproperties.cpp:52 graphdocument.cpp:120
+#, kde-format
+msgid "Unidirectional"
+msgstr "Enosmerno"
+
+#: dialogs/edgetypeproperties.cpp:53 graphdocument.cpp:125
+#, kde-format
+msgid "Bidirectional"
+msgstr "Dvosmerno"
+
+#: dialogs/edgetypeproperties.cpp:54
+#, kde-format
+msgid "Direction:"
+msgstr "Smer:"
+
+#: dialogs/edgetypeproperties.cpp:61 dialogs/nodetypeproperties.cpp:59
+#, kde-format
+msgid "Visibility:"
+msgstr "Vidnost:"
+
+#: dialogs/edgetypeproperties.cpp:137
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The selected ID for this edge type."
+msgstr "Izbran določilnik za to vrsto povezave."
+
+#: dialogs/edgetypeproperties.cpp:141
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another edge type, please select a "
+"different one."
+msgstr ""
+"Izbran določilnik se že uporablja za drugo vrsto povezave. Izberite "
+"drugačnega."
+
+#: dialogs/nodeproperties.cpp:26
+#, kde-format
+msgctxt "@title:window"
+msgid "Node Properties"
+msgstr "Lastnosti vozlišča"
+
+#: dialogs/nodeproperties.cpp:133
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The selected ID for this node."
+msgstr "Izbran določilnik za to vozlišče."
+
+#: dialogs/nodeproperties.cpp:137
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another node, please select a different "
+"one."
+msgstr ""
+"Izbran določilnik se že uporablja za drugo vozlišče. Izberite drugačnega."
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
+#: dialogs/nodeproperties.ui:26
+#, kde-format
+msgid "Node Properties"
+msgstr "Lastnosti vozlišča"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
+#. i18n: ectx: property (toolTip), widget (KColorCombo, color)
+#: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
+#, kde-format
+msgid "Node color"
+msgstr "Barva vozlišča"
+
+#: dialogs/nodetypeproperties.cpp:35
+#, kde-format
+msgid "Nodes"
+msgstr "Vozlišča"
+
+#: dialogs/nodetypeproperties.cpp:41
+#, kde-format
+msgctxt "@title:window"
+msgid "Node Type Properties"
+msgstr "Lastnosti vrste vozlišča"
+
+#: dialogs/nodetypeproperties.cpp:133
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The selected ID for this node type."
+msgstr "Izbran določilnik za to vrsto vozlišča."
+
+#: dialogs/nodetypeproperties.cpp:137
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another node type, please select a "
+"different one."
+msgstr ""
+"Izbran določilnik se že uporablja za drugo vrsto vozlišča. Izberite "
+"drugačnega."
+
+#: dialogs/propertieswidget.cpp:33
+#, kde-format
+msgid "Add Property"
+msgstr "Dodaj lastnost"
+
+#: dialogs/propertydelegate.cpp:49
+#, kde-format
+msgid "Delete this property."
+msgstr "Izbriši to lastnost."
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:33
+#, kde-format
+msgctxt "@title:window"
+msgid "Assign Values"
+msgstr "Dodeli vrednosti"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:52
+#, kde-format
+msgid "All Data Types"
+msgstr "Vse vrste podatkov"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:57
+#, kde-format
+msgid "All Edge Types"
+msgstr "Vse vrste povezav"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:81
+#, kde-format
+msgid "Enter Property Name"
+msgstr "Vnesite ime lastnosti"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
+#: editorplugins/assignvalues/assignvalueswidget.ui:32
+#, kde-format
+msgid "Assign Values"
+msgstr "Dodeli vrednosti"
+
+#. i18n: ectx: property (text), widget (QLabel, property_choice_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:40
+#, kde-format
+msgid "Choose Properties"
+msgstr "Izberite lastnosti"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/assignvalues/assignvalueswidget.ui:59
+#, kde-format
+msgid "Show advanced options."
+msgstr "Prikaži napredne možnosti."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: editorplugins/assignvalues/assignvalueswidget.ui:74
+#, kde-format
+msgid "Assignment Method"
+msgstr "Metoda dodelitve"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:81
+#, kde-format
+msgid "Enumerate Items"
+msgstr "Oštevilči predmete"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:86
+#, kde-format
+msgid "Enumerate Alpha"
+msgstr "Oštevilči s črkami"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:91
+#, kde-format
+msgid "Enumerate Alpha-Numeric"
+msgstr "Oštevilči s črkami in številkami"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:96
+#, kde-format
+msgid "Assign Random Integers"
+msgstr "Dodeli naključna cela števila"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:101
+#, kde-format
+msgid "Assign Random Reals"
+msgstr "Dodeli naključna realna števila"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:106
+#, kde-format
+msgid "Assign Constant Value"
+msgstr "Dodeli stalno vrednost"
+
+#. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
+#: editorplugins/assignvalues/assignvalueswidget.ui:132
+#, kde-format
+msgid "Start ID:"
+msgstr "Začetni določilnik:"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:167
+#, kde-format
+msgid "Initial string"
+msgstr "Začetni niz"
+
+#. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:174
+#, kde-format
+msgid "a"
+msgstr "a"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
+#: editorplugins/assignvalues/assignvalueswidget.ui:192
+#, kde-format
+msgid "Start ID"
+msgstr "Začetni določilnik"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
+#: editorplugins/assignvalues/assignvalueswidget.ui:209
+#, kde-format
+msgid "Prefix"
+msgstr "Predpona"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: editorplugins/assignvalues/assignvalueswidget.ui:230
+#: editorplugins/assignvalues/assignvalueswidget.ui:298
+#, kde-format
+msgid "Lower Limit"
+msgstr "Spodnja meja"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: editorplugins/assignvalues/assignvalueswidget.ui:250
+#: editorplugins/assignvalues/assignvalueswidget.ui:305
+#, kde-format
+msgid "Upper Limit"
+msgstr "Zgornja meja"
+
+#. i18n: ectx: property (text), widget (QLabel, label_dagGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: editorplugins/assignvalues/assignvalueswidget.ui:257
+#: editorplugins/assignvalues/assignvalueswidget.ui:312
+#: editorplugins/generategraph/generategraphwidget.ui:483
+#, kde-format
+msgid "Generator Seed"
+msgstr "Seme ustvarjalnika"
+
+#. i18n: ectx: property (text), widget (QLabel, constant_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:372
+#, kde-format
+msgid "Constant"
+msgstr "Konstanta"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:400
+#, kde-format
+msgid "Overwrite existing values"
+msgstr "Prepiši obstoječe vrednosti"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
+#. i18n: ectx: property (text), widget (QLabel, labelData)
+#: editorplugins/assignvalues/assignvalueswidget.ui:434
+#: editorplugins/generategraph/generategraphwidget.ui:252
+#: editorplugins/generategraph/generategraphwidget.ui:404
+#, kde-format
+msgid "Nodes:"
+msgstr "Vozlišča:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelProperty)
+#: editorplugins/assignvalues/assignvalueswidget.ui:447
+#, kde-format
+msgid "Property name:"
+msgstr "Ime lastnosti:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
+#. i18n: ectx: property (text), widget (QLabel, labelConnection)
+#: editorplugins/assignvalues/assignvalueswidget.ui:460
+#: editorplugins/generategraph/generategraphwidget.ui:272
+#, kde-format
+msgid "Edges:"
+msgstr "Povezave:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
+#: editorplugins/assignvalues/assignvalueswidget.ui:482
+#, kde-format
+msgid "Assign values to selected edges."
+msgstr "Dodeli vrednosti izbranim povezavam."
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
+#: editorplugins/assignvalues/assignvalueswidget.ui:509
+#, kde-format
+msgid "Assign values to selected nodes."
+msgstr "Dodeli vrednosti izbranim vozliščem."
+
+#: editorplugins/generategraph/generategraphwidget.cpp:79
+#, kde-format
+msgctxt "@title:window"
+msgid "Generate Graph"
+msgstr "Ustvari graf"
+
+#: editorplugins/generategraph/generategraphwidget.cpp:119
+#: editorplugins/generategraph/generategraphwidget.cpp:126
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "%1 (ID %2)"
+msgstr "%1 (določilnik %2)"
+
+#: editorplugins/generategraph/generategraphwidget.cpp:529
+#, kde-format
+msgid "Incorrect Edge Direction"
+msgstr "Napačna smer roba"
+
+#: editorplugins/generategraph/generategraphwidget.cpp:529
+#, kde-format
+msgid "Edges in a Directed Acyclical Graph must be directional."
+msgstr "Robovi v usmerjenih acikličnih grafih morajo biti usmerjeni."
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
+#: editorplugins/generategraph/generategraphwidget.ui:14
+#, kde-format
+msgid "Generate Graph"
+msgstr "Ustvari graf"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:22
+#, kde-format
+msgid "Select the graph generator."
+msgstr "Izberite ustvarjalnik grafa."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:26
+#, kde-format
+msgid "Mesh Graph"
+msgstr "Mrežasti graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:31
+#, kde-format
+msgid "Star Graph"
+msgstr "Graf zvezda"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:36
+#, kde-format
+msgid "Circle Graph"
+msgstr "Krožni graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:41
+#, kde-format
+msgid "Random Graph"
+msgstr "Naključni graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:46
+#, kde-format
+msgid "Erdös-Renyi Graph"
+msgstr "Graf Erdös-Renyi"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:51
+#, kde-format
+msgid "Random Tree Graph"
+msgstr "Naključni drevesni graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:56
+#, kde-format
+msgid "Random Dag Graph"
+msgstr "Slučajni usmerjeni aciklični graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:61
+#, kde-format
+msgid "Path Graph"
+msgstr "Graf poti"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:66
+#, kde-format
+msgid "Complete Graph"
+msgstr "Popolni graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:71
+#, kde-format
+msgid "Complete Bipartite"
+msgstr "Popolni bipartitni"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/generategraph/generategraphwidget.ui:91
+#, kde-format
+msgid "Show advanced settings."
+msgstr "Pokaži napredne nastavitve."
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:106
+#, kde-format
+msgid "Set the unique identifier of the generated graph."
+msgstr "Nastavite edinstven določilnik ustvarjenega grafa."
+
+#. i18n: ectx: property (text), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:109
+#, kde-format
+msgid "Graph"
+msgstr "Graf"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:116
+#, kde-format
+msgid "The node type to create the nodes of the graph with"
+msgstr "Vrsta vozlišča s katerim bodo ustvarjena vozlišča grafa"
+
+#. i18n: ectx: property (text), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:119
+#, kde-format
+msgid "Node type:"
+msgstr "Vrsta vozlišča:"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
+#: editorplugins/generategraph/generategraphwidget.ui:126
+#, kde-format
+msgid "The identifier of the created graph (used for scripting)"
+msgstr "Določilnik ustvarjenega grafa (uporabno za pisanje skript)"
+
+#. i18n: ectx: property (text), widget (QLabel, label_columns)
+#: editorplugins/generategraph/generategraphwidget.ui:148
+#, kde-format
+msgid "Number of Columns:"
+msgstr "Število stolpcev:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_rows)
+#: editorplugins/generategraph/generategraphwidget.ui:168
+#, kde-format
+msgid "Number of Rows:"
+msgstr "Število vrstic:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
+#: editorplugins/generategraph/generategraphwidget.ui:196
+#, kde-format
+msgid "Satellite Nodes:"
+msgstr "Spremljevalna vozlišča:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
+#. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_completeNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:224
+#: editorplugins/generategraph/generategraphwidget.ui:505
+#: editorplugins/generategraph/generategraphwidget.ui:527
+#, kde-format
+msgid "Number of Nodes:"
+msgstr "Število vozlišč:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
+#. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
+#: editorplugins/generategraph/generategraphwidget.ui:286
+#: editorplugins/generategraph/generategraphwidget.ui:332
+#, kde-format
+msgid "Allow self-edges:"
+msgstr "Dovoli povezave nase:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:293
+#, kde-format
+msgid "Generator seed:"
+msgstr "Seme generatorja:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:325
+#, kde-format
+msgid "Nodes (n):"
+msgstr "Vozlišča (n):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:349
+#, kde-format
+msgid "Edge Probability (p):"
+msgstr "Verjetnost povezave (p):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:356
+#: editorplugins/generategraph/generategraphwidget.ui:421
+#, kde-format
+msgid "Generator Seed:"
+msgstr "Seme ustvarjalnika:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:446
+#, kde-format
+msgid "Number of Nodes"
+msgstr "Število vozlišč"
+
+#. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:463
+#, kde-format
+msgid "Edge Probability"
+msgstr "Verjetnost povezave"
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
+#: editorplugins/generategraph/generategraphwidget.ui:549
+#, kde-format
+msgid "Left Set Nodes:"
+msgstr "Leva množica vozlišč:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
+#: editorplugins/generategraph/generategraphwidget.ui:563
+#, kde-format
+msgid "Right Set Nodes:"
+msgstr "Desna množica vozlišč:"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:590
+#, kde-format
+msgid "Select the edge type for connections of the generated graph."
+msgstr "Izberite vrsto povezave za povezave ustvarjenega grafa."
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:604
+#, kde-format
+msgid "The edge type to create the edges of the graph with"
+msgstr "Vrsta povezave s katero bodo ustvarjene povezave grafa"
+
+#. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:607
+#, kde-format
+msgid "Edge type:"
+msgstr "Vrsta povezave:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:614
+#, kde-format
+msgid "Graph generator:"
+msgstr "Generator grafov:"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:621
+#, kde-format
+msgid "Select the node type for node elements of the generated graph."
+msgstr "Izberite vrsto vozlišča za predmete vozlišč ustvarjenega grafa."
+
+#: editorplugins/graphlayout/graphlayoutwidget.cpp:37
+#, kde-format
+msgctxt "@title:window"
+msgid "Graph Layout"
+msgstr "Postavitev grafa"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:20
+#, kde-format
+msgid "Graph Layout"
+msgstr "Postavitev grafa"
+
+#. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:36
+#, kde-format
+msgid "Force Based Layout"
+msgstr "Prisilna osnovna postavitev"
+
+#. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:57
+#, kde-format
+msgid "Area factor:"
+msgstr "Faktor površine:"
+
+#. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:77
+#, kde-format
+msgid "Repelling force:"
+msgstr "Odbojna sila:"
+
+#. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:97
+#, kde-format
+msgid "Attraction force:"
+msgstr "Privlačna sila:"
+
+#. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:119
+#, kde-format
+msgid "Radial Tree Layout"
+msgstr "Postavitev krožnega drevesa"
+
+#. i18n: ectx: property (text), widget (QLabel, rootLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:134
+#, kde-format
+msgid "Center/Root:"
+msgstr "Center/izhodišče:"
+
+#. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:144
+#, kde-format
+msgid "Node separation:"
+msgstr "Ločevanje vozlišč:"
+
+#. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:158
+#, kde-format
+msgid "Tree type:"
+msgstr "Vrsta drevesa:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:165
+#, kde-format
+msgid "Free tree"
+msgstr "Prosto drevo"
+
+#. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:175
+#, kde-format
+msgid "Rooted tree"
+msgstr "Zakoreninjeno drevo"
+
+#: editorplugins/transformedges/transformedgeswidget.cpp:23
+#, kde-format
+msgctxt "@title:window"
+msgid "Transform Edges"
+msgstr "Preoblikuj povezave"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
+#: editorplugins/transformedges/transformedgeswidget.ui:14
+#, kde-format
+msgid "Transform Edges"
+msgstr "Preoblikuj povezave"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:22
+#, kde-format
+msgid ""
+"This option connects all nodes of the given graph. The new edges do not have "
+"any preset weights."
+msgstr ""
+"Ta možnost poveže vsa vozlišča danega grafa. Nove povezave nimajo nobenih "
+"nastavljenih uteži."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:25
+#, kde-format
+msgid "Complete graph"
+msgstr "Popolni graf"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:35
+#, kde-format
+msgid "This option removes all edges from the given graph."
+msgstr "Ta možnost odstrani vse povezave iz danega grafa."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:38
+#, kde-format
+msgid "Remove all edges"
+msgstr "Odstrani vse povezave"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:45
+#, kde-format
+msgid ""
+"This option reverses all edges of a directed graph. Note that this does not "
+"apply to undirected graphs."
+msgstr ""
+"Ta možnost obrne smer vseh povezav usmerjenega grafa. Zapomnite si, da to ne "
+"vpliva na grafe, ki niso usmerjeni."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:48
+#, kde-format
+msgid "Reverse all edges"
+msgstr "Obrni smer vseh povezav"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:59
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes <span "
+"style=\" font-style:italic;\">Prim's Minimal Spanning Tree Algorithm</span> "
+"at the graph. All edges without given weights are assumed to have weights "
+"equals 1. Directed and undirected graphs are processed accordingly.</p></"
+"body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Ta možnost izvede <span "
+"style=\" font-style:italic;\">Primov algoritem najmanjšega vpetega drevesa</"
+"span> na grafu. Za vse povezave brez danih uteži je predpostavljena utež 1. "
+"Usmerjeni in neusmerjeni grafi so ustrezno obdelani.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:62
+#, kde-format
+msgid "Spanning tree transformation"
+msgstr "Preoblikovanje vpetega drevesa"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:69
+#, kde-format
+msgid "Remove all self edges"
+msgstr "Odstrani vse povezave nase"
+
+#: fileformats/dot/dotfileformat.cpp:45
+#, kde-format
+msgid "Graphviz Format (%1)"
+msgstr "Format Graphviz (%1)"
+
+#: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
+#: fileformats/rocs1/rocs1fileformat.cpp:57
+#: fileformats/rocs2/rocs2fileformat.cpp:48
+#: fileformats/tgf/tgffileformat.cpp:52
+#, kde-format
+msgid "Could not open file \"%1\" in read mode: %2"
+msgstr "Ni bilo mogoče odpreti datoteke »%1« v načinu za branje: %2"
+
+#: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
+#, kde-format
+msgid "Could not parse file \"%1\"."
+msgstr "Ni bilo mogoče razčleniti datoteke »%1«."
+
+#: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
+#, kde-format
+msgid "Cannot open file %1 to write document. Error: %2"
+msgstr "Ni mogoče odpreti datoteke %1 za zapisovanje dokumenta. Napaka: %2"
+
+#: fileformats/fileformatmanager.cpp:48
+#, kde-format
+msgctxt "@title:window"
+msgid "Plugin Error"
+msgstr "Napaka vtičnika"
+
+#: fileformats/fileformatmanager.cpp:50
+#, kde-format
+msgid "Plugins could not be found in specified directories:<br>"
+msgstr "Ni bilo mogoče najti vtičnikov v navedenih mapah:<br>"
+
+#: fileformats/fileformatmanager.cpp:52
+#, kde-format
+msgid ""
+"<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
+"link</a> for further information."
+msgstr ""
+"<br><br> Preverite <a href='https://doc.qt.io/qt-5/deployment-plugins."
+"html'>to povezavo</a> za nadaljnje informacije."
+
+#: fileformats/gml/gmlfileformat.cpp:44
+#, kde-format
+msgid "Graph Markup Language Format (%1)"
+msgstr "Format Graph Markup Language (%1)"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:38
+#, kde-format
+msgid "Rocs 1 Graph File Format (%1)"
+msgstr "Vrsta datotek z grafi Rocs 1 (%1)"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:258
+#: fileformats/rocs2/rocs2fileformat.cpp:211
+#: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
+#, kde-format
+msgid "Could not open file \"%1\" in write mode: %2"
+msgstr "Ni bilo mogoče odpreti datoteke »%1« v načinu za pisanje: %2"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:269
+#, kde-format
+msgid "Could not write data, aborting. Error: %1."
+msgstr "Ni bilo mogoče zapisati podatkov, prekinjanje. Napaka: %1."
+
+#: fileformats/rocs2/rocs2fileformat.cpp:40
+#, kde-format
+msgid "Rocs Graph Format (%1)"
+msgstr "Vrsta datotek z grafi Rocs (%1)"
+
+#: fileformats/rocs2/rocs2fileformat.cpp:312
+#, kde-format
+msgid "Error on serializing file format to file."
+msgstr "Napaka v zaporejanju vrste datoteke v datoteko."
+
+#: fileformats/tgf/tgffileformat.cpp:38
+#, kde-format
+msgid "Trivial Graph Format (%1)"
+msgstr "Trivial Graph Format (%1)"
+
+#: fileformats/tgf/tgffileformat.cpp:73
+#, kde-format
+msgid "Could not parse file. Identifier \"%1\" is used more than once."
+msgstr ""
+"Ni bilo mogoče razčleniti datoteke. Določilnik »%1« je uporabljen več kot "
+"enkrat."
+
+#: fileformats/tgf/tgffileformat.cpp:85
+#, kde-format
+msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
+msgstr ""
+"Ni bilo mogoče razčleniti datoteke. Povezava od »%1« do »%2« uporablja "
+"nedoločena vozlišča."
+
+#: fileformats/tikz/tikzfileformat.cpp:34
+#, kde-format
+msgid "TikZ (PGF) Format (%1)"
+msgstr "Vrsta TikZ (PGF) (%1)"
+
+#: graphdocument.cpp:129
+#, kde-format
+msgid "Default"
+msgstr "Privzeti"
+
+#: graphdocument.cpp:315
+#, kde-format
+msgctxt "@title:tab initial title for graph document"
+msgid "New Graph"
+msgstr "Nov graf"
+
+#: kernel/documentwrapper.cpp:88
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: no node with ID %2 registered"
+msgstr "%1: ni vpisanega vozlišča z določilnikom %2"
+
+#: kernel/documentwrapper.cpp:115 kernel/nodewrapper.cpp:109
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: node type ID %2 not registered"
+msgstr "%1: določilnik vrste vozlišča %2 ni vpisan"
+
+#: kernel/documentwrapper.cpp:150 kernel/edgewrapper.cpp:59
+#: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
+#: kernel/nodewrapper.cpp:205 kernel/nodewrapper.cpp:242
+#: kernel/nodewrapper.cpp:288 kernel/nodewrapper.cpp:339
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: edge type ID %2 not registered"
+msgstr "%1: določilnik vrste povezave %2 ni vpisan"
+
+#: kernel/documentwrapper.cpp:174
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"from\" is not a valid node object"
+msgstr "%1: »from« ni veljaven predmet vozlišča"
+
+#: kernel/documentwrapper.cpp:179
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"to\" is not a valid node object"
+msgstr "%1: »to« ni veljaven predmet vozlišča"
+
+#: kernel/documentwrapper.cpp:190
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"node\" is not a valid node object"
+msgstr "%1: »node« ni veljaven predmet vozlišča"
+
+#: kernel/documentwrapper.cpp:204
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"edge\" is not a valid edge object"
+msgstr "%1: »edge« ni veljaven predmet povezave"
+
+#: kernel/kernel.cpp:94
+#, kde-format
+msgctxt "@info status message after successful script execution"
+msgid "<i>Execution Finished</i>"
+msgstr "<i>Izvajanje zaključeno</i>"
+
+#: kernel/modules/console/console.xml:7
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"The global Console object allows you to print messages of different "
+"importance to a log."
+msgstr ""
+"Globalni predmet konzole vam omogoča izpis sporočil različne pomembnosti v "
+"dnevnik."
+
+#: kernel/modules/console/console.xml:17
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given message of normal severity."
+msgstr "Izpiše dano sporočilo običajne resnosti."
+
+#: kernel/modules/console/console.xml:31
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given debug message."
+msgstr "Izpiše dano razhroščevalno sporočilo."
+
+#: kernel/modules/console/console.xml:45
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given error message of high severity."
+msgstr "Izpiše dano sporočilo napake visoke resnosti."
+
+#: kernel/modules/document/document.xml:9
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"The document object provides access to all elements.\n"
+msgstr ""
+"\n"
+"Predmet dokumenta ponuja dostop do vseh predmetov.\n"
+
+#: kernel/modules/document/document.xml:19
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the node with specified ID."
+msgstr "Vrne vozlišče z navedenim ID-jem."
+
+#: kernel/modules/document/document.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of a node."
+msgstr "Določilnik vozlišča."
+
+#: kernel/modules/document/document.xml:33
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all nodes."
+msgstr "Vrne seznam vseh vozlišč."
+
+#: kernel/modules/document/document.xml:42
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list all nodes of specified type."
+msgstr "Vrne seznam vseh vozlišč navedene vrste."
+
+#: kernel/modules/document/document.xml:49
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of a node type."
+msgstr "Določilnik vrste vozlišča."
+
+#: kernel/modules/document/document.xml:56
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all edges."
+msgstr "Vrne seznam vseh povezav."
+
+#: kernel/modules/document/document.xml:65
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list all edges of specified type."
+msgstr "Vrne seznam vseh povezav navedene vrste."
+
+#: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
+#: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
+#: kernel/modules/document/node.xml:141 kernel/modules/document/node.xml:164
+#: kernel/modules/document/node.xml:187
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of an edge type."
+msgstr "Določilnik vrste povezave."
+
+#: kernel/modules/document/document.xml:79
+#, kde-format
+msgctxt "Scripting API"
+msgid "Create node at position (x,y)."
+msgstr "Ustvari vozlišče na položaju (x,y)."
+
+#: kernel/modules/document/document.xml:86
+#, kde-format
+msgctxt "Scripting API"
+msgid "X-coordinate of the node."
+msgstr "Koordinata X vozlišča."
+
+#: kernel/modules/document/document.xml:91
+#, kde-format
+msgctxt "Scripting API"
+msgid "Y-coordinate of the node."
+msgstr "Koordinata Y vozlišča."
+
+#: kernel/modules/document/document.xml:98
+#, kde-format
+msgctxt "Scripting API"
+msgid "Create edge between the given nodes of default edge type."
+msgstr "Ustvari povezavo med podanimi vozlišči s povezavo privzete vrste."
+
+#: kernel/modules/document/document.xml:105
+#, kde-format
+msgctxt "Scripting API"
+msgid "Start node of the edge."
+msgstr "Začetno vozlišče povezave."
+
+#: kernel/modules/document/document.xml:110
+#, kde-format
+msgctxt "Scripting API"
+msgid "Target node of the edge."
+msgstr "Ciljno vozlišče povezave."
+
+#: kernel/modules/document/document.xml:117
+#, kde-format
+msgctxt "Scripting API"
+msgid "Delete the given node."
+msgstr "Izbriši navedeno vozlišče."
+
+#: kernel/modules/document/document.xml:124
+#, kde-format
+msgctxt "Scripting API"
+msgid "The node to be deleted."
+msgstr "Vozlišče, ki bo izbrisano."
+
+#: kernel/modules/document/document.xml:131
+#, kde-format
+msgctxt "Scripting API"
+msgid "Delete the given edge."
+msgstr "Izbriši navedeno povezavo."
+
+#: kernel/modules/document/document.xml:138
+#, kde-format
+msgctxt "Scripting API"
+msgid "The edge to be deleted."
+msgstr "Povezava, ki bo izbrisana."
+
+#: kernel/modules/document/edge.xml:9
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"An edge is the connection of two nodes. Edges can be either directed or "
+"undirected, depending on their type.\n"
+msgstr ""
+"\n"
+"Dve vozlišči grafov sta povezani s povezavo. Povezave so lahko usmerjene ali "
+"ne, odvisno od njihove vrste.\n"
+
+#: kernel/modules/document/edge.xml:17
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the edge's type. If setting, the edge type "
+"identifier must exist."
+msgstr ""
+"Prebere in nastavi določilnik vrste povezave. Ob nastavljanju, morate "
+"navesti določilnik vrste povezave."
+
+#: kernel/modules/document/edge.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the origin node of the edge."
+msgstr "Vrne izvorno vozlišče povezave."
+
+#: kernel/modules/document/edge.xml:35
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the target node of the edge."
+msgstr "Vrne ciljno vozlišče povezave."
+
+#: kernel/modules/document/edge.xml:44
+#, kde-format
+msgctxt "Scripting API"
+msgid "Returns true if the edge's type is directed, otherwise false."
+msgstr ""
+"Vrne prav, če je vrsta povezave usmerjena, v nasprotnem primeru pa napak."
+
+#: kernel/modules/document/node.xml:11
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"A node is the data element of a graph.\n"
+"It can have arbitrary dynamic properties that are either set in the editor "
+"or simply assigned on run-time.\n"
+"Note that dynamic properties are only available after script execution, if "
+"they are registered for the node's type.\n"
+msgstr ""
+"\n"
+"Vozlišče je podatkovni predmet grafa.\n"
+"Vsebuje lahko poljubne dinamične lastnosti bodisi nastavljene v urejevalniku "
+"bodisi med delovanjem programa.\n"
+"Zapomnite si, da so dinamične lastnosti na voljo le po izvedbi skripta, če "
+"so registrirane za vrsto vozlišča.\n"
+
+#: kernel/modules/document/node.xml:19
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the unique identifier of this node."
+msgstr "Prebere in nastavi edinstven določilnik tega vozlišča."
+
+#: kernel/modules/document/node.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the x-coordinate of the node."
+msgstr "Prebere in nastavi koordinato X tega vozlišča."
+
+#: kernel/modules/document/node.xml:33
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the y-coordinate of the node."
+msgstr "Prebere in nastavi koordinato Y tega vozlišča."
+
+#: kernel/modules/document/node.xml:40
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
+"for red)."
+msgstr ""
+"Prebere in nastavi barvni niz tega vozlišča v šestnajstiški vrednosti (npr. "
+"»#ff0000« za rdečo)."
+
+#: kernel/modules/document/node.xml:47
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the node's type. If setting, the node type "
+"identifier must exist."
+msgstr ""
+"Prebere in nastavi določilnik vrste vozlišča. Ob nastavljanju, morate "
+"navesti določilnik vrste vozlišča."
+
+#: kernel/modules/document/node.xml:56
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all edges (incoming and outgoing) of this node."
+msgstr "Vrne seznam vseh povezav (dohodnih in odhodnih) tega vozlišča."
+
+#: kernel/modules/document/node.xml:65
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return a list of all edges (incoming and outgoing) of this node of a "
+"specified type."
+msgstr ""
+"Vrne seznam vseh povezav (dohodnih in odhodnih) tega vozlišča navedene vrste."
+
+#: kernel/modules/document/node.xml:79
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of incoming edges of this node."
+msgstr "Vrne seznam vseh dohodnih povezav tega vozlišča."
+
+#: kernel/modules/document/node.xml:88
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all incoming edges of this node of a specified type."
+msgstr "Vrne seznam vseh dohodnih povezav tega vozlišča navedene vrste."
+
+#: kernel/modules/document/node.xml:102
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node."
+msgstr "Vrne seznam vseh odhodnih povezav tega vozlišča."
+
+#: kernel/modules/document/node.xml:111
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node of a specified type."
+msgstr "Vrne seznam vseh odhodnih povezav tega vozlišča navedene vrste."
+
+#: kernel/modules/document/node.xml:125
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node. This method respects if edges "
+"are directed."
+msgstr ""
+"Vrne seznam vseh vozlišč povezanih na to vozlišče. Ta metoda upošteva "
+"usmerjenost povezav."
+
+#: kernel/modules/document/node.xml:134
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node via an edge of specified type. "
+"This method respects if edges are directed."
+msgstr ""
+"Vrne seznam vseh vozlišč povezanih na to vozlišče preko povezave navedene "
+"vrste. Ta metoda upošteva usmerjenost povezav."
+
+#: kernel/modules/document/node.xml:148
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list all nodes connected to this node by an incoming edge."
+msgstr "Vrne seznam vseh vozlišč povezanih na to vozlišče z dohodno povezavo."
+
+#: kernel/modules/document/node.xml:157
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return a list all nodes connected to this node by an incoming edge of "
+"specified type."
+msgstr ""
+"Vrne seznam vseh vozlišč povezanih na to vozlišče z dohodno povezavo "
+"navedene vrste."
+
+#: kernel/modules/document/node.xml:171
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return list all nodes connected to this node by an outgoing edge."
+msgstr "Vrne seznam vseh vozlišč povezanih na to vozlišče z odhodno povezavo."
+
+#: kernel/modules/document/node.xml:180
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node by an outgoing edge of "
+"specified type."
+msgstr ""
+"Vrne seznam vseh vozlišč povezanih na to vozlišče z odhodno povezavo "
+"navedene vrste."
+
+#: kernel/modules/document/node.xml:194
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return list of distances to specified targets in same order."
+msgstr ""
+"Vrne seznam razdalj do navedenih ciljev in pri tem upošteva vrstni red."
+
+#: kernel/modules/document/node.xml:201
+#, kde-format
+msgctxt "Scripting API"
+msgid "Name of edge property that holds the edge length."
+msgstr "Ime lastnosti povezave, ki vsebuje njeno dolžino."
+
+#: kernel/modules/document/node.xml:206
+#, kde-format
+msgctxt "Scripting API"
+msgid "List of nodes to that the distances shall be computed."
+msgstr "Seznam vozlišč, do katerih bo izračunana razdalja."
+
+#: models/edgemodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "Edge"
+msgstr "Povezava"
+
+#: models/edgepropertymodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "EdgeProperty"
+msgstr "LastnostPovezave"
+
+#: models/edgetypemodel.cpp:202
+#, kde-format
+msgctxt "@title:column"
+msgid "Edge Type"
+msgstr "Vrsta povezave"
+
+#: models/edgetypepropertymodel.cpp:141
+#, kde-format
+msgctxt "@title:column"
+msgid "EdgeTypeProperty"
+msgstr "LastnostVrstePovezave"
+
+#: models/nodemodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "Node"
+msgstr "Vozlišče"
+
+#: models/nodepropertymodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "NodeProperty"
+msgstr "LastnostVozlišča"
+
+#: models/nodetypemodel.cpp:200
+#, kde-format
+msgctxt "@title:column"
+msgid "Node Type"
+msgstr "Vrsta vozlišča"
+
+#: models/nodetypepropertymodel.cpp:141
+#, kde-format
+msgctxt "@title:column"
+msgid "NodeTypeProperty"
+msgstr "LastnostVrsteVozlišča"
+
+#: qml/AddEdgeAction.qml:28
+#, kde-format
+msgid "Create Edge"
+msgstr "Ustvari povezavo"
+
+#: qml/AddEdgeAction.qml:31
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Ustvari povezavo med dvema vozliščema"
+
+#: qml/AddNodeAction.qml:13
+#, kde-format
+msgid "Create Node"
+msgstr "Ustvari vozlišče"
+
+#: qml/AddNodeAction.qml:16
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Sceni dodaj vozlišče"
+
+#: qml/DeleteAction.qml:13
+#, kde-format
+msgid "Delete Element"
+msgstr "Izbriši predmet"
+
+#: qml/DeleteAction.qml:16
+#, kde-format
+msgid "Delete element from scene"
+msgstr "Izbriši predmet s scene"
+
+#: qml/SelectMoveAction.qml:14
+#, kde-format
+msgid "Select & Move"
+msgstr "Izberi in premakni"
+
+#: qml/SelectMoveAction.qml:17
+#, kde-format
+msgid "Select and move elements on the scene"
+msgstr "Izberi in premakni predmete na sceni"
+
+#~ msgid "Identifier"
+#~ msgstr "Določilnik"
+
+#~ msgid "Color"
+#~ msgstr "Barva"
+
+#~ msgid "unidirectional"
+#~ msgstr "enosmerni"
+
+#~ msgid "bidirectional"
+#~ msgstr "dvosmerni"
+
+#~ msgid "All Connection Types"
+#~ msgstr "Vse vrste povezav"
+
+#~ msgid "Could not set data type for node %1: data type does not exist."
+#~ msgstr ""
+#~ "Ni bilo mogoče nastaviti vrste podatkov za vozlišče %1: vrsta podatkov ne "
+#~ "obstaja"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "An abstract data element is a unit of information that belongs to an "
+#~ "abstract data structure and possibly is connected to other data elements "
+#~ "by pointers.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Abstraktni podatkovni predmet je enota podatkov, ki spada v abstraktno "
+#~ "podatkovno strukturo in je z drugimi podatkovnimi predmeti povezan s "
+#~ "kazalci.\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "\n"
+#~ msgstr "\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The size of this data element."
+#~ msgstr "Velikost tega podatkovnega predmeta."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The color of this data element stated as hexadecimal value."
+#~ msgstr "Barva tega podatkovnega predmeta v šestnajstiški obliki."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "An abstract data structure defines a set of data elements and possible "
+#~ "connections between them.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Abstraktna podatkovna struktura določa nabor podatkovnih predmetov in vse "
+#~ "povezave med njimi.\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The unique name of this data structure."
+#~ msgstr "Edinstveno ime te podatkovne strukture."
+
+#~ msgid "The method \"%1\" is deprecated, please use \"%2\" instead."
+#~ msgstr "Metoda \"%1\" je opuščena, namesto nje uporabite \"%2\"."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A node is the data element of a graph.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Vozlišče je podatkovni predmet grafa.\n"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "Struktura grafa"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "y"
+
+#~ msgid "Size"
+#~ msgstr "Velikost"
+
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "Večkratni graf"
+
+#~ msgid "Cannot create edge: nodes are not defined."
+#~ msgstr "Ni mogoče ustvariti povezave, saj ni določenih vozlišč."
+
+#~ msgid "Cannot create edge: pointer type %1 not defined"
+#~ msgstr "Ni mogoče ustvariti povezave, saj ni vrsta kazalca %1 ni določena"
+
+#~ msgid "The global method \"%1\" is deprecated, please use \"%2\" instead."
+#~ msgstr "Splošna metoda \"%1\" je opuščena, namesto nje uporabite \"%2\"."
+
+#~ msgid ""
+#~ "This action will probably remove some edges. Do you want to continue?"
+#~ msgstr ""
+#~ "To dejanje bo najbrž odstranilo nekaj povezav. Ali želite nadaljevati?"
+
+#~ msgid "Could not add back-edge (%1->%2) to undirected graph."
+#~ msgstr ""
+#~ "Ni bilo mogoče dodati povratne-povezave (%1->%2) na neusmerjen graf."
+
+#~ msgid "Could not add existing edge (%1->%2): this graph is no multigraph."
+#~ msgstr ""
+#~ "Ni bilo mogoče dodati obstoječe povezave (%1->%2): ta graf ni večkratni "
+#~ "graf."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A graph objects holds the information of a data structure of type \"Graph"
+#~ "\".\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Predmet grafa vsebuje podatke podatkovne strukture vrste \"Graf\".\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Create a new node of the specified type and return the created node. If "
+#~ "the type is not registered, no node is created."
+#~ msgstr ""
+#~ "Ustvari novo vozlišče navedene vrste in ga vrne. Če vrsta ni vpisana, "
+#~ "vozlišče ni ustvarjeno."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Create a new node of default type and return the created node."
+#~ msgstr "Ustvari novo vozlišče privzete vrste in ga vrne."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Create an edge from node \"from\" to node \"to\" of the specified type "
+#~ "and return the created edge. If the type is not registered, no edge is "
+#~ "created."
+#~ msgstr ""
+#~ "Ustvari povezavo med vozlišči \"od\" in \"do\" navedene vrste in jo vrne. "
+#~ "Če vrsta ni vpisana, povezava ni ustvarjena."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Create an edge from node \"from\" to node \"to\" of default type and "
+#~ "return the created edge."
+#~ msgstr ""
+#~ "Ustvari povezavo med vozlišči \"od\" in \"do\" privzete vrste in jo vrne."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Returns an array of shortest path lengths from this node to every other "
+#~ "node in the graph."
+#~ msgstr ""
+#~ "Vrne polje najkrajših dolžin poti od tega vozlišča do kateregakoli "
+#~ "drugega vozlišča v grafu."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A node is the data element of a linked list.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Vozlišče je podatkovni predmet povezanega seznama.\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Set pointer of this list node to the target node."
+#~ msgstr "Nastavi kazalec tega vozlišča na seznamu na ciljno vozlišče."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Linked List Structure"
+#~ msgstr "Struktura povezanega seznama"
+
+#~ msgid "Front value"
+#~ msgstr "Prednja vrednost"
+
+#~ msgid "Data '%1' has more than one out pointer."
+#~ msgstr "Podatki '%1' imajo več kot en kazalec ven."
+
+#~ msgid "Cannot convert document '%1'"
+#~ msgstr "Ni mogoče pretvoriti dokumenta '%1'"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A list objects holds the information of a data structure of type \"Linked "
+#~ "List\".\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Seznam predmetov vsebuje podatke podatkovne strukture vrste \"Povezani "
+#~ "seznam\".\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Set the head of the list."
+#~ msgstr "Nastavi glavo seznama."
+
+#~ msgctxt "@option:check"
+#~ msgid "Show all pointers"
+#~ msgstr "Pokaži vse kazalce"
+
+#~ msgid "There are cycles at node %1. Data will be lost by conversion."
+#~ msgstr ""
+#~ "V vozlišču %1 obstajajo krožne povezave. Ob pretvorbi bodo podatki "
+#~ "izgubljeni."
+
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "Dokument"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Console is not a constructor. All properties and methods of Console can "
+#~ "be called by using Console as an object, without creating it."
+#~ msgstr ""
+#~ "Konzola ni izgrajevalnik. Vse lastnosti in metode konzole lahko "
+#~ "prikličete z uporabo konzole kot predmeta, brez da bi jo ustvarili."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Console.log(\"This is a program message.\"); // print a program message\n"
+#~ "Console.debug(\"A debug message.\"); // print a debug message"
+#~ msgstr ""
+#~ "Console.log(\"To je sporočilo programa.\"); // izpiše sporočilo programa\n"
+#~ "Console.debug(\"Razhroščevalno sporočilo.\"); // izpiše razhroščevalno "
+#~ "sporočilo"
+
+#~ msgid "Group"
+#~ msgstr "Skupina"
+
+#~ msgid "Cannot open file %1."
+#~ msgstr "Ni mogoče odpreti datoteke %1."
+
+#~ msgid "Invalid include directive: %1. Cannot find file in directive."
+#~ msgstr ""
+#~ "Neveljavna direktiva vključitve: %1. Ni mogoče najti datoteke v direktivi."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graphviz Graph File Backend"
+#~ msgstr "Zaledje datotek z grafom Graphviz"
+
+#~ msgid "Read and write Graphviz graph files."
+#~ msgstr "Branje in pisanje dokumentov grafov Graphviz."
+
+#~ msgid "Import"
+#~ msgstr "Uvozi"
+
+#~ msgid "No active graph in this document."
+#~ msgstr "V tem dokumentu ni dejavnega grafa."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "GML File Backend"
+#~ msgstr "Zaledje datotek GML"
+
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "Branje in pisanje datotek grafov Graph Markup Language (GML)."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "KML File Backend"
+#~ msgstr "Zaledje datotek KML"
+
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "Branje in pisanje datotek grafov Keyhole Markup Language (KML)."
+
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "*.kml|Datoteke Keyhole Markup Language"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "Ni mogoče odpreti datoteke %1: %2"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "TGF File Backend"
+#~ msgstr "Zaledje datotek TGF"
+
+#~ msgid "Read and write Trivial Graph Format (TGF) files."
+#~ msgstr "Branje in pisanje datotek Trivial Graph Format (TGF)."
+
+#~ msgid "No data structure specified for output in this document."
+#~ msgstr ""
+#~ "V tem dokumentu ni bilo navedene nobene podatkovne strukture za izpis."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "PGF/TikZ Export File Backend"
+#~ msgstr "Zaledje za izvoz PGF/TikZ"
+
+#~ msgid "Export graph documents in PGF/TikZ format."
+#~ msgstr "Izvozite dokumente grafov v datoteko PGF/TikZ."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr "Zaledje datotek z grafom Rocs"
+
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "Branje in pisanje dokumentov grafov Rocs"
+
+#~ msgid "Could not set pointer type: pointer type does not exist."
+#~ msgstr "Ni bilo mogoče nastaviti vrste kazalca: vrsta kazalca ne obstaja."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "A pointer connects two data elements and can itself hold information by "
+#~ "its properties."
+#~ msgstr ""
+#~ "Kazalec povezuje dva podatkovna predmeta in lahko vsebuje podatke v "
+#~ "njegovih lastnostih."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Start of the connection."
+#~ msgstr "Začetek povezave."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "End of the connection"
+#~ msgstr "Konec povezave."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "If true, the connection is directed. Otherwise is connection is "
+#~ "undirected."
+#~ msgstr ""
+#~ "Če je izbrano, je povezava usmerjena. V nasprotnem primeru ni usmerjena."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "ID of the connection type."
+#~ msgstr "Določilnik vrste povezave."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The width of the connection."
+#~ msgstr "Širina povezave."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Remove this connection."
+#~ msgstr "Odstrani to povezavo."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Remove an existing property from the connection."
+#~ msgstr "Odstrani obstoječo lastnost iz povezave."
+
+#~ msgid "Rocs Console script"
+#~ msgstr "Konzolni skript Rocs"
+
+#~ msgid "Script Error: %1"
+#~ msgstr "Napaka skripta: %1"
+
+#~ msgid "Script error in included file %1"
+#~ msgstr "Napaka skripta v vključeni datoteki %1"

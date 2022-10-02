@@ -1,0 +1,830 @@
+# translation of rocs.po to Slovak
+# Richard Fric <Richard.Fric@kdemail.net>, 2009.
+# Roman Paholík <wizzardsk@gmail.com>, 2012, 2013, 2014, 2015, 2016, 2017, 2022.
+# Matej Mrenica <matejm98mthw@gmail.com>, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: rocs\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2022-04-07 18:26+0200\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 21.12.3\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Roman Paholík"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "wizzardsk@gmail.com"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, kde-format
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "Simulátor teórie grafov"
+
+#: main.cpp:32
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr "(c) 2008-2016 Vývojári Rocs"
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr "Správca"
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr "Pôvodný autor"
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "Vývojár"
+
+#: main.cpp:57
+#, kde-format
+msgid "Project to open."
+msgstr "Projekt na otvorenie."
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "Syntax"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "Vlastnosti"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "Parametre"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "Parameter"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "Metódy"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "Typ"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr "Návratový typ"
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr "Podrobný popis"
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "Popis"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "Script Engine API"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, kde-format
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "Dokument grafu"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "Objekty"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "Moduly skriptového enginu"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr "Objekty skriptu"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "Vlastnosti"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "Metódy"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "Skriptovacie API Rocs"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+"Projekt Rocs sa nepodarilo importovať, pretože súbor projektu sa nedal "
+"analyzovať."
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Zobraziť vedľa ikony text"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Cesta, kde správca rozšírení hľadá rozšírenia."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Projekt"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Dokument skriptu"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Dokument grafu"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Súbor grafu"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Upraviť vybrané údaje"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Usporiadanie"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Nástroje"
+
+#: ui/codeeditorwidget.cpp:81
+#, kde-format
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "Názov dokumentu kódu"
+
+#: ui/codeeditorwidget.cpp:82
+#, kde-format
+msgid "Enter the name of your code document"
+msgstr "Zadajte názov pre váš dokument kódu"
+
+#: ui/documenttypeswidget.cpp:29
+#, kde-format
+msgctxt "@title"
+msgid "Node Types"
+msgstr "Typy uzlov"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, kde-format
+msgid "Create Type"
+msgstr "Vytvoriť typ"
+
+#: ui/documenttypeswidget.cpp:45
+#, kde-format
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "Typy okrajov"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr "bez mena"
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr "Smer okrajov typu okraja."
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr "Jedinečné ID typu okraja."
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "Exportovať"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+"<p>Súbor <br /><strong>'%1'</strong><br /> už existuje; ak ho nechcete "
+"prepísať, použite iný názov súboru.</p>"
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "Súbor existuje"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+"<p>Nemôžem preložiť koncovku súboru<strong>'%1'</strong> do dostupného "
+"backendu súboru. Prerušujem export.</p>"
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr "<p>Chyba počas zápisu súboru: <strong>'%1'</strong></p>"
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|Všetky súbory"
+
+#: ui/fileformatdialog.cpp:116
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "Importovať súbor grafu do projektu"
+
+#: ui/grapheditorwidget.cpp:79
+#, kde-format
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "Názov dokumentu grafu"
+
+#: ui/grapheditorwidget.cpp:80
+#, kde-format
+msgid "Enter the name of your graph document"
+msgstr "Zadajte názov pre váš dokument grafu"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Denník projektu"
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "Spustiť"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr "Spustiť aktuálne aktívny skript na aktívnom dokumente grafu."
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "Zastaviť"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr "Zastaviť beh skriptu."
+
+#: ui/mainwindow.cpp:175
+#, kde-format
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "Debugger"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr "Otvoriť debugger Javascript kódu."
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr "Typy prvkov"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "Denník"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "Skriptovacie API"
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "Nový projekt"
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "Uloženie projektu"
+
+#: ui/mainwindow.cpp:269
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "Otvoriť projekt..."
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "Nedávne projekty"
+
+#: ui/mainwindow.cpp:282
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "Uložiť projekt ako..."
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "Nový dokument grafu"
+
+#: ui/mainwindow.cpp:284
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "Nový súbor skriptu..."
+
+#: ui/mainwindow.cpp:285
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "Importovať graf..."
+
+#: ui/mainwindow.cpp:286
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "Exportovať graf ako..."
+
+#: ui/mainwindow.cpp:287
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "Importovať skript..."
+
+#: ui/mainwindow.cpp:288
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "Exportovať skript..."
+
+#: ui/mainwindow.cpp:327
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "Importovať skript do projektu"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "Exportovať skript"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgid "JavaScript (*.js)"
+msgstr "JavaScript (*.js)"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "nepomenované"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "Uložiť projekt ako"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr "Rocs projekty (*.rocs)"
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+"Súbor s názvom \"%1\" už existuje. Ste si istý, že si ho prajete prepísať?"
+
+#: ui/mainwindow.cpp:385
+#, kde-format
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "Prepísať súbor?"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "Súbory Open Project"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr "Rocs projekty (*.rocs)"
+
+#: ui/mainwindow.cpp:433
+#, kde-format
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "[ nepomenované ]%1"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr "Názov skriptu"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr "Zadajte názov pre váš nový skript"
+
+#: ui/mainwindow.cpp:471
+#, kde-format
+msgid "File already exists."
+msgstr "Súbor už existuje."
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr "Zmeny na vašom projekte sú neuložené. Chcete uložiť vaše zmeny?"
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr "Jedinečné ID typu uzla."
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, kde-format
+msgid "Script output:"
+msgstr "Výstup skriptu:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Vyčistiť výstup programu s každým spustením."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Zobraziť ladiaci výstup."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Vyčistiť výstup."
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "Bočný panel nástrojov"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr "Prepnúť pohľad '%1'."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Uložiť projekt ako"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Overwrite"
+#~ msgstr "Prepísať"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Hlavný panel nástrojov"
+
+#~ msgid "Align Toolbar"
+#~ msgstr "Zarovnať panel nástrojov"
+
+#~ msgid "Rocs Handbook"
+#~ msgstr "Príručka Rocs"
+
+#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+#~ msgstr "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "Príručka"
+
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "Dátových štruktúry"
+
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs - analýza dátových štruktúr"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr ""
+#~ "Nenájdené žiadne zásuvné moduly dátovej štruktúry na vašom systéme. "
+#~ "Ukončenie."
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Rocs potrebuje aspoň jeden zásuvný modul dátovej štruktúry pre "
+#~ "pokračovať.\n"
+#~ "Skúste spustiť kbuildsycoca4 z konzoly a potom spustite Rocs znova."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr "Pozícia, kde sa ukáže názov a hodnota uzla."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Pozícia, kde sa ukáže názov a hodnota hrany."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr "Určuje, či sa ukáže tlačidlo vykonávania pre ladiace vykonávanie."
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr "Určuje, či sa ukáže tlačidlo vykonávania pre krokované vykonávanie."
+
+#~ msgid "Script File"
+#~ msgstr "Skriptový súbor"
+
+#~ msgid "Convert To"
+#~ msgstr "Previesť do"
+
+#~ msgid "Settings"
+#~ msgstr "Nastavenia"
+
+#~ msgid "Help"
+#~ msgstr "Pomocník"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "Nepodarilo sa nájsť textový editor KDE, \n"
+#~ "prosím, skontrolujte si vašu inštaláciu"
+
+#~ msgid "Display of Element Properties"
+#~ msgstr "Zobrazenie vlastností prvku"
+
+#~ msgid "Data Properties"
+#~ msgstr "Vlastnosti dát"
+
+#~ msgid "centered"
+#~ msgstr "vycentrované"
+
+#~ msgid "below"
+#~ msgstr "pod"
+
+#~ msgid "above"
+#~ msgstr "nad"
+
+#~ msgid "Connection Properties"
+#~ msgstr "Vlastnosti pripojenia"
+
+#~ msgid "Execution Controls"
+#~ msgstr "Ovládanie vykonávania"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Ukázať ladiace vykonávanie"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Ukázať jeden krok vykonávania"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Vlastnosti"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Nastaviť viditeľnosť ukazovateľov"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Exportovať grafy do súboru"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "Načítané pluginy"
+
+#~ msgid "Graph File Plugins loaded for %1"
+#~ msgstr "Zásuvný modul súboru grafu načítaný pre %1"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|Súbory skriptu"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Súboru skriptov Rocs"
+
+#~ msgid "Add your description here."
+#~ msgstr "Sem pridajte váš popis."
+
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "Jeden krok"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Ladiace spustenie"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "Prerušiť na prvok riadku"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Stiahnuť príklady"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Nahrať projekt"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Možné rozšírenia"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "Načítané pluginy"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Code Editor..."
+#~ msgstr "Nastaviť editor kódu..."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Správca rozšírení"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Štandardné nastavenia"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Pridať existujúci skript do projektu"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "Toto nevyzerá ako súbor grafu."
+
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Neplatný súbor"
+
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs|Súbory projktov Rocs\n"
+#~ "*.rocsz|Skomprimované súbory projektov Rocs\n"
+#~ "*|Všetky súbory"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Uloženie projektu"
+
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*rocs *.rocsz|Všetky Rocs súbory\n"
+#~ "*.rocs|Súbory projektov Rocs\n"
+#~ "*.rocsz|Skomprimované súbory projektov Rocs\n"
+#~ "*|Všetky súbory"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Grafické documenty Rocs\n"
+#~ "*|všetky súbory"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Uložiť dokument graf"
+
+#~ msgid "Graph name"
+#~ msgstr "Názov grafu"
+
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Zadajte názov grafu"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Možné rozšírenia pre Script Engine"

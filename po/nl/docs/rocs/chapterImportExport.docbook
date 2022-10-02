@@ -1,0 +1,133 @@
+<chapter id="import-export">
+<title
+>Import en export</title>
+<sect1 id="import-export-projects">
+    <title
+>&rocs;-projecten uitwisselen</title>
+    <para
+>&rocs; projecten kunnen worden geïmporteerd en geëxporteerd als archiefbestanden (<literal
+>.tar.gz</literal
+>-bestanden). Deze archieven kunnen worden gebruikt om projecten uit te wisselen met anderen. Importeren en  exporteren doet u met <menuchoice
+><guimenu
+>Graafdocument</guimenu
+> <guimenuitem
+>Graaf importeren</guimenuitem
+></menuchoice
+> en <menuchoice
+><guimenu
+>Graafdocument</guimenu
+> <guimenuitem
+>Graaf exporteren</guimenuitem
+></menuchoice
+>. </para>
+</sect1>
+
+<sect1 id="import-export-graphs">
+    <title
+>Import en export van graafdocumenten</title>
+    <para
+>Import en export naar de volgende formaten worden door &rocs; ondersteund: </para>
+    <itemizedlist>
+        <listitem
+><para
+>DOT-bestanden, ook wel bekend als Graphviz-bestanden.</para
+></listitem>
+        <listitem
+><para
+>GML-bestanden</para
+></listitem>
+        <listitem
+><para
+>Trivial Graph Format bestanden</para
+></listitem>
+        <listitem
+><para
+>Keyhole Markup Language Formaat</para
+></listitem>
+    </itemizedlist>
+
+<sect2 id="format-specification-tgf">
+<title
+>Trivial Graph bestandsformaat</title>
+<para
+><emphasis
+>Trivial Graph Format</emphasis
+> (TGF) is een formaat waarin een grafiek in een eenvoudig tekstbestand wordt beschreven. Een TGF-bestand bevat een lijst van knoopdefinities, waarin knoop-ID's worden gekoppeld aan namen, gevolgd door een lijst van de kanten. In dit formaat is slechts één naam mogelijk per knoop, en één waarde per kant. &rocs; beschouwt geïmporteerde grafen als niet gericht. Geëxporteerde grafen bevatten twee kanten voor elke bidirectionele verbinding (naar beide richtingen). </para>
+
+<sect3>
+<title
+>Formaatbeschrijving</title>
+    <itemizedlist>
+        <listitem
+><para
+>Het bestand begint met een lijst van knopen (op elke regel een knoop), gevolgd door een regel met als enige karakter een '#', gevolgd door een lijst van kanten (op elke regel een kant).</para
+></listitem>
+        <listitem
+><para
+>Een knoop wordt beschreven met een geheel getal (als identificatie), gevolgd door een spatie, gevolgd door een willekeurige tekenreeks.</para
+></listitem>
+        <listitem
+><para
+>Een kant wordt beschreven door twee gehele getallen (die de verbonden knopen identificeren), gescheiden door een spatie, gevolgd door een spatie, gevolgd door een willekeurige tekenreeks. Aangenomen wordt dat de gerichte kant wijst van de eerste naar de tweede geïdentificeerde knoop.</para
+></listitem>
+    </itemizedlist>
+</sect3>
+<sect3>
+<title
+>Voorbeeld</title>
+<programlisting
+>1 beginknoop
+2 zender
+3 aarde
+#
+1 2 blauw
+2 1 rood
+2 3 groen
+</programlisting>
+</sect3>
+</sect2>
+
+<sect2 id="format-specification-dot">
+<title
+>DOT Language / Graphviz Graph bestandsformaat</title>
+<para
+>De DOT language is een taal voor het beschrijven van een graaf in klare tekst, waarin een goede voor mensen leesbare beschrijving wordt gegeven van grafen, die ook geschikt is voor het efficiënt verwerken door programma's voor het weergeven van grafen. DOT is het standaard bestandsformaat voor de Graphviz programma's voor het visualiseren van grafen, maar wordt ook algemeen in andere graafprogramma's gebruikt. De gebruikelijke extensies voor DOT zijn <emphasis
+>.gv</emphasis
+> en <emphasis
+>.dot</emphasis
+>. </para>
+
+<sect3>
+<title
+>Niet ondersteunde eigenschappen</title>
+<para
+>&rocs; kan elk graafbestand lezen van een graaf die met DOT is beschreven <footnote
+><para
+>http://www.graphviz.org/content/dot-language</para
+></footnote
+>. De ondersteuning van deze taal is volledig, ondanks de volgende uitzonderingen: </para>
+    <itemizedlist>
+        <listitem
+><para
+>subgraaf: Omdat in &rocs; het begrip subgraaf niet bestaat, worden subgrafen slechts geïmporteerd als verzamelingen van gegevenselementen en verbindingen. In het bijzonder worden verbindingen naar en van subgrafen niet geïmporteerd.</para
+></listitem>
+        <listitem
+><para
+>&HTML; en &XML; attributen: Attributen (zoals teksten) die &HTML; of &XML; bevatten worden onveranderd gelezen. In het bijzonder worden aanpassingen van lettertypen en stijlen van deze attributen niet gelezen.</para
+></listitem>
+    </itemizedlist>
+</sect3>
+<sect3>
+<title
+>Voorbeeld</title>
+<programlisting
+>digraph mijnGraaf {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect3>
+</sect2>
+
+</sect1>
+</chapter>

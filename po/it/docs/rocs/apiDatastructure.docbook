@@ -1,0 +1,225 @@
+<sect1 id="scripting-data-structure">
+<title
+>API di scripting per ogni struttura di dati</title>
+<sect2>
+<title
+>La struttura di dati astratta</title>
+<para
+>La struttura di dati astratta definisce un insieme di elementi di dati e le possibili connessioni tra loro: questo è il prototipo di ogni altra struttura di dati. Le strutture di dati sono identificate dal loro nome. Supposto sia stata creata una struttura di dati dal nome <literal
+>provagrafo</literal
+>, puoi accedervi semplicemente scrivendone l'identificativo. Per esempio, per avere un elenco di tutti gli elementi nella struttura data, puoi scrivere <userinput
+>provagrafo.list_nodes();</userinput
+> nello script. </para>
+
+<sect3>
+<title
+>Proprietà</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>name</emphasis
+>: </para>
+        <para
+>Il nome univoco di questa struttura di dati.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Dati astratti</title>
+<para
+>Un elemento di dati astratto è un'unità di informazione che appartiene a una struttura di dati astratta e può essere connesso ad altri elementi di dati da puntatori. </para>
+
+<sect3>
+<title
+>Proprietà</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>width</emphasis
+>: </para>
+        <para
+>La dimensione di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>x</emphasis
+>: </para>
+        <para
+>La coordinata X di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>y</emphasis
+>: </para>
+        <para
+>La coordinata Y di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>id</emphasis
+>: </para>
+        <para
+>L'identificativo univoco di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+>: </para>
+        <para
+>Il colore di questo elemento di dati, indicato come valore esadecimale.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+</sect2>
+
+
+<sect2>
+<title
+>Puntatore astratto</title>
+<para
+>Un puntatore collega due elementi di dati e può contenere informazioni nelle sue proprietà. </para>
+<sect3>
+<title
+>Proprietà</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>width</emphasis
+>: </para>
+        <para
+>Lo spessore della connessione.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>directed</emphasis
+>: </para>
+        <para
+>Se vero, la connessione è direzionale, altrimenti non lo è.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>from</emphasis
+>: </para>
+        <para
+>Inizio della connessione.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>to</emphasis
+>: </para>
+        <para
+>Fine della connessione.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+>: </para>
+        <para
+>Identificativo del tipo di connessione.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Metodi</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>remove()</term>
+    <listitem>
+        <para
+>Rimuovi questa connessione.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>add_property(nome, valore)</term>
+    <listitem>
+        <para
+>Aggiungi una nuova proprietà alla connessione.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>add_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>nome</replaceable
+></parameter
+></paramdef
+> <paramdef
+>string <parameter
+><replaceable
+>valore</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>remove_property(nome)</term>
+    <listitem>
+        <para
+>Rimuovi una proprietà presente dalla connessione.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>nome</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+
+</sect2>
+</sect1>

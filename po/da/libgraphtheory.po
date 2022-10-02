@@ -1,0 +1,3287 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Martin Schlander <mschlander@opensuse.org>, 2010, 2011, 2013, 2014, 2015.
+# Claus Christensen <claus_chr@webspeed.dk>, 2012, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2015-12-08 19:58+0100\n"
+"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"Language-Team: Danish <kde-i18n-doc@kde.org>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Martin Schlander,Claus Christensen"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "mschlander@opensuse.org,claus_chr@webspeed.dk"
+
+#: dialogs/edgeproperties.cpp:25
+#, kde-format
+msgctxt "@title:window"
+msgid "Edge Properties"
+msgstr "Kantegenskaber"
+
+#: dialogs/edgeproperties.cpp:80 dialogs/nodeproperties.cpp:86
+#, kde-format
+msgid "Name"
+msgstr "Navn"
+
+#: dialogs/edgeproperties.cpp:81 dialogs/nodeproperties.cpp:87
+#, kde-format
+msgid "Value"
+msgstr "Værdi"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
+#: dialogs/edgeproperties.ui:26
+#, kde-format
+msgid "Edge Properties"
+msgstr "Kantegenskaber"
+
+#. i18n: ectx: property (text), widget (QLabel, labelType)
+#: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
+#, kde-format
+msgid "Type:"
+msgstr "Type:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
+#: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
+#, kde-format
+msgid "Dynamic Properties"
+msgstr "Dynamiske egenskaber"
+
+#: dialogs/edgetypeproperties.cpp:37
+#, kde-format
+msgid "Edges"
+msgstr "Kanter"
+
+#: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
+#, fuzzy, kde-format
+#| msgid "Property Names"
+msgid "Property names"
+msgstr "Egenskabsnavne"
+
+#: dialogs/edgetypeproperties.cpp:43
+#, fuzzy, kde-format
+#| msgid "Edge Properties"
+msgctxt "@title:window"
+msgid "Edge Type Properties"
+msgstr "Kantegenskaber"
+
+#: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
+#, kde-format
+msgid "Name:"
+msgstr "Navn:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelId)
+#. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
+#: dialogs/edgetypeproperties.cpp:49 dialogs/nodeproperties.ui:119
+#: dialogs/nodetypeproperties.cpp:49
+#: editorplugins/generategraph/generategraphwidget.ui:129
+#, fuzzy, kde-format
+#| msgid "Identifier:"
+msgid "Identifier:"
+msgstr "Identifikator:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelColor)
+#: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
+#: dialogs/nodetypeproperties.cpp:52
+#, kde-format
+msgid "Color:"
+msgstr "Farve:"
+
+#: dialogs/edgetypeproperties.cpp:52 graphdocument.cpp:120
+#, fuzzy, kde-format
+#| msgid "Connection"
+msgid "Unidirectional"
+msgstr "Forbindelse"
+
+#: dialogs/edgetypeproperties.cpp:53 graphdocument.cpp:125
+#, fuzzy, kde-format
+#| msgid "Connection"
+msgid "Bidirectional"
+msgstr "Forbindelse"
+
+#: dialogs/edgetypeproperties.cpp:54
+#, fuzzy, kde-format
+#| msgid "Direction"
+msgid "Direction:"
+msgstr "Retning"
+
+#: dialogs/edgetypeproperties.cpp:61 dialogs/nodetypeproperties.cpp:59
+#, fuzzy, kde-format
+#| msgid "Visibility"
+msgid "Visibility:"
+msgstr "Synlighed"
+
+#: dialogs/edgetypeproperties.cpp:137
+#, fuzzy, kde-format
+#| msgid "Select Pointer Type:"
+msgctxt "@info:tooltip"
+msgid "The selected ID for this edge type."
+msgstr "Vælg pointertype:"
+
+#: dialogs/edgetypeproperties.cpp:141
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another edge type, please select a "
+"different one."
+msgstr ""
+
+#: dialogs/nodeproperties.cpp:26
+#, kde-format
+msgctxt "@title:window"
+msgid "Node Properties"
+msgstr "Knudens egenskaber"
+
+#: dialogs/nodeproperties.cpp:133
+#, fuzzy, kde-format
+#| msgid "Select Pointer Type:"
+msgctxt "@info:tooltip"
+msgid "The selected ID for this node."
+msgstr "Vælg pointertype:"
+
+#: dialogs/nodeproperties.cpp:137
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another node, please select a different "
+"one."
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
+#: dialogs/nodeproperties.ui:26
+#, kde-format
+msgid "Node Properties"
+msgstr "Knudens egenskaber"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
+#. i18n: ectx: property (toolTip), widget (KColorCombo, color)
+#: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
+#, kde-format
+msgid "Node color"
+msgstr "Knudens farve"
+
+#: dialogs/nodetypeproperties.cpp:35
+#, kde-format
+msgid "Nodes"
+msgstr "Knuder"
+
+#: dialogs/nodetypeproperties.cpp:41
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@title:window"
+msgid "Node Type Properties"
+msgstr "Knudens egenskaber"
+
+#: dialogs/nodetypeproperties.cpp:133
+#, fuzzy, kde-format
+#| msgid "Select Pointer Type:"
+msgctxt "@info:tooltip"
+msgid "The selected ID for this node type."
+msgstr "Vælg pointertype:"
+
+#: dialogs/nodetypeproperties.cpp:137
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another node type, please select a "
+"different one."
+msgstr ""
+
+#: dialogs/propertieswidget.cpp:33
+#, kde-format
+msgid "Add Property"
+msgstr "Tilføj egenskab"
+
+#: dialogs/propertydelegate.cpp:49
+#, kde-format
+msgid "Delete this property."
+msgstr ""
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:33
+#, fuzzy, kde-format
+#| msgid "Assign Values"
+msgctxt "@title:window"
+msgid "Assign Values"
+msgstr "Tildel værdier"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:52
+#, fuzzy, kde-format
+#| msgid "Data Types"
+msgid "All Data Types"
+msgstr "Datatyper"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:57
+#, fuzzy, kde-format
+#| msgid "Edge style"
+msgid "All Edge Types"
+msgstr "Kantstil"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:81
+#, fuzzy, kde-format
+#| msgid "Pointer Properties"
+msgid "Enter Property Name"
+msgstr "Pointeregenskaber"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
+#: editorplugins/assignvalues/assignvalueswidget.ui:32
+#, kde-format
+msgid "Assign Values"
+msgstr "Tildel værdier"
+
+#. i18n: ectx: property (text), widget (QLabel, property_choice_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:40
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Choose Properties"
+msgstr "Knudens egenskaber"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/assignvalues/assignvalueswidget.ui:59
+#, fuzzy, kde-format
+#| msgid "Show values of pointers"
+msgid "Show advanced options."
+msgstr "Vis pointeres værdier"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: editorplugins/assignvalues/assignvalueswidget.ui:74
+#, kde-format
+msgid "Assignment Method"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:81
+#, kde-format
+msgid "Enumerate Items"
+msgstr "Optæl elementer"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:86
+#, fuzzy, kde-format
+#| msgid "Enumerate"
+msgid "Enumerate Alpha"
+msgstr "Optæl"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:91
+#, kde-format
+msgid "Enumerate Alpha-Numeric"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:96
+#, kde-format
+msgid "Assign Random Integers"
+msgstr "Tildel tilfældige hele tal"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:101
+#, kde-format
+msgid "Assign Random Reals"
+msgstr "Tildel tilfældige reelle tal"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:106
+#, fuzzy, kde-format
+#| msgid "Assign Values"
+msgid "Assign Constant Value"
+msgstr "Tildel værdier"
+
+#. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
+#: editorplugins/assignvalues/assignvalueswidget.ui:132
+#, fuzzy, kde-format
+#| msgid "Start ID"
+msgid "Start ID:"
+msgstr "Start-id"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:167
+#, kde-format
+msgid "Initial string"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:174
+#, kde-format
+msgid "a"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
+#: editorplugins/assignvalues/assignvalueswidget.ui:192
+#, kde-format
+msgid "Start ID"
+msgstr "Start-id"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
+#: editorplugins/assignvalues/assignvalueswidget.ui:209
+#, kde-format
+msgid "Prefix"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: editorplugins/assignvalues/assignvalueswidget.ui:230
+#: editorplugins/assignvalues/assignvalueswidget.ui:298
+#, kde-format
+msgid "Lower Limit"
+msgstr "Nedre grænse"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: editorplugins/assignvalues/assignvalueswidget.ui:250
+#: editorplugins/assignvalues/assignvalueswidget.ui:305
+#, kde-format
+msgid "Upper Limit"
+msgstr "Øvre grænse"
+
+#. i18n: ectx: property (text), widget (QLabel, label_dagGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: editorplugins/assignvalues/assignvalueswidget.ui:257
+#: editorplugins/assignvalues/assignvalueswidget.ui:312
+#: editorplugins/generategraph/generategraphwidget.ui:483
+#, kde-format
+msgid "Generator Seed"
+msgstr "Startværdi for generator"
+
+#. i18n: ectx: property (text), widget (QLabel, constant_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:372
+#, kde-format
+msgid "Constant"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:400
+#, kde-format
+msgid "Overwrite existing values"
+msgstr "Overskriv eksisterende værdier"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
+#. i18n: ectx: property (text), widget (QLabel, labelData)
+#: editorplugins/assignvalues/assignvalueswidget.ui:434
+#: editorplugins/generategraph/generategraphwidget.ui:252
+#: editorplugins/generategraph/generategraphwidget.ui:404
+#, kde-format
+msgid "Nodes:"
+msgstr "Knuder:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelProperty)
+#: editorplugins/assignvalues/assignvalueswidget.ui:447
+#, fuzzy, kde-format
+#| msgid "Property"
+msgid "Property name:"
+msgstr "Egenskab"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
+#. i18n: ectx: property (text), widget (QLabel, labelConnection)
+#: editorplugins/assignvalues/assignvalueswidget.ui:460
+#: editorplugins/generategraph/generategraphwidget.ui:272
+#, kde-format
+msgid "Edges:"
+msgstr "Kanter:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
+#: editorplugins/assignvalues/assignvalueswidget.ui:482
+#, kde-format
+msgid "Assign values to selected edges."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
+#: editorplugins/assignvalues/assignvalueswidget.ui:509
+#, kde-format
+msgid "Assign values to selected nodes."
+msgstr ""
+
+#: editorplugins/generategraph/generategraphwidget.cpp:79
+#, fuzzy, kde-format
+#| msgid "Generate Graph"
+msgctxt "@title:window"
+msgid "Generate Graph"
+msgstr "Generér graf"
+
+#: editorplugins/generategraph/generategraphwidget.cpp:119
+#: editorplugins/generategraph/generategraphwidget.cpp:126
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "%1 (ID %2)"
+msgstr ""
+
+#: editorplugins/generategraph/generategraphwidget.cpp:529
+#, kde-format
+msgid "Incorrect Edge Direction"
+msgstr ""
+
+#: editorplugins/generategraph/generategraphwidget.cpp:529
+#, kde-format
+msgid "Edges in a Directed Acyclical Graph must be directional."
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
+#: editorplugins/generategraph/generategraphwidget.ui:14
+#, kde-format
+msgid "Generate Graph"
+msgstr "Generér graf"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:22
+#, kde-format
+msgid "Select the graph generator."
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:26
+#, kde-format
+msgid "Mesh Graph"
+msgstr "Gittergraf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:31
+#, kde-format
+msgid "Star Graph"
+msgstr "Stjernegraf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:36
+#, kde-format
+msgid "Circle Graph"
+msgstr "Cirkelgraf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:41
+#, kde-format
+msgid "Random Graph"
+msgstr "Tilfældig graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:46
+#, kde-format
+msgid "Erdös-Renyi Graph"
+msgstr "Erdös-Renyi-graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:51
+#, fuzzy, kde-format
+#| msgid "Random Graph"
+msgid "Random Tree Graph"
+msgstr "Tilfældig graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:56
+#, fuzzy, kde-format
+#| msgid "Random Graph"
+msgid "Random Dag Graph"
+msgstr "Tilfældig graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:61
+#, fuzzy, kde-format
+#| msgid "Mesh Graph"
+msgid "Path Graph"
+msgstr "Gittergraf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:66
+#, kde-format
+msgid "Complete Graph"
+msgstr "Fuldfør graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:71
+#, fuzzy, kde-format
+#| msgid "Complete Graph"
+msgid "Complete Bipartite"
+msgstr "Fuldfør graf"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/generategraph/generategraphwidget.ui:91
+#, kde-format
+msgid "Show advanced settings."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:106
+#, fuzzy, kde-format
+#| msgid "This is the unique identifier for the pointer type."
+msgid "Set the unique identifier of the generated graph."
+msgstr "Dette er pointertypens unikke identifikator."
+
+#. i18n: ectx: property (text), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:109
+#, fuzzy, kde-format
+#| msgctxt "@label:inlistbox"
+#| msgid "Graph"
+msgid "Graph"
+msgstr "Graf"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:116
+#, kde-format
+msgid "The node type to create the nodes of the graph with"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:119
+#, fuzzy, kde-format
+#| msgid "Pointer Types"
+msgid "Node type:"
+msgstr "Pointertyper"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
+#: editorplugins/generategraph/generategraphwidget.ui:126
+#, kde-format
+msgid "The identifier of the created graph (used for scripting)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_columns)
+#: editorplugins/generategraph/generategraphwidget.ui:148
+#, kde-format
+msgid "Number of Columns:"
+msgstr "Antal kolonner:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_rows)
+#: editorplugins/generategraph/generategraphwidget.ui:168
+#, kde-format
+msgid "Number of Rows:"
+msgstr "Antal rækker:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
+#: editorplugins/generategraph/generategraphwidget.ui:196
+#, kde-format
+msgid "Satellite Nodes:"
+msgstr "Satellitknuder:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
+#. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_completeNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:224
+#: editorplugins/generategraph/generategraphwidget.ui:505
+#: editorplugins/generategraph/generategraphwidget.ui:527
+#, kde-format
+msgid "Number of Nodes:"
+msgstr "Antal knuder:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
+#. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
+#: editorplugins/generategraph/generategraphwidget.ui:286
+#: editorplugins/generategraph/generategraphwidget.ui:332
+#, kde-format
+msgid "Allow self-edges:"
+msgstr "Tillad løkker:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:293
+#, fuzzy, kde-format
+#| msgid "Generator Seed:"
+msgid "Generator seed:"
+msgstr "Startværdi for generator:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:325
+#, kde-format
+msgid "Nodes (n):"
+msgstr "Knuder (n):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:349
+#, kde-format
+msgid "Edge Probability (p):"
+msgstr "Kantsandsynlighed (p):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:356
+#: editorplugins/generategraph/generategraphwidget.ui:421
+#, kde-format
+msgid "Generator Seed:"
+msgstr "Startværdi for generator:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:446
+#, fuzzy, kde-format
+#| msgid "Number of Nodes:"
+msgid "Number of Nodes"
+msgstr "Antal knuder:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:463
+#, fuzzy, kde-format
+#| msgid "Edge Probability (p):"
+msgid "Edge Probability"
+msgstr "Kantsandsynlighed (p):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
+#: editorplugins/generategraph/generategraphwidget.ui:549
+#, fuzzy, kde-format
+#| msgid "Satellite Nodes:"
+msgid "Left Set Nodes:"
+msgstr "Satellitknuder:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
+#: editorplugins/generategraph/generategraphwidget.ui:563
+#, fuzzy, kde-format
+#| msgid "Satellite Nodes:"
+msgid "Right Set Nodes:"
+msgstr "Satellitknuder:"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:590
+#, kde-format
+msgid "Select the edge type for connections of the generated graph."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:604
+#, kde-format
+msgid "The edge type to create the edges of the graph with"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:607
+#, fuzzy, kde-format
+#| msgid "Edge style"
+msgid "Edge type:"
+msgstr "Kantstil"
+
+#. i18n: ectx: property (text), widget (QLabel, labelGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:614
+#, fuzzy, kde-format
+#| msgid "Graph File"
+msgid "Graph generator:"
+msgstr "Graffil"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:621
+#, kde-format
+msgid "Select the node type for node elements of the generated graph."
+msgstr ""
+
+#: editorplugins/graphlayout/graphlayoutwidget.cpp:37
+#, fuzzy, kde-format
+#| msgid "Graph Document"
+msgctxt "@title:window"
+msgid "Graph Layout"
+msgstr "Grafdokument"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:20
+#, fuzzy, kde-format
+#| msgid "Graph Document"
+msgid "Graph Layout"
+msgstr "Grafdokument"
+
+#. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:36
+#, kde-format
+msgid "Force Based Layout"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:57
+#, kde-format
+msgid "Area factor:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:77
+#, kde-format
+msgid "Repelling force:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:97
+#, kde-format
+msgid "Attraction force:"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:119
+#, kde-format
+msgid "Radial Tree Layout"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, rootLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:134
+#, fuzzy, kde-format
+#| msgctxt "Alignment"
+#| msgid "Center"
+msgid "Center/Root:"
+msgstr "Midte"
+
+#. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:144
+#, fuzzy, kde-format
+#| msgid "Node Information"
+msgid "Node separation:"
+msgstr "Information om knuden"
+
+#. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:158
+#, fuzzy, kde-format
+#| msgid "Type:"
+msgid "Tree type:"
+msgstr "Type:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:165
+#, kde-format
+msgid "Free tree"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:175
+#, fuzzy, kde-format
+#| msgctxt "@title Displayed plugin name"
+#| msgid "RootedTree Structure"
+msgid "Rooted tree"
+msgstr "RootedTree-struktur"
+
+#: editorplugins/transformedges/transformedgeswidget.cpp:23
+#, fuzzy, kde-format
+#| msgid "Transform Edges"
+msgctxt "@title:window"
+msgid "Transform Edges"
+msgstr "Transformér kanter"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
+#: editorplugins/transformedges/transformedgeswidget.ui:14
+#, kde-format
+msgid "Transform Edges"
+msgstr "Transformér kanter"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:22
+#, kde-format
+msgid ""
+"This option connects all nodes of the given graph. The new edges do not have "
+"any preset weights."
+msgstr ""
+"Denne handling forbinder alle knuder i den givne graf. De nye kanter har "
+"ingen foruddefinerede vægte."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:25
+#, fuzzy, kde-format
+#| msgid "Complete Graph"
+msgid "Complete graph"
+msgstr "Fuldfør graf"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:35
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return list all edges in the graph."
+msgid "This option removes all edges from the given graph."
+msgstr "Returnerer en liste med alle grafens kanter."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:38
+#, fuzzy, kde-format
+#| msgid "Remove all Edges"
+msgid "Remove all edges"
+msgstr "Fjern alle kanter"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:45
+#, kde-format
+msgid ""
+"This option reverses all edges of a directed graph. Note that this does not "
+"apply to undirected graphs."
+msgstr ""
+"Denne handling vender alle kanter i en orienteret graf. Bemærk, at dette "
+"ikke virker på en uorienteret graf."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:48
+#, fuzzy, kde-format
+#| msgid "Reverse all Edges"
+msgid "Reverse all edges"
+msgstr "Vend alle kanter"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:59
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes <span "
+"style=\" font-style:italic;\">Prim's Minimal Spanning Tree Algorithm</span> "
+"at the graph. All edges without given weights are assumed to have weights "
+"equals 1. Directed and undirected graphs are processed accordingly.</p></"
+"body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Denne handling anvender "
+"<span style=\" font-style:italic;\">Prims algoritme for et minimalt "
+"udspændende træ</span> på grafen. Alle kanter uden vægt antages at have vægt "
+"1. Kanter behandles i overensstemmelse med, om de er orienterede eller ej.</"
+"p></body></html>"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:62
+#, fuzzy, kde-format
+#| msgid "Spanning Tree Transformation"
+msgid "Spanning tree transformation"
+msgstr "Transformation af udspændende træ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:69
+#, fuzzy, kde-format
+#| msgid "Remove all Edges"
+msgid "Remove all self edges"
+msgstr "Fjern alle kanter"
+
+#: fileformats/dot/dotfileformat.cpp:45
+#, fuzzy, kde-format
+#| msgid "%1|Graphviz Format"
+msgid "Graphviz Format (%1)"
+msgstr "%1|Graphviz-format"
+
+#: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
+#: fileformats/rocs1/rocs1fileformat.cpp:57
+#: fileformats/rocs2/rocs2fileformat.cpp:48
+#: fileformats/tgf/tgffileformat.cpp:52
+#, kde-format
+msgid "Could not open file \"%1\" in read mode: %2"
+msgstr "Kan ikke åbne filen \"%1\" i læsetilstand: %2"
+
+#: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
+#, kde-format
+msgid "Could not parse file \"%1\"."
+msgstr "Kan ikke fortolke filen \"%1\"."
+
+#: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
+#, kde-format
+msgid "Cannot open file %1 to write document. Error: %2"
+msgstr "Kan ikke åbne filen %1 til at gemme dokument i. Fejl: %2"
+
+#: fileformats/fileformatmanager.cpp:48
+#, kde-format
+msgctxt "@title:window"
+msgid "Plugin Error"
+msgstr ""
+
+#: fileformats/fileformatmanager.cpp:50
+#, kde-format
+msgid "Plugins could not be found in specified directories:<br>"
+msgstr ""
+
+#: fileformats/fileformatmanager.cpp:52
+#, kde-format
+msgid ""
+"<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
+"link</a> for further information."
+msgstr ""
+
+#: fileformats/gml/gmlfileformat.cpp:44
+#, fuzzy, kde-format
+#| msgid "*.gml|Graph Markup Language Format"
+msgid "Graph Markup Language Format (%1)"
+msgstr "*.gml|Graph Markup Language-format"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:38
+#, fuzzy, kde-format
+#| msgid "*.graph|Rocs Graph File Format"
+msgid "Rocs 1 Graph File Format (%1)"
+msgstr "*.graph|Rocs-graffilformat"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:258
+#: fileformats/rocs2/rocs2fileformat.cpp:211
+#: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
+#, kde-format
+msgid "Could not open file \"%1\" in write mode: %2"
+msgstr "Kan ikke åbne filen \"%1\" i skrivetilstand: %2"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:269
+#, kde-format
+msgid "Could not write data, aborting. Error: %1."
+msgstr "Kan ikke skrive data, afbryder. Fejl: %1."
+
+#: fileformats/rocs2/rocs2fileformat.cpp:40
+#, fuzzy, kde-format
+#| msgid "*.graph|Rocs Graph File Format"
+msgid "Rocs Graph Format (%1)"
+msgstr "*.graph|Rocs-graffilformat"
+
+#: fileformats/rocs2/rocs2fileformat.cpp:312
+#, kde-format
+msgid "Error on serializing file format to file."
+msgstr ""
+
+#: fileformats/tgf/tgffileformat.cpp:38
+#, fuzzy, kde-format
+#| msgid "*.tgf|Trivial Graph Format"
+msgid "Trivial Graph Format (%1)"
+msgstr "*.tgf|Trivial Graph-format"
+
+#: fileformats/tgf/tgffileformat.cpp:73
+#, kde-format
+msgid "Could not parse file. Identifier \"%1\" is used more than once."
+msgstr ""
+"Kan ikke fortolke filen. Identifikatoren \"%1\" bruges mere end en gang."
+
+#: fileformats/tgf/tgffileformat.cpp:85
+#, kde-format
+msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
+msgstr ""
+"Kunne ikke fortolke filen. Kanten fra \"%1\" til \"%2\" bruger udefinerede "
+"knuder."
+
+#: fileformats/tikz/tikzfileformat.cpp:34
+#, fuzzy, kde-format
+#| msgid "*.pgf|TikZ (PGF) Format"
+msgid "TikZ (PGF) Format (%1)"
+msgstr "*.pgf|TikZ (PGF)-format"
+
+#: graphdocument.cpp:129
+#, fuzzy, kde-format
+#| msgid "Default Color:"
+msgid "Default"
+msgstr "Standardfarve:"
+
+#: graphdocument.cpp:315
+#, fuzzy, kde-format
+#| msgid "Mesh Graph"
+msgctxt "@title:tab initial title for graph document"
+msgid "New Graph"
+msgstr "Gittergraf"
+
+#: kernel/documentwrapper.cpp:88
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: no node with ID %2 registered"
+msgstr ""
+
+#: kernel/documentwrapper.cpp:115 kernel/nodewrapper.cpp:109
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: node type ID %2 not registered"
+msgstr ""
+
+#: kernel/documentwrapper.cpp:150 kernel/edgewrapper.cpp:59
+#: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
+#: kernel/nodewrapper.cpp:205 kernel/nodewrapper.cpp:242
+#: kernel/nodewrapper.cpp:288 kernel/nodewrapper.cpp:339
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: edge type ID %2 not registered"
+msgstr ""
+
+#: kernel/documentwrapper.cpp:174
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"from\" is not a valid node object"
+msgstr ""
+
+#: kernel/documentwrapper.cpp:179
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"to\" is not a valid node object"
+msgstr ""
+
+#: kernel/documentwrapper.cpp:190
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"node\" is not a valid node object"
+msgstr ""
+
+#: kernel/documentwrapper.cpp:204
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"edge\" is not a valid edge object"
+msgstr ""
+
+#: kernel/kernel.cpp:94
+#, kde-format
+msgctxt "@info status message after successful script execution"
+msgid "<i>Execution Finished</i>"
+msgstr "<i>Kørsel afsluttet</i>"
+
+#: kernel/modules/console/console.xml:7
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "The Console object allows you to print messages of different importance "
+#| "to a log."
+msgctxt "Scripting API"
+msgid ""
+"The global Console object allows you to print messages of different "
+"importance to a log."
+msgstr ""
+"Objektet Console lader dig udskrive meddelelser af forskellig vigtighed til "
+"en log."
+
+#: kernel/modules/console/console.xml:17
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Print the given message of normal severity."
+msgctxt "Scripting API"
+msgid "Print the given message of normal severity."
+msgstr "Skriv den givne meddelelse af normal alvorlighed."
+
+#: kernel/modules/console/console.xml:31
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Print the given debug message."
+msgctxt "Scripting API"
+msgid "Print the given debug message."
+msgstr "Skriv den givne fejlsøgningsmeddelelse."
+
+#: kernel/modules/console/console.xml:45
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Print the given error message of high severity."
+msgctxt "Scripting API"
+msgid "Print the given error message of high severity."
+msgstr "Skriv den givne meget alvorlige meddelelse."
+
+#: kernel/modules/document/document.xml:9
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"The document object provides access to all elements.\n"
+msgstr ""
+
+#: kernel/modules/document/document.xml:19
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return list all nodes in the graph of specified type."
+msgctxt "Scripting API"
+msgid "Return the node with specified ID."
+msgstr "Returnerer en liste med alle grafens knuder af en given type."
+
+#: kernel/modules/document/document.xml:26
+#, fuzzy, kde-format
+#| msgid "Identifier"
+msgctxt "Scripting API"
+msgid "Identifier of a node."
+msgstr "Identifikator"
+
+#: kernel/modules/document/document.xml:33
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return list all nodes in the graph."
+msgctxt "Scripting API"
+msgid "Return a list of all nodes."
+msgstr "Returnerer en liste med alle grafens knuder."
+
+#: kernel/modules/document/document.xml:42
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return list all nodes in the graph of specified type."
+msgctxt "Scripting API"
+msgid "Return a list all nodes of specified type."
+msgstr "Returnerer en liste med alle grafens knuder af en given type."
+
+#: kernel/modules/document/document.xml:49
+#, fuzzy, kde-format
+#| msgid "Identifier for new Data Structure"
+msgctxt "Scripting API"
+msgid "Identifier of a node type."
+msgstr "Identifikator for ny datastruktur"
+
+#: kernel/modules/document/document.xml:56
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return a list of all outgoing edges of this node."
+msgctxt "Scripting API"
+msgid "Return a list of all edges."
+msgstr "Returnerer en liste med alle med denne knudes udgående kanter."
+
+#: kernel/modules/document/document.xml:65
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return list all edges in the graph of specified type."
+msgctxt "Scripting API"
+msgid "Return a list all edges of specified type."
+msgstr "Returnerer en liste med alle grafens kanter af en given type."
+
+#: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
+#: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
+#: kernel/modules/document/node.xml:141 kernel/modules/document/node.xml:164
+#: kernel/modules/document/node.xml:187
+#, fuzzy, kde-format
+#| msgid "Identifier for new Data Structure"
+msgctxt "Scripting API"
+msgid "Identifier of an edge type."
+msgstr "Identifikator for ny datastruktur"
+
+#: kernel/modules/document/document.xml:79
+#, fuzzy, kde-format
+#| msgid "Creates a new node at the click position."
+msgctxt "Scripting API"
+msgid "Create node at position (x,y)."
+msgstr "Opretter en ny knude, der hvor der klikkes."
+
+#: kernel/modules/document/document.xml:86
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "The x-coordinate of this data element."
+msgctxt "Scripting API"
+msgid "X-coordinate of the node."
+msgstr "Dette dataelements x-koordinat."
+
+#: kernel/modules/document/document.xml:91
+#, fuzzy, kde-format
+#| msgid "Y-coordinate "
+msgctxt "Scripting API"
+msgid "Y-coordinate of the node."
+msgstr "Y-Koordinat "
+
+#: kernel/modules/document/document.xml:98
+#, fuzzy, kde-format
+#| msgid "Creates a new edge between 2 nodes"
+msgctxt "Scripting API"
+msgid "Create edge between the given nodes of default edge type."
+msgstr "Opretter en ny kant imellem 2 knuder"
+
+#: kernel/modules/document/document.xml:105
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Add a new property to the connection."
+msgctxt "Scripting API"
+msgid "Start node of the edge."
+msgstr "Føj en ny egenskab til forbindelsen."
+
+#: kernel/modules/document/document.xml:110
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Add a new property to the connection."
+msgctxt "Scripting API"
+msgid "Target node of the edge."
+msgstr "Føj en ny egenskab til forbindelsen."
+
+#: kernel/modules/document/document.xml:117
+#, fuzzy, kde-format
+#| msgid "Delete the active graph"
+msgctxt "Scripting API"
+msgid "Delete the given node."
+msgstr "Slet den aktive graf"
+
+#: kernel/modules/document/document.xml:124
+#, fuzzy, kde-format
+#| msgid "Select Pointer Type:"
+msgctxt "Scripting API"
+msgid "The node to be deleted."
+msgstr "Vælg pointertype:"
+
+#: kernel/modules/document/document.xml:131
+#, fuzzy, kde-format
+#| msgid "Delete the active graph"
+msgctxt "Scripting API"
+msgid "Delete the given edge."
+msgstr "Slet den aktive graf"
+
+#: kernel/modules/document/document.xml:138
+#, fuzzy, kde-format
+#| msgid "Select Pointer Type:"
+msgctxt "Scripting API"
+msgid "The edge to be deleted."
+msgstr "Vælg pointertype:"
+
+#: kernel/modules/document/edge.xml:9
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "\n"
+#| "An Edge is the connection of two GraphNodes. Edges can be directed or "
+#| "undirected, depending on their type.\n"
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"An edge is the connection of two nodes. Edges can be either directed or "
+"undirected, depending on their type.\n"
+msgstr ""
+"\n"
+"En kant er en forbindelse imellem to af grafens knuder. Kanter kan være "
+"orienterede eller ikke-orienterede afhængigt af deres type.\n"
+
+#: kernel/modules/document/edge.xml:17
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the edge's type. If setting, the edge type "
+"identifier must exist."
+msgstr ""
+
+#: kernel/modules/document/edge.xml:26
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return head node of the list."
+msgctxt "Scripting API"
+msgid "Return the origin node of the edge."
+msgstr "Returnér listen hovedknude."
+
+#: kernel/modules/document/edge.xml:35
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return head node of the list."
+msgctxt "Scripting API"
+msgid "Return the target node of the edge."
+msgstr "Returnér listen hovedknude."
+
+#: kernel/modules/document/edge.xml:44
+#, kde-format
+msgctxt "Scripting API"
+msgid "Returns true if the edge's type is directed, otherwise false."
+msgstr ""
+
+#: kernel/modules/document/node.xml:11
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"A node is the data element of a graph.\n"
+"It can have arbitrary dynamic properties that are either set in the editor "
+"or simply assigned on run-time.\n"
+"Note that dynamic properties are only available after script execution, if "
+"they are registered for the node's type.\n"
+msgstr ""
+
+#: kernel/modules/document/node.xml:19
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "The unique identifier of this data element."
+msgctxt "Scripting API"
+msgid "Read and set the unique identifier of this node."
+msgstr "Denne datatypes unikke identifikator."
+
+#: kernel/modules/document/node.xml:26
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "The x-coordinate of this data element."
+msgctxt "Scripting API"
+msgid "Read and set the x-coordinate of the node."
+msgstr "Dette dataelements x-koordinat."
+
+#: kernel/modules/document/node.xml:33
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "The y-coordinate of this data element."
+msgctxt "Scripting API"
+msgid "Read and set the y-coordinate of the node."
+msgstr "Dette dataelements y-koordinat."
+
+#: kernel/modules/document/node.xml:40
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
+"for red)."
+msgstr ""
+
+#: kernel/modules/document/node.xml:47
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the node's type. If setting, the node type "
+"identifier must exist."
+msgstr ""
+
+#: kernel/modules/document/node.xml:56
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return a list of all edges (incoming and outgoing) of this node."
+msgctxt "Scripting API"
+msgid "Return a list of all edges (incoming and outgoing) of this node."
+msgstr ""
+"Returnerer en liste med alle denne knudes kanter (indkommende og udgående)."
+
+#: kernel/modules/document/node.xml:65
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return a list of all edges (incoming and outgoing) of this node of a "
+#| "specified type."
+msgctxt "Scripting API"
+msgid ""
+"Return a list of all edges (incoming and outgoing) of this node of a "
+"specified type."
+msgstr ""
+"Returnerer en liste med alle denne knudes kanter (indkommende og udgående) "
+"af en given type."
+
+#: kernel/modules/document/node.xml:79
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return a list of incoming edges of this node."
+msgctxt "Scripting API"
+msgid "Return a list of incoming edges of this node."
+msgstr "Returnerer en liste med denne knudes indkommende kanter."
+
+#: kernel/modules/document/node.xml:88
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return a list of all incoming edges of this node of a specified type."
+msgctxt "Scripting API"
+msgid "Return a list of all incoming edges of this node of a specified type."
+msgstr ""
+"Returnerer en liste med alle denne knudes indkommende kanter af en given "
+"type."
+
+#: kernel/modules/document/node.xml:102
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return a list of all outgoing edges of this node."
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node."
+msgstr "Returnerer en liste med alle med denne knudes udgående kanter."
+
+#: kernel/modules/document/node.xml:111
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return a list of all outgoing edges of this node of a specified type."
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node of a specified type."
+msgstr ""
+"Returnerer en liste med alle denne knudes udgående kanter af en given type."
+
+#: kernel/modules/document/node.xml:125
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node. This method respects if edges "
+"are directed."
+msgstr ""
+"Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
+"tager hensyn til om kanter er orienteriede."
+
+#: kernel/modules/document/node.xml:134
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node via an edge of specified type. "
+"This method respects if edges are directed."
+msgstr ""
+"Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
+"tager hensyn til om kanter er orienteriede."
+
+#: kernel/modules/document/node.xml:148
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid "Return a list all nodes connected to this node by an incoming edge."
+msgstr ""
+"Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
+"tager hensyn til om kanter er orienteriede."
+
+#: kernel/modules/document/node.xml:157
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return a list of all incoming edges of this node of a specified type."
+msgctxt "Scripting API"
+msgid ""
+"Return a list all nodes connected to this node by an incoming edge of "
+"specified type."
+msgstr ""
+"Returnerer en liste med alle denne knudes indkommende kanter af en given "
+"type."
+
+#: kernel/modules/document/node.xml:171
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid "Return list all nodes connected to this node by an outgoing edge."
+msgstr ""
+"Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
+"tager hensyn til om kanter er orienteriede."
+
+#: kernel/modules/document/node.xml:180
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node by an outgoing edge of "
+"specified type."
+msgstr ""
+"Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
+"tager hensyn til om kanter er orienteriede."
+
+#: kernel/modules/document/node.xml:194
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return a list of all edges of this node to the specified node."
+msgctxt "Scripting API"
+msgid "Return list of distances to specified targets in same order."
+msgstr "Returnerer en liste med alle denne knudes kanter til en given knude."
+
+#: kernel/modules/document/node.xml:201
+#, kde-format
+msgctxt "Scripting API"
+msgid "Name of edge property that holds the edge length."
+msgstr ""
+
+#: kernel/modules/document/node.xml:206
+#, kde-format
+msgctxt "Scripting API"
+msgid "List of nodes to that the distances shall be computed."
+msgstr ""
+
+#: models/edgemodel.cpp:154
+#, fuzzy, kde-format
+#| msgid "Edges"
+msgctxt "@title:column"
+msgid "Edge"
+msgstr "Kanter"
+
+#: models/edgepropertymodel.cpp:154
+#, fuzzy, kde-format
+#| msgid "Edge Properties"
+msgctxt "@title:column"
+msgid "EdgeProperty"
+msgstr "Kantegenskaber"
+
+#: models/edgetypemodel.cpp:202
+#, fuzzy, kde-format
+#| msgid "Edge style"
+msgctxt "@title:column"
+msgid "Edge Type"
+msgstr "Kantstil"
+
+#: models/edgetypepropertymodel.cpp:141
+#, fuzzy, kde-format
+#| msgid "Edge Properties"
+msgctxt "@title:column"
+msgid "EdgeTypeProperty"
+msgstr "Kantegenskaber"
+
+#: models/nodemodel.cpp:154
+#, fuzzy, kde-format
+#| msgid "Nodes"
+msgctxt "@title:column"
+msgid "Node"
+msgstr "Knuder"
+
+#: models/nodepropertymodel.cpp:154
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@title:column"
+msgid "NodeProperty"
+msgstr "Knudens egenskaber"
+
+#: models/nodetypemodel.cpp:200
+#, fuzzy, kde-format
+#| msgid "Pointer Types"
+msgctxt "@title:column"
+msgid "Node Type"
+msgstr "Pointertyper"
+
+#: models/nodetypepropertymodel.cpp:141
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@title:column"
+msgid "NodeTypeProperty"
+msgstr "Knudens egenskaber"
+
+#: qml/AddEdgeAction.qml:28
+#, kde-format
+msgid "Create Edge"
+msgstr ""
+
+#: qml/AddEdgeAction.qml:31
+#, fuzzy, kde-format
+#| msgid "Creates a new edge between 2 nodes"
+msgid "Create an edge between two nodes"
+msgstr "Opretter en ny kant imellem 2 knuder"
+
+#: qml/AddNodeAction.qml:13
+#, kde-format
+msgid "Create Node"
+msgstr ""
+
+#: qml/AddNodeAction.qml:16
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Add a new property to the connection."
+msgid "Add a node to the scene"
+msgstr "Føj en ny egenskab til forbindelsen."
+
+#: qml/DeleteAction.qml:13
+#, fuzzy, kde-format
+#| msgid "Element"
+msgid "Delete Element"
+msgstr "Element"
+
+#: qml/DeleteAction.qml:16
+#, kde-format
+msgid "Delete element from scene"
+msgstr ""
+
+#: qml/SelectMoveAction.qml:14
+#, fuzzy, kde-format
+#| msgid "Selected"
+msgid "Select & Move"
+msgstr "Markeret"
+
+#: qml/SelectMoveAction.qml:17
+#, fuzzy, kde-format
+#| msgid "Select and move items."
+msgid "Select and move elements on the scene"
+msgstr "Vælg og flyt elementer."
+
+#~ msgid "Identifier"
+#~ msgstr "Identifikator"
+
+#~ msgid "Color"
+#~ msgstr "Farve"
+
+#, fuzzy
+#~| msgid "Connection"
+#~ msgid "unidirectional"
+#~ msgstr "Forbindelse"
+
+#, fuzzy
+#~| msgid "Connection"
+#~ msgid "bidirectional"
+#~ msgstr "Forbindelse"
+
+#, fuzzy
+#~| msgid "Add Connection"
+#~ msgid "All Connection Types"
+#~ msgstr "Tilføj forbindelse"
+
+#~ msgid "Could not set data type for node %1: data type does not exist."
+#~ msgstr "Kunne ikke sætte datatype for knude %1: datatypen findes ikke."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "An abstract data element is a unit of information that belongs to an "
+#~ "abstract data structure and possibly is connected to other data elements "
+#~ "by pointers.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Et abstrakt dataelement er en informationsenhed, som hører til en "
+#~ "abstrakt datastruktur og som muligvis er forbundet til andre "
+#~ "dataelementer ved pointere.\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "\n"
+#~ msgstr "\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The size of this data element."
+#~ msgstr "Dette dataelements størrelse."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The color of this data element stated as hexadecimal value."
+#~ msgstr "Dette dataelements farve angivet som en hexadecimal værdi."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "An abstract data structure defines a set of data elements and possible "
+#~ "connections between them.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "En abstrakt datastruktur definerer et sæt dataelementer og mulige "
+#~ "forbindelser imellem dem.\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The unique name of this data structure."
+#~ msgstr "Denne datastrukturs unikke navn."
+
+#~ msgid "The method \"%1\" is deprecated, please use \"%2\" instead."
+#~ msgstr "Metoden \"%1\" er forældet, brug \"%2\" i stedet."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A node is the data element of a graph.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "En knude er et dataelement i en graf.\n"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "Grafstruktur"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "y"
+
+#~ msgid "Size"
+#~ msgstr "Størrelse"
+
+#~ msgid "Graph Type:"
+#~ msgstr "Graftype:"
+
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "Multigraf"
+
+#~ msgid "Cannot create edge: nodes are not defined."
+#~ msgstr "Kan ikke oprette kant: knuder er ikke definerede."
+
+#~ msgid "Cannot create edge: pointer type %1 not defined"
+#~ msgstr "Kan ikke oprette kant: pointertype %1 ikke defineret"
+
+#~ msgid "The global method \"%1\" is deprecated, please use \"%2\" instead."
+#~ msgstr "Den globale metode \"%1\" er forældet, brug \"%2\" i stedet."
+
+#~ msgid ""
+#~ "This action will probably remove some edges. Do you want to continue?"
+#~ msgstr ""
+#~ "Denne handling vil sandsynligvis fjerne nogle kanter. Vil du fortsætte?"
+
+#~ msgid "Could not add back-edge (%1->%2) to undirected graph."
+#~ msgstr ""
+#~ "Kunne ikke føje tilbagegående kant (%1->%2) til ikke-orienteret graf."
+
+#~ msgid "Could not add existing edge (%1->%2): this graph is no multigraph."
+#~ msgstr ""
+#~ "Kunne ikke tilføje eksisterende kant (%1->%2): Dette er ikke en multigraf."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A graph objects holds the information of a data structure of type \"Graph"
+#~ "\".\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Et grafobjekt indeholder informationen om en datastruktur af typen \"Graf"
+#~ "\".\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Create a new node of the specified type and return the created node. If "
+#~ "the type is not registered, no node is created."
+#~ msgstr ""
+#~ "Opretter en ny knude af den givne type og returnerer den oprettede knude. "
+#~ "Hvis typen ikke er registreret, så oprettes ingen knude."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Create a new node of default type and return the created node."
+#~ msgstr "Opret en ny knude af standardtypen og returnér den oprettede knude."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Create an edge from node \"from\" to node \"to\" of the specified type "
+#~ "and return the created edge. If the type is not registered, no edge is "
+#~ "created."
+#~ msgstr ""
+#~ "Opret en kant fra knuden \"fra\" til knuden \"til\" af den angivne type "
+#~ "og returnér den oprettede kant. Hvis typen ikke er registreret, så "
+#~ "oprettes ingen kant."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Create an edge from node \"from\" to node \"to\" of default type and "
+#~ "return the created edge."
+#~ msgstr ""
+#~ "Opret en kant fra knuden \"fra\" til knuden \"til\" af standardtypen og "
+#~ "returnér den oprettede kant"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Returns an array of shortest path lengths from this node to every other "
+#~ "node in the graph."
+#~ msgstr ""
+#~ "Returnerer et array af længder af den korteste sti fra denne knude til  "
+#~ "enhver anden knude i grafen."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A node is the data element of a linked list.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "En knude er dataelementet for en kædet liste.\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Set pointer of this list node to the target node."
+#~ msgstr "Sæt denne liste-knudes pointer  til målknuden."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Linked List Structure"
+#~ msgstr "Struktur til kædede lister"
+
+#~ msgid "Front value"
+#~ msgstr "Første værdi"
+
+#~ msgid "Data '%1' has more than one out pointer."
+#~ msgstr "Data \"%1\" har mere end en udgående pointer;"
+
+#~ msgid "Cannot convert document '%1'"
+#~ msgstr "Kan ikke konvertere dokument \"%1\""
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A list objects holds the information of a data structure of type \"Linked "
+#~ "List\".\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Et listeobjekt indeholder informationen om en datastruktur af typen "
+#~ "\"Kædet liste\".\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Set the head of the list."
+#~ msgstr "Sæt listens hoved."
+
+#~ msgctxt "@option:check"
+#~ msgid "Show all pointers"
+#~ msgstr "Vis alle pointere"
+
+#~ msgid "There are cycles at node %1. Data will be lost by conversion."
+#~ msgstr "Der er løkker ved knude %1. Data vil gå tabt ved konvertering."
+
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "Dokument"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Console is not a constructor. All properties and methods of Console can "
+#~ "be called by using Console as an object, without creating it."
+#~ msgstr ""
+#~ "Console er ikke en konstruktør. Alle Consoles egenskaber og metoder kan "
+#~ "kaldes ved at bruge Console som et objekt uden at oprette det."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Console.log(\"This is a program message.\"); // print a program message\n"
+#~ "Console.debug(\"A debug message.\"); // print a debug message"
+#~ msgstr ""
+#~ "Console.log(\"Dette er programmeddelelse.\"); // skriv en "
+#~ "programmeddelelse\n"
+#~ "Console.debug(\"En fejlsøgningsmeddelelse.\"); // skriv en "
+#~ "fejlsøgningsmeddelelse"
+
+#~ msgid "Group"
+#~ msgstr "Gruppér"
+
+#~ msgid "Cannot open file %1."
+#~ msgstr "Kan ikke åbne filen %1."
+
+#~ msgid "Invalid include directive: %1. Cannot find file in directive."
+#~ msgstr "Ugyldigt include-direktiv: %1. Kan ikke finde filen i direktivet."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graphviz Graph File Backend"
+#~ msgstr "Motor til Graphviz-graffiler"
+
+#~ msgid "Read and write Graphviz graph files."
+#~ msgstr "Læs og skriv Graphviz-graffiler."
+
+#~ msgid "Import"
+#~ msgstr "Importér"
+
+#~ msgid "No active graph in this document."
+#~ msgstr "Ingen aktiv graf i dette dokument."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "GML File Backend"
+#~ msgstr "Motor til GML-filer"
+
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "Læs og gem Graph Markup Language-filer (GML)."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "KML File Backend"
+#~ msgstr "Motor til KML-filer"
+
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "Læs og gem Keyhole Markup Language-filer (KML)."
+
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "*.kml|Keyhole Markup Language-format"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "Kan ikke åbne filen %1: %2"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "TGF File Backend"
+#~ msgstr "Motor til TGF-filer"
+
+#~ msgid "Read and write Trivial Graph Format (TGF) files."
+#~ msgstr "Læs og gem Trivial Graph Format-filer (TGF)."
+
+#~ msgid "No data structure specified for output in this document."
+#~ msgstr "Ingen datastruktur angivet til output i dette dokument."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "PGF/TikZ Export File Backend"
+#~ msgstr "Motor til PGF/TikZ-eksportfil"
+
+#~ msgid "Export graph documents in PGF/TikZ format."
+#~ msgstr "Eksportér grafdokumenter i PGF/TikZ-format."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr "Motor til Rocs-graffil"
+
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "Gem og læs Rocs-graffiler"
+
+#~ msgid "Could not set pointer type: pointer type does not exist."
+#~ msgstr "Kan ikke sætte pointertype: pointertype findes ikke."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "A pointer connects two data elements and can itself hold information by "
+#~ "its properties."
+#~ msgstr ""
+#~ "En pointer forbinder to dataelementer og kan selv indeholde information i "
+#~ "sine egenskaber."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Start of the connection."
+#~ msgstr "Begyndelsen af forbindelsen"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "End of the connection"
+#~ msgstr "Slutningen af forbindelsen"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "If true, the connection is directed. Otherwise is connection is "
+#~ "undirected."
+#~ msgstr ""
+#~ "Hvis sand, så er forbindelsen orienteret: Ellers er forbindelsen ikke-"
+#~ "orienteret."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "ID of the connection type."
+#~ msgstr "Forbindelsestypens ID."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The width of the connection."
+#~ msgstr "Forbindelsens bredde."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Remove this connection."
+#~ msgstr "Fjern denne forbindelse."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Remove an existing property from the connection."
+#~ msgstr "Fjern en eksisterende egenskab fra forbindelsen."
+
+#~ msgid "Connection"
+#~ msgstr "Forbindelse"
+
+#~ msgid "Rocs Console script"
+#~ msgstr "Rocs konsolscript"
+
+#~ msgid "Script Error: %1"
+#~ msgstr "Scriptfejl: %1"
+
+#~ msgid "Script error in included file %1"
+#~ msgstr "Scriptfejl i inkluderet fil:  %1"
+
+#~ msgctxt "dynamic property that is present exactly once"
+#~ msgid "Unique"
+#~ msgstr "Unik"
+
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "Multipel"
+
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "Global"
+
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "Ingen"
+
+#, fuzzy
+#~| msgid "Add Edge"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "Tilføj kant"
+
+#, fuzzy
+#~| msgid "Add %1"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add %1"
+#~ msgstr "Tilføj %1"
+
+#, fuzzy
+#~| msgid "Add Data"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Data"
+#~ msgstr "Tilføj data"
+
+#~ msgid "untitled"
+#~ msgstr "unavngiven"
+
+#~ msgid "Add %1"
+#~ msgstr "Tilføj %1"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "Slet"
+
+#, fuzzy
+#~| msgid "Delete items by clicking on them."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "Slet elementer ved at klikke på dem."
+
+#, fuzzy
+#~| msgid "Data Type Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "Datatypeegenskaber"
+
+#, fuzzy
+#~| msgid "Pointer Type Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Pointertypeegenskaber"
+
+#, fuzzy
+#~| msgid "Move"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "Flyt"
+
+#, fuzzy
+#~| msgid "Zoom"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Zoom"
+#~ msgstr "Zoom"
+
+#, fuzzy
+#~| msgid "Zoom the canvas by the wheel, or by dragging."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom the canvas by the wheel, or by dragging."
+#~ msgstr "Zoom lærredet ved hjælp af hjulet eller ved at trække."
+
+#, fuzzy
+#~| msgid "Properties"
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "Egenskaber"
+
+#, fuzzy
+#~| msgid "Graph Document:"
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "Grafdokument:"
+
+#~ msgid "Data Structure:"
+#~ msgstr "Datastruktur:"
+
+#, fuzzy
+#~| msgid "Add a new data structure with the specified name"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new data structure."
+#~ msgstr "Tilføj en ny datastruktur med det angivne navn"
+
+#, fuzzy
+#~| msgid "Select Data Type:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "Vælg datatype:"
+
+#~ msgid "Edit Data Types"
+#~ msgstr "Redigér datatyper"
+
+#, fuzzy
+#~| msgid "Data Element Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Element Properties"
+#~ msgstr "Dataelementegenskaber"
+
+#, fuzzy
+#~| msgid "Data Type Properties"
+#~ msgid "Data Properties"
+#~ msgstr "Datatypeegenskaber"
+
+#, fuzzy
+#~| msgid "Dynamic Properties"
+#~ msgid "Static Properties"
+#~ msgstr "Dynamiske egenskaber"
+
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "Datastruktur-plugin:"
+
+#, fuzzy
+#~| msgid "Data Structure Properties"
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "Datastrukturegenskaber"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Structure"
+#~ msgstr "Datastruktur"
+
+#, fuzzy
+#~| msgid "Data Structure Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "Datastrukturegenskaber"
+
+#, fuzzy
+#~| msgid "Display Options"
+#~ msgid "Display"
+#~ msgstr "Visningstilvalg"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "Egenskab"
+
+#, fuzzy
+#~| msgid "Data Types"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Data Type"
+#~ msgstr "Datatyper"
+
+#~ msgid "Select Data Type:"
+#~ msgstr "Vælg datatype:"
+
+#, fuzzy
+#~| msgid "Select Data Type:"
+#~ msgid "Remove selected data type."
+#~ msgstr "Vælg datatype:"
+
+#, fuzzy
+#~| msgid "Add a new data structure with the specified name"
+#~ msgid "Add new data type."
+#~ msgstr "Tilføj en ny datastruktur med det angivne navn"
+
+#~ msgid "Insert a name for this type"
+#~ msgstr "Indsæt et navn til denne type"
+
+#~ msgid "Default Color:"
+#~ msgstr "Standardfarve:"
+
+#, fuzzy
+#~| msgid "Data Type Properties"
+#~ msgid "Data Type Properties"
+#~ msgstr "Datatypeegenskaber"
+
+#, fuzzy
+#~| msgid "Document Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "Dokumentegenskaber"
+
+#, fuzzy
+#~| msgid "Pointer Types"
+#~ msgid "Edit Pointer Types"
+#~ msgstr "Pointertyper"
+
+#, fuzzy
+#~| msgid "Pointer Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "Pointeregenskaber"
+
+#~ msgid "Width:"
+#~ msgstr "Bredde:"
+
+#, fuzzy
+#~| msgid "solid"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "massiv"
+
+#, fuzzy
+#~| msgid "dash"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "streger"
+
+#, fuzzy
+#~| msgid "dash dot"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash dot line"
+#~ msgstr "streg prik"
+
+#, fuzzy
+#~| msgid "Connection"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "Forbindelse"
+
+#, fuzzy
+#~| msgid "Create new Pointer Type"
+#~ msgid "Add new pointer type."
+#~ msgstr "Lav en ny pointertype"
+
+#~ msgid "Select Pointer Type:"
+#~ msgstr "Vælg pointertype:"
+
+#~ msgid "Style:"
+#~ msgstr "Stil:"
+
+#, fuzzy
+#~| msgid "Pointer Type Properties"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Pointertypeegenskaber"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "Datastruktur"
+
+#, fuzzy
+#~| msgid "Zoom"
+#~ msgctxt "@title:menu"
+#~ msgid "Zoom"
+#~ msgstr "Zoom"
+
+#, fuzzy
+#~| msgid "In"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "In"
+#~ msgstr "Ind"
+
+#, fuzzy
+#~| msgid "Out"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Out"
+#~ msgstr "Ud"
+
+#, fuzzy
+#~| msgid "Reset"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Reset"
+#~ msgstr "Nulstil"
+
+#~ msgid "Align"
+#~ msgstr "Justér"
+
+#, fuzzy
+#~| msgctxt "align elements at bottom"
+#~| msgid "Bottom"
+#~ msgctxt "@action:inmenu align elements at bottom"
+#~ msgid "Bottom"
+#~ msgstr "Nederst"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Top"
+#~ msgctxt "@action:inmenu align elements at top"
+#~ msgid "Top"
+#~ msgstr "Øverst"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Left"
+#~ msgctxt "@action:inmenu align elements left"
+#~ msgid "Left"
+#~ msgstr "Venstre"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Right"
+#~ msgctxt "@action:inmenu align elements right"
+#~ msgid "Right"
+#~ msgstr "Højre"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Circle"
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Cirkel"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Minimize Crossing Edges"
+#~ msgctxt ""
+#~ "@action:inmenu align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Minimér krydsende kanter"
+
+#, fuzzy
+#~| msgid "Properties"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Egenskaber"
+
+#, fuzzy
+#~| msgid "Values"
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "Værdier"
+
+#, fuzzy
+#~| msgid "Random Integers"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Integers"
+#~ msgstr "Tilfældige heltal"
+
+#, fuzzy
+#~| msgid "Random Reals"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Reals"
+#~ msgstr "Tilfældige reelle tal"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "Slet"
+
+#, fuzzy
+#~| msgid "Assign Values"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "Tildel værdier"
+
+#~ msgid "Data Structure"
+#~ msgstr "Datastruktur"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">List of all data "
+#~ "structures that are of type <span style=\" font-style:italic;\">Graph</"
+#~ "span>.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Liste over alle "
+#~ "datastrukturer af typen <span style=\" font-style:italic;\">Graf</span>.</"
+#~ "p></body></html>"
+
+#, fuzzy
+#~| msgid "Generate Graph"
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "Generér graf"
+
+#~ msgid "RandomGraph"
+#~ msgstr "Tilfældig graf"
+
+#, fuzzy
+#~| msgid "Transform Edges"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Transform Edges"
+#~ msgstr "Transformér kanter"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "Kunne ikke finde en KDE-teksteditor, \n"
+#~ " tjek din installation"
+
+#~ msgid "Default Information Display"
+#~ msgstr "Standardvisning af information"
+
+#~ msgid "centered"
+#~ msgstr "centreret"
+
+#~ msgid "below"
+#~ msgstr "under"
+
+#~ msgid "above"
+#~ msgstr "over"
+
+#~ msgid "Edge Information"
+#~ msgstr "Information om kanten"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Vis udførelse af fejlsøgning"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Vis trinvis udførelse"
+
+#, fuzzy
+#~| msgid "Set visibility of pointers"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Sæt pointeres synlighed"
+
+#, fuzzy
+#~| msgid "Element"
+#~ msgid "Element Types"
+#~ msgstr "Element"
+
+#~ msgid "*|All files"
+#~ msgstr "*|Alle filer"
+
+#, fuzzy
+#~| msgid "Export"
+#~ msgctxt "@action:button"
+#~ msgid "Export"
+#~ msgstr "Eksportér"
+
+#, fuzzy
+#~| msgid "Export graphs to file"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Eksportér grafer til fil"
+
+#, fuzzy
+#~| msgid "Import Graph File into Project"
+#~ msgctxt "@title:window"
+#~ msgid "Import Graph File into Project"
+#~ msgstr "Importér graffiler i projekt"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|Script-filer"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Scriptfiler til Rocs"
+
+#, fuzzy
+#~| msgid "Added your description here."
+#~ msgid "Add your description here."
+#~ msgstr "Tilføj din beskrivelse her."
+
+#, fuzzy
+#~| msgid "Program Messages"
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "Programmeddelelser"
+
+#, fuzzy
+#~| msgid "Debug Messages"
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Debug Messages"
+#~ msgstr "Fejlsøgningsmeddelelser"
+
+#, fuzzy
+#~| msgid "Select output:"
+#~ msgctxt "@label:listbox"
+#~ msgid "Select output:"
+#~ msgstr "Vælg output:"
+
+#, fuzzy
+#~| msgctxt "Script Execution"
+#~| msgid "Run"
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "Run"
+#~ msgstr "Kør"
+
+#, fuzzy
+#~| msgctxt "Script Execution"
+#~| msgid "One Step"
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "Et trin"
+
+#, fuzzy
+#~| msgctxt "Script Execution"
+#~| msgid "Stop"
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "Stop"
+#~ msgstr "Stop"
+
+#, fuzzy
+#~| msgctxt "Menu with buttons for debug actions"
+#~| msgid "Debug"
+#~ msgctxt "@title:menu Debug execution"
+#~ msgid "Debug"
+#~ msgstr "Fejlsøgning"
+
+#, fuzzy
+#~| msgctxt "button to start a debug execution"
+#~| msgid "Debug run"
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Kør med fejlsøgning"
+
+#, fuzzy
+#~| msgid "Interrupt at first line"
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "Stop ved første linje"
+
+#, fuzzy
+#~| msgid "Add Data"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "Tilføj data"
+
+#, fuzzy
+#~| msgid "Add new data element"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "Tilføj nyt dataelement"
+
+#, fuzzy
+#~| msgid "Add a new connection between two data elements of selected type"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new connection between two data elements of selected type"
+#~ msgstr "Tilføj en ny forbindelse mellem to dataelementer af den valgte type"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Base"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Base"
+#~ msgstr "Basis"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Center"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "Midte"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Top"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Top"
+#~ msgstr "Øverst"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Left"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Left"
+#~ msgstr "Venstre"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Right"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Right"
+#~ msgstr "Højre"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Circle"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "Cirkel"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Minimize Crossing Edges"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Minimér krydsende kanter"
+
+#, fuzzy
+#~| msgid "New Project"
+#~ msgctxt "@action:inmenu"
+#~ msgid "New Project"
+#~ msgstr "Nyt projekt"
+
+#, fuzzy
+#~| msgid "Save Project"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project"
+#~ msgstr "Gem projekt"
+
+#, fuzzy
+#~| msgid "Open Project"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Open Project"
+#~ msgstr "Åbn projekt"
+
+#, fuzzy
+#~| msgid "Open Project"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Recent Projects"
+#~ msgstr "Åbn projekt"
+
+#, fuzzy
+#~| msgid "Save Project"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Gem projekt"
+
+#, fuzzy
+#~| msgid "New Graph Document"
+#~ msgctxt "@action:inmenu"
+#~ msgid "New Graph Document"
+#~ msgstr "Nyt grafdokument"
+
+#, fuzzy
+#~| msgid "New Script File"
+#~ msgctxt "@action:inmenu"
+#~ msgid "New Script File"
+#~ msgstr "Ny scriptfil"
+
+#, fuzzy
+#~| msgid "Import Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Graph"
+#~ msgstr "Importér graf"
+
+#, fuzzy
+#~| msgid "Export Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Graph as"
+#~ msgstr "Eksportér graf"
+
+#, fuzzy
+#~| msgid "Download Examples"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Download eksempler"
+
+#, fuzzy
+#~| msgid "Upload script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Upload script"
+
+#, fuzzy
+#~| msgid "Possible Includes"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Mulige inkluderingsfiler"
+
+#, fuzzy
+#~| msgid "Import Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Script"
+#~ msgstr "Importér script"
+
+#, fuzzy
+#~| msgid "Import Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Script as"
+#~ msgstr "Importér script"
+
+#, fuzzy
+#~| msgid "Include Manager"
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Håndtering af inkluderingsfiler"
+
+#, fuzzy
+#~| msgid "Default Settings"
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Standardindstillinger"
+
+#, fuzzy
+#~| msgid "Add Existing Script File to Project"
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Tilføj eksisterende scriptfil til projekt"
+
+#, fuzzy
+#~| msgid "This does not seem to be a graph file."
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "Dette ser ikke ud til at være en graffil."
+
+#, fuzzy
+#~| msgid "Invalid file"
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Ugyldig fil"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.rocs|Rocs project files\n"
+#~| "*|All files"
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs|Rocs-projektfiler\n"
+#~ "*|Alle filer"
+
+#, fuzzy
+#~| msgid "Save Project"
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Gem projekt"
+
+#, fuzzy
+#~| msgid "Open Project Files"
+#~ msgctxt "@title:window"
+#~ msgid "Open Project Files"
+#~ msgstr "Åbn projektfiler"
+
+#, fuzzy
+#~| msgid "[ untitled ]"
+#~ msgctxt "caption text for temporary project"
+#~ msgid "[ untitled ]"
+#~ msgstr "[ unavngivet ]"
+
+#, fuzzy
+#~| msgid "Script"
+#~ msgid "ScriptName"
+#~ msgstr "Script"
+
+#, fuzzy
+#~| msgid "Enter Filename for the New Script File"
+#~ msgid "Enter the name of your new script"
+#~ msgstr "Angiv filnavn for den nye script-fil"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Rocs-graf-filer\n"
+#~ "*|Alle filer"
+
+#, fuzzy
+#~| msgid "Save Graph Document"
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Gem grafdokument"
+
+#, fuzzy
+#~| msgid "Enter Filename for the New Graph Document"
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Angiv filnavn for det nye grafdokument"
+
+#, fuzzy
+#~| msgid ""
+#~| "Changes on your project are unsaved. Do you want to save your changes?"
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your project are unsaved. Do you want to save your changes?"
+#~ msgstr ""
+#~ "Ændringer i dit projekt er ikke blevet gemt. Vil du gemme dine ændringer?"
+
+#, fuzzy
+#~| msgid ""
+#~| "Changes on your graph document are unsaved. Do you want to save your "
+#~| "changes?"
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your graph document are unsaved. Do you want to save your "
+#~ "changes?"
+#~ msgstr ""
+#~ "Der er ændringer i dit dokument, som ikke er blevet gemt. Vil du gemme "
+#~ "dine ændringer?"
+
+#, fuzzy
+#~| msgid ""
+#~| "Changes on your script files are unsaved. Do you want to save all "
+#~| "unsaved scripts?"
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files are unsaved. Do you want to save all unsaved "
+#~ "scripts?"
+#~ msgstr ""
+#~ "Der er ændringer i dine scriptfiler, som ikke er blevet gemt. Vil du "
+#~ "gemme alle dine ændrede scripts?"
+
+#, fuzzy
+#~| msgid ""
+#~| "Changes on your script files and on your graph document are unsaved. Do "
+#~| "you want to save your graph document and all unsaved scripts?"
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files and on your graph document are unsaved. Do "
+#~ "you want to save your graph document and all unsaved scripts?"
+#~ msgstr ""
+#~ "Der er ændringer i dine scriptfiler eller dit grafdokument, som ikke er "
+#~ "blevet gemt. Vil du gemme dit grafdokument og alle ændrede scripts?"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Mulige inkluderingsfiler for scriptmotor"
+
+#, fuzzy
+#~| msgid "Rocs"
+#~ msgctxt "@title Displayed program name"
+#~ msgid "Rocs"
+#~ msgstr "Rocs"
+
+#, fuzzy
+#~| msgid "Graph Theory Tool"
+#~ msgctxt "@title KAboutData: short program description"
+#~ msgid "Graph Theory Tool"
+#~ msgstr "Værktøj til grafteori"
+
+#, fuzzy
+#~| msgid "(c) 2009-2012 Rocs Developers"
+#~ msgctxt "@info:credit"
+#~ msgid "(c) 2009-2012 Rocs Developers"
+#~ msgstr "(c) 2009-2012 Rocs' udviklere"
+
+#, fuzzy
+#~| msgid "Rocs - Data Structure Analysis"
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs - Analyse af datastrukturer"
+
+#, fuzzy
+#~| msgid "Tomaz Canabrava"
+#~ msgctxt "@info:credit Developer name"
+#~ msgid "Tomaz Canabrava"
+#~ msgstr "Tomaz Canabrava"
+
+#, fuzzy
+#~| msgid "Developer"
+#~ msgctxt "@info:credit Role"
+#~ msgid "Developer"
+#~ msgstr "Udvikler"
+
+#, fuzzy
+#~| msgid "Wagner Reck"
+#~ msgctxt "@info:credit Developer name"
+#~ msgid "Wagner Reck"
+#~ msgstr "Wagner Reck"
+
+#, fuzzy
+#~| msgid "Andreas Cord-Landwehr"
+#~ msgctxt "@info:credit Developer name"
+#~ msgid "Andreas Cord-Landwehr"
+#~ msgstr "Andreas Cord-Landwehr"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr ""
+#~ "Ingen plugins til datastrukturer blev fundet på dit system. Afslutter."
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Rocs skal bruge mindst et plugin til datastrukturer for at fortsætte.\n"
+#~ "Prøv at køre kbuildsycoca4 fra en konsol og derefter starte Rocs igen."
+
+#~ msgid "Show text beside icon"
+#~ msgstr "Vis tekst ved siden af ikon"
+
+#~ msgid "Path where include manager seek for includes."
+#~ msgstr ""
+#~ "Sti, hvor der ledes efter filer ved håndtering af inkluderingsfiler."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr "Position for en knudes navn og værdi."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Position for en kants navn og værdi."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr "Angiver, om knappen til at udføre fejlfinding skal vises."
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr "Angiver, om knappen til trinvis udførsel skal vises."
+
+#~ msgid "Project"
+#~ msgstr "Projekt"
+
+#~ msgid "Script Document"
+#~ msgstr "Script-dokument"
+
+#~ msgid "Script File"
+#~ msgstr "Script-fil"
+
+#~ msgid "Graph File"
+#~ msgstr "Graffil"
+
+#~ msgid "Convert To"
+#~ msgstr "Konvertér til"
+
+#~ msgid "Edit Selected Data"
+#~ msgstr "Redigér valgte data"
+
+#~ msgid "Layout"
+#~ msgstr "Layout"
+
+#~ msgid "Tools"
+#~ msgstr "Værktøjer"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Hovedværktøjslinje"
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "Layoutværktøjslinje"
+
+#~ msgid "Untitled"
+#~ msgstr "Unavngiven"
+
+#~ msgid "New File"
+#~ msgstr "Ny fil"
+
+#~ msgid "Untitled%1"
+#~ msgstr "Uden titel%1"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgid "Data structure name"
+#~ msgstr "Datastruktur"
+
+#~ msgid ""
+#~ "Delete the current data structure: delete all data elements and all "
+#~ "pointers"
+#~ msgstr ""
+#~ "Slet den aktuelle datastruktur: slet alle dataelementer og alle pointere"
+
+#~ msgid "rocsdeletegrey"
+#~ msgstr "rocsdeletegrey"
+
+#, fuzzy
+#~| msgid "Display Options"
+#~ msgid "Display Options:"
+#~ msgstr "Visningstilvalg"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgctxt "@action:button"
+#~ msgid "Add Data Structure"
+#~ msgstr "Datastruktur"
+
+#, fuzzy
+#~| msgid "Export Project"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "Eksportér projekt"
+
+#, fuzzy
+#~| msgid "Import Project"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "Importér projekt"
+
+#, fuzzy
+#~| msgid "Set Name"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "Angiv navn"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "Gem graf"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "Gem script"
+
+#, fuzzy
+#~| msgid "Save Script as"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script as"
+#~ msgstr "Gem script som"
+
+#, fuzzy
+#~| msgid "Set Project Name"
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "Angiv projektets navn"
+
+#, fuzzy
+#~| msgid "Name:"
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "Navn:"
+
+#~ msgid ""
+#~ "*.js|Rocs script documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.js|Rocs-script-dokumenter\n"
+#~ "*|Alle filer"
+
+#, fuzzy
+#~| msgid "Save Script Document"
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "Gem script-dokument"
+
+#, fuzzy
+#~| msgid "*.tar.gz|Export as tar.gz Archive"
+#~ msgid "*.tar.gz|Import from tar.gz Archive"
+#~ msgstr "*.tar.gz|Eksportér som tar.gz-arkiv"
+
+#, fuzzy
+#~| msgid "Project Archive to Import"
+#~ msgctxt "@title:window"
+#~ msgid "Project Archive to Import"
+#~ msgstr "Projektarkiv, der skal importeres"
+
+#, fuzzy
+#~| msgid "Select Project Directory for Import"
+#~ msgctxt "@title:window"
+#~ msgid "Select Project Directory for Import"
+#~ msgstr "Vælg projektmappe til import"
+
+#~ msgid "*.tar.gz|Export as tar.gz Archive"
+#~ msgstr "*.tar.gz|Eksportér som tar.gz-arkiv"
+
+#, fuzzy
+#~| msgid "Export Project"
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "Eksportér projekt"
+
+#~ msgid "Edge name"
+#~ msgstr "Kantens navn"
+
+#~ msgid "Edge color"
+#~ msgstr "Kantens farve"
+
+#~ msgid "Value:"
+#~ msgstr "Værdi:"
+
+#~ msgid "Edge value"
+#~ msgstr "Kantens værdi"
+
+#~ msgid "Edge width"
+#~ msgstr "Kantbredde"
+
+#~ msgid "Show"
+#~ msgstr "Vis"
+
+#~ msgid "Show/hide edge name"
+#~ msgstr "Vis/skjul kantens navn"
+
+#~ msgid "Show/add edge value"
+#~ msgstr "Vis/skjul kantens værdi"
+
+#~ msgid "Global"
+#~ msgstr "Global"
+
+#~ msgid "add"
+#~ msgstr "tilføj"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid "v=%1"
+#~ msgstr "v=%1"
+
+#, fuzzy
+#~| msgid "untitled %1"
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "%1 uden titel"
+
+#~ msgid "Main Definitions"
+#~ msgstr "Hoveddefinitioner"
+
+#~ msgid "Set the name visible"
+#~ msgstr "Lad navnet være synligt"
+
+#~ msgid "Set the value visible"
+#~ msgstr "Lad værdien være synlig"
+
+#~ msgid "Appearance"
+#~ msgstr "Udseende"
+
+#~ msgid "Enable Color"
+#~ msgstr "Aktivér farve"
+
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "Egenskaber specielt for datastrukturer"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Add new dynamic property to data element.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Føj en ny dynamisk egenskab til dataelementet.</p></"
+#~ "body></html>"
+
+#, fuzzy
+#~| msgid "Show values of data elements"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of data elements"
+#~ msgstr "Vis dataelementers værdier"
+
+#, fuzzy
+#~| msgid "Show names of pointers"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of pointers"
+#~ msgstr "Vis pointeres navne"
+
+#~ msgid "Icon:"
+#~ msgstr "Ikon:"
+
+#~ msgid "Delete"
+#~ msgstr "Slet"
+
+#~ msgid "Create new Data Type"
+#~ msgstr "Lav en ny datatype"
+
+#~ msgid "Type"
+#~ msgstr "Type"
+
+#~ msgid "dot"
+#~ msgstr "prikker"
+
+#, fuzzy
+#~| msgid "Undirected Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "Uorienteret graf"
+
+#, fuzzy
+#~| msgid "Directed Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "Orienteret graf"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "undirected graph for which several edges between same nodes may exist"
+#~| msgid "Undirected Multigraph"
+#~ msgctxt ""
+#~ "@label:inlistbox Undirected graph for which several edges between same "
+#~ "nodes may exist"
+#~ msgid "Undirected Multigraph"
+#~ msgstr "Uorienteret multigraf"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "directed graph for which several same orientated edges between same "
+#~| "nodes may exist"
+#~| msgid "Directed Multigraph"
+#~ msgctxt ""
+#~ "@label:inlistbox Directed graph for which several same orientated edges "
+#~ "between same nodes may exist"
+#~ msgid "Directed Multigraph"
+#~ msgstr "Orienteret multigraf"
+
+#, fuzzy
+#~| msgid "Open and Save GML files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save GML files"
+#~ msgstr "Åbn og gem GML-filer"
+
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Graffiler\n"
+#~ "*|Alle filer"
+
+#, fuzzy
+#~| msgid "Add Existing Graph File to Project"
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Graph File to Project"
+#~ msgstr "Tilføj eksisterende graffil til projekt"
+
+#, fuzzy
+#~| msgid "Import Rocs Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "Importér Rocs-graf"
+
+#, fuzzy
+#~| msgid "Save Graph as"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "Gem graf som"
+
+#~ msgid "Cannot open the file: %1. Error %2"
+#~ msgstr "Kan ikke åbne filen: %1. Fejl %2"
+
+#~ msgid "Could not parse Graphviz file due to syntax errors."
+#~ msgstr "Kunne ikke fortolke Graphviz-filen på grund af syntaksfejl."
+
+#~ msgid "Graphviz parser returned unsuccessfully for file."
+#~ msgstr "Fortolkeren for Graphviz kunne ikke behandle filen."
+
+#, fuzzy
+#~| msgid "Open and Save Plain TXT files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save Plain TXT files"
+#~ msgstr "Åbn og gem klartekst-filer"
+
+#~ msgid "*.txt|Plain TXT Files"
+#~ msgstr "*.txt|Klartekstfiler"
+
+#, fuzzy
+#~| msgid "Add"
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "Tilføj"
+
+#~ msgid "Add Node"
+#~ msgstr "Tilføj knude"
+
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "Navn:"
+
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "Midte"
+
+#~ msgctxt "align elements at top"
+#~ msgid "Top"
+#~ msgstr "Øverst"
+
+#~ msgctxt "align elements left"
+#~ msgid "Left"
+#~ msgstr "Venstre"
+
+#~ msgctxt "align elements right"
+#~ msgid "Right"
+#~ msgstr "Højre"
+
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Cirkel"
+
+#~ msgctxt "align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Minimér krydsende kanter"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type Icon:"
+#~ msgstr "Type"
+
+#, fuzzy
+#~| msgid "Export graphs to file"
+#~ msgid "Export as new Type"
+#~ msgstr "Eksportér grafer til fil"
+
+#~ msgid "Open Script"
+#~ msgstr "Åbn script"
+
+#~ msgid "Edit"
+#~ msgstr "Redigér"
+
+#, fuzzy
+#~| msgid "Pointers"
+#~ msgid "Pointer"
+#~ msgstr "Referencer"
+
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Apply to all nodes"
+#~ msgstr "Anvend på alle knuder"
+
+#~ msgid "Close"
+#~ msgstr "Luk"
+
+#~ msgid "Image"
+#~ msgstr "Billede"
+
+#~ msgid "Untitled0"
+#~ msgstr "Unavngiven0"
+
+#~ msgid "Open Graph"
+#~ msgstr "Åbn graf"
+
+#~ msgid "Save All"
+#~ msgstr "Gem alt"
+
+#~ msgid "New"
+#~ msgstr "Ny"
+
+#~ msgid "Color for new nodes"
+#~ msgstr "Farve til nye knuder"
+
+#~ msgid "Pointer Color:"
+#~ msgstr "Farve til reference:"
+
+#~ msgid "Color for new edges"
+#~ msgstr "Farve til nye kanter"
+
+#~ msgid "Apply the current color to all nodes"
+#~ msgstr "Brug den aktuelle farve på alle knuder"
+
+#~ msgid "Apply the current color to all nodes on the drawing area"
+#~ msgstr "Brug den aktuelle farve på alle knuder i tegneområdet"
+
+#~ msgid "All"
+#~ msgstr "Alle"
+
+#~ msgid "Apply the current color to all edges"
+#~ msgstr "Brug den aktuelle farve til alle kanter"
+
+#~ msgid "Apply the current color to all edges on the drawing area"
+#~ msgstr "Brug den aktuelle farve til alle kanter i tegneområdet"
+
+#~ msgid "Align on the right"
+#~ msgstr "Justér til højre"
+
+#, fuzzy
+#~| msgid "Align on the right"
+#~ msgid "Align on a circle"
+#~ msgstr "Justér til højre"
+
+#~ msgid "(c) 2009"
+#~ msgstr "(c) 2009"
+
+#~ msgid "cancel"
+#~ msgstr "annullér"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialog"
+
+#~ msgid "Radius:"
+#~ msgstr "Radius:"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Name: %1"
+#~ msgstr "Navn: %1"

@@ -1,0 +1,1429 @@
+# Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2009, 2010.
+# Frank Weng (a.k.a. Franklin) <franklin@goodhorse.idv.tw>, 2010.
+# Franklin Weng <franklin@goodhorse.idv.tw>, 2010, 2011, 2012, 2013, 2014, 2015, 2017.
+# pan93412 <pan93412@gmail.com>, 2018, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: rocs\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2019-11-26 21:23+0800\n"
+"Last-Translator: pan93412 <pan93412@gmail.com>\n"
+"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 19.11.80\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Franklin Weng"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "franklin@goodhorse.idv.tw"
+
+#: dialogs/edgeproperties.cpp:25
+#, kde-format
+msgctxt "@title:window"
+msgid "Edge Properties"
+msgstr "邊緣屬性"
+
+#: dialogs/edgeproperties.cpp:80 dialogs/nodeproperties.cpp:86
+#, kde-format
+msgid "Name"
+msgstr "名稱"
+
+#: dialogs/edgeproperties.cpp:81 dialogs/nodeproperties.cpp:87
+#, kde-format
+msgid "Value"
+msgstr "數值"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
+#: dialogs/edgeproperties.ui:26
+#, kde-format
+msgid "Edge Properties"
+msgstr "邊緣屬性"
+
+#. i18n: ectx: property (text), widget (QLabel, labelType)
+#: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
+#, kde-format
+msgid "Type:"
+msgstr "型態："
+
+#. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
+#: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
+#, kde-format
+msgid "Dynamic Properties"
+msgstr "動態屬性"
+
+#: dialogs/edgetypeproperties.cpp:37
+#, kde-format
+msgid "Edges"
+msgstr "邊"
+
+#: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
+#, fuzzy, kde-format
+#| msgid "Property Names"
+msgid "Property names"
+msgstr "屬性名稱"
+
+#: dialogs/edgetypeproperties.cpp:43
+#, kde-format
+msgctxt "@title:window"
+msgid "Edge Type Properties"
+msgstr "邊緣型態屬性"
+
+#: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
+#, fuzzy, kde-format
+#| msgid "Name"
+msgid "Name:"
+msgstr "名稱"
+
+#. i18n: ectx: property (text), widget (QLabel, labelId)
+#. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
+#: dialogs/edgetypeproperties.cpp:49 dialogs/nodeproperties.ui:119
+#: dialogs/nodetypeproperties.cpp:49
+#: editorplugins/generategraph/generategraphwidget.ui:129
+#, kde-format
+msgid "Identifier:"
+msgstr "識別子："
+
+#. i18n: ectx: property (text), widget (QLabel, labelColor)
+#: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
+#: dialogs/nodetypeproperties.cpp:52
+#, kde-format
+msgid "Color:"
+msgstr "顏色："
+
+#: dialogs/edgetypeproperties.cpp:52 graphdocument.cpp:120
+#, kde-format
+msgid "Unidirectional"
+msgstr "單向"
+
+#: dialogs/edgetypeproperties.cpp:53 graphdocument.cpp:125
+#, kde-format
+msgid "Bidirectional"
+msgstr "雙向"
+
+#: dialogs/edgetypeproperties.cpp:54
+#, fuzzy, kde-format
+#| msgid "Direction"
+msgid "Direction:"
+msgstr "方向"
+
+#: dialogs/edgetypeproperties.cpp:61 dialogs/nodetypeproperties.cpp:59
+#, fuzzy, kde-format
+#| msgid "Visibility"
+msgid "Visibility:"
+msgstr "可見度"
+
+#: dialogs/edgetypeproperties.cpp:137
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The selected ID for this edge type."
+msgstr "此邊緣型態選取的代碼："
+
+#: dialogs/edgetypeproperties.cpp:141
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another edge type, please select a "
+"different one."
+msgstr "選取的代碼已用於其他的邊緣型態，請選擇另一個。"
+
+#: dialogs/nodeproperties.cpp:26
+#, kde-format
+msgctxt "@title:window"
+msgid "Node Properties"
+msgstr "節點屬性"
+
+#: dialogs/nodeproperties.cpp:133
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The selected ID for this node."
+msgstr "此節點的選取代碼。"
+
+#: dialogs/nodeproperties.cpp:137
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another node, please select a different "
+"one."
+msgstr "選取的代碼已用於其他的節點，請選擇另一個。"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
+#: dialogs/nodeproperties.ui:26
+#, kde-format
+msgid "Node Properties"
+msgstr "節點屬性"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
+#. i18n: ectx: property (toolTip), widget (KColorCombo, color)
+#: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
+#, kde-format
+msgid "Node color"
+msgstr "節點顏色"
+
+#: dialogs/nodetypeproperties.cpp:35
+#, kde-format
+msgid "Nodes"
+msgstr "節點"
+
+#: dialogs/nodetypeproperties.cpp:41
+#, kde-format
+msgctxt "@title:window"
+msgid "Node Type Properties"
+msgstr "節點型態屬性"
+
+#: dialogs/nodetypeproperties.cpp:133
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The selected ID for this node type."
+msgstr "此節點型態選取的代碼。"
+
+#: dialogs/nodetypeproperties.cpp:137
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another node type, please select a "
+"different one."
+msgstr "選取的代碼已用於其他的節點型態，請選擇另一個。"
+
+#: dialogs/propertieswidget.cpp:33
+#, kde-format
+msgid "Add Property"
+msgstr "新增屬性"
+
+#: dialogs/propertydelegate.cpp:49
+#, kde-format
+msgid "Delete this property."
+msgstr "刪除此屬性。"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:33
+#, kde-format
+msgctxt "@title:window"
+msgid "Assign Values"
+msgstr "指定值"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:52
+#, kde-format
+msgid "All Data Types"
+msgstr "所有資料型態"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:57
+#, kde-format
+msgid "All Edge Types"
+msgstr "所有邊緣型態"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:81
+#, kde-format
+msgid "Enter Property Name"
+msgstr "輸入指標名稱"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
+#: editorplugins/assignvalues/assignvalueswidget.ui:32
+#, kde-format
+msgid "Assign Values"
+msgstr "指定值"
+
+#. i18n: ectx: property (text), widget (QLabel, property_choice_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:40
+#, kde-format
+msgid "Choose Properties"
+msgstr "選擇屬性"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/assignvalues/assignvalueswidget.ui:59
+#, kde-format
+msgid "Show advanced options."
+msgstr "顯示進階選項。"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: editorplugins/assignvalues/assignvalueswidget.ui:74
+#, kde-format
+msgid "Assignment Method"
+msgstr "指定方式"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:81
+#, kde-format
+msgid "Enumerate Items"
+msgstr "列舉項目"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:86
+#, kde-format
+msgid "Enumerate Alpha"
+msgstr "列舉英文字母"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:91
+#, kde-format
+msgid "Enumerate Alpha-Numeric"
+msgstr "列舉英文與數字"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:96
+#, kde-format
+msgid "Assign Random Integers"
+msgstr "指定隨機整數"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:101
+#, kde-format
+msgid "Assign Random Reals"
+msgstr "指定隨機實數"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:106
+#, kde-format
+msgid "Assign Constant Value"
+msgstr "指定常數值"
+
+#. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
+#: editorplugins/assignvalues/assignvalueswidget.ui:132
+#, fuzzy, kde-format
+#| msgid "Start ID"
+msgid "Start ID:"
+msgstr "開始代碼"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:167
+#, kde-format
+msgid "Initial string"
+msgstr "初始字串"
+
+#. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:174
+#, kde-format
+msgid "a"
+msgstr "a"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
+#: editorplugins/assignvalues/assignvalueswidget.ui:192
+#, kde-format
+msgid "Start ID"
+msgstr "開始代碼"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
+#: editorplugins/assignvalues/assignvalueswidget.ui:209
+#, kde-format
+msgid "Prefix"
+msgstr "前置字串"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: editorplugins/assignvalues/assignvalueswidget.ui:230
+#: editorplugins/assignvalues/assignvalueswidget.ui:298
+#, kde-format
+msgid "Lower Limit"
+msgstr "下限"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: editorplugins/assignvalues/assignvalueswidget.ui:250
+#: editorplugins/assignvalues/assignvalueswidget.ui:305
+#, kde-format
+msgid "Upper Limit"
+msgstr "上限"
+
+#. i18n: ectx: property (text), widget (QLabel, label_dagGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: editorplugins/assignvalues/assignvalueswidget.ui:257
+#: editorplugins/assignvalues/assignvalueswidget.ui:312
+#: editorplugins/generategraph/generategraphwidget.ui:483
+#, kde-format
+msgid "Generator Seed"
+msgstr "產生器種子"
+
+#. i18n: ectx: property (text), widget (QLabel, constant_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:372
+#, kde-format
+msgid "Constant"
+msgstr "常數"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:400
+#, kde-format
+msgid "Overwrite existing values"
+msgstr "覆寫現有的值"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
+#. i18n: ectx: property (text), widget (QLabel, labelData)
+#: editorplugins/assignvalues/assignvalueswidget.ui:434
+#: editorplugins/generategraph/generategraphwidget.ui:252
+#: editorplugins/generategraph/generategraphwidget.ui:404
+#, kde-format
+msgid "Nodes:"
+msgstr "節點："
+
+#. i18n: ectx: property (text), widget (QLabel, labelProperty)
+#: editorplugins/assignvalues/assignvalueswidget.ui:447
+#, fuzzy, kde-format
+#| msgid "Property Name"
+msgid "Property name:"
+msgstr "屬性名稱"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
+#. i18n: ectx: property (text), widget (QLabel, labelConnection)
+#: editorplugins/assignvalues/assignvalueswidget.ui:460
+#: editorplugins/generategraph/generategraphwidget.ui:272
+#, kde-format
+msgid "Edges:"
+msgstr "邊："
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
+#: editorplugins/assignvalues/assignvalueswidget.ui:482
+#, kde-format
+msgid "Assign values to selected edges."
+msgstr "指定數值給選取的邊緣。"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
+#: editorplugins/assignvalues/assignvalueswidget.ui:509
+#, kde-format
+msgid "Assign values to selected nodes."
+msgstr "指定數值給選取的節點。"
+
+#: editorplugins/generategraph/generategraphwidget.cpp:79
+#, kde-format
+msgctxt "@title:window"
+msgid "Generate Graph"
+msgstr "產生圖形"
+
+#: editorplugins/generategraph/generategraphwidget.cpp:119
+#: editorplugins/generategraph/generategraphwidget.cpp:126
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "%1 (ID %2)"
+msgstr "%1 (代碼 %2)"
+
+#: editorplugins/generategraph/generategraphwidget.cpp:529
+#, kde-format
+msgid "Incorrect Edge Direction"
+msgstr "錯誤邊緣方向"
+
+#: editorplugins/generategraph/generategraphwidget.cpp:529
+#, kde-format
+msgid "Edges in a Directed Acyclical Graph must be directional."
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
+#: editorplugins/generategraph/generategraphwidget.ui:14
+#, kde-format
+msgid "Generate Graph"
+msgstr "產生圖形"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:22
+#, kde-format
+msgid "Select the graph generator."
+msgstr "選擇圖形產生器。"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:26
+#, kde-format
+msgid "Mesh Graph"
+msgstr "網狀圖形"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:31
+#, kde-format
+msgid "Star Graph"
+msgstr "星形圖形"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:36
+#, kde-format
+msgid "Circle Graph"
+msgstr "圓圈圖形"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:41
+#, kde-format
+msgid "Random Graph"
+msgstr "隨機圖形"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:46
+#, kde-format
+msgid "Erdös-Renyi Graph"
+msgstr "Erdös-Renyi 圖形"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:51
+#, kde-format
+msgid "Random Tree Graph"
+msgstr "隨機樹狀圖"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:56
+#, fuzzy, kde-format
+#| msgid "Random Graph"
+msgid "Random Dag Graph"
+msgstr "隨機圖形"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:61
+#, kde-format
+msgid "Path Graph"
+msgstr "路徑圖形"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:66
+#, kde-format
+msgid "Complete Graph"
+msgstr "完全圖形"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:71
+#, fuzzy, kde-format
+#| msgid "Complete Graph"
+msgid "Complete Bipartite"
+msgstr "完全圖形"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/generategraph/generategraphwidget.ui:91
+#, kde-format
+msgid "Show advanced settings."
+msgstr "顯示進階設定。"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:106
+#, kde-format
+msgid "Set the unique identifier of the generated graph."
+msgstr "設定此產生圖形的唯一識別子。"
+
+#. i18n: ectx: property (text), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:109
+#, kde-format
+msgid "Graph"
+msgstr "圖形"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:116
+#, kde-format
+msgid "The node type to create the nodes of the graph with"
+msgstr "用來建立圖形節點的節點型態"
+
+#. i18n: ectx: property (text), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:119
+#, fuzzy, kde-format
+#| msgid "Node type"
+msgid "Node type:"
+msgstr "節點型態"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
+#: editorplugins/generategraph/generategraphwidget.ui:126
+#, kde-format
+msgid "The identifier of the created graph (used for scripting)"
+msgstr "已建立圖形的識別子（用於文稿）。"
+
+#. i18n: ectx: property (text), widget (QLabel, label_columns)
+#: editorplugins/generategraph/generategraphwidget.ui:148
+#, kde-format
+msgid "Number of Columns:"
+msgstr "欄數："
+
+#. i18n: ectx: property (text), widget (QLabel, label_rows)
+#: editorplugins/generategraph/generategraphwidget.ui:168
+#, kde-format
+msgid "Number of Rows:"
+msgstr "列數："
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
+#: editorplugins/generategraph/generategraphwidget.ui:196
+#, kde-format
+msgid "Satellite Nodes:"
+msgstr "衛星點節："
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
+#. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_completeNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:224
+#: editorplugins/generategraph/generategraphwidget.ui:505
+#: editorplugins/generategraph/generategraphwidget.ui:527
+#, kde-format
+msgid "Number of Nodes:"
+msgstr "節點數："
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
+#. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
+#: editorplugins/generategraph/generategraphwidget.ui:286
+#: editorplugins/generategraph/generategraphwidget.ui:332
+#, kde-format
+msgid "Allow self-edges:"
+msgstr "允許自我邊緣："
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:293
+#, fuzzy, kde-format
+#| msgid "Generator Seed:"
+msgid "Generator seed:"
+msgstr "產生種子："
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:325
+#, kde-format
+msgid "Nodes (n):"
+msgstr "節點 (n)："
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:349
+#, kde-format
+msgid "Edge Probability (p):"
+msgstr "邊緣機率 (p)："
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:356
+#: editorplugins/generategraph/generategraphwidget.ui:421
+#, kde-format
+msgid "Generator Seed:"
+msgstr "產生種子："
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:446
+#, kde-format
+msgid "Number of Nodes"
+msgstr "節點數"
+
+#. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:463
+#, kde-format
+msgid "Edge Probability"
+msgstr "邊緣機率："
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
+#: editorplugins/generategraph/generategraphwidget.ui:549
+#, fuzzy, kde-format
+#| msgid "Satellite Nodes:"
+msgid "Left Set Nodes:"
+msgstr "衛星點節："
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
+#: editorplugins/generategraph/generategraphwidget.ui:563
+#, fuzzy, kde-format
+#| msgid "Satellite Nodes:"
+msgid "Right Set Nodes:"
+msgstr "衛星點節："
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:590
+#, kde-format
+msgid "Select the edge type for connections of the generated graph."
+msgstr "選擇產生圖形的連線的邊緣型態。"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:604
+#, kde-format
+msgid "The edge type to create the edges of the graph with"
+msgstr "用來建立圖形邊緣的邊緣型態"
+
+#. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:607
+#, fuzzy, kde-format
+#| msgid "Edge type"
+msgid "Edge type:"
+msgstr "邊緣型態"
+
+#. i18n: ectx: property (text), widget (QLabel, labelGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:614
+#, fuzzy, kde-format
+#| msgid "Graph Generator"
+msgid "Graph generator:"
+msgstr "圖形產生器"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:621
+#, kde-format
+msgid "Select the node type for node elements of the generated graph."
+msgstr "選擇產生圖形的節點元素的節點型態。"
+
+#: editorplugins/graphlayout/graphlayoutwidget.cpp:37
+#, kde-format
+msgctxt "@title:window"
+msgid "Graph Layout"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:20
+#, kde-format
+msgid "Graph Layout"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:36
+#, kde-format
+msgid "Force Based Layout"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:57
+#, kde-format
+msgid "Area factor:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:77
+#, kde-format
+msgid "Repelling force:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:97
+#, kde-format
+msgid "Attraction force:"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:119
+#, kde-format
+msgid "Radial Tree Layout"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, rootLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:134
+#, kde-format
+msgid "Center/Root:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:144
+#, kde-format
+msgid "Node separation:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:158
+#, fuzzy, kde-format
+#| msgid "Type:"
+msgid "Tree type:"
+msgstr "型態："
+
+#. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:165
+#, kde-format
+msgid "Free tree"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:175
+#, kde-format
+msgid "Rooted tree"
+msgstr ""
+
+#: editorplugins/transformedges/transformedgeswidget.cpp:23
+#, kde-format
+msgctxt "@title:window"
+msgid "Transform Edges"
+msgstr "轉換邊緣"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
+#: editorplugins/transformedges/transformedgeswidget.ui:14
+#, kde-format
+msgid "Transform Edges"
+msgstr "轉換邊緣"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:22
+#, kde-format
+msgid ""
+"This option connects all nodes of the given graph. The new edges do not have "
+"any preset weights."
+msgstr "此選項會將給定圖形的所有結點連接起來。新的邊緣不會有任何預設的權重。"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:25
+#, fuzzy, kde-format
+#| msgid "Complete Graph"
+msgid "Complete graph"
+msgstr "完全圖形"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:35
+#, kde-format
+msgid "This option removes all edges from the given graph."
+msgstr "此選項移除給定圖形的所有邊緣。"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:38
+#, fuzzy, kde-format
+#| msgid "Remove all Edges"
+msgid "Remove all edges"
+msgstr "移除所有邊緣"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:45
+#, kde-format
+msgid ""
+"This option reverses all edges of a directed graph. Note that this does not "
+"apply to undirected graphs."
+msgstr "此選項將一個有向圖的所有邊緣反向。注意它不會套用在無向圖上。"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:48
+#, fuzzy, kde-format
+#| msgid "Reverse all Edges"
+msgid "Reverse all edges"
+msgstr "反向所有邊緣"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:59
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes <span "
+"style=\" font-style:italic;\">Prim's Minimal Spanning Tree Algorithm</span> "
+"at the graph. All edges without given weights are assumed to have weights "
+"equals 1. Directed and undirected graphs are processed accordingly.</p></"
+"body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">這個選項會對圖形執行<span "
+"style=\" font-style:italic;\">Prim 最小生成樹演算法</span>。所有沒有指定權重"
+"的邊緣，預設權重都為 1。有向圖與無向圖會分別處理。</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:62
+#, fuzzy, kde-format
+#| msgid "Spanning Tree Transformation"
+msgid "Spanning tree transformation"
+msgstr "生成樹轉換"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:69
+#, fuzzy, kde-format
+#| msgid "Remove all Edges"
+msgid "Remove all self edges"
+msgstr "移除所有邊緣"
+
+#: fileformats/dot/dotfileformat.cpp:45
+#, kde-format
+msgid "Graphviz Format (%1)"
+msgstr "Graphviz 格式 (%1)"
+
+#: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
+#: fileformats/rocs1/rocs1fileformat.cpp:57
+#: fileformats/rocs2/rocs2fileformat.cpp:48
+#: fileformats/tgf/tgffileformat.cpp:52
+#, kde-format
+msgid "Could not open file \"%1\" in read mode: %2"
+msgstr "無法以讀取模式開啟檔案 %1：%2"
+
+#: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
+#, kde-format
+msgid "Could not parse file \"%1\"."
+msgstr "無法剖析檔案 %1。"
+
+#: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
+#, kde-format
+msgid "Cannot open file %1 to write document. Error: %2"
+msgstr "無法開啟檔案 %1 以寫入文件。錯誤：%2"
+
+#: fileformats/fileformatmanager.cpp:48
+#, fuzzy, kde-format
+#| msgid "Plugin Error"
+msgctxt "@title:window"
+msgid "Plugin Error"
+msgstr "外掛程式錯誤"
+
+#: fileformats/fileformatmanager.cpp:50
+#, kde-format
+msgid "Plugins could not be found in specified directories:<br>"
+msgstr "無法在指定目錄找到外掛程式：<br>"
+
+#: fileformats/fileformatmanager.cpp:52
+#, kde-format
+msgid ""
+"<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
+"link</a> for further information."
+msgstr ""
+"<br><br> 參閱<a href='https://doc.qt.io/qt-5/deployment-plugins.html'>這個連"
+"結</a>以取得更多資訊。"
+
+#: fileformats/gml/gmlfileformat.cpp:44
+#, kde-format
+msgid "Graph Markup Language Format (%1)"
+msgstr "Graph Markup Language 格式 (%1)"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:38
+#, kde-format
+msgid "Rocs 1 Graph File Format (%1)"
+msgstr "Rocs 1 圖形檔案格式（%1）"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:258
+#: fileformats/rocs2/rocs2fileformat.cpp:211
+#: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
+#, kde-format
+msgid "Could not open file \"%1\" in write mode: %2"
+msgstr "無法以寫入模式開啟檔案 %1：%2"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:269
+#, kde-format
+msgid "Could not write data, aborting. Error: %1."
+msgstr "無法寫入資料。操作中止。錯誤：%1。"
+
+#: fileformats/rocs2/rocs2fileformat.cpp:40
+#, kde-format
+msgid "Rocs Graph Format (%1)"
+msgstr "Rocs 圖形檔案格式（%1）"
+
+#: fileformats/rocs2/rocs2fileformat.cpp:312
+#, kde-format
+msgid "Error on serializing file format to file."
+msgstr "將檔案格式序列成檔案時發生錯誤。"
+
+#: fileformats/tgf/tgffileformat.cpp:38
+#, kde-format
+msgid "Trivial Graph Format (%1)"
+msgstr "Trivial Graph 格式 (%1)"
+
+#: fileformats/tgf/tgffileformat.cpp:73
+#, kde-format
+msgid "Could not parse file. Identifier \"%1\" is used more than once."
+msgstr "無法剖析檔案 。辨識子 %1 使用了一次以上。"
+
+#: fileformats/tgf/tgffileformat.cpp:85
+#, kde-format
+msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
+msgstr "無法剖析檔案 。從 %1 到 %2 的邊緣使用了未定義的節點。"
+
+#: fileformats/tikz/tikzfileformat.cpp:34
+#, kde-format
+msgid "TikZ (PGF) Format (%1)"
+msgstr "TikZ (PGF) 格式 (%1)"
+
+#: graphdocument.cpp:129
+#, fuzzy, kde-format
+#| msgid "default"
+msgid "Default"
+msgstr "預設"
+
+#: graphdocument.cpp:315
+#, kde-format
+msgctxt "@title:tab initial title for graph document"
+msgid "New Graph"
+msgstr "新增圖形"
+
+#: kernel/documentwrapper.cpp:88
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: no node with ID %2 registered"
+msgstr "%1：沒有任何代碼為 %2 的節點註冊"
+
+#: kernel/documentwrapper.cpp:115 kernel/nodewrapper.cpp:109
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: node type ID %2 not registered"
+msgstr "%1：節點型態代碼 %2 未註冊"
+
+#: kernel/documentwrapper.cpp:150 kernel/edgewrapper.cpp:59
+#: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
+#: kernel/nodewrapper.cpp:205 kernel/nodewrapper.cpp:242
+#: kernel/nodewrapper.cpp:288 kernel/nodewrapper.cpp:339
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: edge type ID %2 not registered"
+msgstr "%1：邊緣型態代碼 %2 未註冊"
+
+#: kernel/documentwrapper.cpp:174
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"from\" is not a valid node object"
+msgstr "%1：\"from\" 不是合法的節點物件"
+
+#: kernel/documentwrapper.cpp:179
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"to\" is not a valid node object"
+msgstr "%1：\"to\" 不是合法的節點物件"
+
+#: kernel/documentwrapper.cpp:190
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"node\" is not a valid node object"
+msgstr "%1：\"node\" 不是合法的節點物件"
+
+#: kernel/documentwrapper.cpp:204
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"edge\" is not a valid edge object"
+msgstr "%1：\"edge\" 不是合法的節點物件"
+
+#: kernel/kernel.cpp:94
+#, kde-format
+msgctxt "@info status message after successful script execution"
+msgid "<i>Execution Finished</i>"
+msgstr "<i>執行已完成</i>"
+
+#: kernel/modules/console/console.xml:7
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"The global Console object allows you to print messages of different "
+"importance to a log."
+msgstr "全域 Console 物件讓您列印不同重要等級的訊息到紀錄中。"
+
+#: kernel/modules/console/console.xml:17
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given message of normal severity."
+msgstr "用一般嚴重等級列印指定的訊息。"
+
+#: kernel/modules/console/console.xml:31
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given debug message."
+msgstr "列印指定的除錯訊息。"
+
+#: kernel/modules/console/console.xml:45
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given error message of high severity."
+msgstr "用高嚴重等級列印錯誤訊息。"
+
+#: kernel/modules/document/document.xml:9
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"The document object provides access to all elements.\n"
+msgstr ""
+"\n"
+"文件物件提供所有元素均可存取。\n"
+
+#: kernel/modules/document/document.xml:19
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the node with specified ID."
+msgstr "傳回指定 ID 的節點。"
+
+#: kernel/modules/document/document.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of a node."
+msgstr "節點識別子。"
+
+#: kernel/modules/document/document.xml:33
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all nodes."
+msgstr "傳回所有節點清單。"
+
+#: kernel/modules/document/document.xml:42
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list all nodes of specified type."
+msgstr "傳回指定型態的所有節點的清單。"
+
+#: kernel/modules/document/document.xml:49
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of a node type."
+msgstr "節點型態的辨識子"
+
+#: kernel/modules/document/document.xml:56
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all edges."
+msgstr "傳回所有邊緣的清單。"
+
+#: kernel/modules/document/document.xml:65
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list all edges of specified type."
+msgstr "傳回指定型態的所有邊緣的清單。"
+
+#: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
+#: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
+#: kernel/modules/document/node.xml:141 kernel/modules/document/node.xml:164
+#: kernel/modules/document/node.xml:187
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of an edge type."
+msgstr "邊緣型態的辨識子"
+
+#: kernel/modules/document/document.xml:79
+#, kde-format
+msgctxt "Scripting API"
+msgid "Create node at position (x,y)."
+msgstr "在位置 (x,y) 建立新的節點。"
+
+#: kernel/modules/document/document.xml:86
+#, kde-format
+msgctxt "Scripting API"
+msgid "X-coordinate of the node."
+msgstr "節點的 X 座標。"
+
+#: kernel/modules/document/document.xml:91
+#, kde-format
+msgctxt "Scripting API"
+msgid "Y-coordinate of the node."
+msgstr "節點的 Y 座標。"
+
+#: kernel/modules/document/document.xml:98
+#, kde-format
+msgctxt "Scripting API"
+msgid "Create edge between the given nodes of default edge type."
+msgstr "在兩個節點間以預設邊緣型態建立新邊緣。"
+
+#: kernel/modules/document/document.xml:105
+#, kde-format
+msgctxt "Scripting API"
+msgid "Start node of the edge."
+msgstr "新增節點到此邊緣。"
+
+#: kernel/modules/document/document.xml:110
+#, kde-format
+msgctxt "Scripting API"
+msgid "Target node of the edge."
+msgstr "邊緣的目標節點。"
+
+#: kernel/modules/document/document.xml:117
+#, kde-format
+msgctxt "Scripting API"
+msgid "Delete the given node."
+msgstr "刪除指定的節點。"
+
+#: kernel/modules/document/document.xml:124
+#, kde-format
+msgctxt "Scripting API"
+msgid "The node to be deleted."
+msgstr "要刪除的節點。"
+
+#: kernel/modules/document/document.xml:131
+#, kde-format
+msgctxt "Scripting API"
+msgid "Delete the given edge."
+msgstr "刪除指定的邊緣。"
+
+#: kernel/modules/document/document.xml:138
+#, kde-format
+msgctxt "Scripting API"
+msgid "The edge to be deleted."
+msgstr "要刪除的邊緣。"
+
+#: kernel/modules/document/edge.xml:9
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"An edge is the connection of two nodes. Edges can be either directed or "
+"undirected, depending on their type.\n"
+msgstr ""
+"\n"
+"邊緣（Edge）是兩個節點間的連線。邊緣依其型態不同，可以是有向或無向的。\n"
+
+#: kernel/modules/document/edge.xml:17
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the edge's type. If setting, the edge type "
+"identifier must exist."
+msgstr "讀取並設定邊緣型態的識別子。設定了之後則此識別子必須存在。"
+
+#: kernel/modules/document/edge.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the origin node of the edge."
+msgstr "傳回邊緣的原始節點。"
+
+#: kernel/modules/document/edge.xml:35
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the target node of the edge."
+msgstr "傳回邊緣的目標節點。"
+
+#: kernel/modules/document/edge.xml:44
+#, kde-format
+msgctxt "Scripting API"
+msgid "Returns true if the edge's type is directed, otherwise false."
+msgstr "若邊緣型態為有向，則傳回真（true），否則傳回假（false）。"
+
+#: kernel/modules/document/node.xml:11
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"A node is the data element of a graph.\n"
+"It can have arbitrary dynamic properties that are either set in the editor "
+"or simply assigned on run-time.\n"
+"Note that dynamic properties are only available after script execution, if "
+"they are registered for the node's type.\n"
+msgstr ""
+
+#: kernel/modules/document/node.xml:19
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the unique identifier of this node."
+msgstr "讀取與設定此節點的唯一識別子。"
+
+#: kernel/modules/document/node.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the x-coordinate of the node."
+msgstr "讀取與設定此節點的 X 座標。"
+
+#: kernel/modules/document/node.xml:33
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the y-coordinate of the node."
+msgstr "讀取與設定此節點的 Y 座標。"
+
+#: kernel/modules/document/node.xml:40
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
+"for red)."
+msgstr "讀取與設定十六進位數值節點的顏色字串（範例：「#ff0000」表示紅色）"
+
+#: kernel/modules/document/node.xml:47
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the node's type. If setting, the node type "
+"identifier must exist."
+msgstr "讀取與設定節點類型的識別值。設定後節點類型的識別值必須存在。"
+
+#: kernel/modules/document/node.xml:56
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all edges (incoming and outgoing) of this node."
+msgstr "傳回此節點所有邊緣的清單（來向或去向）。"
+
+#: kernel/modules/document/node.xml:65
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return a list of all edges (incoming and outgoing) of this node of a "
+"specified type."
+msgstr "傳回此節點所有特定型態邊緣的清單（來向或去向）。"
+
+#: kernel/modules/document/node.xml:79
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of incoming edges of this node."
+msgstr "傳回此節點所有來向邊緣的清單。"
+
+#: kernel/modules/document/node.xml:88
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all incoming edges of this node of a specified type."
+msgstr "傳回此節點所有來向並且是特定型態邊緣的清單。"
+
+#: kernel/modules/document/node.xml:102
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node."
+msgstr "傳回此節點所有去向邊緣的清單。"
+
+#: kernel/modules/document/node.xml:111
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node of a specified type."
+msgstr "傳回此節點所有去向並且是特定型態邊緣的清單。"
+
+#: kernel/modules/document/node.xml:125
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node. This method respects if edges "
+"are directed."
+msgstr "傳回所有連結到此節點的所有節點清單。此方法會遵循邊緣的方向。"
+
+#: kernel/modules/document/node.xml:134
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node via an edge of specified type. "
+"This method respects if edges are directed."
+msgstr "傳回所有連結到此節點的所有節點清單。此方法會遵循邊緣的方向。"
+
+#: kernel/modules/document/node.xml:148
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid "Return a list all nodes connected to this node by an incoming edge."
+msgstr "傳回所有連結到此節點的所有節點清單。此方法會遵循邊緣的方向。"
+
+#: kernel/modules/document/node.xml:157
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return a list of all incoming edges of this node of a specified type."
+msgctxt "Scripting API"
+msgid ""
+"Return a list all nodes connected to this node by an incoming edge of "
+"specified type."
+msgstr "傳回此節點所有來向並且是特定型態邊緣的清單。"
+
+#: kernel/modules/document/node.xml:171
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid "Return list all nodes connected to this node by an outgoing edge."
+msgstr "傳回所有連結到此節點的所有節點清單。此方法會遵循邊緣的方向。"
+
+#: kernel/modules/document/node.xml:180
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node by an outgoing edge of "
+"specified type."
+msgstr "傳回所有連結到此節點的所有節點清單。此方法會遵循邊緣的方向。"
+
+#: kernel/modules/document/node.xml:194
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return a list of all edges of this node to the specified node."
+msgctxt "Scripting API"
+msgid "Return list of distances to specified targets in same order."
+msgstr "傳回此節點所有指向特定節點的邊緣清單。"
+
+#: kernel/modules/document/node.xml:201
+#, kde-format
+msgctxt "Scripting API"
+msgid "Name of edge property that holds the edge length."
+msgstr ""
+
+#: kernel/modules/document/node.xml:206
+#, kde-format
+msgctxt "Scripting API"
+msgid "List of nodes to that the distances shall be computed."
+msgstr ""
+
+#: models/edgemodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "Edge"
+msgstr "邊緣"
+
+#: models/edgepropertymodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "EdgeProperty"
+msgstr "邊緣屬性"
+
+#: models/edgetypemodel.cpp:202
+#, kde-format
+msgctxt "@title:column"
+msgid "Edge Type"
+msgstr "邊緣型態"
+
+#: models/edgetypepropertymodel.cpp:141
+#, kde-format
+msgctxt "@title:column"
+msgid "EdgeTypeProperty"
+msgstr "邊緣型態屬性"
+
+#: models/nodemodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "Node"
+msgstr "節點"
+
+#: models/nodepropertymodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "NodeProperty"
+msgstr "節點屬性"
+
+#: models/nodetypemodel.cpp:200
+#, kde-format
+msgctxt "@title:column"
+msgid "Node Type"
+msgstr "節點型態"
+
+#: models/nodetypepropertymodel.cpp:141
+#, kde-format
+msgctxt "@title:column"
+msgid "NodeTypeProperty"
+msgstr "節點型態屬性"
+
+#: qml/AddEdgeAction.qml:28
+#, kde-format
+msgid "Create Edge"
+msgstr "建立邊緣"
+
+#: qml/AddEdgeAction.qml:31
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "在兩個節點間建立新邊緣"
+
+#: qml/AddNodeAction.qml:13
+#, kde-format
+msgid "Create Node"
+msgstr "建立節點"
+
+#: qml/AddNodeAction.qml:16
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "新增節點到此場景"
+
+#: qml/DeleteAction.qml:13
+#, kde-format
+msgid "Delete Element"
+msgstr "刪除元素"
+
+#: qml/DeleteAction.qml:16
+#, kde-format
+msgid "Delete element from scene"
+msgstr "從場景刪除元素"
+
+#: qml/SelectMoveAction.qml:14
+#, kde-format
+msgid "Select & Move"
+msgstr "選擇並移動"
+
+#: qml/SelectMoveAction.qml:17
+#, kde-format
+msgid "Select and move elements on the scene"
+msgstr "在場景選擇與移動項目"
+
+#~ msgid "Identifier"
+#~ msgstr "識別子"
+
+#~ msgid "Color"
+#~ msgstr "顏色"
+
+#~ msgid "unidirectional"
+#~ msgstr "單向"
+
+#~ msgid "bidirectional"
+#~ msgstr "雙向"

@@ -1,0 +1,2655 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Petros <pvidalis@gmail.com>, 2010.
+# Yannis Kaskamanidis <kiolalis@gmail.com>, 2010.
+# Dimitris Kardarakos <dimkard@gmail.com>, 2012, 2013, 2014.
+# Stelios <sstavra@gmail.com>, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2021-07-08 11:33+0300\n"
+"Last-Translator: Stelios <sstavra@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.04.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Γιάννης Κασκαμανίδης, Δημήτρης Καρδαράκος"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kiolalis@gmail.com, dimkard@gmail.com"
+
+#: dialogs/edgeproperties.cpp:25
+#, kde-format
+msgctxt "@title:window"
+msgid "Edge Properties"
+msgstr "Ιδιότητες ακμής"
+
+#: dialogs/edgeproperties.cpp:80 dialogs/nodeproperties.cpp:86
+#, kde-format
+msgid "Name"
+msgstr "Όνομα"
+
+#: dialogs/edgeproperties.cpp:81 dialogs/nodeproperties.cpp:87
+#, kde-format
+msgid "Value"
+msgstr "Τιμή"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
+#: dialogs/edgeproperties.ui:26
+#, kde-format
+msgid "Edge Properties"
+msgstr "Ιδιότητες ακμής"
+
+#. i18n: ectx: property (text), widget (QLabel, labelType)
+#: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
+#, kde-format
+msgid "Type:"
+msgstr "Τύπος:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
+#: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
+#, kde-format
+msgid "Dynamic Properties"
+msgstr "Δυναμικές ιδιότητες"
+
+#: dialogs/edgetypeproperties.cpp:37
+#, kde-format
+msgid "Edges"
+msgstr "Ακμές"
+
+#: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
+#, fuzzy, kde-format
+#| msgid "Property Names"
+msgid "Property names"
+msgstr "Ονόματα ιδιοτήτων"
+
+#: dialogs/edgetypeproperties.cpp:43
+#, kde-format
+msgctxt "@title:window"
+msgid "Edge Type Properties"
+msgstr "Ιδιότητες τύπου ακμής"
+
+#: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
+#, kde-format
+msgid "Name:"
+msgstr "Όνομα:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelId)
+#. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
+#: dialogs/edgetypeproperties.cpp:49 dialogs/nodeproperties.ui:119
+#: dialogs/nodetypeproperties.cpp:49
+#: editorplugins/generategraph/generategraphwidget.ui:129
+#, kde-format
+msgid "Identifier:"
+msgstr "Αναγνωριστικό:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelColor)
+#: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
+#: dialogs/nodetypeproperties.cpp:52
+#, kde-format
+msgid "Color:"
+msgstr "Χρώμα:"
+
+#: dialogs/edgetypeproperties.cpp:52 graphdocument.cpp:120
+#, kde-format
+msgid "Unidirectional"
+msgstr "Μονής κατεύθυνσης"
+
+#: dialogs/edgetypeproperties.cpp:53 graphdocument.cpp:125
+#, kde-format
+msgid "Bidirectional"
+msgstr "Διπλής κατεύθυνσης"
+
+#: dialogs/edgetypeproperties.cpp:54
+#, fuzzy, kde-format
+#| msgid "Direction"
+msgid "Direction:"
+msgstr "Κατεύθυνση"
+
+#: dialogs/edgetypeproperties.cpp:61 dialogs/nodetypeproperties.cpp:59
+#, fuzzy, kde-format
+#| msgid "Visibility"
+msgid "Visibility:"
+msgstr "Ορατότητα"
+
+#: dialogs/edgetypeproperties.cpp:137
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The selected ID for this edge type."
+msgstr "Το επιλεγμένο αναγνωριστικό γι' αυτόν τον τύπο ακμής."
+
+#: dialogs/edgetypeproperties.cpp:141
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another edge type, please select a "
+"different one."
+msgstr ""
+"Το επιλεγμένο αναγνωριστικό χρησιμοποιείται ήδη για άλλον τύπο ακμής, "
+"επιλέξτε ένα διαφορετικό."
+
+#: dialogs/nodeproperties.cpp:26
+#, kde-format
+msgctxt "@title:window"
+msgid "Node Properties"
+msgstr "Ιδιότητες κόμβου"
+
+#: dialogs/nodeproperties.cpp:133
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The selected ID for this node."
+msgstr "Το επιλεγμένο αναγνωριστικό γι' αυτόν τον κόμβο."
+
+#: dialogs/nodeproperties.cpp:137
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another node, please select a different "
+"one."
+msgstr ""
+"Το επιλεγμένο αναγνωριστικό χρησιμοποιείται ήδη για άλλον κόμβο, επιλέξτε "
+"ένα διαφορετικό."
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
+#: dialogs/nodeproperties.ui:26
+#, kde-format
+msgid "Node Properties"
+msgstr "Ιδιότητες κόμβου"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
+#. i18n: ectx: property (toolTip), widget (KColorCombo, color)
+#: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
+#, kde-format
+msgid "Node color"
+msgstr "Χρώμα κόμβου"
+
+#: dialogs/nodetypeproperties.cpp:35
+#, kde-format
+msgid "Nodes"
+msgstr "Κόμβοι"
+
+#: dialogs/nodetypeproperties.cpp:41
+#, kde-format
+msgctxt "@title:window"
+msgid "Node Type Properties"
+msgstr "Ιδιότητες τύπου κόμβων"
+
+#: dialogs/nodetypeproperties.cpp:133
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The selected ID for this node type."
+msgstr "Το επιλεγμένο αναγνωριστικό γι' αυτόν τον τύπο κόμμβων."
+
+#: dialogs/nodetypeproperties.cpp:137
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The selected ID is already used for another node type, please select a "
+"different one."
+msgstr ""
+"Το επιλεγμένο αναγνωριστικό χρησιμοποιείται ήδη για άλλον τύπο κόμβων, "
+"επιλέξτε ένα διαφορετικό."
+
+#: dialogs/propertieswidget.cpp:33
+#, kde-format
+msgid "Add Property"
+msgstr "Προσθήκη ιδιότητας"
+
+#: dialogs/propertydelegate.cpp:49
+#, kde-format
+msgid "Delete this property."
+msgstr "Να διαγραφεί αυτή η ιδιότητα."
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:33
+#, kde-format
+msgctxt "@title:window"
+msgid "Assign Values"
+msgstr "Εκχώρηση τιμών"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:52
+#, kde-format
+msgid "All Data Types"
+msgstr "Όλοι οι τύποι δεδομένων"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:57
+#, kde-format
+msgid "All Edge Types"
+msgstr "Όλοι οι τύποι ακμών"
+
+#: editorplugins/assignvalues/assignvalueswidget.cpp:81
+#, kde-format
+msgid "Enter Property Name"
+msgstr "Δώστε το όνομα της ιδιότητας"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
+#: editorplugins/assignvalues/assignvalueswidget.ui:32
+#, kde-format
+msgid "Assign Values"
+msgstr "Εκχώρηση τιμών"
+
+#. i18n: ectx: property (text), widget (QLabel, property_choice_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:40
+#, kde-format
+msgid "Choose Properties"
+msgstr "Επιλογή ιδιοτήτων"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/assignvalues/assignvalueswidget.ui:59
+#, kde-format
+msgid "Show advanced options."
+msgstr "Εμφάνιση προηγμένων επιλογών."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: editorplugins/assignvalues/assignvalueswidget.ui:74
+#, kde-format
+msgid "Assignment Method"
+msgstr "Μέθοδος εκχώρησης"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:81
+#, kde-format
+msgid "Enumerate Items"
+msgstr "Απαρίθμηση αντικειμένων"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:86
+#, kde-format
+msgid "Enumerate Alpha"
+msgstr "Απαρίθμηση αλφαβητικών"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:91
+#, kde-format
+msgid "Enumerate Alpha-Numeric"
+msgstr "Απαρίθμηση αλφαριθμητικών"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:96
+#, kde-format
+msgid "Assign Random Integers"
+msgstr "Εκχώρηση τυχαίων ακεραίων"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:101
+#, kde-format
+msgid "Assign Random Reals"
+msgstr "Εκχώρηση τυχαίων πραγματικών"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:106
+#, kde-format
+msgid "Assign Constant Value"
+msgstr "Εκχώρηση σταθερής τιμής"
+
+#. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
+#: editorplugins/assignvalues/assignvalueswidget.ui:132
+#, fuzzy, kde-format
+#| msgid "Start ID"
+msgid "Start ID:"
+msgstr "Αναγνωριστικό έναρξης"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:167
+#, kde-format
+msgid "Initial string"
+msgstr "Αρχική συμβολοσειρά"
+
+#. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:174
+#, kde-format
+msgid "a"
+msgstr "a"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
+#: editorplugins/assignvalues/assignvalueswidget.ui:192
+#, kde-format
+msgid "Start ID"
+msgstr "Αναγνωριστικό έναρξης"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
+#: editorplugins/assignvalues/assignvalueswidget.ui:209
+#, kde-format
+msgid "Prefix"
+msgstr "Πρόθεμα"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: editorplugins/assignvalues/assignvalueswidget.ui:230
+#: editorplugins/assignvalues/assignvalueswidget.ui:298
+#, kde-format
+msgid "Lower Limit"
+msgstr "Κάτω όριο"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: editorplugins/assignvalues/assignvalueswidget.ui:250
+#: editorplugins/assignvalues/assignvalueswidget.ui:305
+#, kde-format
+msgid "Upper Limit"
+msgstr "Άνω όριο"
+
+#. i18n: ectx: property (text), widget (QLabel, label_dagGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: editorplugins/assignvalues/assignvalueswidget.ui:257
+#: editorplugins/assignvalues/assignvalueswidget.ui:312
+#: editorplugins/generategraph/generategraphwidget.ui:483
+#, kde-format
+msgid "Generator Seed"
+msgstr "Σπόρος γεννήτριας"
+
+#. i18n: ectx: property (text), widget (QLabel, constant_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:372
+#, kde-format
+msgid "Constant"
+msgstr "Σταθερά"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:400
+#, kde-format
+msgid "Overwrite existing values"
+msgstr "Αντικατάσταση υφισταμένων τιμών"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
+#. i18n: ectx: property (text), widget (QLabel, labelData)
+#: editorplugins/assignvalues/assignvalueswidget.ui:434
+#: editorplugins/generategraph/generategraphwidget.ui:252
+#: editorplugins/generategraph/generategraphwidget.ui:404
+#, kde-format
+msgid "Nodes:"
+msgstr "Κόμβοι:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelProperty)
+#: editorplugins/assignvalues/assignvalueswidget.ui:447
+#, fuzzy, kde-format
+#| msgid "Property Name"
+msgid "Property name:"
+msgstr "Όνομα ιδιότητας"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
+#. i18n: ectx: property (text), widget (QLabel, labelConnection)
+#: editorplugins/assignvalues/assignvalueswidget.ui:460
+#: editorplugins/generategraph/generategraphwidget.ui:272
+#, kde-format
+msgid "Edges:"
+msgstr "Ακμές:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
+#: editorplugins/assignvalues/assignvalueswidget.ui:482
+#, kde-format
+msgid "Assign values to selected edges."
+msgstr "Εκχώρηση τιμών σε επιλεγμένες ακμές."
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
+#: editorplugins/assignvalues/assignvalueswidget.ui:509
+#, kde-format
+msgid "Assign values to selected nodes."
+msgstr "Εκχώρηση τιμών σε επιλεγμένους κόμβους."
+
+#: editorplugins/generategraph/generategraphwidget.cpp:79
+#, kde-format
+msgctxt "@title:window"
+msgid "Generate Graph"
+msgstr "Παραγωγή γράφου"
+
+#: editorplugins/generategraph/generategraphwidget.cpp:119
+#: editorplugins/generategraph/generategraphwidget.cpp:126
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "%1 (ID %2)"
+msgstr "%1 (ID %2)"
+
+#: editorplugins/generategraph/generategraphwidget.cpp:529
+#, kde-format
+msgid "Incorrect Edge Direction"
+msgstr "Λανθασμένη κατεύθυνση ακμής"
+
+#: editorplugins/generategraph/generategraphwidget.cpp:529
+#, kde-format
+msgid "Edges in a Directed Acyclical Graph must be directional."
+msgstr ""
+"Οι ακμές σε έναν κατευθυνόμενο χωρίς κύκλους γράφο πρέπει να είναι "
+"κατευθυνόμενες."
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
+#: editorplugins/generategraph/generategraphwidget.ui:14
+#, kde-format
+msgid "Generate Graph"
+msgstr "Παραγωγή γράφου"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:22
+#, kde-format
+msgid "Select the graph generator."
+msgstr "Επιλέξτε τη γεννήτρια του γράφου."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:26
+#, kde-format
+msgid "Mesh Graph"
+msgstr "Γράφος πλέγμσ"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:31
+#, kde-format
+msgid "Star Graph"
+msgstr "Γράφος αστέρι"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:36
+#, kde-format
+msgid "Circle Graph"
+msgstr "Γράφος κύκλος"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:41
+#, kde-format
+msgid "Random Graph"
+msgstr "Τυχαίος γράφος"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:46
+#, kde-format
+msgid "Erdös-Renyi Graph"
+msgstr "Γράφος Erdös-Renyi"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:51
+#, kde-format
+msgid "Random Tree Graph"
+msgstr "Τυχαίο δένδρο"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:56
+#, kde-format
+msgid "Random Dag Graph"
+msgstr "Τυχαίος κατευθυνόμενος χωρίς κύκλους"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:61
+#, kde-format
+msgid "Path Graph"
+msgstr "Διαδρομή"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:66
+#, kde-format
+msgid "Complete Graph"
+msgstr "Πλήρης"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:71
+#, kde-format
+msgid "Complete Bipartite"
+msgstr "Πλήρης διμερής"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/generategraph/generategraphwidget.ui:91
+#, kde-format
+msgid "Show advanced settings."
+msgstr "Εμφάνιση προηγμένων ρυθμίσεων."
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:106
+#, kde-format
+msgid "Set the unique identifier of the generated graph."
+msgstr "Ρύθμιση του μοναδικού αναγνωριστικού του παραγόμενου γράφου."
+
+#. i18n: ectx: property (text), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:109
+#, kde-format
+msgid "Graph"
+msgstr "Γράφος"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:116
+#, kde-format
+msgid "The node type to create the nodes of the graph with"
+msgstr "Ο τύπος κόμβου για τη δημιουργία των κόμβων του γράφου με"
+
+#. i18n: ectx: property (text), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:119
+#, fuzzy, kde-format
+#| msgid "Node type"
+msgid "Node type:"
+msgstr "Τύπος κόμβου"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
+#: editorplugins/generategraph/generategraphwidget.ui:126
+#, kde-format
+msgid "The identifier of the created graph (used for scripting)"
+msgstr ""
+"Το αναγνωριστικό του δημιουργημένου γράφου (χρησιμοποιείται σε συγγραφή "
+"σεναρίων)"
+
+#. i18n: ectx: property (text), widget (QLabel, label_columns)
+#: editorplugins/generategraph/generategraphwidget.ui:148
+#, kde-format
+msgid "Number of Columns:"
+msgstr "Πλήθος στηλών"
+
+#. i18n: ectx: property (text), widget (QLabel, label_rows)
+#: editorplugins/generategraph/generategraphwidget.ui:168
+#, kde-format
+msgid "Number of Rows:"
+msgstr "Πλήθος γραμμών"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
+#: editorplugins/generategraph/generategraphwidget.ui:196
+#, kde-format
+msgid "Satellite Nodes:"
+msgstr "Κόμβοι δορυφόροι:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
+#. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_completeNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:224
+#: editorplugins/generategraph/generategraphwidget.ui:505
+#: editorplugins/generategraph/generategraphwidget.ui:527
+#, kde-format
+msgid "Number of Nodes:"
+msgstr "Πλήθος κόμβων:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
+#. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
+#: editorplugins/generategraph/generategraphwidget.ui:286
+#: editorplugins/generategraph/generategraphwidget.ui:332
+#, kde-format
+msgid "Allow self-edges:"
+msgstr "Να επιτρέπονται βρόχοι:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:293
+#, fuzzy, kde-format
+#| msgid "Generator Seed:"
+msgid "Generator seed:"
+msgstr "Σπόρος γεννήτριας:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:325
+#, kde-format
+msgid "Nodes (n):"
+msgstr "Κόμβοι (n):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:349
+#, kde-format
+msgid "Edge Probability (p):"
+msgstr "Πιθανότητα ακμής (p):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:356
+#: editorplugins/generategraph/generategraphwidget.ui:421
+#, kde-format
+msgid "Generator Seed:"
+msgstr "Σπόρος γεννήτριας:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:446
+#, kde-format
+msgid "Number of Nodes"
+msgstr "Πλήθος κόμβων"
+
+#. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:463
+#, kde-format
+msgid "Edge Probability"
+msgstr "Πιθανότητα ακμής"
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
+#: editorplugins/generategraph/generategraphwidget.ui:549
+#, kde-format
+msgid "Left Set Nodes:"
+msgstr "Κόμβοι αριστερού συνόλου:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
+#: editorplugins/generategraph/generategraphwidget.ui:563
+#, kde-format
+msgid "Right Set Nodes:"
+msgstr "Κόμβοι δεξιού συνόλου:"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:590
+#, kde-format
+msgid "Select the edge type for connections of the generated graph."
+msgstr "Επιλέξτε τον τύπο ακμών για τις συνδέσεις του παραγόμενου γράφου."
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:604
+#, kde-format
+msgid "The edge type to create the edges of the graph with"
+msgstr "Ο τύπος ακμής για τη δημιουργία ακμών του γράφου με"
+
+#. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:607
+#, fuzzy, kde-format
+#| msgid "Edge type"
+msgid "Edge type:"
+msgstr "Τύπος ακμής"
+
+#. i18n: ectx: property (text), widget (QLabel, labelGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:614
+#, fuzzy, kde-format
+#| msgid "Graph Generator"
+msgid "Graph generator:"
+msgstr "Γεννήτρια γράφου"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:621
+#, kde-format
+msgid "Select the node type for node elements of the generated graph."
+msgstr "Επιλέξτε τον τύπο κόμβου για τους κόμβους του παραγόμενου γράφου."
+
+#: editorplugins/graphlayout/graphlayoutwidget.cpp:37
+#, kde-format
+msgctxt "@title:window"
+msgid "Graph Layout"
+msgstr "Διάταξη γράφου"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:20
+#, kde-format
+msgid "Graph Layout"
+msgstr "Διάταξη γράφου"
+
+#. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:36
+#, kde-format
+msgid "Force Based Layout"
+msgstr "Εξαναγκασμός βασικής διάταξης"
+
+#. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:57
+#, kde-format
+msgid "Area factor:"
+msgstr "Παράγοντας περιοχής:"
+
+#. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:77
+#, kde-format
+msgid "Repelling force:"
+msgstr "Δύναμη απώθησης:"
+
+#. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:97
+#, kde-format
+msgid "Attraction force:"
+msgstr "Δύναμη έλξης:"
+
+#. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:119
+#, kde-format
+msgid "Radial Tree Layout"
+msgstr "Διάταξη ακτινωτού δένδρου"
+
+#. i18n: ectx: property (text), widget (QLabel, rootLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:134
+#, kde-format
+msgid "Center/Root:"
+msgstr "Κέντρο/ρίζα"
+
+#. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:144
+#, kde-format
+msgid "Node separation:"
+msgstr "Διαχωρισμός κόμβων:"
+
+#. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:158
+#, kde-format
+msgid "Tree type:"
+msgstr "Τύπος δένδρου:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:165
+#, kde-format
+msgid "Free tree"
+msgstr "Ελεύθερο δένδρο"
+
+#. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:175
+#, kde-format
+msgid "Rooted tree"
+msgstr "Ριζωμένο δένδρο"
+
+#: editorplugins/transformedges/transformedgeswidget.cpp:23
+#, kde-format
+msgctxt "@title:window"
+msgid "Transform Edges"
+msgstr "Μετασχηματισμός ακμών"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
+#: editorplugins/transformedges/transformedgeswidget.ui:14
+#, kde-format
+msgid "Transform Edges"
+msgstr "Μετασχηματισμός ακμών"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:22
+#, kde-format
+msgid ""
+"This option connects all nodes of the given graph. The new edges do not have "
+"any preset weights."
+msgstr ""
+"Αυτή η επιλογή συνδέει όλους τους κόμβους του δοσμένου γράφου. Οι νέες ακμές "
+"δε έχουν προκαθορισμένα βάρη."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:25
+#, fuzzy, kde-format
+#| msgid "Complete Graph"
+msgid "Complete graph"
+msgstr "Πλήρης"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:35
+#, kde-format
+msgid "This option removes all edges from the given graph."
+msgstr "Αυτή η επιλογή αφαιρεί όλες τις ακμές από το δοσμένο γράφο."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:38
+#, fuzzy, kde-format
+#| msgid "Remove all Edges"
+msgid "Remove all edges"
+msgstr "Αφαίρεση όλων των ακμών"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:45
+#, kde-format
+msgid ""
+"This option reverses all edges of a directed graph. Note that this does not "
+"apply to undirected graphs."
+msgstr ""
+"Αυτή η επιλογή αντιστρέφει όλες τις ακμές του κατεθυνόμενου γράφου. "
+"Σημειώστε ότι δεν εφαρμόζεται σε μη κατευθυνόμενους γράφους."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:48
+#, fuzzy, kde-format
+#| msgid "Reverse all Edges"
+msgid "Reverse all edges"
+msgstr "Αντιστροφή όλων των ακμών"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:59
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes <span "
+"style=\" font-style:italic;\">Prim's Minimal Spanning Tree Algorithm</span> "
+"at the graph. All edges without given weights are assumed to have weights "
+"equals 1. Directed and undirected graphs are processed accordingly.</p></"
+"body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Αυτή η επιλογή εκτελεί "
+"στον γράφο <span style=\" font-style:italic;\">τον αλγόριθμο του Ελάχιστου "
+"Γεννητικού Δένδρου του Prim</span>. Όλες οι ακμές χωρίς δοσμένο βάρος "
+"θεωρείται ότι έχουν βάρος ίσον με 1. Αντίστοιχα γίνεται η επεξεργασία "
+"κατευθυνόμενων και μη-κατευθυνόμενων γράφων.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:62
+#, fuzzy, kde-format
+#| msgid "Spanning Tree Transformation"
+msgid "Spanning tree transformation"
+msgstr "Μετασχηματισμός γεννητικού δένδρου"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:69
+#, fuzzy, kde-format
+#| msgid "Remove all Self Edges"
+msgid "Remove all self edges"
+msgstr "Αφαίρεση όλων των βρόχων"
+
+#: fileformats/dot/dotfileformat.cpp:45
+#, kde-format
+msgid "Graphviz Format (%1)"
+msgstr "Τύπος αποθήκευσης Graphviz (%1)"
+
+#: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
+#: fileformats/rocs1/rocs1fileformat.cpp:57
+#: fileformats/rocs2/rocs2fileformat.cpp:48
+#: fileformats/tgf/tgffileformat.cpp:52
+#, kde-format
+msgid "Could not open file \"%1\" in read mode: %2"
+msgstr "Αδυναμία ανοίγματος του αρχείου \"%1\" σε λειτουργία ανάγνωσης: %2"
+
+#: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
+#, kde-format
+msgid "Could not parse file \"%1\"."
+msgstr "Αδυναμία συντακτικής ανάλυσης του αρχείου \"%1\"."
+
+#: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
+#, kde-format
+msgid "Cannot open file %1 to write document. Error: %2"
+msgstr ""
+"Αδυναμία ανοίγματος του αρχείου %1 για την εγγραφή του εγγράφου: Σφάλμα: %2"
+
+#: fileformats/fileformatmanager.cpp:48
+#, fuzzy, kde-format
+#| msgid "Plugin Error"
+msgctxt "@title:window"
+msgid "Plugin Error"
+msgstr "Σφάλμα προσθέτου"
+
+#: fileformats/fileformatmanager.cpp:50
+#, kde-format
+msgid "Plugins could not be found in specified directories:<br>"
+msgstr "Αδυναμία εύρεσης προσθέτων στους συγκεκριμένους καταλόγους:<br>"
+
+#: fileformats/fileformatmanager.cpp:52
+#, kde-format
+msgid ""
+"<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
+"link</a> for further information."
+msgstr ""
+"<br><br> Δείτε <a href='https://doc.qt.io/qt-5/deployment-plugins.html'> "
+"αυτόν το δεσμό</a> για περισσότερες πληροφορίες."
+
+#: fileformats/gml/gmlfileformat.cpp:44
+#, kde-format
+msgid "Graph Markup Language Format (%1)"
+msgstr "Τύπος αποθήκευσης γλώσσας σήμανσης γράφων (%1)"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:38
+#, kde-format
+msgid "Rocs 1 Graph File Format (%1)"
+msgstr "Τύπος αποθήκευσης αρχείων γράφων Rocs 1 (%1)"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:258
+#: fileformats/rocs2/rocs2fileformat.cpp:211
+#: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
+#, kde-format
+msgid "Could not open file \"%1\" in write mode: %2"
+msgstr "Αδυναμία ανοίγματος του αρχείου \"%1\" σε λειτουργία εγγραφής: %2"
+
+#: fileformats/rocs1/rocs1fileformat.cpp:269
+#, kde-format
+msgid "Could not write data, aborting. Error: %1."
+msgstr "Αδυναμία εγγραφής των δεδομένων, εγκατάλειψη. Σφάλμα: %1."
+
+#: fileformats/rocs2/rocs2fileformat.cpp:40
+#, kde-format
+msgid "Rocs Graph Format (%1)"
+msgstr "Τύπος αποθήκευσης αρχείων γράφων Rocs (%1)"
+
+#: fileformats/rocs2/rocs2fileformat.cpp:312
+#, kde-format
+msgid "Error on serializing file format to file."
+msgstr "Σφάλμα στη σειριοποίηση τύπου αποθήκευσης σε αρχείο."
+
+#: fileformats/tgf/tgffileformat.cpp:38
+#, kde-format
+msgid "Trivial Graph Format (%1)"
+msgstr "Τύπος αποθήκευσης Trivial Graph (%1)"
+
+#: fileformats/tgf/tgffileformat.cpp:73
+#, kde-format
+msgid "Could not parse file. Identifier \"%1\" is used more than once."
+msgstr ""
+"Αδυναμία συντακτικής ανάλυσης του αρχείου. Το αναγνωριστικό \"%1\" "
+"χρησιμοποιείται πάνω από μια φορά."
+
+#: fileformats/tgf/tgffileformat.cpp:85
+#, kde-format
+msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
+msgstr ""
+"Αδυναμία συντακτικής ανάλυσης του αρχείου. Η ακμή από το \"%1\" στο \"%2\" "
+"χρησιμοποιεί κόμβους που δεν έχουν οριστεί."
+
+#: fileformats/tikz/tikzfileformat.cpp:34
+#, kde-format
+msgid "TikZ (PGF) Format (%1)"
+msgstr "τύπος αποθήκευσης TikZ (PGF) (%1)"
+
+#: graphdocument.cpp:129
+#, fuzzy, kde-format
+#| msgid "default"
+msgid "Default"
+msgstr "προκαθορισμένο"
+
+#: graphdocument.cpp:315
+#, kde-format
+msgctxt "@title:tab initial title for graph document"
+msgid "New Graph"
+msgstr "Νέος γράφος"
+
+#: kernel/documentwrapper.cpp:88
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: no node with ID %2 registered"
+msgstr "%1: δεν έγινε εγγραφή γράφου με αναγνωριστικό %2"
+
+#: kernel/documentwrapper.cpp:115 kernel/nodewrapper.cpp:109
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: node type ID %2 not registered"
+msgstr "%1: δεν έγινε εγγραφή τύπου γράφου με αναγνωριστικό %2"
+
+#: kernel/documentwrapper.cpp:150 kernel/edgewrapper.cpp:59
+#: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
+#: kernel/nodewrapper.cpp:205 kernel/nodewrapper.cpp:242
+#: kernel/nodewrapper.cpp:288 kernel/nodewrapper.cpp:339
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: edge type ID %2 not registered"
+msgstr "%1: δεν έγινε εγγραφή τύπου ακμής με αναγνωριστικό %2"
+
+#: kernel/documentwrapper.cpp:174
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"from\" is not a valid node object"
+msgstr "%1: «από» δεν είναι έγκυρο αντικείμενο κόμβου"
+
+#: kernel/documentwrapper.cpp:179
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"to\" is not a valid node object"
+msgstr "%1: «προς» δεν είναι έγκυρο αντικείμενο κόμβου"
+
+#: kernel/documentwrapper.cpp:190
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"node\" is not a valid node object"
+msgstr "%1: «κόμβος» δεν είναι έγκυρο αντικείμενο κόμβου"
+
+#: kernel/documentwrapper.cpp:204
+#, kde-format
+msgctxt "@info:shell"
+msgid "%1: \"edge\" is not a valid edge object"
+msgstr "%1: «ακμή» δεν είναι έγκυρο αντικείμενο ακμής"
+
+#: kernel/kernel.cpp:94
+#, kde-format
+msgctxt "@info status message after successful script execution"
+msgid "<i>Execution Finished</i>"
+msgstr "<i>Η εκτέλεση ολοκληρώθηκε</i>"
+
+#: kernel/modules/console/console.xml:7
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"The global Console object allows you to print messages of different "
+"importance to a log."
+msgstr ""
+"Το γενικό αντικείμενο Console σας επιτρέπει να τυπώνετε μηνύματα "
+"διαφορετικής σπουδαιότητας σε μια καταγραφή."
+
+#: kernel/modules/console/console.xml:17
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given message of normal severity."
+msgstr "Εκτύπωση του δοθέντος μηνύματος κανονικής σπουδαιότητας."
+
+#: kernel/modules/console/console.xml:31
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given debug message."
+msgstr "Εκτύπωση του δοθέντος μηνύματος αποσφαλμάτωσης."
+
+#: kernel/modules/console/console.xml:45
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given error message of high severity."
+msgstr "Εκτύπωση του δοθέντος μηνύματος υψηλής σπουδαιότητας."
+
+#: kernel/modules/document/document.xml:9
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"The document object provides access to all elements.\n"
+msgstr ""
+"\n"
+"Το αντικείμενο εγγράφου παρέχει πρόσβαση σε όλα τα αντικείμενα.\n"
+
+#: kernel/modules/document/document.xml:19
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the node with specified ID."
+msgstr "Επιστροφή του κόμβου με το δοσμένο αναγνωριστικό."
+
+#: kernel/modules/document/document.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of a node."
+msgstr "Αναγνωριστικό κόμβου."
+
+#: kernel/modules/document/document.xml:33
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all nodes."
+msgstr "Επιστροφή λίστας με όλους τους κόμβους."
+
+#: kernel/modules/document/document.xml:42
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list all nodes of specified type."
+msgstr "Επιστροφή λίστας με όλους τους κόμβους του δοσμένου τύπου."
+
+#: kernel/modules/document/document.xml:49
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of a node type."
+msgstr "Αναγνωριστικό τύπου κόμβου."
+
+#: kernel/modules/document/document.xml:56
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all edges."
+msgstr "Επιστροφή λίστας με όλες τις ακμές."
+
+#: kernel/modules/document/document.xml:65
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list all edges of specified type."
+msgstr "Επιστροφή λίστας με όλες τις ακμές ενός καθορισμένου τύπου."
+
+#: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
+#: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
+#: kernel/modules/document/node.xml:141 kernel/modules/document/node.xml:164
+#: kernel/modules/document/node.xml:187
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of an edge type."
+msgstr "Αναγνωριστικό τύπου ακμής."
+
+#: kernel/modules/document/document.xml:79
+#, kde-format
+msgctxt "Scripting API"
+msgid "Create node at position (x,y)."
+msgstr "Δημιουργία κόμβου στη θέση (x,y)."
+
+#: kernel/modules/document/document.xml:86
+#, kde-format
+msgctxt "Scripting API"
+msgid "X-coordinate of the node."
+msgstr "Η Χ-συντεταγμένη του κόμβου."
+
+#: kernel/modules/document/document.xml:91
+#, kde-format
+msgctxt "Scripting API"
+msgid "Y-coordinate of the node."
+msgstr "Η Y-συντεταγμένη του κόμβου."
+
+#: kernel/modules/document/document.xml:98
+#, kde-format
+msgctxt "Scripting API"
+msgid "Create edge between the given nodes of default edge type."
+msgstr ""
+"Δημιουργία ακμής μεταξύ των δοσμένων κόμβων προκαθορισμένου τύπου ακμής."
+
+#: kernel/modules/document/document.xml:105
+#, kde-format
+msgctxt "Scripting API"
+msgid "Start node of the edge."
+msgstr "Αρχικός κόμβος της ακμής."
+
+#: kernel/modules/document/document.xml:110
+#, kde-format
+msgctxt "Scripting API"
+msgid "Target node of the edge."
+msgstr "Τελικός κόμβος της ακμής."
+
+#: kernel/modules/document/document.xml:117
+#, kde-format
+msgctxt "Scripting API"
+msgid "Delete the given node."
+msgstr "Διαγραφή του δοσμένου κόμβου."
+
+#: kernel/modules/document/document.xml:124
+#, kde-format
+msgctxt "Scripting API"
+msgid "The node to be deleted."
+msgstr "Ο προς διαγραφή κόμβος."
+
+#: kernel/modules/document/document.xml:131
+#, kde-format
+msgctxt "Scripting API"
+msgid "Delete the given edge."
+msgstr "Διαγραφή της δοσμένης ακμής."
+
+#: kernel/modules/document/document.xml:138
+#, kde-format
+msgctxt "Scripting API"
+msgid "The edge to be deleted."
+msgstr "Η προς διαγραφή ακμή."
+
+#: kernel/modules/document/edge.xml:9
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"An edge is the connection of two nodes. Edges can be either directed or "
+"undirected, depending on their type.\n"
+msgstr ""
+"\n"
+"Ακμή είναι η σύνδεση μεταξύ δύο κόμβων. Οι ακμές μπορεί να είναι είτε "
+"κατευθυνόμενες είτε μη-κατευθυνόμενες, ανάλογα με τον τύπο τους.\n"
+
+#: kernel/modules/document/edge.xml:17
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the edge's type. If setting, the edge type "
+"identifier must exist."
+msgstr ""
+"Διαβάστε και ρυθμίστε το αναγνωριστικό του τύπου της ακμής. Αν ρυθμιστεί, το "
+"αναγνωριστικό του τύπου ακμής πρέπει να υπάρχει."
+
+#: kernel/modules/document/edge.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the origin node of the edge."
+msgstr "Επιστροφή του αρχικού κόμβου της ακμής."
+
+#: kernel/modules/document/edge.xml:35
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the target node of the edge."
+msgstr "Επιστροφή του τελικού κόμβου της ακμής."
+
+#: kernel/modules/document/edge.xml:44
+#, kde-format
+msgctxt "Scripting API"
+msgid "Returns true if the edge's type is directed, otherwise false."
+msgstr ""
+"Επιστρέφει true αν ο τύπος της ακμής είναι κατευθυνόμενος, διαφορετικά false."
+
+#: kernel/modules/document/node.xml:11
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"A node is the data element of a graph.\n"
+"It can have arbitrary dynamic properties that are either set in the editor "
+"or simply assigned on run-time.\n"
+"Note that dynamic properties are only available after script execution, if "
+"they are registered for the node's type.\n"
+msgstr ""
+"\n"
+"Ένας κόμβος είναι το αντικείμενο δεδομένων ενός γράφου.\n"
+"Μπορεί να έχει αυθαίρετα δυναμικές ιδιότητες οι οποίες ρυθμίζονται στον "
+"επεξεργαστή ή απλώς εκχωρούνται κατά την εκτέλεση.\n"
+"Σημειώστε ότι οι δυναμικές ιδιότητες είναι διαθέσιμες μόνο μετά την εκτέλεση "
+"του σεναρίου, αν έχουν εγγραφεί για τον τύπο του κόμμβου.\n"
+
+#: kernel/modules/document/node.xml:19
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the unique identifier of this node."
+msgstr "Διαβάστε και ρυθμίστε το μοναδικό αναγνωριστικό αυτού του κόμβου."
+
+#: kernel/modules/document/node.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the x-coordinate of the node."
+msgstr "Διαβάστε και ρυθμίστε την x-συντεταγμένη του κόμβου."
+
+#: kernel/modules/document/node.xml:33
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the y-coordinate of the node."
+msgstr "Διαβάστε και ρυθμίστε την y-συντεταγμένη του κόμβου."
+
+#: kernel/modules/document/node.xml:40
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
+"for red)."
+msgstr ""
+"Διαβάστε και ρυθμίστε τη συμβολοσειρά χρώματος αυτού του κόμβου σε "
+"δεκαεξαδικές τιμές (π.χ., «#ff0000» για το κόκκινο)."
+
+#: kernel/modules/document/node.xml:47
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the node's type. If setting, the node type "
+"identifier must exist."
+msgstr ""
+"Διαβάστε και ρυθμίστε το αναγνωριστικό του τύπου του κόμβου. Αν ρυθμιστεί, "
+"το αναγνωριστικό του τύπου του κόμβου πρέπει να υπάρχει."
+
+#: kernel/modules/document/node.xml:56
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all edges (incoming and outgoing) of this node."
+msgstr ""
+"Επιστροφή λίστας με όλες τις ακμές (εισερχόμενες και εξερχόμενες) του "
+"συγκεκριμένου κόμβου."
+
+#: kernel/modules/document/node.xml:65
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return a list of all edges (incoming and outgoing) of this node of a "
+"specified type."
+msgstr ""
+"Επιστροφή λίστας με όλες τις ακμές ενός καθορισμένου τύπου (εισερχόμενες και "
+"εξερχόμενες) του συγκεκριμένου κόμβου."
+
+#: kernel/modules/document/node.xml:79
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of incoming edges of this node."
+msgstr ""
+"Επιστροφή λίστας με όλες τις εισερχόμενες ακμές του συγκεκριμένου κόμβου."
+
+#: kernel/modules/document/node.xml:88
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all incoming edges of this node of a specified type."
+msgstr ""
+"Επιστροφή λίστας με όλες τις εισερχόμενες ακμές ενός καθορισμένου τύπου του "
+"συγκεκριμένου κόμβου."
+
+#: kernel/modules/document/node.xml:102
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node."
+msgstr ""
+"Επιστροφή λίστας με όλες τις εξερχόμενες ακμές του συγκεκριμένου κόμβου."
+
+#: kernel/modules/document/node.xml:111
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node of a specified type."
+msgstr ""
+"Επιστροφή λίστας με όλες τις εξερχόμενες ακμές ενός καθορισμένου τύπου του "
+"συγκεκριμένου κόμβου."
+
+#: kernel/modules/document/node.xml:125
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node. This method respects if edges "
+"are directed."
+msgstr ""
+"Επιστροφή λίστας με τους κόμβους που συνδέονται με τον συγκεκριμένο κόμβο. Η "
+"μέθοδος λαμβάνει υπ όψη αν οι ακμές είναι κατευθυνόμενες."
+
+#: kernel/modules/document/node.xml:134
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node via an edge of specified type. "
+"This method respects if edges are directed."
+msgstr ""
+"Επιστροφή λίστας με τους κόμβους που συνδέονται με αυτόν τον κόμβο μέσω "
+"ακμής συγκεκριμένου τύπου. Η μέθοδος λαμβάνει υπόψη αν οι ακμές είναι "
+"κατευθυνόμενες."
+
+#: kernel/modules/document/node.xml:148
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list all nodes connected to this node by an incoming edge."
+msgstr ""
+"Επιστροφή λίστας με τους κόμβους που συνδέονται με τον συγκεκριμένο κόμβο με "
+"εισερχόμενη ακμή."
+
+#: kernel/modules/document/node.xml:157
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return a list all nodes connected to this node by an incoming edge of "
+"specified type."
+msgstr ""
+"Επιστροφή λίστας με όλους τους κόμβους που συνδέονται σε αυτόν τον κόμβο με "
+"μια εισερχόμενη ακμή του συγκεκριμένου τύπου."
+
+#: kernel/modules/document/node.xml:171
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return list all nodes connected to this node by an outgoing edge."
+msgstr ""
+"Επιστροφή λίστας με τους κόμβους που συνδέονται με αυτόν τον κόμβο με μια "
+"εξερχόμενη ακμή."
+
+#: kernel/modules/document/node.xml:180
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node by an outgoing edge of "
+"specified type."
+msgstr ""
+"Επιστροφή λίστας με τους κόμβους που συνδέονται με αυτόν τον κόμβο με μια "
+"εξερχόμενη ακμή του συγκεκριμένου τύπου."
+
+#: kernel/modules/document/node.xml:194
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return list of distances to specified targets in same order."
+msgstr ""
+"Επιστροφή λίστας των αποστάσεων σε συγκεκριμένους τελικούς κόμβους με την "
+"ίδια σειρά."
+
+#: kernel/modules/document/node.xml:201
+#, kde-format
+msgctxt "Scripting API"
+msgid "Name of edge property that holds the edge length."
+msgstr "Το όνομα της ιδιότητας της ακμής που περιέχει το μήκος της ακμής."
+
+#: kernel/modules/document/node.xml:206
+#, kde-format
+msgctxt "Scripting API"
+msgid "List of nodes to that the distances shall be computed."
+msgstr ""
+"Η λίστα των κόμβων για τους οποίους πρέπει να γίνει υπολογισμός των "
+"αποστάσεων."
+
+#: models/edgemodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "Edge"
+msgstr "Ακμή"
+
+#: models/edgepropertymodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "EdgeProperty"
+msgstr "Ιδιότητα ακμής"
+
+#: models/edgetypemodel.cpp:202
+#, kde-format
+msgctxt "@title:column"
+msgid "Edge Type"
+msgstr "Τύπος ακμής"
+
+#: models/edgetypepropertymodel.cpp:141
+#, kde-format
+msgctxt "@title:column"
+msgid "EdgeTypeProperty"
+msgstr "Ιδιότητα τύπου ακμής"
+
+#: models/nodemodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "Node"
+msgstr "Κόμβος"
+
+#: models/nodepropertymodel.cpp:154
+#, kde-format
+msgctxt "@title:column"
+msgid "NodeProperty"
+msgstr "Ιδιότητα κόμβου"
+
+#: models/nodetypemodel.cpp:200
+#, kde-format
+msgctxt "@title:column"
+msgid "Node Type"
+msgstr "Τύπος κόμβου"
+
+#: models/nodetypepropertymodel.cpp:141
+#, kde-format
+msgctxt "@title:column"
+msgid "NodeTypeProperty"
+msgstr "Ιδιότητα τύπου κόμβου"
+
+#: qml/AddEdgeAction.qml:28
+#, kde-format
+msgid "Create Edge"
+msgstr "Δημιουργία ακμής"
+
+#: qml/AddEdgeAction.qml:31
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Δημιουργία ακμής μεταξύ δύο κόμβων"
+
+#: qml/AddNodeAction.qml:13
+#, kde-format
+msgid "Create Node"
+msgstr "Δημιουργία κόμβου"
+
+#: qml/AddNodeAction.qml:16
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Προσθήκη κόμβου στη σκηνή"
+
+#: qml/DeleteAction.qml:13
+#, kde-format
+msgid "Delete Element"
+msgstr "Διαγραφή αντικειμένου"
+
+#: qml/DeleteAction.qml:16
+#, kde-format
+msgid "Delete element from scene"
+msgstr "Διαγραφή αντικειμένου από τη σκηνή"
+
+#: qml/SelectMoveAction.qml:14
+#, kde-format
+msgid "Select & Move"
+msgstr "Επιλογή & μετακίνηση"
+
+#: qml/SelectMoveAction.qml:17
+#, kde-format
+msgid "Select and move elements on the scene"
+msgstr "Επιλογή και μετακίνηση αντικειμένων στη σκηνή"
+
+#~ msgid "Identifier"
+#~ msgstr "Αναγνωριστικό"
+
+#~ msgid "Color"
+#~ msgstr "Χρώμα"
+
+#~ msgid "unidirectional"
+#~ msgstr "μονής κατεύθυνσης"
+
+#~ msgid "bidirectional"
+#~ msgstr "διπλής κατεύθυνσης"
+
+#, fuzzy
+#~ msgid "All Connection Types"
+#~ msgstr "Τύπος σύνδεσης"
+
+#~ msgid "Could not set data type for node %1: data type does not exist."
+#~ msgstr ""
+#~ "Αδυναμία ανάθεσης τύπου δεδομένων στον κόμβο %1: ο τύπος δεδομένων δεν "
+#~ "υπάρχει."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "An abstract data element is a unit of information that belongs to an "
+#~ "abstract data structure and possibly is connected to other data elements "
+#~ "by pointers.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Ένα αφηρημένο στοιχείο δεδομένων είναι μια μονάδα πληροφορίας η οποία "
+#~ "ανήκει σε μια αφηρημένη δομή δεδομένων και πιθανώς συνδέεται με άλλα "
+#~ "στοιχεία δεδομένων μέσω δεικτών.\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "\n"
+#~ msgstr "\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The size of this data element."
+#~ msgstr "Το μέγεθος του συγκεκριμένου στοιχείου δεδομένων."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The color of this data element stated as hexadecimal value."
+#~ msgstr ""
+#~ "Το μέγεθος του συγκεκριμένου στοιχείου δεδομένων, δηλωμένο ως δεκαεξαδική "
+#~ "τιμή."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "An abstract data structure defines a set of data elements and possible "
+#~ "connections between them.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Μια αφηρημένη δομή δεδομένων ορίζει ένα σύνολο στοιχείων δεδομένων και "
+#~ "τις πιθανές μεταξύ τους συνδέσεις.\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The unique name of this data structure."
+#~ msgstr "Το μοναδικό όνομα της συγκεκριμένης δομής δεδομένων."
+
+#~ msgid "The method \"%1\" is deprecated, please use \"%2\" instead."
+#~ msgstr ""
+#~ "Η μέθοδος \"%1\" είναι ξεπερασμένη, χρησιμοποιήστε παρακαλώ τη(ν) \"%2\" "
+#~ "στη θέση της."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A node is the data element of a graph.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Κόμβος είναι το στοιχείο δεδομένων ενός γράφου.\n"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "Δομή γράφου"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "χ"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "ψ"
+
+#~ msgid "Size"
+#~ msgstr "Μέγεθος"
+
+#~ msgid "Graph Type:"
+#~ msgstr "Τύπος γράφου:"
+
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "Πολύγραφος (ψευδογράφημα)"
+
+#~ msgid "Cannot create edge: nodes are not defined."
+#~ msgstr "Αδυναμία δημιουργίας ακμής: δεν έχουν οριστεί κόμβοι."
+
+#~ msgid "Cannot create edge: pointer type %1 not defined"
+#~ msgstr "Αδυναμία δημιουργίας ακμής: ο τύπος δείκτη %1 δεν έχει οριστεί."
+
+#~ msgid "The global method \"%1\" is deprecated, please use \"%2\" instead."
+#~ msgstr ""
+#~ "Η καθολική μέθοδος \"%1\" είναι ξεπερασμένη, χρησιμοποιήστε παρακαλώ "
+#~ "τη(ν) \"%2\" στη θέση της."
+
+#~ msgid ""
+#~ "This action will probably remove some edges. Do you want to continue?"
+#~ msgstr ""
+#~ "Η συγκεκριμένη ενέργεια είναι πιθανό να αφαιρέσει κάποιες ακμές. Θέλετε "
+#~ "να συνεχίσετε;"
+
+#~ msgid "Could not add back-edge (%1->%2) to undirected graph."
+#~ msgstr ""
+#~ "Αδυναμία πρόσθεσης ακμής επιστροφής (%1->%2) σε μη κατευθυνόμενο γράφο."
+
+#~ msgid "Could not add existing edge (%1->%2): this graph is no multigraph."
+#~ msgstr ""
+#~ "Αδυναμία πρόσθεσης υπάρχουσας ακμής (%1->%2): ο συγκεκριμένος γράφος δεν "
+#~ "είναι πολύγραφος (ψευδογράφημα)"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A graph objects holds the information of a data structure of type \"Graph"
+#~ "\".\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Ένα αντικείμενο γράφου περιέχει την πληροφορία μιας δομής δεδομένων τύπου "
+#~ "\"Γράφου\".\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Create a new node of the specified type and return the created node. If "
+#~ "the type is not registered, no node is created."
+#~ msgstr ""
+#~ "Δημιουργία νέου κόμβου με τον καθορισμένο τύπο και επιστροφή του κόμβου "
+#~ "που δημιουργήθηκε. Αν ο τύπος δεν έχει καταχωρηθεί, δε δημιουργείται "
+#~ "κόμβος."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Create a new node of default type and return the created node."
+#~ msgstr ""
+#~ "Δημιουργία κόμβου προκαθορισμένου τύπου και επιστροφή του κόμβου που "
+#~ "δημιουργήθηκε."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Create an edge from node \"from\" to node \"to\" of the specified type "
+#~ "and return the created edge. If the type is not registered, no edge is "
+#~ "created."
+#~ msgstr ""
+#~ "Δημιουργία νέας ακμής καθορισμένου τύπου από τον κόμβο \"από\" προς τον "
+#~ "κόμβο \"προς\" και επιστροφή της ακμής που δημιουργήθηκε. Αν ο τύπος δεν "
+#~ "έχει καταχωρηθεί, δε δημιουργείται ακμή."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Create an edge from node \"from\" to node \"to\" of default type and "
+#~ "return the created edge."
+#~ msgstr ""
+#~ "Δημιουργία ακμής προκαθορισμένου τύπου από τον κόμβο \"από\" προς τον "
+#~ "κόμβο \"προς\" και επιστροφή της ακμής που δημιουργήθηκε."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Returns an array of shortest path lengths from this node to every other "
+#~ "node in the graph."
+#~ msgstr ""
+#~ "Επιστρέφει έναν πίνακα με τα μήκη των συντομότερων διαδρομών από τον "
+#~ "κόμβο αυτόν προς κάθε άλλο κόμβο στον γράφο."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A node is the data element of a linked list.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Κόμβος είναι το στοιχείο δεδομένων μια συνδεδεμένης λίστας.\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Set pointer of this list node to the target node."
+#~ msgstr ""
+#~ "Να οριστεί αυτός ο κόμβος της λίστας να δείχνει στον κόμβο προορισμού."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Linked List Structure"
+#~ msgstr "Δομή συνδεδεμένης λίστας"
+
+#~ msgid "Front value"
+#~ msgstr "Τιμή προηγούμενου κόμβου"
+
+#~ msgid "Data '%1' has more than one out pointer."
+#~ msgstr "Το '%1' έχει περισσότερους από έναν δείκτες εξόδου."
+
+#~ msgid "Cannot convert document '%1'"
+#~ msgstr "Αδυναμία μετατροπής του εγγράφου '%1'"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "\n"
+#~ "A list objects holds the information of a data structure of type \"Linked "
+#~ "List\".\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Μια λίστα αντικειμένων τηρεί την πληροφορία σχετικά με τη δομή δεδομένων "
+#~ "με τύπο \"Συνδεδεμένη Λίστα\".\n"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Set the head of the list."
+#~ msgstr "Ορισμός του κόμβου-κεφαλής της λίστας."
+
+#~ msgctxt "@option:check"
+#~ msgid "Show all pointers"
+#~ msgstr "Εμφάνιση όλων των δεικτών"
+
+#~ msgid "There are cycles at node %1. Data will be lost by conversion."
+#~ msgstr ""
+#~ "Στον κόμβο %1 υπάρχουν κύκλοι. Θα χαθούν δεδομένα κατά τη μετατροπή."
+
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "Έγγραφο"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Console is not a constructor. All properties and methods of Console can "
+#~ "be called by using Console as an object, without creating it."
+#~ msgstr ""
+#~ "Το Console δεν είναι constructor. Όλες οι ιδιότητες και οι μέθοδοι του "
+#~ "Console μπορούν να κληθούν χρησιμοποιώντας το Console ως αντικείμενο, "
+#~ "χωρίς να το δημιουργήσετε."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "Console.log(\"This is a program message.\"); // print a program message\n"
+#~ "Console.debug(\"A debug message.\"); // print a debug message"
+#~ msgstr ""
+#~ "Console.log(\"Αυτό είναι ένα μήνυμα του προγράμματος.\"); // τύπωση ενός "
+#~ "μηνύματος του προγράμματος\n"
+#~ "Console.debug(\"Ένα μήνυμα αποσφαλμάτωσης.\"); // τύπωση ενός μηνύματος "
+#~ "αποσφαλμάτωσης"
+
+#~ msgid "Group"
+#~ msgstr "Ομάδα"
+
+#~ msgid "Cannot open file %1."
+#~ msgstr "Αδυναμία ανοίγματος του αρχείου %1."
+
+#~ msgid "Invalid include directive: %1. Cannot find file in directive."
+#~ msgstr ""
+#~ "Μη έγκυρη οδηγία ενσωμάτωσης: %1. Δε μπορεί να βρεθεί το αρχείο της "
+#~ "οδηγίας."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graphviz Graph File Backend"
+#~ msgstr "Σύστημα υποστήριξης αρχείων γράφων Graphviz"
+
+#~ msgid "Read and write Graphviz graph files."
+#~ msgstr "Ανάγνωση και εγγραφή αρχείων γράφων Graphviz."
+
+#~ msgid "Import"
+#~ msgstr "Εισαγωγή"
+
+#~ msgid "No active graph in this document."
+#~ msgstr "Δεν υπάρχει ενεργός γράφος σε αυτό το έγγραφο."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "GML File Backend"
+#~ msgstr "Σύστημα υποστήριξης αρχείων GML"
+
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "Ανάγνωση και εγγραφή αρχείων της γλώσσας σήμανσης γράφων GML."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "KML File Backend"
+#~ msgstr "Σύστημα υποστήριξης αρχείων KML"
+
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "Ανάγνωση και εγγραφή αρχείων της γλώσσας σήμανσης KML."
+
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "*.kml|Μορφή γλώσσας σήμανσης KML"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "Αδυναμία ανοίγματος του αρχείου %1: %2"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "TGF File Backend"
+#~ msgstr "Σύστημα υποστήριξης αρχείων TGF"
+
+#~ msgid "Read and write Trivial Graph Format (TGF) files."
+#~ msgstr "Ανάγνωση και εγγραφή αρχείων μορφής Trivial Graph (TGF)."
+
+#~ msgid "No data structure specified for output in this document."
+#~ msgstr "Δεν έχει οριστεί δομή δεδομένων εξόδου σε αυτό το έγγραφο."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "PGF/TikZ Export File Backend"
+#~ msgstr "Σύστημα υποστήριξης εξαγωγής αρχείων PGF/TikZ"
+
+#~ msgid "Export graph documents in PGF/TikZ format."
+#~ msgstr "Εξαγωγή εγγράφων γράφων σε μορφή PGF/TikZ."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr "Σύστημα υποστήριξης αρχείων γράφων Rocs"
+
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "Ανάγνωση και εγγραφή αρχείων γράφων Rocs"
+
+#~ msgid "Could not set pointer type: pointer type does not exist."
+#~ msgstr "Αδυναμία ανάθεσης τύπου δείκτη: ο τύπος δείκτη δεν υπάρχει."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "A pointer connects two data elements and can itself hold information by "
+#~ "its properties."
+#~ msgstr ""
+#~ "Ένας δείκτης συνδέει δυο στοιχεία δεδομένων και μπορεί και ο ίδιος να "
+#~ "περιέχει πληροφορία μέσω των ιδιοτήτων του."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Start of the connection."
+#~ msgstr "Αρχή σύνδεσης"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "End of the connection"
+#~ msgstr "Τέλος σύνδεσης"
+
+#~ msgctxt "Scripting API Description"
+#~ msgid ""
+#~ "If true, the connection is directed. Otherwise is connection is "
+#~ "undirected."
+#~ msgstr ""
+#~ "Αν είναι αληθές, η σύνδεση είναι κατευθυνόμενη. Διαφορετικά η σύνδεση "
+#~ "είναι μη-κατευθυνόμενη."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "ID of the connection type."
+#~ msgstr "Αναγνωριστικό του τύπου σύνδεσης."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "The width of the connection."
+#~ msgstr "Το πλάτος της σύνδεσης."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Remove this connection."
+#~ msgstr "Αφαίρεση της συγκεκριμένης σύνδεσης."
+
+#~ msgctxt "Scripting API Description"
+#~ msgid "Remove an existing property from the connection."
+#~ msgstr "Αφαίρεση υπάρχουσας ιδιότητας από τη σύνδεση."
+
+#~ msgid "Connection"
+#~ msgstr "Σύνδεση"
+
+#~ msgid "Rocs Console script"
+#~ msgstr "σενάριο του Rocs Console"
+
+#~ msgid "Script Error: %1"
+#~ msgstr "Σφάλμα σεναρίου: %1"
+
+#~ msgid "Script error in included file %1"
+#~ msgstr "Σφάλμα σεναρίου στο ενσωματωμένο αρχείο %1"
+
+#, fuzzy
+#~ msgctxt "dynamic property that is present exactly once"
+#~ msgid "Unique"
+#~ msgstr "Μοναδικό"
+
+#, fuzzy
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "Πολλαπλό"
+
+#, fuzzy
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "Καθολικό"
+
+#, fuzzy
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "Κανένα"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "Προσθήκη ακμής"
+
+#~ msgid "untitled"
+#~ msgstr "ανώνυμο"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "Διαγραφή"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "Διαγραφή αντικειμένων με κλικ σε αυτά."
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "Ιδιότητες ακμής"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "Μετακίνηση κόμβου"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~ msgid "Edit Data Types"
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Data Element Properties"
+#~ msgstr "Ιδιότητες ακμής"
+
+#, fuzzy
+#~ msgid "Data Properties"
+#~ msgstr "Ιδιότητες ακμής"
+
+#, fuzzy
+#~ msgid "Static Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "@title:tab"
+#~ msgid "Pointer Types"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "Ιδιότητα"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Data Type"
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~ msgid "Select Data Type:"
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~ msgid "Remove selected data type."
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~ msgid "Add new data type."
+#~ msgstr "Εμφάνιση τιμών στο:"
+
+#, fuzzy
+#~ msgid "Default Color:"
+#~ msgstr "Χρώμα:"
+
+#, fuzzy
+#~ msgid "Data Type Properties"
+#~ msgstr "Ιδιότητες ακμής"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgid "Edit Pointer Types"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#~ msgid "Width:"
+#~ msgstr "Πλάτος:"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "συμπαγές"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "παύλα"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash dot line"
+#~ msgstr "παύλα τελεία"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "Τύπος σύνδεσης"
+
+#, fuzzy
+#~ msgid "Select Pointer Type:"
+#~ msgstr "Επιλογή"
+
+#~ msgid "Style:"
+#~ msgstr "Στυλ:"
+
+#, fuzzy
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Κυκλικός"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "Τιμή"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Reals"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "Διαγραφή"
+
+#, fuzzy
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~ msgid "RandomGraph"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "Δεν μπορεί να βρεθεί ένας επεξεργαστής κειμένου \n"
+#~ "του KDE, παρακαλώ ελέγξτε την εγκατάστασή σας."
+
+#, fuzzy
+#~ msgid "centered"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Εμφάνιση τιμών στο:"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "Export"
+#~ msgstr "Εξαγωγή"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Εξαγωγή γραφήματος σε αρχείο"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Import Graph File into Project"
+#~ msgstr "Άνοιγμα δέσμης εντολών..."
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "Αποσφαλματωτής"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Debug Messages"
+#~ msgstr "Αποσφαλματωτής"
+
+#, fuzzy
+#~ msgctxt "@label:listbox"
+#~ msgid "Select output:"
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "Run"
+#~ msgstr "Εκτέλεση"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "Stop"
+#~ msgstr "Διακοπή"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "Εμφάνιση τιμών στο:"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "Κυκλικός"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "New Project"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project"
+#~ msgstr "Αποθήκευση δέσμης εντολών"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Open Project"
+#~ msgstr "Άνοιγμα δέσμης εντολών..."
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Recent Projects"
+#~ msgstr "Άνοιγμα δέσμης εντολών..."
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Αποθήκευση δέσμης εντολών"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "New Graph Document"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "New Script File"
+#~ msgstr "Νέα δέσμη εντολών"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Graph"
+#~ msgstr "Ολοκληρώθηκε"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Graph as"
+#~ msgstr "Εξαγωγή γραφήματος σε αρχείο"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Ολοκληρώθηκε"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Script"
+#~ msgstr "Ολοκληρώθηκε"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Script as"
+#~ msgstr "Ολοκληρώθηκε"
+
+#, fuzzy
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "Αυτό δεν φαίνεται να είναι ένα αρχείο γραφήματος."
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Μη έγκυρο αρχείο"
+
+#, fuzzy
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Graph αρχεία\n"
+#~ "*.*|Όλα τα αρχεία"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Αποθήκευση δέσμης εντολών"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Open Project Files"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "caption text for temporary project"
+#~ msgid "[ untitled ]"
+#~ msgstr "ανώνυμο"
+
+#, fuzzy
+#~ msgid "ScriptName"
+#~ msgstr "Δέσμη εντολών"
+
+#, fuzzy
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Graph αρχεία\n"
+#~ "*.*|Όλα τα αρχεία"
+
+#, fuzzy
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Νέο γράφημα"
+
+#~ msgid "New File"
+#~ msgstr "Νέο αρχείο"
+
+#, fuzzy
+#~ msgctxt "@title Displayed program name"
+#~ msgid "Rocs"
+#~ msgstr "Rocs"
+
+#, fuzzy
+#~ msgctxt "@title KAboutData: short program description"
+#~ msgid "Graph Theory Tool"
+#~ msgstr "Εργαλείο θεωρίας γραφημάτων"
+
+#, fuzzy
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "@info:credit Developer name"
+#~ msgid "Tomaz Canabrava"
+#~ msgstr "Tomaz Canabrava"
+
+#, fuzzy
+#~ msgctxt "@info:credit Role"
+#~ msgid "Developer"
+#~ msgstr "Προγραμματιστής"
+
+#, fuzzy
+#~ msgctxt "@info:credit Developer name"
+#~ msgid "Wagner Reck"
+#~ msgstr "Wagner Reck"
+
+#~ msgid "Untitled%1"
+#~ msgstr "Ανώνυμο%1"
+
+#~ msgid "Show text beside icon"
+#~ msgstr "Εμφάνιση κειμένου δίπλα στο εικονίδιο"
+
+#, fuzzy
+#~ msgid "Script Document"
+#~ msgstr "Αποθήκευση δέσμης εντολών"
+
+#, fuzzy
+#~ msgid "Script File"
+#~ msgstr "Νέα δέσμη εντολών"
+
+#, fuzzy
+#~ msgid "Graph File"
+#~ msgstr "Αρχεία γραφημάτων"
+
+#, fuzzy
+#~ msgid "Edit Selected Data"
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~ msgid "Layout"
+#~ msgstr "Εργαλειοθήκη διάταξης"
+
+#, fuzzy
+#~ msgid "Tools"
+#~ msgstr "&Εργαλεία"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Κύρια εργαλειοθήκη"
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "Εργαλειοθήκη διάταξης"
+
+#~ msgid "Untitled"
+#~ msgstr "Ανώνυμο"
+
+#, fuzzy
+#~ msgid "Data structure name"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgid ""
+#~ "Delete the current data structure: delete all data elements and all "
+#~ "pointers"
+#~ msgstr ""
+#~ "Διαγραφή του τρέχοντος ενεργού γραφήματος: διαγραφή όλων των κόμβων και "
+#~ "των ακμών"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "Άνοιγμα δέσμης εντολών..."
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "Άνοιγμα δέσμης εντολών..."
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "Όνομα"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "Αποθήκευση δέσμης εντολών"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script as"
+#~ msgstr "Αποθήκευση δέσμης εντολών"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "Αποθήκευση δέσμης εντολών"
+
+#, fuzzy
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "Όνομα:"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "Αποθήκευση δέσμης εντολών"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "Άνοιγμα δέσμης εντολών..."
+
+#~ msgid "Edge name"
+#~ msgstr "Όνομα ακμής"
+
+#~ msgid "Edge color"
+#~ msgstr "Χρώμα ακμής"
+
+#~ msgid "Value:"
+#~ msgstr "Τιμή:"
+
+#~ msgid "Edge value"
+#~ msgstr "Τιμή ακμής"
+
+#~ msgid "Edge width"
+#~ msgstr "Πλάτος ακμής"
+
+#~ msgid "Show"
+#~ msgstr "Εμφάνιση"
+
+#~ msgid "Show/hide edge name"
+#~ msgstr "Εμφάνιση/Απόκρυψη ονόματος ακμής"
+
+#~ msgid "Show/add edge value"
+#~ msgstr "Εμφάνιση/Απόκρυψη τιμής της ακμής"
+
+#~ msgid "Global"
+#~ msgstr "Καθολικό"
+
+#~ msgid "add"
+#~ msgstr "προσθήκη"
+
+#, fuzzy
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "Ανώνυμο%1"
+
+#, fuzzy
+#~ msgid "Enable Color"
+#~ msgstr "Χρώμα:"
+
+#, fuzzy
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of data elements"
+#~ msgstr "Εμφάνιση τιμών στο:"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of pointers"
+#~ msgstr "Εμφάνιση ονομάτων στο:"
+
+#~ msgid "Delete"
+#~ msgstr "Διαγραφή"
+
+#~ msgid "Type"
+#~ msgstr "Τύπος"
+
+#~ msgid "dot"
+#~ msgstr "τελεία"
+
+#, fuzzy
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "@label:inlistbox Undirected graph for which several edges between same "
+#~ "nodes may exist"
+#~ msgid "Undirected Multigraph"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "@label:inlistbox Directed graph for which several same orientated edges "
+#~ "between same nodes may exist"
+#~ msgid "Directed Multigraph"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save GML files"
+#~ msgstr "Άνοιγμα και αποθήκευση αρχείων KML"
+
+#, fuzzy
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Graph αρχεία\n"
+#~ "*.*|Όλα τα αρχεία"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "Ολοκληρώθηκε"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save Plain TXT files"
+#~ msgstr "Άνοιγμα και αποθήκευση αρχείων KML"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "Προσθήκη"
+
+#~ msgid "Add Node"
+#~ msgstr "Προσθήκη κόμβου"
+
+#, fuzzy
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "Όνομα:"
+
+#, fuzzy
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Κυκλικός"
+
+#, fuzzy
+#~ msgid "Open Script"
+#~ msgstr "Άνοιγμα δέσμης εντολών..."
+
+#, fuzzy
+#~ msgid "Type Icon:"
+#~ msgstr "Τύπος"
+
+#, fuzzy
+#~ msgid "Export as new Type"
+#~ msgstr "Εξαγωγή γραφήματος σε αρχείο"
+
+#, fuzzy
+#~ msgid "Edit"
+#~ msgstr "Επεξεργαστής"
+
+#, fuzzy
+#~ msgid "Pointer"
+#~ msgstr "Χρώμα κόμβου:"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "χ"
+
+#, fuzzy
+#~ msgid "Apply to all nodes"
+#~ msgstr "Εφαρμογή του τρέχοντος χρώματος σε όλους τους κόμβους"
+
+#~ msgid "Untitled0"
+#~ msgstr "Ανώνυμο0"
+
+#, fuzzy
+#~ msgid "Open Graph"
+#~ msgstr "Άνοιγμα γραφήματος..."
+
+#~ msgid "Color for new nodes"
+#~ msgstr "Χρώμα για τους νέους κόμβους"
+
+#~ msgid "Color for new edges"
+#~ msgstr "Χρώμα για τις νέες ακμές"
+
+#~ msgid "Apply the current color to all nodes"
+#~ msgstr "Εφαρμογή του τρέχοντος χρώματος σε όλους τους κόμβους"
+
+#~ msgid "Apply the current color to all nodes on the drawing area"
+#~ msgstr ""
+#~ "Εφαρμογή του τρέχοντος χρώματος σε όλους τους κόμβους στην περιοχή "
+#~ "σχεδίασης"
+
+#~ msgid "All"
+#~ msgstr "Όλα"
+
+#~ msgid "Apply the current color to all edges"
+#~ msgstr "Εφαρμογή του τρέχοντος χρώματος σε όλες τις ακμές"
+
+#~ msgid "Apply the current color to all edges on the drawing area"
+#~ msgstr ""
+#~ "Εφαρμογή του τρέχοντος χρώματος σε όλες τις ακμές στην περιοχή σχεδίασης"
+
+#~ msgid "Align on the base"
+#~ msgstr "Στοίχιση στη βάση"
+
+#~ msgid "Align on the center"
+#~ msgstr "Στοίχιση στο κέντρο"
+
+#~ msgid "Align on the top"
+#~ msgstr "Στοίχιση επάνω"
+
+#~ msgid "Align on the left"
+#~ msgstr "Στοίχιση αριστερά"
+
+#~ msgid "Align on the right"
+#~ msgstr "Στοίχιση δεξιά"
+
+#, fuzzy
+#~ msgid "Align on a circle"
+#~ msgstr "Στοίχιση αριστερά"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "(c) 2009"
+#~ msgstr "(c) 2009"
+
+#~ msgid "Do you want to save your unsaved document?"
+#~ msgstr "Θέλετε να αποθηκεύσετε το έγγραφό σας;"
+
+#~ msgid "Select Items by clicking on them."
+#~ msgstr "Επιλογή αντικειμένων με κλικ σε αυτά."
+
+#~ msgid "Moves a node around the drawing area."
+#~ msgstr "Μετακινεί τον κόμβο στην περιοχή σχεδίασης"
+
+#~ msgid "Make Complete"
+#~ msgstr "Ολοκλήρωση"
+
+#~ msgid "Dialog"
+#~ msgstr "Πλαίσιο διαλόγου"
+
+#~ msgid "Radius:"
+#~ msgstr "Ακτίνα:"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Complete"
+#~ msgstr "Ολοκληρώθηκε"
+
+#~ msgctxt "Do not translate, X is for delete"
+#~ msgid "x"
+#~ msgstr "χ"
+
+#~ msgid "Graph is oriented"
+#~ msgstr "Το γράφημα είναι προσανατολισμένο"
+
+#, fuzzy
+#~ msgid "Name: %1"
+#~ msgstr "Όνομα:"
+
+#, fuzzy
+#~ msgid "Value: %1"
+#~ msgstr "Τιμή:"
+
+#~ msgid "Save Graph As..."
+#~ msgstr "Αποθήκευση γραφήματος ως..."
+
+#~ msgid "Save Script As..."
+#~ msgstr "Αποθήκευση δέσμης εντολών ως..."
+
+#, fuzzy
+#~ msgid "Ring Graph"
+#~ msgstr "Γράφημα"
+
+#, fuzzy
+#~ msgid "UntitledDoc"
+#~ msgstr "Ανώνυμο"
+
+#~ msgid "Thanks to Ugo Sangiori"
+#~ msgstr "Ευχαριστίες στο Ugo Sangiori"
+
+#~ msgid "Edge Color:"
+#~ msgstr "Χρώμα ακμής:"
+
+#, fuzzy
+#~ msgid "End"
+#~ msgstr " Τελείωσε"
+
+#~ msgid "Graph is Automate"
+#~ msgstr "Αυτοματοποιημένο γράφημα"
+
+#~ msgid " Is begin"
+#~ msgstr " Ξεκίνησε"

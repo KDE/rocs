@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48+devel r11891"
+   width="1406"
+   height="984"
+   sodipodi:docname="rocs-interfaces.svg"
+   inkscape:export-filename="rocs-interfaces.png"
+   inkscape:export-xdpi="40.626442"
+   inkscape:export-ydpi="40.626442">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6">
+    <marker
+       inkscape:stockid="Arrow1Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Send"
+       style="overflow:visible">
+      <path
+         id="path3915"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend"
+       style="overflow:visible">
+      <path
+         id="path3909"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart"
+       style="overflow:visible">
+      <path
+         id="path3906"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend"
+       style="overflow:visible">
+      <path
+         id="path3921"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Send-4"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3915-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1060"
+     id="namedview4"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="0.82024387"
+     inkscape:cx="825.13718"
+     inkscape:cy="399.62136"
+     inkscape:window-x="-2"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <sodipodi:guide
+       orientation="0,1"
+       position="613.05373,344.73129"
+       id="guide3800" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="1272.6603,1.0928955e-08"
+       id="guide3813" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="1214.2653,781.96012"
+       id="guide3824" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="43.577245,959.52633"
+       id="guide3933" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="685.12305,362.67898"
+       id="guide3935" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="532.27689,366.99355"
+       id="guide3937" />
+  </sodipodi:namedview>
+  <image
+     sodipodi:absref="/home/yurchor/Install/Ukrainization/KDE/uk/docs/kdeedu/rocs/rocs-screenshot.png"
+     xlink:href="rocs-screenshot.png"
+     width="1412.8125"
+     height="1040.625"
+     id="image4441"
+     x="5.5771418"
+     y="11.382984" />
+  <rect
+     style="fill:#373be8;fill-opacity:0.2745098;fill-rule:nonzero;stroke:#171bca;stroke-width:2.01368189;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     id="rect2987"
+     width="1268.0272"
+     height="497.00168"
+     x="81.408974"
+     y="121.35647" />
+  <rect
+     style="fill:#50e837;fill-opacity:0.32743363;fill-rule:nonzero;stroke:#218a10;stroke-width:2.08689237;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     id="rect2987-5"
+     width="593.42419"
+     height="382.64688"
+     x="82.778587"
+     y="617.9162" />
+  <rect
+     style="fill:#7ae837;fill-opacity:0.32743363;fill-rule:nonzero;stroke:#088500;stroke-width:2.25469303;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     id="rect2987-5-4"
+     width="578.65466"
+     height="379.43881"
+     x="682.03632"
+     y="621.44836" />
+  <rect
+     style="fill:#ff5555;fill-opacity:0.32743363;fill-rule:nonzero;stroke:#c20404;stroke-width:2.36734414;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     id="rect2987-5-8"
+     width="82.5755"
+     height="380.75449"
+     x="1265.2295"
+     y="619.78052" />
+  <rect
+     style="fill:#007ff4;fill-opacity:0.2745098;fill-rule:nonzero;stroke:#1b15b8;stroke-width:1.98904312;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     id="rect2987-5-7"
+     width="33.467365"
+     height="529.36713"
+     x="43.571766"
+     y="87.644814" />
+  <text
+     xml:space="preserve"
+     style="font-size:47.91446686px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="147.3302"
+     y="830.37158"
+     id="text3826"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="/home/phoenixx/KDE-dev/ROCS-source/doc/rocs-interfaces.png"
+     inkscape:export-xdpi="22.5"
+     inkscape:export-ydpi="22.5"><tspan
+       sodipodi:role="line"
+       id="tspan3828"
+       x="147.3302"
+       y="830.37158">Редактор скриптів</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:47.91446686px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="259.2175"
+     y="353.07269"
+     id="text3826-1"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan3828-7"
+       x="259.2175"
+       y="353.07269">Візуальний редактор графів</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:47.91446686px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="974.81427"
+     y="821.40448"
+     id="text3826-2"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       x="974.81427"
+       y="821.40448"
+       id="tspan3862">Виведене скриптом</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:47.91446686px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="-485.29895"
+     y="1385.1989"
+     id="text3826-26"
+     sodipodi:linespacing="125%"
+     transform="matrix(0,-1,1,0,0,0)"><tspan
+       sodipodi:role="line"
+       x="-485.29895"
+       y="1385.1989"
+       id="tspan3875">Бічна панель</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:37.91479111px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="-688.86853"
+     y="46.374847"
+     id="text3826-0"
+     sodipodi:linespacing="125%"
+     transform="matrix(0,-1,1,0,0,0)"><tspan
+       sodipodi:role="line"
+       id="tspan3828-6"
+       x="-688.86853"
+       y="46.374847">Панель інструментів редактора</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:47.91446686px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="-947.39569"
+     y="1318.2433"
+     id="text3826-15"
+     sodipodi:linespacing="125%"
+     transform="matrix(0,-1,1,0,0,0)"><tspan
+       sodipodi:role="line"
+       id="tspan3828-9"
+       x="-947.39569"
+       y="1318.2433">Керування</tspan></text>
+  <rect
+     style="fill:#3800ff;fill-opacity:0.2745098;fill-rule:nonzero;stroke:#1b15b8;stroke-width:1.79484713;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     id="rect3897"
+     width="1256.9547"
+     height="27.665333"
+     x="81.778763"
+     y="89.016182" />
+  <rect
+     style="fill:#37c7e8;fill-opacity:0.32743363;fill-rule:nonzero;stroke:#0467c2;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     id="rect2987-5-8-6"
+     width="19.149788"
+     height="864.00391"
+     x="1358.7301"
+     y="83.674118" />
+  <text
+     xml:space="preserve"
+     style="font-size:47.91446686px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="1016.3775"
+     y="102.4351"
+     id="text3826-26-2"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       x="1016.3775"
+       y="102.4351"
+       id="tspan3875-2">Панель вибору документів</tspan></text>
+</svg>

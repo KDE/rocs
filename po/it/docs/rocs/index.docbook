@@ -1,0 +1,866 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Italian "INCLUDE">
+
+]>
+<book id="rocs" lang="&language;">
+
+<bookinfo>
+<title
+>Manuale di &rocs;</title>
+<authorgroup>
+<author
+><personname
+> <firstname
+>Tomaz</firstname
+> <surname
+>Canabrava</surname
+> </personname
+> <email
+>tomaz.canabrava@gmail.com</email
+> </author>
+<author
+><personname
+> <firstname
+>Andreas</firstname
+> <surname
+>Cord-Landwehr</surname
+> </personname
+> <email
+>cordlandwehr@kde.org</email
+> </author>
+
+<othercredit role="translator"
+><firstname
+>Valter</firstname
+><surname
+>Mura</surname
+><affiliation
+><address
+><email
+>valtermura@gmail.com</email
+></address
+></affiliation
+><contrib
+>Traduzione della documentazione</contrib
+></othercredit
+><othercredit role="translator"
+><firstname
+>Paolo</firstname
+><surname
+>Zamponi</surname
+><affiliation
+><address
+><email
+>zapaolo@email.it</email
+></address
+></affiliation
+><contrib
+>Traduzione della documentazione</contrib
+></othercredit
+><othercredit role="translator"
+><firstname
+>Domenico</firstname
+><surname
+>Camasta</surname
+><contrib
+>Traduzione della documentazione</contrib
+></othercredit
+><othercredit role="translator"
+><firstname
+>Francesco</firstname
+><surname
+>Nigro</surname
+><contrib
+>Traduzione della documentazione</contrib
+></othercredit
+><othercredit role="translator"
+><firstname
+>Federico Zenith</firstname
+><surname
+></surname
+><affiliation
+><address
+><email
+>federico.zenith@member.fsf.org</email
+></address
+></affiliation
+><contrib
+>Traduzione di interfaccia e documentazione</contrib
+></othercredit
+> 
+</authorgroup>
+
+<date
+>2021-10-23</date>
+<releaseinfo
+>KDE Gear 21.08</releaseinfo>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<abstract>
+<para
+>&rocs; è uno strumento per la teoria dei grafi. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdeedu</keyword>
+<keyword
+>matematica</keyword>
+<keyword
+>matematica</keyword>
+<keyword
+>grafi</keyword>
+<keyword
+>nodo</keyword>
+<keyword
+>arco</keyword>
+<keyword
+>Rocs</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introduzione</title>
+<para
+>Questo capitolo fornisce una panoramica delle funzionalità principali e dei tipici processi di lavoro. Le parti più importanti sono <xref linkend="introduction-nutshell"/> e <xref linkend="scripting"/>, che insieme dovrebbero permettere al nuovo utente di iniziare ad usare subito &rocs;. </para>
+
+<sect1 id="introduction-goals">
+<title
+>Obiettivi, destinatari e processi di lavoro</title>
+<para
+>&rocs; è uno strumento per la teoria dei grafi pensato per chiunque sia interessato a tracciare e analizzare algoritmi per grafi. Ciò include esplicitamente:</para>
+<itemizedlist>
+    <listitem
+><para
+>docenti che vogliano dimostrare gli algoritmi ai loro studenti,</para
+></listitem>
+    <listitem
+><para
+>studenti e ricercatori che vogliono vedere e capire come funziona il loro algoritmo, e</para
+></listitem>
+    <listitem
+><para
+>chiunque sia interessato alle strutture di dati e agli algoritmi.</para
+></listitem>
+</itemizedlist>
+<para
+>&rocs; fornisce a tutti loro un editor grafico per la creazione di grafi semplice da usare, un potente motore di scripting per eseguire gli algoritmi, molti strumenti di aiuto per le simulazioni e gli esperimenti, ed un esportatore di grafi. Generalmente &rocs; viene utilizzato per creare grafi, sia a mano (trascinando, cioè, i nodi e gli archi sulla lavagna), sia usando uno dei generatori di grafi. Gli algoritmi per grafi possono poi essere implementati ed eseguiti sui grafi creati, e tutti i cambiamenti eseguiti dall'algoritmo sono immediatamente visibili nell'editor dei grafi. </para>
+
+<screenshot>
+  <screeninfo
+>Una schermata di &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-screenshot.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Una schermata di &rocs;.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+</sect1>
+
+<sect1 id="introduction-nutshell">
+<title
+>&rocs; in breve</title>
+<para
+>Ogni sessione di &rocs; è un progetto: quando si apre, &rocs; crea un progetto vuoto, mentre quando si carica un progetto, esso diventa quello corrente. In questo contesto, un progetto consiste di <emphasis
+>grafi</emphasis
+>, <emphasis
+>script/algoritmi</emphasis
+>, e un <emphasis
+>diario</emphasis
+>. </para>
+
+<sect2>
+<title
+>Grafi</title>
+<para
+>Un grafo rappresenta il contenuto di una lavagna dell'editor di grafi. Contiene le informazioni sui nodi definiti dall'utente e sui tipi di arco, sulle loro proprietà e sui nodi e gli archi già creati. &rocs; interpreta l'insieme di tutti i nodi e gli archi di un grafo per formare un grafo (non necessariamente connesso). Tutto ciò che appartiene ad un grafo è accessibile dal motore di script per mezzo dell'oggetto globale <userinput
+><command
+>Document</command
+></userinput
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Tipi di archi</title>
+<para
+>In alcuni scenari i grafi sono formati da diversi tipi di archi (ad esempio un grafo non direzionale con tre archi computato da un algoritmo di ricerca in ampiezza) che dovrebbero essere trattati e visualizzati in maniera diversa. Pertanto è possibile definire arbitrariamente altri tipi di archi oltre al tipo predefinito. Ciascun tipo di arco ha una sua rappresentazione visuale individuale e delle proprietà dinamiche, inoltre può essere impostato come diretto o indiretto. L'interfaccia di scripting fornisce un metodo comodo per accedere solo agli archi di un tipo specifico. </para>
+</sect2>
+
+<sect2>
+<title
+>Tipi di nodi</title>
+<para
+>Analogamente ai tipi di archi, si possono definire diversi tipi di nodi di un grafo (ad esempio per dare ad alcuni di questi un ruolo speciale). Ciascun tipo di nodo ha la sua rappresentazione visuale e le sue proprietà dinamiche. </para>
+</sect2>
+
+<sect2>
+<title
+>Proprietà</title>
+<para
+>Ogni elemento (nodo o arco) può avere delle proprietà, che devono essere impostate nel corrispondente tipo di nodo o di arco. Le proprietà sono identificate e sono accessibili per nome, e possono contenere qualsiasi valore. Per crearne di nuove, o per cambiare quelle esistenti, si può usare la barra laterale <guilabel
+>Tipi di elemento</guilabel
+> e il pulsante <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/> </imageobject
+></inlinemediaobject
+><guibutton
+>Proprietà</guibutton
+> per aprire la finestra delle proprietà. </para>
+<para
+>Si può usare il motore di scripting per aver accesso alle proprietà registrate e cambiarne i valori. Nell'esempio seguente si assume che la proprietà <quote
+>weight</quote
+> sia registrata per il tipo di arco predefinito. <programlisting
+>var nodes = Document.nodes()
+for (var i = 0; i &lt; nodes.length; ++i){
+    nodes[i].weight = i;
+}
+for (var i = 0; i &lt; nodes.length; ++i){
+    Console.log("weight of node " + i + ": " + nodes[i].weight);
+}
+</programlisting>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="introduction-tutorial">
+<title
+>Esercitazione</title>
+<para
+>In questa sezione vogliamo elaborare un progetto di esempio per esplorare alcune tra le più importanti funzioni di &rocs;. L'obiettivo è quello di creare un grafo e uno script che illustrino un semplice algoritmo di approssimazione di fattore 2, per trattare un problema di <emphasis
+>copertura minima dei vertici</emphasis
+>. Questo problema può essere descritto come la ricerca del più piccolo sottoinsieme C di vertici in un grafo tale che ogni arco ha almeno un'estremità in C. Si tratta di un problema NP-completo e il nostro obiettivo è quello di trovare un'approssimazione di fattore 2 attraverso la computazione di una corrispondenza all'interno di un grafo dato. </para>
+<para
+>Il nostro obiettivo è di visualizzare la corrispondenza tra l'accoppiamento e la copertura minima dei vertici. Per ottenere questo obiettivo dobbiamo specificare due tipi di archi, uno per mostrare gli archi accoppiati e l'altro per mostrare gli archi <quote
+>ordinari</quote
+>; dobbiamo specificare inoltre due tipi di nodi, che useremo per distinguere i nodi contenuti in C da quelli non contenuti in C. </para>
+
+<sect2>
+<title
+>Creazione del grafo</title>
+<para
+>Per creare il grafo usiamo il generatore di grafi fornito da &rocs;, che si trova in <menuchoice
+><guimenu
+>Grafo</guimenu
+> <guisubmenu
+>Strumenti</guisubmenu
+> <guimenuitem
+>Genera grafo</guimenuitem
+></menuchoice
+>. In questo modo selezioniamo un <quote
+>grafo casuale</quote
+> composto di 30 nodi, 90 archi, e con seme di generazione 1 (il seme determina la casualità del grafo; partendo dallo stesso seme si riproduce lo stesso grafo). </para>
+</sect2>
+
+<sect2>
+<title
+>Creazione dei tipi di elementi</title>
+<para
+>Usiamo <guilabel
+>Tipi di elementi</guilabel
+> per creare sia un secondo tipo di nodo sia di arco. Dobbiamo aprire la finestra delle proprietà di entrambi questi due nuovi tipi facendo clic sul rispettivo pulsante delle <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Proprietà</guibutton
+> per impostare gli ID a <literal
+>2</literal
+>; dobbiamo anche cambiare il colore degli elementi di questi due nuovi tipi (per distinguerli da quelli predefiniti). Infine dobbiamo impostare tutti i tipi di archi come bidirezionali, e gli ID del tipo predefinito a <literal
+>1</literal
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>L'algoritmo</title>
+<para
+>Al minimo è necessario implementare l'algoritmo di approssimazione. Per farlo si utilizza la seguente implementazione: </para>
+<programlisting
+>for (var i=0; i &lt; Document.nodes.length; i++) {
+    Document.nodes[i].type = 1;
+}
+for (var i=0; i &lt; Document.edges.length; i++) {
+    Document.edges[i].type = 1;
+}
+
+var E = Document.edges(); // insieme degli archi non esaminati
+var C = new Array();      // archi accoppiati
+while (E.length 
+> 0) {
+    var e = E[0];         // prende il primo arco e={u,v}
+    var u = e.from();
+    var v = e.to();
+    e.type = 2;           // imposta l'arco come arco accoppiato
+    E.shift();            // elimina l'arco e (i.e., E[0]) dalla lista degli archi
+    C.push(u);            // aggiunge u a C
+    C.push(v);            // aggiunge v a C
+
+    // segna u,v come nodi di C
+    u.type = 2;
+    v.type = 2;
+
+    // rimuove da E tutti gli archi incidenti a u o v
+    var adjacent = u.edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // trova l'indice
+        if (index != -1) {
+            E.splice(index, 1); // elimina l'indice dopo averlo trovato
+        }
+    }
+    var adjacent = v.edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // trova l'indice
+        if (index != -1) {
+            E.splice(index, 1); // elimina l'indice dopo averlo trovato
+        }
+    }
+}
+Console.log("Vertex Cover contains " + C.length + " nodes.");
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Eseguire l'algoritmo</title>
+<para
+>L'algoritmo può essere eseguito facendo clic sul pulsante <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Esegui</guibutton
+> nel pannello di controllo dello script. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="user-interface">
+<title
+>L'interfaccia di &rocs;</title>
+
+<sect1 id="user-interface-all">
+<title
+>Elementi principali dell'interfaccia</title>
+<para
+>L'interfaccia si divide in diverse parti logiche, come presentato nella schermata sotto. </para>
+
+<screenshot>
+  <screeninfo
+>Elementi grafici dell'interfaccia di &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-interfaces.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Elementi grafici dell'interfaccia di &rocs;.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Editor dei grafi</term>
+    <listitem
+><para
+>L'editor fornisce una lavagna su cui si possono posizionare i nodi e gli archi; un doppio clic su un elemento qualsiasi apre il corrispondente menu delle proprietà. Per creare e modificare i grafi puoi usare gli strumenti delle <emphasis
+>schede della Barra laterale</emphasis
+>.</para>
+    <para
+>Strumenti disponibili:</para>
+      <itemizedlist>
+        <listitem
+><para
+>Nella parte superiore sinistra del riquadro troverai le icone delle azioni seguenti. Fare clic su un'azione implica che il puntatore del mouse l'applica alla lavagna dell'editor dei grafi:</para>
+          <itemizedlist>
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsselect.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Seleziona e sposta</guiicon
+>: per selezionare gli elementi, fai clic su un'area vuota della lavagna, tieni il mouse premuto e disegna un rettangolo che contenga alcuni elementi di dati o archi per selezionarli, oppure fai direttamente clic su un elemento non selezionato per selezionarlo. Se fai clic su uno o più elementi selezionati, li puoi spostare tenendo il mouse premuto e spostando il mouse. È possibile spostare gli elementi selezionati anche con i tasti freccia.</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsnode.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Aggiungi un nodo</guiicon
+>: facendo clic su un punto qualsiasi della lavagna dell'editor dei grafi si crea un nuovo dato che appartiene alla struttura dati attualmente selezionata. Tenendo premuto a lungo il tasto del mouse appare un menu attraverso il quale il tipo del dato appena creato può essere selezionato (ciò richiede l'esistenza di tipi di dati differenti).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsedge.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Crea un arco</guiicon
+>: fai clic su un dato, tieni il mouse premuto, e traccia una linea a un altro dato a cui l'arco punterà. Questa azione ha successo solo se il grafo attuale permette l'aggiunta di questo arco (per esempio, in un grafo non direzionale non è possibile aggiungere archi multipli tra due dati). Mantenendo la pressione del puntatore sul tasto appare un menu da cui è possibile selezionare il tipo a cui assegnare l'arco appena creato (solo se esistono più tipi di archi).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsdelete.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Elimina elemento</guiicon
+>: fai clic su un elemento per eliminarlo. Se elimini un nodo, verranno eliminati anche tutti gli archi adiacenti.</para
+></listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Barra laterale</term>
+    <listitem
+><para
+>A destra puoi trovare la barra laterale, che contiene diversi strumenti per il processo di lavoro:</para>
+      <itemizedlist>
+        <listitem
+><para
+><guilabel
+>Tipi di elemento</guilabel
+>: questo oggetto ti dà accesso immediato ai tipi di archi e ai nodi disponibili.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>Diario</guilabel
+>: ogni progetto ha il suo diario, che può essere usato, per esempio, per annotare i compiti, i risultati e le osservazioni.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>API di scripting</guilabel
+>: puoi aprire questo oggetto per avere accesso immediato alla documentazione degli script.</para
+></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Editor di script</term>
+    <listitem
+><para
+>In questo editor di testo puoi scrivere algoritmi, come spiegato in dettaglio in <xref linkend="scripting"/>. Puoi lavorare su diversi script allo stesso tempo usando diverse schede.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Risultato script:</term>
+    <listitem
+><para
+>Quest'area di testo mostra o informazioni di debug o l'output dello script dell'algoritmo, a seconda dell'impostazione attiva in alto. Se lo script produce un errore, viene automaticamente selezionato l'output di debug.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Controlli</term>
+    <listitem
+><para
+>Qui puoi trovare i controlli per l'esecuzione degli script. Puoi eseguire lo script attualmente aperto nell'editor degli script premendo il pulsante <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Esegui</guibutton
+>. È possibile interrompere lo script mentre è in esecuzione premendo il pulsante <inlinemediaobject
+><imageobject
+><imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Interrompi</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<!--FIXME nop alignment action any more?-->
+</chapter>
+
+<chapter id="scripting">
+<title
+>Scripting</title>
+<sect1>
+    <title
+>Eseguire algoritmi in &rocs;</title>
+<para
+>&rocs; usa internamente il motore &javascript; QtScript. Questo significa che tutti gli algoritmi che vengono implementati devono usare &javascript;. Di seguito spiegheremo come accedere agli elementi di un grafo e cambiarli usando il motore di scripting. È importante notare che i cambiamenti effettuati dal motore di scripting si riflettono direttamente sulle proprietà dell'editor di elementi del grafo. </para>
+
+<sect2>
+<title
+>Controllare l'esecuzione degli script</title>
+<para
+>Ci sono diversi modi di esecuzione per gli algoritmi: </para>
+<itemizedlist>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Esegui</guibutton
+>: fa partire lo script e lo esegue fino al termine.</para
+></listitem>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Interrompi</guibutton
+>: ferma l'esecuzione di uno script (disponibile solo mentre uno script viene eseguito).</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2>
+<title
+>Risultato script</title>
+<para
+>Durante l'esecuzione di un algoritmo, gli output del debug e del programma sono mostrati nell'<emphasis
+>output di debug e degli script</emphasis
+>. Se il motore di scripting individua un errore nella sintassi dello script lo mostra anche come messaggio di debug. Tutti i messaggi del programma vengono mostrati (in grassetto) insieme all'output di debug. </para>
+<para
+>Puoi controllare il testo mostrato nell'output dello script attraverso le seguenti funzioni: </para>
+<programlisting
+>Console.log(string message);            // mostra il messaggio come output dello script
+    Console.debug(string message);          // mostra il messaggio come output di debug
+    Console.error(string message);          // mostra il messaggio come output di errore
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>API del motore di scripting</title>
+<para
+>Ciascuna delle diverse parti di &rocs; fornisce un elemento statico che è accessibile dal motore di scripting. Questi sono: <itemizedlist
+> <listitem
+><para
+><userinput
+><command
+>Documento</command
+></userinput
+> per il grafo</para
+></listitem
+> <listitem
+><para
+><userinput
+><command
+>Console</command
+></userinput
+> per la console di registrazione dell'output</para
+></listitem
+> </itemizedlist
+>. Per l'uso esplicito delle API e per il metodo di riferimento consulta l'aiuto in linea nella barra laterale di &rocs;. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="import-export">
+<title
+>Importazione ed esportazione</title>
+<sect1 id="import-export-projects">
+    <title
+>Condividere i progetti di &rocs;</title>
+    <para
+>I progetti di &rocs; possono essere importati ed esportati come archivi <literal role="extension"
+>.tar.gz</literal
+>, che possono essere utilizzati per condividere progetti. Si possono importare o esportare progetti rispettivamente attraverso gli elementi di menu <menuchoice
+><guimenu
+>Grafo</guimenu
+> <guimenuitem
+>Importa grafo</guimenuitem
+></menuchoice
+> e <menuchoice
+><guimenu
+>Grafo</guimenu
+> <guimenuitem
+>Esporta grafo come...</guimenuitem
+></menuchoice
+>. </para>
+
+<sect2 id="import-export-graphs">
+    <title
+>Importazione ed esportazione di grafi</title>
+    <para
+>&rocs; attualmente supporta l'importazione e l'esportazione dei seguenti formati di file:</para>
+    <itemizedlist>
+        <listitem
+><para
+>File &DOT;, altrimenti noti come GraphViz</para
+></listitem>
+        <listitem
+><para
+>File <acronym
+>GML</acronym
+></para
+></listitem>
+        <listitem
+><para
+>File in formato di grafi banale</para
+></listitem>
+        <listitem
+><para
+>Formato di linguaggio a marcatori Keyhole</para
+></listitem>
+    </itemizedlist>
+
+<sect3 id="format-specification-tgf">
+<title
+>Il formato di grafi banale</title>
+<para
+>Il <emphasis
+>formato di grafi banale</emphasis
+> (<acronym
+>TGF</acronym
+>) è un semplice formato di file testuale per descrivere i grafi. Un file <acronym
+>TGF</acronym
+> consiste di un elenco di definizioni dei nodi che fanno corrispondere i loro identificativi a delle etichette, seguite da un elenco degli archi. In questo formato è possibile avere una sola etichetta per nodo e un valore per arco. &rocs; interpreta i grafi importati come grafi non direzionali. I grafi esportati conterranno due archi per connessione se queste sono bidirezionali. </para>
+
+<sect4>
+<title
+>Specifica del formato</title>
+    <itemizedlist>
+        <listitem
+><para
+>Il file inizia con una lista di nodi (un nodo per linea) seguito da una linea col solo carattere <quote
+>#</quote
+>, a cui fa seguito una lista di archi (un arco per linea).</para
+></listitem>
+        <listitem
+><para
+>Un nodo consiste di un intero (identificatore) seguito da uno spazio, seguito da una stringa qualsiasi.</para
+></listitem>
+        <listitem
+><para
+>Un arco è costituito da due interi (gli identificativi) separati da uno spazio, seguiti da uno spazio, seguito da una stringa qualsiasi. Si presume che l'arco direzionale punti dal primo identificativo al secondo.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Esempio</title>
+<programlisting
+>1 nodo iniziale
+2 trasmissione
+3 termine
+#
+1 2 blu
+2 1 rosso
+2 3 verde
+</programlisting>
+</sect4>
+</sect3>
+
+<sect3 id="format-specification-dot">
+<title
+>Linguaggio &DOT; / Formato di grafi Graphviz</title>
+<para
+>Il linguaggio &DOT; è un linguaggio descrittivo in testo semplice che permette sia una rappresentazione leggibile dei grafi, sia un'elaborazione efficiente da parte di un programma di disposizione dei grafi. &DOT; è il formato di file predefinito per la serie di programmi di visualizzazione Graphviz, ma è usato anche da altri strumenti. Le estensioni più comuni dei file &DOT; sono <literal role="extension"
+>.gv</literal
+> e <literal role="extension"
+>.dot</literal
+>. </para>
+
+<sect4>
+<title
+>Funzionalità non supportate</title>
+<para
+>&rocs; può elaborare ogni file grafo che contenga grafi specificati secondo il linguaggio di specifica &DOT;<footnote
+><para
+>https://graphviz.org/doc/info/lang.html</para
+></footnote
+>. Il supporto alle funzionalità del linguaggio è completo, salvo le seguenti eccezioni: </para>
+    <itemizedlist>
+        <listitem
+><para
+>Sottografi: a causa della mancanza del concetto di sottografo in &rocs;, i sottografi sono importati come insiemi di elementi e connessioni. In particolare, le connessioni da o verso sottografi non sono importate.</para
+></listitem>
+        <listitem
+><para
+>Attributi &HTML; e &XML;: gli attributi (come etichette) che contengono sintassi &HTML; o &XML; vengono letti senza modifica. In particolare, da questi attributi non viene letta nessuna specificazione di carattere o stile.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Esempio</title>
+<programlisting
+>digraph myGraph {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect4>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="graph-layout">
+    <title
+>Disposizione dei grafi</title>
+
+    <sect1>
+        <title
+>Disporre automaticamente i grafi in &rocs;</title>
+        <para
+>&rocs; può disporre automaticamente i grafi. Lo strumento per la disposizione dei grafi di &rocs; si trova nel menu principale in <menuchoice
+><guimenu
+>Grafo</guimenu
+> <guisubmenu
+>Strumenti</guisubmenu
+> <guimenuitem
+>Disposizione dei grafi</guimenuitem
+></menuchoice
+>. Sono applicabili due diversi algoritmi di disposizione: Disposizione basata sulla forza e Disposizione ad albero radiale. Per applicarne una, seleziona la scheda corrispondente dello strumento di disposizione dei grafi, scegli i parametri che preferisci ed esegui l'algoritmo premendo il pulsante <guibutton
+>OK</guibutton
+>. I dettagli specifici di ciascun algoritmo di disposizione sono spiegati nelle sezioni seguenti. </para>
+
+    <sect2>
+        <title
+>Disposizione basata sulla forza</title>
+
+        <para
+>La Disposizione basata sulla forza è applicabile a qualsiasi grafo. Come è facile notare, questo algoritmo simula le forze che agiscono in ciascun nodo. Sono presenti forze di repulsione tra coppie di nodi e forze di attrazione tra coppie di nodi che sono adiacenti. L'ordine di grandezza di queste forze può essere specificata spostando i relativi cursori nell'interfaccia utente. </para>
+
+        <screenshot>
+          <screeninfo
+>Schermata della scheda «Disposizione basata sulla forza» dello strumento per la disposizione dei grafi di &rocs;.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Schermata della scheda «Disposizione basata sulla forza» dello strumento per la disposizione dei grafi di &rocs;.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>Un altro parametro controllabile è il «Fattore area». Questo parametro controlla come i nodi si diffondono. Le disposizioni generate con valori elevati del Fattore area tendono ad avere grandi distanze tra i nodi. </para>
+
+    <sect3>
+        <title
+>Disposizione ad albero radiale</title>
+        <para
+>La Disposizione ad albero radiale è applicabile solo agli alberi. Qualsiasi tentativo di applicare questo algoritmo ad altri tipi di grafo genererà un messaggio di errore. I parametri per la Disposizione ad albero radiale è selezionabile tramite l'interfaccia utente fornita. </para>
+
+
+        <screenshot>
+          <screeninfo
+>Schermata della scheda «Disposizione ad albero radiale» dello strumento per la disposizione dei grafi di &rocs;.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Schermata della scheda «Disposizione ad albero radiale» dello strumento per la disposizione dei grafi di &rocs;.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>Il parametro a tre tipi seleziona tra una disposizione ad albero libero e una ad albero con radice. Nella disposizione ad albero libero i nodi vengono sistemati liberamente senza alcuna apparente gerarchia. Nella disposizione ad albero con radice, il nodo radice è posizionato in cima all'albero e gli alberi secondari si diffondono sotto di esso, dando l'idea di una gerarchia tra i nodi. </para>
+
+        <para
+>Il parametro Centro/Radice definisce quale nodo verrà utilizzato come radice per la disposizione ad albero con radice o come centro per la disposizione ad albero libero. The center of a free tree layout is the first node to be placed by the algorithm. All other nodes are placed on circles centered at the center node. A center/root can be selected automatically by the layout algorithm. </para>
+
+        <para
+>Il parametro di separazione del nodo controlla la distanza tra i nodi. Con l'aumento del valore del parametro si aumenterà la distanza tra i nodi. Allo stesso modo, con la riduzione del suo valore si ridurrà la distanza tra i nodi. </para>
+    </sect3>
+    </sect2>
+    </sect1>
+</chapter>
+
+<chapter id="credits">
+<title
+>Riconoscimenti e licenza</title>
+
+<para
+>&rocs; </para>
+<para
+>Copyright del programma:</para>
+<itemizedlist>
+	<listitem
+><para
+>Copyright 2008 di Ugo Sangiori (ugorox@gmail.com)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2008-2012 di Tomaz Canabrava (tcanabrava@kde.org)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2008-2012 di Wagner Reck (wagner.reck@gmail.com)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2011-2015 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Copyright della documentazione:</para>
+<itemizedlist>
+	<listitem
+><para
+>Copyright della documentazione 2009 di &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para
+></listitem>
+	<listitem
+><para
+>Copyright della documentazione 2009 di Tomaz Canabrava (tcanabrava@kde.org)</para
+></listitem>
+	<listitem
+><para
+>Copyright della documentazione 2011-2015 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Traduzione a cura di Valter Mura, Paolo Zamponi, Francesco Nigro e Federico Zenith<email
+>valtermura@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes: nil
+sgml-general-insert-case: lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

@@ -1,0 +1,2429 @@
+# translation of rocs.po to Estonian
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Marek Laane <bald@smail.ee>, 2009, 2010, 2011, 2012, 2014, 2016, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: rocs\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2019-11-11 21:00+0200\n"
+"Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
+"Language-Team: Estonian <kde-et@lists.linux.ee>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 19.08.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Marek Laane"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "qiilaq69@gmail.com"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, kde-format
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "Graafiteooria tööriist"
+
+#: main.cpp:32
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr "(c) 2009-2016: Rocsi arendajad"
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr "Hooldaja"
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr "Algne autor"
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "Arendaja"
+
+#: main.cpp:57
+#, kde-format
+msgid "Project to open."
+msgstr "Avatav projekt."
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "Süntaks"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "Omadused"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "Parameetrid"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "Parameeter"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "Meetodid"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "Tüüp"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr "Tagastatav tüüp"
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr "Üksikasjalik kirjeldus"
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "Kirjeldus"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "Skriptimootori API"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, kde-format
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "Graafidokument"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "Objektid"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "Skriptimootori moodulid"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr "Skripti objektid"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "Omadused"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "Meetodid"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "Rocsi skriptimise API"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr "Rocsi projekti ei saa importida, sest projektifaili ei saa parsida."
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Teksti näitamine ikooni kõrval"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Asukoht, kust päisehaldur otsib kaasatuid."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Projekt"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Skriptidokument"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Graafidokument"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Graafifail"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Muuda valitud andmeid"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Paigutus"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Tööriistad"
+
+#: ui/codeeditorwidget.cpp:81
+#, kde-format
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "Koodidokumendi nimi"
+
+#: ui/codeeditorwidget.cpp:82
+#, kde-format
+msgid "Enter the name of your code document"
+msgstr "Koodidokumendi nime määramine"
+
+#: ui/documenttypeswidget.cpp:29
+#, kde-format
+msgctxt "@title"
+msgid "Node Types"
+msgstr "Tipu tüübid"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, kde-format
+msgid "Create Type"
+msgstr "Loo tüüp"
+
+#: ui/documenttypeswidget.cpp:45
+#, kde-format
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "Seose tüübid"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr "nimetu"
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr "Seose tüübi seoste suund."
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr "Seose tüübi unikaalne ID."
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "Ekspordi"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+"<p>Fail <br /><strong>'%1'</strong><br /> on juba olemas. Kui sa ei soovi "
+"seda üle kirjutada, vali failile mõni muu nimi.</p>"
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "Fail on olemas"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+"<p>Faili<strong>'%1'</strong> sufiksi lahendamine saadaoleva faili "
+"taustaprogrammi puhul ei ole võimalik. Ekspordist loobutakse.</p>"
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr "<p>Tõrge faili kirjutamisel: <strong>'%1'</strong></p>"
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|Kõik failid"
+
+#: ui/fileformatdialog.cpp:116
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "Graafifaili import projekti"
+
+#: ui/grapheditorwidget.cpp:79
+#, kde-format
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "Graafidokumendi nimi"
+
+#: ui/grapheditorwidget.cpp:80
+#, kde-format
+msgid "Enter the name of your graph document"
+msgstr "Graafidokumendi nime määramine"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Projekti päevik"
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "Käivita"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr "Aktiivse skripti täitmine aktiivses graafidokumendis."
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "Peata"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr "Skripti täitmise peatamine."
+
+#: ui/mainwindow.cpp:175
+#, kde-format
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "Silumine"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr "JavaScripti koodi avamine siluris."
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr "Elementide tüübid"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "Päevik"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "Skriptimise API"
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "Uus projekt"
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "Salvesta projekt"
+
+#: ui/mainwindow.cpp:269
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Open Project"
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "Ava projekt"
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "Viimati kasutatud projektid"
+
+#: ui/mainwindow.cpp:282
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Save Project As"
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "Projekti salvestamine"
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "Uus graafidokument"
+
+#: ui/mainwindow.cpp:284
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "New Script File"
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "Uus skriptifail"
+
+#: ui/mainwindow.cpp:285
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Graph"
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "Impordi graaf"
+
+#: ui/mainwindow.cpp:286
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Graph as"
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "Ekspordi graaf"
+
+#: ui/mainwindow.cpp:287
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Script"
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "Impordi skript"
+
+#: ui/mainwindow.cpp:288
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Script"
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "Ekspordi skript"
+
+#: ui/mainwindow.cpp:327
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "Skripti import projekti"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "Skripti eksport"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgid "JavaScript (*.js)"
+msgstr "JavaScript (*.js)"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "nimetu"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "Projekti salvestamine"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr "Rocsi projektid (*.rocs)"
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr "Fail nimega \"%1\" on juba olemas. Kas tõesti see üle kirjutada?"
+
+#: ui/mainwindow.cpp:385
+#, kde-format
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "Kas kirjutada fail üle?"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "Projektifailide avamine"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr "Rocsi projektid (*.rocs)"
+
+#: ui/mainwindow.cpp:433
+#, kde-format
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "[ nimetu ]%1"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr "Skriptinimi"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr "Uue skriptifaili failinime määramine"
+
+#: ui/mainwindow.cpp:471
+#, kde-format
+msgid "File already exists."
+msgstr "Fail on juba olemas."
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr "Muudatused sinu projektis on salvestamata. Kas salvestada muudatused?"
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr "Tipu tüübi unikaalne ID."
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, fuzzy, kde-format
+#| msgid "Script Output:"
+msgid "Script output:"
+msgstr "Skripti väljund:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Programmi väljundi puhastamine igal käivitamisel."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Silumise väljundi näitamine."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Väljundi puhastamine."
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "Külgtööriistariba"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr "\"%1\" vaate lülitamine."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Salvesta projekt kui..."
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Overwrite"
+#~ msgstr "Kirjuta üle"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Peamine tööriistariba"
+
+#~ msgid "Align Toolbar"
+#~ msgstr "Joondamisriba"
+
+#~ msgid "Rocs Handbook"
+#~ msgstr "Rocsi käsiraamat"
+
+#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+#~ msgstr "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "Käsiraamat"
+
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "Andmestruktuurid"
+
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs - andmestruktuuride analüüs"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr "Süsteemis ei leitud andmestruktuuri pluginaid. Väljutakse."
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Rocs vajab jätkamiseks vähemalt üht andmestruktuuri pluginat.\n"
+#~ "Proovi käivitada konsoolist kbuildsycoca4 ja siis käivita Rocs uuesti."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr "Asukoht, kus näidatakse tipu nime ja väärtust."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Asukoht, kus näidatakse seose nime ja väärtust."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr "Määramine, kas silumise täitmise nuppu näidata või mitte."
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr "Määramine, kas sammuga täitmise nuppu näidata või mitte."
+
+#~ msgid "Script File"
+#~ msgstr "Skriptifail"
+
+#~ msgid "Convert To"
+#~ msgstr "Teisendamine"
+
+#~ msgid "Settings"
+#~ msgstr "Seadistused"
+
+#~ msgid "Help"
+#~ msgstr "Abi"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "KDE tekstiredaktorit ei leitud, \n"
+#~ " palun kontrolli oma paigaldust"
+
+#~ msgid "Display of Element Properties"
+#~ msgstr "Elemendi omaduste kuvamine"
+
+#~ msgid "Data Properties"
+#~ msgstr "Andmete omadused"
+
+#~ msgid "centered"
+#~ msgstr "tsentreeritud"
+
+#~ msgid "below"
+#~ msgstr "all"
+
+#~ msgid "above"
+#~ msgstr "ülal"
+
+#~ msgid "Connection Properties"
+#~ msgstr "Ühenduse omadused"
+
+#~ msgid "Execution Controls"
+#~ msgstr "Täitmise juhtimine"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Silumise käivitamine näitamine"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Ühe sammu täitmise näitamine"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Omadused"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Viitade näitamine"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Graafide salvestamine failina"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "Laaditud pluginad"
+
+#~ msgid "Graph File Plugins loaded for %1"
+#~ msgstr "%1 laaditud graafifailipluginad"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|Skriptifailid"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Rocsi skriptifailid"
+
+#~ msgid "Add your description here."
+#~ msgstr "Siia käib sinu kirjeldus."
+
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "Üks samm"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Käivita silumine"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "Katkesta esimesel real"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Laadi alla näiteid"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Laadi projekt üles"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Võimalikud päised"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "Laaditud pluginad"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Code Editor..."
+#~ msgstr "Koodiredaktori seadistamine..."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Päisehaldur"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Vaikeseadistused"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Olemasoleva skriptifaili lisamine projekti"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "See ei paista olevat graafifail."
+
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Vigane fail"
+
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs|Rocsi projektifailid\n"
+#~ "*.rocsz|Tihendatud Rocsi projektifailid\n"
+#~ "*|Kõik failid"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Projekti salvestamine"
+
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*rocs *.rocsz|Kõik Rocsi failid\n"
+#~ "*.rocs|Rocsi projektifailid\n"
+#~ "*.rocsz|Tihendatud Rocsi projektifailid\n"
+#~ "*|Kõik failid"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Rocsi graafidokumendid\n"
+#~ "*|Kõik failid"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Graafidokumendi salvestamine"
+
+#~ msgid "Graph name"
+#~ msgstr "Graafi nimi"
+
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Graafi nime määramine"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Võimalikud päised skriptimootorile"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your graph document are unsaved. Do you want to save your "
+#~ "changes?"
+#~ msgstr ""
+#~ "Muudatused sinu graafidokumentis on salvestamata. Kas salvestada "
+#~ "muudatused?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files are unsaved. Do you want to save all unsaved "
+#~ "scripts?"
+#~ msgstr ""
+#~ "Muudatused sinu skriptifailides on salvestamata. Kas salvestada kõik "
+#~ "salvestamata skriptid?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files and on your graph document are unsaved. Do "
+#~ "you want to save your graph document and all unsaved scripts?"
+#~ msgstr ""
+#~ "Muudatused sinu skriptifailides ja graafidokumendis on salvestamata. Kas "
+#~ "salvestada graafidokument ja kõik salvestamata skriptid?"
+
+#~ msgid "Default Information Display"
+#~ msgstr "Teabe vaikimisi esitamine"
+
+#~ msgid "Node Information"
+#~ msgstr "Tipu teave"
+
+#~ msgid "Edge Information"
+#~ msgstr "Seose teave"
+
+#~ msgid "Display debug messages."
+#~ msgstr "Silumisteadete näitamine"
+
+#~ msgid "Untitled"
+#~ msgstr "Nimetu"
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "Paigutusriba"
+
+#, fuzzy
+#~| msgid "Add Data"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "Lisa andmed"
+
+#, fuzzy
+#~| msgid "Add Data"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Data"
+#~ msgstr "Lisa andmed"
+
+#, fuzzy
+#~| msgid "Add new data element"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "Uue andmeelemendi lisamine"
+
+#, fuzzy
+#~| msgid "Add Connection"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Connection"
+#~ msgstr "Lisa ühendus"
+
+#, fuzzy
+#~| msgid "Add Connection"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Connection"
+#~ msgstr "Lisa ühendus"
+
+#, fuzzy
+#~| msgid "Add a new connection between two data elements of selected type"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new connection between two data elements of selected type"
+#~ msgstr "Uue ühenduse lisamine kahe valitud tüüpi andmeelemendi vahele"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Base"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Base"
+#~ msgstr "Alla"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Center"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "Keskele"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Top"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Top"
+#~ msgstr "Üles"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Left"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Left"
+#~ msgstr "Vasakule"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Right"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Right"
+#~ msgstr "Paremale"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Circle"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "Ring"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Minimize Crossing Edges"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Kattuvate seoste minimeerimine"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "Kustuta"
+
+#, fuzzy
+#~ msgid "Form"
+#~ msgstr "Vorm"
+
+#, fuzzy
+#~| msgid "Add Edge"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "Lisa seos"
+
+#, fuzzy
+#~| msgid "Creates a new edge between 2 nodes"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new edge between 2 nodes"
+#~ msgstr "Uue seose loomine kahe tipu vahele"
+
+#, fuzzy
+#~| msgid "Add %1"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add %1"
+#~ msgstr "Lisa %1"
+
+#, fuzzy
+#~| msgid "Creates a new node at the click position."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position."
+#~ msgstr "Klõpsamise asukohta uue tipu loomine."
+
+#, fuzzy
+#~| msgid "Creates a new node at the click position on the drawing area."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position on the drawing area."
+#~ msgstr "Joonisealal klõpsamise asukohta uue tipu loomine."
+
+#~ msgid "Add %1"
+#~ msgstr "Lisa %1"
+
+#, fuzzy
+#~| msgid "Delete items by clicking on them."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "Elementide kustutamine neil klõpsates."
+
+#, fuzzy
+#~| msgid "Data Type Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "Andmetüübi omadused"
+
+#, fuzzy
+#~| msgid "Pointer Type Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Viidatüübi omadused"
+
+#, fuzzy
+#~| msgid "Move"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "Liiguta"
+
+#, fuzzy
+#~| msgid "Select and move items."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Select and move items."
+#~ msgstr "Elementide valimine ja liigutamine."
+
+#, fuzzy
+#~| msgid "Zoom"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Zoom"
+#~ msgstr "Suurendus"
+
+#, fuzzy
+#~| msgid "Zoom the canvas by the wheel, or by dragging."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom the canvas by the wheel, or by dragging."
+#~ msgstr "Lõuendi suurendamine rattaga või lohistades."
+
+#, fuzzy
+#~| msgid "Properties"
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "Omadused"
+
+#, fuzzy
+#~| msgid "Graph Document:"
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "Graafidokument"
+
+#~ msgid "Data Structure:"
+#~ msgstr "Andmestruktuur:"
+
+#, fuzzy
+#~| msgid "Add a new data structure with the specified name"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new data structure."
+#~ msgstr "Määratud nimega uue andmestruktuuri lisamine"
+
+#, fuzzy
+#~| msgid "Select Data Type:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "Andmetüüp:"
+
+#~ msgid "Edit Data Types"
+#~ msgstr "Muuda andmetüüpe"
+
+#, fuzzy
+#~| msgid "Dynamic Properties"
+#~ msgid "Static Properties"
+#~ msgstr "Dünaamilised omadused"
+
+#~ msgid "Node color"
+#~ msgstr "Tipu värv"
+
+#~ msgid "Color:"
+#~ msgstr "Värv:"
+
+#~ msgid "Type:"
+#~ msgstr "Tüüp:"
+
+#~ msgid "Dynamic Properties"
+#~ msgstr "Dünaamilised omadused"
+
+#~ msgid "Name:"
+#~ msgstr "Nimi:"
+
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "Andmestruktuuri plugin:"
+
+#, fuzzy
+#~| msgid "Data Structure Properties"
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "Andmestruktuuri omadused"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Structure"
+#~ msgstr "Andmestruktuur"
+
+#, fuzzy
+#~| msgid "Data Types"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Types"
+#~ msgstr "Andmetüübid"
+
+#, fuzzy
+#~| msgid "Data Structure Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "Andmestruktuuri omadused"
+
+#~ msgid "Name"
+#~ msgstr "Nimi"
+
+#, fuzzy
+#~| msgid "Default Color:"
+#~ msgid "Default Value"
+#~ msgstr "Vaikimisi värv:"
+
+#, fuzzy
+#~| msgid "Display Options"
+#~ msgid "Display"
+#~ msgstr "Näitamisvalikud"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "Omadus"
+
+#, fuzzy
+#~| msgid "Data Types"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Data Type"
+#~ msgstr "Andmetüübid"
+
+#~ msgid "Select Data Type:"
+#~ msgstr "Andmetüüp:"
+
+#, fuzzy
+#~| msgid "Select Data Type:"
+#~ msgid "Remove selected data type."
+#~ msgstr "Andmetüüp:"
+
+#, fuzzy
+#~| msgid "Add a new data structure with the specified name"
+#~ msgid "Add new data type."
+#~ msgstr "Määratud nimega uue andmestruktuuri lisamine"
+
+#~ msgid "Insert a name for this type"
+#~ msgstr "Kirjuta selle tüübi nimi"
+
+#~ msgid "Default Color:"
+#~ msgstr "Vaikimisi värv:"
+
+#, fuzzy
+#~| msgid "Data Type Properties"
+#~ msgid "Data Type Properties"
+#~ msgstr "Andmetüübi omadused"
+
+#, fuzzy
+#~| msgid "Document Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "Dokumendi omadused"
+
+#~ msgid "Property"
+#~ msgstr "Omadus"
+
+#~ msgid "Value"
+#~ msgstr "Väärtus"
+
+#, fuzzy
+#~| msgid "Pointer Types"
+#~ msgid "Edit Pointer Types"
+#~ msgstr "Viidatüübid"
+
+#, fuzzy
+#~| msgid "Pointer Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "Viida omadused"
+
+#~ msgid "Pointer Properties"
+#~ msgstr "Viida omadused"
+
+#~ msgid "Width:"
+#~ msgstr "Laius:"
+
+#, fuzzy
+#~| msgid "solid"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "ühtlane"
+
+#, fuzzy
+#~| msgid "dash"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "kriipsjoon"
+
+#, fuzzy
+#~| msgid "dash dot"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash dot line"
+#~ msgstr "kriips-punkt"
+
+#, fuzzy
+#~| msgid "Connection"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "Ühendus"
+
+#, fuzzy
+#~| msgid "Create new Pointer Type"
+#~ msgid "Add new pointer type."
+#~ msgstr "Loo uus viidatüüp"
+
+#~ msgid "Select Pointer Type:"
+#~ msgstr "Viidatüüp:"
+
+#, fuzzy
+#~| msgid "Select Pointer Type:"
+#~ msgid "Remove selected pointer type."
+#~ msgstr "Viidatüüp:"
+
+#~ msgid "Style:"
+#~ msgstr "Stiil:"
+
+#, fuzzy
+#~| msgid "Pointer Type Properties"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Viidatüübi omadused"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "Andmestruktuur"
+
+#, fuzzy
+#~| msgid "Selected"
+#~ msgctxt "@title:menu"
+#~ msgid "Selected"
+#~ msgstr "Valitud"
+
+#, fuzzy
+#~| msgid "Zoom"
+#~ msgctxt "@title:menu"
+#~ msgid "Zoom"
+#~ msgstr "Suurendus"
+
+#, fuzzy
+#~| msgid "In"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "In"
+#~ msgstr "Suurenda"
+
+#, fuzzy
+#~| msgid "Out"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Out"
+#~ msgstr "Vähenda"
+
+#, fuzzy
+#~| msgid "Reset"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Reset"
+#~ msgstr "Lähtesta"
+
+#~ msgid "Align"
+#~ msgstr "Joondus"
+
+#, fuzzy
+#~| msgctxt "align elements at bottom"
+#~| msgid "Bottom"
+#~ msgctxt "@action:inmenu align elements at bottom"
+#~ msgid "Bottom"
+#~ msgstr "Alla"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Center"
+#~ msgctxt "@action:inmenu align elements at center"
+#~ msgid "Center"
+#~ msgstr "Keskele"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Top"
+#~ msgctxt "@action:inmenu align elements at top"
+#~ msgid "Top"
+#~ msgstr "Üles"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Left"
+#~ msgctxt "@action:inmenu align elements left"
+#~ msgid "Left"
+#~ msgstr "Vasakule"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Right"
+#~ msgctxt "@action:inmenu align elements right"
+#~ msgid "Right"
+#~ msgstr "Paremale"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Circle"
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Ring"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Minimize Crossing Edges"
+#~ msgctxt ""
+#~ "@action:inmenu align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Kattuvate seoste minimeerimine"
+
+#, fuzzy
+#~| msgid "Values"
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "Väärtused"
+
+#, fuzzy
+#~| msgid "Enumerate"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Enumerate"
+#~ msgstr "Loendina"
+
+#, fuzzy
+#~| msgid "Random Integers"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Integers"
+#~ msgstr "Juhuslikud täisarvud"
+
+#, fuzzy
+#~| msgid "Random Reals"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Reals"
+#~ msgstr "Juhuslikud reaalarvud"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "Kustuta"
+
+#, fuzzy
+#~| msgid "Assign Values"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "Väärtuste omistamine"
+
+#~ msgid "Assign Values"
+#~ msgstr "Väärtuste omistamine"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">List of all data "
+#~ "structures that are of type <span style=\" font-style:italic;\">Graph</"
+#~ "span>.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Kõigi andmestruktuuride "
+#~ "loend, mille tüübiks on <span style=\" font-style:italic;\">graaf</span>."
+#~ "</p></body></html>"
+
+#~ msgid "Nodes"
+#~ msgstr "Tipud"
+
+#~ msgid "Edges"
+#~ msgstr "Seosed"
+
+#~ msgid "Start ID"
+#~ msgstr "Alguse ID"
+
+#~ msgid "Lower Limit"
+#~ msgstr "Alumine piir"
+
+#~ msgid "Upper Limit"
+#~ msgstr "Ülemine piir"
+
+#~ msgid "Generator Seed"
+#~ msgstr "Genereerija seeme"
+
+#~ msgid "Enumerate Items"
+#~ msgstr "Elementide loendamine"
+
+#~ msgid "Assign Random Integers"
+#~ msgstr "Juhuslike täisarvude omistamine"
+
+#~ msgid "Assign Random Reals"
+#~ msgstr "Juhuslike reaalarvude omistamine"
+
+#~ msgid "Overwrite existing values"
+#~ msgstr "Olemasolevate väärtuste ülekirjutamine"
+
+#, fuzzy
+#~| msgid "Generate Graph"
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "Graafiku genereerimine"
+
+#, fuzzy
+#~| msgid "Generate Graph"
+#~ msgctxt "@title:window"
+#~ msgid "Generate Graph"
+#~ msgstr "Graafiku genereerimine"
+
+#~ msgid "Mesh Graph"
+#~ msgstr "Sõrestikgraafik"
+
+#~ msgid "Star Graph"
+#~ msgstr "Tähtgraafik"
+
+#~ msgid "Circle Graph"
+#~ msgstr "Ringgraafik"
+
+#~ msgid "RandomGraph"
+#~ msgstr "Juhuslik graaf"
+
+#~ msgid "Generate Graph"
+#~ msgstr "Graafiku genereerimine"
+
+#~ msgid "Graph Type:"
+#~ msgstr "Graafi tüüp:"
+
+#~ msgid "Random Graph"
+#~ msgstr "Juhuslik graafik"
+
+#~ msgid "Erdös-Renyi Graph"
+#~ msgstr "Erdös-Renyi graaf"
+
+#~ msgid "Number of Columns:"
+#~ msgstr "Veergude arv:"
+
+#~ msgid "Number of Rows:"
+#~ msgstr "Ridade arv:"
+
+#~ msgid "Satellite Nodes:"
+#~ msgstr "Satelliittipud:"
+
+#~ msgid "Number of Nodes:"
+#~ msgstr "Tippude arv:"
+
+#~ msgid "Nodes:"
+#~ msgstr "Tipud:"
+
+#~ msgid "Edges:"
+#~ msgstr "Seosed:"
+
+#~ msgid "Allow self-edges:"
+#~ msgstr "Omaseoste lubamine:"
+
+#~ msgid "Generator Seed:"
+#~ msgstr "Genereerija seeme:"
+
+#~ msgid "Nodes (n):"
+#~ msgstr "Tipud (n):"
+
+#~ msgid "Edge Probability (p):"
+#~ msgstr "Seose tõenäosus (p):"
+
+#, fuzzy
+#~| msgid "Transform Edges"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Transform Edges"
+#~ msgstr "Seoste teisendamine"
+
+#, fuzzy
+#~| msgid "Transform Edges"
+#~ msgctxt "@title:window"
+#~ msgid "Transform Edges"
+#~ msgstr "Seoste teisendamine"
+
+#~ msgid "Transform Edges"
+#~ msgstr "Seoste teisendamine"
+
+#~ msgid ""
+#~ "This option connects all nodes of the given graph. The new edges do not "
+#~ "have any preset weights."
+#~ msgstr ""
+#~ "See valik seob kõik määratud graafi tipud. Uutel seostel pole eelnevalt "
+#~ "määratud kaalu."
+
+#~ msgid "Complete Graph"
+#~ msgstr "Graafi lõpetamine"
+
+#~ msgid "This option removes all edges from the given graph."
+#~ msgstr "See valik eemaldab määratud graafilt kõik seosed."
+
+#~ msgid "Remove all Edges"
+#~ msgstr "Kõigi seoste eemaldamine"
+
+#~ msgid ""
+#~ "This option reverses all edges of a directed graph. Note that this does "
+#~ "not apply to undirected graphs."
+#~ msgstr ""
+#~ "See valik muudab kõigi orienteeritud graafi seoste orientatsiooni. Pane "
+#~ "tähele, et seda ei saa kasutada orienteerimata graafide puhul."
+
+#~ msgid "Reverse all Edges"
+#~ msgstr "Kõik seosed teistpidi"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
+#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
+#~ "Algorithm</span> at the graph. All edges without given weights are "
+#~ "assumed to have weights equals 1. Directed and undirected graphs are "
+#~ "processed accordingly.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">See valik käivitab "
+#~ "graafil <span style=\" font-style:italic;\">Primi minimaalse katva puu "
+#~ "algoritmi</span>. Kõigi määramata kaaluga seoste puhul eeldatakse kaalu "
+#~ "1. Töödeldakse vastavalt nii orienteeritud kui orienteerimata graafe.</"
+#~ "p></body></html>"
+
+#~ msgid "Spanning Tree Transformation"
+#~ msgstr "Katva puu teisendus"
+
+#~ msgid "Element"
+#~ msgstr "Element"
+
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "Dokument"
+
+#~ msgctxt "dynamic property that is present exactly once"
+#~ msgid "Unique"
+#~ msgstr "Unikaalne"
+
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "Mitmene"
+
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "Globaalne"
+
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "Puudub"
+
+#~ msgid "Connection"
+#~ msgstr "Ühendus"
+
+#~ msgid "Rocs Console script"
+#~ msgstr "Rocsi konsooliskript"
+
+#~ msgid "<b style=\"color: red\"> Error in include file %1</b>"
+#~ msgstr "<b style=\"color: red\"> Viga päisefailis %1</b>"
+
+#, fuzzy
+#~| msgid "Program Messages"
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "Programmi teated"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "Read and write Graphviz graph files."
+#~ msgstr "Selles dokumendis pole aktiivset graafi."
+
+#, fuzzy
+#~| msgid "*.dot|Graphviz Files"
+#~ msgid "*.dot *.gv|Graphviz Format"
+#~ msgstr "*.dot|Graphvizi failid"
+
+#, fuzzy
+#~| msgid "dotImport"
+#~ msgid "Import"
+#~ msgstr "dotImport"
+
+#, fuzzy
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Could not open file \"%1\" in read mode: %2"
+#~ msgstr "Faili %1 avamine nurjus: %2"
+
+#, fuzzy
+#~| msgid "cannot parse the file %1."
+#~ msgid "Could not parse file \"%1\"."
+#~ msgstr "Faili '%1' parsimine nurjus"
+
+#~ msgid "No active graph in this document."
+#~ msgstr "Selles dokumendis pole aktiivset graafi."
+
+#~ msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgstr "Faili %1 avamine dokumendi kirjutamiseks nurjus. Viga: %2"
+
+#, fuzzy
+#~| msgid "Open and Save Keyhole Markup Language files"
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "Keyhole märkekeelefailide avamine ja salvestamine"
+
+#, fuzzy
+#~| msgid "*.gml|Graph Markup Language Files"
+#~ msgid "*.gml|Graph Markup Language Format"
+#~ msgstr "*.gml|Graafi märkekeelefailid"
+
+#, fuzzy
+#~| msgid "Open and Save Keyhole Markup Language files"
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "Keyhole märkekeelefailide avamine ja salvestamine"
+
+#, fuzzy
+#~| msgid "*.kml|Keyhole Markup Language Files"
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "*.kml|Keyhole märkekeelefailid"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "Faili %1 avamine nurjus: %2"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "Read and write Trivial Graph Format (TGF) files."
+#~ msgstr "Selles dokumendis pole aktiivset graafi."
+
+#, fuzzy
+#~| msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgid "Could not open file \"%1\" in write mode: %2"
+#~ msgstr "Faili %1 avamine dokumendi kirjutamiseks nurjus. Viga: %2"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "No data structure specified for output in this document."
+#~ msgstr "Selles dokumendis pole aktiivset graafi."
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Rocs graph documents\n"
+#~| "*|All files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr ""
+#~ "*.graph|Rocsi graafidokumendid\n"
+#~ "*|Kõik failid"
+
+#, fuzzy
+#~| msgid "Open and Save Graphviz files"
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "Graphvizi failide avamine ja salvestamine"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Rocs graph documents\n"
+#~| "*|All files"
+#~ msgid "*.graph|Rocs Graph File Format"
+#~ msgstr ""
+#~ "*.graph|Rocsi graafidokumendid\n"
+#~ "*|Kõik failid"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "Graafi struktuur"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "y"
+
+#~ msgid "Size"
+#~ msgstr "Suurus"
+
+#, fuzzy
+#~| msgid "Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Graph"
+#~ msgstr "Graaf"
+
+#, fuzzy
+#~| msgid "Multigraph"
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "Segagraaf"
+
+#~ msgid ""
+#~ "This action will probably remove some edges. Do you want to continue?"
+#~ msgstr "See toiming eemaldab arvatavasti mõned seosed. Kas jätkata?"
+
+#, fuzzy
+#~| msgid "Linked List Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Linked List Structure"
+#~ msgstr "Lingitud loendi struktuur"
+
+#~ msgid "Front value"
+#~ msgstr "Esiväärtus"
+
+#, fuzzy
+#~| msgid "Data '%1' had more than one(1) out pointers;"
+#~ msgid "Data '%1' has more than one out pointer."
+#~ msgstr "Andmetes '%1' on üle ühe (1) viida."
+
+#~ msgid "Cannot convert document '%1'"
+#~ msgstr "Dokumendi '%1' teisendamine nurjus"
+
+#, fuzzy
+#~| msgid "RootedTree Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "RootedTree Structure"
+#~ msgstr "Juurega puu struktuur"
+
+#, fuzzy
+#~| msgid "Show all pointers"
+#~ msgctxt "@option:check"
+#~ msgid "Show all pointers"
+#~ msgstr "Kõigi viitade näitamine"
+
+#~ msgid "There are cycles at node %1. Data will be lost by conversion."
+#~ msgstr "Tipus %1 on tsüklid. Andmed lähevad teisendamisel kaotsi."
+
+#~ msgid "Cannot open file %1."
+#~ msgstr "Faili %1 avamine nurjus."
+
+#~ msgid "Invalid include directive: %1. Cannot find file in directive."
+#~ msgstr "Vigane päise direktiiv: %1. Direktiivi faili ei leitud."
+
+#~ msgid "New File"
+#~ msgstr "Uus fail"
+
+#~ msgid "Untitled%1"
+#~ msgstr "Nimetu%1"
+
+#~ msgid "Visible"
+#~ msgstr "Nähtav"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgid "Data structure name"
+#~ msgstr "Andmestruktuur"
+
+#~ msgid "Delete this data structure"
+#~ msgstr "Selle andmestruktuuri kustutamine"
+
+#~ msgid ""
+#~ "Delete the current data structure: delete all data elements and all "
+#~ "pointers"
+#~ msgstr ""
+#~ "Aktiivse andmestruktuuri kustutamine: kõigi andmeelementide ja kõigi "
+#~ "viitade kustutamine"
+
+#~ msgid "rocsdeletegrey"
+#~ msgstr "rocsdeletegrey"
+
+#, fuzzy
+#~| msgid "Display Options"
+#~ msgid "Display Options:"
+#~ msgstr "Näitamisvalikud"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgctxt "@action:button"
+#~ msgid "Add Data Structure"
+#~ msgstr "Andmestruktuur"
+
+#, fuzzy
+#~| msgid "Export Project"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "Ekspordi projekt"
+
+#, fuzzy
+#~| msgid "Import Project"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "Impordi projekt"
+
+#, fuzzy
+#~| msgid "Set Name"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "Määra nimi"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "Salvesta graaf"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "Salvesta skript"
+
+#, fuzzy
+#~| msgid "Set Project Name"
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "Projekti nime määramine"
+
+#, fuzzy
+#~| msgid "Name:"
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "Nimi:"
+
+#~ msgid ""
+#~ "*.js|Rocs script documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.js|Rocsi skriptidokumendid\n"
+#~ "*|Kõik failid"
+
+#, fuzzy
+#~| msgid "Save Script Document"
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "Skriptidokumendi salvestamine"
+
+#, fuzzy
+#~| msgid "*.tar.gz|Export as tar.gz Archive"
+#~ msgid "*.tar.gz|Import from tar.gz Archive"
+#~ msgstr "*.tar.gz|Eksport tar.gz arhiivina"
+
+#, fuzzy
+#~| msgid "Project Archive to Import"
+#~ msgctxt "@title:window"
+#~ msgid "Project Archive to Import"
+#~ msgstr "Imporditav projektiarhiiv"
+
+#, fuzzy
+#~| msgid "Select Project Directory for Import"
+#~ msgctxt "@title:window"
+#~ msgid "Select Project Directory for Import"
+#~ msgstr "Imporditava projektikataloogi valimine"
+
+#~ msgid "*.tar.gz|Export as tar.gz Archive"
+#~ msgstr "*.tar.gz|Eksport tar.gz arhiivina"
+
+#, fuzzy
+#~| msgid "Export Project"
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "Ekspordi projekt"
+
+#~ msgid "Edge Properties"
+#~ msgstr "Seose omadused"
+
+#~ msgid "Edge name"
+#~ msgstr "Seose nimi"
+
+#~ msgid "Edge color"
+#~ msgstr "Seose värv"
+
+#~ msgid "Value:"
+#~ msgstr "Väärtus:"
+
+#~ msgid "Edge value"
+#~ msgstr "Seose väärtus"
+
+#~ msgid "Edge width"
+#~ msgstr "Seose laius"
+
+#~ msgid "Show"
+#~ msgstr "Näita"
+
+#~ msgid "Show/hide edge name"
+#~ msgstr "Seose nime näitamine/peitmine"
+
+#~ msgid "Show/add edge value"
+#~ msgstr "Seose väärtuse näitamine/lisamine"
+
+#~ msgid "Add Property"
+#~ msgstr "Omaduse lisamine"
+
+#~ msgid "Global"
+#~ msgstr "Globaalne"
+
+#~ msgid "add"
+#~ msgstr "Lisa"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid "v=%1"
+#~ msgstr "v=%1"
+
+#, fuzzy
+#~| msgid "untitled %1"
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "nimetu %1"
+
+#~ msgid "Main Definitions"
+#~ msgstr "Peamised definitsioonid"
+
+#~ msgid "Set the name visible"
+#~ msgstr "Nime näitamine"
+
+#~ msgid "Set the value visible"
+#~ msgstr "Väärtuse näitamine"
+
+#~ msgid "Appearance"
+#~ msgstr "Välimus"
+
+#~ msgid "Enable Color"
+#~ msgstr "Värvi lubamine"
+
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "Andmestruktuuri spetsiifilised omadused"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Add new dynamic property to data element.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Uue dünaamilise omaduse lisamine andmeelementi.</"
+#~ "p></body></html>"
+
+#, fuzzy
+#~| msgid "Show names of data elements"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of data elements"
+#~ msgstr "Andmeelementide nime näitamine"
+
+#, fuzzy
+#~| msgid "Show values of data elements"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of data elements"
+#~ msgstr "Andmeelementide väärtuse näitamine"
+
+#, fuzzy
+#~| msgid "Show names of pointers"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of pointers"
+#~ msgstr "Viitade nimede näitamine"
+
+#, fuzzy
+#~| msgid "Show values of pointers"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of pointers"
+#~ msgstr "Viitade väärtuste näitamine"
+
+#~ msgid "Identifier:"
+#~ msgstr "Identifikaator:"
+
+#~ msgid "This is the unique identifier for the data type."
+#~ msgstr "Andmetüübi unikaalne identifikaator."
+
+#~ msgid "Icon:"
+#~ msgstr "Ikoon:"
+
+#~ msgid "Delete"
+#~ msgstr "Kustuta"
+
+#~ msgid "This is the unique identifier for the pointer type."
+#~ msgstr "Viidatüübi unikaalne identifikaator."
+
+#~ msgid "dot"
+#~ msgstr "punktiir"
+
+#, fuzzy
+#~| msgid "Undirected Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "Orienteerimata graaf"
+
+#, fuzzy
+#~| msgid "Directed Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "Orienteeritud graaf"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "undirected graph for which several edges between same nodes may exist"
+#~| msgid "Undirected Multigraph"
+#~ msgctxt ""
+#~ "@label:inlistbox Undirected graph for which several edges between same "
+#~ "nodes may exist"
+#~ msgid "Undirected Multigraph"
+#~ msgstr "Orienteerimata multigraaf"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "directed graph for which several same orientated edges between same "
+#~| "nodes may exist"
+#~| msgid "Directed Multigraph"
+#~ msgctxt ""
+#~ "@label:inlistbox Directed graph for which several same orientated edges "
+#~ "between same nodes may exist"
+#~ msgid "Directed Multigraph"
+#~ msgstr "Orienteeritud multigraaf"
+
+#, fuzzy
+#~| msgid "Open and Save GML files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save GML files"
+#~ msgstr "GML-failide avamine ja salvestamine"
+
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Graafifailid\n"
+#~ "*|Kõik failid"
+
+#, fuzzy
+#~| msgid "Add Existing Graph File to Project"
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Graph File to Project"
+#~ msgstr "Olemasoleva graafifaili lisamine projekti"
+
+#, fuzzy
+#~| msgid "Import Rocs Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "Impordi Rocsi graaf"
+
+#, fuzzy
+#~| msgid "Save Graph as"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "Salvesta graaf kui"
+
+#~ msgid "Cannot open the file: %1. Error %2"
+#~ msgstr "Faili %1 avamine nurjus. Viga: %2"
+
+#~ msgid "Could not parse Graphviz file due to syntax errors."
+#~ msgstr "Graphviz-faili parsimine nurjus süntaksivigade tõttu."
+
+#~ msgid "Graphviz parser returned unsuccessfully for file."
+#~ msgstr "Graphvizi parser lõpetas töö faili kallal nurjumisega."
+
+#, fuzzy
+#~| msgid "Open and Save Plain TXT files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save Plain TXT files"
+#~ msgstr "TXT-lihttekstifailide avamine ja salvestamine"
+
+#~ msgid "*.txt|Plain TXT Files"
+#~ msgstr "*.txt|TXT-lihttekstifailid"
+
+#, fuzzy
+#~| msgid "Add"
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "Lisa"
+
+#~ msgid "Identifier for new Data Structure"
+#~ msgstr "Uue andmestruktuuri identifikaator"
+
+#~ msgid "Add Node"
+#~ msgstr "Lisa tipp"
+
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "Nimi:"
+
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "Keskele"
+
+#~ msgctxt "align elements at top"
+#~ msgid "Top"
+#~ msgstr "Üles"
+
+#~ msgctxt "align elements left"
+#~ msgid "Left"
+#~ msgstr "Vasakule"
+
+#~ msgctxt "align elements right"
+#~ msgid "Right"
+#~ msgstr "Paremale"
+
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Ringis"
+
+#~ msgctxt "align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Kattuvate seoste minimeerimine"
+
+#~ msgid ""
+#~ "*.js|Rocs script document\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.js|Rocsi skriptidokument\n"
+#~ "*|Kõik failid"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type Icon:"
+#~ msgstr "Tüüp"
+
+#, fuzzy
+#~| msgid "Export graphs to file"
+#~ msgid "Export as new Type"
+#~ msgstr "Graafide salvestamine failina"
+
+#~ msgid "Open Script"
+#~ msgstr "Ava skript"
+
+#~ msgid "Edit"
+#~ msgstr "Redigeerimine"
+
+#, fuzzy
+#~| msgid "Pointers"
+#~ msgid "Pointer"
+#~ msgstr "Osutid"
+
+#~ msgid "Delete the active graph"
+#~ msgstr "Kustuta aktiivne graaf"
+
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Apply to all nodes"
+#~ msgstr "Rakendamine kõigile tippudele"
+
+#~ msgid "Close"
+#~ msgstr "Sulge"
+
+#~ msgid "Image"
+#~ msgstr "Pilt"
+
+#~ msgid "Untitled0"
+#~ msgstr "Nimetu0"
+
+#~ msgid "Open Graph"
+#~ msgstr "Ava graaf"
+
+#~ msgid "Save All"
+#~ msgstr "Salvesta kõik"
+
+#~ msgid "New"
+#~ msgstr "Uus"
+
+#~ msgid "Color for new nodes"
+#~ msgstr "Uute tippude värv"
+
+#~ msgid "Pointer Color:"
+#~ msgstr "Osuti värv:"
+
+#~ msgid "Color for new edges"
+#~ msgstr "Uute seoste värv"
+
+#~ msgid "Apply the current color to all nodes"
+#~ msgstr "Aktiivse värvi rakendamine kõigile tippudele"
+
+#~ msgid "Apply the current color to all nodes on the drawing area"
+#~ msgstr "Aktiivse värvi rakendamine kõigile jooniseala tippudele"
+
+#~ msgid "All"
+#~ msgstr "Kõik"
+
+#~ msgid "Apply the current color to all edges"
+#~ msgstr "Aktiivse värvi rakendamine kõigile seostele"
+
+#~ msgid "Apply the current color to all edges on the drawing area"
+#~ msgstr "Aktiivse värvi rakendamine kõigile jooniseala seostele"
+
+#~ msgid "Align on the base"
+#~ msgstr "Joonda alla"
+
+#~ msgid "Align on the center"
+#~ msgstr "Joonda keskele"
+
+#~ msgid "Align on the top"
+#~ msgstr "Joonda üles"
+
+#~ msgid "Align on the left"
+#~ msgstr "Joonda vasakule"
+
+#~ msgid "Align on the right"
+#~ msgstr "Joonda paremale"
+
+#, fuzzy
+#~| msgid "Align on the left"
+#~ msgid "Align on a circle"
+#~ msgstr "Joonda vasakule"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Ignoring line: %1"
+#~ msgstr "Eiratakse rida: %1"
+
+#~ msgid "debug(\"Cannot open file %1.\")"
+#~ msgstr "debug(\"Faili %1 avamine nurjus.\")"
+
+#~ msgid "debug(\"Cannot open file %1.\")\n"
+#~ msgstr "debug(\"Faili %1 avamine nurjus.\")\n"
+
+#~ msgid "Add Random Integer Values"
+#~ msgstr "Juhuslike täisarvväärtuste lisamine"
+
+#~ msgid "Add Random Float Values"
+#~ msgstr "Juhuslike murdarvväärtuste lisamine"
+
+#~ msgid "(c) 2009"
+#~ msgstr "(c) 2009"
+
+#~ msgid "Do you want to save your unsaved document?"
+#~ msgstr "Kas salvestada seni salvestamata dokument?"
+
+#~ msgid "Select Items by clicking on them."
+#~ msgstr "Elementide valimine neil klõpsates."
+
+#~ msgid "Moves a node around the drawing area."
+#~ msgstr "Tipu liigutamine joonisealal."
+
+#~ msgid "Make Complete"
+#~ msgstr "Lõpetamine"
+
+#~ msgid "cancel"
+#~ msgstr "Loobu"
+
+#~ msgid "assign values"
+#~ msgstr "omista väärtused"
+
+#~ msgid "start transform"
+#~ msgstr "Alusta teisendamist"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialoog"
+
+#~ msgid "Radius:"
+#~ msgstr "Raadius:"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Complete"
+#~ msgstr "Lõpetatud"
+
+#~ msgctxt "Do not translate, X is for delete"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Graph is oriented"
+#~ msgstr "Graaf on orienteeritud"
+
+#~ msgid "Name: %1"
+#~ msgstr "Nimi: %1"
+
+#~ msgid "Value: %1"
+#~ msgstr "Väärtus: %1"
+
+#~ msgid "Save Graph As..."
+#~ msgstr "Salvesta graaf kui..."
+
+#~ msgid "Save Script As..."
+#~ msgstr "Salvesta skript kui..."
+
+#~ msgid "cola@uni-paderborn.de"
+#~ msgstr "cola@uni-paderborn.de"
+
+#~ msgid "Ring Graph"
+#~ msgstr "Ringgraafik"
+
+#~ msgid "UntitledDoc"
+#~ msgstr "Nimetu dokument"
+
+#~ msgid "Thanks to Ugo Sangiori"
+#~ msgstr "Tänusõnad Ugo Sangiorile"
+
+#~ msgid "Edge Color:"
+#~ msgstr "Seose värv:"
+
+#~ msgid "X-coordinate "
+#~ msgstr "X-koordinaat "
+
+#~ msgid "Y-coordinate "
+#~ msgstr "Y-koordinaat "
+
+#~ msgid "Node size"
+#~ msgstr "Tipu suurus"
+
+#~ msgid "Begin"
+#~ msgstr "Algus"
+
+#~ msgid "End"
+#~ msgstr "Lõpp"
+
+#~ msgid "Graph is Automate"
+#~ msgstr "Graaf on automaatne"
+
+#~ msgid " Is begin"
+#~ msgstr " on algus"
+
+#~ msgid " Is End"
+#~ msgstr " on lõpp"
+
+#~ msgid "Oriented graph"
+#~ msgstr "Orienteeritud graaf"
+
+#~ msgid "Enabling this button will make the graph oriented."
+#~ msgstr "Märkimisel on graaf orienteeritud."
+
+#~ msgid "Automaton Graph"
+#~ msgstr "Automaatgraaf"
+
+#~ msgid "Enabling this button will make the graph an automaton graph."
+#~ msgstr "Märkimisel on tegemist automaatgraafiga."
+
+#~ msgid "Enabling this button will show the names of all nodes."
+#~ msgstr "Märkimisel näidatakse kõigi tippude nimesid."
+
+#~ msgid "Show all edges' names"
+#~ msgstr "Kõigi seoste nimede näitamine"
+
+#~ msgid "Enabling this button will show the names of all edges."
+#~ msgstr "Märkimisel näidatakse kõigi seoste nimesid."
+
+#~ msgid "Show all nodes' values"
+#~ msgstr "Kõigi tippude väärtuste näitamine"
+
+#~ msgid "Enabling this button will show the values of all nodes."
+#~ msgstr "Märkimisel näidatakse kõigi tippude väärtusi."
+
+#~ msgid "Show all edges' values"
+#~ msgstr "Kõigi seoste väärtuste näitamine"
+
+#~ msgid "Enabling this button will show the values of edges."
+#~ msgstr "Märkimisel näidatakse kõigi seoste väärtusi."
+
+#~ msgid "Double Linked List"
+#~ msgstr "Topeltlingitud loend"
+
+#~ msgid "Binary Tree"
+#~ msgstr "Binaarpuu"
+
+#, fuzzy
+#~ msgctxt "X-coordinate "
+#~ msgid "x:"
+#~ msgstr "x"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgid "Node name"
+#~ msgstr "Marek Laane"
+
+#~ msgid "Draw the graphics using the fastest (but ugliest) method. "
+#~ msgstr "Graafika joonistamine kiireimal (ja inetuimal) viisil. "
+
+#~ msgid "long explanation needed. "
+#~ msgstr "vajalik on pikk selgitus "
+
+#~ msgid " The Right Size of the Cell "
+#~ msgstr " Lahtri õige suurus "
+
+#~ msgid " long  explanation needed "
+#~ msgstr " vajalik on pikk selgitus "
+
+#~ msgid " the Top Size of the cell "
+#~ msgstr " Lahtri maks. suurus "
+
+#~ msgid " long explanation needed "
+#~ msgstr " vajalik on pikk selgitus "
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgid "show"
+#~ msgstr "Marek Laane"
+
+#, fuzzy
+#~ msgid "Enabling this button will show all names in edges"
+#~ msgstr "Lubamine nupp show kõik asukohas"
+
+#, fuzzy
+#~ msgid "enabling this button will show all values in nodes"
+#~ msgstr "nupp show kõik asukohas"

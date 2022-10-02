@@ -1,0 +1,822 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Swedish "INCLUDE">
+
+]>
+<book id="rocs" lang="&language;">
+
+<bookinfo>
+<title
+>Handbok &rocs;</title>
+<authorgroup>
+<author
+><personname
+> <firstname
+>Tomaz</firstname
+> <surname
+>Canabrava</surname
+> </personname
+> <email
+>tomaz.canabrava@gmail.com</email
+> </author>
+<author
+><personname
+> <firstname
+>Andreas</firstname
+> <surname
+>Cord-Landwehr</surname
+> </personname
+> <email
+>cordlandwehr@kde.org</email
+> </author>
+
+<othercredit role="translator"
+> <firstname
+>Stefan</firstname
+> <surname
+>Asserhäll</surname
+> <affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+> <contrib
+>Översättare</contrib
+></othercredit
+> 
+</authorgroup>
+
+<date
+>2021-10-23</date>
+<releaseinfo
+>KDE Gear 21.08</releaseinfo>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<abstract>
+<para
+>&rocs; är ett grafteoriverktyg. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdeedu</keyword>
+<keyword
+>matematik</keyword>
+<keyword
+>matematik</keyword>
+<keyword
+>grafer</keyword>
+<keyword
+>nod</keyword>
+<keyword
+>båge</keyword>
+<keyword
+>Rocs</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inledning</title>
+<para
+>Det här kapitlet ger en översikt av de centrala funktionerna och typiska arbetssätten. De viktigaste delarna är <xref linkend="introduction-nutshell"/> och använda <xref linkend="scripting"/>, som tillsammans bör göra det möjligt för alla nya användare att börja arbeta med &rocs;. </para>
+
+<sect1 id="introduction-goals">
+<title
+>Syfte, målgrupp och arbetsflöden</title>
+<para
+>&rocs; är ett verktyg för grafteori avsett för alla som är intresserade av att konstruera och analysera grafalgoritmer. Mer specifikt är de:</para>
+<itemizedlist>
+    <listitem
+><para
+>föreläsare som vill demonstrera algoritmer för sina studenter,</para
+></listitem>
+    <listitem
+><para
+>studenter och forskare som vill se hur deras algoritmer fungerar, och</para
+></listitem>
+    <listitem
+><para
+>alla andra som är intresserade av datastrukturer och algoritmer.</para
+></listitem>
+</itemizedlist>
+<para
+>För alla tillhandahåller &rocs; en lättanvänd grafisk editor för att skapa grafer, ett kraftfullt skriptgränssnitt för att beräkna algoritmer, och flera olika hjälpverktyg för simulering, experiment, och export av grafer. Det typiska sättet att använda &rocs; är att skapa en graf, antingen för hand (dvs. dra noder och bågar till skrivtavlan) eller genom att använda en av grafgeneratorerna. Grafalgoritmer kan implementeras och beräknas för den skapade grafen och alla ändringar som algoritmen utför syns omedelbart i grafeditorn. </para>
+
+<screenshot>
+  <screeninfo
+>En skärmbild av &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-screenshot.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>En skärmbild av &rocs;.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+</sect1>
+
+<sect1 id="introduction-nutshell">
+<title
+>&rocs; i ett nötskal</title>
+<para
+>Varje session i &rocs; är ett projekt: när &rocs; startas skapas ett tomt projekt, och när ett projekt läses in blir det till det aktuella projektet. Härigenom består själva projektet av <emphasis
+>grafdokument</emphasis
+>, <emphasis
+>skript eller algoritmer</emphasis
+> och en <emphasis
+>journal</emphasis
+>. </para>
+
+<sect2>
+<title
+>Grafdokument</title>
+<para
+>Ett grafdokument representerar en skrivtavlas innehåll i grafeditorn. Det innehåller information om de användardefinierade nod- och bågtyperna, deras egenskaper och de redan skapade noderna och bågarna. Det vill säga, &rocs; förstår mängden av alla noder och bågar i ett grafdokument som formar en graf (inte nödvändigtvis förbunden). Allting som hör till ett grafdokument är tillgängligt i skriptgränssnittet via det globala objektet <userinput
+><command
+>Document</command
+></userinput
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Bågtyper</title>
+<para
+>I vissa scenarier består grafer av olika bågtyper (t.ex. en oriktad graf plus trädbågar beräknade av en bredd först-sökalgoritm), som ska hanteras och visas på olika sätt. I detta syfte går det att definiera godtyckliga andra bågtyper, förutom standardtypen. Varje bågtyp har sin individuella visuella representation, dynamiska egenskaper och kan ställas in att antingen vara oriktad eller riktad. Skriptgränssnittet tillhandahåller bekvämlighetsmetoder för att specifikt komma åt bågar av specifika typer. </para>
+</sect2>
+
+<sect2>
+<title
+>Nodtyper</title>
+<para
+>I likhet med bågtyper, går det att definiera olika nodtyper i en graf (t.ex. för att ge vissa noder särskilda roller). Varje nodtyp har sin egen visuella representation och dynamiska egenskaper. </para>
+</sect2>
+
+<sect2>
+<title
+>Egenskaper</title>
+<para
+>Varje nod- eller bågelement kan ha egenskaper. Egenskaperna måste ställas in för motsvarande nod- eller bågtyp. Egenskaper kan identifieras och kommas åt med sina namn, och kan innehålla godtyckliga värden. För att skapa nya eller ändra befintliga egenskaper, använd sidoraden <guilabel
+>Elementtyper</guilabel
+> och använd knappen <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/> </imageobject
+></inlinemediaobject
+><guibutton
+>Egenskaper</guibutton
+> för att visa egenskapsdialogrutan. </para>
+<para
+>Det går också att använda skriptgränssnittet för att komma åt registrerade egenskaper och ändra deras värden. I följande exempel antar vi att egenskapen <quote
+>weight</quote
+> är registrerad för den förvalda bågtypen. <programlisting
+>var nodes = Document.nodes()
+for (var i = 0; i &lt; nodes.length; ++i){
+    nodes[i].weight = i;
+}
+for (var i = 0; i &lt; nodes.length; ++i){
+    Console.log("weight of node " + i + ": " + nodes[i].weight);
+}
+</programlisting>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="introduction-tutorial">
+<title
+>Handledning</title>
+<para
+>I det här avsnittet ska vi skapa ett exempelprojekt för att utforska några av de viktigaste funktionerna i &rocs;. Målet är att skapa en graf och ett skript som åskådliggör en enkel 2-approximativ algoritm för problemet med <emphasis
+>minimal hörntäckning</emphasis
+>. Minimal hörntäckning är problemet att hitta en delmängd av grafnoder C med minimal storlek, sådan att varje grafbåge är ansluten till minst en nod i C. Problemet är känt som NP-svårt, och vi vill åskådliggöra hur man hittar en approximation med faktorn 2 genom att hitta en motsvarighet i den givna grafen. </para>
+<para
+>Vårt mål är att åskådliggöra förhållandet mellan den matchande och den minimala hörntäckningen. För att göra det behöver vi specificera två bågtyper, en för att visa matchande bågar och en för att visa <quote
+>vanliga</quote
+> bågar, samt två nodtyper som vi använder för att skilja på noder som ingår i C och de som inte ingår i C. </para>
+
+<sect2>
+<title
+>Skapa grafen</title>
+<para
+>För att skapa grafen använder vi den förvalda grafgenerering som tillhandahålls av &rocs;.  Den finns i huvudmenyn under <menuchoice
+><guimenu
+>Grafdokument</guimenu
+> <guisubmenu
+>Verktyg</guisubmenu
+> <guimenuitem
+>Skapa graf</guimenuitem
+></menuchoice
+>. Där väljer vi en <guilabel
+>Slumpmässig graf</guilabel
+> med 30 noder, 90 bågar och fröet 1 (fröet är startfrö för den slumpmässiga grafgenereringen, används samma frö flera gånger erhålles samma och upprepningsbara grafer). </para>
+</sect2>
+
+<sect2>
+<title
+>Skapa elementtyperna</title>
+<para
+>Vi använder <guilabel
+>Elementtyper</guilabel
+> och skapar en andra nodtyp samt en andra bågtyp. För båda de nya typerna öppnar vi egenskapsdialogrutan genom att använda de respektive knapparna <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Egenskaper</guibutton
+> och ställer in identifierarna till <literal
+>2</literal
+>. Dessutom ändrar vi elementens färger för de två nya typerna (för att skilja dem från standardtyperna). Till sist ställer vi in att alla bågar ska vara dubbelriktade, och identifierarna för standardtyperna till <literal
+>1</literal
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Algoritmen</title>
+<para
+>Till sist måste vi implementera approximationsalgoritmen. Vi använder följande implementering för den: </para>
+<programlisting
+>for (var i=0; i &lt; Document.nodes.length; i++) {
+    Document.nodes[i].type = 1;
+}
+for (var i=0; i &lt; Document.edges.length; i++) {
+    Document.edges[i].type = 1;
+}
+
+var E = Document.edges(); // mängden obehandlade bågar
+var C = new Array();      // matchande bågar
+while (E.length 
+> 0) {
+    var e = E[0];         // vi väljer första bågen e={u,v}
+    var u = e.from();
+    var v = e.to();
+    e.type = 2;           // ange att bågen är matchande
+    E.shift();            // ta bort e (dvs., E[0]) från båglistan
+    C.push(u);            // lägg till u i C
+    C.push(v);            // lägg till v i C
+
+    // markera u,v som noder i C
+    u.type = 2;
+    v.type = 2;
+
+    // ta bort alla bågar från E förbundna till u eller v
+    var adjacent = u.edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // hitta index
+        if (index != -1) {
+            E.splice(index, 1); // ta bort om verkligen hittad
+        }
+    }
+    var adjacent = v.edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // hitta index
+        if (index != -1) {
+            E.splice(index, 1); // ta bort om verkligen hittad
+        }
+    }
+}
+Console.log("Vertex Cover contains " + C.length + " nodes.");
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Utför algoritmen</title>
+<para
+>Algoritmen kan beräknas med knappen <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Kör</guibutton
+> i skriptkontrollpanelen. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="user-interface">
+<title
+>&rocs; användargränssnitt</title>
+
+<sect1 id="user-interface-all">
+<title
+>Användargränssnittets huvuddelar</title>
+<para
+>Användargränssnittet är uppdelat i flera logiska delar som framgår av skärmbilden nedan. </para>
+
+<screenshot>
+  <screeninfo
+>Grafiska element i &rocs; användargränssnitt.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-interfaces.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Grafiska element i &rocs; användargränssnitt.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Grafeditor</term>
+    <listitem
+><para
+>Editorn tillhandahåller en skrivtavla där noder och bågar kan placeras. Ett dubbelklick på något av elementen visar motsvarande egenskapsmeny. Du kan använda verktygen från <emphasis
+>sidoradsflikarna</emphasis
+> för att skapa och ändra grafer.</para>
+    <para
+>Tillgängliga verktyg:</para>
+      <itemizedlist>
+        <listitem
+><para
+>Längst upp till vänster i rutan finns följande åtgärdsikoner. Att klicka på en åtgärd leder till att muspekaren utför åtgärden på grafeditorns skrivtavla:</para>
+          <itemizedlist>
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsselect.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Markera och flytta</guiicon
+>: För att markera element, klicka antingen på en oanvänd plats på skrivtavlan, håll musknappen nedtryckt och rita en rektangel som innehåller några noder och/eller bågar för att markera dessa element, eller klicka annars direkt på ett omarkerat element för att markera det. Om du klickar på ett markerat element, eller en uppsättning markerade element, kan de flyttas omkring genom att hålla musknappen nedtryckt och flytta omkring musen. Det är också möjligt att flytta markerade element med piltangenterna.</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsnode.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Lägg till en nod</guiicon
+>: Klicka på ett godtyckligt ställe på grafeditorns skrivtavla för att skapa ett nytt dataelement som hör till datastrukturen som för närvarande är markerad. Genom att hålla muspekaren nedtryckt visas en meny där datatypen för det nyskapade dataelementen kan väljas (bara om olika datatyper finns).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsedge.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Skapa en båge</guiicon
+>: Klicka på ett dataelement, håll musknappen nedtryckt och rita en linje till ett annat dataelement, dit bågen ska peka. Åtgärden lyckas bara om den aktuella grafen tillåter att bågen läggs till (i en oriktad graf får t.ex. inte mer än en båge läggas till mellan två dataelement). Genom att hålla muspekaren nedtryckt, dyker en meny upp där bågtypen för de nyskapade bågarna kan väljas (bara om olika bågtyper finns).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsdelete.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Ta bort element</guiicon
+>: Klicka på ett element för att ta bort det. Om du tar bort en nod, tas också alla intilliggande bågar bort.</para
+></listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Sidorad</term>
+    <listitem
+><para
+>Till höger finns sidoraden som tillhandahåller flera verktyg för arbetsflödet:</para>
+      <itemizedlist>
+        <listitem
+><para
+><guilabel
+>Elementtyper</guilabel
+>: Denna grafiska komponent ger direktåtkomst till de tillgängliga båg- och nodtyperna.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>Journal</guilabel
+>: Varje projekt har sin egen journal som t.ex. kan användas för anteckningar om uppgifter, resultat eller observationer.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>Programmeringsgränssnittet för skript</guilabel
+>: Den här grafiska komponenten kan användas för att direkt komma åt handboken och därmed skriptdokumentationen.</para
+></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Skripteditor</term>
+    <listitem
+><para
+>I texteditorn kan algoritmer skrivas som förklaras i detalj i <xref linkend="scripting"/>. Det går att arbeta med flera skriptdokument samtidigt genom att använda flera flikar.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Skriptutmatning:</term>
+    <listitem
+><para
+>I det här textområdet visas antingen felsökningsinformation eller skriptutmatning från algoritmer, beroende på val av utmatningsinställning längst upp i den grafiska komponenten. Om ett fel uppstår i skriptet, väljes automatiskt felsökningsutmatning.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Styrning</term>
+    <listitem
+><para
+>Här hittar man hur körning av algoritmerna styrs. Skriptet som för närvarande är öppet i skripteditorn kan köras med genom att klicka på knappen <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Kör</guibutton
+>. Medan skriptet körs, är det möjligt att stoppa det genom att klicka på knappen <inlinemediaobject
+><imageobject
+><imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Stopp</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<!--FIXME nop alignment action any more?-->
+</chapter>
+
+<chapter id="scripting">
+<title
+>Skript</title>
+<sect1>
+    <title
+>Beräkna algoritmer i &rocs;</title>
+<para
+>&rocs; använder &javascript;-gränssnittet QtScript internt. Det betyder att alla algoritmer som implementeras måste använda &javascript;. Nedan förklarar vi hur elementen i ett grafdokument kan kommas åt och ändras från skriptgränssnittet. Det är viktigt att observera att ändringar som görs av skriptgränssnittet direkt avspeglas i egenskaperna för grafeditorns element. </para>
+
+<sect2>
+<title
+>Styr körning av skript</title>
+<para
+>Det finns olika beräkningssätt för algoritmerna: </para>
+<itemizedlist>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Kör</guibutton
+>: Kör skriptet till det är klart.</para
+></listitem>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Stoppa</guibutton
+>: Stoppa körning av skript (bara tillgängligt medan körning av ett skript pågår).</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2>
+<title
+>Skriptutmatning</title>
+<para
+>När en algoritm körs visas felsöknings- och programutdata i <emphasis
+>felsöknings- och skriptutmatning</emphasis
+>. Om skriptgränssnittet upptäcker ett syntaxfel i skriptet visas även det felet som ett felsökningsmeddelande. Observera att alla programmeddelanden också visas i felsökningsutmatningen (med fetstil). </para>
+<para
+>Du kan bestämma vilken text som visas i skriptutmatningen med följande funktioner: </para>
+<programlisting
+>    Console.log(string message);              // visar meddelandet som skriptutdata
+    Console.debug(string message);            // visar meddelandet som felsökningsutdata
+    Console.error(string message);          // visar meddelandet som felutdata
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Programmeringsgränssnittet för skripthantering</title>
+<para
+>De olika delarna av &rocs; tillhandahåller var och en ett statiskt element som kan kommas åt av skriptgränssnittet. De är. <itemizedlist
+> <listitem
+><para
+><userinput
+><command
+>Document</command
+></userinput
+> för grafdokumentet</para
+></listitem
+> <listitem
+><para
+><userinput
+><command
+>Console</command
+></userinput
+> för loggutmatning på terminalen</para
+></listitem
+></itemizedlist
+> För explicit användning av programmeringsgränssnittet och en metodreferens, se direkthjälpen i &rocs; sidorad. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="import-export">
+<title
+>Import och export</title>
+<sect1 id="import-export-projects">
+    <title
+>Utbyt &rocs;-projekt</title>
+    <para
+>&rocs;-projekt kan importeras och exporteras som arkivfiler <literal role="extension"
+>.tar.gz</literal
+>. Dessa arkiv kan användas för att utbyta projekt. Import och export kan utföras med respektive menyalternativ <menuchoice
+><guimenu
+>Grafdokument</guimenu
+> <guimenuitem
+>Importera graf...</guimenuitem
+></menuchoice
+> och <menuchoice
+><guimenu
+>Grafdokument</guimenu
+> <guimenuitem
+>Exportera projekt...</guimenuitem
+></menuchoice
+>. </para>
+
+<sect2 id="import-export-graphs">
+    <title
+>Import och export av grafdokument</title>
+    <para
+>&rocs; stöder för närvarande import och export av följande filformat:</para>
+    <itemizedlist>
+        <listitem
+><para
+>&DOT;-filer, också kända som Graphviz-filer</para
+></listitem>
+        <listitem
+><para
+><acronym
+>GML</acronym
+>-filer</para
+></listitem>
+        <listitem
+><para
+>Filer med Trivial Graph-format</para
+></listitem>
+        <listitem
+><para
+>Keyhole Markup Language-format</para
+></listitem>
+    </itemizedlist>
+
+<sect3 id="format-specification-tgf">
+<title
+>Trivial Graph-filformat</title>
+<para
+><emphasis
+>Trivial Graph-formatet</emphasis
+> (<acronym
+>TGF</acronym
+>) är ett enkelt textbaserat filformat för att beskriva grafer. En <acronym
+>TGF</acronym
+>-fil består av en lista med noddefinitioner, som avbildar nod-identifierare på etiketter, följt av en lista med bågarna. Det är bara möjligt att ha en etikett per nod och ett värde per båge i detta format. &rocs; tolkar importerade grafer som oriktade grafer. Exporterade grafer innehåller två bågar per anslutning om anslutningarna är bidirektionella. </para>
+
+<sect4>
+<title
+>Formatspecifikation</title>
+    <itemizedlist>
+        <listitem
+><para
+>Filen börjar med en lista med noder (en nod per rad), följt av en rad med det enda tecknet <quote
+>#</quote
+>, följt av en lista med bågar (en båge per rad).</para
+></listitem>
+        <listitem
+><para
+>En nod består av ett heltal (identifierare), följt av ett mellanslag, följt av en godtycklig sträng.</para
+></listitem>
+        <listitem
+><para
+>En båge består av två heltal (identifierare) åtskilda med ett mellanslag, följda av ett mellanslag, följt av en godtycklig sträng. Det antas att den riktade bågen pekar från den första identifieraren till den andra.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Exempel</title>
+<programlisting
+>1 startnod
+2 sändare
+3 mottagare
+#
+1 2 blå
+2 1 röd
+2 3 grön
+</programlisting>
+</sect4>
+</sect3>
+
+<sect3 id="format-specification-dot">
+<title
+>&DOT;-språket, Graphviz graffilformat</title>
+<para
+>&DOT;-språket är ett grafbeskrivningsspråk med vanlig text som både tillåter en bra mänskligt läsbar representation av grafer samt en effektiv behandling av graflayoutprogram. &DOT; är standardfilformat för Graphviz grafvisualiseringssvit, men används också av många andra grafverktyg. De vanliga filändelserna för &DOT; är <literal role="extension"
+>.gv</literal
+> och <literal role="extension"
+>.dot</literal
+>. </para>
+
+<sect4>
+<title
+>Funktioner som inte stöds</title>
+<para
+>&rocs; kan tolka alla graffiler som innehåller en graf angiven enligt språkdefinitionen för &DOT;<footnote
+><para
+>https://graphviz.org/doc/info/lang.html</para
+></footnote
+>. Stödet för språkets funktioner är fullständigt, trots följande undantag: </para>
+    <itemizedlist>
+        <listitem
+><para
+>delgraf: På grund av avsaknaden av ett delgrafskoncept i &rocs;, importeras bara delgrafer som en uppsättning dataelement och anslutningar. I synnerhet importeras inte anslutningar till eller från delgrafer.</para
+></listitem>
+        <listitem
+><para
+>&HTML;- och &XML;-attribut: Attribut (som beteckningar) som innehåller &HTML;- eller &XML;-syntax läses oförändrade. I synnerhet läses inte justeringar av teckensnitt och stilar från sådana attribut.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Exempel</title>
+<programlisting
+>digraph min_graf {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect4>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="graph-layout">
+    <title
+>Graflayout</title>
+
+    <sect1>
+        <title
+>Automatisk layout av grafer i &rocs;</title>
+        <para
+>&rocs; kan skapa layouter för grafer automatiskt. &rocs; graflayoutverktyg finns i huvudmenyn under <menuchoice
+><guimenu
+>Grafdokument</guimenu
+> <guisubmenu
+>Verktyg</guisubmenu
+> <guimenuitem
+>Graflayout</guimenuitem
+></menuchoice
+>. Det finns två olika layoutalgoritmer som kan användas: Kraftbaserad layout och Radiell trädlayout. För att använda en av dem, välj motsvarande flik i graflayoutverktyget, välj önskade parametrar och utför algoritmen genom att trycka på knappen <guibutton
+>Ok</guibutton
+>. Detaljerad information specifik för var och en av layoutalgoritmerna tillhandahålls i följande avsnitt. </para>
+
+    <sect2>
+        <title
+>Kraftbaserad layout</title>
+
+        <para
+>Den kraftbaserade layouten kan användas för vilken graf som helst. Intuitivt simulerar algoritmen krafter som verkar på varje nod. Det finns frånstötande krafter mellan nodpar och attraktiva krafter mellan nodpar som är grannar. Krafternas storlek kan anges genom att flytta motsvarande skjutreglage i användargränssnittet. </para>
+
+        <screenshot>
+          <screeninfo
+>En skärmbild av fliken för kraftbaserad layout i &rocs; graflayoutverktyg.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>En skärmbild av fliken för kraftbaserad layout i &rocs; graflayoutverktyg.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>En annan parameter som kan styras är Areafaktor. Parametern styr hur noderna sprids ut. Layouter genererade med stora värden på areafaktorn har en tendens att ha större avstånd mellan noder. </para>
+
+    <sect3>
+        <title
+>Radiell trädlayout</title>
+        <para
+>Den radiella trädlayouten kan bara användas för träd. Alla försök att använda layoutalgoritmen för andra graftyper producerar ett felmeddelande. Parametrar för den radiella trädlayouten kan väljas genom att använda det tillhandahållna användargränssnittet. </para>
+
+
+        <screenshot>
+          <screeninfo
+>En skärmbild av fliken för radiell trädlayout i &rocs; graflayoutverktyg.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>En skärmbild av fliken för radiell trädlayout i &rocs; graflayoutverktyg.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>Parametern för trädtyp väljer mellan en fri trädlayout och en rotad trädlayout. I en fri trädlayout placeras noder fritt utan någon uppenbar inbördes hierarki. I en rotad trädlayout placeras rotnoden längst upp och delträd placeras ut under den, vilket ger en idé om hierarkin mellan noder. </para>
+
+        <para
+>Parametern Centrum eller rot definierar vilken nod som kommer att användas som rot för den rotade trädlayouten eller som centrum för den fria trädlayouten. Centrum för den fria trädlayouten är den första noden som placeras ut av algoritmen. Alla andra noder placeras i cirklar omkring centrumnoden. Centrum eller rot kan väljas automatiskt av layoutalgoritmen. </para>
+
+        <para
+>Parametern Nodseparation styr avståndet mellan noderna. Ökas parameterns värde ökar avståndet mellan noder. På liknande sätt, minskas parameterns värde minskas avståndet mellan noder. </para>
+    </sect3>
+    </sect2>
+    </sect1>
+</chapter>
+
+<chapter id="credits">
+<title
+>Tack till och licens</title>
+
+<para
+>&rocs; </para>
+<para
+>Program Copyright:</para>
+<itemizedlist>
+	<listitem
+><para
+>Copyright 2008 Ugo Sangiori (ugorox SNABELA gmail.com)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2008-2012 Tomaz Canabrava (tcanabrava SNABELA kde.org)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2008-2012 Wagner Reck (wagner.reck SNABELA gmail.com)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2011-2015 Andreas Cord-Landwehr (cordlandwehr SNABELA kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Dokumentation Copyright:</para>
+<itemizedlist>
+	<listitem
+><para
+>Dokumentation copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para
+></listitem>
+	<listitem
+><para
+>Dokumentation copyright 2009 Tomaz Canabrava (tcanabrava SNABELA kde.org)</para
+></listitem>
+	<listitem
+><para
+>Dokumentation copyright 2011-2015 Andreas Cord-Landwehr (cordlandwehr SNABELA kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes: nil
+sgml-general-insert-case: lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

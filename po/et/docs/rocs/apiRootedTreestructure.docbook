@@ -1,0 +1,61 @@
+<sect1 id="scripting-backend-rootedtree">
+<title
+>Juurega puu taustaprogrammi skriptimise API</title>
+<sect2>
+<title
+>Juurega puu andmestruktuur</title>
+<para
+>Andmestruktuuri omaduste dialoog võimaldab kasutada graafi taustaprogrammile eripäraseid seadistusi. Omaduse <guilabel
+>Kõigi viitade näitamine</guilabel
+> märkimisel näidatakse kõiki viitu puu tippude vahel. Kui see on märkimata, koondatakse mitu viita samade tippude vahel üheks. </para>
+</sect2>
+
+<sect2>
+<title
+>Juurega puu struktuur</title>
+<para
+>Kui andmestruktuuriobjekti tüüp on "juurega puu", saab lugeda või kirjutada järgmisi omadusi: </para>
+<programlisting
+>ShowAllPointers     // tõene (true), kui näidatakse kõiki seoseid, väär (false), kui mitu seost tuleb ühendada
+</programlisting>
+<para
+>Kui andmestruktuuriobjekti tüüp on "juurega puu", saab välja kutsuda järgmisi liikmesfunktsioone: </para>
+<programlisting
+>node add_data(string name);         // määratud nimega tipu lisamine puule
+    void set_root_node(node root);      // puu juurtipu määramine
+    node root_node();                   // puu juurtipu tagastamine
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Juurega puu tipud</title>
+<para
+>Kui tipuobjekti tüüp on "juurega puu", saab lugeda või kirjutada järgmisi omadusi: </para>
+<programlisting
+>int numberOfChilds                  // määratud tipu (lubatud) järglaste arvu määramine
+    node left_child                     // ainult loetav: vasakpoolsest järglasest tipp
+    node right_child                    // ainult loetav: parempoolsest järglasest tipp
+    node node_parent                    // ainult loetav: eellasest tipp
+</programlisting>
+<para
+>Kui tipuobjekti tüüp on "juurega puu", saab välja kutsuda järgmisi liikmesfunktsioone: </para>
+<programlisting
+>node add_left_child(node child);    // vasaku järglase lisamine
+    node add_right_child(node child);   // parema järglase lisamine
+    node add_child(node child, int i);  // järglase lisamine tipu i-nda järglasena
+    node add_node_parent(node child);   // eellase lisamine (õnnestub ainult siis, kui eellast pole veel määratud)
+    node left_child();                  // parema järglase tagastamine
+    node right_child();                 // vasaku järglase tagastamine
+    node child_at(int i);               // tipu i-nda järglase tagastamine
+    node node_parent();                 // tipu eellase tagastamine
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Juurega puu seosed</title>
+<para
+>Kui andmestruktuuriobjekti tüüp on "juurega puu", on saadaval ainult baasandmestruktuuri omadused. </para>
+</sect2>
+</sect1>

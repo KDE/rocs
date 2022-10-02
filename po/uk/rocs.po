@@ -1,0 +1,933 @@
+# Translation of rocs.po to Ukrainian
+# Copyright (C) 2009-2019 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: rocs\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2021-10-24 09:40+0300\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.12.0\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Юрій Чорноіван"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "yurchor@ukr.net"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, kde-format
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "Імітатор для теорії графів"
+
+#: main.cpp:32
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr "© Розробники Rocs, 2009–2016"
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr "Супровідник"
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr "Автор першої версії"
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "Розробник"
+
+#: main.cpp:57
+#, kde-format
+msgid "Project to open."
+msgstr "Проєкт, який слід відкрити."
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "Синтаксис"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "Властивості"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "Параметри"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "Параметр"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "Методи"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "Тип"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr "Тип результату"
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr "Докладний опис"
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "Опис"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "Програмний інтерфейс рушія скриптів"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, kde-format
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "Документ графу"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "Об'єкти"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "Модулі рушія скриптів"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr "Об’єкти скрипту"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "Властивості"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "Методи"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "Інтерфейс (API) роботи зі скриптами Rocs"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+"Не вдалося імпортувати проєкт Rocs, оскільки не вдалося обробити файл "
+"проєкту."
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Показувати текст поряд з піктограмою"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Шлях, у якому керування включеннями шукатиме їх."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Проєкт"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Документ скрипту"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Документ графу"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Файл графу"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Редагувати позначені дані"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Компонування"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Інструменти"
+
+#: ui/codeeditorwidget.cpp:81
+#, kde-format
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "Назва документа коду"
+
+#: ui/codeeditorwidget.cpp:82
+#, kde-format
+msgid "Enter the name of your code document"
+msgstr "Введіть назву вашого документа коду"
+
+#: ui/documenttypeswidget.cpp:29
+#, kde-format
+msgctxt "@title"
+msgid "Node Types"
+msgstr "Типи вузлів"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, kde-format
+msgid "Create Type"
+msgstr "Створити тип"
+
+#: ui/documenttypeswidget.cpp:45
+#, kde-format
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "Типи ребер"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr "без назви"
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr "Напрямок ребер для типу ребер."
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr "Унікальний ідентифікатор типу ребер."
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "Експортувати"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+"<p>Файл <br /><strong>'%1'</strong><br /> вже існує. Якщо ви не хочете його "
+"перезаписати, змініть назву файла на щось інше.</p>"
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "Файл вже існує"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+"<p>Не вдалося визначитися із суфіксом файла <strong>%1</strong> з метою "
+"використати доступний модуль обробки файлів. Перериваємо експортування.</p>"
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr ""
+"<p>Під час спроби записати дані до файла сталася помилка: <strong>'%1'</"
+"strong></p>"
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|всі файли"
+
+#: ui/fileformatdialog.cpp:116
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "Імпортування файла графу до проєкту"
+
+#: ui/grapheditorwidget.cpp:79
+#, kde-format
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "Назва документа графу"
+
+#: ui/grapheditorwidget.cpp:80
+#, kde-format
+msgid "Enter the name of your graph document"
+msgstr "Введіть назву вашого документа графу"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Журнал проєкту"
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "Пуск"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr "Виконати поточний активний скрипт для активного документа графу."
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "Стоп"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr "Припинити виконання скрипту."
+
+#: ui/mainwindow.cpp:175
+#, kde-format
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "Діагностика"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr "Відкрити засіб діагностики Javascript."
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr "Типи елементів"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "Журнал"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "Інтерфейс (API) роботи зі скриптами"
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "Створити проєкт"
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "Зберегти проєкт"
+
+#: ui/mainwindow.cpp:269
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "Відкрити проєкт…"
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "Нещодавні проєкти"
+
+#: ui/mainwindow.cpp:282
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "Зберегти проєкт як…"
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "Створити документ графу"
+
+#: ui/mainwindow.cpp:284
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "Створити файл скрипту…"
+
+#: ui/mainwindow.cpp:285
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "Імпортувати граф…"
+
+#: ui/mainwindow.cpp:286
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "Експортувати граф як…"
+
+#: ui/mainwindow.cpp:287
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "Імпортувати скрипт…"
+
+#: ui/mainwindow.cpp:288
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "Експортувати скрипт…"
+
+#: ui/mainwindow.cpp:327
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "Імпортування скрипту до проєкту"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "Експортування скрипту"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgid "JavaScript (*.js)"
+msgstr "JavaScript (*.js)"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "без назви"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "Збереження проєкту із новою назвою"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr "проєкти Rocs (*.rocs)"
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr "Файл з назвою «%1» вже існує. Хочете його перезаписати?"
+
+#: ui/mainwindow.cpp:385
+#, kde-format
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "Перезаписати файл?"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "Відкриття файлів проєктів"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr "проєкти Rocs (*.rocs)"
+
+#: ui/mainwindow.cpp:433
+#, kde-format
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "[ без назви ]%1"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr "Назва скрипту"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr "Вкажіть назву вашого нового скрипту"
+
+#: ui/mainwindow.cpp:471
+#, kde-format
+msgid "File already exists."
+msgstr "Файл вже існує."
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr ""
+"Зміни, внесені до вашого проєкту, не збережено. Бажаєте зберегти внесені "
+"зміни?"
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr "Унікальний ідентифікатор типу вузлів."
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, kde-format
+msgid "Script output:"
+msgstr "Дані, виведені скриптом:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Спорожняти панель виведення даних перед кожним виконанням."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Показувати діагностичні повідомлення."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Спорожнити панель виведення."
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "Бічна панель інструментів"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr "Увімкнути або вимкнути перегляд «%1»."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Зберегти проєкт як"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Overwrite"
+#~ msgstr "Перезаписати"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Головна панель"
+
+#~ msgid "Align Toolbar"
+#~ msgstr "Панель вирівнювання"
+
+#~ msgid "Rocs Handbook"
+#~ msgstr "Підручник з Rocs"
+
+#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+#~ msgstr "http://docs.kde.org/stable/uk/kdeedu/rocs/index.html"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "Підручник"
+
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "Структури даних"
+
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs — аналіз структур даних"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr "У системі не виявлено додатків структур даних. Завершення роботи."
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Для продовження роботи Rocs потрібен принаймні один додаток структур "
+#~ "даних.\n"
+#~ "Спробуйте виконати команду kbuildsycoca4 з консолі, а потім перезапустити "
+#~ "Rocs."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr "Позиція, у якій буде показано назву і значення вузла."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Позиція, у якій буде показано назву і значення ребра."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr "Визначає, чи слід показувати кнопку виконання з діагностикою."
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr "Визначає, чи слід показувати кнопку покрокового виконання."
+
+#~ msgid "Script File"
+#~ msgstr "Файл скрипту"
+
+#~ msgid "Convert To"
+#~ msgstr "Перетворити на"
+
+#~ msgid "Settings"
+#~ msgstr "Параметри"
+
+#~ msgid "Help"
+#~ msgstr "Довідка"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "Не вдалося знайти текстовий редактор KDE, \n"
+#~ "будь ласка, перевірте наявність відповідної програми"
+
+#~ msgid "Display of Element Properties"
+#~ msgstr "Показ властивостей елементів"
+
+#~ msgid "Data Properties"
+#~ msgstr "Властивості даних"
+
+#~ msgid "centered"
+#~ msgstr "за центром"
+
+#~ msgid "below"
+#~ msgstr "нижче"
+
+#~ msgid "above"
+#~ msgstr "вище"
+
+#~ msgid "Connection Properties"
+#~ msgstr "Властивості з’єднань"
+
+#~ msgid "Execution Controls"
+#~ msgstr "Керування виконанням"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Показувати кнопку діагностики"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Показувати кнопку покрокового виконання"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Властивості"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Встановити, чи слід показувати вказівники"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Експортувати графи до файла"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "Завантажені додатки"
+
+#~ msgid "Graph File Plugins loaded for %1"
+#~ msgstr "Додатки файлів даних графів, завантажені для %1"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|файли скриптів"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Файли скриптів Rocs"
+
+#~ msgid "Add your description here."
+#~ msgstr "Тут можна додати опис."
+
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "Один крок"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Діагностичний запуск"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "Переривання на першому ж рядку"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Отримати приклади"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Вивантажити проєкт"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Можливі включення"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "Завантажені додатки"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Code Editor..."
+#~ msgstr "Налаштувати редактор коду…"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Керування включенням"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Типові параметри"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Додавання вже створеного файла скрипту до проєкту"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "Здається, це не файл графів."
+
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Некоректний файл"
+
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs|файли проєктів Rocs\n"
+#~ "*.rocsz|файли стиснутих проєктів Rocs\n"
+#~ "*|всі файли"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Зберегти проєкт"
+
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*rocs *.rocsz|всі файли Rocs\n"
+#~ "*.rocs|файли проєктів Rocs\n"
+#~ "*.rocsz|файли стиснутих проєктів Rocs\n"
+#~ "*|всі файли"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|файли графів Rocs\n"
+#~ "*|всі файли"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Збереження документа графу"
+
+#~ msgid "Graph name"
+#~ msgstr "Назва графу"
+
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Вкажіть назву графу"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Можливі включення для рушія скриптів"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your graph document are unsaved. Do you want to save your "
+#~ "changes?"
+#~ msgstr ""
+#~ "Зміни, внесені до вашого документа графу, не збережено. Бажаєте зберегти "
+#~ "внесені зміни?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files are unsaved. Do you want to save all unsaved "
+#~ "scripts?"
+#~ msgstr ""
+#~ "Зміни, внесені до ваших файлів скриптів, не збережено. Бажаєте зберегти "
+#~ "всі незбережені скрипти?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files and on your graph document are unsaved. Do "
+#~ "you want to save your graph document and all unsaved scripts?"
+#~ msgstr ""
+#~ "Зміни, внесені до ваших файлів скриптів та документа графу, не збережено. "
+#~ "Бажаєте зберегти ваш документ графу та всі незбережені скрипти?"
+
+#~ msgid "Default Information Display"
+#~ msgstr "Типовий показ даних"
+
+#~ msgid "Node Information"
+#~ msgstr "Дані вузла"
+
+#~ msgid "Edge Information"
+#~ msgstr "Дані щодо ребра"
+
+#~ msgid "Display debug messages."
+#~ msgstr "Показати діагностичні повідомлення."
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "Панель компонування"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "Додати дані"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Data"
+#~ msgstr "Додати дані"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "Додати новий елемент даних"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Add Connection"
+#~ msgstr "Додати з’єднання"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Connection"
+#~ msgstr "Додати з’єднання"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new connection between two data elements of selected type"
+#~ msgstr "Додати нове з’єднання між двома елементами даних вибраного типу"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Base"
+#~ msgstr "Основа"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "Центр"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Top"
+#~ msgstr "Вгору"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Left"
+#~ msgstr "Ліворуч"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Right"
+#~ msgstr "Праворуч"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "Коло"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Мінімізувати кількість перетинів"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "Вилучити"
+
+#~ msgid "Form"
+#~ msgstr "Форма"

@@ -1,0 +1,727 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+
+  <!ENTITY kappname "&rocs;">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Portuguese "INCLUDE">
+
+]>
+<book id="rocs" lang="&language;">
+
+<bookinfo>
+<title
+>O Manual do &rocs;</title>
+<authorgroup>
+<author
+><personname
+> <firstname
+>Tomaz</firstname
+> <surname
+>Canabrava</surname
+> </personname
+> <email
+>tomaz.canabrava@gmail.com</email
+> </author>
+<author
+><personname
+> <firstname
+>Andreas</firstname
+> <surname
+>Cord-Landwehr</surname
+> </personname
+> <email
+>cordlandwehr@kde.org</email
+> </author>
+
+<othercredit role="translator"
+><firstname
+>José</firstname
+><surname
+>Pires</surname
+><affiliation
+><address
+><email
+>zepires@gmail.com</email
+></address
+></affiliation
+><contrib
+>Tradução</contrib
+></othercredit
+> 
+</authorgroup>
+
+<date
+>2016-04-10</date>
+<releaseinfo
+>Rocs 2.1.50 (Aplicações 16.04)</releaseinfo>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<abstract>
+<para
+>O &rocs; é uma ferramenta da teoria dos grafos para o &kde;. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdeedu</keyword>
+<keyword
+>matemática</keyword>
+<keyword
+>matemática</keyword>
+<keyword
+>grafos</keyword>
+<keyword
+>nó</keyword>
+<keyword
+>aresta</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introdução</title>
+<para
+>Neste capítulo, iremos dar uma visão geral sobre as funcionalidades e fluxos de trabalho básicos. Para o leitor que quiser começar a usar directamente o &rocs;, sugerimos que leia o <xref linkend="introduction-nutshell"/> e, enquanto escreve programas, use o <xref linkend="scripting"/> como referência. </para>
+
+<sect1 id="introduction-goals">
+<title
+>Objectivos, Público-Alvo e Funcionamento</title>
+<para
+>O &rocs; é uma Ferramenta da Teoria dos Grafos para todos os interessados no desenho e análise de algoritmos de grafos. Isto inclui explicitamente</para>
+<itemizedlist>
+    <listitem
+><para
+>os professores que poderão querer demonstrar algoritmos aos seus alunos,</para
+></listitem>
+    <listitem
+><para
+>os alunos e investigadores, que queiram compreender e ver como é que funcionam os seus algoritmos</para
+></listitem>
+    <listitem
+><para
+>e todos os que estejam interessados em algoritmos e estruturas de dados.</para
+></listitem>
+</itemizedlist>
+<para
+>Para todos eles, o &rocs; oferece um editor gráfico fácil de usar para criar grafos, um motor de programação poderoso para executar algoritmos e diversos utilitários para simulações, experiências e exportações dos grafos. A forma típica de usar o &rocs; é criar um grafo, seja à mão (i.e., arrastando nós e arestas para o quadro) ou usando um dos geradores de grafos. Os algoritmos de grafos poderão então ser implementados e executados no grafo criado e todas as alterações que o algoritmo efectue serão visíveis imediatamente no editor do grafo. </para>
+
+<screenshot>
+<screeninfo
+>Uma imagem do &rocs;.</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="rocs-screenshot.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Uma imagem do &rocs;.</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+</sect1>
+
+<sect1 id="introduction-nutshell">
+<title
+>O &rocs; em Resumo</title>
+<para
+>Cada sessão do &rocs; é um projecto: ao abrir o &rocs;, é criado um projecto vazio e podê-lo-á substituir se carregar ou importar outro projecto. Como tal, um projecto em si consiste nos <emphasis
+>documentos de grafos</emphasis
+>, nos <emphasis
+>programas/algoritmos</emphasis
+> e num <emphasis
+>registo</emphasis
+>. </para>
+
+<sect2>
+<title
+>Documentos do Grafo</title>
+<para
+>Um documento de grafo representa o conteúdo de um quadro no editor de grafos. Contém informações sobre os tipos de nós e arestas definidos pelo utilizador, as suas propriedades e os nós e arestas já criados. Isto é, o &rocs; compreende o conjunto de todos os nós e arestas de um documento de grafo para formar um grafo (não necessariamente ligado). Tudo o que pertence ao documento de um grafo fica acessível ao motor de programação através do objecto global <userinput
+><command
+>Document</command
+></userinput
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Tipos de Arestas</title>
+<para
+>Em alguns cenários, os grafos consistem em diversos tipos de arestas (p.ex., um grafo não-direccional mais as arestas da árvore calculadas por um algoritmo de pesquisa primeiro-em-largura) que deverá ser tratado e apresentado de forma diferente. Para tal, para além de um tipo de aresta predefinido, poderá definir outros tipos de arestas arbitrários. Cada tipo de aresta tem a sua representação visual individual, propriedades dinâmicas e poderá ser configurado como direccionado ou não-direccionado. A interface de programação oferece métodos de conveniência para aceder de forma específica apenas às arestas de determinados tipos. </para>
+</sect2>
+
+<sect2>
+<title
+>Tipos de Nós</title>
+<para
+>De forma análoga aos tipos de arestas, poderá definir diferentes tipos de nós de um grafo (p.ex., para dar alguns papéis especiais aos nós). Cada tipo de nó tem a sua própria representação visual e propriedades dinâmicas. </para>
+</sect2>
+
+<sect2>
+<title
+>Propriedades</title>
+<para
+>Cada elemento (nó ou aresta) poderá ter propriedades. Essas propriedades deverão ser configuradas no tipo de nó ou aresta correspondente. As propriedades são identificadas e acedidas pelos seus nomes e poderão conter qualquer valor. Para criar novas propriedades ou alterar as existentes, use a barra lateral <guilabel
+>Tipos de Elementos</guilabel
+> e use o botão <inlinemediaobject
+><imageobject
+><imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/> </imageobject
+></inlinemediaobject
+><guibutton
+>Propriedades</guibutton
+> para abrir a janela de propriedades. </para>
+<para
+>Também poderá usar o motor de programação para aceder às propriedades registadas e alterar os seus valores. No exemplo que se segue, assume-se que a propriedade "peso" está registada para o tipo de aresta predefinido. <programlisting
+>var nos = Document.nodes()
+for (var i = 0; i &lt; nos.length; ++i){
+    nos[i].peso = i;
+}
+for (var i = 0; i &lt; nos.length; ++i){
+    Console.log("peso do nó " + i + ": " + nos[i].peso);
+}
+</programlisting>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="introduction-tutorial">
+<title
+>Tutorial</title>
+<para
+>Nesta secção, iremos querer criar um projecto de exemplo para explorar algumas das funções mais importantes do &rocs;. O objectivo é criar um grafo e um programa que ilustre um algoritmo de 2 aproximações para o problema da <emphasis
+>cobertura mínima de vértices</emphasis
+>. Este problema consiste em encontrar um sub-conjunto de nós do grafo C com um tamanho mínimo, de modo que cada aresta do grafo esteja ligada a pelo menos um nó do C. Este problema é conhecido por ser NP-difícil e queremos ilustrar como encontrar uma aproximação com um factor 2, encontrando uma correspondência no grafo indicado. </para>
+<para
+>O nosso objectivo é visualizar a correspondência da ocorrência e da cobertura mínima de vértices. Para tal, queremos mostrar dois tipos de arestas, um para mostrar as arestas correspondentes e outro para mostrar as "normais", assim como dois tipos de dados que usamos para distinguir os nós contidos em C e os não-contidos. </para>
+
+<sect2>
+<title
+>Gerar o Grafo</title>
+<para
+>Para criar o grafo, o &rocs; oferece um utilitário que poderá gerar grafos. Este está disponível no menu <menuchoice
+><guimenu
+>Documento do Grafo</guimenu
+><guisubmenu
+>Ferramentas</guisubmenu
+><guimenuitem
+>Gerar o Grafo</guimenuitem
+></menuchoice
+>. Aí, iremos gerar um <guilabel
+>Grafo Aleatório</guilabel
+> com 30 nós, 90 arestas e com uma raiz 1 (a raiz é o valor de referência inicial para o gerador de grafos aleatórios; a utilização da mesma raiz várias vezes origina grafos iguais). </para>
+</sect2>
+
+<sect2>
+<title
+>Criar os Tipos de Elementos</title>
+<para
+>Usamos os <guilabel
+>Tipos de Elementos</guilabel
+> e criamos um segundo tipo de nó, assim como um segundo tipo de aresta. Para ambos os tipos novos, poderemos abrir a janela de propriedades, usando os respectivos botões de <guibutton
+>Propriedades</guibutton
+> e configurar os ID's como <literal
+>2</literal
+>. Para além disso, iremos mudar as cores dos elementos desses dois novos tipos (para os distinguir dos tipos predefinidos). Finalmente, configuramos todos os tipos de arestas como sendo bidireccionais e os ID's dos tipos predefinidos como <literal
+>1</literal
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>O Algoritmo</title>
+<para
+>Por último, temos de implementar o algoritmo de aproximação. Para tal, iremos usar a seguinte implementação: </para>
+<programlisting
+>for (var i=0; i &lt; Document.nodes.length; i++) {
+    Document.nodes[i].type = 1;
+}
+for (var i=0; i &lt; Document.edges.length; i++) {
+    Document.edges[i].type = 1;
+}
+
+var E = Document.edges(); // conjunto de arestas não processadas
+var C = new Array();      // arestas correspondentes
+while (E.length 
+> 0) {
+    var e = E[0];         // escolhemos primeiro a aresta e={u,v}
+    var u = e.from();
+    var v = e.to();
+    e.type = 2;           // configurar a aresta como sendo correspondente
+    E.shift();            // remover a 'e' (i.e., E[0]) da lista de arestas
+    C.push(u);            // adicionar a 'u' ao C
+    C.push(v);            // adicionar a 'v' ao C
+
+    // marcar o u,v como nós no C
+    u.type = 2;
+    v.type = 2;
+
+    // remover do E todas as arestas que incidem em 'u' ou 'v'
+    var adjacente = u.edges();
+    for (var i=0; i &lt; adjacente.length; i++) {
+        var indice = E.indexOf(adjacente[i]); // descobrir o índice
+        if (indice != -1) {
+            E.splice(indice, 1); // remover se já tiver encontrado
+        }
+    }
+    var adjacente = v.edges();
+    for (var i=0; i &lt; adjacente.length; i++) {
+        var indice = E.indexOf(adjacente[i]); // descobrir o índice
+        if (indice != -1) {
+            E.splice(indice, 1); // remover se já tiver encontrado
+        }
+    }
+}
+Console.log("A Cobertura de Vértices contém " + C.length + " nós.");
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Executar o Algoritmo</title>
+<para
+>O algoritmo pode ser posto em execução com o botão de <guibutton
+>Execução</guibutton
+> no painel de controlo do programa. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="user-interface">
+<title
+>A Interface de Utilizador do &rocs;</title>
+
+<sect1 id="user-interface-all">
+<title
+>Elementos Gerais da Interface do Utilizador</title>
+<para
+>A interface do utilizador está dividida em várias partes lógicas, como aparece na imagem abaixo. </para>
+<screenshot>
+    <screeninfo
+>Elementos gráficos da &GUI; do &rocs;.</screeninfo>
+    <mediaobject>
+    <imageobject>
+    <imagedata fileref="rocs-interfaces.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+    <phrase
+>Elementos gráficos da &GUI; do &rocs;.</phrase>
+    </textobject>
+    </mediaobject>
+</screenshot>
+<variablelist>
+<varlistentry>
+    <term
+>Editor de Grafos</term>
+    <listitem
+><para
+>O editor oferece um quadro onde poderá criar e modificar as suas estruturas de dados. Carregue com o botão direito no quadro, nos elementos de dados ou nas arestas para abrir os menus de contexto. Poderá usar as ferramentas da <emphasis
+>Barra de Edição do Grafo</emphasis
+> para modificar os elementos no quadro visual do grafo.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+    <term
+>Barra do Editor de Grafos</term>
+    <listitem
+><para
+>A barra de ferramentas oferece as ferramentas <inlinemediaobject
+><imageobject
+><imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject
+> </inlinemediaobject
+><guibutton
+>Criar um Nó</guibutton
+> ou <inlinemediaobject
+><imageobject
+><imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Criar uma Aresta</guibutton
+>, para criar novos elementos no quadro (Lembre-se da barra extra para seleccionar o tipo do nó ou aresta respectivo, que fica visível quando seleccionar uma dessas ferramentas. Do mesmo modo, as ferramentas para seleccionar e mover, assim como remover, os elementos estão disponíveis aqui. Para mais detalhes, veja em <xref linkend="user-interface-toolbar"/>. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+    <term
+>Barra Lateral</term>
+    <listitem
+><para
+>À direita poderá encontrar a barra lateral que oferece diversas ferramentas para o seu fluxo de trabalho: <itemizedlist>
+        <listitem
+><para
+>Tipos de Elementos: Este elemento dá-lhe acesso directo para os tipos de arestas e nós disponíveis.</para
+></listitem>
+        <listitem
+><para
+>Diário: Cada projecto tem o seu próprio diário que pode ser usado &eg; para: notas das tarefas, resultados ou observações.</para
+></listitem>
+        <listitem
+><para
+>API de Programação: Para obter acesso directo ao manual e, deste modo, à documentação do programa, poderá abrir este elemento.</para
+></listitem>
+        </itemizedlist>
+    </para
+></listitem>
+</varlistentry>
+<varlistentry>
+    <term
+>Editor de Programas</term>
+    <listitem
+><para
+>Neste editor de texto, poderá criar os algoritmos da forma descrita em  <xref linkend="scripting"/>. Poderá trabalhar com vários documentos de programas ao mesmo tempo, usando diversas páginas. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+    <term
+>Resultado do Programa</term>
+    <listitem
+><para
+>Esta área de texto poderá apresentar a informação de depuração ou o resultado do programa para o seu algoritmo, dependendo da configuração do resultado. Se o programa emitir um erro, será seleccionado automaticamente o resultado da depuração. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+    <term
+>Controlos</term>
+    <listitem
+><para
+>Aqui poderá encontrar os controlos para a execução dos algoritmos. Poderá executar o programa que está aberto de momento no editor do programa se carregar em <guiicon
+>Executar</guiicon
+>. Enquanto o programa estiver em execução, é possível interrompê-lo se carregar no botão <guiicon
+>Parar</guiicon
+>. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="user-interface-toolbar">
+<title
+>Barra do Editor de Grafos</title>
+<para
+>Esta barra de ferramentas consiste nas seguintes acções. Se carregar no nome de uma acção, significa que o seu cursor do rato aplica esta acção ao quadro do editor do grafo:</para>
+<itemizedlist>
+<listitem
+><para>
+<inlinemediaobject
+><imageobject>
+<imagedata fileref="hi22-actions-rocsselectmove.png" format="PNG"/></imageobject>
+</inlinemediaobject
+> <guilabel
+>Seleccionar e Mover</guilabel
+>: Para seleccionar os elementos, tanto poderá carregar no espaço em branco do quadro, mantenha carregado o rato e desenhe um rectângulo que contenha alguns nós e/ou arestas para seleccionar estes elementos ou poderá então carregar directamente num elemento não seleccionado para escolher esse elemento. Se carregar num elemento ou conjunto de elementos seleccionados, poderá mover estes elementos em conjunto. A movimentação dos elementos seleccionados também é possível com as teclas de cursores.</para
+></listitem>
+<listitem
+><para>
+<inlinemediaobject
+><imageobject>
+<imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject>
+</inlinemediaobject
+> <guilabel
+>Criar um Nó</guilabel
+>: Carregue numa posição arbitrária no quadro do editor do grafo para criar um novo elemento de dados que pertença ao grafo seleccionado de momento. Mantendo o botão do rato pressionado, irá aparecer um menu de contexto onde poderá escolher o tipo de dados dos novos elementos (somente se existirem outros tipos de dados diferentes).</para
+></listitem>
+<listitem
+><para>
+<inlinemediaobject
+><imageobject>
+<imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject>
+</inlinemediaobject
+> <guilabel
+>Criar uma Aresta</guilabel
+>: Carregue num elemento de dados, mantenha o rato pressionado e desenhe uma linha para outro nó, apontando a aresta nessa direcção. Esta acção só será bem-sucedida se o grafo actual permitir adicionar esta aresta (&eg;, num grafo não-direccionado, não poderá adicionar várias arestas entre dois nós). Mantendo o botão do rato pressionado, irá aparecer um menu de contexto onde poderá escolher o tipo de aresta dos novos elementos (somente se existirem outros tipos de dados diferentes).</para
+></listitem>
+<listitem
+><para>
+<inlinemediaobject
+><imageobject>
+<imagedata fileref="hi22-actions-rocsdelete.png" format="PNG"/></imageobject>
+</inlinemediaobject
+> <guilabel
+>Apagar</guilabel
+>: Carregue num elemento para o apagar. Se apagar um nó, todas as arestas adjacentes serão também apagadas.</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<!--FIXME nop alignment action any more?-->
+</chapter>
+
+<chapter id="scripting">
+<title
+>Programação</title>
+<sect1>
+    <title
+>Executar os Algoritmos no &rocs;</title>
+<para
+>O &rocs; usa internamente o motor de JavaScript do QtScript. Isto significa que todos os algoritmos que implementar deverão estar feitos em JavaScript. Nos seguintes pontos, iremos explicar como aceder e modificar os elementos de um documento de grafo a partir do motor de programação. É importante apontar que as alterações feitas pelo motor de programação são reflectidas directamente nas propriedades dos elementos do editor de grafos. </para>
+
+<sect2>
+<title
+>Controlar a Execução do Programa</title>
+<para
+>Existem diferentes modos de execução para os seus algoritmos: </para>
+<itemizedlist>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="hi22-actions-controls-run.png" format="PNG"/></imageobject>
+</inlinemediaobject
+> <guilabel
+>Executar</guilabel
+>: Executa o programa até este terminar.</para
+></listitem>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="hi22-actions-control-stop.png" format="PNG"/></imageobject>
+</inlinemediaobject
+> <guilabel
+>Parar</guilabel
+>: Interrompe a execução do programa (só disponível se tiver um programa em execução).</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2>
+<title
+>Resultado do Programa</title>
+<para
+>Durante a execução de um algoritmo, o resultado de depuração e do programa aparece no <emphasis
+>Resultado de Depuração &and; Programa</emphasis
+>. Se o motor de programação detectar um erro de sintaxe no seu programa, o erro também aparece como uma mensagem de depuração. Repare que todas as mensagens do programa também são apresentadas no resultado de depuração (aparecendo a negrito). </para>
+<para
+>Pode controlar o texto que é apresentado no resultado do programa, usando as seguintes funções: </para>
+<programlisting
+>Console.log(string mensagem);            // mostra a mensagem como resultado do programa
+    Console.debug(string mensagem);             // mostra a mensagem como resultado de depuração
+    Console.error(string mensagem);             // mostra a mensagem como resultado de erro
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>API do Motor de Programação</title>
+<para
+>Cada uma das diferentes partes do &rocs; oferece um elemento estático que poderá ser acedido pelo motor de programação. Estas são: o <itemizedlist
+> <listitem
+><para
+><userinput
+><command
+>Document</command
+></userinput
+> para o documento do grafo</para
+></listitem
+> <listitem
+><para
+><userinput
+><command
+>Console</command
+></userinput
+> para o resultado do registo da consola</para
+></listitem
+> </itemizedlist
+> Para o uso explícito da API e para uma referência dos métodos, veja por favor a ajuda incorporada na barra lateral do &rocs;. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="import-export">
+<title
+>Importar e Exportar</title>
+<sect1 id="import-export-projects">
+    <title
+>Intercâmbio de Projectos &rocs;</title>
+    <para
+>Poderá importar e exportar projectos do &rocs; como ficheiros de pacotes <literal
+>.tar.gz</literal
+>. Estes pacotes poderão ser usados para o intercâmbio de projectos. A importação e exportação poderão ser efectuados com as opções <menuchoice
+><guimenu
+>Documento do Grafo</guimenu
+> <guimenuitem
+>Importar um Grafo</guimenuitem
+></menuchoice
+> e <menuchoice
+><guimenu
+>Documento do Grafo</guimenu
+> <guimenuitem
+>Exportar o Grafo Como</guimenuitem
+></menuchoice
+>, respectivamente. </para>
+
+<sect2 id="import-export-graphs">
+    <title
+>Importação e Exportação de Documentos de Grafos</title>
+    <para
+>O &rocs; suporta de momento a importação e exportação dos seguintes formatos de ficheiros:</para>
+    <itemizedlist>
+        <listitem
+><para
+>ficheiros DOT, também conhecidos por ficheiros do Graphviz</para
+></listitem>
+        <listitem
+><para
+>ficheiros GML</para
+></listitem>
+        <listitem
+><para
+>ficheiros no formato TGF (Trivial Graph Format)</para
+></listitem>
+        <listitem
+><para
+>Formato KML (Keyhole Markup Language)</para
+></listitem>
+    </itemizedlist>
+
+<sect3 id="format-specification-tgf">
+<title
+>Formato TGF (Trivial Graph Format)</title>
+<para
+>O <emphasis
+>Trivial Graph Format</emphasis
+> (TGF) é um formato de ficheiros simples em texto para descrever grafos. Um ficheiro TGF consiste numa lista de definições de nós que associam os ID's dos nós às legendas, seguidas de uma lista de arestas. Neste formato só é possível ter uma legenda por nó e um valor por aresta. O &rocs; interpreta os grafos importados como não-direccionais. Os grafos exportados irão ter duas arestas por ligação, caso estas sejam bidireccionais. </para>
+
+<sect4>
+<title
+>Especificação do Formato</title>
+    <itemizedlist>
+        <listitem
+><para
+>O ficheiro começa com uma lista de nós (um por cada linha), seguido de uma linha com o único carácter "#", seguido de uma lista de arestas (uma por cada linha).</para
+></listitem>
+        <listitem
+><para
+>Um nó consiste num número inteiro (identificador), seguido de um espaço e depois um texto arbitrário.</para
+></listitem>
+        <listitem
+><para
+>Uma aresta consiste em dois inteiros (identificadores) separados por um espaço, seguidos de um espaço e depois por um texto arbitrário. Assume-se que a aresta direccionada aponta do primeiro identificador para o segundo.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Exemplo</title>
+<programlisting
+>1 nó inicial
+2 transmissor
+3 receptor
+#
+1 2 azul
+2 1 vermelho
+2 3 verde
+</programlisting>
+</sect4>
+</sect3>
+
+<sect3 id="format-specification-dot">
+<title
+>Formato da Linguagem DOT / Graphviz</title>
+<para
+>A linguagem DOT é uma linguagem de descrição de grafos em texto simples que permite tanto uma boa representação legível dos grafos, assim como um processamento eficiente pelos programas de formatação de grafos. O DOT é o formato de ficheiros por omissão para o pacote de visualização de grafos Graphviz, mas também é amplamente usado por outras ferramentas de grafos. As extensões de ficheiros normais do DOT são a <emphasis
+>.gv</emphasis
+> e a <emphasis
+>.dot</emphasis
+>. </para>
+
+<sect4>
+<title
+>Funcionalidades Não Suportadas</title>
+<para
+>O &rocs; consegue processar todos os ficheiros de grafos que contêm um grafo definido de acordo com a especificação da linguagem DOT<footnote
+><para
+>http://www.graphviz.org/content/dot-language</para
+></footnote
+>. O suporte das funcionalidades da linguagem é completo, apesar das seguintes excepções: </para>
+    <itemizedlist>
+        <listitem
+><para
+>sub-grafos: Devido à falta do conceito de sub-grafos no &rocs;, os sub-grafos são importados apenas como um conjunto de elementos de dados e ligações. Especialmente, as ligações de e para sub-grafos não são importadas.</para
+></listitem>
+        <listitem
+><para
+>Atributos em &HTML; e &XML;: Os atributos (como as legendas) que tenham uma sintaxe em &HTML; ou &XML; são lidos sem qualquer alteração. Especialmente, não serão processados os estilos e ajustes de tamanho do texto a partir desses atributos.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Exemplo</title>
+<programlisting
+>digraph meuGrafo {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect4>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="credits">
+<title
+>Créditos e Licença</title>
+
+<para
+>&rocs; </para>
+<para
+>Copyright do Programa:</para>
+<itemizedlist>
+	<listitem
+><para
+>'Copyright' 2008 de Ugo Sangiori (ugorox AT gmail.com)</para
+></listitem>
+	<listitem
+><para
+>'Copyright' 2008-2012 de Tomaz Canabrava (tcanabrava AT kde.org)</para
+></listitem>
+	<listitem
+><para
+>'Copyright' 2008-2012 de Wagner Reck (wagner.reck AT gmail.com)</para
+></listitem>
+	<listitem
+><para
+>'Copyright' 2011-2015 de Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</para
+></listitem>
+</itemizedlist>
+
+<para
+>'Copyright' da Documentação:</para>
+<itemizedlist>
+	<listitem
+><para
+>Documentação com 'copyright' 2009 de &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para
+></listitem>
+	<listitem
+><para
+>Documentação com 'copyright' 2009 de Tomaz Canabrava (tcanabrava at kde dot org)</para
+></listitem>
+	<listitem
+><para
+>Documentação com 'copyright' 2011-2015 de Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Tradução de José Nuno Pires <email
+>zepires@gmail.com</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes: nil
+sgml-general-insert-case: lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

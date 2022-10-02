@@ -1,0 +1,1571 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# A S Alam <aalam@users.sf.net>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2010-01-27 09:16+0530\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: ਪੰਜਾਬੀ <punjabi-users@lists.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "aalam@users.sf.net"
+
+#: main.cpp:26
+#, fuzzy, kde-format
+#| msgid "Rocs"
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "ਰੌਕਸ"
+
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgid "Graph Theory Tool"
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "ਗਰਾਫ਼ ਥਿਊਰੀ ਟੂਲ"
+
+#: main.cpp:32
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr ""
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr ""
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr ""
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr ""
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr ""
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr ""
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:57
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Project to open."
+msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@title"
+msgid "Properties"
+msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, fuzzy, kde-format
+#| msgid "Graph Files"
+msgctxt "@title"
+msgid "Type"
+msgstr "ਗਰਾਫ਼ ਫਾਇਲਾਂ"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, fuzzy, kde-format
+#| msgid "Connection Type"
+msgctxt "@title"
+msgid "Description"
+msgstr "ਕੁਨੈਕਸ਼ਨ ਟਾਈਪ"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, fuzzy, kde-format
+#| msgid "New Script"
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "ਨਵੀਂ ਸਕ੍ਰਿਪਟ"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, fuzzy, kde-format
+#| msgid "Save Script"
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, fuzzy, kde-format
+#| msgid "Select"
+msgid "Script Objects"
+msgstr "ਚੁਣੋ"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Properties"
+msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, fuzzy, kde-format
+#| msgid "New Script"
+msgid "Rocs Scripting API"
+msgstr "ਨਵੀਂ ਸਕ੍ਰਿਪਟ"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr ""
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr ""
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Project"
+msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, fuzzy, kde-format
+#| msgid "Save Script"
+msgid "Script Document"
+msgstr "ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgid "Graph Document"
+msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, fuzzy, kde-format
+#| msgid "Graph Files"
+msgid "Graph File"
+msgstr "ਗਰਾਫ਼ ਫਾਇਲਾਂ"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, fuzzy, kde-format
+#| msgid "Select"
+msgid "Edit Selected Data"
+msgstr "ਚੁਣੋ"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, fuzzy, kde-format
+#| msgid "Layout Toolbar"
+msgid "Layout"
+msgstr "ਲੇਆਉਟ ਟੂਲਬਾਰ"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr ""
+
+#: ui/codeeditorwidget.cpp:81
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#: ui/codeeditorwidget.cpp:82
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgid "Enter the name of your code document"
+msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#: ui/documenttypeswidget.cpp:29
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@title"
+msgid "Node Types"
+msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, fuzzy, kde-format
+#| msgid "Select"
+msgid "Create Type"
+msgstr "ਚੁਣੋ"
+
+#: ui/documenttypeswidget.cpp:45
+#, fuzzy, kde-format
+#| msgid "Edge style"
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "ਕੋਨਾ ਸਟਾਈਲ"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr ""
+
+#: ui/fileformatdialog.cpp:46
+#, fuzzy, kde-format
+#| msgid "Open Graph..."
+msgctxt "@action:button"
+msgid "Export"
+msgstr "ਗਰਾਫ਼ ਖੋਲ੍ਹੋ..."
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:116
+#, fuzzy, kde-format
+#| msgid "Open Script..."
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "ਸਕ੍ਰਿਪਟ ਖੋਲ੍ਹੋ..."
+
+#: ui/grapheditorwidget.cpp:79
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#: ui/grapheditorwidget.cpp:80
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgid "Enter the name of your graph document"
+msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Project Journal"
+msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#: ui/mainwindow.cpp:170
+#, fuzzy, kde-format
+#| msgid "Run"
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "ਚਲਾਓ"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr ""
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr ""
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr ""
+
+#: ui/mainwindow.cpp:175
+#, kde-format
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr ""
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr ""
+
+#: ui/mainwindow.cpp:211
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Element Types"
+msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr ""
+
+#: ui/mainwindow.cpp:222
+#, fuzzy, kde-format
+#| msgid "New Script"
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "ਨਵੀਂ ਸਕ੍ਰਿਪਟ"
+
+#: ui/mainwindow.cpp:257
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#: ui/mainwindow.cpp:263
+#, fuzzy, kde-format
+#| msgid "Save Script"
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#: ui/mainwindow.cpp:269
+#, fuzzy, kde-format
+#| msgid "Open Script..."
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "ਸਕ੍ਰਿਪਟ ਖੋਲ੍ਹੋ..."
+
+#: ui/mainwindow.cpp:277
+#, fuzzy, kde-format
+#| msgid "Open Script..."
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "ਸਕ੍ਰਿਪਟ ਖੋਲ੍ਹੋ..."
+
+#: ui/mainwindow.cpp:282
+#, fuzzy, kde-format
+#| msgid "Save Script"
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#: ui/mainwindow.cpp:283
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#: ui/mainwindow.cpp:284
+#, fuzzy, kde-format
+#| msgid "New Script"
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "ਨਵੀਂ ਸਕ੍ਰਿਪਟ"
+
+#: ui/mainwindow.cpp:285
+#, fuzzy, kde-format
+#| msgid "Complete"
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "ਪੂਰਾ"
+
+#: ui/mainwindow.cpp:286
+#, fuzzy, kde-format
+#| msgid "Open Graph..."
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "ਗਰਾਫ਼ ਖੋਲ੍ਹੋ..."
+
+#: ui/mainwindow.cpp:287
+#, fuzzy, kde-format
+#| msgid "Complete"
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "ਪੂਰਾ"
+
+#: ui/mainwindow.cpp:288
+#, fuzzy, kde-format
+#| msgid "Complete"
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "ਪੂਰਾ"
+
+#: ui/mainwindow.cpp:327
+#, fuzzy, kde-format
+#| msgid "Open Script..."
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "ਸਕ੍ਰਿਪਟ ਖੋਲ੍ਹੋ..."
+
+#: ui/mainwindow.cpp:340
+#, fuzzy, kde-format
+#| msgid "Complete"
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "ਪੂਰਾ"
+
+#: ui/mainwindow.cpp:340
+#, fuzzy, kde-format
+#| msgid "Save Script"
+msgid "JavaScript (*.js)"
+msgstr "ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "ਬਿਨਾਂ ਨਾਂ"
+
+#: ui/mainwindow.cpp:374
+#, fuzzy, kde-format
+#| msgid "Save Script"
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+
+#: ui/mainwindow.cpp:385
+#, fuzzy, kde-format
+#| msgid "New Script"
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "ਨਵੀਂ ਸਕ੍ਰਿਪਟ"
+
+#: ui/mainwindow.cpp:408
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:433
+#, fuzzy, kde-format
+#| msgid "untitled"
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "ਬਿਨਾਂ ਨਾਂ"
+
+#: ui/mainwindow.cpp:462
+#, fuzzy, kde-format
+#| msgid "Script"
+msgid "ScriptName"
+msgstr "ਸਕ੍ਰਿਪਟ"
+
+#: ui/mainwindow.cpp:462
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgid "Enter the name of your new script"
+msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#: ui/mainwindow.cpp:471
+#, kde-format
+msgid "File already exists."
+msgstr ""
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr ""
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, fuzzy, kde-format
+#| msgid "Select"
+msgid "Script output:"
+msgstr "ਚੁਣੋ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr ""
+
+#: ui/sidedockwidget.cpp:105
+#, fuzzy, kde-format
+#| msgid "Main Toolbar"
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "ਮੁੱਖ ਟੂਲਬਾਰ"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr ""
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "ਮੁੱਖ ਟੂਲਬਾਰ"
+
+#, fuzzy
+#~| msgid "Main Toolbar"
+#~ msgid "Align Toolbar"
+#~ msgstr "ਮੁੱਖ ਟੂਲਬਾਰ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "New Script"
+#~ msgid "Script File"
+#~ msgstr "ਨਵੀਂ ਸਕ੍ਰਿਪਟ"
+
+#, fuzzy
+#~| msgid "Color:"
+#~ msgid "Settings"
+#~ msgstr "ਰੰਗ:"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgid "Display of Element Properties"
+#~ msgstr "ਕੋਨਾ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgid "Data Properties"
+#~ msgstr "ਕੋਨਾ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "centered"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Connection Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Open Graph..."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "ਗਰਾਫ਼ ਖੋਲ੍ਹੋ..."
+
+#, fuzzy
+#~| msgid "New Script"
+#~ msgid "*.js|Script files"
+#~ msgstr "ਨਵੀਂ ਸਕ੍ਰਿਪਟ"
+
+#, fuzzy
+#~| msgid "New Script"
+#~ msgid "Rocs Script Files"
+#~ msgstr "ਨਵੀਂ ਸਕ੍ਰਿਪਟ"
+
+#, fuzzy
+#~| msgid "Complete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "ਪੂਰਾ"
+
+#, fuzzy
+#~| msgid "Color:"
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "ਰੰਗ:"
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "ਸਕ੍ਰਿਪਟ ਖੋਲ੍ਹੋ..."
+
+#, fuzzy
+#~| msgid "Invalid file"
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "ਗਲਤ ਫਾਇਲ"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*.*|All files"
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|ਗਰਾਫ਼ ਫਾਇਲਾਂ\n"
+#~ "*.*|ਸਭ ਫਾਇਲਾਂ"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*.*|All files"
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|ਗਰਾਫ਼ ਫਾਇਲਾਂ\n"
+#~ "*.*|ਸਭ ਫਾਇਲਾਂ"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*.*|All files"
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|ਗਰਾਫ਼ ਫਾਇਲਾਂ\n"
+#~ "*.*|ਸਭ ਫਾਇਲਾਂ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Graph Files"
+#~ msgid "Graph name"
+#~ msgstr "ਗਰਾਫ਼ ਫਾਇਲਾਂ"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgid "Debugger"
+#~ msgid "Display debug messages."
+#~ msgstr "ਡੀਬੱਗਰ"
+
+#~ msgid "Untitled"
+#~ msgstr "ਬਿਨਾਂ ਨਾਂ"
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "ਲੇਆਉਟ ਟੂਲਬਾਰ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Connection"
+#~ msgstr "ਕੁਨੈਕਸ਼ਨ ਟਾਈਪ"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Connection"
+#~ msgstr "ਕੁਨੈਕਸ਼ਨ ਟਾਈਪ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Circular"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "ਗੋਲਾਕਾਰ"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "ਹਟਾਓ"
+
+#, fuzzy
+#~| msgid "Add Edge"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "ਕੋਨਾ ਸ਼ਾਮਲ"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "ਕੋਨਾ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new data structure."
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "ਚੁਣੋ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Edit Data Types"
+#~ msgstr "ਚੁਣੋ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Static Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#~ msgid "Color:"
+#~ msgstr "ਰੰਗ:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Dynamic Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Types"
+#~ msgstr "ਚੁਣੋ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#~ msgid "Name"
+#~ msgstr "ਨਾਂ"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Select Data Type:"
+#~ msgstr "ਚੁਣੋ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Remove selected data type."
+#~ msgstr "ਚੁਣੋ"
+
+#, fuzzy
+#~| msgid "Color:"
+#~ msgid "Default Color:"
+#~ msgstr "ਰੰਗ:"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgid "Data Type Properties"
+#~ msgstr "ਕੋਨਾ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#~ msgid "Property"
+#~ msgstr "ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#~ msgid "Value"
+#~ msgstr "ਮੁੱਲ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Edit Pointer Types"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Pointer Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#~ msgid "Width:"
+#~ msgstr "ਚੌੜਾਈ:"
+
+#, fuzzy
+#~| msgid "solid"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "ਲਾਈਨ"
+
+#, fuzzy
+#~| msgid "dash"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "ਡੈਸ਼"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "ਕੁਨੈਕਸ਼ਨ ਟਾਈਪ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Select Pointer Type:"
+#~ msgstr "ਚੁਣੋ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Remove selected pointer type."
+#~ msgstr "ਚੁਣੋ"
+
+#~ msgid "Style:"
+#~ msgstr "ਸਟਾਈਲ:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@title:menu"
+#~ msgid "Selected"
+#~ msgstr "ਚੁਣੋ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu align elements at center"
+#~ msgid "Center"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Circular"
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "ਗੋਲਾਕਾਰ"
+
+#, fuzzy
+#~| msgid "Value"
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "ਮੁੱਲ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Enumerate"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Integers"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Reals"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "ਹਟਾਓ"
+
+#, fuzzy
+#~| msgid "Value"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "ਮੁੱਲ"
+
+#, fuzzy
+#~| msgid "Nodes:"
+#~ msgid "Nodes"
+#~ msgstr "ਨੋਡ:"
+
+#, fuzzy
+#~| msgid "Edge style"
+#~ msgid "Edges"
+#~ msgstr "ਕੋਨਾ ਸਟਾਈਲ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Generator Seed"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Enumerate Items"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Assign Random Reals"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@title:window"
+#~ msgid "Generate Graph"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgid "Mesh Graph"
+#~ msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Star Graph"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgid "Circle Graph"
+#~ msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "RandomGraph"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Generate Graph"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Graph Files"
+#~ msgid "Graph Type:"
+#~ msgstr "ਗਰਾਫ਼ ਫਾਇਲਾਂ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Random Graph"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#~ msgid "Nodes:"
+#~ msgstr "ਨੋਡ:"
+
+#, fuzzy
+#~| msgid "Edge style"
+#~ msgid "Edges:"
+#~ msgstr "ਕੋਨਾ ਸਟਾਈਲ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Generator Seed:"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Nodes:"
+#~ msgid "Nodes (n):"
+#~ msgstr "ਨੋਡ:"
+
+#, fuzzy
+#~| msgid "Complete"
+#~ msgid "Complete Graph"
+#~ msgstr "ਪੂਰਾ"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgid "untitled"
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "ਬਿਨਾਂ ਨਾਂ"
+
+#, fuzzy
+#~| msgid "None"
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "ਕੋਈ ਨਹੀਂ"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgid "Connection"
+#~ msgstr "ਕੁਨੈਕਸ਼ਨ ਟਾਈਪ"
+
+#, fuzzy
+#~| msgid "Debugger"
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "ਡੀਬੱਗਰ"
+
+#, fuzzy
+#~| msgid "Graph Files"
+#~ msgid "*.dot *.gv|Graphviz Format"
+#~ msgstr "ਗਰਾਫ਼ ਫਾਇਲਾਂ"
+
+#, fuzzy
+#~| msgid "Complete"
+#~ msgid "Import"
+#~ msgstr "ਪੂਰਾ"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*.*|All files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr ""
+#~ "*.graph|ਗਰਾਫ਼ ਫਾਇਲਾਂ\n"
+#~ "*.*|ਸਭ ਫਾਇਲਾਂ"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*.*|All files"
+#~ msgid "*.graph|Rocs Graph File Format"
+#~ msgstr ""
+#~ "*.graph|ਗਰਾਫ਼ ਫਾਇਲਾਂ\n"
+#~ "*.*|ਸਭ ਫਾਇਲਾਂ"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgctxt "X-coordinate "
+#~| msgid "x"
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "x"
+
+#, fuzzy
+#~| msgctxt "Y-coordinate "
+#~| msgid "y"
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "y"
+
+#, fuzzy
+#~| msgid "Size:"
+#~ msgid "Size"
+#~ msgstr "ਅਕਾਰ:"
+
+#, fuzzy
+#~| msgid "Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Graph"
+#~ msgstr "ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgid "untitled"
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "ਬਿਨਾਂ ਨਾਂ"
+
+#~ msgid "New File"
+#~ msgstr "ਨਵੀਂ ਫਾਇਲ"
+
+#~ msgid "Untitled%1"
+#~ msgstr "ਬਿਨਾਂ ਨਾਂ%1"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Data structure name"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "ਸਕ੍ਰਿਪਟ ਖੋਲ੍ਹੋ..."
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "ਸਕ੍ਰਿਪਟ ਖੋਲ੍ਹੋ..."
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "ਨਾਂ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "ਨਾਂ"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "ਸਕ੍ਰਿਪਟ ਖੋਲ੍ਹੋ..."
+
+#~ msgid "Edge Properties"
+#~ msgstr "ਕੋਨਾ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#~ msgid "Value:"
+#~ msgstr "ਮੁੱਲ:"
+
+#~ msgid "Edge width"
+#~ msgstr "ਕੋਨਾ ਚੌੜਾਈ"
+
+#~ msgid "Show"
+#~ msgstr "ਵੇਖੋ"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgid "Add Property"
+#~ msgstr "ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#, fuzzy
+#~| msgid "Add"
+#~ msgid "add"
+#~ msgstr "ਸ਼ਾਮਲ"
+
+#, fuzzy
+#~| msgid "Untitled%1"
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "ਬਿਨਾਂ ਨਾਂ%1"
+
+#, fuzzy
+#~| msgid "Color:"
+#~ msgid "Enable Color"
+#~ msgstr "ਰੰਗ:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "ਨੋਡ ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#~ msgid "Delete"
+#~ msgstr "ਹਟਾਓ"
+
+#~ msgid "dot"
+#~ msgstr "ਬਿੰਦੂ"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt ""
+#~ "@label:inlistbox Undirected graph for which several edges between same "
+#~ "nodes may exist"
+#~ msgid "Undirected Multigraph"
+#~ msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt ""
+#~ "@label:inlistbox Directed graph for which several same orientated edges "
+#~ "between same nodes may exist"
+#~ msgid "Directed Multigraph"
+#~ msgstr "ਨਵਾਂ ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*.*|All files"
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|ਗਰਾਫ਼ ਫਾਇਲਾਂ\n"
+#~ "*.*|ਸਭ ਫਾਇਲਾਂ"
+
+#, fuzzy
+#~| msgid "Complete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "ਪੂਰਾ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Add"
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "ਸ਼ਾਮਲ"
+
+#~ msgid "Add Node"
+#~ msgstr "ਨੋਡ ਸ਼ਾਮਲ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Circular"
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "ਗੋਲਾਕਾਰ"
+
+#, fuzzy
+#~| msgid "Graph Files"
+#~ msgid "Type Icon:"
+#~ msgstr "ਗਰਾਫ਼ ਫਾਇਲਾਂ"
+
+#, fuzzy
+#~| msgid "Open Graph..."
+#~ msgid "Export as new Type"
+#~ msgstr "ਗਰਾਫ਼ ਖੋਲ੍ਹੋ..."
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgid "Open Script"
+#~ msgstr "ਸਕ੍ਰਿਪਟ ਖੋਲ੍ਹੋ..."
+
+#, fuzzy
+#~| msgid "Editor"
+#~ msgid "Edit"
+#~ msgstr "ਐਡੀਟਰ"
+
+#, fuzzy
+#~| msgid "Edge Color:"
+#~ msgid "Pointer"
+#~ msgstr "ਕੋਨਾ ਰੰਗ:"
+
+#, fuzzy
+#~| msgctxt "X-coordinate "
+#~| msgid "x"
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Untitled0"
+#~ msgstr "ਬਿਨਾਂ ਨਾਂ0"
+
+#, fuzzy
+#~| msgid "Open Graph..."
+#~ msgid "Open Graph"
+#~ msgstr "ਗਰਾਫ਼ ਖੋਲ੍ਹੋ..."
+
+#~ msgid "Color for new edges"
+#~ msgstr "ਨਵੇਂ ਕੋਨਿਆਂ ਲਈ ਰੰਗ"
+
+#~ msgid "All"
+#~ msgstr "ਸਭ"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "(c) 2009"
+#~ msgstr "(c) 2009"
+
+#, fuzzy
+#~| msgid "Complete"
+#~ msgid "Make Complete"
+#~ msgstr "ਪੂਰਾ"
+
+#~ msgid "Dialog"
+#~ msgstr "ਡਾਈਲਾਗ"
+
+#~ msgid "Radius:"
+#~ msgstr "ਰੇਡੀਅਸ:"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Complete"
+#~ msgstr "ਪੂਰਾ"
+
+#~ msgctxt "Do not translate, X is for delete"
+#~ msgid "x"
+#~ msgstr "x"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Name: %1"
+#~ msgstr "ਨਾਂ"
+
+#, fuzzy
+#~| msgid "Value:"
+#~ msgid "Value: %1"
+#~ msgstr "ਮੁੱਲ:"
+
+#~ msgid "Save Graph As..."
+#~ msgstr "...ਵਜੋਂ ਗਰਾਫ਼ ਸੰਭਾਲੋ"
+
+#~ msgid "Save Script As..."
+#~ msgstr "...ਵਜੋਂ ਸਕ੍ਰਿਪਟ ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "Graph"
+#~ msgid "Ring Graph"
+#~ msgstr "ਗਰਾਫ਼"
+
+#, fuzzy
+#~| msgid "Untitled"
+#~ msgid "UntitledDoc"
+#~ msgstr "ਬਿਨਾਂ ਨਾਂ"

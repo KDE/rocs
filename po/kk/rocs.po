@@ -1,0 +1,2239 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sairan Kikkarin <sairan@computer.org>, 2012, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2013-07-01 03:20+0600\n"
+"Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
+"Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Сайран Киккарин"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "sairan@computer.org"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgctxt "@title KAboutData: short program description"
+#| msgid "Graph Theory Tool"
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "Граф теория құралы"
+
+#: main.cpp:32
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "(c) 2009-2013 Rocs Developers"
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr "(C) 2009-2013, Rocs құрастырушылар"
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr ""
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr ""
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "Құрастырушы"
+
+#: main.cpp:57
+#, fuzzy, kde-format
+#| msgid "Project Journal"
+msgid "Project to open."
+msgstr "Жоба журналы"
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "Синтаксис"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "Қасиеттер"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "Параметрлер"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "Параметр"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "Әдістер"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "Түрі"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr "Қайтаратын түрі"
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr "Егжей-тегжейлі сипаттама"
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "Сипаттамасы"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "Скрипт тетік API-і"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "New Graph Document"
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "Жаңа граф құжаты"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "Нысандар"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Script Engine Components"
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "Скрипт тетік компоненттері"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr "Скрипт нысандары"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "Қасиеттер"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "Әдістер"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "Rocs скрипт API-і"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Таңбашаның жанында жазуын көрсету"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Кірмелер менеджері кірмелерін іздейтін жолдары."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Жоба"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Скрипт құжаты"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Граф құжаты"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Граф файлы"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Таңдалған деректі өңдеу"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Орналасуы"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Құралдар"
+
+#: ui/codeeditorwidget.cpp:81
+#, fuzzy, kde-format
+#| msgid "Graph Document"
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "Граф құжаты"
+
+#: ui/codeeditorwidget.cpp:82
+#, fuzzy, kde-format
+#| msgid "Enter the name of your new script"
+msgid "Enter the name of your code document"
+msgstr "Жаңа скрипт файлының атауын келтіру"
+
+#: ui/documenttypeswidget.cpp:29
+#, fuzzy, kde-format
+#| msgid "Pointer Types"
+msgctxt "@title"
+msgid "Node Types"
+msgstr "Көрсеткіш түрлері"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, fuzzy, kde-format
+#| msgid "Create new Data Type"
+msgid "Create Type"
+msgstr "Жаңа деректер түрін құру"
+
+#: ui/documenttypeswidget.cpp:45
+#, fuzzy, kde-format
+#| msgid "Edge style"
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "Қырының стилі"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr ""
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "Экспорт"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+"<p><strong>'%1'</strong><br /> деген файл бар екен. Егер оны үстінен "
+"жазбаймын десеңіз, файлды басқаша атаңыз.</p>"
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "Файл бар екен"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|Бүкіл файлдар"
+
+#: ui/fileformatdialog.cpp:116
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Import Graph File into Project"
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "Жобаға граф файлын импорттау"
+
+#: ui/grapheditorwidget.cpp:79
+#, fuzzy, kde-format
+#| msgid "Graph Document"
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "Граф құжаты"
+
+#: ui/grapheditorwidget.cpp:80
+#, fuzzy, kde-format
+#| msgid "Enter the name of your new script"
+msgid "Enter the name of your graph document"
+msgstr "Жаңа скрипт файлының атауын келтіру"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Жоба журналы"
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "Жегу"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr ""
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "Тоқтату"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr ""
+
+#: ui/mainwindow.cpp:175
+#, fuzzy, kde-format
+#| msgctxt "@title:menu Debug execution"
+#| msgid "Debug"
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "Жөндеу"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr ""
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr "Элемент түрлері"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "Журнал"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "Скрипт API-і"
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "Жаңа жоба"
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "Жобаны сақтау"
+
+#: ui/mainwindow.cpp:269
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Open Project"
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "Жобаны ашу"
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "Жуырдағы жобалар"
+
+#: ui/mainwindow.cpp:282
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Save Project as"
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "Жобаны былай сақтау"
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "Жаңа граф құжаты"
+
+#: ui/mainwindow.cpp:284
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "New Script File"
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "Жаңа скрипт файлы"
+
+#: ui/mainwindow.cpp:285
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Graph"
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "Графты импорттау"
+
+#: ui/mainwindow.cpp:286
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Graph as"
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "Графты былай экспорттау"
+
+#: ui/mainwindow.cpp:287
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Script"
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "Скриптті импорттау"
+
+#: ui/mainwindow.cpp:288
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Script as"
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "Скриптті былай экспорттау"
+
+#: ui/mainwindow.cpp:327
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Import Graph File into Project"
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "Жобаға граф файлын импорттау"
+
+#: ui/mainwindow.cpp:340
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Script as"
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "Скриптті былай экспорттау"
+
+#: ui/mainwindow.cpp:340
+#, fuzzy, kde-format
+#| msgid "Save Script as"
+msgid "JavaScript (*.js)"
+msgstr "Скриптті былай сақтау"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "аталмаған"
+
+#: ui/mainwindow.cpp:374
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Save Project as"
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "Жобаны былай сақтау"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+
+#: ui/mainwindow.cpp:385
+#, fuzzy, kde-format
+#| msgid "Overwrite"
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "Үстінен жазу"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "Жоба файлдарын ашу"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:433
+#, fuzzy, kde-format
+#| msgctxt "caption text for temporary project"
+#| msgid "[ untitled ]"
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "[ аталмаған ]"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr "СкриптАтауы"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr "Жаңа скрипт файлының атауын келтіру"
+
+#: ui/mainwindow.cpp:471
+#, fuzzy, kde-format
+#| msgid "File Exists"
+msgid "File already exists."
+msgstr "Файл бар екен"
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr "Жобадағы өзгерістер сақталмаған. Сақтауды қалайсыз ба?"
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, fuzzy, kde-format
+#| msgid "Script Output:"
+msgid "Script output:"
+msgstr "Скрипттің шығысы:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Әр орындау сайын бағдарлама шығысын тазалау."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Жөндеу шығысын көрсету."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Шығысын таазалау."
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "Бүйірдегі құралдар панелі"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr "'%1' көрініс күйін терістеу"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Жобаны былай сақтау"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Overwrite"
+#~ msgstr "Үстінен жазу"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Негізгі құралдар"
+
+#~ msgid "Align Toolbar"
+#~ msgstr "Құралдар панелін туралау"
+
+#~ msgid "Rocs Handbook"
+#~ msgstr "Rocs анықтамасы"
+
+#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+#~ msgstr "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "Анықтамасы"
+
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "Деректер құрылымдары"
+
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs - деректер құрылымын талдау"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr "Деректер құрылым плагині жүйеңізде жоқ. Жабылады."
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Rocs деректер құрылым плагинін қажет етеді.\n"
+#~ "Консолінен kbuildsycoca4 дегенді жегіп көріп, қайта Rocs-ты жегіңіз."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr "Төбесінің атауы мен мәні көрсетілетін орны."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Қырының атауы мен мәні көрсетілетін орны."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr "Жөндеу режімінде орындау батырмасын көрсету-көрсетпеуін анықтау."
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr "Қадамдап орындау батырмасын көрсету-көрсетпеуін анықтау."
+
+#~ msgid "Script File"
+#~ msgstr "Скрипт файлы"
+
+#~ msgid "Convert To"
+#~ msgstr "Мынаған аудару"
+
+#~ msgid "Settings"
+#~ msgstr "Баптау"
+
+#~ msgid "Help"
+#~ msgstr "Көмек"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "KDE-нің мәтін өңдегіші табылмады,\n"
+#~ "орнатылғанын тексеріңіз"
+
+#~ msgid "Display of Element Properties"
+#~ msgstr "Элемент қасиеттерін көрсету"
+
+#~ msgid "Data Properties"
+#~ msgstr "Деректер қасиеттері"
+
+#~ msgid "centered"
+#~ msgstr "ортада"
+
+#~ msgid "below"
+#~ msgstr "төменде"
+
+#~ msgid "above"
+#~ msgstr "жоғарда"
+
+#~ msgid "Connection Properties"
+#~ msgstr "Қосылым қасиеттері"
+
+#~ msgid "Execution Controls"
+#~ msgstr "Орындауды басқару"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Жөндеу орындауын көрсету"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Бір қадамдап орындауын көрсету"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Қасиеттер"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Көрсеткіштерді көрсету-көрсетпеуін орнату"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Графты файлға экспорттау"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "Жүктелген плагиндері"
+
+#~ msgid "Graph File Plugins loaded for %1"
+#~ msgstr "%1 дегеннің граф плагиндер файлы жүктелді"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|Скрипт файлдары"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Rocs скрипт файлдары"
+
+#~ msgid "Add your description here."
+#~ msgstr "Сипатаманы осында қосыңыз."
+
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "Бір қадам"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Жөндеуді бастау"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "Алғашқы жолында үзу"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Мысалдарды жүктеп алу"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Жобаны жүктеп беру"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Мүмкін кірмелері"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "Жүктелген плагиндері"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Code Editor..."
+#~ msgstr "Код редакторын баптау..."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Кірмелерді басқару"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Әдеттегі параметрлері"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Жобаға бар скрипт файлын қосу"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "Бұл граф файлына ұқсамайды."
+
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Жарамсыз файл"
+
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs|Rocs жоба файлдары\n"
+#~ "*.rocsz|Сығылған Rocs жоба файлдары\n"
+#~ "*|Бүкіл файлдар"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Жобаны сақтау"
+
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs *.rocsz|Бүкіл Rocs файлдары\n"
+#~ "*.rocs|Rocs жоба файлдары\n"
+#~ "*.rocsz|Сығылған Rocs жоба файлдары\n"
+#~ "*|Бүкіл файлдар"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|*.Rocs граф құжаты\n"
+#~ "*|Бүкіл файлдар"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Граф құжатын сақтау"
+
+#~ msgid "Graph name"
+#~ msgstr "Граф атауы"
+
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Граф атауын келтіру"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Скрипт тетігі үшін мүмкін кірмелері"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your graph document are unsaved. Do you want to save your "
+#~ "changes?"
+#~ msgstr "Граф құжатыңыздағы өзгерістер сақталмаған. Сақтауды қалайсыз ба?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files are unsaved. Do you want to save all unsaved "
+#~ "scripts?"
+#~ msgstr ""
+#~ "Скрипт файлдарыңыздағы өзгерістер сақталмаған. Бүкіл сақталмағандарын "
+#~ "сақтауын қалайсыз ба?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files and on your graph document are unsaved. Do "
+#~ "you want to save your graph document and all unsaved scripts?"
+#~ msgstr ""
+#~ "Граф құжатыңыз бен скрипт файлдарыңыздағы өзгерістер сақталмаған. Бүкіл "
+#~ "сақталмағандарын сақтауын қалайсыз ба?"
+
+#~ msgid "Default Information Display"
+#~ msgstr "Әдетті ақпарды көрсету"
+
+#~ msgid "Node Information"
+#~ msgstr "Төбе туралы мәлімет"
+
+#~ msgid "Edge Information"
+#~ msgstr "Қыры туралы мәлімет"
+
+#, fuzzy
+#~| msgid "Debug Messages"
+#~ msgid "Display debug messages."
+#~ msgstr "Жөндеу хабарламалары"
+
+#~ msgid "Untitled"
+#~ msgstr "Аталмаған"
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "Орналастыру құралдары"
+
+#, fuzzy
+#~| msgid "Add Data"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "Деректі қосу"
+
+#, fuzzy
+#~| msgid "Add Data"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Data"
+#~ msgstr "Деректі қосу"
+
+#, fuzzy
+#~| msgid "Add new data element"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "Жаңа дерек элементін қосу"
+
+#, fuzzy
+#~| msgid "Add Connection"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Connection"
+#~ msgstr "Байланыс құру"
+
+#, fuzzy
+#~| msgid "Add Connection"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Connection"
+#~ msgstr "Байланыс құру"
+
+#, fuzzy
+#~| msgid "Add a new connection between two data elements of selected type"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new connection between two data elements of selected type"
+#~ msgstr "Таңдалған түрінің екі дерек элемент арасында жаңа байланысын құру"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Base"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Base"
+#~ msgstr "Негізгі"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Center"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "Ортаға"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Top"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Top"
+#~ msgstr "Жоғарға"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Left"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Left"
+#~ msgstr "Солға"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Right"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Right"
+#~ msgstr "Оңға"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Circle"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "Айнала"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Minimize Crossing Edges"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Қиылысқан қырларын мейілінше азайту"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "Өшіру"
+
+#, fuzzy
+#~| msgid "Add Edge"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "Қырды қосу"
+
+#, fuzzy
+#~| msgid "Creates a new edge between 2 nodes"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new edge between 2 nodes"
+#~ msgstr "Екі төбе арасындағы қырын құру"
+
+#, fuzzy
+#~| msgid "Add %1"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add %1"
+#~ msgstr "%1 дегенді қосу"
+
+#, fuzzy
+#~| msgid "Creates a new node at the click position."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position."
+#~ msgstr "Түрткен жерде төбесін құру. "
+
+#, fuzzy
+#~| msgid "Creates a new node at the click position on the drawing area."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position on the drawing area."
+#~ msgstr "Сурет салатын өрісінде түрткен жерде төбені құру "
+
+#~ msgid "Add %1"
+#~ msgstr "%1 дегенді қосу"
+
+#, fuzzy
+#~| msgid "Delete items by clicking on them."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "Түртенді өшіру."
+
+#, fuzzy
+#~| msgid "Data Type Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "Деректер түрінің қасиеттері"
+
+#, fuzzy
+#~| msgid "Pointer Type Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Көрсеткіш түрінің қасиеттері"
+
+#, fuzzy
+#~| msgid "Move"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "Жылжыту"
+
+#, fuzzy
+#~| msgid "Select and move items."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Select and move items."
+#~ msgstr "Бірдемені таңдап алып жылжыту."
+
+#, fuzzy
+#~| msgid "Zoom"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Zoom"
+#~ msgstr "Масштабы"
+
+#, fuzzy
+#~| msgid "Zoom the canvas by the wheel, or by dragging."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom the canvas by the wheel, or by dragging."
+#~ msgstr "Тышқанның тегіршігімен немесе онымен тартып масштабын өзгерту."
+
+#, fuzzy
+#~| msgid "Properties"
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "Қасиеттер"
+
+#, fuzzy
+#~| msgid "Graph Document:"
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "Граф құжаты"
+
+#~ msgid "Data Structure:"
+#~ msgstr "Деректер құрылымы:"
+
+#, fuzzy
+#~| msgid "Add a new data structure with the specified name"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new data structure."
+#~ msgstr "Атауын келтіріп жаңа дерек құрылымын қосу"
+
+#, fuzzy
+#~| msgid "Select Data Type:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "Деректер түрін таңдау:"
+
+#~ msgid "Edit Data Types"
+#~ msgstr "Дерек түрлерін өңдеу"
+
+#, fuzzy
+#~| msgid "Dynamic Properties"
+#~ msgid "Static Properties"
+#~ msgstr "Динамикалық қасиеттер"
+
+#~ msgid "Node color"
+#~ msgstr "Төбенің түсі"
+
+#~ msgid "Color:"
+#~ msgstr "Түсі:"
+
+#~ msgid "Type:"
+#~ msgstr "Түрі:"
+
+#~ msgid "Dynamic Properties"
+#~ msgstr "Динамикалық қасиеттер"
+
+#~ msgid "Name:"
+#~ msgstr "Атауы:"
+
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "Деректер құрылымының плагині:"
+
+#, fuzzy
+#~| msgid "Data Structure Properties"
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "Деректер құрылымының қасиеттері"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Structure"
+#~ msgstr "Деректер құрылымы"
+
+#, fuzzy
+#~| msgid "Data Types"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Types"
+#~ msgstr "Дерек түрлері"
+
+#, fuzzy
+#~| msgid "Data Structure Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "Деректер құрылымының қасиеттері"
+
+#~ msgid "Name"
+#~ msgstr "Атауы"
+
+#, fuzzy
+#~| msgid "Default Color:"
+#~ msgid "Default Value"
+#~ msgstr "Әдетті түс:"
+
+#, fuzzy
+#~| msgid "Display Options"
+#~ msgid "Display"
+#~ msgstr "Көрсету параметрлері"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "Қасиет"
+
+#, fuzzy
+#~| msgid "Data Types"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Data Type"
+#~ msgstr "Дерек түрлері"
+
+#~ msgid "Select Data Type:"
+#~ msgstr "Деректер түрін таңдау:"
+
+#, fuzzy
+#~| msgid "Select Data Type:"
+#~ msgid "Remove selected data type."
+#~ msgstr "Деректер түрін таңдау:"
+
+#, fuzzy
+#~| msgid "Add a new data structure with the specified name"
+#~ msgid "Add new data type."
+#~ msgstr "Атауын келтіріп жаңа дерек құрылымын қосу"
+
+#~ msgid "Insert a name for this type"
+#~ msgstr "Осы түрінің атауын ендіру"
+
+#~ msgid "Default Color:"
+#~ msgstr "Әдетті түс:"
+
+#, fuzzy
+#~| msgid "Data Type Properties"
+#~ msgid "Data Type Properties"
+#~ msgstr "Деректер түрінің қасиеттері"
+
+#, fuzzy
+#~| msgid "Document Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "Құжаттың қасиеттері"
+
+#~ msgid "Property"
+#~ msgstr "Қасиет"
+
+#~ msgid "Value"
+#~ msgstr "Мәні"
+
+#, fuzzy
+#~| msgid "Pointer Types"
+#~ msgid "Edit Pointer Types"
+#~ msgstr "Көрсеткіш түрлері"
+
+#, fuzzy
+#~| msgid "Pointer Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "Көрсеткіштің қасиеттері"
+
+#~ msgid "Pointer Properties"
+#~ msgstr "Көрсеткіштің қасиеттері"
+
+#~ msgid "Width:"
+#~ msgstr "Ені:"
+
+#, fuzzy
+#~| msgid "solid"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "тұтас"
+
+#, fuzzy
+#~| msgid "dash"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "штрихты"
+
+#, fuzzy
+#~| msgid "dash dot"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash dot line"
+#~ msgstr "штрих-нүктелі"
+
+#, fuzzy
+#~| msgid "Connection"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "Байланыс"
+
+#, fuzzy
+#~| msgid "Create new Pointer Type"
+#~ msgid "Add new pointer type."
+#~ msgstr "Жаңа көрсеткіш түрін құру"
+
+#~ msgid "Select Pointer Type:"
+#~ msgstr "Көрсеткіштің түрі:"
+
+#, fuzzy
+#~| msgid "Select Pointer Type:"
+#~ msgid "Remove selected pointer type."
+#~ msgstr "Көрсеткіштің түрі:"
+
+#~ msgid "Style:"
+#~ msgstr "Стилі:"
+
+#, fuzzy
+#~| msgid "Pointer Type Properties"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Көрсеткіш түрінің қасиеттері"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "Деректер құрылымы"
+
+#, fuzzy
+#~| msgid "Selected"
+#~ msgctxt "@title:menu"
+#~ msgid "Selected"
+#~ msgstr "Таңдалғанды"
+
+#, fuzzy
+#~| msgid "Zoom"
+#~ msgctxt "@title:menu"
+#~ msgid "Zoom"
+#~ msgstr "Масштабы"
+
+#, fuzzy
+#~| msgid "In"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "In"
+#~ msgstr "Ішке"
+
+#, fuzzy
+#~| msgid "Out"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Out"
+#~ msgstr "Сыртқа"
+
+#, fuzzy
+#~| msgid "Reset"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Reset"
+#~ msgstr "Ысырып тастау"
+
+#~ msgid "Align"
+#~ msgstr "Туралау"
+
+#, fuzzy
+#~| msgctxt "align elements at bottom"
+#~| msgid "Bottom"
+#~ msgctxt "@action:inmenu align elements at bottom"
+#~ msgid "Bottom"
+#~ msgstr "Төменге"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Center"
+#~ msgctxt "@action:inmenu align elements at center"
+#~ msgid "Center"
+#~ msgstr "Ортаға"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Top"
+#~ msgctxt "@action:inmenu align elements at top"
+#~ msgid "Top"
+#~ msgstr "Жоғарға"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Left"
+#~ msgctxt "@action:inmenu align elements left"
+#~ msgid "Left"
+#~ msgstr "Солға"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Right"
+#~ msgctxt "@action:inmenu align elements right"
+#~ msgid "Right"
+#~ msgstr "Оңға"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Circle"
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Айнала"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Minimize Crossing Edges"
+#~ msgctxt ""
+#~ "@action:inmenu align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Қиылысқан қырларын мейілінше азайту"
+
+#, fuzzy
+#~| msgid "Values"
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "Мәндері"
+
+#, fuzzy
+#~| msgid "Enumerate"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Enumerate"
+#~ msgstr "Санап шығу"
+
+#, fuzzy
+#~| msgid "Random Integers"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Integers"
+#~ msgstr "Кездейсоқ бүтін сандар"
+
+#, fuzzy
+#~| msgid "Random Reals"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Reals"
+#~ msgstr "Кездейсоқ нақты сандар"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "Өшіру"
+
+#, fuzzy
+#~| msgid "Assign Values"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "Мәндерін келтіру"
+
+#~ msgid "Assign Values"
+#~ msgstr "Мәндерін келтіру"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">List of all data "
+#~ "structures that are of type <span style=\" font-style:italic;\">Graph</"
+#~ "span>.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Graph</span> түріне жататын бүкіл деректер құрылымдар "
+#~ "тізімі.</p></body></html>"
+
+#~ msgid "Nodes"
+#~ msgstr "Төбелер"
+
+#~ msgid "Edges"
+#~ msgstr "Қырлар"
+
+#~ msgid "Start ID"
+#~ msgstr "Бастапқы идентификатор"
+
+#~ msgid "Lower Limit"
+#~ msgstr "Төменгі шек"
+
+#~ msgid "Upper Limit"
+#~ msgstr "Жоғарғы шек"
+
+#~ msgid "Generator Seed"
+#~ msgstr "Генератордың бастапқы саны"
+
+#~ msgid "Enumerate Items"
+#~ msgstr "Нөмірлеп шығу"
+
+#~ msgid "Assign Random Integers"
+#~ msgstr "Кездейсоқ бүтін сандар"
+
+#~ msgid "Assign Random Reals"
+#~ msgstr "Кездейсоқ нақты сандар"
+
+#~ msgid "Overwrite existing values"
+#~ msgstr "Бар мәндерін ауыстырып"
+
+#, fuzzy
+#~| msgid "Generate Graph"
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "Графты құру"
+
+#, fuzzy
+#~| msgid "Generate Graph"
+#~ msgctxt "@title:window"
+#~ msgid "Generate Graph"
+#~ msgstr "Графты құру"
+
+#~ msgid "Mesh Graph"
+#~ msgstr "Торлы граф"
+
+#~ msgid "Star Graph"
+#~ msgstr "Жүлдызды граф"
+
+#~ msgid "Circle Graph"
+#~ msgstr "Дөңгелек граф"
+
+#~ msgid "RandomGraph"
+#~ msgstr "Қездейсоқ граф"
+
+#~ msgid "Generate Graph"
+#~ msgstr "Графты құру"
+
+#~ msgid "Graph Type:"
+#~ msgstr "Графтың түрі:"
+
+#~ msgid "Random Graph"
+#~ msgstr "Кездейсоқ граф"
+
+#~ msgid "Erdös-Renyi Graph"
+#~ msgstr "Эрдеш-Реньи графы"
+
+#~ msgid "Number of Columns:"
+#~ msgstr "Бағандар саны:"
+
+#~ msgid "Number of Rows:"
+#~ msgstr "Жолдар саны:"
+
+#~ msgid "Satellite Nodes:"
+#~ msgstr "Серіктес төбелері:"
+
+#~ msgid "Number of Nodes:"
+#~ msgstr "Төбелер саны:"
+
+#~ msgid "Nodes:"
+#~ msgstr "Төбелер:"
+
+#~ msgid "Edges:"
+#~ msgstr "Қырлар:"
+
+#~ msgid "Allow self-edges:"
+#~ msgstr "Өз-өзіне түйілген қырлар:"
+
+#~ msgid "Generator Seed:"
+#~ msgstr "Генератордың бастапқы саны:"
+
+#~ msgid "Nodes (n):"
+#~ msgstr "Төбелер (n):"
+
+#~ msgid "Edge Probability (p):"
+#~ msgstr "Қыр ықтималдығы (p):"
+
+#, fuzzy
+#~| msgid "Transform Edges"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Transform Edges"
+#~ msgstr "Қырларын түрлендіру"
+
+#, fuzzy
+#~| msgid "Transform Edges"
+#~ msgctxt "@title:window"
+#~ msgid "Transform Edges"
+#~ msgstr "Қырларын түрлендіру"
+
+#~ msgid "Transform Edges"
+#~ msgstr "Қырларын түрлендіру"
+
+#~ msgid ""
+#~ "This option connects all nodes of the given graph. The new edges do not "
+#~ "have any preset weights."
+#~ msgstr ""
+#~ "Бұнымен осы графтың бүкіл төбелері байланыстырлады. Жаңа қырларға "
+#~ "тағайындалған салмақтар берілмейді. "
+
+#~ msgid "Complete Graph"
+#~ msgstr "Графты бітіру"
+
+#~ msgid "This option removes all edges from the given graph."
+#~ msgstr "Бұнымен графтың бүкіл қырларын алып тастайды."
+
+#~ msgid "Remove all Edges"
+#~ msgstr "Бүкіл қырларын өшіру"
+
+#~ msgid ""
+#~ "This option reverses all edges of a directed graph. Note that this does "
+#~ "not apply to undirected graphs."
+#~ msgstr ""
+#~ "Бұнымен бағытты графтың бүкіл қырларының бағытын керіге ауыстырады. Тек "
+#~ "бағытты графтарға қолданылады. "
+
+#~ msgid "Reverse all Edges"
+#~ msgstr "Бүкіл қырларының бағытын кері қылу"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
+#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
+#~ "Algorithm</span> at the graph. All edges without given weights are "
+#~ "assumed to have weights equals 1. Directed and undirected graphs are "
+#~ "processed accordingly.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Бұл <span style=\" font-"
+#~ "style:italic;\">Графты минималдыру Прим алгоритмын</span> графқа "
+#~ "қолдануы. Салмағы белгіленбеген қырларының салмағы 1 деп есептеледі. "
+#~ "Бағытты және бағытталмаған графтар өз жолымен қарастырлады.</p></body></"
+#~ "html>"
+
+#~ msgid "Spanning Tree Transformation"
+#~ msgstr "Графты минималдыру"
+
+#~ msgid "Element"
+#~ msgstr "Элемент"
+
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "Құжат"
+
+#~ msgctxt "dynamic property that is present exactly once"
+#~ msgid "Unique"
+#~ msgstr "Бірегей"
+
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "Еселенген"
+
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "Жалпы-жүйелік"
+
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "Жоқ"
+
+#~ msgid "Connection"
+#~ msgstr "Байланыс"
+
+#~ msgid "Rocs Console script"
+#~ msgstr "Rocs консоль скрипті"
+
+#~ msgid "<b style=\"color: red\"> Error in include file %1</b>"
+#~ msgstr "<b style=\"color: red\"> %1 кірме файлында қате</b>"
+
+#, fuzzy
+#~| msgid "Program Messages"
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "Бағдарламаның хабарламалары"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "Read and write Graphviz graph files."
+#~ msgstr "Бұл құжатта жарамды граф жоқ."
+
+#, fuzzy
+#~| msgid "*.dot|Graphviz Files"
+#~ msgid "*.dot *.gv|Graphviz Format"
+#~ msgstr "*.dot|Graphviz файлдары"
+
+#, fuzzy
+#~| msgid "dotImport"
+#~ msgid "Import"
+#~ msgstr "dotImport"
+
+#, fuzzy
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Could not open file \"%1\" in read mode: %2"
+#~ msgstr "%1 файлы ашылмады: %2"
+
+#, fuzzy
+#~| msgid "cannot parse the file %1."
+#~ msgid "Could not parse file \"%1\"."
+#~ msgstr "%1 файлы талдауға келмеді."
+
+#~ msgid "No active graph in this document."
+#~ msgstr "Бұл құжатта жарамды граф жоқ."
+
+#~ msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgstr "%1 файлы жазу үшін ашылмады. Қатесі: %2"
+
+#, fuzzy
+#~| msgid "Open and Save Keyhole Markup Language files"
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "Keyhole Markup Language файлдарын ашу мен сақтау"
+
+#, fuzzy
+#~| msgid "*.gml|Graph Markup Language Files"
+#~ msgid "*.gml|Graph Markup Language Format"
+#~ msgstr "*.gml|Graph Markup Language файлдары"
+
+#, fuzzy
+#~| msgid "Open and Save Keyhole Markup Language files"
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "Keyhole Markup Language файлдарын ашу мен сақтау"
+
+#, fuzzy
+#~| msgid "*.kml|Keyhole Markup Language Files"
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "*.kml|Keyhole Markup Language файлдары"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "%1 файлы ашылмады: %2"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "Read and write Trivial Graph Format (TGF) files."
+#~ msgstr "Бұл құжатта жарамды граф жоқ."
+
+#, fuzzy
+#~| msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgid "Could not open file \"%1\" in write mode: %2"
+#~ msgstr "%1 файлы жазу үшін ашылмады. Қатесі: %2"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "No data structure specified for output in this document."
+#~ msgstr "Бұл құжатта жарамды граф жоқ."
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Rocs graph documents\n"
+#~| "*|All files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr ""
+#~ "*.graph|*.Rocs граф құжаты\n"
+#~ "*|Бүкіл файлдар"
+
+#, fuzzy
+#~| msgid "Open and Save Graphviz files"
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "Graphviz файлдарын ашу мен сақтау"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Rocs graph documents\n"
+#~| "*|All files"
+#~ msgid "*.graph|Rocs Graph File Format"
+#~ msgstr ""
+#~ "*.graph|*.Rocs граф құжаты\n"
+#~ "*|Бүкіл файлдар"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "Граф құрылымы"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "y"
+
+#~ msgid "Size"
+#~ msgstr "Өлшемі"
+
+#, fuzzy
+#~| msgid "Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Graph"
+#~ msgstr "Граф"
+
+#, fuzzy
+#~| msgid "Multigraph"
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "Мультиграф"
+
+#~ msgid ""
+#~ "This action will probably remove some edges. Do you want to continue?"
+#~ msgstr "Бұл амал кейбір қырларды өшіру ықтимал. Жалғастыра бересіз бе?"
+
+#, fuzzy
+#~| msgid "Linked List Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Linked List Structure"
+#~ msgstr "Байланысты тізім құрылымы"
+
+#~ msgid "Front value"
+#~ msgstr "Алғашқы мәні"
+
+#, fuzzy
+#~| msgid "Data '%1' had more than one(1) out pointers;"
+#~ msgid "Data '%1' has more than one out pointer."
+#~ msgstr "'%1' дерегінде бірден(1) артық сырт көрсеткіші болған;"
+
+#~ msgid "Cannot convert document '%1'"
+#~ msgstr "'%1' құжат аударылмады"
+
+#, fuzzy
+#~| msgid "RootedTree Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "RootedTree Structure"
+#~ msgstr "Түбірлі бұтақ құрылымы"
+
+#, fuzzy
+#~| msgid "Show all pointers"
+#~ msgctxt "@option:check"
+#~ msgid "Show all pointers"
+#~ msgstr "Бүкіл көрсеткіштерін көрсету"
+
+#~ msgid "There are cycles at node %1. Data will be lost by conversion."
+#~ msgstr "%1 төбесінде циклдері бар. Аударғанда деректер жоғалмақ."
+
+#~ msgid "Cannot open file %1."
+#~ msgstr "%1 файлы ашылмады."
+
+#~ msgid "Invalid include directive: %1. Cannot find file in directive."
+#~ msgstr "Жарамсыз кіргізу бұйрығы: %1. Бұйрықта файл атауы табылмады."
+
+#~ msgid "New File"
+#~ msgstr "Жаңа файл"
+
+#~ msgid "Untitled%1"
+#~ msgstr "Аталмаған%1"
+
+#~ msgid "Visible"
+#~ msgstr "Көрінетіні"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgid "Data structure name"
+#~ msgstr "Деректер құрылымы"
+
+#~ msgid "Delete this data structure"
+#~ msgstr "Осы деректер құрылымын өшіру"
+
+#~ msgid ""
+#~ "Delete the current data structure: delete all data elements and all "
+#~ "pointers"
+#~ msgstr ""
+#~ "Назардағы деректер құрылымын өшіру: бүкіл дерек элементері мен "
+#~ "көрсеткіштерін кетіру"
+
+#~ msgid "rocsdeletegrey"
+#~ msgstr "rocsdeletegrey"
+
+#, fuzzy
+#~| msgid "Display Options"
+#~ msgid "Display Options:"
+#~ msgstr "Көрсету параметрлері"
+
+#, fuzzy
+#~| msgid "Data Structure"
+#~ msgctxt "@action:button"
+#~ msgid "Add Data Structure"
+#~ msgstr "Деректер құрылымы"
+
+#, fuzzy
+#~| msgid "Export Project"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "Жобаны экспорттау"
+
+#, fuzzy
+#~| msgid "Import Project"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "Жобаны импорттау"
+
+#, fuzzy
+#~| msgid "Set Name"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "Атауын беру"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "Графты сақтау"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "Скриптті сақтау"
+
+#, fuzzy
+#~| msgid "Set Project Name"
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "Жобаны атау"
+
+#, fuzzy
+#~| msgid "Name:"
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "Атауы:"
+
+#~ msgid ""
+#~ "*.js|Rocs script documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.js|*.Rocs скрипт құжаты\n"
+#~ "*|Бүкіл файлдар"
+
+#, fuzzy
+#~| msgid "Save Script Document"
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "Скрипт құжатын сақтау"
+
+#, fuzzy
+#~| msgid "*.tar.gz|Export as tar.gz Archive"
+#~ msgid "*.tar.gz|Import from tar.gz Archive"
+#~ msgstr "*.tar.gz|tar.gz архиві қылып экспорттау"
+
+#, fuzzy
+#~| msgid "Project Archive to Import"
+#~ msgctxt "@title:window"
+#~ msgid "Project Archive to Import"
+#~ msgstr "Импорттайтын жоба архиві"
+
+#, fuzzy
+#~| msgid "Select Project Directory for Import"
+#~ msgctxt "@title:window"
+#~ msgid "Select Project Directory for Import"
+#~ msgstr "Импорттау үшін жоба қапшығын таңдау"
+
+#~ msgid "*.tar.gz|Export as tar.gz Archive"
+#~ msgstr "*.tar.gz|tar.gz архиві қылып экспорттау"
+
+#, fuzzy
+#~| msgid "Export Project"
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "Жобаны экспорттау"
+
+#~ msgid "Edge Properties"
+#~ msgstr "Қырының қасиеттері"
+
+#~ msgid "Edge name"
+#~ msgstr "Қырының атауы"
+
+#~ msgid "Edge color"
+#~ msgstr "Қырының түсі"
+
+#~ msgid "Value:"
+#~ msgstr "Мәні:"
+
+#~ msgid "Edge value"
+#~ msgstr "Қырының мәні"
+
+#~ msgid "Edge width"
+#~ msgstr "Қырының ені"
+
+#~ msgid "Show"
+#~ msgstr "Қөрсету"
+
+#~ msgid "Show/hide edge name"
+#~ msgstr "Қырының атауын көрсету/жасыру"
+
+#~ msgid "Show/add edge value"
+#~ msgstr "Қырының мәнін көрсету/жасыру"
+
+#~ msgid "Add Property"
+#~ msgstr "Қасиетін қосу"
+
+#~ msgid "Global"
+#~ msgstr "Жалпы"
+
+#~ msgid "add"
+#~ msgstr "қосу"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid "v=%1"
+#~ msgstr "v=%1"
+
+#, fuzzy
+#~| msgid "untitled %1"
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "аталмаған %1"
+
+#~ msgid "Main Definitions"
+#~ msgstr "Негізгі анықтаулары"
+
+#~ msgid "Set the name visible"
+#~ msgstr "Атауын көрінетін қылу"
+
+#~ msgid "Set the value visible"
+#~ msgstr "Мәнін көрінетін қылу"
+
+#~ msgid "Appearance"
+#~ msgstr "Сырт көрінісі"
+
+#~ msgid "Enable Color"
+#~ msgstr "Түсі болмасын"
+
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "Деректер құрылымдарына тән қасиеттері"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Add new dynamic property to data element.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Дерек элементіне жаңа динамикалық қасиетін қосу.</"
+#~ "p></body></html>"
+
+#, fuzzy
+#~| msgid "Show names of data elements"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of data elements"
+#~ msgstr "Дерек элементтерінің атауларын көрсету"
+
+#, fuzzy
+#~| msgid "Show values of data elements"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of data elements"
+#~ msgstr "Дерек элементтерінің мәндерін көрсету"
+
+#, fuzzy
+#~| msgid "Show names of pointers"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of pointers"
+#~ msgstr "Көрсеткіштерінің атауларын көрсету"
+
+#, fuzzy
+#~| msgid "Show values of pointers"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of pointers"
+#~ msgstr "Көрсеткіштерінің мәндерін көрсету"
+
+#~ msgid "Identifier:"
+#~ msgstr "Идентификаторы:"
+
+#~ msgid "This is the unique identifier for the data type."
+#~ msgstr "Бұл осы деректер түрінің бірегей идентификаторы."
+
+#~ msgid "Icon:"
+#~ msgstr "Таңбашасы:"
+
+#~ msgid "Delete"
+#~ msgstr "Өшіру"
+
+#~ msgid "This is the unique identifier for the pointer type."
+#~ msgstr "Бұл осы көрсеткіш түрінің бірегей идентификаторы."
+
+#~ msgid "dot"
+#~ msgstr "нүктелі"
+
+#, fuzzy
+#~| msgid "Undirected Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "Бағытталмаған граф"
+
+#, fuzzy
+#~| msgid "Directed Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "Бағытты граф"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "undirected graph for which several edges between same nodes may exist"
+#~| msgid "Undirected Multigraph"
+#~ msgctxt ""
+#~ "@label:inlistbox Undirected graph for which several edges between same "
+#~ "nodes may exist"
+#~ msgid "Undirected Multigraph"
+#~ msgstr "Бағытталмаған мультиграф"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "directed graph for which several same orientated edges between same "
+#~| "nodes may exist"
+#~| msgid "Directed Multigraph"
+#~ msgctxt ""
+#~ "@label:inlistbox Directed graph for which several same orientated edges "
+#~ "between same nodes may exist"
+#~ msgid "Directed Multigraph"
+#~ msgstr "Бағытты мультиграф"
+
+#, fuzzy
+#~| msgid "Open and Save GML files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save GML files"
+#~ msgstr "GML файлдарын ашу мен сақтау"
+
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Граф файлдары\n"
+#~ "*|Бүкіл файлдар"
+
+#, fuzzy
+#~| msgid "Add Existing Graph File to Project"
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Graph File to Project"
+#~ msgstr "Жобаға бар граф файлын қосу"
+
+#, fuzzy
+#~| msgid "Import Rocs Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "Rocs графын импорттау"
+
+#, fuzzy
+#~| msgid "Save Graph as"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "Графты былай сақтау"
+
+#~ msgid "Cannot open the file: %1. Error %2"
+#~ msgstr "Файл ашылмады: %1 Қатесі: %2"
+
+#~ msgid "Could not parse Graphviz file due to syntax errors."
+#~ msgstr "Синтаксис қате себебінен Graphviz файлы талдауға келмеді."
+
+#~ msgid "Graphviz parser returned unsuccessfully for file."
+#~ msgstr "Graphviz файл талдағышы сәтсіздік туралы хабарлады."
+
+#, fuzzy
+#~| msgid "Open and Save Plain TXT files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save Plain TXT files"
+#~ msgstr "Кәдімгі TXT файлдарын ашу мен сақтау"
+
+#~ msgid "*.txt|Plain TXT Files"
+#~ msgstr "*.txt|Қәдімгі TXT файлдары"
+
+#, fuzzy
+#~| msgid "Add"
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "Қосу"
+
+#~ msgid "Identifier for new Data Structure"
+#~ msgstr "Жаңа Деректер құрылымының индентификаторы"
+
+#~ msgid "Add Node"
+#~ msgstr "Төбені қосу"
+
+#~| msgid "Name:"
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "Атауы:"
+
+#~| msgid "Center"
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "Ортаға"
+
+#~| msgid "Top"
+#~ msgctxt "align elements at top"
+#~ msgid "Top"
+#~ msgstr "Жоғарға"
+
+#~| msgid "Left"
+#~ msgctxt "align elements left"
+#~ msgid "Left"
+#~ msgstr "Солға"
+
+#~| msgid "Right"
+#~ msgctxt "align elements right"
+#~ msgid "Right"
+#~ msgstr "Оңға"
+
+#~| msgid "Circle"
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Шеңбер"
+
+#~| msgid "Minimize Crossing Edges"
+#~ msgctxt "align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Қиылысқан қырларын мейілінше азайту"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type Icon:"
+#~ msgstr "Түрі"
+
+#, fuzzy
+#~| msgid "Export graphs to file"
+#~ msgid "Export as new Type"
+#~ msgstr "Графты файлға экспорттау"
+
+#~ msgid "Open Script"
+#~ msgstr "Скриптті ашу"
+
+#~ msgid "Edit"
+#~ msgstr "Өзгерту"
+
+#, fuzzy
+#~| msgid "Pointers"
+#~ msgid "Pointer"
+#~ msgstr "Көрсеткіштер"
+
+#~ msgid "Delete the active graph"
+#~ msgstr "Назардағы графты өшіру"
+
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Apply to all nodes"
+#~ msgstr "Бүкіл төбелерге қолданылсын"
+
+#~ msgid "Close"
+#~ msgstr "Жабу"
+
+#~ msgid "Image"
+#~ msgstr "Кескін"
+
+#~ msgid "Untitled0"
+#~ msgstr "Аталмаған0"
+
+#~ msgid "Open Graph"
+#~ msgstr "Графты ашу"
+
+#~ msgid "Save All"
+#~ msgstr "Бүкілін сақтау"
+
+#~ msgid "New"
+#~ msgstr "Жаңа"
+
+#~ msgid "Color for new nodes"
+#~ msgstr "Жаңа төбелерінің түсі"
+
+#~ msgid "Pointer Color:"
+#~ msgstr "Көрсеткіштің түсі:"
+
+#~ msgid "Color for new edges"
+#~ msgstr "Жаңа қырларының түсі"
+
+#~ msgid "Apply the current color to all nodes"
+#~ msgstr "Түсті бүкіл төбелерге қолдану"
+
+#~ msgid "Apply the current color to all nodes on the drawing area"
+#~ msgstr "Түсті бүкіл сурет өрісіндегі төбелерге қолдану"
+
+#~ msgid "All"
+#~ msgstr "Бүкіліне"
+
+#~ msgid "Apply the current color to all edges"
+#~ msgstr "Түсті бүкіл қырларына қолдану"
+
+#~ msgid "Apply the current color to all edges on the drawing area"
+#~ msgstr "Түсті бүкіл сурет өрісіндегі қырларға қолдану"

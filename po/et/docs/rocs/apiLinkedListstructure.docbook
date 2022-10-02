@@ -1,0 +1,209 @@
+<sect1>
+<title
+>Lingitud loendi taustaprogrammi skriptimise API</title>
+<sect2>
+<title
+>Lingitud loendi andmestruktuur</title>
+<para
+>Loendi objektid sisaldavad teavet andmestruktuurist tüübiga <quote
+>Linked List"</quote
+> (lingitud loend). </para>
+
+<sect3>
+<title
+>Omadused</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>name</emphasis
+> : </para>
+        <para
+>Andmestruktuuri unikaalne nimi.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Meetodid</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>head()</term>
+    <listitem>
+        <para
+>Loendi peatipu tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>head</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>setHead(tipp)</term>
+    <listitem>
+        <para
+>Loendi pea määramine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>setHead</function
+></funcdef
+> <paramdef
+>ListNode <parameter
+><replaceable
+>tipp</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode(tüüp)</term>
+    <listitem>
+        <para
+>Uue määratud tüübiga tipu loomine ja loodud tipu tagastamine. Kui tüüp ei ole registreeritud, tippu ei looda.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>createNode</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tüüp</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode()</term>
+    <listitem>
+        <para
+>Uue vaikimisi tüübiga tipu loomine ja loodud tipu tagastamine.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>createNode</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+
+<sect2>
+<title
+>Loendi tipp</title>
+<para
+>Tipp on lingitud loendi andmeelement. </para>
+
+<sect3>
+<title
+>Omadused</title>
+<itemizedlist>
+
+    <listitem>
+        <para
+><emphasis
+>width</emphasis
+> : </para>
+        <para
+>Andmeelemendi suurus.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>x</emphasis
+> : </para>
+        <para
+>Andmeelemendi X-koordinaat.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>y</emphasis
+> : </para>
+        <para
+>Andmeelemendi Y-koordinaat.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>id</emphasis
+> : </para>
+        <para
+>Andmeelemendi unikaalne identifikaator.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+> : </para>
+        <para
+>Andmeelemendi värv kuueteistkümnendkoodis väärtusena.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Meetodid</title>
+<variablelist>
+    <varlistentry>
+    <term
+>pointTo(siht)</term>
+    <listitem>
+        <para
+>Selle loendi tipu viida osutamine sihttipule.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>pointTo</function
+></funcdef
+> <paramdef
+>ListNode <parameter
+><replaceable
+>siht</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+</sect1>

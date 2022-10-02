@@ -1,0 +1,71 @@
+<sect1 id="scripting-backend-rootedtree">
+<title
+>API di scripting per il motore ad albero con radice</title>
+<sect2>
+<title
+>Struttura di dati ad albero con radice</title>
+<para
+>La finestra delle proprietà delle strutture di dati permette di accedere alla configurazione delle impostazione del motore di grafi. Lì, spuntando la proprietà <guilabel
+>Mostra tutti i puntatori</guilabel
+>, verranno mostrati tutti i puntatori relativi ai nodi dell'albero. Togliendo la spunta, tutti i puntatori relativi allo stesso nodo saranno contratti in uno. </para>
+</sect2>
+
+<sect2>
+<title
+>Struttura ad albero con radice</title>
+<para
+>Data una struttura di dati del tipo <quote
+>albero con radice</quote
+>, si possono scrivere o leggere le seguenti proprietà: </para>
+<programlisting
+>ShowAllPointers     // vero per mostrare tutti gli archi, falso per comprimerli
+</programlisting>
+<para
+>Data una struttura dati del tipo <quote
+>albero con radice</quote
+>, si possono richiamare le seguenti funzioni membro: </para>
+<programlisting
+>node add_data(string nome);         // aggiunge un nodo all'albero indicato dal nome
+    void set_root_node(node radice);      // imposta la radice come nodo radice dell'albero
+    node root_node();                   // restituisce il nodo radice dell'albero
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Nodi negli alberi con radice</title>
+<para
+>Dato un nodo del tipo <quote
+>albero con radice</quote
+>, si possono leggere o scrivere le seguenti proprietà: </para>
+<programlisting
+>int numberOfChilds                  // imposta il numero (ammissibile) di figli per questo nodo
+    node left_child                     // sola lettura: nodo figlio sinistro
+    node right_child                    // sola lettura: nodo figlio destro
+    node node_parent                    // sola lettura: nodo genitore
+</programlisting>
+<para
+>Data un nodo del tipo <quote
+>albero con radice</quote
+>, si possono richiamare le seguenti funzioni membro: </para>
+<programlisting
+>node add_left_child(node figlio);    // aggiungi un figlio sinistro
+    node add_right_child(node figlio);   // aggiungi un figlio destro
+    node add_child(node figlio, int n);  // aggiungi un figlio come ennesimo figlio del nodo
+    node add_node_parent(node figlio);   // aggiungi un genitore (funziona solo se non esiste già un altro genitore)
+    node left_child();                  // restituisce il figlio destro
+    node right_child();                 // restituisce il figlio sinistro
+    node child_at(int n);               // restituisce il figlio ennesimo del nodo
+    node node_parent();                 // restituisce il genitore del nodo
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Archi negli alberi con radice</title>
+<para
+>Dati gli archi di una struttura di dati del tipo <quote
+>albero con radice</quote
+>, sono disponibili solo le proprietà della struttura di dati di base. </para>
+</sect2>
+</sect1>

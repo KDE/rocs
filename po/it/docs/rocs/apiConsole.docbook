@@ -1,0 +1,78 @@
+<sect1 id="include-scripting-interface">
+<title
+>Interfacce di scripting</title>
+<sect2>
+<title
+>L'oggetto Console</title>
+<para
+>L'oggetto Console permette di scrivere messaggi di varia importanza su un registro. </para>
+<para
+>Console non è un costruttore. Tutte le proprietà e i metodi di Console si possono richiamare usando Console come un oggetto, senza crearlo. </para>
+</sect2>
+<sect2>
+<title
+>Sintassi</title>
+<programlisting
+>Console.log("Questo è un messaggio del programma."); // stampa un messaggio del programma
+Console.debug("Messaggio di debug."); // stampa un messaggio di debug
+</programlisting>
+</sect2>
+<sect2>
+<title
+>Metodi dell'oggetto Console</title>
+<sect3>
+<title
+>log()</title>
+<para
+>Stampa il messaggio di severità normale dato. </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>log</function
+></funcdef
+> <paramdef
+>string <parameter
+>messaggio</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+<sect3>
+<title
+>debug()</title>
+<para
+>Stampa il messaggio di debug dato. </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>debug</function
+></funcdef
+> <paramdef
+>string <parameter
+>messaggio</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+<sect3>
+<title
+>error()</title>
+<para
+>Stampa il messaggio d'errore di severità alta dato. </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>error</function
+></funcdef
+> <paramdef
+>string <parameter
+>messaggio</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+</sect2>
+</sect1>

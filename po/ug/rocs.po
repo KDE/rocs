@@ -1,0 +1,1229 @@
+# Uyghur translation for rocs.
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Sahran <sahran.ug@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rocs\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2013-09-08 07:05+0900\n"
+"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
+"Language: ug\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ئابدۇقادىر ئابلىز, غەيرەت كەنجى"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "sahran.ug@gmail.com,  gheyret@gmail.com"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, kde-format
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr ""
+
+#: main.cpp:32
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr ""
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr ""
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr ""
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr ""
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr ""
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr ""
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "ئىجادىيەتچى"
+
+#: main.cpp:57
+#, fuzzy, kde-format
+#| msgid "Project"
+msgid "Project to open."
+msgstr "قۇرۇلۇش"
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "گرامماتىكا"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "خاسلىق"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "پارامېتىرلار"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "پارامېتىر"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "فۇنكسىيىلەر(Methods)"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "تىپى"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "چۈشەندۈرۈش"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox"
+#| msgid "Graph Document:"
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "يېڭى گراڧ"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "نەڭلەر"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, fuzzy, kde-format
+#| msgid "Script File"
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "قوليازما ھۆججىتى"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "خاسلىق"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "فۇنكسىيىلەر(Methods)"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr ""
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "سىنبەلگە يېنىدا تېكىست كۆرسەت"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr ""
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "قۇرۇلۇش"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr ""
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr ""
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr ""
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr ""
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "جايلاشتۇرۇش"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "قوراللار"
+
+#: ui/codeeditorwidget.cpp:81
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox"
+#| msgid "Graph Document:"
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "يېڭى گراڧ"
+
+#: ui/codeeditorwidget.cpp:82
+#, kde-format
+msgid "Enter the name of your code document"
+msgstr ""
+
+#: ui/documenttypeswidget.cpp:29
+#, fuzzy, kde-format
+#| msgctxt "@title:tab"
+#| msgid "Pointer Types"
+msgctxt "@title"
+msgid "Node Types"
+msgstr "خاسلىق"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Data Type"
+msgid "Create Type"
+msgstr "خاسلىق"
+
+#: ui/documenttypeswidget.cpp:45
+#, fuzzy, kde-format
+#| msgid "Edit Pointer Types"
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "خاسلىق"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr ""
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "ئېكسپورت قىل"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "ھۆججەت مەۋجۇت"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|بارلىق ھۆججەتلەر"
+
+#: ui/fileformatdialog.cpp:116
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Project"
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "قوليازما ئاچ"
+
+#: ui/grapheditorwidget.cpp:79
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox"
+#| msgid "Graph Document:"
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "يېڭى گراڧ"
+
+#: ui/grapheditorwidget.cpp:80
+#, kde-format
+msgid "Enter the name of your graph document"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr ""
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "ئىجرا"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr ""
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "توختا"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr ""
+
+#: ui/mainwindow.cpp:175
+#, fuzzy, kde-format
+#| msgctxt "@title:menu Debug execution"
+#| msgid "Debug"
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "سازلا"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr ""
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr ""
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "ژۇرنال"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr ""
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr ""
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr ""
+
+#: ui/mainwindow.cpp:269
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Open Project"
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "قۇرۇلۇش ئاچ"
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "يېقىنقى قۇرۇلۇشلار"
+
+#: ui/mainwindow.cpp:282
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Set Project Name"
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "قوليازما ساقلاش"
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr ""
+
+#: ui/mainwindow.cpp:284
+#, fuzzy, kde-format
+#| msgid "New File"
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "يېڭى ھۆججەت"
+
+#: ui/mainwindow.cpp:285
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Rocs Graph"
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "قوليازما ئاچ"
+
+#: ui/mainwindow.cpp:286
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr ""
+
+#: ui/mainwindow.cpp:287
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Script"
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "قوليازما ئىمپورت قىلىش"
+
+#: ui/mainwindow.cpp:288
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Script"
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "قوليازما ئىمپورت قىلىش"
+
+#: ui/mainwindow.cpp:327
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Project"
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "قوليازما ئاچ"
+
+#: ui/mainwindow.cpp:340
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Script"
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "قوليازما ئىمپورت قىلىش"
+
+#: ui/mainwindow.cpp:340
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Save Script as"
+msgid "JavaScript (*.js)"
+msgstr "قوليازما ساقلاش"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "ماۋزۇسىز"
+
+#: ui/mainwindow.cpp:374
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Set Project Name"
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "قوليازما ساقلاش"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+
+#: ui/mainwindow.cpp:385
+#, fuzzy, kde-format
+#| msgid "Overwrite"
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "قاپلا"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr ""
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:433
+#, fuzzy, kde-format
+#| msgctxt "Property keyword only caracters from a to z (no spaces)"
+#| msgid "untitled%1"
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "ماۋزۇسىز"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr ""
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr ""
+
+#: ui/mainwindow.cpp:471
+#, fuzzy, kde-format
+#| msgid "File Exists"
+msgid "File already exists."
+msgstr "ھۆججەت مەۋجۇت"
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr ""
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, kde-format
+msgid "Script output:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr ""
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr ""
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr ""
+
+#~ msgid "Overwrite"
+#~ msgstr "قاپلا"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "ئاساسىي قورال بالداق"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "قوللانما"
+
+#~ msgid "Convert To"
+#~ msgstr "ئايلاندۇر"
+
+#~ msgid "Settings"
+#~ msgstr "تەڭشەكلەر"
+
+#~ msgid "Help"
+#~ msgstr "ياردەم"
+
+#~ msgid "centered"
+#~ msgstr "ئوتتۇرىدا"
+
+#~ msgid "below"
+#~ msgstr "ئاستى"
+
+#~ msgid "above"
+#~ msgstr "ئۈستى"
+
+#~ msgid "Connection Properties"
+#~ msgstr "ئۇلىنىش خاسلىقى"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "خاسلىق"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "ئوقۇلغان قىستۇرمىلار"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "ئوقۇلغان قىستۇرمىلار"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "كۆڭۈلدىكى تەڭشەكلەر"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "بۇ ھۆججەت ئىناۋەتلىك گراڧ ھۆججىتى ئەمەسكەن."
+
+#~ msgid "Untitled"
+#~ msgstr "ماۋزۇسىز"
+
+#~| msgid "Main Toolbar"
+#~ msgid "Layout Toolbar"
+#~ msgstr "ئاساسىي قورال بالداق"
+
+#~| msgid "Data"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "سانلىق-مەلۇمات"
+
+#~| msgid "Data"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Data"
+#~ msgstr "سانلىق-مەلۇمات"
+
+#~| msgid "Connection Type"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Connection"
+#~ msgstr "باغلىنىش تىپى"
+
+#~| msgid "Connection Type"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Connection"
+#~ msgstr "باغلىنىش تىپى"
+
+#~| msgctxt "Alignment"
+#~| msgid "Base"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Base"
+#~ msgstr "ئاساسى"
+
+#~| msgctxt "Alignment"
+#~| msgid "Center"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "مەركەز"
+
+#~| msgctxt "Alignment"
+#~| msgid "Top"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Top"
+#~ msgstr "ئۈستى"
+
+#~| msgctxt "Alignment"
+#~| msgid "Left"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Left"
+#~ msgstr "سول"
+
+#~| msgctxt "Alignment"
+#~| msgid "Right"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Right"
+#~ msgstr "ئوڭ"
+
+#~| msgctxt "Alignment"
+#~| msgid "Circle"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "چەمبەر"
+
+#~| msgid "Delete"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "ئۆچۈر"
+
+#~| msgid "Add Edge"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "گىرۋەك قوش"
+
+#~| msgid "Delete items by clicking on them."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "ئېلىمېنتلارنى بېسىش ئارقىلىق ئۆچۈرۈش"
+
+#~| msgid "Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "خاسلىق"
+
+#~| msgid "Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "خاسلىق"
+
+#~| msgid "Move"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "يۆتكە"
+
+#~| msgid "Zoom"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Zoom"
+#~ msgstr "كېڭەيت-تارايت"
+
+#~| msgid "Properties"
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "خاسلىق"
+
+#~| msgid "Properties"
+#~ msgid "Static Properties"
+#~ msgstr "خاسلىق"
+
+#~ msgid "Color:"
+#~ msgstr "رەڭ:"
+
+#~| msgid "Type"
+#~ msgid "Type:"
+#~ msgstr "تىپى"
+
+#~| msgid "Properties"
+#~ msgid "Dynamic Properties"
+#~ msgstr "خاسلىق"
+
+#~ msgid "Name:"
+#~ msgstr "ئاتى:"
+
+#~| msgid "Properties"
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "خاسلىق"
+
+#~| msgid "Properties"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Types"
+#~ msgstr "خاسلىق"
+
+#~| msgid "Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "خاسلىق"
+
+#~ msgid "Name"
+#~ msgstr "ئاتى"
+
+#~| msgid "Color:"
+#~ msgid "Default Value"
+#~ msgstr "رەڭ:"
+
+#~| msgid "Property"
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "خاسلىق"
+
+#~| msgid "Color:"
+#~ msgid "Default Color:"
+#~ msgstr "رەڭ:"
+
+#~| msgid "Properties"
+#~ msgid "Data Type Properties"
+#~ msgstr "خاسلىق"
+
+#~| msgid "Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "خاسلىق"
+
+#~ msgid "Property"
+#~ msgstr "خاسلىق"
+
+#~ msgid "Value"
+#~ msgstr "قىممەت"
+
+#~| msgid "Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "خاسلىق"
+
+#~ msgid "Width:"
+#~ msgstr "كەڭلىك:"
+
+#~| msgid "solid"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "پۈتەي"
+
+#~| msgid "dash"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "سىزىقچە"
+
+#~| msgid "Connection Type"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "باغلىنىش تىپى"
+
+#~ msgid "Style:"
+#~ msgstr "ئۇسلۇب:"
+
+#~| msgid "Properties"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "خاسلىق"
+
+#~| msgid "Selected"
+#~ msgctxt "@title:menu"
+#~ msgid "Selected"
+#~ msgstr "تاللانغان"
+
+#~| msgid "Zoom"
+#~ msgctxt "@title:menu"
+#~ msgid "Zoom"
+#~ msgstr "كېڭەيت-تارايت"
+
+#~| msgid "In"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "In"
+#~ msgstr "ئىچى"
+
+#~| msgid "Out"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Out"
+#~ msgstr "سىرتى"
+
+#~| msgid "Reset"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Reset"
+#~ msgstr "ئەسلىگە قايتۇرۇش"
+
+#~ msgid "Align"
+#~ msgstr "توغرىلا"
+
+#~| msgid "Bottom"
+#~ msgctxt "@action:inmenu align elements at bottom"
+#~ msgid "Bottom"
+#~ msgstr "ئاستى"
+
+#~| msgctxt "Alignment"
+#~| msgid "Center"
+#~ msgctxt "@action:inmenu align elements at center"
+#~ msgid "Center"
+#~ msgstr "مەركەز"
+
+#~| msgctxt "Alignment"
+#~| msgid "Top"
+#~ msgctxt "@action:inmenu align elements at top"
+#~ msgid "Top"
+#~ msgstr "ئۈستى"
+
+#~| msgctxt "Alignment"
+#~| msgid "Left"
+#~ msgctxt "@action:inmenu align elements left"
+#~ msgid "Left"
+#~ msgstr "سول"
+
+#~| msgctxt "Alignment"
+#~| msgid "Right"
+#~ msgctxt "@action:inmenu align elements right"
+#~ msgid "Right"
+#~ msgstr "ئوڭ"
+
+#~| msgctxt "Alignment"
+#~| msgid "Circle"
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "چەمبەر"
+
+#~| msgid "Values"
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "قىممىتى"
+
+#~| msgid "Delete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "ئۆچۈر"
+
+#~| msgid "Assign Values"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "تەقسىملەنگەن قىممەتلەر"
+
+#~ msgid "Assign Values"
+#~ msgstr "تەقسىملەنگەن قىممەتلەر"
+
+#~ msgid "Nodes"
+#~ msgstr "تۈگۈنلەر"
+
+#~| msgid "Save Graph"
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "گراڧنى ساقلاش"
+
+#~| msgid "Save Graph"
+#~ msgctxt "@title:window"
+#~ msgid "Generate Graph"
+#~ msgstr "گراڧنى ساقلاش"
+
+#~| msgid "Graph"
+#~ msgid "RandomGraph"
+#~ msgstr "گرافىك"
+
+#~| msgid " Documents "
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr " پۈتۈكلەر "
+
+#~| msgid "Unique"
+#~ msgctxt "dynamic property that is present exactly once"
+#~ msgid "Unique"
+#~ msgstr "بىردىنبىر"
+
+#~| msgid "Multiple"
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "بىر قانچە"
+
+#~| msgid "Global"
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "ئومۇمىيەت"
+
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "يوق"
+
+#~| msgid "Connection Type"
+#~ msgid "Connection"
+#~ msgstr "باغلىنىش تىپى"
+
+#~| msgid "Open Script"
+#~ msgid "Import"
+#~ msgstr "قوليازما ئاچ"
+
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Could not open file \"%1\" in read mode: %2"
+#~ msgstr "ھۆججەت %1 نى ئاچقىلى بولمىدى: %2"
+
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Could not parse file \"%1\"."
+#~ msgstr "ھۆججەت %1 نى ئاچقىلى بولمىدى: %2"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "ھۆججەت %1 نى ئاچقىلى بولمىدى: %2"
+
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Could not open file \"%1\" in write mode: %2"
+#~ msgstr "ھۆججەت %1 نى ئاچقىلى بولمىدى: %2"
+
+#~| msgid "Graph Files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr "گراڧ ھۆججەتلىرى"
+
+#~| msgid "New Graph"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "يېڭى گراڧ"
+
+#~| msgid "x"
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~| msgid "y"
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "y"
+
+#~ msgid "Size"
+#~ msgstr "چوڭلۇقى"
+
+#~| msgid "Graph Files"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Graph"
+#~ msgstr "گراڧ ھۆججەتلىرى"
+
+#~| msgid "Multiple"
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "بىر قانچە"
+
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Cannot open file %1."
+#~ msgstr "ھۆججەت %1 نى ئاچقىلى بولمىدى: %2"
+
+#~| msgid "Open Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "قوليازما ئاچ"
+
+#~| msgid "Name"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "ئاتى"
+
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "گراڧنى ساقلاش"
+
+#~| msgid "Save Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "قوليازما ساقلاش"
+
+#~| msgid "Name:"
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "ئاتى:"
+
+#~| msgid "Save Script"
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "قوليازما ساقلاش"
+
+#~| msgid "Open Script"
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "قوليازما ئاچ"
+
+#~ msgid "Value:"
+#~ msgstr "قىممىتى:"
+
+#~ msgid "Show"
+#~ msgstr "كۆرسەت"
+
+#~ msgid "Add Property"
+#~ msgstr "خاسلىق قوش"
+
+#~ msgid "Global"
+#~ msgstr "ئومۇمىيەت"
+
+#~ msgid "add"
+#~ msgstr "قوش"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~| msgid "Properties"
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "خاسلىق"
+
+#~ msgid "Delete"
+#~ msgstr "ئۆچۈر"
+
+#~ msgid "dot"
+#~ msgstr "چېكىت"
+
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "گراڧنى ساقلاش"
+
+#~| msgid "Add"
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "قوش"
+
+#~ msgid "Add Node"
+#~ msgstr "تۈگۈن قوش"
+
+#~| msgid "Name:"
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "ئاتى:"
+
+#~| msgid "Center"
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "مەركەز"
+
+#~| msgid "Top"
+#~ msgctxt "align elements at top"
+#~ msgid "Top"
+#~ msgstr "ئۈستى"
+
+#~| msgid "Left"
+#~ msgctxt "align elements left"
+#~ msgid "Left"
+#~ msgstr "سول"
+
+#~| msgid "Right"
+#~ msgctxt "align elements right"
+#~ msgid "Right"
+#~ msgstr "ئوڭ"
+
+#~| msgid "Circle"
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "چەمبەر"
+
+#~| msgid "Type"
+#~ msgid "Type Icon:"
+#~ msgstr "تىپى"
+
+#~ msgid "Edit"
+#~ msgstr "تەھرىرلەش"
+
+#~| msgid "Pointers"
+#~ msgid "Pointer"
+#~ msgstr "ئىسترېلكا"
+
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Close"
+#~ msgstr "يېپىش"
+
+#~ msgid "Image"
+#~ msgstr "سۈرەت"
+
+#~ msgid "Untitled0"
+#~ msgstr "نامسىز0"
+
+#~ msgid "Save All"
+#~ msgstr "ھەممىنى ساقلا"
+
+#~ msgid "New"
+#~ msgstr "يېڭى"
+
+#~ msgid "All"
+#~ msgstr "ھەممىسى"
+
+#~ msgid "..."
+#~ msgstr "…"
+
+#~ msgid "debug(\"Cannot open file %1.\")"
+#~ msgstr "debug(\"ھۆججەت %1 نى ئاچقىلى بولمىدى.\")"
+
+#~ msgid "debug(\"Cannot open file %1.\")\n"
+#~ msgstr "debug(\"ھۆججەت %1 نى ئاچقىلى بولمىدى.\")\n"
+
+#~ msgid "(c) 2009"
+#~ msgstr "(c) 2009"
+
+#~ msgid "Dialog"
+#~ msgstr "سۆزلەشكۈ"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Complete"
+#~ msgstr "تولۇق"
+
+#~ msgctxt "Do not translate, X is for delete"
+#~ msgid "x"
+#~ msgstr "x"

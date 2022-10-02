@@ -1,0 +1,652 @@
+<sect1>
+<title
+>API di scripting per il motore dei grafi</title>
+
+<para
+>La finestra delle proprietà delle strutture di dati permette di accedere alle impostazioni di configurazione proprie del motore dei grafi. Lì puoi selezionare il <guilabel
+>Tipo del grafo</guilabel
+>. Il significato di questi tipi è come segue: </para>
+<itemizedlist>
+    <listitem
+><para
+><guilabel
+>Grafo</guilabel
+>: grafo in cui non possono esistere più archi con gli stessi archi punti iniziale e finale. </para
+></listitem>
+    <listitem
+><para
+><guilabel
+>Multigrafo</guilabel
+>: grafo in cui possono esistere più archi con gli stessi archi punti iniziale e finale. </para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Struttura di dati dei grafi</title>
+<para
+>Un oggetto grafo contiene le informazioni di una struttura di dati del tipo <quote
+>Grafo</quote
+>. </para>
+
+<sect3>
+<title
+>Proprietà</title>
+<itemizedlist>
+
+    <listitem>
+        <para
+><emphasis
+>name</emphasis
+>: </para>
+        <para
+>Il nome univoco di questa struttura di dati.</para>
+    </listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3>
+<title
+>Metodi</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>nodes()</term>
+    <listitem>
+        <para
+>Restituisci un elenco di tutti i nodi nel grafo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>nodes</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>nodes(tipo)</term>
+    <listitem>
+        <para
+>Restituisci un elenco di tutti i nodi nel grafo del tipo specificato.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>nodes</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tipo</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges()</term>
+    <listitem>
+        <para
+>Restituisci un elenco di tutti gli archi nel grafo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges(tipo)</term>
+    <listitem>
+        <para
+>Restituisci un elenco di tutti gli archi nel grafo del tipo specificato.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tipo</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode(tipo)</term>
+    <listitem>
+        <para
+>Crea un nuovo nodo del tipo specificato e restituiscilo. Se il tipo non è registrato, non viene creato nessun nodo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphNode <function
+>createNode</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tipo</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode()</term>
+    <listitem>
+        <para
+>Crea un nuovo nodo di tipo predefinito e restituiscilo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphNode <function
+>createNode</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createEdge(da, a, tipo)</term>
+    <listitem>
+        <para
+>Crea un arco dal nodo <quote
+>da</quote
+> al nodo <quote
+>a</quote
+> del tipo specificato e restituiscilo. Se il tipo non è registrato, non viene creato nessun arco.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphEdge <function
+>createEdge</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>da</replaceable
+></parameter
+></paramdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>a</replaceable
+></parameter
+></paramdef
+> <paramdef
+>int <parameter
+><replaceable
+>tipo</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createEdge(da, a)</term>
+    <listitem>
+        <para
+>Crea un arco dal nodo <quote
+>da</quote
+> al nodo <quote
+>a</quote
+> di tipo predefinito e restituiscilo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphEdge <function
+>createEdge</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>da</replaceable
+></parameter
+></paramdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>a</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>distances(da)</term>
+    <listitem>
+        <para
+>Restituisce un elenco delle lunghezza minime di percorso da questo nodo a ogni altro nodo del grafo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>Array <function
+>distances</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>da</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Nodo del grafo</title>
+<para
+>Un nodo è l'elemento di dati di un grafo. </para>
+
+<sect3>
+<title
+>Proprietà</title>
+<itemizedlist>
+
+    <listitem>
+        <para
+><emphasis
+>width</emphasis
+>: </para>
+        <para
+>La dimensione di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>x</emphasis
+>: </para>
+        <para
+>La coordinata X di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>y</emphasis
+>: </para>
+        <para
+>La coordinata Y di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>id</emphasis
+>: </para>
+        <para
+>L'identificativo univoco di questo elemento di dati.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+>: </para>
+        <para
+>Il colore di questo elemento di dati, indicato come valore esadecimale.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+<sect3>
+<title
+>Metodi</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>neighbors()</term>
+    <listitem>
+        <para
+>Restituisci un elenco di tutti i nodi collegati a questo. Questo metodo rispetta l'eventuale direzionalità degli archi.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>neighbors</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges()</term>
+    <listitem>
+        <para
+>Restituisci un elenco di tutti gli archi (entranti e uscenti) di questo nodo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges(tipo)</term>
+    <listitem>
+        <para
+>Restituisci un elenco di tutti gli archi (entranti e uscenti) di questo nodo del tipo specificato.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tipo</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>inEdges()</term>
+    <listitem>
+        <para
+>Restituisci un elenco degli archi entranti in questo nodo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>inEdges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>inEdges(tipo)</term>
+    <listitem>
+        <para
+>Restituisci un elenco di tutti gli archi entranti in questo nodo del tipo specificato.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>inEdges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tipo</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>outEdges()</term>
+    <listitem>
+        <para
+>Restituisci un elenco di tutti gli archi uscenti da questo nodo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>outEdges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>outEdges(tipo)</term>
+    <listitem>
+        <para
+>Restituisci un elenco di tutti gli archi uscenti da questo nodo del tipo specificato.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>outEdges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tipo</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edgesTo(destinazione)</term>
+    <listitem>
+        <para
+>Restituisci un elenco di tutti gli archi di questo nodo al nodo specificato.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edgesTo</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>destinazione</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+
+<sect2>
+<title
+>Arco del grafo</title>
+<para
+>Un arco è la connessione di due nodi del grafo. Gli archi possono essere direzionali o meno, a seconda del loro stile. </para>
+
+<sect3>
+<title
+>Proprietà</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>width</emphasis
+>: </para>
+        <para
+>Lo spessore della connessione.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>directed</emphasis
+>: </para>
+        <para
+>Se vero, la connessione è direzionale, altrimenti non lo è.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>from</emphasis
+>: </para>
+        <para
+>Inizio della connessione.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>to</emphasis
+>: </para>
+        <para
+>Fine della connessione.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+>: </para>
+        <para
+>Identificativo del tipo di connessione.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Metodi</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>remove()</term>
+    <listitem>
+        <para
+>Rimuovi questa connessione.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>add_property(nome, valore)</term>
+    <listitem>
+        <para
+>Aggiungi una nuova proprietà alla connessione.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>add_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>nome</replaceable
+></parameter
+></paramdef
+> <paramdef
+>string <parameter
+><replaceable
+>valore</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>remove_property(nome)</term>
+    <listitem>
+        <para
+>Rimuovi una proprietà presente dalla connessione.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>nome</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+</variablelist>
+</sect3>
+</sect2>
+
+</sect1>

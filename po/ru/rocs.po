@@ -1,0 +1,1942 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Alexander Potashev <aspotashev@gmail.com>, 2010, 2011, 2015, 2016.
+# Yury G. Kudryashov <urkud.urkud@gmail.com>, 2011.
+# Edwin Veber <edwin0307@gmail.com>, 2011.
+# Julia Dronova <juliette.tux@gmail.com>, 2013.
+# Мария Шикунова <translation-team@basealt.ru>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2021-11-23 11:07+0300\n"
+"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"Language-Team: Basealt Translation Team\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 21.08.2\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Александр Поташев,Эдвин Вебер,Мария Шикунова,Олеся Герасименко"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"aspotashev@gmail.com,edwin0307@gmail.com,translation-team@basealt.ru,"
+"translation-team@basealt.ru"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, kde-format
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "Визуализатор графов"
+
+#: main.cpp:32
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr "© Разработчики Rocs, 2008-2016"
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr "Сопровождающий"
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr "Первоначальный автор"
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "Разработчик"
+
+#: main.cpp:57
+#, kde-format
+msgid "Project to open."
+msgstr "Открываемый проект"
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "Синтаксис"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "Свойства"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "Параметры"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "Параметр"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "Методы"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "Тип"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr "Тип возвращаемого значения"
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr "Подробное описание"
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "Описание"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "API обработчика сценариев"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, kde-format
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "Граф"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "Объекты"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "Модули обработчика сценариев"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr "Объекты сценария"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "Свойства"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "Методы"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "API сценариев Rocs"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+"Не удалось импортировать проект Rocs, потому что невозможно обработать файл "
+"проекта."
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Показывать текст сбоку от значков"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Путь для поиска вложений."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Проект"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Сценарий"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Граф"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Файл графа"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Изменить выделенные данные"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Компоновка"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Инструменты"
+
+#: ui/codeeditorwidget.cpp:81
+#, kde-format
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "Имя документа с кодом"
+
+#: ui/codeeditorwidget.cpp:82
+#, kde-format
+msgid "Enter the name of your code document"
+msgstr "Введите имя документа с кодом"
+
+#: ui/documenttypeswidget.cpp:29
+#, kde-format
+msgctxt "@title"
+msgid "Node Types"
+msgstr "Типы вершин"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, kde-format
+msgid "Create Type"
+msgstr "Создать тип"
+
+#: ui/documenttypeswidget.cpp:45
+#, kde-format
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "Типы рёбер"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr "безымянный"
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr "Направленность рёбер этого типа"
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr "Уникальный ID типа ребра"
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "Экспорт"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+"<p>Файл <br /><strong>«%1»</strong><br /> уже существует; если не следует "
+"его перезаписывать, укажите другое имя.</p>"
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "Файл уже существует"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+"<p>Не удалось распознать суффикс файла <strong>«%1»</strong> в доступный "
+"модуль файла. Отмена экспорта.</p>"
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr "<p>Произошла ошибка записи в файл: <strong>«%1»</strong></p>"
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|Все файлы"
+
+#: ui/fileformatdialog.cpp:116
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "Импорт файла графа в проект"
+
+#: ui/grapheditorwidget.cpp:79
+#, kde-format
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "Имя графа"
+
+#: ui/grapheditorwidget.cpp:80
+#, kde-format
+msgid "Enter the name of your graph document"
+msgstr "Введите имя графа"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Журнал проекта"
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "Запустить"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr "Выполнить данный сценарий на текущем графе"
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "Остановить"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr "Остановить выполнение сценария"
+
+#: ui/mainwindow.cpp:175
+#, kde-format
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "Отладчик"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr "Открыть отладчик кода Javascript"
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr "Типы элементов"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "Журнал"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "API сценариев"
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "Создать проект"
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "Сохранить проект"
+
+#: ui/mainwindow.cpp:269
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "Открыть проект…"
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "Недавние проекты"
+
+#: ui/mainwindow.cpp:282
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "Сохранить проект как…"
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "Создать граф"
+
+#: ui/mainwindow.cpp:284
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "Создать файл сценария…"
+
+#: ui/mainwindow.cpp:285
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "Импорт графа…"
+
+#: ui/mainwindow.cpp:286
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "Экспорт графа как…"
+
+#: ui/mainwindow.cpp:287
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "Импорт сценария…"
+
+#: ui/mainwindow.cpp:288
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "Экспорт сценария…"
+
+#: ui/mainwindow.cpp:327
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "Импорт сценария в проект"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "Экспорт сценария"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgid "JavaScript (*.js)"
+msgstr "Сценарии JavaScript (*.js)"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "безымянный"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "Сохранение проекта"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr "Проекты Rocs (*.rocs)"
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr "Файл «%1» уже существует. Заменить его?"
+
+#: ui/mainwindow.cpp:385
+#, kde-format
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "Файл уже существует"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "Открыть файлы проектов"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr "Проекты Rocs (*.rocs)"
+
+#: ui/mainwindow.cpp:433
+#, kde-format
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "[ безымянный ]%1"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr "ScriptName"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr "Введите имя нового сценария"
+
+#: ui/mainwindow.cpp:471
+#, kde-format
+msgid "File already exists."
+msgstr "Файл уже существует."
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr "Внесённые в проект изменения не сохранены. Сохранить изменения?"
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr "Уникальный ID типа вершины."
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, kde-format
+msgid "Script output:"
+msgstr "Вывод сценария:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Очищать программный вывод с каждым запуском"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Показывать вывод отладки"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Очистить вывод"
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "Боковая панель инструментов"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr "Показывать просмотр «%1»"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Сохранить проект как..."
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Overwrite"
+#~ msgstr "Заменить"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Основная панель инструментов"
+
+#~ msgid "Align Toolbar"
+#~ msgstr "Выровнять панель инструментов"
+
+#~ msgid "Rocs Handbook"
+#~ msgstr "Руководство Rocs"
+
+#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+#~ msgstr "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "Руководство"
+
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "Структуры данных"
+
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs — Анализ структуры данных"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr ""
+#~ "Модули для работы со структурами данных не найдены. Программа будет "
+#~ "закрыта."
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Rocs требуется хотя бы один модуль для работы со структурами данных.\n"
+#~ "Попробуйте запустить kbuildsycoca4 в командной строке и запустите Rocs "
+#~ "ещё раз."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr "Место для отображения названия и значения вершины."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Место для отображения названия и значения ребра."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr "Будет ли показана кнопка запуска выполнения с отладкой"
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr "Будет ли показана кнопка запуска пошагового выполнения"
+
+#~ msgid "Script File"
+#~ msgstr "Файл сценария"
+
+#~ msgid "Convert To"
+#~ msgstr "Преобразовать в"
+
+#~ msgid "Settings"
+#~ msgstr "Настройка"
+
+#~ msgid "Help"
+#~ msgstr "Справка"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "Компонент текстового редактора KDE не найден.\n"
+#~ "Возможно, среда KDE установлена неправильно."
+
+#~ msgid "Display of Element Properties"
+#~ msgstr "Показ свойств элемента"
+
+#~ msgid "Data Properties"
+#~ msgstr "Свойства данных"
+
+#~ msgid "centered"
+#~ msgstr "посередине"
+
+#~ msgid "below"
+#~ msgstr "под"
+
+#~ msgid "above"
+#~ msgstr "над"
+
+#~ msgid "Connection Properties"
+#~ msgstr "Свойства соединения"
+
+#~ msgid "Execution Controls"
+#~ msgstr "Управление выполнением"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Показывать отладку выполнения"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Показывать пошаговое выполнение"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Свойства"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Видимость указателей"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Экспортировать графы в файл"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "Загруженные модули"
+
+#~ msgid "Graph File Plugins loaded for %1"
+#~ msgstr "Модули файла графа загружены для %1"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|Файлы сценариев"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Файлы сценариев Rocs"
+
+#~ msgid "Add your description here."
+#~ msgstr "Добавьте описание."
+
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "Один шаг"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Выполнение отладки"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "Прервать после первой строки"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Загрузить примеры"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Отправить проект"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Допустимые вложения"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "Загруженные модули"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Code Editor..."
+#~ msgstr "Настроить редактор кода..."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Менеджер вложений"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Настройки по умолчанию"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Добавить существующий файл скрипта к проекту"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "Файл не является файлом графа."
+
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Недопустимый файл"
+
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs|файлы проектов Rocs\n"
+#~ "*.rocsz|сжатые файлы проектов Rocs\n"
+#~ "*|Все файлы"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Сохранить проект"
+
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*rocs *.rocsz|Все файлы Rocs\n"
+#~ "*.rocs|файлы проектов Rocs\n"
+#~ "*.rocsz|сжатые файлы проектов Rocs\n"
+#~ "*|Все файлы"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|документы графов Rocs\n"
+#~ "*|Все файлы"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Сохранить документ графа"
+
+#~ msgid "Graph name"
+#~ msgstr "Название графа"
+
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Введите название графа"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Допустимые вложения для скриптового движка"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your graph document are unsaved. Do you want to save your "
+#~ "changes?"
+#~ msgstr "Внесённые в граф изменения не сохранены. Сохранить изменения?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files are unsaved. Do you want to save all unsaved "
+#~ "scripts?"
+#~ msgstr ""
+#~ "Внесённые в файлы сценариев изменения не сохранены. Сохранить "
+#~ "несохранённые сценарии?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files and on your graph document are unsaved. Do "
+#~ "you want to save your graph document and all unsaved scripts?"
+#~ msgstr ""
+#~ "Внесённые в граф и файлы сценариев изменения не сохранены. Сохранить файл "
+#~ "графа и все несохранённые сценарии?"
+
+#~ msgid "Default Information Display"
+#~ msgstr "Показ сведений по умолчанию"
+
+#~ msgid "Node Information"
+#~ msgstr "Сведения о вершине"
+
+#~ msgid "Edge Information"
+#~ msgstr "Сведения о ребре"
+
+#, fuzzy
+#~ msgid "Display debug messages."
+#~ msgstr "Сообщения отладки"
+
+#~ msgid "Untitled"
+#~ msgstr "Безымянный"
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "Панель компоновки"
+
+#, fuzzy
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "Данных"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Data"
+#~ msgstr "Данных"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "Показывать присвоенные значения для:"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Base"
+#~ msgstr "Основное"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "По центру"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Top"
+#~ msgstr "Вверх"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Left"
+#~ msgstr "Влево"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Right"
+#~ msgstr "Вправо"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "По кругу"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Минимизировать количество пересекающихся рёбер"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "Удалить"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "Добавить ребро"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new edge between 2 nodes"
+#~ msgstr "Создаёт ребро, соединяющее две вершины."
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position."
+#~ msgstr "Создаёт новую вершину в точке нажатия."
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position on the drawing area."
+#~ msgstr "Создаёт новую вершину в точке нажатия в области рисования."
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "Удаляет объекты путём нажатия на них."
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "Свойства ребра"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Свойства вершины"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "Переместить"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Select and move items."
+#~ msgstr "Выбрать и переместить объекты."
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Zoom"
+#~ msgstr "Масштаб"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom the canvas by the wheel, or by dragging."
+#~ msgstr "Масштабировать холст с помощью прокрутки или перетягивания"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "Свойства"
+
+#, fuzzy
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "Создать граф"
+
+#~ msgid "Data Structure:"
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new data structure."
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "Выберите вывод:"
+
+#, fuzzy
+#~ msgid "Edit Data Types"
+#~ msgstr "Выберите вывод:"
+
+#, fuzzy
+#~ msgid "Static Properties"
+#~ msgstr "Свойства"
+
+#~ msgid "Node color"
+#~ msgstr "Цвет вершины"
+
+#~ msgid "Color:"
+#~ msgstr "Цвет:"
+
+#, fuzzy
+#~ msgid "Type:"
+#~ msgstr "Тип"
+
+#, fuzzy
+#~ msgid "Dynamic Properties"
+#~ msgstr "Свойства"
+
+#~ msgid "Name:"
+#~ msgstr "Название:"
+
+#, fuzzy
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgctxt "@title:tab"
+#~ msgid "Data Structure"
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgctxt "@title:tab"
+#~ msgid "Data Types"
+#~ msgstr "Выберите вывод:"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "Структура данных:"
+
+#~ msgid "Name"
+#~ msgstr "Название"
+
+#, fuzzy
+#~ msgid "Default Value"
+#~ msgstr "Цвет данных:"
+
+#, fuzzy
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "Параметр"
+
+#, fuzzy
+#~ msgid "Select Data Type:"
+#~ msgstr "Выберите вывод:"
+
+#, fuzzy
+#~ msgid "Remove selected data type."
+#~ msgstr "Выберите вывод:"
+
+#, fuzzy
+#~ msgid "Add new data type."
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgid "Default Color:"
+#~ msgstr "Цвет данных:"
+
+#, fuzzy
+#~ msgid "Data Type Properties"
+#~ msgstr "Свойства ребра"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "Свойства вершины"
+
+#~ msgid "Property"
+#~ msgstr "Параметр"
+
+#~ msgid "Value"
+#~ msgstr "Значение"
+
+#, fuzzy
+#~ msgid "Edit Pointer Types"
+#~ msgstr "Свойства вершины"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "Свойства вершины"
+
+#, fuzzy
+#~ msgid "Pointer Properties"
+#~ msgstr "Свойства вершины"
+
+#~ msgid "Width:"
+#~ msgstr "Толщина линии:"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "сплошная"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "штриховая"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash dot line"
+#~ msgstr "штрихпунктирная"
+
+#, fuzzy
+#~ msgid "Select Pointer Type:"
+#~ msgstr "Выберите вывод:"
+
+#, fuzzy
+#~ msgid "Remove selected pointer type."
+#~ msgstr "Выберите вывод:"
+
+#~ msgid "Style:"
+#~ msgstr "Тип линии:"
+
+#, fuzzy
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Свойства вершины"
+
+#, fuzzy
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgctxt "@title:menu"
+#~ msgid "Selected"
+#~ msgstr "Выделенное"
+
+#, fuzzy
+#~ msgctxt "@title:menu"
+#~ msgid "Zoom"
+#~ msgstr "Масштаб"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "In"
+#~ msgstr "Увеличить"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Out"
+#~ msgstr "Уменьшить"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Reset"
+#~ msgstr "Сбросить"
+
+#~ msgid "Align"
+#~ msgstr "Выровнять"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu align elements at bottom"
+#~ msgid "Bottom"
+#~ msgstr "Снизу"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu align elements at center"
+#~ msgid "Center"
+#~ msgstr "По центру"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu align elements at top"
+#~ msgid "Top"
+#~ msgstr "Вверх"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu align elements left"
+#~ msgid "Left"
+#~ msgstr "Влево"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu align elements right"
+#~ msgid "Right"
+#~ msgstr "Вправо"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "По кругу"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "@action:inmenu align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Минимизировать количество пересекающихся рёбер"
+
+#, fuzzy
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "Значения"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Enumerate"
+#~ msgstr "Перечислить"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Integers"
+#~ msgstr "Случайные целые числа"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Reals"
+#~ msgstr "Случайные дробные числа"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "Удалить"
+
+#, fuzzy
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "Присвоение значений"
+
+#~ msgid "Assign Values"
+#~ msgstr "Присвоение значений"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">List of all data "
+#~ "structures that are of type <span style=\" font-style:italic;\">Graph</"
+#~ "span>.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Список всех структур "
+#~ "данных типа <span style=\" font-style:italic;\">Граф</span>.</p></body></"
+#~ "html>"
+
+#~ msgid "Nodes"
+#~ msgstr "Вершин"
+
+#~ msgid "Edges"
+#~ msgstr "Рёбер"
+
+#~ msgid "Start ID"
+#~ msgstr "Начальный идентификатор"
+
+#~ msgid "Lower Limit"
+#~ msgstr "Нижний предел"
+
+#~ msgid "Upper Limit"
+#~ msgstr "Верхний предел"
+
+#~ msgid "Generator Seed"
+#~ msgstr "Семя для генератора"
+
+#~ msgid "Enumerate Items"
+#~ msgstr "Перечислять предметы"
+
+#~ msgid "Assign Random Integers"
+#~ msgstr "Присваивать случайные целые числа"
+
+#~ msgid "Assign Random Reals"
+#~ msgstr "Присваивать случайные дробные числа"
+
+#~ msgid "Overwrite existing values"
+#~ msgstr "Заменять существующие значения"
+
+#, fuzzy
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "Генерировать граф"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Generate Graph"
+#~ msgstr "Генерировать граф"
+
+#~ msgid "Mesh Graph"
+#~ msgstr "Граф-сетка"
+
+#~ msgid "Star Graph"
+#~ msgstr "Граф-звезда"
+
+#~ msgid "Circle Graph"
+#~ msgstr "Граф-окружность"
+
+#~ msgid "RandomGraph"
+#~ msgstr "Случайный граф"
+
+#~ msgid "Generate Graph"
+#~ msgstr "Генерировать граф"
+
+#~ msgid "Graph Type:"
+#~ msgstr "Тип графа:"
+
+#~ msgid "Random Graph"
+#~ msgstr "Случайный граф"
+
+#~ msgid "Erdös-Renyi Graph"
+#~ msgstr "Граф Эрдёша-Реньи"
+
+#~ msgid "Number of Columns:"
+#~ msgstr "Количество столбцов:"
+
+#~ msgid "Number of Rows:"
+#~ msgstr "Количество строк:"
+
+#~ msgid "Satellite Nodes:"
+#~ msgstr "Вершин-спутников:"
+
+#~ msgid "Number of Nodes:"
+#~ msgstr "Количество вершин:"
+
+#~ msgid "Nodes:"
+#~ msgstr "Вершин:"
+
+#~ msgid "Edges:"
+#~ msgstr "Рёбер:"
+
+#~ msgid "Allow self-edges:"
+#~ msgstr "Разрешить самозамкнутые рёбра:"
+
+#~ msgid "Generator Seed:"
+#~ msgstr "Семя для генератора:"
+
+#~ msgid "Nodes (n):"
+#~ msgstr "Вершин (n):"
+
+#~ msgid "Edge Probability (p):"
+#~ msgstr "Вероятность рёбер (p):"
+
+#, fuzzy
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Transform Edges"
+#~ msgstr "Преобразование рёбер"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Transform Edges"
+#~ msgstr "Преобразование рёбер"
+
+#~ msgid "Transform Edges"
+#~ msgstr "Преобразование рёбер"
+
+#~ msgid ""
+#~ "This option connects all nodes of the given graph. The new edges do not "
+#~ "have any preset weights."
+#~ msgstr ""
+#~ "Этот параметр соединяет все вершины выбранного графа. Новые рёбра не "
+#~ "будут иметь предустановленного веса."
+
+#~ msgid "Complete Graph"
+#~ msgstr "Полный граф"
+
+#~ msgid "This option removes all edges from the given graph."
+#~ msgstr "Этот параметр удаляет все рёбра из выбранного графа."
+
+#~ msgid "Remove all Edges"
+#~ msgstr "Удалить все рёбра"
+
+#~ msgid ""
+#~ "This option reverses all edges of a directed graph. Note that this does "
+#~ "not apply to undirected graphs."
+#~ msgstr ""
+#~ "Этот параметр разворачивает все рёбра ориентированного графа. Это не "
+#~ "действует для неориентированных графов."
+
+#~ msgid "Reverse all Edges"
+#~ msgstr "Развернуть все рёбра"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
+#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
+#~ "Algorithm</span> at the graph. All edges without given weights are "
+#~ "assumed to have weights equals 1. Directed and undirected graphs are "
+#~ "processed accordingly.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Этот параметр применяет "
+#~ "<span style=\" font-style:italic;\">алгоритм минимального остовного "
+#~ "дерева Прима</span> к графу. Для всех рёбер без указанного веса будет "
+#~ "подразумеваться, что вес равен 1. Ориентированные и неориентированные "
+#~ "графы будут обрабатываться соответственно.</p></body></html>"
+
+#~ msgid "Spanning Tree Transformation"
+#~ msgstr "Преобразование остовного дерева"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "Создать граф"
+
+#, fuzzy
+#~ msgctxt "dynamic property that is present exactly once"
+#~ msgid "Unique"
+#~ msgstr "Индивидуальный"
+
+#, fuzzy
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "Кратный"
+
+#, fuzzy
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "Глобальный"
+
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "Отсутствует"
+
+#, fuzzy
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "Сообщения программы"
+
+#, fuzzy
+#~ msgid "Read and write Graphviz graph files."
+#~ msgstr "Нет выбранного графа."
+
+#, fuzzy
+#~ msgid "*.dot *.gv|Graphviz Format"
+#~ msgstr "*.dot|Файлы Graphviz"
+
+#, fuzzy
+#~ msgid "Import"
+#~ msgstr "dotImport"
+
+#, fuzzy
+#~ msgid "Could not open file \"%1\" in read mode: %2"
+#~ msgstr "Не удалось открыть файл %1: %2"
+
+#, fuzzy
+#~ msgid "Could not parse file \"%1\"."
+#~ msgstr "Не удалось обработать файл %1."
+
+#~ msgid "No active graph in this document."
+#~ msgstr "Нет выбранного графа."
+
+#~ msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgstr "Не удалось открыть файл %1 для записи. Ошибка: %2"
+
+#, fuzzy
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "Открытие и сохранение в файлы Keyhole Markup Language"
+
+#, fuzzy
+#~ msgid "*.gml|Graph Markup Language Format"
+#~ msgstr "*.gml|Файлы GML (Graph Markup Language)"
+
+#, fuzzy
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "Открытие и сохранение в файлы Keyhole Markup Language"
+
+#, fuzzy
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "*.kml|Файлы KML (Keyhole Markup Language)"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "Не удалось открыть файл %1: %2"
+
+#, fuzzy
+#~ msgid "Read and write Trivial Graph Format (TGF) files."
+#~ msgstr "Нет выбранного графа."
+
+#, fuzzy
+#~ msgid "Could not open file \"%1\" in write mode: %2"
+#~ msgstr "Не удалось открыть файл %1 для записи. Ошибка: %2"
+
+#, fuzzy
+#~ msgid "No data structure specified for output in this document."
+#~ msgstr "Нет выбранного графа."
+
+#, fuzzy
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr ""
+#~ "*.graph|Файлы графов\n"
+#~ "*|Все файлы"
+
+#, fuzzy
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "Открытие и сохранение в файлы Graphviz"
+
+#, fuzzy
+#~ msgid "*.graph|Rocs Graph File Format"
+#~ msgstr ""
+#~ "*.graph|Файлы графов\n"
+#~ "*|Все файлы"
+
+#, fuzzy
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "Структура графа"
+
+#, fuzzy
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "x"
+
+#, fuzzy
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "y"
+
+#~ msgid "Size"
+#~ msgstr "Размер"
+
+#, fuzzy
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Graph"
+#~ msgstr "Граф"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "Мультиграф"
+
+#~ msgid ""
+#~ "This action will probably remove some edges. Do you want to continue?"
+#~ msgstr "Это действие, возможно, удалит некоторые рёбра. Продолжить?"
+
+#, fuzzy
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Linked List Structure"
+#~ msgstr "Структура линейного списка"
+
+#~ msgid "Front value"
+#~ msgstr "Переднее значение"
+
+#, fuzzy
+#~ msgid "Data '%1' has more than one out pointer."
+#~ msgstr "В данных «%1» имелось больше одного(1) исходящего указателя;"
+
+#~ msgid "Cannot convert document '%1'"
+#~ msgstr "Не удалось конвертировать документ %1"
+
+#, fuzzy
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "RootedTree Structure"
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgctxt "@option:check"
+#~ msgid "Show all pointers"
+#~ msgstr "Показывать присвоенные значения для:"
+
+#, fuzzy
+#~ msgid "Cannot open file %1."
+#~ msgstr "Не удалось открыть файл %2."
+
+#~ msgid "Invalid include directive: %1. Cannot find file in directive."
+#~ msgstr ""
+#~ "Недопустимая директива вложения: %1. Не удалось найти файл, указанный в "
+#~ "директиве."
+
+#~ msgid "New File"
+#~ msgstr "Создать файл"
+
+#~ msgid "Untitled%1"
+#~ msgstr "Безымянный%1"
+
+#, fuzzy
+#~ msgid "Data structure name"
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgid "Delete this data structure"
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgid ""
+#~ "Delete the current data structure: delete all data elements and all "
+#~ "pointers"
+#~ msgstr "Удаление выбранного графа вместе со всеми его вершинами и рёбрами."
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "Add Data Structure"
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "Открыть сценарий"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "Открыть сценарий"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "Название"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "Сохранить граф"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "Сохранить сценарий"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "Сохранить сценарий"
+
+#, fuzzy
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "Название:"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "Сохранить сценарий"
+
+#, fuzzy
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "Открыть сценарий"
+
+#~ msgid "Edge Properties"
+#~ msgstr "Свойства ребра"
+
+#~ msgid "Edge name"
+#~ msgstr "Название ребра"
+
+#~ msgid "Edge color"
+#~ msgstr "Цвет ребра"
+
+#~ msgid "Value:"
+#~ msgstr "Значение:"
+
+#~ msgid "Edge value"
+#~ msgstr "Значение, присвоенное ребру"
+
+#~ msgid "Edge width"
+#~ msgstr "Толщина линии ребра"
+
+#~ msgid "Show"
+#~ msgstr "Показывать"
+
+#~ msgid "Show/hide edge name"
+#~ msgstr "Показать/скрыть название ребра"
+
+#~ msgid "Show/add edge value"
+#~ msgstr "Показать/скрыть значение, присвоенное ребру"
+
+#~ msgid "Add Property"
+#~ msgstr "Добавить свойство"
+
+#~ msgid "Global"
+#~ msgstr "Глобальный"
+
+#~ msgid "add"
+#~ msgstr "Добавить"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid "v=%1"
+#~ msgstr "v=%1"
+
+#, fuzzy
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "Безымянный%1"
+
+#, fuzzy
+#~ msgid "Enable Color"
+#~ msgstr "Отключать цвет"
+
+#, fuzzy
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "Структура данных:"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of data elements"
+#~ msgstr "Показывать присвоенные значения для:"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of data elements"
+#~ msgstr "Показывать присвоенные значения для:"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of pointers"
+#~ msgstr "Показывать названия для:"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of pointers"
+#~ msgstr "Показывать присвоенные значения для:"
+
+#~ msgid "Delete"
+#~ msgstr "Удалить"
+
+#~ msgid "dot"
+#~ msgstr "пунктирная"
+
+#, fuzzy
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "Неориентированный граф"
+
+#, fuzzy
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "Ориентированный граф"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "@label:inlistbox Undirected graph for which several edges between same "
+#~ "nodes may exist"
+#~ msgid "Undirected Multigraph"
+#~ msgstr "Неориентированный граф"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "@label:inlistbox Directed graph for which several same orientated edges "
+#~ "between same nodes may exist"
+#~ msgid "Directed Multigraph"
+#~ msgstr "Ориентированный граф"
+
+#, fuzzy
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save GML files"
+#~ msgstr "Открытие и сохранение в файлы GML"
+
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Файлы графов\n"
+#~ "*|Все файлы"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "Импорт графа"
+
+#, fuzzy
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "Сохранить граф как..."
+
+#~ msgid "Cannot open the file: %1. Error %2"
+#~ msgstr "Не удалось открыть файл %1. Ошибка: %2"
+
+#~ msgid "Could not parse Graphviz file due to syntax errors."
+#~ msgstr "Не удалось обработать файл Graphviz из-за синтаксических ошибок."
+
+#~ msgid "Graphviz parser returned unsuccessfully for file."
+#~ msgstr "Обработчик Graphviz неудачно завершил работу с файлом."
+
+#, fuzzy
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save Plain TXT files"
+#~ msgstr "Открытие и сохранение в текстовые файлы"
+
+#~ msgid "*.txt|Plain TXT Files"
+#~ msgstr "*.txt|Текстовые файлы"
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "Добавить"
+
+#~ msgid "Add Node"
+#~ msgstr "Добавить вершину"
+
+#, fuzzy
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "Название:"
+
+#, fuzzy
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "По центру"
+
+#, fuzzy
+#~ msgctxt "align elements at top"
+#~ msgid "Top"
+#~ msgstr "Сверху"
+
+#, fuzzy
+#~ msgctxt "align elements left"
+#~ msgid "Left"
+#~ msgstr "Слева"
+
+#, fuzzy
+#~ msgctxt "align elements right"
+#~ msgid "Right"
+#~ msgstr "Справа"
+
+#, fuzzy
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Вокруг"
+
+#, fuzzy
+#~ msgctxt "align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Минимизировать количество пересекающихся рёбер"
+
+#, fuzzy
+#~ msgid "Type Icon:"
+#~ msgstr "Тип"
+
+#, fuzzy
+#~ msgid "Export as new Type"
+#~ msgstr "Экспорт графов в файл"
+
+#~ msgid "Open Script"
+#~ msgstr "Открыть сценарий"
+
+#~ msgid "Edit"
+#~ msgstr "Правка"
+
+#, fuzzy
+#~ msgid "Pointer"
+#~ msgstr "Указателей"
+
+#~ msgid "Delete the active graph"
+#~ msgstr "Удалить граф"
+
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Apply to all nodes"
+#~ msgstr "Применить ко всем вершинам"
+
+#~ msgid "Close"
+#~ msgstr "Закрыть"
+
+#~ msgid "Image"
+#~ msgstr "Изображение:"
+
+#~ msgid "Untitled0"
+#~ msgstr "Безымянный0"
+
+#~ msgid "Open Graph"
+#~ msgstr "Открыть граф..."
+
+#~ msgid "Save All"
+#~ msgstr "Сохранить все"
+
+#~ msgid "New"
+#~ msgstr "Новый"
+
+#~ msgid "Color for new nodes"
+#~ msgstr "Цвет добавляемых вершин"
+
+#~ msgid "Pointer Color:"
+#~ msgstr "Цвет указателя:"
+
+#~ msgid "Color for new edges"
+#~ msgstr "Цвет добавляемых рёбер"
+
+#~ msgid "Apply the current color to all nodes"
+#~ msgstr "Покрасить все вершины в выбранный цвет"
+
+#~ msgid "Apply the current color to all nodes on the drawing area"
+#~ msgstr "Покрасить все вершины в области рисования в выбранный цвет"
+
+#~ msgid "All"
+#~ msgstr "Все"
+
+#~ msgid "Apply the current color to all edges"
+#~ msgstr "Покрасить все рёбра в выбранный цвет"
+
+#~ msgid "Apply the current color to all edges on the drawing area"
+#~ msgstr "Покрасить все рёбра в области рисования в выбранный цвет"

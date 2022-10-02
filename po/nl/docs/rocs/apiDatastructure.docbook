@@ -1,0 +1,225 @@
+<sect1 id="scripting-data-structure">
+<title
+>Script API voor iedere gegevensstructuur</title>
+<sect2>
+<title
+>Abstract object voor een gegevensstructuur</title>
+<para
+>De abstracte gegevensstructuur beschrijft een verzameling van gegevenselementen en hun mogelijke verbindingen, en is het prototype voor elke andere gegevensstructuur. Gegevensstructuren krijgen ieder een unieke naam. Indien u een gegevensstructuur heeft gemaakt met de naam <literal
+>testgraaf</literal
+>, dan krijgt u toegang tot de hierin aanwezige gegevens met behulp van deze naam. Bijvoorbeeld, als u een lijst wilt maken van alle in de gegeven gegevensstructuur voorkomende gegevenselementen, kunt u in het script <literal
+>testgraaf.list_nodes();</literal
+> schrijven. </para>
+
+<sect3>
+<title
+>Eigenschappen</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>naam</emphasis
+> : </para>
+        <para
+>De unieke naam voor deze gegevensstructuur.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Abstracte gegevens</title>
+<para
+>Een abstract gegevenselement is een eenheid van informatie die onderdeel is van een abstracte gegevensstructuur, en mogelijk met pointers verbonden is met andere gegevenselementen. </para>
+
+<sect3>
+<title
+>Eigenschappen</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>breedte</emphasis
+> : </para>
+        <para
+>De grootte van dit gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>x</emphasis
+> : </para>
+        <para
+>De x-coördinaat van dit gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>y</emphasis
+> : </para>
+        <para
+>De y-coördinaat van dit gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>id</emphasis
+> : </para>
+        <para
+>Dit is de unieke naam van dit gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>kleur</emphasis
+> : </para>
+        <para
+>De kleur van dit gegevenselement, uitgedrukt in een hexadecimaal getal.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+</sect2>
+
+
+<sect2>
+<title
+>Abstracte pointer</title>
+<para
+>Een pointer verbindt twee gegevenselementen met elkaar, en kan zelf informatie bevatten in de vorm van zijn eigenschappen. </para>
+<sect3>
+<title
+>Eigenschappen</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>breedte</emphasis
+> : </para>
+        <para
+>De breedte van de verbinding.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>gericht</emphasis
+> : </para>
+        <para
+>Indien waar, is de verbinding gericht. Anders is de verbinding niet gericht.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>vanaf</emphasis
+> : </para>
+        <para
+>Begin van de verbinding.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>tot</emphasis
+> : </para>
+        <para
+>Einde van de verbinding</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>kleur</emphasis
+> : </para>
+        <para
+>Naam van het type verbinding.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Methoden</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>remove()</term>
+    <listitem>
+        <para
+>Deze verbinding verwijderen.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>add_property(naam, waarde)</term>
+    <listitem>
+        <para
+>Een nieuwe eigenschap aan de verbinding toevoegen.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>add_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>naam</replaceable
+></parameter
+></paramdef
+> <paramdef
+>string <parameter
+><replaceable
+>waarde</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>remove_property(naam)</term>
+    <listitem>
+        <para
+>Een bestaande eigenschap van de verbinding verwijderen.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>naam</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+
+</sect2>
+</sect1>

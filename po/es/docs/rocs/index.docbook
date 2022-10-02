@@ -1,0 +1,834 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Spanish "INCLUDE">
+
+]>
+<book id="rocs" lang="&language;">
+
+<bookinfo>
+<title
+>El manual de &rocs;</title>
+<authorgroup>
+<author
+><personname
+> <firstname
+>Tomaz</firstname
+> <surname
+>Canabrava</surname
+> </personname
+> <email
+>tomaz.canabrava@gmail.com</email
+> </author>
+<author
+><personname
+> <firstname
+>Andreas</firstname
+> <surname
+>Cord-Landwehr</surname
+> </personname
+> <email
+>cordlandwehr@kde.org</email
+> </author>
+
+<othercredit role="translator"
+><firstname
+>Leticia</firstname
+><surname
+>Martín Hernández</surname
+><affiliation
+><address
+><email
+>leticia.martin@gmail.com</email
+></address
+></affiliation
+><contrib
+>Traducción</contrib
+></othercredit
+> <othercredit role="translator"
+><firstname
+>Rocío</firstname
+><surname
+>Gallego</surname
+><affiliation
+><address
+><email
+>traducciones@rociogallego.com</email
+></address
+></affiliation
+><contrib
+>Traducción</contrib
+></othercredit
+> 
+</authorgroup>
+
+<date
+>2021-10-23</date>
+<releaseinfo
+>KDE Gear 21.08</releaseinfo>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<abstract>
+<para
+>&rocs; es una herramienta de teoría de grafos. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdeedu</keyword>
+<keyword
+>matemáticas</keyword>
+<keyword
+>matemáticas</keyword>
+<keyword
+>grafos</keyword>
+<keyword
+>nodo</keyword>
+<keyword
+>arista</keyword>
+<keyword
+>Rocs</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introducción</title>
+<para
+>En este capítulo le proporcionamos un resumen de las funcionalidades principales y de los flujos de trabajo típicos. Las partes más importantes son <xref linkend="introduction-nutshell"/> y <xref linkend="scripting"/>, que deberían bastar para que cualquier nuevo usuario comience a usar &rocs;. </para>
+
+<sect1 id="introduction-goals">
+<title
+>Objetivos, audiencia de destino y flujo de trabajo</title>
+<para
+>&rocs; es una herramienta de teoría de grafos para todos aquellos interesados en el diseño y el análisis de algoritmos de grafos. Esto incluye:</para>
+<itemizedlist>
+    <listitem
+><para
+>a profesores que quieran mostrar algoritmos a sus estudiantes,</para
+></listitem>
+    <listitem
+><para
+>a estudiantes e investigadores que quieran ver como funciona un algoritmo,</para
+></listitem>
+    <listitem
+><para
+>y a cualquier persona interesada en estructuras de datos y algoritmos.</para
+></listitem>
+</itemizedlist>
+<para
+>Para todos ellos, &rocs; proporciona un editor gráfico muy fácil de usar para crear grafos, un potente motor de guiones para ejecutar algoritmos y diversas herramientas auxiliares para realizar simulaciones, experimentos y exportar grafos. El modo usual de usar &rocs; consiste en crear un grafo, bien a mano (es decir, arrastrando nodos y aristas por la pizarra), o bien usando cualquiera de los generadores de grafos. A continuación puede implementar algoritmos de grafos y ejecutarlos sobre el grafo creado, con lo que cualquier cambio que realice el algoritmo se hará visible de forma inmediata en el editor de grafos. </para>
+
+<screenshot>
+  <screeninfo
+>Una captura de pantalla de &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-screenshot.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Una captura de pantalla de &rocs;.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+</sect1>
+
+<sect1 id="introduction-nutshell">
+<title
+>&rocs; en pocas palabras</title>
+<para
+>Cada sesión de &rocs; es un proyecto: cuando abra &rocs; se creará un proyecto vacío; cuando cargue algún proyecto, se convertirá en proyecto activo. En sí, un proyecto consta de <emphasis
+>documentos de grafos</emphasis
+>, de <emphasis
+>guiones o algoritmos</emphasis
+>. y de un <emphasis
+>diario</emphasis
+>. </para>
+
+<sect2>
+<title
+>Documentos de grafos</title>
+<para
+>Un documento de grafos representa el contenido de una pizarra en el editor de grafos. Contiene información sobre los tipos de nodo y aristas definidos por el usuario y sus propiedades, así como sobre los nodos y aristas ya creados. Es decir, &rocs; entiende el conjunto de todos los nodos y aristas de un documento de grafos (no necesariamente conectados) que componen un grafo. Todo lo que pertenezca a un documento de grafos permanece accesible para el motor de guiones usando el objeto global <userinput
+><command
+>Document</command
+></userinput
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Tipos de aristas</title>
+<para
+>En algunos escenarios, los grafos consisten en distintos tipos de aristas (por ejemplo, un grafo no dirigido más las tres aristas calculadas por un algoritmo de búsqueda en anchura) que se deben manejar y mostrar de forma diferente. Para ello, además de un tipo de arista por omisión, puede definir otros tipos de aristas adicionales. Cada tipo de arista tiene su representación visual individual, sus propiedades dinámicas y se puede cambiar de dirigido a no dirigido. La interfaz de guiones proporciona los métodos necesarios para acceder de forma específica a las aristas de determinados tipos. </para>
+</sect2>
+
+<sect2>
+<title
+>Tipos de nodos</title>
+<para
+>Del mismo modo que para los tipos de aristas, puede definir diferentes tipos de nodos de un grafo (por ejemplo, para proporcionar un papel especial a algunos nodos). Cada tipo de nodo posee su propia representación visual y propiedades dinámicas. </para>
+</sect2>
+
+<sect2>
+<title
+>Propiedades</title>
+<para
+>Cada elemento (nodo o arista) puede tener propiedades. Estas propiedades se deben configurar en el correspondiente tipo de nodo o arista. Los nombres de las propiedades pueden contener cualquier valor y sirven para identificarlas y para acceder a ellas. Para crear una nueva propiedad o para modificar una existente, use la barra lateral <guilabel
+>Tipos de elementos</guilabel
+>. Para abrir el diálogo de una propiedad, use el botón <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/> </imageobject
+></inlinemediaobject
+><guibutton
+>Propiedades</guibutton
+>. </para>
+<para
+>También puede usar el motor de guiones para acceder a las propiedades registradas y modificar su valor. En el ejemplo siguiente se supondrá que la propiedad «weight» está registrada para el tipo de arista por omisión. <programlisting
+>var nodes = Document.nodes()
+for (var i = 0; i &lt; nodes.length; ++i){
+    nodes[i].weight = i;
+}
+for (var i = 0; i &lt; nodes.length; ++i){
+    Console.log("peso del nodo " + i + ": " + nodes[i].weight);
+}
+</programlisting>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="introduction-tutorial">
+<title
+>Tutorial</title>
+<para
+>En esta sección queremos crear un proyecto de ejemplo para explorar algunas de las funciones más importantes de &rocs;. El objetivo es crear un grafo y un guion que ilustre un sencillo algoritmo de aproximación a 2 para el problema de la <emphasis
+>cobertura de vértices mínima</emphasis
+>. En este problema se debe encontrar un subconjunto de nodos del grafo C del mínimo tamaño, de modo que cada arista de grafo esté conectada al menos a un nodo de C. Este problema es NP-complejo y deseamos ilustrar cómo encontrar una aproximación de factor 2 buscando una coincidencia en el grafo propuesto. </para>
+<para
+>Nuestro objetivo es mostrar la correspondencia de las coincidencias y la cobertura de vértices mínima. Para ello, vamos a especificar dos tipos de aristas (uno para mostrar las aristas coincidentes y otro para mostrar las aristas «ordinarias»), así como dos tipos de nodos que vamos a usar para distinguir los nodos contenidos en C y los que no están contenidos en C. </para>
+
+<sect2>
+<title
+>Generación del grafo</title>
+<para
+>Para crear el grafo, usaremos el generador por omisión que proporciona &rocs;. Está disponible en menú principal: <menuchoice
+><guimenu
+>Documento de grafo</guimenu
+> <guisubmenu
+>Herramientas</guisubmenu
+> <guimenuitem
+>Generar grafo</guimenuitem
+></menuchoice
+>. Allí seleccionamos un <guilabel
+>Grafo aleatorio</guilabel
+> con 30 nodos, 90 aristas y semilla 1 (la semilla es la inicial para el generador de grafos aleatorios; si usa la misma semilla varias veces, se volverán a reproducir los mismos grafos). </para>
+</sect2>
+
+<sect2>
+<title
+>Creación de los tipos de elementos</title>
+<para
+>Usaremos <guilabel
+>Tipos de elementos</guilabel
+> para crear un segundo tipo de nodo y un segundo tipo de arista. Para estos dos nuevos tipos, abriremos el diálogo de propiedades usando sus respectivos botones <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Propiedades</guibutton
+> y fijaremos sus ID a <literal
+>2</literal
+>. Además, cambiaremos los colores de los elementos de estos dos nuevos tipos (para distinguirlos de los tipos por omisión). Finalmente, indicaremos que todos los tipos de aristas sean bidireccionales y fijaremos el ID de los tipos por omisión a <literal
+>1</literal
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>El algoritmo</title>
+<para
+>Por último, tenemos que implementar el algoritmo de aproximación. Para ello usaremos la siguiente implementación: </para>
+<programlisting
+>for (var i=0; i &lt; Document.nodes.length; i++) {
+    Document.nodes[i].type = 1;
+}
+for (var i=0; i &lt; Document.edges.length; i++) {
+    Document.edges[i].type = 1;
+}
+
+var E = Document.edges(); // conjunto de aristas sin procesar
+var C = new Array();      // aristas coincidentes
+while (E.length 
+> 0) {
+    var e = E[0];         // tomamos la primera arista e={u,v}
+    var u = e.from();
+    var v = e.to();
+    e.type = 2;           // indicamos que la arista es coincidente
+    E.shift();            // eliminar e (es decir, E[0]) de la lista de aristas
+    C.push(u);            // añadir u a C
+    C.push(v);            // añadir v a C
+
+    // marcar u,v como nodos en C
+    u.type = 2;
+    v.type = 2;
+
+    // eliminar de E todas las aristas en común con u o v
+    var adjacent = u.edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // encontrar el índice
+        if (index != -1) {
+            E.splice(index, 1); // eliminarla si se encuentra
+        }
+    }
+    var adjacent = v.edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // encontrar el índice
+        if (index != -1) {
+            E.splice(index, 1); // eliminarla si se encuentra
+        }
+    }
+}
+Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Ejecución del algoritmo</title>
+<para
+>El algoritmo se puede ejecutar usando el botón <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Ejecutar</guibutton
+> que hay en el panel de control del guion. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="user-interface">
+<title
+>La interfaz de usuario de &rocs;</title>
+
+<sect1 id="user-interface-all">
+<title
+>Elementos principales de la interfaz de usuario</title>
+<para
+>La interfaz de usuario se divide en varias partes lógicas tal como se presentan en la captura de pantalla de más abajo. </para>
+
+<screenshot>
+  <screeninfo
+>Elementos de la interfaz gráfica de usuario de &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-interfaces.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Elementos de la interfaz gráfica de usuario de &rocs;.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Editor de grafos</term>
+    <listitem
+><para
+>El editor proporciona una pizarra en blanco en la que se pueden situar nodos y aristas. Si hace doble clic en cualquiera de sus elementos, se abrirá el correspondiente menú de propiedades. Puede usar las herramientas de las <emphasis
+>pestañas de la barra lateral</emphasis
+> para crear y modificar grafos.</para>
+    <para
+>Herramientas disponibles:</para>
+      <itemizedlist>
+        <listitem
+><para
+>En la parte superior izquierda de la caja se pueden encontrar los siguientes iconos de acciones (al hacer clic en una acción, el puntero del ratón aplica dicha acción a la pizarra del editor de grafos):</para>
+          <itemizedlist>
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsselect.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Seleccionar y mover</guiicon
+>: para seleccionar elementos dispone de dos alternativas: puede pulsar en un espacio sin utilizar en la pizarra, mantener el ratón pulsado para dibujar un rectángulo que contenga elementos de datos o aristas para seleccionar dichos elementos, o bien hacer clic directamente en un elemento sin seleccionar para seleccionarlo. Si pulsa sobre un elemento seleccionado o un conjunto de elementos seleccionados, respectivamente, se pueden mover dichos elementos manteniendo el ratón pulsado y moviéndolo. También se pueden mover los elementos seleccionados mediante las teclas de las flechas.</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsnode.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Añadir un nodo</guiicon
+>: haga clic en cualquier posición de la pizarra del editor visual de grafos para crear un nuevo elemento de datos que pertenezca a la estructura de datos seleccionada actualmente. Si mantiene pulsado el botón del ratón, se mostrará un menú donde puede seleccionar el tipo de datos de los nuevos elementos de datos creados (solo si existen diferentes tipos de datos).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsedge.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Crear una arista</guiicon
+>: haga clic en un elemento de dato, mantenga pulsado el ratón y dibuje una línea hacia otro elemento de dato al que debe apuntar la arista. Esta acción solo se podrá realizar correctamente si el grafo actual permite añadir dicha arista (&eg;, en un grafo no dirigido no se pueden añadir varias aristas entre dos elementos de datos). Si mantiene pulsado el botón del ratón se mostrará un menú en el que puede seleccionar el tipo de las aristas recién creadas (solo si existen diferentes tipos de aristas).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsdelete.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Borrar elemento</guiicon
+>: haga clic en un elemento para borrarlo. Si borra un nodo, todas las aristas adyacentes también se borran.</para
+></listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Barra lateral</term>
+    <listitem
+><para
+>A la derecha puede encontrar la barra lateral que le proporciona diversas herramientas para su flujo de trabajo.</para>
+      <itemizedlist>
+        <listitem
+><para
+><guilabel
+>Tipos de elementos</guilabel
+>: esta ventana le proporciona acceso directo a los tipos de aristas y de nodos disponibles.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>Diario</guilabel
+>: cada proyecto dispone de su propio diario que se puede usar para, &eg;, anotar tareas, resultados u observaciones.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>API de guiones</guilabel
+>: abra este elemento gráfico para tener acceso directo a la documentación de guiones.</para
+></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Editor de guiones</term>
+    <listitem
+><para
+>En este editor de texto puede escribir algoritmos como se explica con más detalle en <xref linkend="scripting"/>. Puede trabajar en varios documentos de guiones al mismo tiempo usando varias pestañas.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Salida del guion:</term>
+    <listitem
+><para
+>Este área de texto muestra información de depuración o la salida del guion del algoritmo, dependiendo de la preferencia indicada en la parte superior de este elemento gráfico. Si el guion produce un error, se muestra de forma automática la salida de depuración.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Controles</term>
+    <listitem
+><para
+>Aquí puede encontrar los controles para la ejecución de guiones. Se puede ejecutar el guion que esté abierto actualmente en el editor de guiones pulsando el botón <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Ejecutar</guibutton
+>. Mientras ejecuta el guion, puede detener su ejecución pulsando el botón <inlinemediaobject
+><imageobject
+><imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Detener</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<!--FIXME nop alignment action any more?-->
+</chapter>
+
+<chapter id="scripting">
+<title
+>Guiones</title>
+<sect1>
+    <title
+>Ejecución de algoritmos en &rocs;</title>
+<para
+>&rocs; usa internamente el motor de &javascript; de QtScript. Esto significa que todos los algoritmos que implemente deben usar &javascript;. A continuación explicaremos cómo acceder y modificar los elementos de un documento de grafos desde el motor de guiones. Es importante que tenga en cuenta que los cambios realizados por el motor de guiones se reflejan directamente en las propiedades de los elementos del editor de grafos. </para>
+
+<sect2>
+<title
+>Control de la ejecución del guion</title>
+<para
+>Existen diferentes modos para ejecutar los algoritmos: </para>
+<itemizedlist>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Ejecutar</guibutton
+>: ejecuta el guion hasta su final.</para
+></listitem>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Detener</guibutton
+>: detener la ejecución del guion (solo está disponible cuando se ejecuta un guion).</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2>
+<title
+>Salida del guion</title>
+<para
+>Durante la ejecución de un algoritmo, la salida de depuración y del programa se muestran en <emphasis
+>Depuración y Salida del guion</emphasis
+>. Si el motor de guiones detecta un error de sintaxis en el guion, también se muestra dicho error como un mensaje de depuración. Tenga en cuenta que todos los mensajes del programa también se muestran en la salida de depuración (como texto en negrita). </para>
+<para
+>Puede controlar el texto que se muestra en la salida del guion mediante las siguientes funciones: </para>
+<programlisting
+>Console.log(string mensaje);            // muestra el mensaje como salida del guion
+    Console.debug(string mensaje);             // muestra el mensaje como salida de depuración
+    Console.error(string mensaje);          // muestra el mensaje comosalida de error
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>API del motor de guiones</title>
+<para
+>Las diferentes partes de &rocs; proporcionan elementos estáticos a los que se puede acceder desde el motor de guiones. Son las siguientes: <itemizedlist
+> <listitem
+><para
+><userinput
+><command
+>Document</command
+></userinput
+> para el documento de grafos</para
+></listitem
+> <listitem
+><para
+><userinput
+><command
+>Console</command
+></userinput
+> para la salida de registro de la consola</para
+></listitem
+> </itemizedlist
+> Para el uso de la API y para una guía sobre los métodos que contienen, consulte la ayuda en línea disponible en la barra lateral de &rocs;. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="import-export">
+<title
+>Importar y exportar</title>
+<sect1 id="import-export-projects">
+    <title
+>Intercambiar proyectos de &rocs;</title>
+    <para
+>Los proyectos de &rocs; se pueden importar y exportar como archivos comprimidos <literal role="extension"
+>.tar.gz</literal
+>. Estos archivos se puede usar para intercambiar proyectos. La importación y la exportación se pueden llevar a cabo con los elementos del menú <menuchoice
+><guimenu
+>Documento de grafo</guimenu
+> <guimenuitem
+>Importar grafo...</guimenuitem
+></menuchoice
+> y <menuchoice
+><guimenu
+>Documento de grafo</guimenu
+> <guimenuitem
+>Exportar grafo como</guimenuitem
+></menuchoice
+>, respectivamente. </para>
+
+<sect2 id="import-export-graphs">
+    <title
+>Importar y exportar documentos de grafos</title>
+    <para
+>En la actualidad, &rocs; permite importar y exportar en los siguientes formatos de archivos:</para>
+    <itemizedlist>
+        <listitem
+><para
+>Archivos &DOT;, también conocidos como archivos Graphviz</para
+></listitem>
+        <listitem
+><para
+>Archivos <acronym
+>GML</acronym
+></para
+></listitem>
+        <listitem
+><para
+>Archivos en formato de grafos Trivial</para
+></listitem>
+        <listitem
+><para
+>El formato del lenguaje de marcas Keyhole</para
+></listitem>
+    </itemizedlist>
+
+<sect3 id="format-specification-tgf">
+<title
+>El formato de archivo de grafos Trivial</title>
+<para
+>El <emphasis
+>Formato de grafo trivial</emphasis
+> (<acronym
+>TGF</acronym
+>) es un formato de archivo sencillo basado en texto para describir grafos. Un archivo <acronym
+>TGF</acronym
+> consiste en una lista de definiciones de nodos, que enlazan los ID de los nodos con etiquetas, seguida por una lista de las aristas. En este formato solamente se puede tener una etiqueta por nodo y un valor por arista. &rocs; interpreta los grafos importados como grafos no dirigidos. Los grafos exportados contendrán dos aristas por conexión si la conexiones son bidireccionales. </para>
+
+<sect4>
+<title
+>Especificación del formato</title>
+    <itemizedlist>
+        <listitem
+><para
+>El archivo comienza con una lista de nodos (un nodo por línea), seguida por una línea que contiene únicamente el carácter «#», seguida por una lista de aristas (una arista por línea).</para
+></listitem>
+        <listitem
+><para
+>Un nodo consta de un entero (identificador), seguido por un espacio y por una cadena de texto.</para
+></listitem>
+        <listitem
+><para
+>Una arista consta de dos enteros (identificadores) separados por un espacio, seguidos por un espacio y una cadena de texto. Se supone que la arista dirigida apunta desde el primer identificador hasta el segundo.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Ejemplo</title>
+<programlisting
+>1 nodo inicial
+2 transmisor
+3 pila
+#
+1 2 azul
+2 1 rojo
+2 3 verde
+</programlisting>
+</sect4>
+</sect3>
+
+<sect3 id="format-specification-dot">
+<title
+>Lenguaje &DOT; / Formato de archivo de grafos Graphviz</title>
+<para
+>El lenguaje &DOT; es un lenguaje de descripción de grafos en texto sin formato que permite tanto una buena representación legible para humanos como un procesamiento eficiente para los programas de diseño de grafos. &DOT; es el formato de archivo por omisión para la suite de visualización de grafos Graphviz, aunque también se usa ampliamente en otras herramientas de grafos. Las extensiones típicas para &DOT; son <literal role="extension"
+>.gv</literal
+> y <literal role="extension"
+>.dot</literal
+>. </para>
+
+<sect4>
+<title
+>Funcionalidades no permitidas</title>
+<para
+>&rocs; puede analizar cualquier archivo de grafos que contenga un grafo definido conforme a la especificación del lenguaje &DOT;<footnote
+><para
+>https://graphviz.org/doc/info/lang.html</para
+></footnote
+>. La implementación de las funcionalidades de este lenguaje es completa, a pesar de las siguientes excepciones: </para>
+    <itemizedlist>
+        <listitem
+><para
+>subgrafo: debido a la falta del concepto de subgrafo en &rocs;, los subgrafos solo se importan como un conjunto de elementos de datos y conexiones. En especial, no se importan las conexiones hacia o desde subgrafos.</para
+></listitem>
+        <listitem
+><para
+>Atributos &HTML; y &XML;: los atributos (como las etiquetas) que contienen sintaxis &HTML; o &XML; se leen sin cambios. En especial, no se lee de estos atributos ninguna información sobre ajustes de tipos de letra ni estilos.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Ejemplo</title>
+<programlisting
+>digraph miGrafo {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect4>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="graph-layout">
+    <title
+>Diseño del gráfico</title>
+
+    <sect1>
+        <title
+>Diseño de gráficos automático en &rocs;</title>
+        <para
+>&rocs; puede diseñar gráficos automáticamente. La herramienta de diseño de gráficos &rocs; se puede encontrar en el menú principal, en <menuchoice
+><guimenu
+>Documento de grafos</guimenu
+> <guisubmenu
+>Herramientas</guisubmenu
+> <guimenuitem
+>Diseño de gráfico</guimenuitem
+></menuchoice
+>. Hay dos algoritmos de diseño diferentes que se pueden aplicar: diseño basado en fuerzas y diseño de árbol radial. Para aplicar cualquiera de ellos, seleccione la pestaña correspondiente en la herramienta de diseño de gráficos, elija los parámetros deseados y ejecute el algoritmo pulsando el botón <guibutton
+>Aceptar</guibutton
+>. Los detalles que son específicos de cada uno de los algoritmos de diseño se proporcionan en las siguientes secciones. </para>
+
+    <sect2>
+        <title
+>Diseño basado en fuerzas</title>
+
+        <para
+>El diseño basado en fuerzas se puede aplicar a cualquier gráfico. De manera intuitiva, este algoritmo simula las fuerzas que actúan en cada nodo. Hay fuerzas repelentes entre pares de nodos y fuerzas de atracción entre pares de nodos vecinos. La magnitud de estas fuerzas se puede indicar moviendo los controles deslizantes correspondientes en la interfaz de usuario. </para>
+
+        <screenshot>
+          <screeninfo
+>Captura de pantalla de la pestaña de diseño basado en fuerzas de la herramienta de diseño de grafos &rocs;.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Captura de pantalla de la pestaña de diseño basado en fuerzas de la herramienta de diseño de grafos &rocs;.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>Otro parámetro que se puede controlar es el factor de área. Este parámetro controla cómo se distribuyen los nodos. Los diseños generados con valores altos de factor de área tienden a tener grandes distancias entre los nodos. </para>
+
+    <sect3>
+        <title
+>Diseño de árbol radial</title>
+        <para
+>El diseño de árbol radial solo se puede aplicar a árboles. Cualquier intento de aplicar este algoritmo de diseño a otros tipos de gráficos producirá un mensaje de error. Los parámetros para el diseño de árbol radial se pueden seleccionar usando la interfaz de usuario proporcionada. </para>
+
+
+        <screenshot>
+          <screeninfo
+>Captura de pantalla de la pestaña de diseño de árbol radial de la herramienta de diseño de grafos &rocs;.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Captura de pantalla de la pestaña de diseño de árbol radial de la herramienta de diseño de grafos &rocs;.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>El parámetro de tipo de árbol selecciona entre un diseño de árbol libre y un diseño de árbol con raíz. En un diseño de árbol libre, los nodos se colocan libremente sin ninguna jerarquía aparente entre ellos. En un diseño de árbol con raíz, el nodo raíz se coloca en la parte superior y los subárboles se colocan debajo, lo que da una idea de jerarquía entre los nodos. </para>
+
+        <para
+>El parámetro centro/raíz define qué nodo se usará como raíz para el diseño de árbol con raíz o como centro para el diseño de árbol libre. El centro de un diseño de árbol libre es el primer nodo que coloca el algoritmo. El resto de nodos se colocan en círculos centrados en el nodo central. El algoritmo de diseño puede seleccionar automáticamente un centro/raíz. </para>
+
+        <para
+>El parámetro de separación de nodos controla la distancia entre nodos. Al incrementar el valor de este parámetro, aumentará la distancia entre los nodos. De manera similar, disminuir el valor de este parámetro hará que la distancia entre los nodos disminuya. </para>
+    </sect3>
+    </sect2>
+    </sect1>
+</chapter>
+
+<chapter id="credits">
+<title
+>Créditos y licencia</title>
+
+<para
+>&rocs; </para>
+<para
+>Copyright del programa:</para>
+<itemizedlist>
+	<listitem
+><para
+>Copyright 2008 Ugo Sangiori (ugorox EN gmail.com)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2008-2012 Tomaz Canabrava (tcanabrava EN kde.org)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2008-2012 Wagner Reck (wagner.reck EN gmail.com)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2011-2015 Andreas Cord-Landwehr (cordlandwehr EN kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Copyright de la documentación:</para>
+<itemizedlist>
+	<listitem
+><para
+>Copyright de la documentación 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para
+></listitem>
+	<listitem
+><para
+>Copyright de la documentación 2009 Tomaz Canabrava (tcanabrava EN kde.org)</para
+></listitem>
+	<listitem
+><para
+>Copyright de la documentación 2011-2015 Andreas Cord-Landwehr (cordlandwehr EN kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Traducido por Leticia Martín Hernández <email
+>leticia.martin@gmail.com</email
+>, Rocío Gallego<email
+>traducciones@rociogallego.com </email
+> y Eloy Cuadra <email
+>ecuadra@eloihr.net</email
+>.</para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes: nil
+sgml-general-insert-case: lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

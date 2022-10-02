@@ -1,0 +1,61 @@
+<sect1 id="scripting-backend-rootedtree">
+<title
+>Script API voor backend boomstructuur.</title>
+<sect2>
+<title
+>Boomstructuur voor gegevens</title>
+<para
+>In de dialoog voor de eigenschappen van de gegevensstructuur kunt u instellingen doen die behoren tot de backend van de graaf. Hierin, door <guilabel
+>Alle pijlen tonen</guilabel
+> te selecteren, worden alle pijlen getoond tussen de knooppunten in de boom. Indien niet geselecteerd, worden meerdere pijlen tussen twee zelfde knooppunten als één pijl getoond. </para>
+</sect2>
+
+<sect2>
+<title
+>De boomstructuur</title>
+<para
+>Gegeven een gegevensstructuurobject van het type "Boomstructuur" (Rooted Tree), kunnen de volgende eigenschappen worden gelezen of geschreven: </para>
+<programlisting
+>ShowAllPointers     // stel in op true (waar), voor het tonen van alle kanten, stel in op false (onwaar), als meerdere kanten als één moeten worden weergegeven.
+</programlisting>
+<para
+>Gegeven een gegevensstructuurobject van het type "Boomstructuur" (Rooted Tree), kunt u de volgende functies die er deel van uitmaken gebruiken: </para>
+<programlisting
+>node add_data(string naam);         // voeg knoop toe aan boom met gegeven naam
+    void set_root_node(node begin);      // stel begin in als beginknoop van de boom
+    node root_node();                   // geef beginknoop terug van de boom terug
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Knooppunten in boomstructuur</title>
+<para
+>Gegeven een knooppuntobject van het type "Boomstructuur" (Rooted Tree), kunnen de volgende eigenschappen worden gelezen of geschreven: </para>
+<programlisting
+>int numberOfChilds                  // instellen aantal mogelijke onderliggende knooppunten. voor dit knooppunt
+    node left_child                     // alleen lezen: linkse knooppunt child
+    node right_child                    // alleen lezen: rechtse knooppunt child
+    node node_parent                    // alleen lezen: voortbrengende knooppunt
+</programlisting>
+<para
+>Gegeven knoopobject van het type "Boomstructuur" (Rooted Tree), kunt u de volgende functies gebruiken: </para>
+<programlisting
+>node add_left_child(node child);    // links onderliggende knooppunt child toevoegen
+    node add_right_child(node child);   // rechts onderliggende knooppunt child toevoegen
+    node add_child(node child, int i);  // child als i-de onderliggend knooppunt toevoegen
+    node add_node_parent(node child);   // aan knoop child een voortbrengende knoop toevoegen (kan alleen als die er nog niet is)
+    node left_child();                  // onderliggende knoop links teruggeven
+    node right_child();                 // onderliggende knoop rechts teruggeven
+    node child_at(int i);               // de i-de onderliggende knoop teruggeven
+    node node_parent();                 // de voortbrengende knoop teruggeven
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Kanten in boomstructuur</title>
+<para
+>Gegeven kanten van een gegevensstructuur van het type "Boomstructuur" (Rooted Tree), zijn alleen de eigenschappen beschikbaar van de basisgegevensstructuur. </para>
+</sect2>
+</sect1>

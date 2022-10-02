@@ -1,0 +1,61 @@
+<sect1 id="scripting-backend-rootedtree">
+<title
+>Interfaz de programación de guiones para el motor de árbol con raíz</title>
+<sect2>
+<title
+>La estructura de datos de árbol con raíz</title>
+<para
+>El diálogo de las propiedades de la estructura de datos permite el acceso a la configuración de las preferencias de un determinado motor de grafos. En él puede marcar la propiedad <guilabel
+>Mostrar todos los punteros</guilabel
+> para mostrar todos los punteros entre los nodos del árbol. Si no está marcada, los diferentes punteros entre los mismos nodos están comprimidos en uno solo. </para>
+</sect2>
+
+<sect2>
+<title
+>La estructura de árbol con raíz</title>
+<para
+>Dado un objeto de estructura de datos del tipo «árbol con raíz», se pueden leer y escribir las siguientes propiedades: </para>
+<programlisting
+>ShowAllPointers     // fijar a «true» para mostrar todas las aristas; fijar a «false» si se deben comprimir varias aristas
+</programlisting>
+<para
+>Dado un objeto de estructura de datos del tipo «árbol con raíz», puede llamar a las siguientes funciones miembro: </para>
+<programlisting
+>node add_data(string name);         // añadir un nodo al árbol con el nombre indicado
+    void set_root_node(node root);      // fijar la raíz como raíz del nodo del árbol
+    node root_node();                   // devolver el nodo raíz del árbol
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Nodos de árbol con raíz</title>
+<para
+>Dado un objeto de nodo del tipo «árbol con raíz», se pueden leer y escribir las siguientes propiedades: </para>
+<programlisting
+>int numberOfChilds                  // fijar el número (permitido) de hijos de este nodo
+    node left_child                     // solo lectura: el nodo que es el hijo de la izquierda
+    node right_child                    // solo lectura: el nodo que es el hijo de la derecha
+    node node_parent                    // solo lectura: el nodo que es el padre
+</programlisting>
+<para
+>Dado un objeto de nodo del tipo «árbol con raíz», puede llamar a las siguientes funciones miembro: </para>
+<programlisting
+>node add_left_child(node child);    // añadir hijo a la izquierda
+    node add_right_child(node child);   // añadir hijo a la derecha
+    node add_child(node child, int i);  // añadir hijo como el enésimo hijo del nodo
+    node add_node_parent(node child);   // añadir padre (solo tendrá éxito si aún no se ha asignado un padre)
+    node left_child();                  // devolver el hijo de la izquierda
+    node right_child();                 // devolver el hijo de la derecha
+    node child_at(int i);               // devolver el enésimo hijo del nodo
+    node node_parent();                 // devolver el padre del nodo
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Aristas de árboles con raíz</title>
+<para
+>Dadas las aristas de una estructura de datos del tipo «árbol con raíz», solo están disponibles las propiedades de la estructura de datos base. </para>
+</sect2>
+</sect1>

@@ -1,0 +1,2283 @@
+# translation of rocs.po to Swedish
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2009, 2010.
+# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021.
+# Arve Eriksson <031299870@telia.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: rocs\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2021-10-24 13:44+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.08.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Stefan Asserhäll"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "stefan.asserhall@bredband.net"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, kde-format
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "Grafteorisimulator"
+
+#: main.cpp:32
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr "© 2009-2016 Rocs-utvecklarna"
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr "Underhåll"
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr "Ursprunglig upphovsman"
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "Utvecklare"
+
+#: main.cpp:57
+#, kde-format
+msgid "Project to open."
+msgstr "Projekt att öppna."
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "Syntax"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "Egenskaper"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "Parametrar"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "Parameter"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "Metoder"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "Typ"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr "Returtyp"
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr "Detaljerad beskrivning"
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "Beskrivning"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "Användargränssnitt för skripthantering"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, kde-format
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "Grafdokumentet"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "Objekt"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "Moduler i skriptgränssnitt"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr "Skriptobjekt"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "Egenskaper"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "Metoder"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "Rocs programmeringsgränssnittet för skript"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+"Rocs-projektet kunde inte importeras eftersom projektfilen inte kunde tolkas."
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Visa text bredvid ikoner"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Sökväg där deklararionshanteraren letar efter deklarationsfiler."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Projekt"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Skriptdokument"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Grafdokument"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Graffil"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Redigera markerad data"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Layout"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Verktyg"
+
+#: ui/codeeditorwidget.cpp:81
+#, kde-format
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "Koddokumentets namn"
+
+#: ui/codeeditorwidget.cpp:82
+#, kde-format
+msgid "Enter the name of your code document"
+msgstr "Ange koddokumentets namn"
+
+#: ui/documenttypeswidget.cpp:29
+#, kde-format
+msgctxt "@title"
+msgid "Node Types"
+msgstr "Nodtyper"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, kde-format
+msgid "Create Type"
+msgstr "Skapa typ"
+
+#: ui/documenttypeswidget.cpp:45
+#, kde-format
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "Bågtyper"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr "namnlös"
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr "Riktning för bågar av bågtyp."
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr "Unik identifierare för bågtypen."
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "Exportera"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+"<p>Filen <br /><strong>'%1'</strong><br /> finns redan. Om du inte vill att "
+"den ska skrivas över, ändra filnamnet till något annat.</p>"
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "Filen finns"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+"<p>Kan inte koppla ihop suffix för filen <strong>'%1'</strong> med ett "
+"tillgängligt filgränssnitt. Avbryter export.</p>"
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr ""
+"<p>Fel uppstod vid försök att skriva till fil: <strong>'%1'</strong></p>"
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|Alla filer"
+
+#: ui/fileformatdialog.cpp:116
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "Importera graffil i projekt"
+
+#: ui/grapheditorwidget.cpp:79
+#, kde-format
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "Grafdokumentets namn"
+
+#: ui/grapheditorwidget.cpp:80
+#, kde-format
+msgid "Enter the name of your graph document"
+msgstr "Ange grafdokumentets namn"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Projektjournal"
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "Kör"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr ""
+"Kör skriptet som för närvarande är aktivt med det aktiva grafdokumentet."
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "Stoppa"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr "Stoppa körning av skript."
+
+#: ui/mainwindow.cpp:175
+#, kde-format
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "Avlusare"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr "Öppna Javascript-kodavlusaren."
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr "Elementtyper"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "Journal"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "Programmeringsgränssnittet för skript"
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "Nytt projekt"
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "Spara projekt"
+
+#: ui/mainwindow.cpp:269
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "Öppna projekt..."
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "Senaste projekt"
+
+#: ui/mainwindow.cpp:282
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "Spara projekt som..."
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "Nytt grafdokument"
+
+#: ui/mainwindow.cpp:284
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "Ny skriptfil..."
+
+#: ui/mainwindow.cpp:285
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "Importera graf..."
+
+#: ui/mainwindow.cpp:286
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "Exportera graf som..."
+
+#: ui/mainwindow.cpp:287
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "Importera skript..."
+
+#: ui/mainwindow.cpp:288
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "Exportera skript..."
+
+#: ui/mainwindow.cpp:327
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "Importera skript i projekt"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "Exportera skript"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgid "JavaScript (*.js)"
+msgstr "Javascript (*.js)"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "namnlös"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "Spara projekt som"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr "Rocs-projekt (*.rocs)"
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+"En fil med namnet \"%1\" finns redan. Är du säker på att du vill skriva över "
+"den?"
+
+#: ui/mainwindow.cpp:385
+#, kde-format
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "Skriv över fil?"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "Öppna projektfiler"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr "Rocs-projekt (*.rocs)"
+
+#: ui/mainwindow.cpp:433
+#, kde-format
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "[ namnlös ]%1"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr "Skriptnamn"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr "Ange det nya skriptets namn"
+
+#: ui/mainwindow.cpp:471
+#, kde-format
+msgid "File already exists."
+msgstr "Filen finns redan."
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr "Ändringar i projektet har inte sparats. Vill du spara dina ändringar?"
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr "Unik identifierare för nodtypen."
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, kde-format
+msgid "Script output:"
+msgstr "Skriptutmatning:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Rensa programutmatning för varje körning."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Visa felsökningsutmatning."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Rensa utmatning."
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "Sidoverktygsrad"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr "Växla vyn '%1'."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Spara projekt som"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Overwrite"
+#~ msgstr "Skriv över"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Huvudverktygsrad"
+
+#~ msgid "Align Toolbar"
+#~ msgstr "Justeringsverktygsrad"
+
+#~ msgid "Rocs Handbook"
+#~ msgstr "Handbok Rocs"
+
+#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+#~ msgstr "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "Handbok"
+
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "Datastrukturer"
+
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs - Datastrukturanalys"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr "Inga datastrukturinsticksprogram hittades i systemet. Avslutar."
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Rocs behöver minst ett datastrukturinsticksprogram för att fortsätta.\n"
+#~ "Försök att köra kbuildsycoca4 i en terminal, och därefter köra Rocs igen."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr "Position där en nods namn och värde ska visas."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Position där en båges namn och värde ska visas."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr "Anger om körningsknappen för felsökningskörning ska visas."
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr "Anger om körningsknappen för stegvis körning ska visas."
+
+#~ msgid "Script File"
+#~ msgstr "Skriptfil"
+
+#~ msgid "Convert To"
+#~ msgstr "Konvertera till"
+
+#~ msgid "Settings"
+#~ msgstr "Inställningar"
+
+#~ msgid "Help"
+#~ msgstr "Hjälp"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "En KDE texteditor kunde inte hittas.\n"
+#~ "Kontrollera installationen."
+
+#~ msgid "Display of Element Properties"
+#~ msgstr "Visning av elementegenskaper"
+
+#~ msgid "Data Properties"
+#~ msgstr "Dataegenskaper"
+
+#~ msgid "centered"
+#~ msgstr "centrerad"
+
+#~ msgid "below"
+#~ msgstr "nedanför"
+
+#~ msgid "above"
+#~ msgstr "ovanför"
+
+#~ msgid "Connection Properties"
+#~ msgstr "Anslutningsegenskaper"
+
+#~ msgid "Execution Controls"
+#~ msgstr "Körkontroller"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Visa felsökningskörning"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Visa stegvis körning"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Egenskaper"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Ange pilarnas synlighet"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Exportera grafer till fil"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "Laddade insticksprogram"
+
+#~ msgid "Graph File Plugins loaded for %1"
+#~ msgstr "Insticksprogram för graffiler laddade för %1"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|Skriptfiler"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Rocs-skriptfiler"
+
+#~ msgid "Add your description here."
+#~ msgstr "Lägg till en beskrivning här."
+
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "Ett steg"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Kör med felsökning"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "Avbrott på första raden"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Ladda ner exempel"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Ladda upp projekt"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Möjliga deklarationsfiler"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "Laddade insticksprogram"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Code Editor..."
+#~ msgstr "Anpassa kodeditor..."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Inkluderingshanterare"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Standardinställningar"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Lägg till befintlig skriptfil i projekt"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "Den här filen verkar inte vara en graffil."
+
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Ogiltig fil"
+
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs|Rocs-projektfiler\n"
+#~ "*.rocsz|Komprimerade Rocs-projektfiler\n"
+#~ "*|Alla filer"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Spara projekt"
+
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*rocs,*.rocsz|Alla Rocs-filer\n"
+#~ "*.rocs|Rocs-projektfiler\n"
+#~ "*.rocsz|Komprimerade Rocs-projektfiler\n"
+#~ "*|Alla filer"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Rocs grafdokument\n"
+#~ "*|Alla filer"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Spara grafdokument"
+
+#~ msgid "Graph name"
+#~ msgstr "Grafnamn"
+
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Ange grafens namn"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Möjliga deklarationsfiler för skriptgränssnitt"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your graph document are unsaved. Do you want to save your "
+#~ "changes?"
+#~ msgstr ""
+#~ "Ändringar i grafdokumentet har inte sparats. Vill du spara dina ändringar?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files are unsaved. Do you want to save all unsaved "
+#~ "scripts?"
+#~ msgstr ""
+#~ "Ändringar i skriptfiler har inte sparats. Vill du spara alla skript som "
+#~ "inte har sparats?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files and on your graph document are unsaved. Do "
+#~ "you want to save your graph document and all unsaved scripts?"
+#~ msgstr ""
+#~ "Ändringar i skriptfiler och grafdokumentet har inte sparats. Vill du "
+#~ "spara ditt grafdokument och alla skript som inte har sparats?"
+
+#~ msgid "Default Information Display"
+#~ msgstr "Standardvisning av information"
+
+#~ msgid "Node Information"
+#~ msgstr "Nodinformation"
+
+#~ msgid "Edge Information"
+#~ msgstr "Båginformation"
+
+#~ msgid "Display debug messages."
+#~ msgstr "Visa felsökningsmeddelanden."
+
+#~ msgid "Untitled"
+#~ msgstr "Namnlös"
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "Layoutverktygsrad"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "Lägg till data"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Data"
+#~ msgstr "Lägg till data"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "Lägg till nytt dataelement"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Add Connection"
+#~ msgstr "Lägg till anslutning"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Connection"
+#~ msgstr "Lägg till anslutning"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new connection between two data elements of selected type"
+#~ msgstr "Lägg till en ny anslutning mellan två dataelement av vald typ"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Base"
+#~ msgstr "Bas"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "Mitt"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Top"
+#~ msgstr "Upp"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Left"
+#~ msgstr "Vänster"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Right"
+#~ msgstr "Höger"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "Cirkel"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Minimera korsande bågar"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "Ta bort"
+
+#~ msgid "Form"
+#~ msgstr "Formulär"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "Lägg till båge"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new edge between 2 nodes"
+#~ msgstr "Skapar en ny båge mellan två noder"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add %1"
+#~ msgstr "Lägg till %1"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position."
+#~ msgstr "Skapar en ny nod på positionen som klickades."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position on the drawing area."
+#~ msgstr "Skapar en ny nod på positionen som klickades på ritområdet."
+
+#~ msgid "Add %1"
+#~ msgstr "Lägg till %1"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "Ta bort objekt genom att klicka på dem."
+
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "Datatypegenskaper"
+
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Piltypegenskaper"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "Flytta"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Select and move items."
+#~ msgstr "Markera och flytta objekt."
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Zoom"
+#~ msgstr "Zooma"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom the canvas by the wheel, or by dragging."
+#~ msgstr "Zooma duken med mushjulet, eller genom att dra."
+
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "Egenskaper"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "Grafdokument:"
+
+#~ msgid "Data Structure:"
+#~ msgstr "Grafstruktur:"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new data structure."
+#~ msgstr "Lägg till en ny datastruktur"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "Ta bort vald datastruktur."
+
+#~ msgctxt "@info:tooltip current zoom factor for graph editor"
+#~ msgid "Zoom: %1\\%"
+#~ msgstr "Zooma: %1 \\%"
+
+#~ msgid "Edit Data Types"
+#~ msgstr "Redigera datatyper"
+
+#~ msgid "Static Properties"
+#~ msgstr "Statiska egenskaper"
+
+#~ msgid "Node color"
+#~ msgstr "Nodfärg"
+
+#~ msgid "Color:"
+#~ msgstr "Färg:"
+
+#~ msgid "Type:"
+#~ msgstr "Typ:"
+
+#~ msgid "Dynamic Properties"
+#~ msgstr "Dynamiska egenskaper"
+
+#~ msgid "Name:"
+#~ msgstr "Namn:"
+
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "Insticksprogram för datastruktur:"
+
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "Datastrukturegenskaper för insticksprogram"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Data Structure"
+#~ msgstr "Datastruktur"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Data Types"
+#~ msgstr "Datatyper"
+
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "Datastrukturegenskaper"
+
+#~ msgid "Name"
+#~ msgstr "Namn"
+
+#~ msgid "Default Value"
+#~ msgstr "Standardvärde"
+
+#~ msgid "Display"
+#~ msgstr "Visning"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "%1 (ID %2)"
+#~ msgstr "%1 (id %2)"
+
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "egenskap%1"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Data Type"
+#~ msgstr "Datatyp"
+
+#~ msgid "Select Data Type:"
+#~ msgstr "Välj datatyp:"
+
+#~ msgid "Remove selected data type."
+#~ msgstr "Ta bort vald datatyp."
+
+#~ msgid "Add new data type."
+#~ msgstr "Lägg till ny datatyp"
+
+#~ msgid "Insert a name for this type"
+#~ msgstr "Infoga ett namn på den här typen"
+
+#~ msgid "Default Color:"
+#~ msgstr "Standardfärg:"
+
+#~ msgid "Data Type Properties"
+#~ msgstr "Datatypegenskaper"
+
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "Dokumentegenskaper"
+
+#~ msgid "Property"
+#~ msgstr "Egenskap"
+
+#~ msgid "Value"
+#~ msgstr "Värde"
+
+#~ msgid "Edit Pointer Types"
+#~ msgstr "Redigera piltyper"
+
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "Pilegenskaper"
+
+#~ msgid "Pointer Properties"
+#~ msgstr "Pilegenskaper"
+
+#~ msgid "Width:"
+#~ msgstr "Bredd:"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "heldragen linje"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "streckad linje"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dot line "
+#~ msgstr "punktlinje "
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash dot line"
+#~ msgstr "streck punkt-linje"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Unidirectional"
+#~ msgstr "Enkelriktad"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Bidirectional"
+#~ msgstr "Dubbelriktad"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "Anslutning"
+
+#~ msgid "Add new pointer type."
+#~ msgstr "Lägg till ny piltyp."
+
+#~ msgid "Select Pointer Type:"
+#~ msgstr "Välj piltyp:"
+
+#~ msgid "Remove selected pointer type."
+#~ msgstr "Ta bort vald piltyp."
+
+#~ msgid ""
+#~ "<html><head/><body><p>Select if pointers of this type is unidirectional "
+#~ "or bidirectional. Changing this value changes directions of all pointers "
+#~ "of this type.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Välj om pilar av typen är enkelriktade eller "
+#~ "dubbelriktade. Genom att ändra värdet ändras riktning för alla pilar av "
+#~ "typen.</p></body></html>"
+
+#~ msgid "Style:"
+#~ msgstr "Stil:"
+
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Piltypegenskaper"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "Datastruktur"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Selected"
+#~ msgstr "Markerad"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Zoom"
+#~ msgstr "Zooma"
+
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "In"
+#~ msgstr "In"
+
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Out"
+#~ msgstr "Ut"
+
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Reset"
+#~ msgstr "Återställ"
+
+#~ msgid "Align"
+#~ msgstr "Justera"
+
+#~ msgctxt "@action:inmenu align elements at bottom"
+#~ msgid "Bottom"
+#~ msgstr "Neråt"
+
+#~ msgctxt "@action:inmenu align elements at center"
+#~ msgid "Center"
+#~ msgstr "Mitt"
+
+#~ msgctxt "@action:inmenu align elements at top"
+#~ msgid "Top"
+#~ msgstr "Uppåt"
+
+#~ msgctxt "@action:inmenu align elements left"
+#~ msgid "Left"
+#~ msgstr "Vänster"
+
+#~ msgctxt "@action:inmenu align elements right"
+#~ msgid "Right"
+#~ msgstr "Höger"
+
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Cirkel"
+
+#~ msgctxt ""
+#~ "@action:inmenu align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Minimera korsande bågar"
+
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "Värden"
+
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Enumerate"
+#~ msgstr "Uppräkna"
+
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Integers"
+#~ msgstr "Slumpmässiga heltalsvärden"
+
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Reals"
+#~ msgstr "Slumpmässiga flyttal"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "Ta bort"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "Tilldela värden"
+
+#~ msgid "Assign Values"
+#~ msgstr "Tilldela värden"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">List of all data "
+#~ "structures that are of type <span style=\" font-style:italic;\">Graph</"
+#~ "span>.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Lista över alla "
+#~ "datastructurer av typen <span style=\" font-style:italic;\">Graf</span>.</"
+#~ "p></body></html>"
+
+#~ msgid "Nodes"
+#~ msgstr "Noder"
+
+#~ msgid "Edges"
+#~ msgstr "Bågar"
+
+#~ msgid "Start ID"
+#~ msgstr "Start-id"
+
+#~ msgid "Lower Limit"
+#~ msgstr "Undre gräns"
+
+#~ msgid "Upper Limit"
+#~ msgstr "Övre gräns"
+
+#~ msgid "Generator Seed"
+#~ msgstr "Genereringsfrö"
+
+#~ msgid "Enumerate Items"
+#~ msgstr "Uppräkningsobjekt"
+
+#~ msgid "Assign Random Integers"
+#~ msgstr "Tilldela slumpmässiga heltalsvärden"
+
+#~ msgid "Assign Random Reals"
+#~ msgstr "Tilldela slumpmässiga flyttal"
+
+#~ msgid "Overwrite existing values"
+#~ msgstr "Skriv över befintliga värden"
+
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "Skapa graf"
+
+#~ msgctxt "@title:window"
+#~ msgid "Generate Graph"
+#~ msgstr "Skapa graf"
+
+#~ msgid "Mesh Graph"
+#~ msgstr "Nätgraf"
+
+#~ msgid "Star Graph"
+#~ msgstr "Stjärngraf"
+
+#~ msgid "Circle Graph"
+#~ msgstr "Cirkelgraf"
+
+#~ msgid "RandomGraph"
+#~ msgstr "Slumpgraf"
+
+#~ msgid "Generate Graph"
+#~ msgstr "Skapa graf"
+
+#~ msgid "Graph Type:"
+#~ msgstr "Graftyp:"
+
+#~ msgid "Random Graph"
+#~ msgstr "Slumpgraf"
+
+#~ msgid "Erdös-Renyi Graph"
+#~ msgstr "Erdös-Renyi-graf"
+
+#~ msgid "Number of Columns:"
+#~ msgstr "Antal kolumner:"
+
+#~ msgid "Number of Rows:"
+#~ msgstr "Antal rader:"
+
+#~ msgid "Satellite Nodes:"
+#~ msgstr "Satellitnoder:"
+
+#~ msgid "Number of Nodes:"
+#~ msgstr "Antal noder:"
+
+#~ msgid "Nodes:"
+#~ msgstr "Noder:"
+
+#~ msgid "Edges:"
+#~ msgstr "Bågar:"
+
+#~ msgid "Allow self-edges:"
+#~ msgstr "Tillåt återgående bågar:"
+
+#~ msgid "Generator Seed:"
+#~ msgstr "Genereringsfrö:"
+
+#~ msgid "Nodes (n):"
+#~ msgstr "Noder:"
+
+#~ msgid "Edge Probability (p):"
+#~ msgstr "Bågsannolikhet (p):"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Transform Edges"
+#~ msgstr "Transformera bågar"
+
+#~ msgctxt "@title:window"
+#~ msgid "Transform Edges"
+#~ msgstr "Transformera bågar"
+
+#~ msgid "Transform Edges"
+#~ msgstr "Transformera bågar"
+
+#~ msgid ""
+#~ "This option connects all nodes of the given graph. The new edges do not "
+#~ "have any preset weights."
+#~ msgstr ""
+#~ "Det här alternativet kopplar samman alla noder i den givna grafen. De nya "
+#~ "bågarna har inga ursprungliga vikter."
+
+#~ msgid "Complete Graph"
+#~ msgstr "Fullständig"
+
+#~ msgid "This option removes all edges from the given graph."
+#~ msgstr "Det här alternativet tar bort alla bågar från den givna grafen."
+
+#~ msgid "Remove all Edges"
+#~ msgstr "Ta bort alla bågar"
+
+#~ msgid ""
+#~ "This option reverses all edges of a directed graph. Note that this does "
+#~ "not apply to undirected graphs."
+#~ msgstr ""
+#~ "Det här alternativet omvänder alla bågar i en riktad graf. Observera att "
+#~ "det inte gäller för oriktade grafer."
+
+#~ msgid "Reverse all Edges"
+#~ msgstr "Omvänd alla bågar"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
+#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
+#~ "Algorithm</span> at the graph. All edges without given weights are "
+#~ "assumed to have weights equals 1. Directed and undirected graphs are "
+#~ "processed accordingly.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Alternativet utför "
+#~ "<span style=\" font-style:italic;\">Prims minsta omgivande träd-algoritm</"
+#~ "span> i grafen. Alla bågar utan given vikt antas ha vikter lika med 1. "
+#~ "Riktade och oriktade grafer hanteras för sig.</p></body></html>"
+
+#~ msgid "Spanning Tree Transformation"
+#~ msgstr "Omgivande träd-transformering"
+
+#~ msgid "Element"
+#~ msgstr "Element"
+
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "Dokument "
+
+#~ msgid "The name (%1) passed to property is invalid."
+#~ msgstr "Namnet (%1) som skickades till egenskap är ogiltigt."
+
+#~ msgctxt "dynamic property that is present exactly once"
+#~ msgid "Unique"
+#~ msgstr "Unik"
+
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "Flera"
+
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "Global"
+
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "Ingen"
+
+#~ msgid "The new name (%1) passed to property is invalid."
+#~ msgstr "Den nya namnet (%1) som skickades till egenskap är ogiltigt."
+
+#~ msgid "Group"
+#~ msgstr "Grupp"
+
+#~ msgid "Connection"
+#~ msgstr "Anslutning"
+
+#~ msgid "Rocs Console script"
+#~ msgstr "Rocs-terminalskript"
+
+#~ msgid "<b style=\"color: red\"> Error in include file %1</b>"
+#~ msgstr "<b style=\"color: red\">Fil i inkluderad fil %1</b>"
+
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "Programmeddelanden"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graphviz Graph File Backend"
+#~ msgstr "Gränssnitt för Graphviz-graffil"
+
+#~ msgid "Read and write Graphviz graph files."
+#~ msgstr "Läs och skriv Graphviz-graffiler."
+
+#~ msgid "*.dot *.gv|Graphviz Format"
+#~ msgstr "*.dot *.gv|Graphviz-format"
+
+#~ msgid "Import"
+#~ msgstr "Importera"
+
+#~ msgid "Could not open file \"%1\" in read mode: %2"
+#~ msgstr "Kan inte öppna filen \"%1\" för läsning: %2"
+
+#~ msgid "Could not parse file \"%1\"."
+#~ msgstr "Kan inte tolka filen \"%1\"."
+
+#~ msgid "No active graph in this document."
+#~ msgstr "Ingen aktiv graf i dokumentet."
+
+#~ msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgstr "Kan inte öppna filen %1 för att skriva dokument. Fel: %2"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "GML File Backend"
+#~ msgstr "Gränssnitt för GML-fil"
+
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "Läs och skriv Graph Markup Language-filer (GML)."
+
+#~ msgid "*.gml|Graph Markup Language Format"
+#~ msgstr "*.gml|Graph Markup Language-format"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "KML File Backend"
+#~ msgstr "Gränssnitt för KML-fil"
+
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "Läs och skriv Keyhole Markup Language-filer (KML)."
+
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "*.kml|Keyhole Markup Language-format"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "Kan inte öppna filen %1: %2"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "TGF File Backend"
+#~ msgstr "Gränssnitt för TGF-fil"
+
+#~ msgid "Read and write Trivial Graph Format (TGF) files."
+#~ msgstr "Läs och skriv Trivial Graph Format-filer (TGF)."
+
+#~ msgid "*.tgf|Trivial Graph Format"
+#~ msgstr "*.tgf|Trivial Graph-format"
+
+#~ msgid "Could not parse file. Identifier \"%1\" is used more than once."
+#~ msgstr "Kunde inte tolka fil. Identifieraren \"%1\" används mer än en gång."
+
+#~ msgid ""
+#~ "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
+#~ msgstr ""
+#~ "Kunde inte tolka fil. Båge från \"%1\" till \"%2\" använder odefinierade "
+#~ "noder."
+
+#~ msgid "Could not open file \"%1\" in write mode: %2"
+#~ msgstr "Kan inte öppna filen \"%1\" för skrivning: %2"
+
+#~ msgid "No data structure specified for output in this document."
+#~ msgstr "Ingen datastruktur specificerad för utmatning i dokumentet."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "PGF/TikZ Export File Backend"
+#~ msgstr "Gränssnitt för PGF/TikZ-exportfil"
+
+#~ msgid "Export graph documents in PGF/TikZ format."
+#~ msgstr "Exportera grafdokument med PGF/TikZ-format."
+
+#~ msgid "*.pgf|TikZ (PGF) Format"
+#~ msgstr "*.pgf|TikZ (PGF)-format"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr "Gränssnitt för Rocs-graffil"
+
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "Läs och skriv Rocs-graffiler"
+
+#~ msgid "*.graph|Rocs Graph File Format"
+#~ msgstr "*.graph|Rocs-graffilformat"
+
+#~ msgid "Could not write data, aborting. Error: %1."
+#~ msgstr "Kunde inte skriva data, avbryter. Fel: %1."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "Grafstruktur"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "y"
+
+#~ msgid "Size"
+#~ msgstr "Storlek"
+
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Graph"
+#~ msgstr "Graf"
+
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "Multigraf"
+
+#~ msgid ""
+#~ "This action will probably remove some edges. Do you want to continue?"
+#~ msgstr "Åtgärden tar troligtvis bort några bågar. Vill du fortsätta?"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Linked List Structure"
+#~ msgstr "Länkad liststruktur"
+
+#~ msgid "Front value"
+#~ msgstr "Första värde"
+
+#~ msgid "Data '%1' has more than one out pointer."
+#~ msgstr "Data '%1' har mer än en utpil,"
+
+#~ msgid "Cannot convert document '%1'"
+#~ msgstr "Kan inte konvertera dokumentet '%1'"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "RootedTree Structure"
+#~ msgstr "Rotad trädstruktur"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show all pointers"
+#~ msgstr "Visa alla pilar"
+
+#~ msgid "There are cycles at node %1. Data will be lost by conversion."
+#~ msgstr ""
+#~ "Det finns cykler för nod %1. Data kommer att gå förlorad med konvertering."
+
+#~ msgid "Cannot open file %1."
+#~ msgstr "Kan inte öppna filen %1."
+
+#~ msgid "Invalid include directive: %1. Cannot find file in directive."
+#~ msgstr ""
+#~ "Ogiltigt deklarationsdirektiv: %1. Kan inte hitta filen i direktivet."
+
+#~ msgid "New File"
+#~ msgstr "Ny fil"
+
+#~ msgid "Untitled%1"
+#~ msgstr "Namnlös %1"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid "v=%1"
+#~ msgstr "v=%1"
+
+#~| msgid "untitled %1"
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "namnlös %1"
+
+#~ msgid "Main Definitions"
+#~ msgstr "Huvuddefinitioner"
+
+#~ msgid "Set the name visible"
+#~ msgstr "Gör namnet synligt"
+
+#~ msgid "Value:"
+#~ msgstr "Värde:"
+
+#~ msgid "Set the value visible"
+#~ msgstr "Gör värdet synligt"
+
+#~ msgid "Appearance"
+#~ msgstr "Utseende"
+
+#~ msgid "Enable Color"
+#~ msgstr "Aktivera färg"
+
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "Specifika datastrukturegenskaper"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Add new dynamic property to data element.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Lägg till ny dynamisk egenskap i dataelement.</p></"
+#~ "body></html>"
+
+#~ msgid "Visible"
+#~ msgstr "Synlig"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of data elements"
+#~ msgstr "Visa namn på dataelementen"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of data elements"
+#~ msgstr "Visa värden för dataelement"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of pointers"
+#~ msgstr "Visa pilarnas namn"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of pointers"
+#~ msgstr "Visa pilarnas värden"
+
+#~ msgid "Data structure name"
+#~ msgstr "Datastrukturnamn"
+
+#~ msgid ""
+#~ "Delete the current data structure: delete all data elements and all "
+#~ "pointers"
+#~ msgstr ""
+#~ "Ta bort den nuvarande datastrukturen: ta bort alla dataelement och alla "
+#~ "pilar"
+
+#~ msgid "rocsdeletegrey"
+#~ msgstr "rocs ta bort grå"
+
+#~ msgid "Identifier:"
+#~ msgstr "Identifierare:"
+
+#~ msgid "This is the unique identifier for the data type."
+#~ msgstr "Det här är den unika identifieraren för datatypen."
+
+#~ msgid "Icon:"
+#~ msgstr "Ikon:"
+
+#~ msgid "Delete"
+#~ msgstr "Ta bort"
+
+#~ msgctxt "@action:button"
+#~ msgid "Add Data Structure"
+#~ msgstr "Lägg till datastruktur"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "Exportera projekt"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "Importera projekt"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "Ange namn"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "Spara graf"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "Spara skript"
+
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "Ange projektnamn"
+
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "Namn:"
+
+#~ msgid ""
+#~ "*.js|Rocs script documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.js|Rocs skriptdokument\n"
+#~ "*|Alla filer"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "Spara skriptdokument"
+
+#~ msgid "*.tar.gz|Import from tar.gz Archive"
+#~ msgstr "*.tar.gz|Importera från tar.gz-arkiv"
+
+#~ msgctxt "@title:window"
+#~ msgid "Project Archive to Import"
+#~ msgstr "Projektarkiv att importera"
+
+#~ msgctxt "@title:window"
+#~ msgid "Select Project Directory for Import"
+#~ msgstr "Välj projektkatalog för import"
+
+#~ msgid "*.tar.gz|Export as tar.gz Archive"
+#~ msgstr "*.tar.gz|Exportera som tar.gz-arkiv"
+
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "Exportera projekt"
+
+#~ msgid "Edge Properties"
+#~ msgstr "Bågegenskaper"
+
+#~ msgid "Edge name"
+#~ msgstr "Bågnamn"
+
+#~ msgid "Edge color"
+#~ msgstr "Bågfärg"
+
+#~ msgid "Edge value"
+#~ msgstr "Bågvärde"
+
+#~ msgid "Edge width"
+#~ msgstr "Bågbredd"
+
+#~ msgid "Show"
+#~ msgstr "Visa"
+
+#~ msgid "Show/hide edge name"
+#~ msgstr "Visa eller dölj bågnamn"
+
+#~ msgid "Show/add edge value"
+#~ msgstr "Visa eller lägg till bågvärde"
+
+#~ msgid "Add Property"
+#~ msgstr "Lägg till egenskap"
+
+#~ msgid "Global"
+#~ msgstr "Global"
+
+#~ msgid "add"
+#~ msgstr "lägg till"
+
+#~ msgid "This is the unique identifier for the pointer type."
+#~ msgstr "Det här är den unika identifieraren för piltypen."
+
+#~ msgid "dot"
+#~ msgstr "punkt"
+
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "Oriktad graf"
+
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "Riktad graf"
+
+#~ msgctxt ""
+#~ "@label:inlistbox Undirected graph for which several edges between same "
+#~ "nodes may exist"
+#~ msgid "Undirected Multigraph"
+#~ msgstr "Oriktad multigraf"
+
+#~ msgctxt ""
+#~ "@label:inlistbox Directed graph for which several same orientated edges "
+#~ "between same nodes may exist"
+#~ msgid "Directed Multigraph"
+#~ msgstr "Riktad multigraf"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save GML files"
+#~ msgstr "Öppna och spara GML-filer"
+
+#~ msgid "Open and Save Graph Documents in Trivial Graph Format"
+#~ msgstr "Öppna och spara grafdokument med Trivial Graph-format"
+
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Graffiler\n"
+#~ "*|Alla filer"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Graph File to Project"
+#~ msgstr "Lägg till befintlig graffil i projekt"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "Importera Rocs-graf"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "Spara graf som"
+
+#~ msgid "Cannot open the file: %1. Error %2"
+#~ msgstr "Kan inte öppna filen: %1. Fel %2"
+
+#~ msgid "Could not parse Graphviz file due to syntax errors."
+#~ msgstr "Kunde inte tolka Graphviz-filen på grund av syntaxfel."
+
+#~ msgid "Graphviz parser returned unsuccessfully for file."
+#~ msgstr "Graphviz-tolken returnerade utan att lyckas för filen."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save Plain TXT files"
+#~ msgstr "Öppna och spara vanliga textfiler"
+
+#~ msgid "*.txt|Plain TXT Files"
+#~ msgstr "*.txt|Vanliga TXT-filer"
+
+#~| msgid "Add"
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "Lägg till"
+
+#~ msgid "Identifier for new Data Structure"
+#~ msgstr "Identifierare för ny datastruktur"
+
+#~ msgid "Add Node"
+#~ msgstr "Lägg till nod"
+
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "Namn:"
+
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "Centrera"
+
+#~ msgctxt "align elements at top"
+#~ msgid "Top"
+#~ msgstr "Uppåt"
+
+#~ msgctxt "align elements left"
+#~ msgid "Left"
+#~ msgstr "Vänster"
+
+#~ msgctxt "align elements right"
+#~ msgid "Right"
+#~ msgstr "Höger"
+
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Cirkel"
+
+#~ msgctxt "align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Minimera korsande bågar"
+
+#~ msgid ""
+#~ "*.js|Rocs script document\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.js|Rocs skriptdokument\n"
+#~ "*|Alla filer"
+
+#, fuzzy
+#~| msgid "Type:"
+#~ msgid "Type Icon:"
+#~ msgstr "Typ:"
+
+#, fuzzy
+#~| msgid "Export graphs to file"
+#~ msgid "Export as new Type"
+#~ msgstr "Exportera grafer till fil"
+
+#~ msgid "Open Script"
+#~ msgstr "Öppna skript"
+
+#~ msgid "Edit"
+#~ msgstr "Redigera"
+
+#~ msgid "Pointer"
+#~ msgstr "Pilar"
+
+#~ msgid "Delete the active graph"
+#~ msgstr "Ta bort aktiv graf"
+
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "type"
+#~ msgstr "typ"
+
+#~ msgid "Apply to all nodes"
+#~ msgstr "Använd för alla noder"
+
+#~ msgid "Set default color for pointers"
+#~ msgstr "Ange förvald färg för pilar"
+
+#~ msgid "Close"
+#~ msgstr "Stäng"
+
+#~ msgid "Set default color for data elements"
+#~ msgstr "Ange förvald färg för dataelement"
+
+#~ msgid "Image"
+#~ msgstr "Bild"
+
+#~ msgid "Untitled0"
+#~ msgstr "Namnlös 0"
+
+#~ msgid "Open Graph"
+#~ msgstr "Öppna graf"
+
+#~ msgid "Save All"
+#~ msgstr "Spara alla"
+
+#~ msgid "New"
+#~ msgstr "Ny"
+
+#~ msgid "Color for new nodes"
+#~ msgstr "Färg på nya noder"
+
+#~ msgid "Pointer Color:"
+#~ msgstr "Pilfärg:"
+
+#~ msgid "Color for new edges"
+#~ msgstr "Färg på nya bågar"
+
+#~ msgid "Apply the current color to all nodes"
+#~ msgstr "Använd aktuell färg för alla noder"
+
+#~ msgid "Apply the current color to all nodes on the drawing area"
+#~ msgstr "Använd aktuell färg för alla noder på ritområdet"
+
+#~ msgid "All"
+#~ msgstr "Alla"
+
+#~ msgid "Apply the current color to all edges"
+#~ msgstr "Använd aktuell färg för alla bågar"
+
+#~ msgid "Apply the current color to all edges on the drawing area"
+#~ msgstr "Använd aktuell färg för alla bågar på ritområdet"
+
+#~ msgid "Align on the base"
+#~ msgstr "Justera till grundlinje"
+
+#~ msgid "Align on the center"
+#~ msgstr "Centrera"
+
+#~ msgid "Align on the top"
+#~ msgstr "Justera uppåt"
+
+#~ msgid "Align on the left"
+#~ msgstr "Justera åt vänster"
+
+#~ msgid "Align on the right"
+#~ msgstr "Justera åt höger"
+
+#~ msgid "Align on a circle"
+#~ msgstr "Justera längs en cirkel"
+
+#~ msgid "Tree"
+#~ msgstr "Träd"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Ignoring line: %1"
+#~ msgstr "Ignorerar rad: %1"
+
+#~ msgid "debug(\"Cannot open file %1.\")"
+#~ msgstr "avlusning(\"Kan inte öppna filen %1.\")"
+
+#~ msgid "debug(\"Cannot open file %1.\")\n"
+#~ msgstr "avlusa(\"Kan inte öppna filen %1.\")\n"
+
+#~ msgid "Add Random Integer Values"
+#~ msgstr "Tilldela slumpmässiga heltalsvärden"
+
+#~ msgid "Add Random Float Values"
+#~ msgstr "Tilldela slumpmässiga flyttalsvärden"
+
+#~ msgid "(c) 2009"
+#~ msgstr "© 2009"
+
+#~ msgid "Do you want to save your unsaved document?"
+#~ msgstr "Vill du spara det osparade dokumentet?"
+
+#~ msgid "Select Items by clicking on them."
+#~ msgstr "Markera objekt genom att klicka på dem."
+
+#~ msgid "Moves a node around the drawing area."
+#~ msgstr "Flyttar omkring en nod på ritområdet."
+
+#~ msgid "Make Complete"
+#~ msgstr "Gör fullständig"
+
+#~ msgid "cancel"
+#~ msgstr "avbryt"
+
+#~ msgid "assign values"
+#~ msgstr "tilldela värden"
+
+#~ msgid "start transform"
+#~ msgstr "börja transformera"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialogruta"
+
+#~ msgid "Radius:"
+#~ msgstr "Radie:"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Complete"
+#~ msgstr "Fullständig"
+
+#~ msgctxt "Do not translate, X is for delete"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Graph is oriented"
+#~ msgstr "Grafen är orienterad"
+
+#~ msgid "Name: %1"
+#~ msgstr "Namn: %1"
+
+#~ msgid "Value: %1"
+#~ msgstr "Värde: %1"
+
+#~ msgid "Save Graph As..."
+#~ msgstr "Spara graf som..."
+
+#~ msgid "Save Script As..."
+#~ msgstr "Spara skript som..."
+
+#~ msgid "cola@uni-paderborn.de"
+#~ msgstr "cola@uni-paderborn.de"
+
+#~ msgid "Ring Graph"
+#~ msgstr "Ringgraf "
+
+#~ msgid "UntitledDoc"
+#~ msgstr "Namnlöst dokument"
+
+#~ msgid "Thanks to Ugo Sangiori"
+#~ msgstr "Tack till Ugo Sangiori"
+
+#~ msgid "Edge Color:"
+#~ msgstr "Bågfärg:"
+
+#~ msgid "X-coordinate "
+#~ msgstr "X-koordinat "
+
+#~ msgid "Y-coordinate "
+#~ msgstr "Y-koordinat "
+
+#~ msgid "Node size"
+#~ msgstr "Nodstorlek"
+
+#~ msgid "Begin"
+#~ msgstr "Början"
+
+#~ msgid "End"
+#~ msgstr "Slut"
+
+#~ msgid "Graph is Automate"
+#~ msgstr "Grafen är automat"
+
+#~ msgid " Is begin"
+#~ msgstr " Är början"
+
+#~ msgid " Is End"
+#~ msgstr " Är slutet"
+
+#~ msgid ""
+#~ "<html><p>KPluginFactory could not load the plugin:<br/><i>%1</i></p></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><p>KPluginFactory kunde inte ladda insticksprogrammet:<br/><i>%1</"
+#~ "i></p></html>"
+
+#~ msgid "Wagner Reck - wagner.reck@gmail.com"
+#~ msgstr "Wagner Reck - wagner.reck@gmail.com"
+
+#~ msgid "Add Components"
+#~ msgstr "Lägg till komponenter"
+
+#~| msgid ""
+#~| "remove all edges of the graphs and add news one to make graphs completes"
+#~ msgid ""
+#~ "Remove all the edges from a graph, and add new ones to make it complete."
+#~ msgstr ""
+#~ "Ta bort alla bågar från en graf och lägg till nya för att göra den "
+#~ "fullständig."
+
+#~ msgid "Add edges and make graph complete."
+#~ msgstr "Lägg till bågar och gör grafer fullständiga."
+
+#~ msgid "Oriented graph"
+#~ msgstr "Orienterad graf"
+
+#~ msgid "Enabling this button will make the graph oriented."
+#~ msgstr "Att aktivera knappen gör grafen riktad."
+
+#~ msgid "Automaton Graph"
+#~ msgstr "Automatgraf"
+
+#~ msgid "Enabling this button will make the graph an automaton graph."
+#~ msgstr "Att aktivera knappen gör grafen till en automatgraf."
+
+#~ msgid "Enabling this button will show the names of all nodes."
+#~ msgstr "Att aktivera knappen visar alla nodnamn."
+
+#~ msgid "Show all edges' names"
+#~ msgstr "Visa alla bågars namn"
+
+#~ msgid "Enabling this button will show the names of all edges."
+#~ msgstr "Att aktivera knappen visar alla bågnamn."
+
+#~ msgid "Show all nodes' values"
+#~ msgstr "Visa alla noders värden"
+
+#~ msgid "Enabling this button will show the values of all nodes."
+#~ msgstr "Att aktivera knappen visar alla nodvärden."
+
+#~ msgid "Show all edges' values"
+#~ msgstr "Visa alla bågars värden"
+
+#~ msgid "Enabling this button will show the values of edges."
+#~ msgstr "Att aktivera knappen visar alla bågars värden."
+
+#~ msgid "Double Linked List"
+#~ msgstr "Dubbellänkad lista"
+
+#~ msgid "Binary Tree"
+#~ msgstr "Binärt träd"
+
+#, fuzzy
+#~| msgid "x"
+#~ msgctxt "X-coordinate "
+#~ msgid "x:"
+#~ msgstr "x"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgid "Node name"
+#~ msgstr "Stefan Asserhäll"
+
+#~ msgid "Draw the graphics using the fastest (but ugliest) method. "
+#~ msgstr "Rita grafiken med den snabbaste (men fulaste) metoden. "
+
+#~ msgid "long explanation needed. "
+#~ msgstr "lång förklaring behövs "
+
+#~ msgid " The Right Size of the Cell "
+#~ msgstr " Cellens rätta storlek "
+
+#~ msgid " long  explanation needed "
+#~ msgstr " lång förklaring behövs "
+
+#~ msgid " the Top Size of the cell "
+#~ msgstr " cellens största storlek "
+
+#~ msgid " long explanation needed "
+#~ msgstr " lång förklaring behövs "
+
+#~ msgid "show"
+#~ msgstr "visa"
+
+#~ msgid "Enabling this button will show all names in edges"
+#~ msgstr "Att aktivera knappen visar alla bågarnas namn"
+
+#~ msgid "enabling this button will show all values in nodes"
+#~ msgstr "Att aktivera knappen visar alla värden i noder"
+
+#~ msgid ""
+#~ "Creates a simple Graph, without multiple edges and without an edge to a "
+#~ "note from the same node."
+#~ msgstr ""
+#~ "Skapar en enkel graf, utan flera bågar och utan en båge till en "
+#~ "anteckning från samma nod."
+
+#~ msgid "KSqueezedTextLabel"
+#~ msgstr "KSqueezedTextLabel"
+
+#~ msgid "ScrollArea"
+#~ msgstr "Panoreringsområde"
+
+#~ msgid "X"
+#~ msgstr "X"
+
+#~ msgid "Node:"
+#~ msgstr "Nod:"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "Name of the property"
+#~ msgstr "Egenskapens namn"
+
+#~ msgid "Value of the property"
+#~ msgstr "Egenskapens värde"
+
+#~ msgid "ok"
+#~ msgstr "Ok"
+
+#~ msgid "Smart Tool"
+#~ msgstr "Smart verktyg"
+
+#~ msgid "Tries to do what it thinks that's good for the soul."
+#~ msgstr "Försöker göra vad det tycker är bra för själen."
+
+#~ msgid "Does Nothing."
+#~ msgstr "Gör ingenting."

@@ -1,0 +1,2153 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Kiszel Kristóf <ulysses@kubuntu.org>, 2010, 2012.
+# Balázs Úr <urbalazs@gmail.com>, 2012, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2013-07-13 11:59+0200\n"
+"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Kiszel Kristóf"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "ulysses@kubuntu.org"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgctxt "@title KAboutData: short program description"
+#| msgid "Graph Theory Tool"
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "Gráfelméleti program"
+
+#: main.cpp:32
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "(c) 2009-2013 Rocs Developers"
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr "© A Rocs fejlesztői, 2009-2013."
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr ""
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr ""
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "Fejlesztő"
+
+#: main.cpp:57
+#, fuzzy, kde-format
+#| msgid "Project Journal"
+msgid "Project to open."
+msgstr "Projektnapló"
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "Szintaxis"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "Tulajdonságok"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "Paraméterek"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "Paraméter"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "Metódusok"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "Típus"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr "Visszatérési típus"
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr "Részletes leírás"
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "Leírás"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "Szkript motor API"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "New Graph Document"
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "Új gráfdokumentum"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "Objektumok"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Script Engine Components"
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "Szkript motor komponensek"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr "Szkript objektumok"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "Tulajdonságok"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "Metódusok"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "Rocs szkriptelés API"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Szöveg az ikon mellett"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Az elérési út, ahol a Beágyazáskezelő a fájlokat keresi."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Projekt"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Szkriptdokumentum"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Gráfdokumentum"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Gráffájl"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "A kijelölt adat szerkesztése"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Elrendezés"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Eszközök"
+
+#: ui/codeeditorwidget.cpp:81
+#, fuzzy, kde-format
+#| msgid "Graph Document"
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "Gráfdokumentum"
+
+#: ui/codeeditorwidget.cpp:82
+#, fuzzy, kde-format
+#| msgid "Enter the name of your new script"
+msgid "Enter the name of your code document"
+msgstr "Adja meg az új szkriptje nevét"
+
+#: ui/documenttypeswidget.cpp:29
+#, fuzzy, kde-format
+#| msgctxt "@title:tab"
+#| msgid "Pointer Types"
+msgctxt "@title"
+msgid "Node Types"
+msgstr "Mutatótípusok"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, fuzzy, kde-format
+#| msgid "Create new Data Type"
+msgid "Create Type"
+msgstr "Új adattípus létrehozása"
+
+#: ui/documenttypeswidget.cpp:45
+#, fuzzy, kde-format
+#| msgid "Edge style"
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "Élstílus"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr ""
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "Exportálás"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+"<p>Már létezik <br /><strong>„%1”</strong><br /> nevű fájl. Ha nem akarja "
+"felülírni, változtassa meg a fájl nevét valami másra.</p>"
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "A fájl létezik"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|Minden fájl"
+
+#: ui/fileformatdialog.cpp:116
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Import Graph File into Project"
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "Gráffájl importálása a projektbe"
+
+#: ui/grapheditorwidget.cpp:79
+#, fuzzy, kde-format
+#| msgid "Graph Document"
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "Gráfdokumentum"
+
+#: ui/grapheditorwidget.cpp:80
+#, fuzzy, kde-format
+#| msgid "Enter the name of your new script"
+msgid "Enter the name of your graph document"
+msgstr "Adja meg az új szkriptje nevét"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Projektnapló"
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "Futtatás"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr ""
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "Leállítás"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr ""
+
+#: ui/mainwindow.cpp:175
+#, fuzzy, kde-format
+#| msgctxt "@title:menu Debug execution"
+#| msgid "Debug"
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "Hibakeresés"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr ""
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr "Elemtípusok"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "Napló"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "Szkriptelés API"
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "Új projekt"
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "Projekt mentése"
+
+#: ui/mainwindow.cpp:269
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Open Project"
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "Projekt megnyitása"
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "Legutóbbi projektek"
+
+#: ui/mainwindow.cpp:282
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Save Project as"
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "Projekt mentése másként"
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "Új gráfdokumentum"
+
+#: ui/mainwindow.cpp:284
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "New Script File"
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "Új szkriptfájl"
+
+#: ui/mainwindow.cpp:285
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Graph"
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "Gráf importálása"
+
+#: ui/mainwindow.cpp:286
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Graph as"
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "Gráf exportálása másként"
+
+#: ui/mainwindow.cpp:287
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Script"
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "Szkript importálása"
+
+#: ui/mainwindow.cpp:288
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Script as"
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "Szkript exportálása másként"
+
+#: ui/mainwindow.cpp:327
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Import Graph File into Project"
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "Gráffájl importálása a projektbe"
+
+#: ui/mainwindow.cpp:340
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Script as"
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "Szkript exportálása másként"
+
+#: ui/mainwindow.cpp:340
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Save Script as"
+msgid "JavaScript (*.js)"
+msgstr "Szkript mentése másként"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "névtelen"
+
+#: ui/mainwindow.cpp:374
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Save Project as"
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "Projekt mentése másként"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+
+#: ui/mainwindow.cpp:385
+#, fuzzy, kde-format
+#| msgid "Overwrite"
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "Felülírás"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "Projektfájlok megnyitása"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:433
+#, fuzzy, kde-format
+#| msgctxt "caption text for temporary project"
+#| msgid "[ untitled ]"
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "[ névtelen ]"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr "Szkriptnév"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr "Adja meg az új szkriptje nevét"
+
+#: ui/mainwindow.cpp:471
+#, fuzzy, kde-format
+#| msgid "File Exists"
+msgid "File already exists."
+msgstr "A fájl létezik"
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr ""
+"A projekt változtatásai nincsenek elmentve. Szeretné menteni a "
+"változtatásokat?"
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, fuzzy, kde-format
+#| msgid "Script Output:"
+msgid "Script output:"
+msgstr "Szkript kimenet:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Program kimenetének törlése minden végrehajtásnál."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Hibakereső kimenet megjelenítése."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Kimenet törlése."
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "Oldal eszköztár"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr "„%1” nézet váltása."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Projekt mentése másként"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Overwrite"
+#~ msgstr "Felülírás"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Alap eszköztár"
+
+#~ msgid "Align Toolbar"
+#~ msgstr "Igazítás eszköztár"
+
+#~ msgid "Rocs Handbook"
+#~ msgstr "Rocs kézikönyv"
+
+#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+#~ msgstr "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "Kézikönyv"
+
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "Adatstruktúrák"
+
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs - Adatstruktúra-analízis"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr "Nem található az Adatstruktúra bővítmény, kilépés…"
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "A Rocs legalább egy adatstruktúra bővítményt igényel a folytatáshoz.\n"
+#~ "Próbálja futtatni a „kbuildsyscoca4” parancsot terminálban, majd indítsa "
+#~ "a Rocsot újból."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr "A csúcsok nevének és értékének megjelenítési pozíciója."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Az élek nevének és értékének megjelenítési pozíciója."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr "Megjelenjen-e a hibakövető végrehajtás gombja."
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr "Megjelenjen-e a lépésenkénti végrehajtás gombja."
+
+#~ msgid "Script File"
+#~ msgstr "Szkriptfájl"
+
+#~ msgid "Convert To"
+#~ msgstr "Konvertálás erre:"
+
+#~ msgid "Settings"
+#~ msgstr "Beállítások"
+
+#~ msgid "Help"
+#~ msgstr "Súgó"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "A KDE szövegszerkesztő nem található, \n"
+#~ " ellenőrizze a telepítését"
+
+#~ msgid "Display of Element Properties"
+#~ msgstr "Elemtulajdonságok megjelenítése"
+
+#~ msgid "Data Properties"
+#~ msgstr "Adat tulajdonságok"
+
+#~ msgid "centered"
+#~ msgstr "középen"
+
+#~ msgid "below"
+#~ msgstr "alul"
+
+#~ msgid "above"
+#~ msgstr "felül"
+
+#~ msgid "Connection Properties"
+#~ msgstr "Csatlakozás tulajdonságok"
+
+#~ msgid "Execution Controls"
+#~ msgstr "Végrehajtás vezérlők"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Hibakövető futtatás megjelenítése"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Egy lépéses végrehajtás megjelenítése"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Tulajdonságok"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Mutatók láthatóságának beállítása"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Gráfok exportálása fájlba"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "Betöltött bővítmények"
+
+#~ msgid "Graph File Plugins loaded for %1"
+#~ msgstr "Gráf fájl bővítmények betöltve ehhez: %1"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|Szkriptfájlok"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Rocs szkriptfájlok"
+
+#~ msgid "Add your description here."
+#~ msgstr "Leírása hozzáadása itt."
+
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "Lépésenként"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Hibakeresési futtatás"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "Megszakítás az első sornál"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Példák letöltése"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Projekt feltöltése"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Beágyazható fájlok"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "Betöltött bővítmények"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Code Editor..."
+#~ msgstr "Kódszerkesztő beállításai…"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Beágyazáskezelő"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Alapértelmezett beállítások"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Meglévő szkriptfájl hozzáadása a projekthez"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "Ez a fájl nem tűnik gráffájlnak."
+
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Érvénytelen fájl"
+
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs|Rocs projektfájlok\n"
+#~ "*.rocsz|Tömörített Rocs projektfájlok\n"
+#~ "* |Minden fájl"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Projekt mentése"
+
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*rocs *.rocsz|Minden Rocs fájl\n"
+#~ "*.rocs|Rocs projektfájlok\n"
+#~ "*.rocsz|Tömörített Rocs projektfájlok\n"
+#~ "*|Minden fájl"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr "*.graph|Rocs gráfdokumentum| *|Minden fájl"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Gráfdokumentum mentése"
+
+#~ msgid "Graph name"
+#~ msgstr "Gráfnév"
+
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Adja meg gráf nevét"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Beágyazható fájlok a Szkript modulhoz"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your graph document are unsaved. Do you want to save your "
+#~ "changes?"
+#~ msgstr ""
+#~ "A gráfdokumentum változtatásai nincsenek elmentve. Szeretné menteni a "
+#~ "változtatásokat?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files are unsaved. Do you want to save all unsaved "
+#~ "scripts?"
+#~ msgstr ""
+#~ "A szkriptfájlok változtatásai nincsenek elmentve. Szeretné menteni az "
+#~ "összes nem mentett szkriptet?"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files and on your graph document are unsaved. Do "
+#~ "you want to save your graph document and all unsaved scripts?"
+#~ msgstr ""
+#~ "A szkriptfájlok és a gráfdokumentum változtatásai nincsenek elmentve. "
+#~ "Szeretné menteni az a gráfdokumentumot és az összes nem mentett szkriptet?"
+
+#~ msgid "Default Information Display"
+#~ msgstr "Alapértelmezett információmegjelenítés"
+
+#~ msgid "Node Information"
+#~ msgstr "Csúcsokon:"
+
+#~ msgid "Edge Information"
+#~ msgstr "Éleken:"
+
+#~ msgid "Display debug messages."
+#~ msgstr "Hibakövetési üzenetek megjelenítése."
+
+#~ msgid "Untitled"
+#~ msgstr "Névtelen"
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "Elrendezés eszköztár"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "Adat hozzáadása"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Data"
+#~ msgstr "Adat hozzáadása"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "Új adatelem hozzáadása"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Add Connection"
+#~ msgstr "Kapcsolat hozzáadása"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Connection"
+#~ msgstr "Kapcsolat hozzáadása"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new connection between two data elements of selected type"
+#~ msgstr "Új kapcsolat hozzáadása a kijelölt típus két adateleme között"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Base"
+#~ msgstr "Alapvonalra"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "Középre"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Top"
+#~ msgstr "Felülre"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Left"
+#~ msgstr "Balra"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Right"
+#~ msgstr "Jobbra"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "Körbe"
+
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Keresztező szélek minimalizálása"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "Törlés"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "Szél hozzáadása"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new edge between 2 nodes"
+#~ msgstr "Egy új szél hozzáadása 2 csomópont között"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add %1"
+#~ msgstr "%1 hozzáadása"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position."
+#~ msgstr "Új csúcs létrehozása a kattintás helyén."
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position on the drawing area."
+#~ msgstr "Új csúcs létrehozása a kattintás helyén a rajzterületen."
+
+#~ msgid "Add %1"
+#~ msgstr "%1 hozzáadása"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "Elemek törlése rájuk kattintáskor."
+
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "Adattípus tulajdonságok"
+
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Mutatótípus tulajdonságok"
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "Áthelyezés"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Select and move items."
+#~ msgstr "Elemek kijelölése és áthelyezése."
+
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Zoom"
+#~ msgstr "Nagyítás"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Zoom the canvas by the wheel, or by dragging."
+#~ msgstr "A vászon nagyítása a görgővel vagy húzással."
+
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "Tulajdonságok"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "Gráfdokumentum:"
+
+#~ msgid "Data Structure:"
+#~ msgstr "Adatstruktúra:"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new data structure."
+#~ msgstr "Új adatstruktúra hozzáadása."
+
+#, fuzzy
+#~| msgid "Remove selected data type."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "A kijelölt adattípus eltávolítása."
+
+#~ msgctxt "@info:tooltip current zoom factor for graph editor"
+#~ msgid "Zoom: %1\\%"
+#~ msgstr "Nagyítás: %1\\%"
+
+#~ msgid "Edit Data Types"
+#~ msgstr "Adattípusok szerkesztése"
+
+#~ msgid "Static Properties"
+#~ msgstr "Statikus tulajdonságok"
+
+#~ msgid "Node color"
+#~ msgstr "Csomópont "
+
+#~ msgid "Color:"
+#~ msgstr "Szín:"
+
+#~ msgid "Type:"
+#~ msgstr "Típus:"
+
+#~ msgid "Dynamic Properties"
+#~ msgstr "Dinamikus tulajdonságok"
+
+#~ msgid "Name:"
+#~ msgstr "Név:"
+
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "Adatstruktúra-modul:"
+
+#, fuzzy
+#~| msgctxt "@title:window"
+#~| msgid "Data Structure Properties"
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "Adatstruktúra tulajdonságok"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Data Structure"
+#~ msgstr "Adatstruktúra"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Data Types"
+#~ msgstr "Adattípusok"
+
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "Adatstruktúra tulajdonságok"
+
+#~ msgid "Name"
+#~ msgstr "Név"
+
+#~ msgid "Default Value"
+#~ msgstr "Alapértelmezett érték"
+
+#~ msgid "Display"
+#~ msgstr "Megjelenítés"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "%1 (ID %2)"
+#~ msgstr "%1 (Azonosító: %2)"
+
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "tulajdonság%1"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Data Type"
+#~ msgstr "Adattípus"
+
+#~ msgid "Select Data Type:"
+#~ msgstr "Adattípus-választás:"
+
+#~ msgid "Remove selected data type."
+#~ msgstr "A kijelölt adattípus eltávolítása."
+
+#~ msgid "Add new data type."
+#~ msgstr "Új adattípus hozzáadása."
+
+#~ msgid "Insert a name for this type"
+#~ msgstr "Adja meg a típus nevét"
+
+#~ msgid "Default Color:"
+#~ msgstr "Alapértelmezett szín:"
+
+#~ msgid "Data Type Properties"
+#~ msgstr "Adattípus tulajdonságok"
+
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "Dokumentumjellemzők"
+
+#~ msgid "Property"
+#~ msgstr "Tulajdonság"
+
+#~ msgid "Value"
+#~ msgstr "Érték"
+
+#, fuzzy
+#~| msgctxt "@title:tab"
+#~| msgid "Pointer Types"
+#~ msgid "Edit Pointer Types"
+#~ msgstr "Mutatótípusok"
+
+#, fuzzy
+#~| msgid "Pointer Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "Mutatótulajdonságok"
+
+#~ msgid "Pointer Properties"
+#~ msgstr "Mutatótulajdonságok"
+
+#~ msgid "Width:"
+#~ msgstr "Szélesség:"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "tömör vonal"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "szaggatott vonal"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dot line "
+#~ msgstr "pontozott vonal "
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash dot line"
+#~ msgstr "vonal-pont vonal"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Unidirectional"
+#~ msgstr "Egyirányú"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Bidirectional"
+#~ msgstr "Kétirányú"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "Kapcsolat"
+
+#~ msgid "Add new pointer type."
+#~ msgstr "Új mutatótípus hozzáadása."
+
+#~ msgid "Select Pointer Type:"
+#~ msgstr "Mutatótípus-választás:"
+
+#~ msgid "Remove selected pointer type."
+#~ msgstr "A kijelölt mutatótípus eltávolítása."
+
+#~ msgid "Style:"
+#~ msgstr "Stílus:"
+
+#, fuzzy
+#~| msgctxt "@title:window"
+#~| msgid "Pointer Type Properties"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Mutatótípus tulajdonságok"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "Adatstruktúra"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Selected"
+#~ msgstr "Kijelölve"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Zoom"
+#~ msgstr "Nagyítás"
+
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "In"
+#~ msgstr "Be"
+
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Out"
+#~ msgstr "Ki"
+
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Reset"
+#~ msgstr "Visszaállítás"
+
+#~ msgid "Align"
+#~ msgstr "Igazítás"
+
+#~ msgctxt "@action:inmenu align elements at bottom"
+#~ msgid "Bottom"
+#~ msgstr "Alulra"
+
+#~ msgctxt "@action:inmenu align elements at center"
+#~ msgid "Center"
+#~ msgstr "Középre"
+
+#~ msgctxt "@action:inmenu align elements at top"
+#~ msgid "Top"
+#~ msgstr "Felülre"
+
+#~ msgctxt "@action:inmenu align elements left"
+#~ msgid "Left"
+#~ msgstr "Balra"
+
+#~ msgctxt "@action:inmenu align elements right"
+#~ msgid "Right"
+#~ msgstr "Jobbra"
+
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Körbe"
+
+#~ msgctxt ""
+#~ "@action:inmenu align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Keresztező szélek minimalizálása"
+
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "Értékek"
+
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Enumerate"
+#~ msgstr "Felsorolás"
+
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Integers"
+#~ msgstr "Véletlenszerű egész számok"
+
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Reals"
+#~ msgstr "Véletlenszerű valós számok"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "Törlés"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "Érték-hozzárendelés"
+
+#~ msgid "Assign Values"
+#~ msgstr "Érték-hozzárendelés"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">List of all data "
+#~ "structures that are of type <span style=\" font-style:italic;\">Graph</"
+#~ "span>.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Az összes <span style="
+#~ "\" font-style:italic;\">gráf</span> típusú adatstruktúra listázása.</p></"
+#~ "body></html>"
+
+#~ msgid "Nodes"
+#~ msgstr "Csúcsok"
+
+#~ msgid "Edges"
+#~ msgstr "Élek"
+
+#~ msgid "Start ID"
+#~ msgstr "Kezdőazonosító"
+
+#~ msgid "Lower Limit"
+#~ msgstr "Alsó korlát"
+
+#~ msgid "Upper Limit"
+#~ msgstr "Felső korlát"
+
+#~ msgid "Generator Seed"
+#~ msgstr "Entrópiagenerátor"
+
+#~ msgid "Enumerate Items"
+#~ msgstr "Felsorolt elemek"
+
+#~ msgid "Assign Random Integers"
+#~ msgstr "Véletlen egész számok hozzárendelése"
+
+#~ msgid "Assign Random Reals"
+#~ msgstr "Véletlen valós számok hozzárendelése"
+
+#~ msgid "Overwrite existing values"
+#~ msgstr "Meglévő értékek felülírása"
+
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "Gráf készítése"
+
+#~ msgctxt "@title:window"
+#~ msgid "Generate Graph"
+#~ msgstr "Gráf készítése"
+
+#~ msgid "Mesh Graph"
+#~ msgstr "Rácsgráf"
+
+#~ msgid "Star Graph"
+#~ msgstr "Csillaggráf"
+
+#~ msgid "Circle Graph"
+#~ msgstr "Körgráf"
+
+#~ msgid "RandomGraph"
+#~ msgstr "Véletlenszerű gráf"
+
+#~ msgid "Generate Graph"
+#~ msgstr "Gráf készítése"
+
+#~ msgid "Graph Type:"
+#~ msgstr "Gráftípus:"
+
+#~ msgid "Random Graph"
+#~ msgstr "Véletlenszerű gráf"
+
+#~ msgid "Erdös-Renyi Graph"
+#~ msgstr "Erdős-Renyi gráf"
+
+#~ msgid "Number of Columns:"
+#~ msgstr "Oszlopok száma:"
+
+#~ msgid "Number of Rows:"
+#~ msgstr "Sorok száma:"
+
+#~ msgid "Satellite Nodes:"
+#~ msgstr "Szatellit csúcs"
+
+#~ msgid "Number of Nodes:"
+#~ msgstr "Csúcsok száma:"
+
+#~ msgid "Nodes:"
+#~ msgstr "Csúcsok:"
+
+#~ msgid "Edges:"
+#~ msgstr "Élek:"
+
+#~ msgid "Allow self-edges:"
+#~ msgstr "Hurokélek engedélyezése:"
+
+#~ msgid "Generator Seed:"
+#~ msgstr "Entrópiagenerátor:"
+
+#~ msgid "Nodes (n):"
+#~ msgstr "Csúcsok (n):"
+
+#~ msgid "Edge Probability (p):"
+#~ msgstr "Él valószínűsége (p):"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Transform Edges"
+#~ msgstr "Szélek átalakítása"
+
+#~ msgctxt "@title:window"
+#~ msgid "Transform Edges"
+#~ msgstr "Szélek átalakítása"
+
+#~ msgid "Transform Edges"
+#~ msgstr "Élek átalakítása"
+
+#~ msgid ""
+#~ "This option connects all nodes of the given graph. The new edges do not "
+#~ "have any preset weights."
+#~ msgstr ""
+#~ "Ez a beállítás összeköti a megadott gráf összes csúcsát. Az új éleknek "
+#~ "nem lesz előre beállított súlya."
+
+#~ msgid "Complete Graph"
+#~ msgstr "Teljes gráf"
+
+#~ msgid "This option removes all edges from the given graph."
+#~ msgstr "Ez a beállítás eltávolítja az összes élt a megadott gráfból."
+
+#~ msgid "Remove all Edges"
+#~ msgstr "Összes él eltávolítása"
+
+#~ msgid ""
+#~ "This option reverses all edges of a directed graph. Note that this does "
+#~ "not apply to undirected graphs."
+#~ msgstr ""
+#~ "Ez a beállítás megfordítja egy irányított gráf összes élét. Nem "
+#~ "alkalmazható irányítatlan gráfokra."
+
+#~ msgid "Reverse all Edges"
+#~ msgstr "Összes él megfordítása"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
+#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
+#~ "Algorithm</span> at the graph. All edges without given weights are "
+#~ "assumed to have weights equals 1. Directed and undirected graphs are "
+#~ "processed accordingly.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Ez a beállítás "
+#~ "végrehajtja <span style=\" font-style:italic;\">Prim minimális feszítőfa "
+#~ "algoritmusát</span> a gráfon. A súly nélküli élek súlyát egynek veszi. Az "
+#~ "irányított és irányítatlan gráfok eszerint lesznek feldolgozva.</p></"
+#~ "body></html>"
+
+#~ msgid "Spanning Tree Transformation"
+#~ msgstr "Feszítőfa-átalakítás"
+
+#~ msgid "Element"
+#~ msgstr "Elem"
+
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "Dokumentum"
+
+#~ msgctxt "dynamic property that is present exactly once"
+#~ msgid "Unique"
+#~ msgstr "Egyedi"
+
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "Többszörös"
+
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "Globális"
+
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "Nincs"
+
+#~ msgid "Group"
+#~ msgstr "Csoport"
+
+#~ msgid "Connection"
+#~ msgstr "Kapcsolat"
+
+#~ msgid "Rocs Console script"
+#~ msgstr "Rocs konzol szkript"
+
+#~ msgid "<b style=\"color: red\"> Error in include file %1</b>"
+#~ msgstr "<b style=\"color: red\">Hiba a(z) %1 fájlban</b>"
+
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "Programüzenetek"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graphviz Graph File Backend"
+#~ msgstr "Graphviz gráf fájl háttérprogram"
+
+#~ msgid "Read and write Graphviz graph files."
+#~ msgstr "Graphviz gráf fájlok olvasása és írása."
+
+#~ msgid "*.dot *.gv|Graphviz Format"
+#~ msgstr "*.dot *.gv|Graphviz formátum"
+
+#~ msgid "Import"
+#~ msgstr "Importálás"
+
+#~ msgid "Could not open file \"%1\" in read mode: %2"
+#~ msgstr "Nem lehet megnyitni a(z) „%1” fájlt olvasási módban: %2"
+
+#~ msgid "Could not parse file \"%1\"."
+#~ msgstr "Nem lehet feldolgozni a(z) „%1” fájlt."
+
+#~ msgid "No active graph in this document."
+#~ msgstr "Nincs aktív gráf a dokumentumban."
+
+#~ msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgstr "Nem lehet megnyitni a(z) %1 fájlt a dokumentum írásához. Hiba: %2"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "GML File Backend"
+#~ msgstr "GML fájl háttérprogram"
+
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "Gráf jelölő nyelv (GML) fájlok olvasása és írása."
+
+#~ msgid "*.gml|Graph Markup Language Format"
+#~ msgstr "*.gml|Gráf jelölő nyelv formátum"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "KML File Backend"
+#~ msgstr "KML fájl háttérprogram"
+
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "Keyhole jelölő nyelv (KML) fájlok olvasása és írása."
+
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "*.kml|Keyhole jelölő nyelv formátum"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "Nem lehet megnyitni a(z) %1 fájlt: %2"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "TGF File Backend"
+#~ msgstr "TGF fájl háttérprogram"
+
+#~ msgid "Read and write Trivial Graph Format (TGF) files."
+#~ msgstr "Trivial gráf formátum (TGF) fájlok olvasása és írása."
+
+#~ msgid "*.tgf|Trivial Graph Format"
+#~ msgstr "*.tgf|Triviális gráf formátum"
+
+#~ msgid "Could not parse file. Identifier \"%1\" is used more than once."
+#~ msgstr ""
+#~ "Nem lehet feldolgozni a fájlt. A(z) „%1” azonosító több mint egyszer van "
+#~ "használva."
+
+#~ msgid ""
+#~ "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
+#~ msgstr ""
+#~ "Nem lehet feldolgozni a fájlt. Az ettől „%1” eddig: „%2” tartó szél nem "
+#~ "meghatározott csomópontokat használ."
+
+#~ msgid "Could not open file \"%1\" in write mode: %2"
+#~ msgstr "Nem lehet megnyitni a(z) „%1” fájlt írás módban: %2"
+
+#~ msgid "No data structure specified for output in this document."
+#~ msgstr ""
+#~ "Nincs adatstruktúra meghatározva a kimenethez ebben a dokumentumban."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "PGF/TikZ Export File Backend"
+#~ msgstr "PGF/TikZ export fájl háttérprogram"
+
+#~ msgid "Export graph documents in PGF/TikZ format."
+#~ msgstr "Gráfdokumentumok exportálása PGF/TikZ formátumba."
+
+#~ msgid "*.pgf|TikZ (PGF) Format"
+#~ msgstr "*.pgf|TikZ (PGF) formátum"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr "Rocs gráf fájl háttérprogram"
+
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "Rocs gráf fájlok olvasása és írása"
+
+#~ msgid "*.graph|Rocs Graph File Format"
+#~ msgstr "*.graph|Rocs gráf fájl formátum"
+
+#~ msgid "Could not write data, aborting. Error: %1."
+#~ msgstr "Nem lehet írni az adatot, megszakítás. Hiba: %1."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "Gráfstruktúra"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "y"
+
+#~ msgid "Size"
+#~ msgstr "Méret"
+
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Graph"
+#~ msgstr "Gráf"
+
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "Többszörös gráf"
+
+#~ msgid ""
+#~ "This action will probably remove some edges. Do you want to continue?"
+#~ msgstr "Ez a művelet valószínűleg töröl néhány élt. Szeretné folytatni?"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Linked List Structure"
+#~ msgstr "Láncolt lista struktúra"
+
+#~ msgid "Front value"
+#~ msgstr "Elülső érték"
+
+#~ msgid "Data '%1' has more than one out pointer."
+#~ msgstr "A(z) „%1” adatnak több mint egy kimenő mutatója van."
+
+#~ msgid "Cannot convert document '%1'"
+#~ msgstr "A(z) „%1” dokumentum nem konvertálható"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "RootedTree Structure"
+#~ msgstr "Gyökeres fa struktúra"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show all pointers"
+#~ msgstr "Összes mutató megjelenítése"
+
+#~ msgid "There are cycles at node %1. Data will be lost by conversion."
+#~ msgstr ""
+#~ "Körök vannak a(z) %1 csúcsnál. A konverziónál adatvesztés történhet."
+
+#~ msgid "Cannot open file %1."
+#~ msgstr "Nem lehet megnyitni a(z) %1 fájlt."
+
+#~ msgid "Invalid include directive: %1. Cannot find file in directive."
+#~ msgstr ""
+#~ "Érvénytelen beágyazási direktíva: %1. Nem található fájl a direktívában."
+
+#~ msgid "New File"
+#~ msgstr "Új fájl"
+
+#~ msgid "Untitled%1"
+#~ msgstr "Névtelen%1"
+
+#~ msgid "Visible"
+#~ msgstr "Látható"
+
+#~ msgid "Data structure name"
+#~ msgstr "Adatstruktúra neve"
+
+#~ msgid "Delete this data structure"
+#~ msgstr "Adatstruktúra törlése"
+
+#~ msgid ""
+#~ "Delete the current data structure: delete all data elements and all "
+#~ "pointers"
+#~ msgstr ""
+#~ "A jelenlegi adatstruktúra törlése: az összes adatelem és mutató törlése"
+
+#~ msgid "rocsdeletegrey"
+#~ msgstr "rocsdeletegrey"
+
+#~ msgid "Display Options:"
+#~ msgstr "Megjelenítési beállítások:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Add Data Structure"
+#~ msgstr "Adatstruktúra hozzáadása"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "Projekt exportálása"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "Projekt importálása"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "Név beállítása"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "Gráf mentése"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "Szkript mentése"
+
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "Projektnév beállítása"
+
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "Név:"
+
+#~ msgid ""
+#~ "*.js|Rocs script documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.js| Rocs szkriptdokumentum\n"
+#~ "*|Minden fájl"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "Szkriptdokumentum mentése"
+
+#~ msgid "*.tar.gz|Import from tar.gz Archive"
+#~ msgstr "*.tar.gz|Importálás tar.gz archívumból"
+
+#~ msgctxt "@title:window"
+#~ msgid "Project Archive to Import"
+#~ msgstr "Importálandó projektarchívum"
+
+#~ msgctxt "@title:window"
+#~ msgid "Select Project Directory for Import"
+#~ msgstr "Válassza ki a projektmappát az importáláshoz"
+
+#~ msgid "*.tar.gz|Export as tar.gz Archive"
+#~ msgstr "*.tar.gz|Exportálás tar.gz archívumként"
+
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "Projekt exportálása"
+
+#~ msgid "Edge Properties"
+#~ msgstr "Éltulajdonságok"
+
+#~ msgid "Edge name"
+#~ msgstr "Élnév"
+
+#~ msgid "Edge color"
+#~ msgstr "Élszín"
+
+#~ msgid "Value:"
+#~ msgstr "Érték:"
+
+#~ msgid "Edge value"
+#~ msgstr "Él értéke"
+
+#~ msgid "Edge width"
+#~ msgstr "Él szélessége"
+
+#~ msgid "Show"
+#~ msgstr "Megjelenítés"
+
+#~ msgid "Show/hide edge name"
+#~ msgstr "Élnév megjelenítése/elrejtése"
+
+#~ msgid "Show/add edge value"
+#~ msgstr "Élérték megjelenítése/hozzáadása"
+
+#~ msgid "Add Property"
+#~ msgstr "Tulajdonság hozzáadása"
+
+#~ msgid "Global"
+#~ msgstr "Globális"
+
+#~ msgid "add"
+#~ msgstr "Hozzáadás"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid "v=%1"
+#~ msgstr "v=%1"
+
+#, fuzzy
+#~| msgid "untitled %1"
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "névtelen %1"
+
+#~ msgid "Main Definitions"
+#~ msgstr "Fő definíciók"
+
+#~ msgid "Set the name visible"
+#~ msgstr "Legyen látható a név"
+
+#~ msgid "Set the value visible"
+#~ msgstr "Legyen látható az érték"
+
+#~ msgid "Appearance"
+#~ msgstr "Megjelenés"
+
+#~ msgid "Enable Color"
+#~ msgstr "Színezés bekapcsolása"
+
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "Adatstruktúra-specifikus tulajdonságok"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Add new dynamic property to data element.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Új dinamikus tulajdonság hozzáadása az adatelemhez."
+#~ "</p></body></html>"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of data elements"
+#~ msgstr "Adatelemek neveinek megjelenítése"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of data elements"
+#~ msgstr "Adatelemek értékeinek megjelenítése"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of pointers"
+#~ msgstr "Mutatók neveinek megjelenítése"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of pointers"
+#~ msgstr "Mutatók értékeinek megjelenítése"
+
+#~ msgid "Identifier:"
+#~ msgstr "Azonosító:"
+
+#~ msgid "This is the unique identifier for the data type."
+#~ msgstr "Ez az adattípus egyedi azonosítója."
+
+#~ msgid "Icon:"
+#~ msgstr "Ikon:"
+
+#~ msgid "Delete"
+#~ msgstr "Törlés"
+
+#~ msgid "This is the unique identifier for the pointer type."
+#~ msgstr "Ez a mutatótípus egyedi azonosítója."
+
+#~ msgid "dot"
+#~ msgstr "pontozott"
+
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "Irányítatlan gráf"
+
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "Irányított gráf"
+
+#~ msgctxt ""
+#~ "@label:inlistbox Undirected graph for which several edges between same "
+#~ "nodes may exist"
+#~ msgid "Undirected Multigraph"
+#~ msgstr "Irányítatlan többszörös gráf"
+
+#~ msgctxt ""
+#~ "@label:inlistbox Directed graph for which several same orientated edges "
+#~ "between same nodes may exist"
+#~ msgid "Directed Multigraph"
+#~ msgstr "Irányított többszörös gráf"
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save GML files"
+#~ msgstr "GML fájlok megnyitása és mentése"
+
+#~ msgid "Open and Save Graph Documents in Trivial Graph Format"
+#~ msgstr "Gráfdokumentumok megnyitása és mentése triviális gráf formátumban"
+
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Gráffájlok\n"
+#~ "*|Összes fájl"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Graph File to Project"
+#~ msgstr "Meglévő gráffájl hozzáadása a projekthez"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "Rocs gráf importálása"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "Gráf mentése másként"
+
+#~ msgid "Cannot open the file: %1. Error %2"
+#~ msgstr "A(z) %1 fájl nem nyitható meg. Hiba: %2."
+
+#~ msgid "Could not parse Graphviz file due to syntax errors."
+#~ msgstr "Szintaktikai hibák miatt nem lehet feldolgozni a Graphviz fájlt."
+
+#~ msgid "Graphviz parser returned unsuccessfully for file."
+#~ msgstr "A Graphviz feldolgozó sikertelenül tért vissza."
+
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save Plain TXT files"
+#~ msgstr "Egyszerű TXT fájlok megnyitása és mentése"
+
+#~ msgid "*.txt|Plain TXT Files"
+#~ msgstr "*.txt|Sima TXT fájlok"
+
+#~| msgid "Add"
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "Hozzáadás"
+
+#~ msgid "Identifier for new Data Structure"
+#~ msgstr "Az új adatstruktúra azonosítója"
+
+#~ msgid "Add Node"
+#~ msgstr "Csúcs hozzáadása"
+
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "Név:"
+
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "Középre"
+
+#~ msgctxt "align elements at top"
+#~ msgid "Top"
+#~ msgstr "Felülre"
+
+#~ msgctxt "align elements left"
+#~ msgid "Left"
+#~ msgstr "Balra"
+
+#~ msgctxt "align elements right"
+#~ msgid "Right"
+#~ msgstr "Jobbra"
+
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Körbe"
+
+#~ msgctxt "align elements such that crossing edges are minimized"
+#~ msgid "Minimize Crossing Edges"
+#~ msgstr "Keresztező élek minimalizálása"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type Icon:"
+#~ msgstr "Típus"
+
+#, fuzzy
+#~| msgid "Export graphs to file"
+#~ msgid "Export as new Type"
+#~ msgstr "Grafikonok fájlba exportálása"
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgid "Open Script"
+#~ msgstr "Szkript megnyitása..."
+
+#, fuzzy
+#~| msgid "Editor"
+#~ msgid "Edit"
+#~ msgstr "Szerkesztő"
+
+#, fuzzy
+#~| msgid "Node Color:"
+#~ msgid "Pointer"
+#~ msgstr "Csomópont szín:"
+
+#~ msgid "Delete the active graph"
+#~ msgstr "Az aktív grafikon törlése"
+
+#, fuzzy
+#~| msgctxt "X-coordinate "
+#~| msgid "x"
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "x"
+
+#, fuzzy
+#~| msgid "Apply the current color to all nodes"
+#~ msgid "Apply to all nodes"
+#~ msgstr "A jelenlegi szín alkalmazása az összes csomópontra"
+
+#~ msgid "Untitled0"
+#~ msgstr "Címtelen0"
+
+#, fuzzy
+#~| msgid "Open Graph..."
+#~ msgid "Open Graph"
+#~ msgstr "Grafikon megnyitása..."
+
+#~ msgid "Color for new nodes"
+#~ msgstr "Új csomópontok színe"
+
+#~ msgid "Color for new edges"
+#~ msgstr "Az új szélek színe"
+
+#~ msgid "Apply the current color to all nodes"
+#~ msgstr "A jelenlegi szín alkalmazása az összes csomópontra"
+
+#~ msgid "Apply the current color to all nodes on the drawing area"
+#~ msgstr ""
+#~ "A jelenlegi szín alkalmazása a rajzolási területen található összes "
+#~ "csomópontra"
+
+#~ msgid "All"
+#~ msgstr "Mind"
+
+#~ msgid "Apply the current color to all edges"
+#~ msgstr "A jelenlegi szín alkalmazása az összes szélre"
+
+#~ msgid "Apply the current color to all edges on the drawing area"
+#~ msgstr ""
+#~ "A jelenlegi szín alkalmazása a rajzolási területen található összes szélre"
+
+#~ msgid "Align on the base"
+#~ msgstr "Alapokra igazítás"
+
+#~ msgid "Align on the center"
+#~ msgstr "Középre igazítás"
+
+#~ msgid "Align on the top"
+#~ msgstr "Felülre igazítás"
+
+#~ msgid "Align on the left"
+#~ msgstr "Balra igazítás"
+
+#~ msgid "Align on the right"
+#~ msgstr "Jobbra igazítás"
+
+#, fuzzy
+#~| msgid "Align on the left"
+#~ msgid "Align on a circle"
+#~ msgstr "Balra igazítás"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "(c) 2009"
+#~ msgstr "(c) 2009"
+
+#~ msgid "Do you want to save your unsaved document?"
+#~ msgstr "El szeretné menteni a nem mentett dokumentumot?"
+
+#~ msgid "Select Items by clicking on them."
+#~ msgstr "Elemek kiválasztása rájuk kattintáskor."
+
+#~ msgid "Moves a node around the drawing area."
+#~ msgstr "Egy csomópont áthelyezése a rajzoló terület körül."
+
+#~ msgid "Make Complete"
+#~ msgstr "Teljes készítés"
+
+#, fuzzy
+#~| msgid "Edge value"
+#~ msgid "assign values"
+#~ msgstr "Szegély érték"
+
+#~ msgid "Dialog"
+#~ msgstr "Párbeszédablak"
+
+#~ msgid "Radius:"
+#~ msgstr "Sugár:"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Complete"
+#~ msgstr "Befejezett"
+
+#~ msgctxt "Do not translate, X is for delete"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Graph is oriented"
+#~ msgstr "A grafikon orientált"
+
+#, fuzzy
+#~| msgid "Name:"
+#~ msgid "Name: %1"
+#~ msgstr "Név:"
+
+#, fuzzy
+#~| msgid "Value:"
+#~ msgid "Value: %1"
+#~ msgstr "Érték:"
+
+#~ msgid "Save Graph As..."
+#~ msgstr "Grafikon másként mentése"
+
+#~ msgid "Save Script As..."
+#~ msgstr "Szkript mentése másként..."
+
+#, fuzzy
+#~| msgid "Graph"
+#~ msgid "Ring Graph"
+#~ msgstr "Grafikon"
+
+#, fuzzy
+#~| msgid "Untitled"
+#~ msgid "UntitledDoc"
+#~ msgstr "Címtelen"
+
+#~ msgid "Thanks to Ugo Sangiori"
+#~ msgstr "Köszönjük Uho Sangiori"
+
+#~ msgid "Edge Color:"
+#~ msgstr "Szél szín:"
+
+#~ msgid "X-coordinate "
+#~ msgstr "X-koordináta"
+
+#~ msgid "Y-coordinate "
+#~ msgstr "Y-koordináta"
+
+#~ msgid "Node size"
+#~ msgstr "Csomópont méret"
+
+#, fuzzy
+#~| msgid " Is End"
+#~ msgid "End"
+#~ msgstr "vége"
+
+#~ msgid "Graph is Automate"
+#~ msgstr "A grafikon automatizált"
+
+#~ msgid " Is begin"
+#~ msgstr "kezdés"

@@ -1,0 +1,137 @@
+<chapter id="import-export">
+<title
+>Importazione ed esportazione</title>
+<sect1 id="import-export-projects">
+    <title
+>Condividere i progetti di &rocs;</title>
+    <para
+>I progetti di &rocs; possono essere importati ed esportati come archivi <literal role="extension"
+>.tar.gz</literal
+>, che si possono usare per condividere progetti. Si possono importare o esportare progetti rispettivamente attraverso i menu <menuchoice
+><guimenu
+>Grafo</guimenu
+><guimenuitem
+>Importa grafo</guimenuitem
+></menuchoice
+> e <menuchoice
+><guimenu
+>Grafo</guimenu
+><guimenuitem
+>Esporta grafo come</guimenuitem
+></menuchoice
+>. </para>
+</sect1>
+
+<sect1 id="import-export-graphs">
+    <title
+>Importazione ed esportazione di grafi</title>
+    <para
+>&rocs; attualmente supporta l'importazione e l'esportazione dei seguenti formati di file:</para>
+    <itemizedlist>
+        <listitem
+><para
+>File DOT, altrimenti noti come GraphViz</para
+></listitem>
+        <listitem
+><para
+>File GML</para
+></listitem>
+        <listitem
+><para
+>File in formato di grafi banale (TGF)</para
+></listitem>
+        <listitem
+><para
+>Formato di linguaggio a marcatori Keyhole</para
+></listitem>
+    </itemizedlist>
+
+<sect2 id="format-specification-tgf">
+<title
+>Il formato di grafi banale (TGF)</title>
+<para
+>Il <emphasis
+>formato di grafi banale</emphasis
+> (<foreignphrase lang="en"
+>Trivial Graph Format</foreignphrase
+>, TGF) è un semplice formato di file testuale per descrivere i grafi. Un file TGF consiste di un elenco di definizioni dei nodi che fanno corrispondere i loro identificativi a delle etichette, seguite da un elenco degli archi. In questo formato è possibile avere una sola etichetta per nodo e un valore per arco. &rocs; interpreta i grafi importati come grafi non direzionali. I grafi esportati conterranno due archi per connessione se le connessioni sono bidirezionali. </para>
+
+<sect3>
+<title
+>Specificazione del formato</title>
+    <itemizedlist>
+        <listitem
+><para
+>Il file comincia con un elenco di nodi (uno per riga), seguito da una riga con il solo carattere <literal
+>#</literal
+>, seguito da un elenco di archi (uno per riga).</para
+></listitem>
+        <listitem
+><para
+>Un nodo è costituito da un intero (l'identificativo), seguito da uno spazio, seguito da una stringa qualsiasi.</para
+></listitem>
+        <listitem
+><para
+>Un arco è costituito da due interi (gli identificativi) separati da uno spazio, seguiti da uno spazio, seguito da una stringa qualsiasi. Si assume che l'arco direzionale punti dal primo identificativo al secondo.</para
+></listitem>
+    </itemizedlist>
+</sect3>
+<sect3>
+<title
+>Esempio</title>
+<programlisting
+>1 nodo iniziale
+2 trasmissione
+3 termine
+#
+1 2 blu
+2 1 rosso
+2 3 verde
+</programlisting>
+</sect3>
+</sect2>
+
+<sect2 id="format-specification-dot">
+<title
+>Linguaggio DOT / Formato di grafi Graphviz</title>
+<para
+>Il linguaggio DOT è un linguaggio descrittivo in testo semplice che permette sia rappresentazione leggibile dei grafi, sia una elaborazione efficiente da parte di un programma di disposizione dei grafi. DOT è il formato di file predefinito per la serie di programmi di visualizzazione Graphviz, ma è usato anche da altri strumenti. Le estensioni più comuni dei file DOT sono <literal role="extension"
+>.gv</literal
+> e <literal role="extension"
+>.dot</literal
+>. </para>
+
+<sect3>
+<title
+>Funzionalità non supportate</title>
+<para
+>&rocs; può elaborare ogni file contenente un grafo specificato secondo il linguaggio DOT<footnote
+><para
+>http://www.graphviz.org/content/dot-language</para
+></footnote
+>. Il supporto delle varie funzionalità del linguaggio è completo, con le seguenti eccezioni: </para>
+    <itemizedlist>
+        <listitem
+><para
+>Sottografi: a causa della mancanza del concetto di sottografo in &rocs;, i sottografi sono importati come insiemi di elementi e connessioni. In particolare, le connessioni da o verso sottografi non sono importate.</para
+></listitem>
+        <listitem
+><para
+>Attributi &HTML; e &XML;: gli attributi (come etichette) che contengono sintassi &HTML; o &XML; vengono letti senza modifica. In particolare, da questi attributi non viene letta nessuna specificazione di carattere o stile.</para
+></listitem>
+    </itemizedlist>
+</sect3>
+<sect3>
+<title
+>Esempio</title>
+<programlisting
+>digraph mioGrafo {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect3>
+</sect2>
+
+</sect1>
+</chapter>

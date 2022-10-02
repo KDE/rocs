@@ -1,0 +1,804 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Dutch "INCLUDE">
+
+]>
+<book id="rocs" lang="&language;">
+
+<bookinfo>
+<title
+>Het handboek van &rocs;</title>
+<authorgroup>
+<author
+><personname
+> <firstname
+>Tomaz</firstname
+> <surname
+>Canabrava</surname
+> </personname
+> <email
+>tomaz.canabrava@gmail.com</email
+> </author>
+<author
+><personname
+> <firstname
+>Andreas</firstname
+> <surname
+>Cord-Landwehr</surname
+> </personname
+> <email
+>cordlandwehr@kde.org</email
+> </author>
+
+&Freek.de.Kruijf;&Jaap.Woldringh; 
+</authorgroup>
+
+<date
+>2021-10-23</date>
+<releaseinfo
+>KDE Gear 21.08</releaseinfo>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<abstract>
+<para
+>&rocs; is een hulpmiddel voor de grafentheorie. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdeedu</keyword>
+<keyword
+>wiskunde</keyword>
+<keyword
+>wiskunde</keyword>
+<keyword
+>grafen</keyword>
+<keyword
+>knoop</keyword>
+<keyword
+>kant</keyword>
+<keyword
+>Rocs</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inleiding</title>
+<para
+>In dit hoofdstuk vindt u een overzicht van de kerneigenschappen en manier van werken met &rocs;. Het belangrijkst zijn <xref linkend="introduction-nutshell"/> en <xref linkend="scripting"/>, hiermee kan elke nieuwe gebruiker onmiddellijk aan de slag gaan met &rocs;. </para>
+
+<sect1 id="introduction-goals">
+<title
+>Doelen, voor wie is dit bestemd en manier van werken.</title>
+<para
+>&rocs; is een hulpmiddel voor de grafentheorie, geschikt voor iedereen die algoritmes voor grafen wil ontwerpen en bestuderen. Dit zijn vooral</para>
+<itemizedlist>
+    <listitem
+><para
+>docenten die algoritmes aan hun studenten willen demonstreren,</para
+></listitem>
+    <listitem
+><para
+>studenten en onderzoekers die willen begrijpen en zien hoe een algoritme werkt, en</para
+></listitem>
+    <listitem
+><para
+>iedereen die belang stelt in gegevensstructuren en algoritmes.</para
+></listitem>
+</itemizedlist>
+<para
+>Voor ieder van hen heeft &rocs; een eenvoudig grafisch bewerkingsprogramma voor het aanmaken van grafen, een krachtig hulpmiddel voor het maken van scripts voor algoritmen, en diverse hulpmiddelen voor simulaties, experimenten, en het exporteren van grafen. &rocs; kan typisch worden gebruikt voor het aanmaken van een graaf, handmatig (met slepen en neerzetten van knopen en kanten op het whiteboard), of met een van de graafgeneratoren. Op de aangemaakte graaf kunnen daarna algoritmen worden aangebracht en toegepast, en alle veranderingen als gevolg hiervan zijn direct zichtbaar in de graafbewerker. </para>
+
+<screenshot>
+  <screeninfo
+>Schermbeeld van &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-screenshot.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Schermbeeld van &rocs;.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+</sect1>
+
+<sect1 id="introduction-nutshell">
+<title
+>&rocs; in een notendop</title>
+<para
+>Elke sessie in &rocs; is een project: wanneer &rocs; wordt gestart, wordt een leeg project aangemaakt. Bij het inlezen of importeren van een ander project wordt dat het huidige project. Hierbij bestaat een project zelf uit <emphasis
+>graafdocumenten</emphasis
+>, <emphasis
+>scripts/algoritmen</emphasis
+>,  en een <emphasis
+>journaal</emphasis
+>. </para>
+
+<sect2>
+<title
+>Graafdocumenten</title>
+<para
+>Een graafdocument bevat de inhoud van een whiteboard, in de graafbewerker. Hierin is informatie over de door de gebruiker gedefinieerde knoop- en kanttypen, samen met hun eigenschappen, en de reeds aangemaakte knopen en kanten. Dit betekent dat &rocs; de verzameling kent van alle knopen en kanten in een graafdocument, en er een (niet noodzakelijk verbonden) graaf mee kan vormen. Alles dat tot een graafdocument behoort, is toegankelijk voor het programma waarmee scripts worden gemaakt, via het globale object <userinput
+><command
+>Document</command
+></userinput
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Kanttypen</title>
+<para
+>In sommige scenario's hebben grafen verschillende soorten kanten (bijv. een ongerichte graaf plus de kanten in een boom berekend met een "breadth-first" zoekalgoritme) die anders worden behandeld en weergegeven. U kunt hiervoor zelf, naast een standaard kanttype, andere kanttypen definiëren. Elk kanttype wordt op een eigen manier visueel weergegeven, heeft eigen dynamische eigenschappen, en kan gericht of ongericht worden gemaakt. De interface voor scripts bevat mogelijkheden om eenvoudig de toegang te regelen voor alleen bepaalde kanttypen. </para>
+</sect2>
+
+<sect2>
+<title
+>Knooptypen</title>
+<para
+>Op dezelfde manier als bij kanttypen, kunnen verschillende knooptypen voor een graaf worden gedefinieerd (bijv. om sommige knopen een speciale rol te geven). Elk knooptype wordt op een eigen manier visueel weergegeven, en heeft eigen dynamische eigenschappen. </para>
+</sect2>
+
+<sect2>
+<title
+>Eigenschappen</title>
+<para
+>Elk element (knoop of kant) kan eigenschappen hebben. Deze eigenschappen moeten worden ingesteld bij het overeenkomende knoop- of kanttype. Eigenschappen hebben een naam, en kunnen elke waarde bevatten. Het nieuw aanmaken of wijzigen van bestaande eigenschappen, kunt u in de zijbalk <guilabel
+>Elementtypen</guilabel
+> doen met de knop <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/> </imageobject
+></inlinemediaobject
+><guibutton
+>Eigenschappen</guibutton
+>. U ziet dan een eigenschappendialoog.  </para>
+<para
+>U kunt ook met het scriptprogramma bestaande eigenschappen vinden en de waarden hiervan wijzigen. In het volgende voorbeeld nemen we aan dat de eigenschap <quote
+>gewicht</quote
+> bestaat voor het standaard kanttype. <programlisting
+>var knopen = Document.nodes()
+for (var i = 0; i &lt; knopen.length; ++i){
+    knopen[i].gewicht = i;
+}
+for (var i = 0; i &lt; knopen.length; ++i){
+    Console.log("gewicht knoop" + i + ": " + knopen[i].gewicht);
+}
+</programlisting>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="introduction-tutorial">
+<title
+>Instructie</title>
+<para
+>In dit gedeelte maken we een voorbeeldproject aan, waarin enkele van de meest belangrijke eigenschappen van &rocs; worden gebruikt. Het doel is een graaf en een script te maken voor een eenvoudig 2-benaderingsalgoritme voor het <emphasis
+>"minimum vertex cover"</emphasis
+>- probleem. Dit houdt in het zoeken naar de kleinste deelverzameling C van de knopen van de graaf, zodat elke kant van de graaf met tenminste een knoop van C is verbonden. Het is bekend dat dit probleem "NP-hard" is, en we willen laten zien hoe we een benadering met een factor 2 kunnen vinden door een overeenkomst in de bestaande graaf te zoeken (in het volgende gebruiken we de gebruikelijke termen in graafalgoritmes: graaf is de gegevensstructuur, knopen zijn de gegevenselementen, kanten zijn de pijlen). (Noot vertaler: ik handhaaf vele Engelse benamingen, ten eerste om de gebruiker van deze tekst in de gelegenheid te stellen om naar deze namen te googlen, en ten tweede omdat ik van de meeste niet de Nederlandse naam (als die er is) ken, of kan vinden). </para>
+<para
+>Ons doel is de overeenkomst zichtbaar te maken tussen de overeenkomende en de "minimum vertex cover". Hiervoor moeten we twee kanttypen specificeren, een voor het tonen van de overeenkomende kanten, en een voor de <quote
+>gewone</quote
+> kanten. En verder twee knooptypen, die gebruikt worden voor het onderscheid tussen knopen in C en knopen die niet tot C behoren. </para>
+
+<sect2>
+<title
+>Een graaf genereren</title>
+<para
+>Voor het aanmaken van de graaf is in &rocs; een hulpmiddel aanwezig waarmee grafen kunnen worden aangemaakt. We gaan naar het menu <menuchoice
+><guimenu
+>Graafdocument</guimenu
+> <guisubmenu
+>Hulpmiddelen</guisubmenu
+> <guimenuitem
+>Graaf aanmaken</guimenuitem
+></menuchoice
+>. Hier genereren we een <guilabel
+>Willekeurige graaf</guilabel
+>, met 30 knopen, 90 kanten en met het zaadje 1 (het zaadje is de startwaarde voor het genereren van willekeurige getallen; meerdere keren dit zelfde zaadje gebruiken resulteert in dezelfde, en dus reproduceerbare grafen).  </para>
+</sect2>
+
+<sect2>
+<title
+>De elementtypen genereren</title>
+<para
+>Met <guilabel
+>Elementtypen</guilabel
+> maken we een tweede knooptype aan en een tweede kanttype. Voor beide  nieuwe typen openen we de eigenschappendialoog met respectievelijk de knoppen <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Eigenschappen</guibutton
+> en zetten de ID's op <literal
+>2</literal
+>. Verder wijzigen we de kleuren van elementen van de beide nieuwe typen (om ze van de standaardtypen te onderscheiden). Tenslotte maken we alle kanttypen bidirectioneel en de ID's van de standaardtypen <literal
+>1</literal
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Het algoritme</title>
+<para
+>Tenslotte moeten we het benaderingsalgoritme implementeren. Hiervoor gebruiken we het volgende:  </para>
+<programlisting
+>for (var i=0; i &lt; Document.nodes.length; i++) {
+    Document.nodes[i].type = 1;
+}
+for (var i=0; i &lt; Document.edges.length; i++) {
+    Document.edges[i].type = 1;
+}
+
+var E = Document.edges(); // verzameling onverwerkte kanten
+var C = new Array();      // overeenkomende kanten
+while (E.length 
+> 0) {
+    var e = E[0];         // we nemen eerste kant e={u,v}
+    var u = e.from();
+    var v = e.to();
+    e.type = 2;           // maak kant overeenkomend
+    E.shift();            // verwijder e (bijv. E[0]) uit kantenlijst
+    C.push(u);            // u aan C toevoegen
+    C.push(v);            // v aan C toevoegen
+
+    // u,v als knopen in C markeren
+    u.type = 2;
+    v.type = 2;
+
+    // uit E alle kanten verwijderen die verbonden zijn met u of v
+    var aanliggend = u.edges();
+    for (var i=0; i &lt; aanliggend.length; i++) {
+        var index = E.indexOf(aanliggend[i]); // de index bepalen
+        if (index != -1) {
+            E.splice(index, 1); // het verwijderen indien gevonden
+        }
+    }
+    var aanliggend = v.edges();
+    for (var i=0; i &lt; aanliggend.length; i++) {
+        var index = E.indexOf(adjacent[i]); // de index bepalen
+        if (index != -1) {
+            E.splice(index, 1); // het verwijderen indien gevonden
+        }
+    }
+}
+Console.log("Vertex Cover bevat " + C.length + " knopen.");
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Het algoritme uitvoeren</title>
+<para
+>Het algoritme kunnen we starten met de knop <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Uitvoeren</guibutton
+> in het controlepaneel voor scripts. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="user-interface">
+<title
+>De gebruikersinterface van &rocs;</title>
+
+<sect1 id="user-interface-all">
+<title
+> Belangrijkste elementen van de gebruikersinterface</title>
+<para
+>De gebruikersinterface is verdeeld in een aantal logische gedeelten, zoals getoond in onderstaand schermbeeld. </para>
+
+<screenshot>
+  <screeninfo
+>&GUI;-elementen van de interface van &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-interfaces.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>&GUI;-elementen van de interface van &rocs;.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Graafbewerker</term>
+    <listitem
+><para
+>De graafbewerker heeft een zogenaamde "whiteboard", waarop u knopen en kanten kunt plaatsen. Door op een element hierin te dubbelklikken krijgt u het erbij behorende eigenschappenmenu. Met de hulpmiddelen in de <emphasis
+>Tabbladen in de zijbalk</emphasis
+> kunt u grafen aanmaken en wijzigen.</para>
+    <para
+>Beschikbare hulpmiddelen:</para>
+      <itemizedlist>
+        <listitem
+><para
+>Linksboven in het vak vindt u de volgende actiepictogrammen. Op een actie klikken maakt dat uw muisaanwijzer deze actie toepast op het whiteboard van de graafbewerker:</para>
+          <itemizedlist>
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsselect.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Selecteren en verplaatsen</guiicon
+>: U kunt elementen selecteren door in het whiteboard op een lege plek te klikken, of door de muisknop ingedrukt te houden en een rechthoek te "trekken" om enige gegevenselementen heen om deze elementen te selecteren, of door direct op een niet geselecteerd element te klikken om dit te selecteren. Indien u op een geselecteerd element klikt, of op een verzameling van geselecteerde elementen, kunt u die verplaatsen met de muis, met ingedrukte muisknop. Geselecteerde elementen kunnen ook met de pijltjestoetsen worden verplaatst.</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsnode.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Een knoop aanmaken</guiicon
+>: Klik op een willekeurige plaats in het whiteboard van het grafische bewerkingsprogramma, om zo een nieuw gegevenselement aan te maken voor de huidig geselecteerde gegevensstructuur. Door de muisaanwijzer op de knop ingedrukt te houden, komt er een contextmenu, waarin het type kan worden gekozen van de nieuw aangemaakte gegevenselementen (alleen wanneer er meerdere gegevenstypen zijn).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsedge.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Een kant aanmaken</guiicon
+>: Klik op een gegevenselement, houdt de muisknop ingedrukt, en trek een lijn naar een ander gegevenselement waarnaar de kant moet wijzen. Dit zal alleen lukken als het in de huidige graaf is toegestaan deze kant toe te voegen (&eg;, in een ongerichte graaf kunt u niet meerdere kanten toevoegen tussen gegevenselementen). Door de muisaanwijzer op de knop ingedrukt te houden, komt er een contextmenu, waarin het type kan worden gekozen van de nieuw aangemaakte pijlen (alleen wanneer daarvoor meerdere kanttypen zijn).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsdelete.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Element verwijderen</guiicon
+>: Klik op het element om het te verwijderen. Bij het verwijderen van een knoop worden meteen alle ermee verbonden kanten verwijderd.</para
+></listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Zijbalk </term>
+    <listitem
+><para
+>Rechts vindt u de zijbalk waarin u diverse hulpmiddelen vindt om mee te werken:</para>
+      <itemizedlist>
+        <listitem
+><para
+><guilabel
+>Elementtypen</guilabel
+>: Hiermee heeft u direct toegang tot de beschikbare kant- en knooptypen.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>Journaal</guilabel
+>: Bij elk project hoort een eigen journaal waarin &eg; taken, resultaten of waarnemingen kunnen worden genoteerd.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>API voor scripts</guilabel
+>: Hiermee kunt u direct toegang krijgen tot de documentatie over scripts, en zo tot de documentatie over scripts.</para
+></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Bewerken van scripts</term>
+    <listitem
+><para
+>In deze tekstbewerker kunt u algoritmes schrijven, zoals in detail is uitgelegd in <xref linkend="scripting"/>. U kunt aan verschillende scriptdocumenten tegelijk werken, in verschillende tabbladen.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Scriptuitvoer:</term>
+    <listitem
+><para
+>In dit tekstgebied staat informatie over het herstellen van fouten (debug), of de script-uitvoer van uw algoritme, afhankelijk van de selectie van de ingestelde uitvoer, bovenin. Als het script een fout meldt, wordt automatisch de debug-uitvoer geselecteerd.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Besturing</term>
+    <listitem
+><para
+>Hierin kunt u het uitvoeren van scripts regelen. U kunt het script uitvoeren (draaien, laten werken) dat op dit moment in de scriptbewerker is geopend, door op de knop <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Uitvoeren</guibutton
+> te klikken. Een script kan tijdens het uitvoeren worden gestopt door op de knop <inlinemediaobject
+><imageobject
+><imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Stop</guibutton
+> te klikken.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<!--FIXME nop alignment action any more?-->
+</chapter>
+
+<chapter id="scripting">
+<title
+>Scripts</title>
+<sect1>
+    <title
+>Het  uitvoeren van algoritmes in &rocs; </title>
+<para
+>Intern maakt &rocs; gebruik van QTScript &javascript;. Dit betekent dat voor alle algoritmen &javascript; nodig is. We leggen u hier nu uit hoe u tot elementen in een graafdocument toegang heeft, en die kunt wijzigen, bij het maken van scripts. Het is belangrijk te weten dat alle wijzigingen in een script direct werken op de eigenschappen van de elementen in de graafbewerker.  </para>
+
+<sect2>
+<title
+>Sturen uitvoeren van script</title>
+<para
+>U kunt scripts op verschillende manieren uitvoeren: </para>
+<itemizedlist>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Uitvoeren</guibutton
+>: Script uitvoeren tot het einde.</para
+></listitem>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Stop</guibutton
+>: Stop het uitvoeren van script (alleen wanneer een script bezig is).</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2>
+<title
+>Scriptuitvoer</title>
+<para
+>Gedurende het uitvoeren (werking) van een algoritme, worden debug (programmafouten) en programmauitvoer getoond in de <emphasis
+>Debug &and; scriptuitvoer</emphasis
+>. Indien er een syntaxisfout in uw script wordt ontdekt, wordt de fout ook getoond als een debugbericht. Merk op dat alle programmaberichten ook in de debuguitvoer worden getoond (in een vette letter). </para>
+<para
+>U kunt met de volgende functies de tekst regelen, die in de scriptuitvoer wordt getoond: </para>
+<programlisting
+>Console.log(tekenreeks);            // toont tekenreeks als scriptuitvoer
+    Console.debug(tekenreeks);          // toont tekenreeks als debuguitvoer
+    Console.error(tekenreeks);          // toont tekenreeks als foutuitvoer
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>API voor scripts</title>
+<para
+>De diverse onderdelen van &rocs; hebben elk een statisch element dat in scripts kan worden gebruikt. Dit zijn: <itemizedlist
+> <listitem
+><para
+><userinput
+><command
+>Document</command
+></userinput
+> voor het graafdocument</para
+></listitem
+> <listitem
+><para
+><userinput
+><command
+>Console</command
+></userinput
+> voor de loguitvoer van de console</para
+></listitem
+> </itemizedlist
+> Voor het expliciete API-gebruik en voor een methodenoverzicht, zie de help die in de zijbalk van &rocs; beschikbaar is. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="import-export">
+<title
+>Import en export</title>
+<sect1 id="import-export-projects">
+    <title
+>&rocs;-projecten uitwisselen</title>
+    <para
+>&rocs;-projecten kunnen worden geïmporteerd en geëxporteerd als archiefbestanden (<literal role="extension"
+>.tar.gz</literal
+>-bestanden). Deze archieven kunnen worden gebruikt om projecten te ruilen met anderen. Importeren en exporteren doet u met respectievelijk de menu-items <menuchoice
+><guimenu
+>Graafdocument</guimenu
+> <guimenuitem
+>Graaf importeren</guimenuitem
+></menuchoice
+> en <menuchoice
+><guimenu
+>Graafdocument</guimenu
+> <guimenuitem
+>Graaf exporteren als</guimenuitem
+></menuchoice
+>. </para>
+
+<sect2 id="import-export-graphs">
+    <title
+>Import en export van graafdocumenten</title>
+    <para
+>Import en export naar de volgende formaten worden door &rocs; ondersteund: </para>
+    <itemizedlist>
+        <listitem
+><para
+>&DOT;-bestanden, ook wel bekend als Graphviz-bestanden.</para
+></listitem>
+        <listitem
+><para
+><acronym
+>GML</acronym
+>-bestanden</para
+></listitem>
+        <listitem
+><para
+>Trivial Graph Format bestanden</para
+></listitem>
+        <listitem
+><para
+>Keyhole Markup Language formaat</para
+></listitem>
+    </itemizedlist>
+
+<sect3 id="format-specification-tgf">
+<title
+>Trivial Graph bestandsformaat</title>
+<para
+><emphasis
+>Trivial Graph Format</emphasis
+> (<acronym
+>TGF</acronym
+>) is een formaat waarin een grafiek in een eenvoudig tekstbestand wordt beschreven. Een <acronym
+>TGF</acronym
+>-bestand bevat een lijst van knoopdefinities, waarin knoop-ID's worden gekoppeld aan namen, gevolgd door een lijst van kanten. In dit formaat is slechts één naam mogelijk per knoop, en één waarde per kant. &rocs; beschouwt geïmporteerde grafen als niet gericht. Geëxporteerde grafen bevatten twee kanten voor elke bi-directionele verbinding (naar beide richtingen). </para>
+
+<sect4>
+<title
+>Formaatbeschrijving</title>
+    <itemizedlist>
+        <listitem
+><para
+>Het bestand begint met een lijst van knopen (op elke regel een knoop), gevolgd door een regel met als enige karakter een <quote
+>#</quote
+>, gevolgd door een lijst van kanten (op elke regel een kant).</para
+></listitem>
+        <listitem
+><para
+>Een knoop wordt beschreven met een geheel getal (als identificatie), gevolgd door een spatie, gevolgd door een willekeurige tekenreeks.</para
+></listitem>
+        <listitem
+><para
+>Een kant wordt beschreven door twee gehele getallen (die de verbonden knopen identificeren), gescheiden door een spatie, gevolgd door een spatie, gevolgd door een willekeurige tekenreeks. Aangenomen wordt dat de gerichte kant wijst van de eerste naar de tweede geïdentificeerde knoop.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Voorbeeld</title>
+<programlisting
+>1 beginknoop
+2 zender
+3 aarde
+#
+1 2 blauw
+2 1 rood
+2 3 groen
+</programlisting>
+</sect4>
+</sect3>
+
+<sect3 id="format-specification-dot">
+<title
+>&DOT;-taal / Graphviz Graph bestandsformaat</title>
+<para
+>De taal &DOT; is een taal voor het beschrijven van een graaf in klare tekst, waarin een goede voor mensen leesbare beschrijving wordt gegeven van grafen, die ook geschikt is voor het efficiënt verwerken door programma's voor het indelen van grafen. &DOT; is het standaard bestandsformaat voor de Graphviz programma's voor het visualiseren van grafen, maar wordt ook algemeen in andere graafprogramma's gebruikt. De gebruikelijke bestandsextensies voor &DOT; zijn <literal role="extension"
+>.gv</literal
+> en <literal role="extension"
+>.dot</literal
+>. </para>
+
+<sect4>
+<title
+>Niet ondersteunde eigenschappen</title>
+<para
+>&rocs; kan elk graafbestand lezen van een graaf die volgens &DOT; is beschreven <footnote
+><para
+>https://graphviz.org/doc/info/lang.html</para
+></footnote
+>. De ondersteuning van deze taal is volledig, ondanks de volgende uitzonderingen: </para>
+    <itemizedlist>
+        <listitem
+><para
+>subgraaf: Omdat in &rocs; het begrip subgraaf niet bestaat, worden subgrafen slechts geïmporteerd als verzamelingen van gegevenselementen en verbindingen. In het bijzonder worden verbindingen naar en van subgrafen niet geïmporteerd.</para
+></listitem>
+        <listitem
+><para
+>&HTML; en &XML; attributen: Attributen (zoals tekst) die &HTML; of &XML; bevatten worden onveranderd gelezen. In het bijzonder worden aanpassingen van lettertypen en stijlen van deze attributen niet gelezen.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Voorbeeld</title>
+<programlisting
+>digraph mijnGraaf {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect4>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="graph-layout">
+    <title
+>Graafindeling</title>
+
+    <sect1>
+        <title
+>Automatische indeling van grafen in &rocs;</title>
+        <para
+>&rocs; kan grafen automatisch indelen. Het hulpmiddel hiervoor is te vinden in het hoofdmenu <menuchoice
+><guimenu
+>Graaf Document</guimenu
+> <guisubmenu
+>Hulpmiddelen</guisubmenu
+> <guimenuitem
+>Graafindeling</guimenuitem
+></menuchoice
+>. Er zijn twee verschillende algoritmen die kunnen worden gebruikt: Op krachten gebaseerde indeling, en de radiële boomindeling. U kunt het te gebruiken algoritme in het bijbehorende tabblad te kiezen in het hulpmiddel voor het indelen van grafen. Kies hierin de gewenste parameters, en voer het algoritme uit door te drukken op de knop <guibutton
+>OK</guibutton
+> . In de volgende secties leest u over de details voor beide indelingsalgoritmen. </para>
+
+    <sect2>
+        <title
+>Op krachten gebaseerde Indeling</title>
+
+        <para
+>De op krachten gebaseerde indeling kan in elke graaf worden toegepast. Op intuïtieve manier simuleert dit algoritme de krachten die in elk knoop optreden. Er zijn afstotende krachten, en aantrekkende krachten tussen knopenparen die elkaars buurman zijn. Met behulp van schuifknoppen in de gebruikersinterface kan de grootte van deze krachten worden ingesteld. </para>
+
+        <screenshot>
+          <screeninfo
+>Een schermbeeld van de op krachten gebaseerde indelingstab van het hulpmiddel voor de indeling van grafen in &rocs; </screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Een schermbeeld van de op krachten gebaseerde indelingstab van het hulpmiddel voor de indeling van grafen in &rocs; </phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>Nog een parameter die kan worden bestuurd is de Oppervlaktefactor. Deze parameter regelt de afstanden tussen de knopen. Hoge waarden van deze factor leiden tot grotere afstanden tussen de knopen. </para>
+
+    <sect3>
+        <title
+>Radiële boom</title>
+        <para
+>De radiële boomindeling kan alleen op bomen worden toegepast. Elke poging die op andere soorten grafen toe te passen geeft een foutmelding. In de aanwezige gebruikersinterface kunnen de parameters worden gekozen voor de radiële boomindeling. </para>
+
+
+        <screenshot>
+          <screeninfo
+>Een schermbeeld van de indelingstab voor de radiële boomindeling van het hulpmiddel voor de indeling van grafen in &rocs; </screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Een schermbeeld van de indelingstab voor de radiële boomindeling van het hulpmiddel voor de indeling van grafen in &rocs; </phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>Met de parameter voor boomtype kiest u tussen een vrije boomindeling en een indeling met een wortel. In een losse indeling worden de knopen willekeurig geplaatst zonder een kenbare hiërarchie. In een boom met een wortel wordt de wortel bovenaan geplaatst, en subbomen worden er onder geplaatst, zodat er een hiërarchie ontstaat tussen de knopen. </para>
+
+        <para
+>De parameter voor centrum/wortel bepaalt de knoop die als wortel wordt gebruikt in de indeling als boom of als centrum in de vrije indeling. Het centrum van de vrije indeling is de eerste knoop die door het algoritme wordt geplaatst. Alle andere knopen komen op cirkels rondom de middelste knoop te liggen. Een centrum/wortel kan automatisch worden gekozen door het algoritme voor de indeling. </para>
+
+        <para
+>De parameter voor de afstand tussen de knopen regelt de afstand tussen de knopen. Een grotere waarde maakt die afstand groter. Omgekeerd maakt een kleinere waarde die afstand kleiner. </para>
+    </sect3>
+    </sect2>
+    </sect1>
+</chapter>
+
+<chapter id="credits">
+<title
+>Dankbetuiging en licentie</title>
+
+<para
+>&rocs; </para>
+<para
+>Programma Copyright:</para>
+<itemizedlist>
+	<listitem
+><para
+>Copyright 2008 Ugo Sangiori (ugorox AT gmail.com)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2008-2012 Tomaz Canabrava (tcanabrava AT kde.org)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2008-2012 Wagner Reck (wagner.reck AT gmail.com)</para
+></listitem>
+	<listitem
+><para
+>Copyright 2011-2015 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Documentatie Copyright:</para>
+<itemizedlist>
+	<listitem
+><para
+>Documentatie copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para
+></listitem>
+	<listitem
+><para
+>Documentatie copyright 2009 Tomaz Canabrava (tcanabrava AT kde.org)</para
+></listitem>
+	<listitem
+><para
+>Documentation copyright 2011-2015 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para
+></listitem>
+</itemizedlist>
+
+&meld.fouten;&vertaling.freek;&vertaling.jaap; &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes: nil
+sgml-general-insert-case: lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

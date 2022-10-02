@@ -1,0 +1,644 @@
+<sect1>
+<title
+>Script API voor backend van graaf</title>
+
+<para
+>In de dialoog voor de eigenschappen van de gegevensstructuur kunt u instellingen doen die behoren tot de backend van de graaf. Hierin, met <guilabel
+>Graaftype</guilabel
+>, kunt u het type kiezen van de graaf. De betekenis van deze typen is als volgt: </para>
+<itemizedlist>
+    <listitem
+><para
+><guilabel
+>Graaf</guilabel
+>: Graaf waarin dezelfde kanten (met dezelfde begin- en eindpunten) niet meerdere keren kunnen voorkomen. </para
+></listitem>
+    <listitem
+><para
+><guilabel
+>Multigraaf</guilabel
+>: Graaf waarin dezelfde kanten (met dezelfde begin- en eindpunten) meerdere keren kunnen voorkomen. </para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Gegevensstructuur graaf</title>
+<para
+>Een graafobject bevat de informatie van een gegevensstructuur van het type <quote
+>Graph</quote
+>. </para>
+
+<sect3>
+<title
+>Eigenschappen</title>
+<itemizedlist>
+
+    <listitem>
+        <para
+><emphasis
+>naam</emphasis
+> : </para>
+        <para
+>De unieke naam voor deze gegevensstructuur.</para>
+    </listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3>
+<title
+>Methodes</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>nodes()</term>
+    <listitem>
+        <para
+>Tonen van alle knooppunten in de graaf.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>nodes</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>nodes(type)</term>
+    <listitem>
+        <para
+>Tonen van alle knooppunten in de graaf, van een opgegeven type.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>nodes</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>type</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges()</term>
+    <listitem>
+        <para
+>Tonen van alle kanten in de graaf.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges(type)</term>
+    <listitem>
+        <para
+>Tonen van alle kanten in de graaf van een opgegeven type.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>type</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode(type)</term>
+    <listitem>
+        <para
+>Aanmaken van een nieuw knooppunt van het opgegeven type, en dit teruggeven. Indien het type niet wordt opgegeven, wordt het knooppunt niet aangemaakt.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphNode <function
+>createNode</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>type</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode()</term>
+    <listitem>
+        <para
+>Aanmaken van een nieuw knooppunt van het standaard type, en dit teruggeven.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphNode <function
+>createNode</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createEdge(van, tot, type)</term>
+    <listitem>
+        <para
+>Aanmaken van een kant vanaf knooppunt "vanaf" naar knooppunt "tot", van het opgegeven type, en deze teruggeven. Indien het type niet is opgegeven, wordt er geen kant aangemaakt.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphEdge <function
+>createEdge</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>van</replaceable
+></parameter
+></paramdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>tot</replaceable
+></parameter
+></paramdef
+> <paramdef
+>int <parameter
+><replaceable
+>type</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createEdge(van, tot)</term>
+    <listitem>
+        <para
+>Aanmaken van een kant vanaf knooppunt "van" naar knooppunt "tot", van het standaard type, en deze teruggeven.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>GraphEdge <function
+>createEdge</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>van</replaceable
+></parameter
+></paramdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>tot</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>distances(from)</term>
+    <listitem>
+        <para
+>Geeft een lijst terug van de kortste weglengten vanaf dit knooppunt naar alle andere knooppunten in de graaf.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>Array <function
+>distances</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>van</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Knooppunt van de graaf</title>
+<para
+>Een knooppunt is het gegevenselement van de graaf. </para>
+
+<sect3>
+<title
+>Eigenschappen</title>
+<itemizedlist>
+
+    <listitem>
+        <para
+><emphasis
+>breedte</emphasis
+> : </para>
+        <para
+>De grootte van dit gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>x</emphasis
+> : </para>
+        <para
+>De x-coördinaat van dit gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>y</emphasis
+> : </para>
+        <para
+>De y-coördinaat van dit gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>id</emphasis
+> : </para>
+        <para
+>Dit is de unieke naam van dit gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+> : </para>
+        <para
+>De kleur van dit gegevenselement, uitgedrukt in een hexadecimaal getal.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+<sect3>
+<title
+>Methodes</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>neighbors()</term>
+    <listitem>
+        <para
+>Geef een lijst terug van alle met dit knooppunt verbonden knooppunten. Deze methode houdt rekening met het eventueel gericht zijn van kanten.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>neighbors</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges()</term>
+    <listitem>
+        <para
+>Geef een lijst terug van alle kanten (inkomend en uitgaand), verbonden met dit knooppunt.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edges(type)</term>
+    <listitem>
+        <para
+>Geef een lijst terug van alle kanten (inkomend en uitgaand), verbonden met dit knooppunt, en van een opgegeven type.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>type</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>inEdges()</term>
+    <listitem>
+        <para
+>Geef een lijst terug van alle inkomende kanten, verbonden met dit knooppunt.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>inEdges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>inEdges(type)</term>
+    <listitem>
+        <para
+>Geef een lijst terug van alle inkomende kanten, verbonden met dit knooppunt, en van een opgegeven type.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>inEdges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>type</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>outEdges()</term>
+    <listitem>
+        <para
+>Geef een lijst terug  van alle uitgaande kanten, verbonden met dit knooppunt.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>outEdges</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>outEdges(type)</term>
+    <listitem>
+        <para
+>Geef een lijst terug van alle uitgaande kanten, verbonden met dit knooppunt, en van een opgegeven type.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>outEdges</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>type</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>edgesTo(doel)</term>
+    <listitem>
+        <para
+>Geef een lijst terug van alle kanten tussen dit knooppunt en het opgegeven knooppunt.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>array <function
+>edgesTo</function
+></funcdef
+> <paramdef
+>GraphNode <parameter
+><replaceable
+>doel</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+
+<sect2>
+<title
+>Graafkant</title>
+<para
+>Een kant is de verbinding van twee knooppunten in de graaf. Afhankelijk van hun type kunnen kanten gericht of ongericht zijn. </para>
+
+<sect3>
+<title
+>Eigenschappen</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>breedte</emphasis
+> : </para>
+        <para
+>De breedte van de verbinding.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>gericht</emphasis
+> : </para>
+        <para
+>Indien waar, is de verbinding gericht. Anders is de verbinding niet gericht.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>van</emphasis
+> : </para>
+        <para
+>Begin van de verbinding.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>tot</emphasis
+> : </para>
+        <para
+>Einde van de verbinding</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+> : </para>
+        <para
+>Naam van het type verbinding.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Methodes</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>remove()</term>
+    <listitem>
+        <para
+>Deze verbinding verwijderen.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>add_property(naam, waarde)</term>
+    <listitem>
+        <para
+>Een nieuwe eigenschap aan de verbinding toevoegen.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>add_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>naam</replaceable
+></parameter
+></paramdef
+> <paramdef
+>string <parameter
+><replaceable
+>waarde</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>remove_property(naam)</term>
+    <listitem>
+        <para
+>Een bestaande eigenschap van de verbinding verwijderen.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>remove_property</function
+></funcdef
+> <paramdef
+>string <parameter
+><replaceable
+>naam</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+</variablelist>
+</sect3>
+</sect2>
+
+</sect1>

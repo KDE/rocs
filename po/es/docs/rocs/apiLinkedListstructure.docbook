@@ -1,0 +1,207 @@
+<sect1>
+<title
+>Interfaz de programación para guiones para el motor de listas enlazadas</title>
+<sect2>
+<title
+>Estructura de datos de lista enlazada</title>
+<para
+>Un objeto de lista contiene la información de una estructura de datos de tipo «lista enlazada». </para>
+
+<sect3>
+<title
+>Propiedades</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>nombre</emphasis
+> : </para>
+        <para
+>El nombre único de esta estructura de datos.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Métodos</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>head()</term>
+    <listitem>
+        <para
+>Devolver el nodo de cabecera de la lista.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>head</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>setHead(nodo)</term>
+    <listitem>
+        <para
+>Fijar la cabecera de la lista.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>setHead</function
+></funcdef
+> <paramdef
+>ListNode <parameter
+><replaceable
+>nodo</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode(tipo)</term>
+    <listitem>
+        <para
+>Crea un nuevo nodo del tipo indicado y devuelve el nodo creado. Si el tipo no está registrado, no se crea ningún nodo.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>createNode</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>tipo</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode()</term>
+    <listitem>
+        <para
+>Crea un nuevo nodo del tipo por omisión y devuelve el nodo creado.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>createNode</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+
+<sect2>
+<title
+>Lista el nodo</title>
+<para
+>Un nodo es el elemento de datos de una lista enlazada. </para>
+
+<sect3>
+<title
+>Propiedades</title>
+<itemizedlist>
+
+    <listitem>
+        <para
+><emphasis
+>anchura</emphasis
+> : </para>
+        <para
+>El tamaño de este elemento de datos.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>x</emphasis
+> : </para>
+        <para
+>La coordenada X de este elemento de datos.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>y</emphasis
+> : </para>
+        <para
+>La coordenada Y de este elemento de datos.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>id</emphasis
+> : </para>
+        <para
+>El identificador único de este elemento de datos.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>color</emphasis
+> : </para>
+        <para
+>El color de este elemento de datos indicado como valor hexadecimal.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Métodos</title>
+<variablelist>
+    <varlistentry>
+    <term
+>pointTo(destino)</term>
+    <listitem>
+        <para
+>Fija el puntero de este nodo de lista al nodo de destino.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>pointTo</function
+></funcdef
+> <paramdef
+>ListNode <parameter
+><replaceable
+>destino</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+</sect1>

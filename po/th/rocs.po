@@ -1,0 +1,1654 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Phuwanat Sakornsakolpat <narachai@gmail.com>, 2010, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2011-05-12 22:44+0700\n"
+"Last-Translator: Phuwanat Sakornsakolpat <narachai@gmail.com>\n"
+"Language-Team: Thai <thai-l10n@googlegroups.com>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr ""
+
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgid "Graph Theory Tool"
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "เครื่องมือทฤษฎีกราฟ"
+
+#: main.cpp:32
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr ""
+
+#: main.cpp:33
+#, fuzzy, kde-format
+#| msgid "Andreas Cord-Landwehr"
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr ""
+
+#: main.cpp:37
+#, fuzzy, kde-format
+#| msgid "Tomaz Canabrava"
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr ""
+
+#: main.cpp:41
+#, fuzzy, kde-format
+#| msgid "Wagner Reck"
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, fuzzy, kde-format
+#| msgid "Developer"
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "ผู้พัฒนา"
+
+#: main.cpp:57
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Project to open."
+msgstr "คุณสมบัติของโหนด"
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@title"
+msgid "Properties"
+msgstr "คุณสมบัติของโหนด"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, fuzzy, kde-format
+#| msgid "Type"
+msgctxt "@title"
+msgid "Type"
+msgstr "ชนิด"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, fuzzy, kde-format
+#| msgid "Connection Type"
+msgctxt "@title"
+msgid "Description"
+msgstr "ชนิดการเชื่อมต่อ"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, fuzzy, kde-format
+#| msgid "New Script"
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "สคริปต์ใหม่"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "กราฟใหม่"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr ""
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, fuzzy, kde-format
+#| msgid "Save Script"
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "บันทึกสคริปต์"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, fuzzy, kde-format
+#| msgid "Select"
+msgid "Script Objects"
+msgstr "เลือก"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Properties"
+msgstr "คุณสมบัติของโหนด"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, fuzzy, kde-format
+#| msgid "Rocs Script Files"
+msgid "Rocs Scripting API"
+msgstr "แฟ้มสคริปต์ Rocs"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr ""
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr ""
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Project"
+msgstr "คุณสมบัติของโหนด"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, fuzzy, kde-format
+#| msgid "Save Script"
+msgid "Script Document"
+msgstr "บันทึกสคริปต์"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgid "Graph Document"
+msgstr "กราฟใหม่"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, fuzzy, kde-format
+#| msgid "Graph Files"
+msgid "Graph File"
+msgstr "แฟ้มกราฟ"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, fuzzy, kde-format
+#| msgid "Select"
+msgid "Edit Selected Data"
+msgstr "เลือก"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr ""
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr ""
+
+#: ui/codeeditorwidget.cpp:81
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "กราฟใหม่"
+
+#: ui/codeeditorwidget.cpp:82
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgid "Enter the name of your code document"
+msgstr "กราฟใหม่"
+
+#: ui/documenttypeswidget.cpp:29
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@title"
+msgid "Node Types"
+msgstr "คุณสมบัติของโหนด"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, fuzzy, kde-format
+#| msgid "Select"
+msgid "Create Type"
+msgstr "เลือก"
+
+#: ui/documenttypeswidget.cpp:45
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "คุณสมบัติของโหนด"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr ""
+
+#: ui/fileformatdialog.cpp:46
+#, fuzzy, kde-format
+#| msgid "Export"
+msgctxt "@action:button"
+msgid "Export"
+msgstr "ส่งออก"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|แฟ้มทั้งหมด"
+
+#: ui/fileformatdialog.cpp:116
+#, fuzzy, kde-format
+#| msgid "Open Script"
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "เปิดสคริปต์"
+
+#: ui/grapheditorwidget.cpp:79
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "กราฟใหม่"
+
+#: ui/grapheditorwidget.cpp:80
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgid "Enter the name of your graph document"
+msgstr "กราฟใหม่"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Project Journal"
+msgstr "คุณสมบัติของโหนด"
+
+#: ui/mainwindow.cpp:170
+#, fuzzy, kde-format
+#| msgid "Run"
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "เริ่ม"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr ""
+
+#: ui/mainwindow.cpp:172
+#, fuzzy, kde-format
+#| msgid "Stop"
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "หยุด"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr ""
+
+#: ui/mainwindow.cpp:175
+#, kde-format
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr ""
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr ""
+
+#: ui/mainwindow.cpp:211
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Element Types"
+msgstr "คุณสมบัติของโหนด"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr ""
+
+#: ui/mainwindow.cpp:222
+#, fuzzy, kde-format
+#| msgid "Rocs Script Files"
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "แฟ้มสคริปต์ Rocs"
+
+#: ui/mainwindow.cpp:257
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "คุณสมบัติของโหนด"
+
+#: ui/mainwindow.cpp:263
+#, fuzzy, kde-format
+#| msgid "Save Script"
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "บันทึกสคริปต์"
+
+#: ui/mainwindow.cpp:269
+#, fuzzy, kde-format
+#| msgid "Open Script"
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "เปิดสคริปต์"
+
+#: ui/mainwindow.cpp:277
+#, fuzzy, kde-format
+#| msgid "Open Script"
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "เปิดสคริปต์"
+
+#: ui/mainwindow.cpp:282
+#, fuzzy, kde-format
+#| msgid "Save Script"
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "บันทึกสคริปต์"
+
+#: ui/mainwindow.cpp:283
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "กราฟใหม่"
+
+#: ui/mainwindow.cpp:284
+#, fuzzy, kde-format
+#| msgid "New Script"
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "สคริปต์ใหม่"
+
+#: ui/mainwindow.cpp:285
+#, fuzzy, kde-format
+#| msgid "Complete"
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "เสร็จสิ้น"
+
+#: ui/mainwindow.cpp:286
+#, fuzzy, kde-format
+#| msgid "Export graphs to file"
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "ส่งออกกราฟเป็นแฟ้ม"
+
+#: ui/mainwindow.cpp:287
+#, fuzzy, kde-format
+#| msgid "Complete"
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "เสร็จสิ้น"
+
+#: ui/mainwindow.cpp:288
+#, fuzzy, kde-format
+#| msgid "Complete"
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "เสร็จสิ้น"
+
+#: ui/mainwindow.cpp:327
+#, fuzzy, kde-format
+#| msgid "Open Script"
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "เปิดสคริปต์"
+
+#: ui/mainwindow.cpp:340
+#, fuzzy, kde-format
+#| msgid "Complete"
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "เสร็จสิ้น"
+
+#: ui/mainwindow.cpp:340
+#, fuzzy, kde-format
+#| msgid "Save Script as"
+msgid "JavaScript (*.js)"
+msgstr "บันทึกสคริปต์เป็น"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "ไม่มีชื่อ"
+
+#: ui/mainwindow.cpp:374
+#, fuzzy, kde-format
+#| msgid "Save Script"
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "บันทึกสคริปต์"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+
+#: ui/mainwindow.cpp:385
+#, fuzzy, kde-format
+#| msgid "New Script"
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "สคริปต์ใหม่"
+
+#: ui/mainwindow.cpp:408
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "คุณสมบัติของโหนด"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:433
+#, fuzzy, kde-format
+#| msgid "untitled"
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "ไม่มีชื่อ"
+
+#: ui/mainwindow.cpp:462
+#, fuzzy, kde-format
+#| msgid "New Script"
+msgid "ScriptName"
+msgstr "สคริปต์ใหม่"
+
+#: ui/mainwindow.cpp:462
+#, fuzzy, kde-format
+#| msgid "New Graph"
+msgid "Enter the name of your new script"
+msgstr "กราฟใหม่"
+
+#: ui/mainwindow.cpp:471
+#, kde-format
+msgid "File already exists."
+msgstr ""
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr ""
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, fuzzy, kde-format
+#| msgid "Select"
+msgid "Script output:"
+msgstr "เลือก"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr ""
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr ""
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr ""
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "บันทึกสคริปต์"
+
+#, fuzzy
+#~| msgid "Align on the base"
+#~ msgid "Main Toolbar"
+#~ msgstr "จัดไว้ที่ฐาน"
+
+#, fuzzy
+#~| msgid "Align on the base"
+#~ msgid "Align Toolbar"
+#~ msgstr "จัดไว้ที่ฐาน"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "โครงสร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Rocs - Data Structure Training"
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs - เรียนรู้โครงสร้างข้อมูล"
+
+#, fuzzy
+#~| msgid "No Data Structure plugins found in the system. Exiting."
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr "ไม่พบปลั๊กอินโครงสร้างข้อมูลในระบบ กำลังออกจากโปรแกรม"
+
+#, fuzzy
+#~| msgid ""
+#~| "Rocs need at least one data structure plugin to continue.\n"
+#~| "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Rocs ต้องการปลั๊กอินโครงสร้างข้อมูลอย่างน้อย 1 แบบเพื่อดำเนินการต่อ\n"
+#~ "ลองเปิด kbuildsycoca4 จากคอนโซลแล้วเปิด Rocs ใหม่อีกครั้ง"
+
+#, fuzzy
+#~| msgid "New Script"
+#~ msgid "Script File"
+#~ msgstr "สคริปต์ใหม่"
+
+#, fuzzy
+#~| msgid "Data Color:"
+#~ msgid "Settings"
+#~ msgstr "สีของข้อมูล:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Display of Element Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Data Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "centered"
+#~ msgstr "บันทึกกราฟ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Connection Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Export graphs to file"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "ส่งออกกราฟเป็นแฟ้ม"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|แฟ้มสคริปต์"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "แฟ้มสคริปต์ Rocs"
+
+#, fuzzy
+#~| msgid "Download Examples"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "ดาวน์โหลดตัวอย่าง"
+
+#, fuzzy
+#~| msgid "Upload script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "อัพโหลดสคริปต์"
+
+#, fuzzy
+#~| msgid "Data Color:"
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "สีของข้อมูล:"
+
+#, fuzzy
+#~| msgid "Open Script"
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "เปิดสคริปต์"
+
+#, fuzzy
+#~| msgid "This does not seem to be a graph file."
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "นี่ดูเหมือนจะไม่ใช่แฟ้มกราฟ"
+
+#, fuzzy
+#~| msgid "Invalid file"
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "แฟ้มไม่ถูกต้อง"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*|All files"
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|แฟ้มกราฟ\n"
+#~ "*|แฟ้มทั้งหมด"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "บันทึกสคริปต์"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*|All files"
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|แฟ้มกราฟ\n"
+#~ "*|แฟ้มทั้งหมด"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*|All files"
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|แฟ้มกราฟ\n"
+#~ "*|แฟ้มทั้งหมด"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "บันทึกกราฟ"
+
+#, fuzzy
+#~| msgid "Graph Files"
+#~ msgid "Graph name"
+#~ msgstr "แฟ้มกราฟ"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "กราฟใหม่"
+
+#, fuzzy
+#~| msgid "Debugger"
+#~ msgid "Display debug messages."
+#~ msgstr "ตัวดีบัก"
+
+#~ msgid "Untitled"
+#~ msgstr "ไม่มีชื่อ"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "โครงสร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Name of Data Structure Here"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "ชื่อของโครงสร้างข้อมูล"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Connection"
+#~ msgstr "ชนิดการเชื่อมต่อ"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Connection"
+#~ msgstr "ชนิดการเชื่อมต่อ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "บันทึกกราฟ"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "ลบ"
+
+#, fuzzy
+#~| msgid "Add Edge"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "เพิ่มขอบ"
+
+#, fuzzy
+#~| msgid "Creates a new edge between 2 nodes"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new edge between 2 nodes"
+#~ msgstr "สร้างขอบใหม่ระหว่าง 2 จุด"
+
+#, fuzzy
+#~| msgid "Creates a new node at the click position on the drawing area."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position."
+#~ msgstr "คลิกตำแหน่งบนพื้นที่วาดเพื่อสร้างจุดใหม่"
+
+#, fuzzy
+#~| msgid "Creates a new node at the click position on the drawing area."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position on the drawing area."
+#~ msgstr "คลิกตำแหน่งบนพื้นที่วาดเพื่อสร้างจุดใหม่"
+
+#, fuzzy
+#~| msgid "Delete items by clicking on them."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "คลิกเพื่อลบรายการ"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Move Node"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "ย้ายจุด"
+
+#, fuzzy
+#~| msgid "Zoom"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Zoom"
+#~ msgstr "ย่อ/ขยาย"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "กราฟใหม่"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Data Structure:"
+#~ msgstr "โครงสร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Name of Data Structure Here"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new data structure."
+#~ msgstr "ชื่อของโครงสร้างข้อมูล"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "เลือก"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Edit Data Types"
+#~ msgstr "เลือก"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Static Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#~ msgid "Node color"
+#~ msgstr "สีโหนด"
+
+#~ msgid "Color:"
+#~ msgstr "สี:"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type:"
+#~ msgstr "ชนิด"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Dynamic Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#~ msgid "Name:"
+#~ msgstr "ชื่อ:"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "โครงสร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "โครงสร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Structure"
+#~ msgstr "โครงสร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Types"
+#~ msgstr "เลือก"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "โครงสร้างกราฟ"
+
+#~ msgid "Name"
+#~ msgstr "ชื่อ"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "คุณสมบัติ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Select Data Type:"
+#~ msgstr "เลือก"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Remove selected data type."
+#~ msgstr "เลือก"
+
+#, fuzzy
+#~| msgid "Data Color:"
+#~ msgid "Default Color:"
+#~ msgstr "สีของข้อมูล:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Data Type Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#~ msgid "Property"
+#~ msgstr "คุณสมบัติ"
+
+#~ msgid "Value"
+#~ msgstr "ค่า"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Edit Pointer Types"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Pointer Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "ชนิดการเชื่อมต่อ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Select Pointer Type:"
+#~ msgstr "เลือก"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Remove selected pointer type."
+#~ msgstr "เลือก"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "โครงสร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@title:menu"
+#~ msgid "Selected"
+#~ msgstr "เลือก"
+
+#, fuzzy
+#~| msgid "Zoom"
+#~ msgctxt "@title:menu"
+#~ msgid "Zoom"
+#~ msgstr "ย่อ/ขยาย"
+
+#, fuzzy
+#~| msgid "Output"
+#~ msgctxt "@action:inmenu Zoom"
+#~ msgid "Out"
+#~ msgstr "ผลลัพธ์"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu align elements at center"
+#~ msgid "Center"
+#~ msgstr "บันทึกกราฟ"
+
+#, fuzzy
+#~| msgid "Value"
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "ค่า"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Enumerate"
+#~ msgstr "บันทึกกราฟ"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "ลบ"
+
+#, fuzzy
+#~| msgid "Value"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "ค่า"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Generator Seed"
+#~ msgstr "บันทึกกราฟ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Enumerate Items"
+#~ msgstr "บันทึกกราฟ"
+
+#, fuzzy
+#~| msgid "Generate Graph"
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "สร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Generate Graph"
+#~ msgctxt "@title:window"
+#~ msgid "Generate Graph"
+#~ msgstr "สร้างกราฟ"
+
+#~ msgid "Generate Graph"
+#~ msgstr "สร้างกราฟ"
+
+#~ msgid "Graph Type:"
+#~ msgstr "ชนิดกราฟ:"
+
+#~ msgid "Nodes:"
+#~ msgstr "โหนด:"
+
+#, fuzzy
+#~| msgid "Nodes:"
+#~ msgid "Edges:"
+#~ msgstr "โหนด:"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Generator Seed:"
+#~ msgstr "บันทึกกราฟ"
+
+#, fuzzy
+#~| msgid "Nodes:"
+#~ msgid "Nodes (n):"
+#~ msgstr "โหนด:"
+
+#, fuzzy
+#~| msgid "Complete"
+#~ msgid "Complete Graph"
+#~ msgstr "เสร็จสิ้น"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "กราฟใหม่"
+
+#, fuzzy
+#~| msgid "Global"
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "โดยรวม"
+
+#, fuzzy
+#~| msgid "None"
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "ไม่มี"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgid "Connection"
+#~ msgstr "ชนิดการเชื่อมต่อ"
+
+#, fuzzy
+#~| msgid "Debugger"
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "ตัวดีบัก"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "Read and write Graphviz graph files."
+#~ msgstr "ไม่มีกราฟที่ทำงานได้ในเอกสาร"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*|All files"
+#~ msgid "*.dot *.gv|Graphviz Format"
+#~ msgstr ""
+#~ "*.graph|แฟ้มกราฟ\n"
+#~ "*|แฟ้มทั้งหมด"
+
+#, fuzzy
+#~| msgid "Import"
+#~ msgid "Import"
+#~ msgstr "นำเข้า"
+
+#, fuzzy
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Could not open file \"%1\" in read mode: %2"
+#~ msgstr "ไม่สามารถเปิดแฟ้ม %1: %2"
+
+#, fuzzy
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Could not parse file \"%1\"."
+#~ msgstr "ไม่สามารถเปิดแฟ้ม %1: %2"
+
+#~ msgid "No active graph in this document."
+#~ msgstr "ไม่มีกราฟที่ทำงานได้ในเอกสาร"
+
+#~ msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgstr "ไม่สามารถเปิดแฟ้ม %1 เพื่อเขียนเอกสาร เกิดข้อผิดพลาด %2"
+
+#, fuzzy
+#~| msgid "Open and Save GML files"
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "เปิดและบันทึกแฟ้ม GML"
+
+#, fuzzy
+#~| msgid "Open and Save GML files"
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "เปิดและบันทึกแฟ้ม GML"
+
+#, fuzzy
+#~| msgid "Open and Save GML files"
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "เปิดและบันทึกแฟ้ม GML"
+
+#~ msgid "Cannot open file %1: %2"
+#~ msgstr "ไม่สามารถเปิดแฟ้ม %1: %2"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "Read and write Trivial Graph Format (TGF) files."
+#~ msgstr "ไม่มีกราฟที่ทำงานได้ในเอกสาร"
+
+#, fuzzy
+#~| msgid "Cannot open file %1 to write document. Error: %2"
+#~ msgid "Could not open file \"%1\" in write mode: %2"
+#~ msgstr "ไม่สามารถเปิดแฟ้ม %1 เพื่อเขียนเอกสาร เกิดข้อผิดพลาด %2"
+
+#, fuzzy
+#~| msgid "No active graph in this document."
+#~ msgid "No data structure specified for output in this document."
+#~ msgstr "ไม่มีกราฟที่ทำงานได้ในเอกสาร"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*|All files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr ""
+#~ "*.graph|แฟ้มกราฟ\n"
+#~ "*|แฟ้มทั้งหมด"
+
+#, fuzzy
+#~| msgid "Open and Save GML files"
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "เปิดและบันทึกแฟ้ม GML"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*|All files"
+#~ msgid "*.graph|Rocs Graph File Format"
+#~ msgstr ""
+#~ "*.graph|แฟ้มกราฟ\n"
+#~ "*|แฟ้มทั้งหมด"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "โครงสร้างกราฟ"
+
+#~ msgid "Size"
+#~ msgstr "ขนาด"
+
+#, fuzzy
+#~| msgid "Graph Files"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Graph"
+#~ msgstr "แฟ้มกราฟ"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Linked List Structure"
+#~ msgstr "โครงสร้างกราฟ"
+
+#~ msgid "Cannot convert document '%1'"
+#~ msgstr "ไม่สามารถแปลงเอกสาร '%1' ได้"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "RootedTree Structure"
+#~ msgstr "โครงสร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Cannot open file %1: %2"
+#~ msgid "Cannot open file %1."
+#~ msgstr "ไม่สามารถเปิดแฟ้ม %1: %2"
+
+#~ msgid "New File"
+#~ msgstr "แฟ้มใหม่"
+
+#~ msgid "Untitled%1"
+#~ msgstr "ไม่มีชื่อ%1"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Data structure name"
+#~ msgstr "โครงสร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Delete this data structure"
+#~ msgstr "โครงสร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Delete the current active graph: delete all nodes and edges"
+#~ msgid ""
+#~ "Delete the current data structure: delete all data elements and all "
+#~ "pointers"
+#~ msgstr "ลบกราฟที่ใช้งานอยู่: ลบโหนดและขอบทั้งหมด"
+
+#, fuzzy
+#~| msgid "Open Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "เปิดสคริปต์"
+
+#, fuzzy
+#~| msgid "Open Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "เปิดสคริปต์"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "ชื่อ"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "บันทึกกราฟ"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "บันทึกสคริปต์"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "บันทึกสคริปต์"
+
+#, fuzzy
+#~| msgid "Name:"
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "ชื่อ:"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "บันทึกสคริปต์"
+
+#, fuzzy
+#~| msgid "Open Script"
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "เปิดสคริปต์"
+
+#~ msgid "Value:"
+#~ msgstr "ค่า:"
+
+#~ msgid "Show"
+#~ msgstr "แสดง"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgid "Add Property"
+#~ msgstr "คุณสมบัติ"
+
+#~ msgid "Global"
+#~ msgstr "โดยรวม"
+
+#~ msgid "add"
+#~ msgstr "เพิ่ม"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#, fuzzy
+#~| msgid "Untitled%1"
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "ไม่มีชื่อ%1"
+
+#, fuzzy
+#~| msgid "Data Color:"
+#~ msgid "Enable Color"
+#~ msgstr "สีของข้อมูล:"
+
+#, fuzzy
+#~| msgid "Graph Structure"
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "โครงสร้างกราฟ"
+
+#~ msgid "Delete"
+#~ msgstr "ลบ"
+
+#, fuzzy
+#~| msgid "Generate Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "สร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Generate Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "สร้างกราฟ"
+
+#, fuzzy
+#~| msgid "Open and Save GML files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save GML files"
+#~ msgstr "เปิดและบันทึกแฟ้ม GML"
+
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|แฟ้มกราฟ\n"
+#~ "*|แฟ้มทั้งหมด"
+
+#, fuzzy
+#~| msgid "Complete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "เสร็จสิ้น"
+
+#, fuzzy
+#~| msgid "Save Graph as"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "บันทึกกราฟเป็น"
+
+#~ msgid "Cannot open the file: %1. Error %2"
+#~ msgstr "ไม่สามารถเปิดแฟ้ม %1 ได้ เกิดข้อผิดพลาด %2"
+
+#, fuzzy
+#~| msgid "Open and Save Plain TXT files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save Plain TXT files"
+#~ msgstr "เปิดและบันทึกแฟ้มข้อความธรรมดา"
+
+#~ msgid "*.txt|Plain TXT Files"
+#~ msgstr "*.txt|แฟ้มข้อความ TXT ธรรมดา"
+
+#, fuzzy
+#~| msgid "Add"
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "เพิ่ม"
+
+#~ msgid "Add Node"
+#~ msgstr "เพิ่มจุด"
+
+#, fuzzy
+#~| msgid "Name:"
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "ชื่อ:"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "บันทึกกราฟ"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type Icon:"
+#~ msgstr "ชนิด"
+
+#, fuzzy
+#~| msgid "Export graphs to file"
+#~ msgid "Export as new Type"
+#~ msgstr "ส่งออกกราฟเป็นแฟ้ม"
+
+#~ msgid "Open Script"
+#~ msgstr "เปิดสคริปต์"
+
+#, fuzzy
+#~| msgid "Editor"
+#~ msgid "Edit"
+#~ msgstr "ตัวแก้ไข"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Pointer"
+#~ msgstr "บันทึกกราฟ"
+
+#~ msgid "Delete the active graph"
+#~ msgstr "ลบกราฟที่ใช้งานอยู่"
+
+#~ msgid "Image"
+#~ msgstr "รูปภาพ"
+
+#~ msgid "Untitled0"
+#~ msgstr "ไม่มีชื่อ0"
+
+#~ msgid "Open Graph"
+#~ msgstr "เปิดกราฟ"
+
+#~ msgid "Color for new nodes"
+#~ msgstr "สีของโหนดใหม่"
+
+#~ msgid "Color for new edges"
+#~ msgstr "สีสำหรับขอบใหม่"
+
+#~ msgid "All"
+#~ msgstr "ทั้งหมด"
+
+#~ msgid "Apply the current color to all edges"
+#~ msgstr "ให้สีปัจจุบันมีผลต่อทุกขอบ"
+
+#~ msgid "Apply the current color to all edges on the drawing area"
+#~ msgstr "ให้สีปัจจุบันมีผลต่อทุกขอบบนพื้นที่วาดภาพ"
+
+#~ msgid "Align on the center"
+#~ msgstr "จัดไว้ตรงกลาง"
+
+#~ msgid "Align on the top"
+#~ msgstr "จัดไว้ด้านบน"
+
+#~ msgid "Align on the left"
+#~ msgstr "จัดไว้ซ้าย"
+
+#~ msgid "Align on the right"
+#~ msgstr "จัดไว้ขวา"
+
+#, fuzzy
+#~| msgid "Align on the left"
+#~ msgid "Align on a circle"
+#~ msgstr "จัดไว้ซ้าย"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Ignoring line: %1"
+#~ msgstr "ละเว้นบรรทัด: %1"
+
+#~ msgid "(c) 2009"
+#~ msgstr "สงวนลิขสิทธิ์ 2552"
+
+#~ msgid "Do you want to save your unsaved document?"
+#~ msgstr "คุณต้องการจะบันทึกเอกสารที่ยังไม่บันทึกหรือไม่?"
+
+#~ msgid "Select Items by clicking on them."
+#~ msgstr "คลิกเพื่อเลือกรายการนั้น"
+
+#~ msgid "Moves a node around the drawing area."
+#~ msgstr "ย้ายจุดภายในพื้นที่วาด"
+
+#~ msgid "Dialog"
+#~ msgstr "กล่องโต้ตอบ"
+
+#~ msgid "Radius:"
+#~ msgstr "รัศมี:"
+
+#~ msgid "Complete"
+#~ msgstr "เสร็จสิ้น"
+
+#~ msgid "Name: %1"
+#~ msgstr "ชื่อ: %1"
+
+#~ msgid "Value: %1"
+#~ msgstr "ค่า: %1"
+
+#~ msgid "Save Graph As..."
+#~ msgstr "บันทึกกราฟเป้น..."
+
+#~ msgid "Save Script As..."
+#~ msgstr "บันทึกสคริปต์เป็น..."
+
+#~ msgid "Thanks to Ugo Sangiori"
+#~ msgstr "ขอบคุณ Ugo Sangiori"

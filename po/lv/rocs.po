@@ -1,0 +1,873 @@
+# translation of rocs.po to Latvian
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Einars Sprugis <einars8@gmail.com>, 2010, 2011, 2012, 2013.
+# Maris Nartiss <maris.kde@gmail.com>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: rocs\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2013-08-03 13:04+0300\n"
+"Last-Translator: Maris Nartiss <maris.kde@gmail.com>\n"
+"Language-Team: Latvian\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Einārs Sprūģis"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "einars8@gmail.com"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, fuzzy, kde-format
+#| msgctxt "@title KAboutData: short program description"
+#| msgid "Graph Theory Tool"
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "Grafu teorijas rīks"
+
+#: main.cpp:32
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "(c) 2009-2013 Rocs Developers"
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr "(c) 2009-2013 Rocs izstrādātāji"
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr ""
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr ""
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "Izstrādātājs"
+
+#: main.cpp:57
+#, fuzzy, kde-format
+#| msgid "Project Journal"
+msgid "Project to open."
+msgstr "Projekta žurnāls"
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "Sintakse"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "Īpašības"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "Parametri"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "Parametrs"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "Metodes"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "Tips"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr "Atgrieztais tips"
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr "Detalizēts apraksts"
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "Apraksts"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "Skriptu dzinēja API"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "New Graph Document"
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "Jauns grafa dokuments"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "Objekti"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Script Engine Components"
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "Skriptu dziņa komponentes"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr "Skriptu objekti"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "Īpašības"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "Metodes"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "Rocs skriptēšanas API"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Rādīt tekstu blakus ikonai"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Ceļš, kur iekļaujamo pārvaldnieks meklēs iekļaujamos."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Projekts"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Skripta dokuments"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Grafa dokuments"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Grafa fails"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Rediģēt izvēlētos datus"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Izkārtojums"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Rīki"
+
+#: ui/codeeditorwidget.cpp:81
+#, fuzzy, kde-format
+#| msgid "Graph Document"
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "Grafa dokuments"
+
+#: ui/codeeditorwidget.cpp:82
+#, fuzzy, kde-format
+#| msgid "Enter the name of your new script"
+msgid "Enter the name of your code document"
+msgstr "Ievadiet nosaukumu jaunajam skriptam"
+
+#: ui/documenttypeswidget.cpp:29
+#, fuzzy, kde-format
+#| msgid "Element Types"
+msgctxt "@title"
+msgid "Node Types"
+msgstr "Elementu tipi"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Return Type"
+msgid "Create Type"
+msgstr "Atgrieztais tips"
+
+#: ui/documenttypeswidget.cpp:45
+#, fuzzy, kde-format
+#| msgid "Element Types"
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "Elementu tipi"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr ""
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr ""
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "Eksportēt"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+"<p>Fails <br /><strong>'%1'</strong><br /> jau pastāv; ja nevēlaties to "
+"pārrakstīt, mainiet faila nosaukumu.</p>"
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "Fails pastāv"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr ""
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|Visi faili"
+
+#: ui/fileformatdialog.cpp:116
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Import Graph File into Project"
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "Importēt grafa failu projektā"
+
+#: ui/grapheditorwidget.cpp:79
+#, fuzzy, kde-format
+#| msgid "Graph Document"
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "Grafa dokuments"
+
+#: ui/grapheditorwidget.cpp:80
+#, fuzzy, kde-format
+#| msgid "Enter the name of your new script"
+msgid "Enter the name of your graph document"
+msgstr "Ievadiet nosaukumu jaunajam skriptam"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Projekta žurnāls"
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "Palaist"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr ""
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "Apturēt"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr ""
+
+#: ui/mainwindow.cpp:175
+#, fuzzy, kde-format
+#| msgctxt "@title:menu Debug execution"
+#| msgid "Debug"
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "Atkļūdot"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr ""
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr "Elementu tipi"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "Dienasgrāmata"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "Skriptēšanas API"
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "Jauns projekts"
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "Saglabāt projektu"
+
+#: ui/mainwindow.cpp:269
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Open Project"
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "Atvērt projektu"
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "Nesenie projekti"
+
+#: ui/mainwindow.cpp:282
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Save Project as"
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "Saglabāt projektu kā"
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "Jauns grafa dokuments"
+
+#: ui/mainwindow.cpp:284
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "New Script File"
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "Jauns skripta fails"
+
+#: ui/mainwindow.cpp:285
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Graph"
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "Importēt grafu"
+
+#: ui/mainwindow.cpp:286
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Graph as"
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "Eksportēt grafu kā"
+
+#: ui/mainwindow.cpp:287
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Script"
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "Importēt skriptu"
+
+#: ui/mainwindow.cpp:288
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Script as"
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "Eksportēt skriptu kā"
+
+#: ui/mainwindow.cpp:327
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Import Graph File into Project"
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "Importēt grafa failu projektā"
+
+#: ui/mainwindow.cpp:340
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Script as"
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "Eksportēt skriptu kā"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgid "JavaScript (*.js)"
+msgstr ""
+
+#: ui/mainwindow.cpp:351
+#, fuzzy, kde-format
+#| msgctxt "caption text for temporary project"
+#| msgid "[ untitled ]"
+msgid "untitled"
+msgstr "[ nenosaukts ]"
+
+#: ui/mainwindow.cpp:374
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Save Project as"
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "Saglabāt projektu kā"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+
+#: ui/mainwindow.cpp:385
+#, fuzzy, kde-format
+#| msgid "Overwrite"
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "Pārrakstīt"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "Atvērt projektu failus"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr ""
+
+#: ui/mainwindow.cpp:433
+#, fuzzy, kde-format
+#| msgctxt "caption text for temporary project"
+#| msgid "[ untitled ]"
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "[ nenosaukts ]"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr "SkriptaNosaukums"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr "Ievadiet nosaukumu jaunajam skriptam"
+
+#: ui/mainwindow.cpp:471
+#, fuzzy, kde-format
+#| msgid "File Exists"
+msgid "File already exists."
+msgstr "Fails pastāv"
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr "Izmaiņas jūsu projektā nav saglabātas. Vai vēlaties izmaiņas saglabāt?"
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, fuzzy, kde-format
+#| msgid "Script Output:"
+msgid "Script output:"
+msgstr "Skripta izvade:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Notīrīt programmas izvadi pirms katras izpildes."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Rādīt atkļūdošanas izvadi."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Notīrīt izvadi."
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "Sānu rīkjosla"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr "Pārslēgt '%1' skatu."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Saglabāt projektu kā"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Overwrite"
+#~ msgstr "Pārrakstīt"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Galvenā rīkjosla"
+
+#~ msgid "Align Toolbar"
+#~ msgstr "Izlīdzināt rīkjoslu"
+
+#~ msgid "Rocs Handbook"
+#~ msgstr "Rocs rokasgrāmata"
+
+#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+#~ msgstr "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "Rokasgrāmata"
+
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "Datu struktūras"
+
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs — datu struktūru analīze"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr "Jūsu sistēmā netika atrasti datu struktūras spraudņi. Iziet."
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Rocs nepieciešams vismaz viens datu struktūras spraudnis.\n"
+#~ "Mēģiniet konsolē palaist kbuildsycoca4 un pēc tam startēt Rocs vēlreiz."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr "Vieta, kurā tiks rādīts virsotnes nosaukums un vērtība."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Vieta, kurā tiks rādīts šķautnes nosaukums un vērtība."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr "Norāda, vai tiks rādīta poga atkļūdošanas izpildei."
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr "Norāda, vai tiks rādīta poga soļos sadalītai izpildei."
+
+#~ msgid "Script File"
+#~ msgstr "Skripta fails"
+
+#~ msgid "Convert To"
+#~ msgstr "Pārveidot uz"
+
+#~ msgid "Settings"
+#~ msgstr "Iestatījumi"
+
+#~ msgid "Help"
+#~ msgstr "Palīdzība"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "KDE teksta redaktors netika atrasts, \n"
+#~ " lūdzu, pārbaudiet jūsu instalāciju"
+
+#~ msgid "Display of Element Properties"
+#~ msgstr "Elementa attēlojuma īpašības"
+
+#~ msgid "Data Properties"
+#~ msgstr "Datu īpašības"
+
+#~ msgid "centered"
+#~ msgstr "centrēts"
+
+#~ msgid "below"
+#~ msgstr "zem"
+
+#~ msgid "above"
+#~ msgstr "virs"
+
+#~ msgid "Connection Properties"
+#~ msgstr "Savienojuma īpašības"
+
+#~ msgid "Execution Controls"
+#~ msgstr "Izpildes vadīklas"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Rādīt atkļūdošanas izpildi"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Rādīt viena soļa izpildi"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Īpašības"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Iestatīt rādītāju redzamību"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Eksportēt grafus failā"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "Ielādētie spraudņi"
+
+#~ msgid "Graph File Plugins loaded for %1"
+#~ msgstr "Grafa faila spraudņi ielādēti priekš %1"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|Skriptu faili"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Rocs skriptu faili"
+
+#~ msgid "Add your description here."
+#~ msgstr "Pievienojiet savu aprakstu šeit."
+
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "Viens solis"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Atkļūdošanas palaišana"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "Pārtraukums pirmajā rindā"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Lejupielādēt piemērus"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Augšuplādēt projektu"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Iespējamie iekļaujamie"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "Ielādētie spraudņi"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Code Editor..."
+#~ msgstr "Konfigurēt koda redaktoru..."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Iekļaujamo pārvaldnieks"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Noklusētie iestatījumi"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Pievienot projektam esošu skriptu failu"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "Šis, šķiet, nav grafu fails."
+
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Nederīgs fails"
+
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Rocs projektu faili\n"
+#~ "*.rocsz|Kompresēti Rocs projektu faili\n"
+#~ "*|Visi faili"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Saglabāt projektu"
+
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*rocs *.rocsz|Visi Rocs faili\n"
+#~ "*.rocs|Rocs projektu faili \n"
+#~ "*.rocsz|Kompresēti Rocs projektu faili\n"
+#~ "*|Visi faili"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Rocs grafu dokumenti\n"
+#~ "*|Visi faili"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Saglabāt grafu dokumentu"
+
+#~ msgid "Graph name"
+#~ msgstr "Grafa nosaukums"
+
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Ievadiet nosaukumu grafam"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Iespējamie iekļaujamie skriptu dzinējam"

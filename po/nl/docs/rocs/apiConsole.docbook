@@ -1,0 +1,78 @@
+<sect1 id="include-scripting-interface">
+<title
+>Interfaces voor scripts</title>
+<sect2>
+<title
+>Console-object</title>
+<para
+>Met het console-object kunt u berichten van wisselend belang naar een logboek wegschrijven. </para>
+<para
+>Console is geen constructor. Alle eigenschappen en methodes van Console kunt u aanroepen met console als een object, zonder die aan te maken. </para>
+</sect2>
+<sect2>
+<title
+>Syntaxis</title>
+<programlisting
+>Console.log("Dit is een programmabericht."); // drukt een programmabericht af
+Console.debug("Een debugbericht."); // drukt een debugbericht af
+</programlisting>
+</sect2>
+<sect2>
+<title
+>Methodes van het Console-object</title>
+<sect3>
+<title
+>log()</title>
+<para
+>Afdrukken van het gegeven bericht van normaal belang. </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>log</function
+></funcdef
+> <paramdef
+>string <parameter
+>bericht</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+<sect3>
+<title
+>debug()</title>
+<para
+>Afdrukken van het gegeven debugbericht. </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>debug</function
+></funcdef
+> <paramdef
+>string <parameter
+>bericht</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+<sect3>
+<title
+>error()</title>
+<para
+>Afdrukken van het gegeven zeer ernstige foutbericht.  </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>error</function
+></funcdef
+> <paramdef
+>string <parameter
+>bericht</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+</sect2>
+</sect1>

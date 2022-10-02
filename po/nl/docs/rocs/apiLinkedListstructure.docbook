@@ -1,0 +1,209 @@
+<sect1>
+<title
+>Script API voor backend voor Linked List  (gekoppelde lijststructuur)</title>
+<sect2>
+<title
+>Gegevensstructuur Linked List (gekoppelde lijst)</title>
+<para
+>Een lijstobject bevat de informatie voor een gegevensstructuur van het type <quote
+>Linked List</quote
+>. </para>
+
+<sect3>
+<title
+>Eigenschappen</title>
+<itemizedlist>
+    <listitem>
+        <para
+><emphasis
+>naam</emphasis
+> : </para>
+        <para
+>De unieke naam voor deze gegevensstructuur.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Methodes</title>
+<variablelist>
+
+    <varlistentry>
+    <term
+>head()</term>
+    <listitem>
+        <para
+>Eerste knooppunt van de lijst teruggeven.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>head</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>setHead(knooppunt)</term>
+    <listitem>
+        <para
+>De kop van de lijst instellen (eerste knooppunt).</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>setHead</function
+></funcdef
+> <paramdef
+>ListNode <parameter
+><replaceable
+>knooppunt</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode(type)</term>
+    <listitem>
+        <para
+>Aanmaken van een nieuw knooppunt van het opgegeven type, en dit teruggeven. Indien het type niet wordt opgegeven, wordt het knooppunt niet aangemaakt.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>createNode</function
+></funcdef
+> <paramdef
+>int <parameter
+><replaceable
+>type</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+>createNode()</term>
+    <listitem>
+        <para
+>Aanmaken van een nieuw knooppunt van het standaard type, en dit teruggeven.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>ListNode <function
+>createNode</function
+></funcdef
+> <paramdef
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+
+<sect2>
+<title
+>Knooppunt in de lijst</title>
+<para
+>Een knooppunt is het gegevenselement van een gekoppelde lijst. </para>
+
+<sect3>
+<title
+>Eigenschappen</title>
+<itemizedlist>
+
+    <listitem>
+        <para
+><emphasis
+>breedte</emphasis
+> : </para>
+        <para
+>De grootte van dit gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>x</emphasis
+> : </para>
+        <para
+>De x-coördinaat van dit gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>y</emphasis
+> : </para>
+        <para
+>De y-coördinaat van dit gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>id</emphasis
+> : </para>
+        <para
+>Dit is de unieke naam voor het gegevenselement.</para>
+    </listitem>
+
+    <listitem>
+        <para
+><emphasis
+>kleur</emphasis
+> : </para>
+        <para
+>De kleur van dit gegevenselement, uitgedrukt in een hexadecimaal getal.</para>
+    </listitem>
+</itemizedlist>
+</sect3>
+
+
+<sect3>
+<title
+>Methodes</title>
+<variablelist>
+    <varlistentry>
+    <term
+>pointTo(doel)</term>
+    <listitem>
+        <para
+>Instellen van de pijl van dit knooppunt in de lijst naar het knooppunt doel.</para>
+    <funcsynopsis
+><funcprototype
+><funcdef
+>void <function
+>pointTo</function
+></funcdef
+> <paramdef
+>ListNode <parameter
+><replaceable
+>doel</replaceable
+></parameter
+></paramdef
+> </funcprototype>
+    </funcsynopsis>
+    </listitem>
+    </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+</sect1>

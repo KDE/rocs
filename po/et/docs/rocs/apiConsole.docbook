@@ -1,0 +1,78 @@
+<sect1 id="include-scripting-interface">
+<title
+>Skriptiliidesed</title>
+<sect2>
+<title
+>Konsooli objekt</title>
+<para
+>Konsooli objekt võimaldab kirjutada eri tähtsusega sõnumeid logisse. </para>
+<para
+>Konsool ei ole konstruktor. Kõik konsooli omadused ja meetodid saab välja kutsuda Console'i objektina kasutades, ilma seda loomata. </para>
+</sect2>
+<sect2>
+<title
+>Süntaks</title>
+<programlisting
+>Console.log("See on programmi teade."); // programmi teate näitamine
+Console.debug("Silumisteade."); // silumisteate näitamine
+</programlisting>
+</sect2>
+<sect2>
+<title
+>Konsooli objekti meetodid</title>
+<sect3>
+<title
+>log()</title>
+<para
+>Määratud tavalise raskusastmega teate näitamine. </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>log</function
+></funcdef
+> <paramdef
+>string <parameter
+>teade</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+<sect3>
+<title
+>debug()</title>
+<para
+>Määratud silumisteate näitamine. </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>debug</function
+></funcdef
+> <paramdef
+>string <parameter
+>teade</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+<sect3>
+<title
+>error()</title>
+<para
+>Määratud suure raskusastmega veateate näitamine. </para>
+<funcsynopsis>
+<funcprototype
+><funcdef
+>void <function
+>error</function
+></funcdef
+> <paramdef
+>string <parameter
+>teade</parameter
+></paramdef
+> </funcprototype>
+</funcsynopsis>
+</sect3>
+</sect2>
+</sect1>

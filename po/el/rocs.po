@@ -1,0 +1,1901 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Petros <pvidalis@gmail.com>, 2010.
+# Yannis Kaskamanidis <kiolalis@gmail.com>, 2010.
+# Dimitris Kardarakos <dimkard@gmail.com>, 2012, 2013.
+# Stelios <sstavra@gmail.com>, 2017, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"PO-Revision-Date: 2020-05-13 09:45+0300\n"
+"Last-Translator: Stelios <sstavra@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 18.12.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Γιάννης Κασκαμανίδης, Δημήτρης Καρδαράκος"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kiolalis@gmail.com, dimkard@gmail.com"
+
+#: main.cpp:26
+#, kde-format
+msgctxt "@title Displayed program name"
+msgid "Rocs"
+msgstr "Rocs"
+
+#: main.cpp:29
+#, kde-format
+msgctxt "@title Short program description"
+msgid "Graph Theory Simulator"
+msgstr "Προσομοιωτής θεωρίας γράφων"
+
+#: main.cpp:32
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 2008-2016 Rocs Developers"
+msgstr "(c) 2009-2016 Οι προγραμματιστές του Rocs"
+
+#: main.cpp:33
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Andreas Cord-Landwehr"
+msgstr "Andreas Cord-Landwehr"
+
+#: main.cpp:34
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Maintainer"
+msgstr "Συντηρητής"
+
+#: main.cpp:37
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:38
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Original Author"
+msgstr "Αρχικός συγγραφέας"
+
+#: main.cpp:41
+#, kde-format
+msgctxt "@info:credit Developer name"
+msgid "Wagner Reck"
+msgstr "Wagner Reck"
+
+#: main.cpp:42
+#, kde-format
+msgctxt "@info:credit Role"
+msgid "Developer"
+msgstr "Προγραμματιστής"
+
+#: main.cpp:57
+#, kde-format
+msgid "Project to open."
+msgstr "Έργο για άνοιγμα."
+
+#: plugins/scriptapi/scriptapimanager.cpp:111
+#, kde-format
+msgctxt "@title"
+msgid "Syntax"
+msgstr "Σύνταξη"
+
+#: plugins/scriptapi/scriptapimanager.cpp:112
+#, kde-format
+msgctxt "@title"
+msgid "Properties"
+msgstr "Ιδιότητες"
+
+#: plugins/scriptapi/scriptapimanager.cpp:113
+#, kde-format
+msgctxt "@title"
+msgid "Parameters"
+msgstr "Παράμετροι"
+
+#: plugins/scriptapi/scriptapimanager.cpp:114
+#, kde-format
+msgctxt "@title"
+msgid "Parameter"
+msgstr "Παράμετρος"
+
+#: plugins/scriptapi/scriptapimanager.cpp:115
+#, kde-format
+msgctxt "@title"
+msgid "Methods"
+msgstr "Μέθοδοι"
+
+#: plugins/scriptapi/scriptapimanager.cpp:116
+#, kde-format
+msgctxt "@title"
+msgid "Type"
+msgstr "Τύπος"
+
+#: plugins/scriptapi/scriptapimanager.cpp:117
+#, kde-format
+msgctxt "@title"
+msgid "Return Type"
+msgstr "Τύπος επιστροφής"
+
+#: plugins/scriptapi/scriptapimanager.cpp:118
+#, kde-format
+msgctxt "@title"
+msgid "Detailed Description"
+msgstr "Αναλυτική περιγραφή"
+
+#: plugins/scriptapi/scriptapimanager.cpp:119
+#, kde-format
+msgctxt "@title"
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: plugins/scriptapi/scriptapimanager.cpp:259
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine API"
+msgstr "API μηχανής σεναρίων"
+
+#: plugins/scriptapi/scriptapimanager.cpp:260
+#, kde-format
+msgctxt "@title"
+msgid "The Graph Document"
+msgstr "Το έγγραφο γράφου"
+
+#: plugins/scriptapi/scriptapimanager.cpp:261
+#, kde-format
+msgctxt "@title"
+msgid "Objects"
+msgstr "Αντικείμενα"
+
+#: plugins/scriptapi/scriptapimanager.cpp:262
+#, kde-format
+msgctxt "@title"
+msgid "Script Engine Modules"
+msgstr "Αρθρώματα μηχανής σεναρίων"
+
+#: plugins/scriptapi/scriptapimodel.cpp:111
+#, kde-format
+msgid "Script Objects"
+msgstr "Αντικείμενα σεναρίων"
+
+#: plugins/scriptapi/scriptapimodel.cpp:229
+#, kde-format
+msgid "Properties"
+msgstr "Ιδιότητες"
+
+#: plugins/scriptapi/scriptapimodel.cpp:243
+#, kde-format
+msgid "Methods"
+msgstr "Μέθοδοι"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "API μηχανής σεναρίων του Rocs"
+
+#: project/project.cpp:170
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+"Αδυναμία εισαγωγής του έργου Rocs εξαιτίας της αδυναμίας συντακτικής "
+"ανάλυσης του αρχείου του έργου."
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Εμφάνιση κειμένου δίπλα στο εικονίδιο"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr ""
+"Η διαδρομή στην οποία ο διαχειριστής ενσωματώσεων αναζητά αρχεία για "
+"ενσωμάτωση."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Έργο"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Έγγραφο σεναρίου"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Έγγραφο γράφου"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Αρχείο γράφου"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Επεξεργασία επιλεγμένων δεδομένων"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Διάταξη"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Εργαλεία"
+
+#: ui/codeeditorwidget.cpp:81
+#, kde-format
+msgctxt "@title"
+msgid "Code Document Name"
+msgstr "Όνομα εγγράφου κώδικα"
+
+#: ui/codeeditorwidget.cpp:82
+#, kde-format
+msgid "Enter the name of your code document"
+msgstr "Εισάγετε το όνομα του εγγράφου κώδικα"
+
+#: ui/documenttypeswidget.cpp:29
+#, kde-format
+msgctxt "@title"
+msgid "Node Types"
+msgstr "Τύποι κόμβων"
+
+#: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
+#, kde-format
+msgid "Create Type"
+msgstr "Δημιουργία τύπου"
+
+#: ui/documenttypeswidget.cpp:45
+#, kde-format
+msgctxt "@title"
+msgid "Edge Types"
+msgstr "Τύποι ακμών"
+
+#: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
+#, kde-format
+msgid "unnamed"
+msgstr "χωρίς όνομα"
+
+#: ui/edgetypesdelegate.cpp:57
+#, kde-format
+msgid "Direction of edges of edge type."
+msgstr "Κατευθύνσεις ακμών του τύπου ακμής."
+
+#: ui/edgetypesdelegate.cpp:61
+#, kde-format
+msgid "Unique ID of edge type."
+msgstr "Μοναδική ταυτότητα τύπου ακμής."
+
+#: ui/fileformatdialog.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Export"
+msgstr "Εξαγωγή"
+
+#: ui/fileformatdialog.cpp:65
+#, kde-format
+msgid ""
+"<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
+"want to overwrite it, change the file name to something else.</p>"
+msgstr ""
+"<p>Το αρχείο <br /><strong>'%1'</strong><br /> υπάρχει ήδη. Αν δε θέλετε να "
+"το αντικαταστήσετε, αλλάξτε το όνομα του αρχείου.</p>"
+
+#: ui/fileformatdialog.cpp:69
+#, kde-format
+msgid "File Exists"
+msgstr "Το αρχείο υπάρχει ήδη"
+
+#: ui/fileformatdialog.cpp:85
+#, kde-format
+msgid ""
+"<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
+"backend. Aborting export.</p>"
+msgstr ""
+"<p>Αδυναμία επίλυσης κατάληξης του αρχείου <strong>'%1'</strong> σε ένα "
+"διαθέσιμο σύστημα υποστήριξης αρχείων. Εγκατάλειψη εξαγωγής.</p>"
+
+#: ui/fileformatdialog.cpp:96
+#, kde-format
+msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
+msgstr ""
+"<p>Παρουσιάστηκε σφάλμα κατά την εγγραφή του αρχείου: <strong>'%1'</strong></"
+"p>"
+
+#: ui/fileformatdialog.cpp:114
+#, kde-format
+msgid "*|All files"
+msgstr "*|Όλα τα αρχεία"
+
+#: ui/fileformatdialog.cpp:116
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Graph File into Project"
+msgstr "Εισαγωγή αρχείου γράφου σε έργο"
+
+#: ui/grapheditorwidget.cpp:79
+#, kde-format
+msgctxt "@title"
+msgid "Graph Document Name"
+msgstr "Όνομα εγγράφου γράφου"
+
+#: ui/grapheditorwidget.cpp:80
+#, kde-format
+msgid "Enter the name of your graph document"
+msgstr "Εισάγετε το όνομα του εγγράφου γράφου"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Χρονικό του έργου"
+
+#: ui/mainwindow.cpp:170
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Run"
+msgstr "Εκτέλεση"
+
+#: ui/mainwindow.cpp:171
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Execute currently active script on active graph document."
+msgstr "Τρέχουσα εκτέλεση του ενεργού σεναρίου στο ενεργό έγγραφο γράφου."
+
+#: ui/mainwindow.cpp:172
+#, kde-format
+msgctxt "@action:intoolbar Script Execution"
+msgid "Stop"
+msgstr "Διακοπή"
+
+#: ui/mainwindow.cpp:173
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop script execution."
+msgstr "Διακοπή εκτέλεσης σεναρίου."
+
+#: ui/mainwindow.cpp:175
+#, kde-format
+msgctxt "@action:intoolbar Open Debugger"
+msgid "Debugger"
+msgstr "Πρόγραμμα αποσφαλμάτωσης"
+
+#: ui/mainwindow.cpp:176
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open the Javascript code debugger."
+msgstr "Άνοιγμα του προγράμματος αποσφαλμάτωσης για κώδικα Javascript."
+
+#: ui/mainwindow.cpp:211
+#, kde-format
+msgid "Element Types"
+msgstr "Τύποι στοιχείων"
+
+#: ui/mainwindow.cpp:218
+#, kde-format
+msgctxt "@title"
+msgid "Journal"
+msgstr "Χρονικό"
+
+#: ui/mainwindow.cpp:222
+#, kde-format
+msgctxt "@title"
+msgid "Scripting API"
+msgstr "API σεναρίων"
+
+#: ui/mainwindow.cpp:257
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Project"
+msgstr "Νέο έργο"
+
+#: ui/mainwindow.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Project"
+msgstr "Αποθήκευση έργου"
+
+#: ui/mainwindow.cpp:269
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Open Project"
+msgctxt "@action:inmenu"
+msgid "Open Project..."
+msgstr "Άνοιγμα έργου"
+
+#: ui/mainwindow.cpp:277
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Recent Projects"
+msgstr "Πρόσφατα έργα"
+
+#: ui/mainwindow.cpp:282
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Save Project As"
+msgctxt "@action:inmenu"
+msgid "Save Project As..."
+msgstr "Αποθήκευση έργου ως"
+
+#: ui/mainwindow.cpp:283
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New Graph Document"
+msgstr "Νέο έγγραφο γράφου"
+
+#: ui/mainwindow.cpp:284
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "New Script File"
+msgctxt "@action:inmenu"
+msgid "New Script File..."
+msgstr "Νέο αρχείο σεναρίου"
+
+#: ui/mainwindow.cpp:285
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Graph"
+msgctxt "@action:inmenu"
+msgid "Import Graph..."
+msgstr "Εισαγωγή γράφου"
+
+#: ui/mainwindow.cpp:286
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Graph as"
+msgctxt "@action:inmenu"
+msgid "Export Graph As..."
+msgstr "Εξαγωγή γράφου ως"
+
+#: ui/mainwindow.cpp:287
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Import Script"
+msgctxt "@action:inmenu"
+msgid "Import Script..."
+msgstr "Εισαγωγή σεναρίου"
+
+#: ui/mainwindow.cpp:288
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Export Script"
+msgctxt "@action:inmenu"
+msgid "Export Script..."
+msgstr "Εξαγωγή σεναρίου"
+
+#: ui/mainwindow.cpp:327
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Script into Project"
+msgstr "Εισαγωγή σεναρίου σε έργο"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Script"
+msgstr "Εξαγωγή σεναρίου"
+
+#: ui/mainwindow.cpp:340
+#, kde-format
+msgid "JavaScript (*.js)"
+msgstr "JavaScript (*.js)"
+
+#: ui/mainwindow.cpp:351
+#, kde-format
+msgid "untitled"
+msgstr "ανώνυμο"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Project As"
+msgstr "Αποθήκευση έργου ως"
+
+#: ui/mainwindow.cpp:374
+#, kde-format
+msgid "Rocs Projects (*.rocs)"
+msgstr "Έργα Rocs (*.rocs)"
+
+#: ui/mainwindow.cpp:384
+#, kde-format
+msgctxt "@info"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+"Ένα αρχείο με όνομα \"%1\" υπάρχει ήδη. Είστε βέβαιοι ότι θέλετε να το "
+"αντικαταστήσετε;"
+
+#: ui/mainwindow.cpp:385
+#, kde-format
+msgctxt "@title:window"
+msgid "Overwrite File?"
+msgstr "Αντικατάσταση αρχείου!"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgctxt "@title:window"
+msgid "Open Project Files"
+msgstr "Άνοιγμα αρχείων έργου"
+
+#: ui/mainwindow.cpp:408
+#, kde-format
+msgid "Rocs projects (*.rocs)"
+msgstr "Έργα Rocs (*.rocs)"
+
+#: ui/mainwindow.cpp:433
+#, kde-format
+msgctxt "caption text for temporary project"
+msgid "[ untitled ]%1"
+msgstr "[ άτιτλο ]%1"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "ScriptName"
+msgstr "ΌνομαΣεναρίου"
+
+#: ui/mainwindow.cpp:462
+#, kde-format
+msgid "Enter the name of your new script"
+msgstr "Εισάγετε το όνομα του νέου σεναρίου"
+
+#: ui/mainwindow.cpp:471
+#, kde-format
+msgid "File already exists."
+msgstr "Το αρχείο υπάρχει ήδη."
+
+#: ui/mainwindow.cpp:492
+#, kde-format
+msgctxt "@info"
+msgid "Changes on your project are unsaved. Do you want to save your changes?"
+msgstr ""
+"Οι αλλαγές στο έργο σας δεν έχουν αποθηκευθεί. Επιθυμείτε την αποθήκευση των "
+"αλλαγών σας;"
+
+#: ui/nodetypesdelegate.cpp:60
+#, kde-format
+msgid "Unique ID of the node type."
+msgstr "Μοναδική ταυτότητα για τον τύπο κόμβου."
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, fuzzy, kde-format
+#| msgid "Script Output:"
+msgid "Script output:"
+msgstr "Έξοδος σεναρίου:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Καθαρισμός της εξόδου του προγράμματος σε κάθε εκτέλεση."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Εμφάνισης της εξόδου αποσφαλμάτωσης."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Καθαρισμός εξόδου."
+
+#: ui/sidedockwidget.cpp:105
+#, kde-format
+msgctxt "@title"
+msgid "Side Toolbar"
+msgstr "Πλευρική εργαλειοθήκη"
+
+#: ui/sidedockwidget.cpp:133
+#, kde-format
+msgid "Toggle '%1' view."
+msgstr "Εναλλαγή της προβολής '%1'."
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Project as"
+#~ msgstr "Αποθήκευση έργου ως"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Overwrite"
+#~ msgstr "Αντικατάσταση"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Κύρια εργαλειοθήκη"
+
+#~ msgid "Align Toolbar"
+#~ msgstr "Στοίχιση εργαλειοθήκης"
+
+#~ msgid "Rocs Handbook"
+#~ msgstr "Το εγχειρίδιο του Rocs"
+
+#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+#~ msgstr "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
+
+#~ msgctxt "@title"
+#~ msgid "Handbook"
+#~ msgstr "Εγχειρίδιο"
+
+#~ msgctxt "@title"
+#~ msgid "Data Structures"
+#~ msgstr "Δομές δεδομένων"
+
+#~ msgctxt "@title Short program description"
+#~ msgid "Rocs - Data Structure Analysis"
+#~ msgstr "Rocs - Ανάλυση δομών δεδομένων"
+
+#~ msgid "No Data Structure plugins found on your system. Exiting."
+#~ msgstr "Δε βρέθηκαν πρόσθετα δομών δεδομένων στο σύστημά σας. Έξοδος."
+
+#~ msgid ""
+#~ "Rocs needs at least one data structure plugin to continue.\n"
+#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
+#~ msgstr ""
+#~ "Το Rocs απαιτεί τουλάχιστον ένα πρόσθετο δομών δεδομένων για να "
+#~ "συνεχίσει.\n"
+#~ " Παρακαλώ προσπαθήστε να εκτελέσετε το kbuildsycoca4 από την κονσόλα και "
+#~ "στη συνέχεια εκτελέστε ξανά το Rocs."
+
+#~ msgid "Position where name and value of a node shall be shown."
+#~ msgstr "Η θέση στην οποία θα εμφανίζεται το όνομα και η τιμή κάθε κόμβου."
+
+#~ msgid "Position where name and value of an edge shall be shown."
+#~ msgstr "Η θέση στην οποία θα εμφανίζεται το όνομα και η τιμή κάθε ακμής."
+
+#~ msgid ""
+#~ "Specifies whether execution button for debug execution shall be shown."
+#~ msgstr ""
+#~ "Καθορίζει αν θα εμφανίζεται το κουμπί εκτέλεσης για την αποσφαλμάτωση της "
+#~ "εκτέλεσης."
+
+#~ msgid ""
+#~ "Specifies whether execution button for stepped execution shall be shown."
+#~ msgstr ""
+#~ "Καθορίζει αν θα εμφανίζεται το κουμπί εκτέλεσης για την εκτέλεση σε "
+#~ "βήματα."
+
+#~ msgid "Script File"
+#~ msgstr "Αρχείο σεναρίου"
+
+#~ msgid "Convert To"
+#~ msgstr "Μετατροπή σε"
+
+#~ msgid "Settings"
+#~ msgstr "Ρυθμίσεις"
+
+#~ msgid "Help"
+#~ msgstr "Βοήθεια"
+
+#~ msgid ""
+#~ "A KDE Text Editor could not be found, \n"
+#~ " please, check your installation"
+#~ msgstr ""
+#~ "Δεν μπορεί να βρεθεί ένας επεξεργαστής κειμένου \n"
+#~ "του KDE, παρακαλώ ελέγξτε την εγκατάστασή σας."
+
+#~ msgid "Display of Element Properties"
+#~ msgstr "Εμφάνιση ιδιοτήτων στοιχείου"
+
+#~ msgid "Data Properties"
+#~ msgstr "Ιδιότητες δεδομένων"
+
+#~ msgid "centered"
+#~ msgstr "στο κέντρο"
+
+#~ msgid "below"
+#~ msgstr "κάτω"
+
+#~ msgid "above"
+#~ msgstr "πάνω"
+
+#~ msgid "Connection Properties"
+#~ msgstr "Ιδιότητες σύνδεσης"
+
+#~ msgid "Execution Controls"
+#~ msgstr "Συστατικά ελέγχου εκτέλεσης"
+
+#~ msgid "Show Debug Execution"
+#~ msgstr "Εμφάνιση αποσφαλμάτωσης εκτέλεσης"
+
+#~ msgid "Show One Step Execution"
+#~ msgstr "Εμφάνιση εκτέλεσης ενός βήματος"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Properties"
+#~ msgstr "Ιδιότητες"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Set visibility of pointers"
+#~ msgstr "Ορισμός ορατότητας δεικτών"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Export graphs to file"
+#~ msgstr "Εξαγωγή γράφων σε αρχείο"
+
+#~ msgid "Loaded Plugins"
+#~ msgstr "Φορτωμένα πρόσθετα"
+
+#~ msgid "Graph File Plugins loaded for %1"
+#~ msgstr "Τα πρόσθετα του αρχείου γράφου φορτώθηκαν για το %1"
+
+#~ msgid "*.js|Script files"
+#~ msgstr "*.js|Αρχεία σεναρίων"
+
+#~ msgid "Rocs Script Files"
+#~ msgstr "Αρχεία σεναρίων του Rocs"
+
+#~ msgid "Add your description here."
+#~ msgstr "Προσθέστε εδώ την περιγραφή σας."
+
+#~ msgctxt "@action:intoolbar Script Execution"
+#~ msgid "One Step"
+#~ msgstr "Ένα βήμα"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Debug run"
+#~ msgstr "Αποσφαλμάτωση εκτέλεσης"
+
+#~ msgctxt "@action:inmenu Debug execution"
+#~ msgid "Interrupt at first line"
+#~ msgstr "Σταμάτημα στο πρώτο βήμα"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Download Examples"
+#~ msgstr "Λήψη παραδειγμάτων"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Upload project"
+#~ msgstr "Αποστολή έργου"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Possible Includes"
+#~ msgstr "Αρχεία με δυνατότητα ενσωμάτωσης"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Loaded Plugins"
+#~ msgstr "Φορτωμένα πρόσθετα"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Configure Code Editor..."
+#~ msgstr "Διαμόρφωση επεξεργαστή κώδικα..."
+
+#~ msgctxt "@title:tab"
+#~ msgid "Include Manager"
+#~ msgstr "Διαχειριστής ενσωματώσεων"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Default Settings"
+#~ msgstr "Προκαθορισμένες ρυθμίσεις"
+
+#~ msgctxt "@title:window"
+#~ msgid "Add Existing Script File to Project"
+#~ msgstr "Προσθήκη υπάρχοντος αρχείου σεναρίου στο έργο"
+
+#~ msgctxt "@info"
+#~ msgid "This does not seem to be a graph file."
+#~ msgstr "Αυτό δεν φαίνεται να είναι ένα αρχείο γράφου."
+
+#~ msgctxt "@title:window"
+#~ msgid "Invalid File"
+#~ msgstr "Μη έγκυρο αρχείο"
+
+#~ msgid ""
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.rocs|Αρχεία έργων του Rocs\n"
+#~ "*.rocsz|Συμπιεσμένα αρχεία έργων του Rocs\n"
+#~ "*|Όλα τα αρχεία"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Project"
+#~ msgstr "Αποθήκευση έργου"
+
+#~ msgid ""
+#~ "*rocs *.rocsz|All Rocs files\n"
+#~ "*.rocs|Rocs project files\n"
+#~ "*.rocsz|Compressed Rocs project files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*rocs *.rocsz|Όλα τα αρχεία του Rocs\n"
+#~ "*.rocs|Αρχεία έργων του Rocs\n"
+#~ "*.rocsz|Συμπιεσμένα αρχεία έργων του Rocs\n"
+#~ "*|Όλα τα αρχεία"
+
+#~ msgid ""
+#~ "*.graph|Rocs graph documents\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Έγγραφα γράφων του Rocs\n"
+#~ "*|Όλα τα αρχεία"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save Graph Document"
+#~ msgstr "Αποθήκευση εγγράφου γράφου"
+
+#~ msgid "Graph name"
+#~ msgstr "Όνομα γράφου"
+
+#~ msgid "Enter the name of the Graph"
+#~ msgstr "Εισάγετε το όνομα του γράφου"
+
+#~ msgid "Possible Includes for Script Engine"
+#~ msgstr "Αρχεία με δυνατότητα ενσωμάτωσης στη μηχανή σεναρίων"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your graph document are unsaved. Do you want to save your "
+#~ "changes?"
+#~ msgstr ""
+#~ "Οι αλλαγές σας στο έγγραφο γράφου δεν έχουν αποθηκευθεί. Επιθυμείτε την "
+#~ "αποθήκευση των αλλαγών σας;"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files are unsaved. Do you want to save all unsaved "
+#~ "scripts?"
+#~ msgstr ""
+#~ "Οι αλλαγές στα αρχεία σεναρίων σας δεν έχουν αποθηκευθεί. Επιθυμείτε την "
+#~ "αποθήκευση όλων των σεναρίων που δεν έχουν αποθηκευθεί;"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Changes on your script files and on your graph document are unsaved. Do "
+#~ "you want to save your graph document and all unsaved scripts?"
+#~ msgstr ""
+#~ "Οι αλλαγές στα αρχεία σεναρίων σας και στα έγγραφα γράφων δεν έχουν "
+#~ "αποθηκευθεί. Επιθυμείτε την αποθήκευση όλων των σεναρίων και των εγγράφων "
+#~ "γράφων που δεν έχουν αποθηκευθεί;"
+
+#~ msgid "Default Information Display"
+#~ msgstr "Προκαθορισμένη εμφάνιση πληροφοριών"
+
+#~ msgid "Node Information"
+#~ msgstr "Πληροφορίες κόμβων"
+
+#~ msgid "Edge Information"
+#~ msgstr "Πληροφορίες ακμών"
+
+#, fuzzy
+#~| msgid "Debugger"
+#~ msgid "Display debug messages."
+#~ msgstr "Αποσφαλματωτής"
+
+#~ msgid "Untitled"
+#~ msgstr "Ανώνυμο"
+
+#~ msgid "Layout Toolbar"
+#~ msgstr "Εργαλειοθήκη διάταξης"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Data"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add new data element"
+#~ msgstr "Εμφάνιση τιμών στο:"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@title:menu"
+#~ msgid "Add Connection"
+#~ msgstr "Τύπος σύνδεσης"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Connection"
+#~ msgstr "Τύπος σύνδεσης"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Center"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Circular"
+#~ msgctxt "@action:intoolbar Alignment"
+#~ msgid "Circle"
+#~ msgstr "Κυκλικός"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Delete"
+#~ msgstr "Διαγραφή"
+
+#, fuzzy
+#~| msgid "Add Edge"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Add Edge"
+#~ msgstr "Προσθήκη ακμής"
+
+#, fuzzy
+#~| msgid "Creates a new edge between 2 nodes"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new edge between 2 nodes"
+#~ msgstr "Δημιουργεί μια νέα ακμή μεταξύ δύο κόμβων"
+
+#, fuzzy
+#~| msgid "Creates a new node at the click position on the drawing area."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position."
+#~ msgstr ""
+#~ "Δημιουργεί έναν νέο κόμβο στο σημείο της περιοχής σχεδίασης όπου θα γίνει "
+#~ "κλικ."
+
+#, fuzzy
+#~| msgid "Creates a new node at the click position on the drawing area."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Creates a new node at the click position on the drawing area."
+#~ msgstr ""
+#~ "Δημιουργεί έναν νέο κόμβο στο σημείο της περιοχής σχεδίασης όπου θα γίνει "
+#~ "κλικ."
+
+#, fuzzy
+#~| msgid "Delete items by clicking on them."
+#~ msgctxt "@info:tooltip"
+#~ msgid "Delete items by clicking on them."
+#~ msgstr "Διαγραφή αντικειμένων με κλικ σε αυτά."
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Type Properties"
+#~ msgstr "Ιδιότητες ακμής"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~| msgid "Move Node"
+#~ msgctxt "@action:intoolbar"
+#~ msgid "Move"
+#~ msgstr "Μετακίνηση κόμβου"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@action:button"
+#~ msgid "Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@label:listbox"
+#~ msgid "Graph Document:"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Add a new data structure."
+#~ msgstr "Εμφάνιση τιμών στο:"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Remove selected data structure."
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Edit Data Types"
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Static Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#~ msgid "Node color"
+#~ msgstr "Χρώμα κόμβου"
+
+#~ msgid "Color:"
+#~ msgstr "Χρώμα:"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type:"
+#~ msgstr "Τύπος"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Dynamic Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#~ msgid "Name:"
+#~ msgstr "Όνομα:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Data Structure Plugin:"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Data Structure Plugin Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@title:tab"
+#~ msgid "Data Types"
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Data Structure Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#~ msgid "Name"
+#~ msgstr "Όνομα"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "Property identifier, only a-Z and no spaces"
+#~ msgid "property%1"
+#~ msgstr "Ιδιότητα"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Select Data Type:"
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Remove selected data type."
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgid "Add new data type."
+#~ msgstr "Εμφάνιση τιμών στο:"
+
+#, fuzzy
+#~| msgid "Color:"
+#~ msgid "Default Color:"
+#~ msgstr "Χρώμα:"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgid "Data Type Properties"
+#~ msgstr "Ιδιότητες ακμής"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Document Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#~ msgid "Property"
+#~ msgstr "Ιδιότητα"
+
+#~ msgid "Value"
+#~ msgstr "Τιμή"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Edit Pointer Types"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:window"
+#~ msgid "Pointer Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Pointer Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#~ msgid "Width:"
+#~ msgstr "Πλάτος:"
+
+#, fuzzy
+#~| msgid "solid"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "solid line"
+#~ msgstr "συμπαγές"
+
+#, fuzzy
+#~| msgid "dash"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash line"
+#~ msgstr "παύλα"
+
+#, fuzzy
+#~| msgid "dash dot"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "dash dot line"
+#~ msgstr "παύλα τελεία"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Connection"
+#~ msgstr "Τύπος σύνδεσης"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Select Pointer Type:"
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Remove selected pointer type."
+#~ msgstr "Επιλογή"
+
+#~ msgid "Style:"
+#~ msgstr "Στυλ:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Pointer Type Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:menu"
+#~ msgid "Data Structure"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgctxt "@title:menu"
+#~ msgid "Selected"
+#~ msgstr "Επιλογή"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu align elements at center"
+#~ msgid "Center"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Circular"
+#~ msgctxt "@action:inmenu align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Κυκλικός"
+
+#, fuzzy
+#~| msgid "Value"
+#~ msgctxt "@title:menu Assign values"
+#~ msgid "Values"
+#~ msgstr "Τιμή"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Enumerate"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Integers"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu Value"
+#~ msgid "Random Reals"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Delete"
+#~ msgstr "Διαγραφή"
+
+#, fuzzy
+#~| msgid "Edge value"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Assign Values"
+#~ msgstr "Τιμή ακμής"
+
+#~ msgid "Nodes"
+#~ msgstr "Κόμβοι"
+
+#~ msgid "Edges"
+#~ msgstr "Ακμές"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Generator Seed"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Enumerate Items"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Assign Random Reals"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@Title Displayed plugin name"
+#~ msgid "Generate Graph"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@title:window"
+#~ msgid "Generate Graph"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgid "Mesh Graph"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Star Graph"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgid "Circle Graph"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "RandomGraph"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Generate Graph"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Graph Files"
+#~ msgid "Graph Type:"
+#~ msgstr "Αρχεία γραφημάτων"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Random Graph"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#~ msgid "Nodes:"
+#~ msgstr "Κόμβοι:"
+
+#, fuzzy
+#~| msgid "Edges"
+#~ msgid "Edges:"
+#~ msgstr "Ακμές"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgid "Generator Seed:"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Nodes:"
+#~ msgid "Nodes (n):"
+#~ msgstr "Κόμβοι:"
+
+#, fuzzy
+#~| msgid "Complete"
+#~ msgid "Complete Graph"
+#~ msgstr "Ολοκληρώθηκε"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt ""
+#~ "document that contains graphs or data structures as a visual "
+#~ "representation"
+#~ msgid "Document"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~| msgid "Unique"
+#~ msgctxt "dynamic property that is present exactly once"
+#~ msgid "Unique"
+#~ msgstr "Μοναδικό"
+
+#, fuzzy
+#~| msgid "Multiple"
+#~ msgctxt "dynamic property that is present multiple times"
+#~ msgid "Multiple"
+#~ msgstr "Πολλαπλό"
+
+#, fuzzy
+#~| msgid "Global"
+#~ msgctxt "dynamic property that is present at all elements"
+#~ msgid "Global"
+#~ msgstr "Καθολικό"
+
+#, fuzzy
+#~| msgid "None"
+#~ msgctxt "type of dynamic property"
+#~ msgid "None"
+#~ msgstr "Κανένα"
+
+#, fuzzy
+#~| msgid "Connection Type"
+#~ msgid "Connection"
+#~ msgstr "Τύπος σύνδεσης"
+
+#, fuzzy
+#~| msgid "Debugger"
+#~ msgctxt "@item:inlistbox Select output"
+#~ msgid "Program Messages"
+#~ msgstr "Αποσφαλματωτής"
+
+#~ msgid "New File"
+#~ msgstr "Νέο αρχείο"
+
+#, fuzzy
+#~| msgid "Graph Files"
+#~ msgid "*.dot *.gv|Graphviz Format"
+#~ msgstr "Αρχεία γραφημάτων"
+
+#, fuzzy
+#~| msgid "Import"
+#~ msgid "Import"
+#~ msgstr "Εισαγωγή"
+
+#, fuzzy
+#~| msgid "Open and Save KML files"
+#~ msgid "Read and write Graph Markup Language (GML) files."
+#~ msgstr "Άνοιγμα και αποθήκευση αρχείων KML"
+
+#, fuzzy
+#~| msgid "*.kml|KML Files\n"
+#~ msgid "*.gml|Graph Markup Language Format"
+#~ msgstr "*.kml|KML αρχεία\n"
+
+#, fuzzy
+#~| msgid "Open and Save KML files"
+#~ msgid "Read and write Keyhole Markup Language (KML) files."
+#~ msgstr "Άνοιγμα και αποθήκευση αρχείων KML"
+
+#, fuzzy
+#~| msgid "*.kml|KML Files\n"
+#~ msgid "*.kml|Keyhole Markup Language Format"
+#~ msgstr "*.kml|KML αρχεία\n"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*.*|All files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Rocs Graph File Backend"
+#~ msgstr ""
+#~ "*.graph|Graph αρχεία\n"
+#~ "*.*|Όλα τα αρχεία"
+
+#, fuzzy
+#~| msgid "Open and Save KML files"
+#~ msgid "Read and write Rocs Graph Files"
+#~ msgstr "Άνοιγμα και αποθήκευση αρχείων KML"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*.*|All files"
+#~ msgid "*.graph|Rocs Graph File Format"
+#~ msgstr ""
+#~ "*.graph|Graph αρχεία\n"
+#~ "*.*|Όλα τα αρχεία"
+
+#~ msgid "Untitled%1"
+#~ msgstr "Ανώνυμο%1"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Graph Structure"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~| msgctxt "X-coordinate "
+#~| msgid "x"
+#~ msgctxt "coordinate axis"
+#~ msgid "x"
+#~ msgstr "χ"
+
+#, fuzzy
+#~| msgctxt "Y-coordinate "
+#~| msgid "y"
+#~ msgctxt "coordinate axis"
+#~ msgid "y"
+#~ msgstr "ψ"
+
+#, fuzzy
+#~| msgid "Size:"
+#~ msgid "Size"
+#~ msgstr "Μέγεθος:"
+
+#, fuzzy
+#~| msgid "Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Graph"
+#~ msgstr "Γράφημα"
+
+#, fuzzy
+#~| msgid "Multiple"
+#~ msgctxt ""
+#~ "@label:inlistbox graph for which several edges between same nodes may "
+#~ "exist"
+#~ msgid "Multigraph"
+#~ msgstr "Πολλαπλό"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgctxt "@option:check"
+#~ msgid "Show all pointers"
+#~ msgstr "Εμφάνιση τιμών στο:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Data structure name"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~| msgid "Delete the current active graph: delete all nodes and edges"
+#~ msgid ""
+#~ "Delete the current data structure: delete all data elements and all "
+#~ "pointers"
+#~ msgstr ""
+#~ "Διαγραφή του τρέχοντος ενεργού γραφήματος: διαγραφή όλων των κόμβων και "
+#~ "των ακμών"
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgctxt "@action:inmenu"
+#~ msgid "Export Project"
+#~ msgstr "Άνοιγμα δέσμης εντολών..."
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Project"
+#~ msgstr "Άνοιγμα δέσμης εντολών..."
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Set Name"
+#~ msgstr "Όνομα"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Script"
+#~ msgstr "Αποθήκευση δέσμης εντολών"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@title:window"
+#~ msgid "Set Project Name"
+#~ msgstr "Αποθήκευση δέσμης εντολών"
+
+#, fuzzy
+#~| msgid "Name:"
+#~ msgctxt "@label:textbox name of the project"
+#~ msgid "Name:"
+#~ msgstr "Όνομα:"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgctxt "@title:window"
+#~ msgid "Save Script Document"
+#~ msgstr "Αποθήκευση δέσμης εντολών"
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgctxt "@title:window"
+#~ msgid "Export Project"
+#~ msgstr "Άνοιγμα δέσμης εντολών..."
+
+#~ msgid "Edge Properties"
+#~ msgstr "Ιδιότητες ακμής"
+
+#~ msgid "Edge name"
+#~ msgstr "Όνομα ακμής"
+
+#~ msgid "Edge color"
+#~ msgstr "Χρώμα ακμής"
+
+#~ msgid "Value:"
+#~ msgstr "Τιμή:"
+
+#~ msgid "Edge value"
+#~ msgstr "Τιμή ακμής"
+
+#~ msgid "Edge width"
+#~ msgstr "Πλάτος ακμής"
+
+#~ msgid "Show"
+#~ msgstr "Εμφάνιση"
+
+#~ msgid "Show/hide edge name"
+#~ msgstr "Εμφάνιση/Απόκρυψη ονόματος ακμής"
+
+#~ msgid "Show/add edge value"
+#~ msgstr "Εμφάνιση/Απόκρυψη τιμής της ακμής"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgid "Add Property"
+#~ msgstr "Ιδιότητα"
+
+#~ msgid "Global"
+#~ msgstr "Καθολικό"
+
+#~ msgid "add"
+#~ msgstr "προσθήκη"
+
+#, fuzzy
+#~| msgid "Untitled%1"
+#~ msgctxt "Property keyword only caracters from a to z (no spaces)"
+#~ msgid "untitled%1"
+#~ msgstr "Ανώνυμο%1"
+
+#, fuzzy
+#~| msgid "Color:"
+#~ msgid "Enable Color"
+#~ msgstr "Χρώμα:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Data Structure Specific Properties"
+#~ msgstr "Ιδιότητες κόμβου"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of data elements"
+#~ msgstr "Εμφάνιση τιμών στο:"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of data elements"
+#~ msgstr "Εμφάνιση τιμών στο:"
+
+#, fuzzy
+#~| msgid "Show names in:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show names of pointers"
+#~ msgstr "Εμφάνιση ονομάτων στο:"
+
+#, fuzzy
+#~| msgid "Show values in:"
+#~ msgctxt "@info:tooltip"
+#~ msgid "Show values of pointers"
+#~ msgstr "Εμφάνιση τιμών στο:"
+
+#~ msgid "Delete"
+#~ msgstr "Διαγραφή"
+
+#~ msgid "dot"
+#~ msgstr "τελεία"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Undirected Graph"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt "@label:inlistbox"
+#~ msgid "Directed Graph"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt ""
+#~ "@label:inlistbox Undirected graph for which several edges between same "
+#~ "nodes may exist"
+#~ msgid "Undirected Multigraph"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgctxt ""
+#~ "@label:inlistbox Directed graph for which several same orientated edges "
+#~ "between same nodes may exist"
+#~ msgid "Directed Multigraph"
+#~ msgstr "Νέο γράφημα"
+
+#, fuzzy
+#~| msgid "Open and Save KML files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save GML files"
+#~ msgstr "Άνοιγμα και αποθήκευση αρχείων KML"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.graph|Graph files\n"
+#~| "*.*|All files"
+#~ msgid ""
+#~ "*.graph|Graph files\n"
+#~ "*|All files"
+#~ msgstr ""
+#~ "*.graph|Graph αρχεία\n"
+#~ "*.*|Όλα τα αρχεία"
+
+#, fuzzy
+#~| msgid "Complete"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Import Rocs Graph"
+#~ msgstr "Ολοκληρώθηκε"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Save Graph as"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Open and Save KML files"
+#~ msgctxt "@title Displayed plugin name"
+#~ msgid "Open and Save Plain TXT files"
+#~ msgstr "Άνοιγμα και αποθήκευση αρχείων KML"
+
+#, fuzzy
+#~| msgid "Add"
+#~ msgctxt "@action:button"
+#~ msgid "Add"
+#~ msgstr "Προσθήκη"
+
+#~ msgid "Add Node"
+#~ msgstr "Προσθήκη κόμβου"
+
+#, fuzzy
+#~| msgid "Name:"
+#~ msgctxt "name of the project"
+#~ msgid "Name:"
+#~ msgstr "Όνομα:"
+
+#, fuzzy
+#~| msgid "Save Graph"
+#~ msgctxt "align elements at center"
+#~ msgid "Center"
+#~ msgstr "Αποθήκευση γραφήματος"
+
+#, fuzzy
+#~| msgid "Circular"
+#~ msgctxt "align elements as a circle"
+#~ msgid "Circle"
+#~ msgstr "Κυκλικός"
+
+#, fuzzy
+#~| msgid "Open Script..."
+#~ msgid "Open Script"
+#~ msgstr "Άνοιγμα δέσμης εντολών..."
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type Icon:"
+#~ msgstr "Τύπος"
+
+#, fuzzy
+#~| msgid "Export graphs to file"
+#~ msgid "Export as new Type"
+#~ msgstr "Εξαγωγή γραφήματος σε αρχείο"
+
+#, fuzzy
+#~| msgid "Editor"
+#~ msgid "Edit"
+#~ msgstr "Επεξεργαστής"
+
+#, fuzzy
+#~| msgid "Node Color:"
+#~ msgid "Pointer"
+#~ msgstr "Χρώμα κόμβου:"
+
+#~ msgid "Delete the active graph"
+#~ msgstr "Διαγραφή ενεργού γραφήματος"
+
+#, fuzzy
+#~| msgctxt "X-coordinate "
+#~| msgid "x"
+#~ msgctxt "@action:button"
+#~ msgid "x"
+#~ msgstr "χ"
+
+#, fuzzy
+#~| msgid "Apply the current color to all nodes"
+#~ msgid "Apply to all nodes"
+#~ msgstr "Εφαρμογή του τρέχοντος χρώματος σε όλους τους κόμβους"
+
+#~ msgid "Untitled0"
+#~ msgstr "Ανώνυμο0"
+
+#, fuzzy
+#~| msgid "Open Graph..."
+#~ msgid "Open Graph"
+#~ msgstr "Άνοιγμα γραφήματος..."
+
+#~ msgid "Color for new nodes"
+#~ msgstr "Χρώμα για τους νέους κόμβους"
+
+#~ msgid "Color for new edges"
+#~ msgstr "Χρώμα για τις νέες ακμές"
+
+#~ msgid "Apply the current color to all nodes"
+#~ msgstr "Εφαρμογή του τρέχοντος χρώματος σε όλους τους κόμβους"
+
+#~ msgid "Apply the current color to all nodes on the drawing area"
+#~ msgstr ""
+#~ "Εφαρμογή του τρέχοντος χρώματος σε όλους τους κόμβους στην περιοχή "
+#~ "σχεδίασης"
+
+#~ msgid "All"
+#~ msgstr "Όλα"
+
+#~ msgid "Apply the current color to all edges"
+#~ msgstr "Εφαρμογή του τρέχοντος χρώματος σε όλες τις ακμές"
+
+#~ msgid "Apply the current color to all edges on the drawing area"
+#~ msgstr ""
+#~ "Εφαρμογή του τρέχοντος χρώματος σε όλες τις ακμές στην περιοχή σχεδίασης"
+
+#~ msgid "Align on the base"
+#~ msgstr "Στοίχιση στη βάση"
+
+#~ msgid "Align on the center"
+#~ msgstr "Στοίχιση στο κέντρο"
+
+#~ msgid "Align on the top"
+#~ msgstr "Στοίχιση επάνω"
+
+#~ msgid "Align on the left"
+#~ msgstr "Στοίχιση αριστερά"
+
+#~ msgid "Align on the right"
+#~ msgstr "Στοίχιση δεξιά"
+
+#, fuzzy
+#~| msgid "Align on the left"
+#~ msgid "Align on a circle"
+#~ msgstr "Στοίχιση αριστερά"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "(c) 2009"
+#~ msgstr "(c) 2009"
+
+#~ msgid "Do you want to save your unsaved document?"
+#~ msgstr "Θέλετε να αποθηκεύσετε το έγγραφό σας;"
+
+#~ msgid "Select Items by clicking on them."
+#~ msgstr "Επιλογή αντικειμένων με κλικ σε αυτά."
+
+#~ msgid "Moves a node around the drawing area."
+#~ msgstr "Μετακινεί τον κόμβο στην περιοχή σχεδίασης"
+
+#~ msgid "Make Complete"
+#~ msgstr "Ολοκλήρωση"
+
+#~ msgid "Dialog"
+#~ msgstr "Πλαίσιο διαλόγου"
+
+#~ msgid "Radius:"
+#~ msgstr "Ακτίνα:"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Complete"
+#~ msgstr "Ολοκληρώθηκε"
+
+#~ msgctxt "Do not translate, X is for delete"
+#~ msgid "x"
+#~ msgstr "χ"
+
+#~ msgid "Graph is oriented"
+#~ msgstr "Το γράφημα είναι προσανατολισμένο"
+
+#, fuzzy
+#~| msgid "Name:"
+#~ msgid "Name: %1"
+#~ msgstr "Όνομα:"
+
+#, fuzzy
+#~| msgid "Value:"
+#~ msgid "Value: %1"
+#~ msgstr "Τιμή:"
+
+#~ msgid "Save Graph As..."
+#~ msgstr "Αποθήκευση γραφήματος ως..."
+
+#~ msgid "Save Script As..."
+#~ msgstr "Αποθήκευση δέσμης εντολών ως..."
+
+#, fuzzy
+#~| msgid "Graph"
+#~ msgid "Ring Graph"
+#~ msgstr "Γράφημα"
+
+#, fuzzy
+#~| msgid "Untitled"
+#~ msgid "UntitledDoc"
+#~ msgstr "Ανώνυμο"
+
+#~ msgid "Thanks to Ugo Sangiori"
+#~ msgstr "Ευχαριστίες στο Ugo Sangiori"
+
+#~ msgid "Edge Color:"
+#~ msgstr "Χρώμα ακμής:"
+
+#~ msgid "X-coordinate "
+#~ msgstr "Χ-συντεταγμένη "
+
+#~ msgid "Y-coordinate "
+#~ msgstr "Ψ-συντεταγμένη"
+
+#~ msgid "Node size"
+#~ msgstr "Μέγεθος κόμβου"
+
+#, fuzzy
+#~| msgid " Is End"
+#~ msgid "End"
+#~ msgstr " Τελείωσε"
+
+#~ msgid "Graph is Automate"
+#~ msgstr "Αυτοματοποιημένο γράφημα"
+
+#~ msgid " Is begin"
+#~ msgstr " Ξεκίνησε"

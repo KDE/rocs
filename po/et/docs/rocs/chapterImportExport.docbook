@@ -1,0 +1,133 @@
+<chapter id="import-export">
+<title
+>Import ja eksport</title>
+<sect1 id="import-export-projects">
+    <title
+>&rocs;i projektide vahetamine</title>
+    <para
+>&rocs;i projekte saab importida ja eksportida arhiveeritud <literal
+>.tar.gz</literal
+>-failidena. Nende arhiivide abil saab projekte teistega vahetada. Importida ja eksportida saab vastavalt menüükäskudega <menuchoice
+><guimenu
+>Graafidokument</guimenu
+> <guimenuitem
+>Impordi graaf</guimenuitem
+></menuchoice
+> ja <menuchoice
+><guimenu
+>Graafidokument</guimenu
+> <guimenuitem
+>Ekspordi graaf</guimenuitem
+></menuchoice
+>. </para>
+</sect1>
+
+<sect1 id="import-export-graphs">
+    <title
+>Graafidokumentide import ja eksport</title>
+    <para
+>&rocs; toetab praegu importimisel ja eksportimisel järgmisi failivorminguid:</para>
+    <itemizedlist>
+        <listitem
+><para
+>DOT-failid, tuntud ka kui Graphviz-failid</para
+></listitem>
+        <listitem
+><para
+>GML-failid</para
+></listitem>
+        <listitem
+><para
+>TGF (Trivial Graph Format) failid</para
+></listitem>
+        <listitem
+><para
+>KML (Keyhole Markup Language) vorming</para
+></listitem>
+    </itemizedlist>
+
+<sect2 id="format-specification-tgf">
+<title
+>Trivial Graph failivorming</title>
+<para
+><emphasis
+>Trivial Graph Format</emphasis
+> (TGF) on lihtne graafe kirjeldav tekstipõhine failivorming. TGF-fail koosneb tipudefinitsioonide loendist, mis seovad tippude ID-d pealdistega ja millele järgneb seoste loend. Selles vormingus saab igal tipul olla ainult üks pealdis ja igal seosel ainult üks väärtus. &rocs; tõlgendab imporditud graafe orienteerimata graafidena. Eksporditud graafid sisaldavad ühenduse kohta kaks seost, kui ühendused on kahesuunalised. </para>
+
+<sect3>
+<title
+>Vormingu spetsifikatsioon</title>
+    <itemizedlist>
+        <listitem
+><para
+>Fail algab tippude loendiga (üks tipp rea kohta), millele järgneb rida, millel on ainult märk "#". Sellele järgneb seoste loend (üks seos igal real).</para
+></listitem>
+        <listitem
+><para
+>Tipp koosneb täisarvust (identifikaator), millele järgneb tühik, millele järgneb suvaline string.</para
+></listitem>
+        <listitem
+><para
+>Seos koosneb kahest tühikuga eraldatud täisarvust (identifikaatoritest), millele järgneb tühik, millele järgneb suvaline string. Eeldatakse, et suunaga seos kulgeb esimeselt identifikaatorilt teisele.</para
+></listitem>
+    </itemizedlist>
+</sect3>
+<sect3>
+<title
+>Näide</title>
+<programlisting
+>1 algustipp
+2 saatja
+3 neel
+#
+1 2 sinine
+2 1 punane
+2 3 roheline
+</programlisting>
+</sect3>
+</sect2>
+
+<sect2 id="format-specification-dot">
+<title
+>DOT-keele / Graphvizi graafi failivorming</title>
+<para
+>DOT-keel on lihttekstis graafi kirjeldamise keel, mis võimaldab nii graafide inimsilmale kergesti haaratavat esitamist kui ka tõhusat töötlemist graafipaigutusprogrammide poolt. DOT on Graphvizi graafide visualiseerimise komplekti vaikimisi failivorming, aga seda kasutavad ka paljud muud graafitööriistad. DOT-faili tavaline laiend on <emphasis
+>.gv</emphasis
+> või <emphasis
+>.dot</emphasis
+>. </para>
+
+<sect3>
+<title
+>Toetamata võimalused</title>
+<para
+>&rocs; suudab parsida kõiki graafifaile, mis sisaldavad graafi, mis on loodud DOT-keele spetsifikatsiooni alusel<footnote
+><para
+>http://www.graphviz.org/content/dot-language</para
+></footnote
+>. Keele omadused on täielikult toetatud, ehkki kehtivad järgmised erandid: </para>
+    <itemizedlist>
+        <listitem
+><para
+>alamgraafik (subgraph): et &rocs; ei kasuta alamgraafiku kontseptsiooni, imporditakse alamgraafikud lihtsalt andmeelementide ja ühenduste kogumina. Eriti tuleb tähele panna, et ei impordita ühendusi alamgraafikust või alamgraafikusse.</para
+></listitem>
+        <listitem
+><para
+>&HTML;-i ja &XML;-i atribuudid: atribuudid (näiteks pealdised), mis sisaldavad &HTML;-i või &XML;-i süntaksit, loetakse sisse muutmata kujul. Eriti tuleb tähele panna, et neist atribuutidest ei loeta välja fontide ja stiilide kohandamist.</para
+></listitem>
+    </itemizedlist>
+</sect3>
+<sect3>
+<title
+>Näide</title>
+<programlisting
+>digraph minuGraaf {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect3>
+</sect2>
+
+</sect1>
+</chapter>

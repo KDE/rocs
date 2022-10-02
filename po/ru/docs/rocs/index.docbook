@@ -1,0 +1,854 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Russian "INCLUDE">
+
+]>
+<book id="rocs" lang="&language;">
+
+<bookinfo>
+<title
+>Руководство пользователя &rocs;</title>
+<authorgroup>
+<author
+><personname
+> <firstname
+>Tomaz</firstname
+> <surname
+>Canabrava</surname
+> </personname
+> <email
+>tomaz.canabrava@gmail.com</email
+> </author>
+<author
+><personname
+> <firstname
+>Andreas</firstname
+> <surname
+>Cord-Landwehr</surname
+> </personname
+> <email
+>cordlandwehr@kde.org</email
+> </author>
+
+<othercredit role="translator"
+><firstname
+>Алексей</firstname
+><surname
+>Субач</surname
+><affiliation
+><address
+><email
+>alexey.subach@gmail.com</email
+></address
+></affiliation
+><contrib
+>Перевод на русский язык</contrib
+></othercredit
+><othercredit role="translator"
+><firstname
+>Мария</firstname
+><surname
+>Шикунова</surname
+><affiliation
+><address
+><email
+>translation-team@basealt.ru</email
+></address
+></affiliation
+><contrib
+>Обновление перевода</contrib
+></othercredit
+><othercredit role="translator"
+><firstname
+>Олеся</firstname
+><surname
+>Герасименко</surname
+><affiliation
+><address
+><email
+>translation-team@basealt.ru</email
+></address
+></affiliation
+><contrib
+>Обновление и редактирование перевода</contrib
+></othercredit
+> 
+</authorgroup>
+
+<date
+>2021-10-23</date>
+<releaseinfo
+>KDE Gear 21.08</releaseinfo>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<abstract>
+<para
+>&rocs; — это программа для работы с теорией графов. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdeedu</keyword>
+<keyword
+>математика</keyword>
+<keyword
+>граф</keyword>
+<keyword
+>графы</keyword>
+<keyword
+>вершина</keyword>
+<keyword
+>ребро</keyword>
+<keyword
+>Rocs</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Введение</title>
+<para
+>В этой главе содержится общее описание основных функций и стандартный процесс работы в приложении. Наиболее важные разделы — это <xref linkend="introduction-nutshell"/> и <xref linkend="scripting"/>, прочтение которых позволит каждому новому пользователю сразу начать пользоваться &rocs;. </para>
+
+<sect1 id="introduction-goals">
+<title
+>Цели, целевая аудитория и рабочие процессы</title>
+<para
+>&rocs; — это инструмент для работы с графами для всех, кто заинтересован в разработке и изучении алгоритмов, основанных на графах. Он подойдёт для</para>
+<itemizedlist>
+    <listitem
+><para
+>преподавателей, которые хотят продемонстрировать алгоритмы своим студентам,</para
+></listitem>
+    <listitem
+><para
+>студентов и исследователей, которые хотят увидеть, как работает созданный ими алгоритм,</para
+></listitem>
+    <listitem
+><para
+>всех, кто интересуется структурами данных и алгоритмами.</para
+></listitem>
+</itemizedlist>
+<para
+>Для всех этих людей &rocs; предоставляет простой в использовании графический редактор для построения графов, обладающий широкими возможностями обработчик сценариев для выполнения алгоритмов и несколько вспомогательныхинструментов для симуляций, экспериментов и экспорта графов. Чаще всего &rocs; используется для построения графа: либо вручную (путём перетаскивания вершин и рёбер в область редактирования), либо с помощью одного из построителей графов. Затем на построенном графе могут быть созданы и выполнены алгоритмы. Все изменения, которые выполняет алгоритм, сразу отображаются в редакторе графов. </para>
+
+<screenshot>
+  <screeninfo
+>Окно &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-screenshot.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Окно &rocs;.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+</sect1>
+
+<sect1 id="introduction-nutshell">
+<title
+>Вкратце о &rocs;</title>
+<para
+>Каждый сеанс &rocs; — это проект: при открытии &rocs; создаётся пустой проект, а при загрузке уже существующего проекта он становится текущим проектом. Таким образом, проект состоит из <emphasis
+>документов с графами</emphasis
+>, <emphasis
+>сценариев и алгоритмов</emphasis
+> и <emphasis
+>журнала</emphasis
+>. </para>
+
+<sect2>
+<title
+>Документы с графами</title>
+<para
+>Документ с графами представляет собой содержимое области редактирования в редакторе графов. Он содержит информацию об указанных пользователем типах вершин и рёбер, их свойствах, а также об уже созданных вершинах и рёбрах. Это значит, что &rocs; распознаёт набор всех вершин и рёбер документа для формирования (не обязательно связанного) графа. Всё, что относится к документу, доступно обработчику сценариев через глобальный объект <userinput
+><command
+>Document</command
+></userinput
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Типы рёбер</title>
+<para
+>В некоторых сценариях графы состоят из разных типов рёбер (например, ненаправленный граф плюс рёбра дерева, вычисленные с помощью алгоритма поиска в ширину), которые должны обрабатываться и отображаться по-разному. Для этого, помимо стандартного типа ребра, возможно указать произвольные другие типы рёбер. Каждый тип рёбер имеет своё визуальное представление, динамические свойства и может быть либо направленным, либо ненаправленным. Интерфейс сценариев предоставляет удобные методы для доступа только к рёбрам определённых типов. </para>
+</sect2>
+
+<sect2>
+<title
+>Типы вершин</title>
+<para
+>Аналогично типам рёбер, возможно указать различные типы вершин графа (например, чтобы присвоить некоторым вершинам особые роли). Каждый тип вершины имеет своё визуальное представление и динамические свойства. </para>
+</sect2>
+
+<sect2>
+<title
+>Свойства</title>
+<para
+>Каждый (вершина или ребро) элемент может иметь свойства. Эти свойства должны быть указаны в соответствующем типе ребра или вершины. Свойства идентифицируются и доступны по именам и могут содержать любое значение. Чтобы создать новое или изменить существующее свойство, воспользуйтесь боковой панелью <guilabel
+>Типы элементов</guilabel
+> и кнопкой <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/> </imageobject
+></inlinemediaobject
+><guibutton
+>Свойства</guibutton
+> для открытия диалога свойств. </para>
+<para
+>Обработчик сценариев также возможно использовать для доступа к уже указанным свойствам и изменения их значений. В следующем примере предполагается, что свойство <quote
+>вес</quote
+> присвоено типу ребра по умолчанию. <programlisting
+>var nodes = Document.nodes()
+for (var i = 0; i &lt; nodes.length; ++i){
+    nodes[i].weight = i;
+}
+for (var i = 0; i &lt; nodes.length; ++i){
+    Console.log("вес вершины " + i + ": " + nodes[i].weight);
+}
+</programlisting>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="introduction-tutorial">
+<title
+>Пример работы с &rocs;</title>
+<para
+>В этом разделе будет представлен пример проекта для изучения некоторых наиболее важных функций &rocs;. Цель состоит в том, чтобы создать граф и сценарий, иллюстрирующий простой алгоритм для задачи <emphasis
+>минимального вершинного покрытия</emphasis
+>. Задача минимального вершинного покрытия — это задача поиска подмножества вершин графа С минимального размера, такого, чтобы каждое ребро графа было соединено по крайней мере с одной вершиной в С. Эта задача является NP-сложной, и пример ниже иллюстрирует, как найти приближение фактора 2, вычисляя соответствие на заданном графе. </para>
+<para
+>Цель — визуализировать взаимосвязь соответствия и минимального покрытия вершин. Для этого следует указать два типа рёбер, один для отображения совпадающих рёбер, а другой — для отображения <quote
+>обычных</quote
+>. Также следует указать два типа вершин, которые будут использоваться для обозначения вершин, содержащихся и не содержащихся в C. </para>
+
+<sect2>
+<title
+>Построение графа</title>
+<para
+>Для создания графа используется построитель графов, предоставляемый &rocs;. Он находится в главном меню <menuchoice
+><guimenu
+>Граф</guimenu
+> <guisubmenu
+>Инструменты</guisubmenu
+> <guimenuitem
+>Построитель графов</guimenuitem
+></menuchoice
+>. В открывшемся диалоге выберите вариант <guilabel
+>Случайный граф</guilabel
+> и укажите количество вершин: 30, количество рёбер: 90 и семя: 1 (семя является начальным значением для генератора случайных графов; многократное использование одного и того же начального значения приводит к одинаковым и воспроизводимым графам). </para>
+</sect2>
+
+<sect2>
+<title
+>Создание типов элементов</title>
+<para
+>Далее потребуется создать второй тип вершин и второй тип рёбер с помощью панели <guilabel
+>Типы элементов</guilabel
+>. Для обоих типов следует открыть диалог со свойствами с помощью соответствующих кнопок <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Свойства</guibutton
+> и установить значение идентификатора <literal
+>2</literal
+>. После этого поменяйте цвета элементов этих двух новых типов (чтобы отличать их от типов по умолчанию). Затем установите все типы рёбер двунаправленными, а идентификаторы типов по умолчанию должны иметь значение <literal
+>1</literal
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Алгоритм</title>
+<para
+>После всех проделанных действий требуется запустить алгоритм. Для этого будет использоваться следующий код: </para>
+<programlisting
+>for (var i=0; i &lt; Document.nodes.length; i++) {
+    Document.nodes[i].type = 1;
+}
+for (var i=0; i &lt; Document.edges.length; i++) {
+    Document.edges[i].type = 1;
+}
+
+var E = Document.edges(); // набор необработанных рёбер
+var C = new Array();      // совпадающие рёбра
+while (E.length 
+> 0) {
+    var e = E[0];         // первое ребро e={u,v}
+    var u = e.from();
+    var v = e.to();
+    e.type = 2;           // указать ребру свойство «совпадающее»
+    E.shift();            // убрать e (то есть, E[0]) из списка рёбер
+    C.push(u);            // добавить u к C
+    C.push(v);            // добавить v к C
+
+    // отметить u,v как вершины в C
+    u.type = 2;
+    v.type = 2;
+
+    // убрать из E все рёбра, присоединённые к u или v
+    var adjacent = u.edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // найти индекс
+        if (index != -1) {
+            E.splice(index, 1); // убрать индекс, если найден
+        }
+    }
+    var adjacent = v.edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // найти индекс
+        if (index != -1) {
+            E.splice(index, 1); // убрать индекс, если найден
+        }
+    }
+}
+Console.log("Вершинное покрытие содержит вершин: " + C.length + ".");
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>Запуск алгоритма</title>
+<para
+>Чтобы запустить алгоритм, нажмите кнопку <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Запустить</guibutton
+> на панели управления сценарием. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="user-interface">
+<title
+>Интерфейс &rocs;</title>
+
+<sect1 id="user-interface-all">
+<title
+>Основные элементы пользовательского интерфейса</title>
+<para
+>Пользовательский интерфейс разделён на несколько логических частей как показано на снимке окна ниже. </para>
+
+<screenshot>
+  <screeninfo
+>Элементы интерфейса &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-interfaces.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Элементы интерфейса &rocs;.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Редактор графов</term>
+    <listitem
+><para
+>Редактор предоставляет область, на которую возможно поместить вершины и рёбра. Щёлкните дважды левой кнопкой мыши по любому элементу, чтобы открыть соответствующее меню свойств. Чтобы создавать и изменять графы, воспользуйтесь инструментами на <emphasis
+>вкладках боковой панели</emphasis
+>.</para>
+    <para
+>Доступные инструменты:</para>
+      <itemizedlist>
+        <listitem
+><para
+>В поле (в его верхней части, слева) находятся следующие значки действий. Щелчок по значку подразумевает, что последующий щелчок мышью в области редактирования применит выбранное действие:</para>
+          <itemizedlist>
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsselect.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Выделить и переместить</guiicon
+>: чтобы выбрать элементы, либо, щёлкнув левой кнопкой мыши по неиспользуемому пространству области редактирования, удерживайте нажатой кнопку мыши и нарисуйте прямоугольник, содержащий некоторые элементы данных и/или рёбра, либо нажмите непосредственно на сам элемент. Чтобы переместить выбранный элемент или набор выбранных элементов, щёлкните левой кнопкой мыши по выбранному элементу или набору выбранных элементов и, удерживая кнопку нажатой, переместите указатель мыши в нужное место. Перемещение выбранных элементов также возможно с помощью клавиш со стрелками.</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsnode.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Добавить вершину</guiicon
+>: чтобы создать новый элемент данных, принадлежащий выбранной структуре данных, щёлкните левой кнопкой мыши по произвольному месту области редактирования в редакторе графов. Если навести указатель на кнопку и удерживать левую кнопку мыши нажатой, появится диалог, в котором возможно выбрать тип вершины для добавления новых вершин (только если существуют разные типы данных).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsedge.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Добавить ребро</guiicon
+>: чтобы соединить вершины ребром, нажмите на одну вершину и, удерживая левую кнопку мыши нажатой, проведите линию к другой вершине. Это действие произойдёт, только если добавление ребра в текущий граф возможно (например, в неориентированном графе нельзя добавлять несколько рёбер между вершинами). При удерживании левой кнопки мыши нажатой откроется диалог, позволяющий выбрать тип ребра для добавления новых рёбер (только если существуют разные типы рёбер).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsdelete.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Удалить элемент</guiicon
+>: чтобы удалить элемент, щёлкните по нему. При удалении вершины будут также удалены все смежные рёбра.</para
+></listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Боковая панель</term>
+    <listitem
+><para
+>Справа расположена боковая панель, которая предлагает несколько инструментов для рабочего процесса:</para>
+      <itemizedlist>
+        <listitem
+><para
+><guilabel
+>Типы элементов</guilabel
+>: вкладка предоставляет доступ ко всем доступным типам рёбер и вершин.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>Журнал</guilabel
+>: каждый проект имеет собственный журнал, который возможно использовать для записи задач, результатов или наблюдений.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>API сценариев</guilabel
+>: эта вкладка предоставляет доступ к документации сценариев.</para
+></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Редактор сценариев</term>
+    <listitem
+><para
+>Этот текстовый редактор позволяет составлять алгоритмы, как подробнее описано в разделе <xref linkend="scripting"/>. Возможно работать с несколькими сценариями одновременно, используя несколько вкладок.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Вывод сценария:</term>
+    <listitem
+><para
+>В этой текстовой области отображается либо отладочная информация, либо вывод сценария, в зависимости от переключаемого параметра в верхней части этой вкладки. Если сценарий выдаёт ошибку, автоматически выводится отладочная информация.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>Управление</term>
+    <listitem
+><para
+>Здесь находятся кнопки для управления сценарием. Чтобы запустить открытый в данный момент в редакторе сценарий, воспользуйтесь кнопкой <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Запустить</guibutton
+>. Чтобы остановить сценарий в процессе выполнения, нажмите кнопку <inlinemediaobject
+><imageobject
+><imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Остановить</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<!--FIXME nop alignment action any more?-->
+</chapter>
+
+<chapter id="scripting">
+<title
+>Сценарии</title>
+<sect1>
+    <title
+>Выполнение сценариев в &rocs;</title>
+<para
+>&rocs; использует обработчик &javascript; QtScript. Это значит, что все реализуемые алгоритмы должны использовать &javascript;. Далее будет представлена информация о том, как изменить элементы графа с помощью обработчика сценариев. Обратите внимание, что изменения, внесённые обработчиком сценариев, напрямую отражаются в свойствах элементов редактора графов. </para>
+
+<sect2>
+<title
+>Управление выполнением сценариев</title>
+<para
+>Существует несколько режимов выполнения алгоритмов: </para>
+<itemizedlist>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Запустить</guibutton
+>: выполнять сценарий до его завершения.</para
+></listitem>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>Остановить</guibutton
+>: остановить выполнение сценария (доступно только при выполнении сценария).</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2>
+<title
+>Вывод сценария</title>
+<para
+>Во время выполнения алгоритма отладочные данные и вывод программы отображаются на панели <emphasis
+>вывода отладки и сценария</emphasis
+>. Если обработчик сценариев обнаруживает синтаксическую ошибку, эта ошибка будет отображаться в виде отладочного сообщения. Обратите внимание, что все сообщения программы также отображаются в выводе отладки (выделены жирным шрифтом). </para>
+<para
+>Параметры текста, отображаемого в выводе сценария, возможно менять с помощью следующих функций: </para>
+<programlisting
+>Console.log(строка сообщения);            // отображает сообщение как вывод сценария
+    Console.debug(строка сообщения);          // отображает сообщение как вывод отладчика
+    Console.error(строка сообщения);          // отображает сообщение как вывод ошибки
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>API обработчика сценариев</title>
+<para
+>Каждая из различных частей &rocs; предоставляет статический элемент, к которому обработчик сценариев может получить доступ. Это: <itemizedlist
+> <listitem
+><para
+><userinput
+><command
+>Document</command
+></userinput
+> для графа</para
+></listitem
+> <listitem
+><para
+><userinput
+><command
+>Console</command
+></userinput
+> для вывода журнала консоли</para
+></listitem
+> </itemizedlist
+> Для явного использования API и ссылок на методы обратитесь к встроенной справке на боковой панели &rocs;. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="import-export">
+<title
+>Импорт и экспорт</title>
+<sect1 id="import-export-projects">
+    <title
+>Обмен проектами &rocs;</title>
+    <para
+>Проекты &rocs; возможно импортировать и экспортировать в качестве архива <literal role="extension"
+>.tar.gz</literal
+>. Эти архивы возможно использовать для обмена проектами. Операции импорта и экспорта доступны в меню <menuchoice
+><guimenu
+>Граф</guimenu
+> <guimenuitem
+>Импорт графа...</guimenuitem
+></menuchoice
+> и <menuchoice
+><guimenu
+>Граф</guimenu
+> <guimenuitem
+>Экспорт графа как…</guimenuitem
+></menuchoice
+>. </para>
+
+<sect2 id="import-export-graphs">
+    <title
+>Импорт и экспорт документов с графами</title>
+    <para
+>&rocs; на данный момент поддерживает импорт и экспорт в следующих файловых форматах:</para>
+    <itemizedlist>
+        <listitem
+><para
+>&DOT;-файлы, также известные как файлы Graphviz</para
+></listitem>
+        <listitem
+><para
+>Файлы <acronym
+>GML</acronym
+></para
+></listitem>
+        <listitem
+><para
+>Файлы формата Trivial Graph</para
+></listitem>
+        <listitem
+><para
+>Формат Keyhole Markup Language</para
+></listitem>
+    </itemizedlist>
+
+<sect3 id="format-specification-tgf">
+<title
+>Формат файлов Trivial Graph</title>
+<para
+>Формат <emphasis
+>Trivial Graph Format</emphasis
+> (<acronym
+>TGF</acronym
+>) — это простой текстовый формат файла для описания графов. Файл <acronym
+>TGF</acronym
+> состоит из списка определений вершин, которые сопоставляют идентификаторы вершин с метками, после чего следует список рёбер. Этот формат позволяет иметь только одну метку на вершину и одно значение на ребро. &rocs; интерпретирует импортированные графы как ненаправленные. Экспортированные графы будут содержать по два ребра на соединение, если соединения являются двунаправленными. </para>
+
+<sect4>
+<title
+>Спецификация формата</title>
+    <itemizedlist>
+        <listitem
+><para
+>Файл начинается со списка вершин (одна вершина на строку), за которым следует строка с единственным символом <quote
+>#</quote
+>, после чего приводится список рёбер (одно ребро на строку).</para
+></listitem>
+        <listitem
+><para
+>Вершина состоит из целого числа (идентификатора), за которым следует пробел, а затем произвольная строка.</para
+></listitem>
+        <listitem
+><para
+>Ребро состоит из двух целых чисел (идентификаторов), разделённых пробелом, за которыми следует пробел, а затем произвольная строка. Предполагается, что направленное ребро указывает от первого идентификатора ко второму идентификатору.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Пример</title>
+<programlisting
+>1 стартовый узел
+2 передатчик
+3 сток
+#
+1 2 синий
+2 1 красный
+2 3 зелёный
+</programlisting>
+</sect4>
+</sect3>
+
+<sect3 id="format-specification-dot">
+<title
+>Язык &DOT; / Формат файлов Graphviz</title>
+<para
+>Язык &DOT; — это простой текстовый язык описания графов, который обеспечивает как хорошо читаемое человеком представление графов, так и эффективную обработку программами компоновки графов. &DOT; — это формат файла по умолчанию для пакета визуализации графов Graphviz, который также широко используется другими инструментами для работы с графами. Обычными расширениями файлов для &DOT; являются <literal role="extension"
+>.gv</literal
+> и <literal role="extension"
+>.dot</literal
+>.. </para>
+
+<sect4>
+<title
+>Неподдерживаемые возможности</title>
+<para
+>&rocs; может распознавать любой файл графов, содержащий граф в соответствии со спецификацией языка &DOT; <footnote
+><para
+>https://graphviz.org/doc/info/lang.html</para
+></footnote
+>. Поддержка языковых функций является полной, несмотря на следующие исключения: </para>
+    <itemizedlist>
+        <listitem
+><para
+>Подграф: из-за отсутствия понятия «подграф» в &rocs; подграфы импортируются только как набор элементов и соединений. Не импортируются соединения с подграфами.</para
+></listitem>
+        <listitem
+><para
+>Атрибуты &HTML; и &XML;: атрибуты (например, метки), содержащие синтаксис &HTML; или &XML;, остаются без изменений. Особенно это касается стилей и шрифтов.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>Пример</title>
+<programlisting
+>digraph myGraph {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect4>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="graph-layout">
+    <title
+>Компоновка графов</title>
+
+    <sect1>
+        <title
+>Автоматическая компоновка графов в &rocs;</title>
+        <para
+>&rocs; позволяет автоматически компоновать графы. Инструмент компоновки графов &rocs; находится в главном меню <menuchoice
+><guimenu
+>Граф</guimenu
+> <guisubmenu
+>Инструменты</guisubmenu
+> <guimenuitem
+>Компоновка графов</guimenuitem
+></menuchoice
+>. Существует два алгоритма компоновки: компоновка на основе силы и компоновка радиального дерева. Чтобы применить один из них, выберите соответствующую вкладку в диалоге компоновки графа, выберите нужные параметры и запустите алгоритм, нажав кнопку <guibutton
+>OK</guibutton
+>. Подробные сведения, относящиеся к каждому из алгоритмов компоновки, приведены в следующих разделах. </para>
+
+    <sect2>
+        <title
+>Компоновка по силе</title>
+
+        <para
+>Компоновку на основе силы возможно применить к любому графу. Этот алгоритм симулирует силы, действующие на каждую вершину. Между парами соседних вершин существуют силы отталкивания и силы притяжения. Чтобы задать величину этих сил, следует переместить соответствующие ползунки в соответствующем диалоге. </para>
+
+        <screenshot>
+          <screeninfo
+>Окно с диалогом инструмента компоновки на основе силы.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Окно с диалогом инструмента компоновки на основе силы.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>«Рабочая область» — это ещё один параметр, который возможно настроить. Он регулирует степень разброса вершин. Компоновки, созданные с высокими значениями рабочей области, имеют большие расстояния между вершинами. </para>
+
+    <sect3>
+        <title
+>Радиальное дерево</title>
+        <para
+>Компоновка «Радиальное дерево» может быть применена только к графам-деревьям. Любая попытка применить эту компоновку к графу другого типа приведёт к появлению сообщения об ошибке. Параметры этой компоновки доступны в соответствующем диалоге. </para>
+
+
+        <screenshot>
+          <screeninfo
+>Окно с диалогом инструмента компоновки радиального дерева.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Окно с диалогом инструмента компоновки радиального дерева.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>Параметр типа дерева предлагает два варианта: свободная компоновка дерева и корневая. В свободной компоновке вершины размещаются свободно, без какой-либо видимой иерархии между ними. При компоновке корневого дерева корневая вершина размещается вверху, а под ней располагаются ответвления, что даёт представление об иерархии между вершинами. </para>
+
+        <para
+>Параметр «Основа» определяет, какая вершина будет использоваться в качестве корня для компоновки корневого дерева или в качестве центра для компоновки свободного дерева. Основа компоновки свободного дерева — это первая вершина, размещаемая алгоритмом. Все остальные вершины расположены на окружностях с центром в центральной вершине. Основа может быть выбрана автоматически с помощью алгоритма компоновки. </para>
+
+        <para
+>Параметр разделения вершин позволяет управлять расстоянием между вершинами. Увеличение значения этого параметра приведёт к увеличению расстояния между вершинами. Аналогичным образом, уменьшение значения этого параметра приведёт к уменьшению расстояния между вершинами. </para>
+    </sect3>
+    </sect2>
+    </sect1>
+</chapter>
+
+<chapter id="credits">
+<title
+>Авторские права и лицензия</title>
+
+<para
+>&rocs; </para>
+<para
+>Авторские права на программу:</para>
+<itemizedlist>
+	<listitem
+><para
+>© Ugo Sangiori, 2008 (ugorox@gmail.com)</para
+></listitem>
+	<listitem
+><para
+>© Tomaz Canabrava, 2008-2012 (tcanabrava@kde.org)</para
+></listitem>
+	<listitem
+><para
+>© Wagner Reck, 2008-2012 (wagner.reck@gmail.com)</para
+></listitem>
+	<listitem
+><para
+>© Andreas Cord-Landwehr, 2011-2015 (cordlandwehr@kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Авторские права на документацию:</para>
+<itemizedlist>
+	<listitem
+><para
+>© Anne-Marie.Mahfouf, 2009 (annma@kde.org)</para
+></listitem>
+	<listitem
+><para
+>© Tomaz Canabrava, 2009 (tcanabrava@ kde.org)</para
+></listitem>
+	<listitem
+><para
+>© Andreas Cord-Landwehr, 2011-2015 (cordlandwehr@kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Перевод на русский язык: Алексей Субач<email
+>alexey.subach@gmail.com</email
+>, Мария Шикунова<email
+>translation-team@basealt.ru</email
+>, Олеся Герасименко<email
+>translation-team@basealt.ru</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes: nil
+sgml-general-insert-case: lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
