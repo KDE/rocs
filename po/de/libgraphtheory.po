@@ -2,19 +2,21 @@
 # Frederik Schwarzer <schwarzer@kde.org>, 2009, 2010, 2011, 2012, 2013, 2014, 2016.
 # Panagiotis Papadopoulos <pano_90@gmx.net>, 2010, 2011.
 # Peter Rüthemann <peter.ruethemann@gmail.com>, 2010.
+# Alois Spitzbart <spitz234@hotmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-23 00:40+0000\n"
-"PO-Revision-Date: 2021-05-10 06:25+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2022-10-12 22:10+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -66,8 +68,7 @@ msgid "Edges"
 msgstr "Kanten"
 
 #: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
-#, fuzzy, kde-format
-#| msgid "Property Names"
+#, kde-format
 msgid "Property names"
 msgstr "Eigenschaftsnamen"
 
@@ -78,7 +79,7 @@ msgid "Edge Type Properties"
 msgstr "Eigenschaften des Kantentyps"
 
 #: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
-#, fuzzy, kde-format
+#, kde-format
 msgid "Name:"
 msgstr "Name:"
 
@@ -109,16 +110,14 @@ msgid "Bidirectional"
 msgstr "Bidirektional"
 
 #: dialogs/edgetypeproperties.cpp:54
-#, fuzzy, kde-format
-#| msgid "Direction"
+#, kde-format
 msgid "Direction:"
-msgstr "Richtung"
+msgstr "Richtung:"
 
 #: dialogs/edgetypeproperties.cpp:61 dialogs/nodetypeproperties.cpp:59
-#, fuzzy, kde-format
-#| msgid "Visibility"
+#, kde-format
 msgid "Visibility:"
-msgstr "Sichtbarkeit"
+msgstr "Sichtbarkeit:"
 
 #: dialogs/edgetypeproperties.cpp:137
 #, kde-format
@@ -291,10 +290,9 @@ msgstr "Konstanten Werte zuweisen"
 
 #. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
 #: editorplugins/assignvalues/assignvalueswidget.ui:132
-#, fuzzy, kde-format
-#| msgid "Start ID"
+#, kde-format
 msgid "Start ID:"
-msgstr "Startkennung"
+msgstr "Startkennung:"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:167
@@ -370,10 +368,9 @@ msgstr "Knoten:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelProperty)
 #: editorplugins/assignvalues/assignvalueswidget.ui:447
-#, fuzzy, kde-format
-#| msgid "Property Name"
+#, kde-format
 msgid "Property name:"
-msgstr "Eigenschaftsname"
+msgstr "Eigenschaftsname:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
 #. i18n: ectx: property (text), widget (QLabel, labelConnection)
@@ -516,10 +513,9 @@ msgstr "Der Knotentyp für die Knoten dieses Graphen"
 
 #. i18n: ectx: property (text), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:119
-#, fuzzy, kde-format
-#| msgid "Node type"
+#, kde-format
 msgid "Node type:"
-msgstr "Knotentyp"
+msgstr "Knotentyp:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
 #: editorplugins/generategraph/generategraphwidget.ui:126
@@ -565,8 +561,7 @@ msgstr "Kanten auf sich selbst erlauben:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
 #: editorplugins/generategraph/generategraphwidget.ui:293
-#, fuzzy, kde-format
-#| msgid "Generator Seed:"
+#, kde-format
 msgid "Generator seed:"
 msgstr "Seed für den Generator:"
 
@@ -628,18 +623,16 @@ msgstr "Der Kantentyp für die Kanten dieses Graphen"
 
 #. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:607
-#, fuzzy, kde-format
-#| msgid "Edge type"
+#, kde-format
 msgid "Edge type:"
-msgstr "Kantentyp"
+msgstr "Kantentyp:"
 
 # Platzhalter?
 #. i18n: ectx: property (text), widget (QLabel, labelGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:614
-#, fuzzy, kde-format
-#| msgid "Graph Generator"
+#, kde-format
 msgid "Graph generator:"
-msgstr "Graphen-Generator"
+msgstr "Graphen-Generator:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:621
@@ -744,8 +737,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
 #: editorplugins/transformedges/transformedgeswidget.ui:25
-#, fuzzy, kde-format
-#| msgid "Complete Graph"
+#, kde-format
 msgid "Complete graph"
 msgstr "Graphen vervollständigen"
 
@@ -757,8 +749,7 @@ msgstr "Diese Option entfernt alle Kanten aus dem Graphen."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:38
-#, fuzzy, kde-format
-#| msgid "Remove all Edges"
+#, kde-format
 msgid "Remove all edges"
 msgstr "Alle Kanten entfernen"
 
@@ -774,8 +765,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:48
-#, fuzzy, kde-format
-#| msgid "Reverse all Edges"
+#, kde-format
 msgid "Reverse all edges"
 msgstr "Alle Kanten umkehren"
 
@@ -813,15 +803,13 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:62
-#, fuzzy, kde-format
-#| msgid "Spanning Tree Transformation"
+#, kde-format
 msgid "Spanning tree transformation"
 msgstr "Spannbaumtransformation "
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:69
-#, fuzzy, kde-format
-#| msgid "Remove all Self Edges"
+#, kde-format
 msgid "Remove all self edges"
 msgstr "Alle Kanten auf sich selbst entfernen"
 
@@ -851,8 +839,7 @@ msgstr ""
 "%2"
 
 #: fileformats/fileformatmanager.cpp:48
-#, fuzzy, kde-format
-#| msgid "Plugin Error"
+#, kde-format
 msgctxt "@title:window"
 msgid "Plugin Error"
 msgstr "Modulfehler"
@@ -929,8 +916,7 @@ msgid "TikZ (PGF) Format (%1)"
 msgstr "TikZ(PGF)-Format (%1)"
 
 #: graphdocument.cpp:129
-#, fuzzy, kde-format
-#| msgid "default"
+#, kde-format
 msgid "Default"
 msgstr "Standard"
 
