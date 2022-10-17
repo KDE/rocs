@@ -88,7 +88,7 @@ msgstr "Desenvolupador"
 #: main.cpp:57
 #, kde-format
 msgid "Project to open."
-msgstr "Projecte a obrir."
+msgstr "Projecte que s'obrirà."
 
 #: plugins/scriptapi/scriptapimanager.cpp:111
 #, kde-format
