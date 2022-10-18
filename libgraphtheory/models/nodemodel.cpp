@@ -41,7 +41,7 @@ NodeModel::NodeModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new NodeModelPrivate)
 {
-    connect(d->m_signalMapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &NodeModel::emitNodeChanged);
+    connect(d->m_signalMapper, &QSignalMapper::mappedInt, this, &NodeModel::emitNodeChanged);
 }
 
 NodeModel::~NodeModel()

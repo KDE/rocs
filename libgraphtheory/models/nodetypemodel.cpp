@@ -43,7 +43,7 @@ NodeTypeModel::NodeTypeModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new NodeTypeModelPrivate)
 {
-    connect(d->m_signalMapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &NodeTypeModel::emitNodeTypeChanged);
+    connect(d->m_signalMapper, &QSignalMapper::mappedInt, this, &NodeTypeModel::emitNodeTypeChanged);
 }
 
 NodeTypeModel::~NodeTypeModel()

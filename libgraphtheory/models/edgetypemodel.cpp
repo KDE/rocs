@@ -43,7 +43,7 @@ EdgeTypeModel::EdgeTypeModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new EdgeTypeModelPrivate)
 {
-    connect(d->m_signalMapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &EdgeTypeModel::emitEdgeTypeChanged);
+    connect(d->m_signalMapper, &QSignalMapper::mappedInt, this, &EdgeTypeModel::emitEdgeTypeChanged);
 }
 
 EdgeTypeModel::~EdgeTypeModel()
