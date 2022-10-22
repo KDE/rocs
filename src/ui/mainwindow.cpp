@@ -32,6 +32,7 @@
 #include <QSplitter>
 #include <QToolButton>
 
+#include <kwidgetsaddons_version.h>
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KConfigDialog>
@@ -489,13 +490,25 @@ bool MainWindow::queryClose()
     if (!m_currentProject->isModified()) {
         return true;
     }
-    const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc("@info", "Changes on your project are unsaved. Do you want to save your changes?"));
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    const int btnCode = KMessageBox::warningTwoActionsCancel(this,
+#else
+    const int btnCode = KMessageBox::warningYesNoCancel(this,
+#endif
+                                                        i18nc("@info", "Changes on your project are unsaved. Do you want to save your changes?"),
+                                                        QString(),
+                                                        KStandardGuiItem::save(),
+                                                        KStandardGuiItem::discard());
 
     if (btnCode == KMessageBox::Cancel) {
         return false;
     }
 
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    if (btnCode == KMessageBox::PrimaryAction) {
+#else
     if (btnCode == KMessageBox::Yes) {
+#endif
         saveProject();
     }
 
