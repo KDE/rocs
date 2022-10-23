@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"POT-Creation-Date: 2022-10-23 00:40+0000\n"
 "PO-Revision-Date: 2020-05-13 09:45+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -362,72 +362,72 @@ msgstr "Εισάγετε το όνομα του εγγράφου γράφου"
 msgid "Project Journal"
 msgstr "Χρονικό του έργου"
 
-#: ui/mainwindow.cpp:170
+#: ui/mainwindow.cpp:171
 #, kde-format
 msgctxt "@action:intoolbar Script Execution"
 msgid "Run"
 msgstr "Εκτέλεση"
 
-#: ui/mainwindow.cpp:171
+#: ui/mainwindow.cpp:172
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Execute currently active script on active graph document."
 msgstr "Τρέχουσα εκτέλεση του ενεργού σεναρίου στο ενεργό έγγραφο γράφου."
 
-#: ui/mainwindow.cpp:172
+#: ui/mainwindow.cpp:173
 #, kde-format
 msgctxt "@action:intoolbar Script Execution"
 msgid "Stop"
 msgstr "Διακοπή"
 
-#: ui/mainwindow.cpp:173
+#: ui/mainwindow.cpp:174
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop script execution."
 msgstr "Διακοπή εκτέλεσης σεναρίου."
 
-#: ui/mainwindow.cpp:175
+#: ui/mainwindow.cpp:176
 #, kde-format
 msgctxt "@action:intoolbar Open Debugger"
 msgid "Debugger"
 msgstr "Πρόγραμμα αποσφαλμάτωσης"
 
-#: ui/mainwindow.cpp:176
+#: ui/mainwindow.cpp:177
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open the Javascript code debugger."
 msgstr "Άνοιγμα του προγράμματος αποσφαλμάτωσης για κώδικα Javascript."
 
-#: ui/mainwindow.cpp:211
+#: ui/mainwindow.cpp:212
 #, kde-format
 msgid "Element Types"
 msgstr "Τύποι στοιχείων"
 
-#: ui/mainwindow.cpp:218
+#: ui/mainwindow.cpp:219
 #, kde-format
 msgctxt "@title"
 msgid "Journal"
 msgstr "Χρονικό"
 
-#: ui/mainwindow.cpp:222
+#: ui/mainwindow.cpp:223
 #, kde-format
 msgctxt "@title"
 msgid "Scripting API"
 msgstr "API σεναρίων"
 
-#: ui/mainwindow.cpp:257
+#: ui/mainwindow.cpp:258
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Project"
 msgstr "Νέο έργο"
 
-#: ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:264
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project"
 msgstr "Αποθήκευση έργου"
 
-#: ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Open Project"
@@ -435,13 +435,13 @@ msgctxt "@action:inmenu"
 msgid "Open Project..."
 msgstr "Άνοιγμα έργου"
 
-#: ui/mainwindow.cpp:277
+#: ui/mainwindow.cpp:278
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Recent Projects"
 msgstr "Πρόσφατα έργα"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Save Project As"
@@ -449,13 +449,13 @@ msgctxt "@action:inmenu"
 msgid "Save Project As..."
 msgstr "Αποθήκευση έργου ως"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Graph Document"
 msgstr "Νέο έγγραφο γράφου"
 
-#: ui/mainwindow.cpp:284
+#: ui/mainwindow.cpp:285
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "New Script File"
@@ -463,7 +463,7 @@ msgctxt "@action:inmenu"
 msgid "New Script File..."
 msgstr "Νέο αρχείο σεναρίου"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:286
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Import Graph"
@@ -471,7 +471,7 @@ msgctxt "@action:inmenu"
 msgid "Import Graph..."
 msgstr "Εισαγωγή γράφου"
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:287
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Export Graph as"
@@ -479,7 +479,7 @@ msgctxt "@action:inmenu"
 msgid "Export Graph As..."
 msgstr "Εξαγωγή γράφου ως"
 
-#: ui/mainwindow.cpp:287
+#: ui/mainwindow.cpp:288
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Import Script"
@@ -487,7 +487,7 @@ msgctxt "@action:inmenu"
 msgid "Import Script..."
 msgstr "Εισαγωγή σεναρίου"
 
-#: ui/mainwindow.cpp:288
+#: ui/mainwindow.cpp:289
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Export Script"
@@ -495,40 +495,40 @@ msgctxt "@action:inmenu"
 msgid "Export Script..."
 msgstr "Εξαγωγή σεναρίου"
 
-#: ui/mainwindow.cpp:327
+#: ui/mainwindow.cpp:328
 #, kde-format
 msgctxt "@title:window"
 msgid "Import Script into Project"
 msgstr "Εισαγωγή σεναρίου σε έργο"
 
-#: ui/mainwindow.cpp:340
+#: ui/mainwindow.cpp:341
 #, kde-format
 msgctxt "@title:window"
 msgid "Export Script"
 msgstr "Εξαγωγή σεναρίου"
 
-#: ui/mainwindow.cpp:340
+#: ui/mainwindow.cpp:341
 #, kde-format
 msgid "JavaScript (*.js)"
 msgstr "JavaScript (*.js)"
 
-#: ui/mainwindow.cpp:351
+#: ui/mainwindow.cpp:352
 #, kde-format
 msgid "untitled"
 msgstr "ανώνυμο"
 
-#: ui/mainwindow.cpp:374
+#: ui/mainwindow.cpp:375
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Project As"
 msgstr "Αποθήκευση έργου ως"
 
-#: ui/mainwindow.cpp:374
+#: ui/mainwindow.cpp:375
 #, kde-format
 msgid "Rocs Projects (*.rocs)"
 msgstr "Έργα Rocs (*.rocs)"
 
-#: ui/mainwindow.cpp:384
+#: ui/mainwindow.cpp:385
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -537,45 +537,45 @@ msgstr ""
 "Ένα αρχείο με όνομα \"%1\" υπάρχει ήδη. Είστε βέβαιοι ότι θέλετε να το "
 "αντικαταστήσετε;"
 
-#: ui/mainwindow.cpp:385
+#: ui/mainwindow.cpp:386
 #, kde-format
 msgctxt "@title:window"
 msgid "Overwrite File?"
 msgstr "Αντικατάσταση αρχείου!"
 
-#: ui/mainwindow.cpp:408
+#: ui/mainwindow.cpp:409
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Project Files"
 msgstr "Άνοιγμα αρχείων έργου"
 
-#: ui/mainwindow.cpp:408
+#: ui/mainwindow.cpp:409
 #, kde-format
 msgid "Rocs projects (*.rocs)"
 msgstr "Έργα Rocs (*.rocs)"
 
-#: ui/mainwindow.cpp:433
+#: ui/mainwindow.cpp:434
 #, kde-format
 msgctxt "caption text for temporary project"
 msgid "[ untitled ]%1"
 msgstr "[ άτιτλο ]%1"
 
-#: ui/mainwindow.cpp:462
+#: ui/mainwindow.cpp:463
 #, kde-format
 msgid "ScriptName"
 msgstr "ΌνομαΣεναρίου"
 
-#: ui/mainwindow.cpp:462
+#: ui/mainwindow.cpp:463
 #, kde-format
 msgid "Enter the name of your new script"
 msgstr "Εισάγετε το όνομα του νέου σεναρίου"
 
-#: ui/mainwindow.cpp:471
+#: ui/mainwindow.cpp:472
 #, kde-format
 msgid "File already exists."
 msgstr "Το αρχείο υπάρχει ήδη."
 
-#: ui/mainwindow.cpp:492
+#: ui/mainwindow.cpp:498
 #, kde-format
 msgctxt "@info"
 msgid "Changes on your project are unsaved. Do you want to save your changes?"

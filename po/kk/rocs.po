@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"POT-Creation-Date: 2022-10-23 00:40+0000\n"
 "PO-Revision-Date: 2013-07-01 03:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -369,31 +369,31 @@ msgstr "Жаңа скрипт файлының атауын келтіру"
 msgid "Project Journal"
 msgstr "Жоба журналы"
 
-#: ui/mainwindow.cpp:170
+#: ui/mainwindow.cpp:171
 #, kde-format
 msgctxt "@action:intoolbar Script Execution"
 msgid "Run"
 msgstr "Жегу"
 
-#: ui/mainwindow.cpp:171
+#: ui/mainwindow.cpp:172
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Execute currently active script on active graph document."
 msgstr ""
 
-#: ui/mainwindow.cpp:172
+#: ui/mainwindow.cpp:173
 #, kde-format
 msgctxt "@action:intoolbar Script Execution"
 msgid "Stop"
 msgstr "Тоқтату"
 
-#: ui/mainwindow.cpp:173
+#: ui/mainwindow.cpp:174
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop script execution."
 msgstr ""
 
-#: ui/mainwindow.cpp:175
+#: ui/mainwindow.cpp:176
 #, fuzzy, kde-format
 #| msgctxt "@title:menu Debug execution"
 #| msgid "Debug"
@@ -401,42 +401,42 @@ msgctxt "@action:intoolbar Open Debugger"
 msgid "Debugger"
 msgstr "Жөндеу"
 
-#: ui/mainwindow.cpp:176
+#: ui/mainwindow.cpp:177
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open the Javascript code debugger."
 msgstr ""
 
-#: ui/mainwindow.cpp:211
+#: ui/mainwindow.cpp:212
 #, kde-format
 msgid "Element Types"
 msgstr "Элемент түрлері"
 
-#: ui/mainwindow.cpp:218
+#: ui/mainwindow.cpp:219
 #, kde-format
 msgctxt "@title"
 msgid "Journal"
 msgstr "Журнал"
 
-#: ui/mainwindow.cpp:222
+#: ui/mainwindow.cpp:223
 #, kde-format
 msgctxt "@title"
 msgid "Scripting API"
 msgstr "Скрипт API-і"
 
-#: ui/mainwindow.cpp:257
+#: ui/mainwindow.cpp:258
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Project"
 msgstr "Жаңа жоба"
 
-#: ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:264
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project"
 msgstr "Жобаны сақтау"
 
-#: ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Open Project"
@@ -444,13 +444,13 @@ msgctxt "@action:inmenu"
 msgid "Open Project..."
 msgstr "Жобаны ашу"
 
-#: ui/mainwindow.cpp:277
+#: ui/mainwindow.cpp:278
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Recent Projects"
 msgstr "Жуырдағы жобалар"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save Project as"
@@ -458,13 +458,13 @@ msgctxt "@action:inmenu"
 msgid "Save Project As..."
 msgstr "Жобаны былай сақтау"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Graph Document"
 msgstr "Жаңа граф құжаты"
 
-#: ui/mainwindow.cpp:284
+#: ui/mainwindow.cpp:285
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "New Script File"
@@ -472,7 +472,7 @@ msgctxt "@action:inmenu"
 msgid "New Script File..."
 msgstr "Жаңа скрипт файлы"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:286
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Import Graph"
@@ -480,7 +480,7 @@ msgctxt "@action:inmenu"
 msgid "Import Graph..."
 msgstr "Графты импорттау"
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:287
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Export Graph as"
@@ -488,7 +488,7 @@ msgctxt "@action:inmenu"
 msgid "Export Graph As..."
 msgstr "Графты былай экспорттау"
 
-#: ui/mainwindow.cpp:287
+#: ui/mainwindow.cpp:288
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Import Script"
@@ -496,7 +496,7 @@ msgctxt "@action:inmenu"
 msgid "Import Script..."
 msgstr "Скриптті импорттау"
 
-#: ui/mainwindow.cpp:288
+#: ui/mainwindow.cpp:289
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Export Script as"
@@ -504,7 +504,7 @@ msgctxt "@action:inmenu"
 msgid "Export Script..."
 msgstr "Скриптті былай экспорттау"
 
-#: ui/mainwindow.cpp:327
+#: ui/mainwindow.cpp:328
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Import Graph File into Project"
@@ -512,7 +512,7 @@ msgctxt "@title:window"
 msgid "Import Script into Project"
 msgstr "Жобаға граф файлын импорттау"
 
-#: ui/mainwindow.cpp:340
+#: ui/mainwindow.cpp:341
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Export Script as"
@@ -520,18 +520,18 @@ msgctxt "@title:window"
 msgid "Export Script"
 msgstr "Скриптті былай экспорттау"
 
-#: ui/mainwindow.cpp:340
+#: ui/mainwindow.cpp:341
 #, fuzzy, kde-format
 #| msgid "Save Script as"
 msgid "JavaScript (*.js)"
 msgstr "Скриптті былай сақтау"
 
-#: ui/mainwindow.cpp:351
+#: ui/mainwindow.cpp:352
 #, kde-format
 msgid "untitled"
 msgstr "аталмаған"
 
-#: ui/mainwindow.cpp:374
+#: ui/mainwindow.cpp:375
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save Project as"
@@ -539,37 +539,37 @@ msgctxt "@title:window"
 msgid "Save Project As"
 msgstr "Жобаны былай сақтау"
 
-#: ui/mainwindow.cpp:374
+#: ui/mainwindow.cpp:375
 #, kde-format
 msgid "Rocs Projects (*.rocs)"
 msgstr ""
 
-#: ui/mainwindow.cpp:384
+#: ui/mainwindow.cpp:385
 #, kde-format
 msgctxt "@info"
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
 
-#: ui/mainwindow.cpp:385
+#: ui/mainwindow.cpp:386
 #, fuzzy, kde-format
 #| msgid "Overwrite"
 msgctxt "@title:window"
 msgid "Overwrite File?"
 msgstr "Үстінен жазу"
 
-#: ui/mainwindow.cpp:408
+#: ui/mainwindow.cpp:409
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Project Files"
 msgstr "Жоба файлдарын ашу"
 
-#: ui/mainwindow.cpp:408
+#: ui/mainwindow.cpp:409
 #, kde-format
 msgid "Rocs projects (*.rocs)"
 msgstr ""
 
-#: ui/mainwindow.cpp:433
+#: ui/mainwindow.cpp:434
 #, fuzzy, kde-format
 #| msgctxt "caption text for temporary project"
 #| msgid "[ untitled ]"
@@ -577,23 +577,23 @@ msgctxt "caption text for temporary project"
 msgid "[ untitled ]%1"
 msgstr "[ аталмаған ]"
 
-#: ui/mainwindow.cpp:462
+#: ui/mainwindow.cpp:463
 #, kde-format
 msgid "ScriptName"
 msgstr "СкриптАтауы"
 
-#: ui/mainwindow.cpp:462
+#: ui/mainwindow.cpp:463
 #, kde-format
 msgid "Enter the name of your new script"
 msgstr "Жаңа скрипт файлының атауын келтіру"
 
-#: ui/mainwindow.cpp:471
+#: ui/mainwindow.cpp:472
 #, fuzzy, kde-format
 #| msgid "File Exists"
 msgid "File already exists."
 msgstr "Файл бар екен"
 
-#: ui/mainwindow.cpp:492
+#: ui/mainwindow.cpp:498
 #, kde-format
 msgctxt "@info"
 msgid "Changes on your project are unsaved. Do you want to save your changes?"

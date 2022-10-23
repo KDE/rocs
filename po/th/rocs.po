@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"POT-Creation-Date: 2022-10-23 00:40+0000\n"
 "PO-Revision-Date: 2011-05-12 22:44+0700\n"
 "Last-Translator: Phuwanat Sakornsakolpat <narachai@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -379,228 +379,228 @@ msgstr "กราฟใหม่"
 msgid "Project Journal"
 msgstr "คุณสมบัติของโหนด"
 
-#: ui/mainwindow.cpp:170
+#: ui/mainwindow.cpp:171
 #, fuzzy, kde-format
 #| msgid "Run"
 msgctxt "@action:intoolbar Script Execution"
 msgid "Run"
 msgstr "เริ่ม"
 
-#: ui/mainwindow.cpp:171
+#: ui/mainwindow.cpp:172
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Execute currently active script on active graph document."
 msgstr ""
 
-#: ui/mainwindow.cpp:172
+#: ui/mainwindow.cpp:173
 #, fuzzy, kde-format
 #| msgid "Stop"
 msgctxt "@action:intoolbar Script Execution"
 msgid "Stop"
 msgstr "หยุด"
 
-#: ui/mainwindow.cpp:173
+#: ui/mainwindow.cpp:174
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop script execution."
 msgstr ""
 
-#: ui/mainwindow.cpp:175
+#: ui/mainwindow.cpp:176
 #, kde-format
 msgctxt "@action:intoolbar Open Debugger"
 msgid "Debugger"
 msgstr ""
 
-#: ui/mainwindow.cpp:176
+#: ui/mainwindow.cpp:177
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open the Javascript code debugger."
 msgstr ""
 
-#: ui/mainwindow.cpp:211
+#: ui/mainwindow.cpp:212
 #, fuzzy, kde-format
 #| msgid "Node Properties"
 msgid "Element Types"
 msgstr "คุณสมบัติของโหนด"
 
-#: ui/mainwindow.cpp:218
+#: ui/mainwindow.cpp:219
 #, kde-format
 msgctxt "@title"
 msgid "Journal"
 msgstr ""
 
-#: ui/mainwindow.cpp:222
+#: ui/mainwindow.cpp:223
 #, fuzzy, kde-format
 #| msgid "Rocs Script Files"
 msgctxt "@title"
 msgid "Scripting API"
 msgstr "แฟ้มสคริปต์ Rocs"
 
-#: ui/mainwindow.cpp:257
+#: ui/mainwindow.cpp:258
 #, fuzzy, kde-format
 #| msgid "Node Properties"
 msgctxt "@action:inmenu"
 msgid "New Project"
 msgstr "คุณสมบัติของโหนด"
 
-#: ui/mainwindow.cpp:263
+#: ui/mainwindow.cpp:264
 #, fuzzy, kde-format
 #| msgid "Save Script"
 msgctxt "@action:inmenu"
 msgid "Save Project"
 msgstr "บันทึกสคริปต์"
 
-#: ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:270
 #, fuzzy, kde-format
 #| msgid "Open Script"
 msgctxt "@action:inmenu"
 msgid "Open Project..."
 msgstr "เปิดสคริปต์"
 
-#: ui/mainwindow.cpp:277
+#: ui/mainwindow.cpp:278
 #, fuzzy, kde-format
 #| msgid "Open Script"
 msgctxt "@action:inmenu"
 msgid "Recent Projects"
 msgstr "เปิดสคริปต์"
 
-#: ui/mainwindow.cpp:282
+#: ui/mainwindow.cpp:283
 #, fuzzy, kde-format
 #| msgid "Save Script"
 msgctxt "@action:inmenu"
 msgid "Save Project As..."
 msgstr "บันทึกสคริปต์"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:284
 #, fuzzy, kde-format
 #| msgid "New Graph"
 msgctxt "@action:inmenu"
 msgid "New Graph Document"
 msgstr "กราฟใหม่"
 
-#: ui/mainwindow.cpp:284
+#: ui/mainwindow.cpp:285
 #, fuzzy, kde-format
 #| msgid "New Script"
 msgctxt "@action:inmenu"
 msgid "New Script File..."
 msgstr "สคริปต์ใหม่"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:286
 #, fuzzy, kde-format
 #| msgid "Complete"
 msgctxt "@action:inmenu"
 msgid "Import Graph..."
 msgstr "เสร็จสิ้น"
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:287
 #, fuzzy, kde-format
 #| msgid "Export graphs to file"
 msgctxt "@action:inmenu"
 msgid "Export Graph As..."
 msgstr "ส่งออกกราฟเป็นแฟ้ม"
 
-#: ui/mainwindow.cpp:287
+#: ui/mainwindow.cpp:288
 #, fuzzy, kde-format
 #| msgid "Complete"
 msgctxt "@action:inmenu"
 msgid "Import Script..."
 msgstr "เสร็จสิ้น"
 
-#: ui/mainwindow.cpp:288
+#: ui/mainwindow.cpp:289
 #, fuzzy, kde-format
 #| msgid "Complete"
 msgctxt "@action:inmenu"
 msgid "Export Script..."
 msgstr "เสร็จสิ้น"
 
-#: ui/mainwindow.cpp:327
+#: ui/mainwindow.cpp:328
 #, fuzzy, kde-format
 #| msgid "Open Script"
 msgctxt "@title:window"
 msgid "Import Script into Project"
 msgstr "เปิดสคริปต์"
 
-#: ui/mainwindow.cpp:340
+#: ui/mainwindow.cpp:341
 #, fuzzy, kde-format
 #| msgid "Complete"
 msgctxt "@title:window"
 msgid "Export Script"
 msgstr "เสร็จสิ้น"
 
-#: ui/mainwindow.cpp:340
+#: ui/mainwindow.cpp:341
 #, fuzzy, kde-format
 #| msgid "Save Script as"
 msgid "JavaScript (*.js)"
 msgstr "บันทึกสคริปต์เป็น"
 
-#: ui/mainwindow.cpp:351
+#: ui/mainwindow.cpp:352
 #, kde-format
 msgid "untitled"
 msgstr "ไม่มีชื่อ"
 
-#: ui/mainwindow.cpp:374
+#: ui/mainwindow.cpp:375
 #, fuzzy, kde-format
 #| msgid "Save Script"
 msgctxt "@title:window"
 msgid "Save Project As"
 msgstr "บันทึกสคริปต์"
 
-#: ui/mainwindow.cpp:374
+#: ui/mainwindow.cpp:375
 #, kde-format
 msgid "Rocs Projects (*.rocs)"
 msgstr ""
 
-#: ui/mainwindow.cpp:384
+#: ui/mainwindow.cpp:385
 #, kde-format
 msgctxt "@info"
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
 
-#: ui/mainwindow.cpp:385
+#: ui/mainwindow.cpp:386
 #, fuzzy, kde-format
 #| msgid "New Script"
 msgctxt "@title:window"
 msgid "Overwrite File?"
 msgstr "สคริปต์ใหม่"
 
-#: ui/mainwindow.cpp:408
+#: ui/mainwindow.cpp:409
 #, fuzzy, kde-format
 #| msgid "Node Properties"
 msgctxt "@title:window"
 msgid "Open Project Files"
 msgstr "คุณสมบัติของโหนด"
 
-#: ui/mainwindow.cpp:408
+#: ui/mainwindow.cpp:409
 #, kde-format
 msgid "Rocs projects (*.rocs)"
 msgstr ""
 
-#: ui/mainwindow.cpp:433
+#: ui/mainwindow.cpp:434
 #, fuzzy, kde-format
 #| msgid "untitled"
 msgctxt "caption text for temporary project"
 msgid "[ untitled ]%1"
 msgstr "ไม่มีชื่อ"
 
-#: ui/mainwindow.cpp:462
+#: ui/mainwindow.cpp:463
 #, fuzzy, kde-format
 #| msgid "New Script"
 msgid "ScriptName"
 msgstr "สคริปต์ใหม่"
 
-#: ui/mainwindow.cpp:462
+#: ui/mainwindow.cpp:463
 #, fuzzy, kde-format
 #| msgid "New Graph"
 msgid "Enter the name of your new script"
 msgstr "กราฟใหม่"
 
-#: ui/mainwindow.cpp:471
+#: ui/mainwindow.cpp:472
 #, kde-format
 msgid "File already exists."
 msgstr ""
 
-#: ui/mainwindow.cpp:492
+#: ui/mainwindow.cpp:498
 #, kde-format
 msgctxt "@info"
 msgid "Changes on your project are unsaved. Do you want to save your changes?"
