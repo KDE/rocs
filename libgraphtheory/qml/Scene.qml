@@ -30,13 +30,13 @@ Item {
 
     Connections {
         target: selectMoveAction
-        onToggled: {
+        function onToggled() {
             dsmSelectMove.running = selectMoveAction.checked
         }
     }
     Connections {
         target: addEdgeAction
-        onToggled: {
+        function onToggled() {
             dsmCreateEdge.running = addEdgeAction.checked
         }
     }
@@ -103,9 +103,8 @@ Item {
             leftMargin: 10
         }
 
-
         Rectangle { // white background
-            color: "white"
+            color: "#ffffff"
             width: parent.width
             height: parent.height
         }
@@ -143,11 +142,12 @@ Item {
                 id: sceneAction
                 anchors.fill: parent
                 z: -10 // must lie behind everything else
+                preventStealing: true
 
-                property variant lastMouseClicked: Qt.point(0, 0)
-                property variant lastMousePressed: Qt.point(0, 0)
-                property variant lastMouseReleased: Qt.point(0, 0)
-                property variant lastMousePosition: Qt.point(0, 0)
+                property point lastMouseClicked: Qt.point(0, 0)
+                property point lastMousePressed: Qt.point(0, 0)
+                property point lastMouseReleased: Qt.point(0, 0)
+                property point lastMousePosition: Qt.point(0, 0)
                 property bool nodePressed: false // if true, the current mouse-press event started at a node
 
                 onClicked: {
@@ -218,9 +218,9 @@ Item {
                 NodeItem {
                     id: nodeItem
                     node: model.dataRole
-                    highlighted: addEdgeAction.from == node || addEdgeAction.to == node
+                    highlighted: addEdgeAction.from === node || addEdgeAction.to === node
                     property bool __modifyingPosition: false
-                    property variant __moveStartedPosition: Qt.point(0, 0)
+                    property point __moveStartedPosition: Qt.point(0, 0)
                     Connections {
                         target: selectionRect
                         onChanged: {
