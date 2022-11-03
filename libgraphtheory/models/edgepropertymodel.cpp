@@ -15,14 +15,6 @@ using namespace GraphTheory;
 class GraphTheory::EdgePropertyModelPrivate
 {
 public:
-    EdgePropertyModelPrivate()
-    {
-    }
-
-    ~EdgePropertyModelPrivate()
-    {
-    }
-
     EdgePtr m_edge;
 };
 
@@ -32,9 +24,7 @@ EdgePropertyModel::EdgePropertyModel(QObject *parent)
 {
 }
 
-EdgePropertyModel::~EdgePropertyModel()
-{
-}
+EdgePropertyModel::~EdgePropertyModel() = default;
 
 QHash<int, QByteArray> EdgePropertyModel::roleNames() const
 {

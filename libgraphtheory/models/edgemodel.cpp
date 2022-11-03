@@ -7,7 +7,6 @@
 #include "edgemodel.h"
 #include "edge.h"
 #include "graphdocument.h"
-
 #include <KLocalizedString>
 #include <QDebug>
 #include <QSignalMapper>
@@ -17,38 +16,26 @@ using namespace GraphTheory;
 class GraphTheory::EdgeModelPrivate
 {
 public:
-    EdgeModelPrivate()
-        : m_signalMapper(new QSignalMapper)
-    {
-    }
-
-    ~EdgeModelPrivate()
-    {
-        m_signalMapper->deleteLater();
-    }
-
     void updateMappings()
     {
         int edges = m_document->edges().count();
         for (int i = 0; i < edges; i++) {
-            m_signalMapper->setMapping(m_document->edges().at(i).data(), i);
+            m_signalMapper.setMapping(m_document->edges().at(i).data(), i);
         }
     }
 
     GraphDocumentPtr m_document;
-    QSignalMapper *m_signalMapper;
+    QSignalMapper m_signalMapper;
 };
 
 EdgeModel::EdgeModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new EdgeModelPrivate)
 {
-    connect(d->m_signalMapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &EdgeModel::emitEdgeChanged);
+    connect(&d->m_signalMapper, &QSignalMapper::mappedInt, this, &EdgeModel::emitEdgeChanged);
 }
 
-EdgeModel::~EdgeModel()
-{
-}
+EdgeModel::~EdgeModel() = default;
 
 QHash<int, QByteArray> EdgeModel::roleNames() const
 {

@@ -17,38 +17,26 @@ using namespace GraphTheory;
 class GraphTheory::EdgeTypeModelPrivate
 {
 public:
-    EdgeTypeModelPrivate()
-        : m_signalMapper(new QSignalMapper)
-    {
-    }
-
-    ~EdgeTypeModelPrivate()
-    {
-        m_signalMapper->deleteLater();
-    }
-
     void updateMappings()
     {
         int types = m_document->edgeTypes().count();
         for (int i = 0; i < types; ++i) {
-            m_signalMapper->setMapping(m_document->edgeTypes().at(i).data(), i);
+            m_signalMapper.setMapping(m_document->edgeTypes().at(i).data(), i);
         }
     }
 
     GraphDocumentPtr m_document;
-    QSignalMapper *m_signalMapper;
+    QSignalMapper m_signalMapper;
 };
 
 EdgeTypeModel::EdgeTypeModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new EdgeTypeModelPrivate)
 {
-    connect(d->m_signalMapper, &QSignalMapper::mappedInt, this, &EdgeTypeModel::emitEdgeTypeChanged);
+    connect(&d->m_signalMapper, &QSignalMapper::mappedInt, this, &EdgeTypeModel::emitEdgeTypeChanged);
 }
 
-EdgeTypeModel::~EdgeTypeModel()
-{
-}
+EdgeTypeModel::~EdgeTypeModel() = default;
 
 QHash<int, QByteArray> EdgeTypeModel::roleNames() const
 {
@@ -164,9 +152,9 @@ int EdgeTypeModel::rowCount(const QModelIndex &parent) const
 void EdgeTypeModel::onEdgeTypeAboutToBeAdded(EdgeTypePtr type, int index)
 {
     beginInsertRows(QModelIndex(), index, index);
-    connect(type.data(), &EdgeType::idChanged, d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
-    connect(type.data(), &EdgeType::nameChanged, d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
-    connect(type->style(), &EdgeTypeStyle::colorChanged, d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
+    connect(type.data(), &EdgeType::idChanged, &d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
+    connect(type.data(), &EdgeType::nameChanged, &d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
+    connect(type->style(), &EdgeTypeStyle::colorChanged, &d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
 }
 
 void EdgeTypeModel::onEdgeTypeAdded()

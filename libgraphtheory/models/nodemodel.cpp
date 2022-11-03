@@ -15,38 +15,26 @@ using namespace GraphTheory;
 class GraphTheory::NodeModelPrivate
 {
 public:
-    NodeModelPrivate()
-        : m_signalMapper(new QSignalMapper)
-    {
-    }
-
-    ~NodeModelPrivate()
-    {
-        m_signalMapper->deleteLater();
-    }
-
     void updateMappings()
     {
         int nodes = m_document->nodes().count();
         for (int i = 0; i < nodes; i++) {
-            m_signalMapper->setMapping(m_document->nodes().at(i).data(), i);
+            m_signalMapper.setMapping(m_document->nodes().at(i).data(), i);
         }
     }
 
     GraphDocumentPtr m_document;
-    QSignalMapper *m_signalMapper;
+    QSignalMapper m_signalMapper;
 };
 
 NodeModel::NodeModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new NodeModelPrivate)
 {
-    connect(d->m_signalMapper, &QSignalMapper::mappedInt, this, &NodeModel::emitNodeChanged);
+    connect(&d->m_signalMapper, &QSignalMapper::mappedInt, this, &NodeModel::emitNodeChanged);
 }
 
-NodeModel::~NodeModel()
-{
-}
+NodeModel::~NodeModel() = default;
 
 QHash<int, QByteArray> NodeModel::roleNames() const
 {

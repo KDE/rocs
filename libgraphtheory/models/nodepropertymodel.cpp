@@ -15,14 +15,6 @@ using namespace GraphTheory;
 class GraphTheory::NodePropertyModelPrivate
 {
 public:
-    NodePropertyModelPrivate()
-    {
-    }
-
-    ~NodePropertyModelPrivate()
-    {
-    }
-
     NodePtr m_node;
 };
 
@@ -32,9 +24,7 @@ NodePropertyModel::NodePropertyModel(QObject *parent)
 {
 }
 
-NodePropertyModel::~NodePropertyModel()
-{
-}
+NodePropertyModel::~NodePropertyModel() = default;
 
 QHash<int, QByteArray> NodePropertyModel::roleNames() const
 {
