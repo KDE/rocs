@@ -398,7 +398,7 @@ msgstr "JavaScript kod hata ayıklayıcısını açar."
 #: ui/mainwindow.cpp:212
 #, kde-format
 msgid "Element Types"
-msgstr "Öğe Türleri"
+msgstr "Öge Türleri"
 
 #: ui/mainwindow.cpp:219
 #, kde-format
@@ -604,26 +604,3 @@ msgstr "Yan Araç Çubuğu"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "\"%1\" görünümüne geç."
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Save Project as"
-#~ msgstr "Projeyi Farklı Kaydet"
-
-#~ msgid "about:blank"
-#~ msgstr "about:blank"
-
-#~ msgid "Overwrite"
-#~ msgstr "Üzerine Yaz"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Ana Araç Çubuğu"
-
-#~ msgid "Align Toolbar"
-#~ msgstr "Hiza Araç Çubuğu"
-
-#~ msgid ""
-#~ "A KDE Text Editor could not be found, \n"
-#~ " please, check your installation"
-#~ msgstr ""
-#~ "Bir KDE Metin Düzenleyicisi bulunamadı,\n"
-#~ " lütfen kurulumunuzu kontrol edin"
