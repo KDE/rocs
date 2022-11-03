@@ -34,6 +34,7 @@ include(ECMAddTests)
 include(ECMInstallIcons)
 include(ECMOptionalAddSubdirectory)
 include(ECMSetupVersion)
+include(ECMEnableSanitizers)
 include(FeatureSummary)
 include(GenerateExportHeader)
 
