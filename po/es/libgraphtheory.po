@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"POT-Creation-Date: 2022-11-04 00:42+0000\n"
 "PO-Revision-Date: 2021-10-24 13:16+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -1344,49 +1344,49 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Lista de nodos para los que se deben calcular las distancias."
 
-#: models/edgemodel.cpp:154
+#: models/edgemodel.cpp:141
 #, kde-format
 msgctxt "@title:column"
 msgid "Edge"
 msgstr "Arista"
 
-#: models/edgepropertymodel.cpp:154
+#: models/edgepropertymodel.cpp:144
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeProperty"
 msgstr "Propiedad de la arista"
 
-#: models/edgetypemodel.cpp:202
+#: models/edgetypemodel.cpp:190
 #, kde-format
 msgctxt "@title:column"
 msgid "Edge Type"
 msgstr "Tipo de arista"
 
-#: models/edgetypepropertymodel.cpp:141
+#: models/edgetypepropertymodel.cpp:131
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeTypeProperty"
 msgstr "Propiedad del tipo de arista"
 
-#: models/nodemodel.cpp:154
+#: models/nodemodel.cpp:142
 #, kde-format
 msgctxt "@title:column"
 msgid "Node"
 msgstr "Nodo"
 
-#: models/nodepropertymodel.cpp:154
+#: models/nodepropertymodel.cpp:144
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeProperty"
 msgstr "Propiedad del nodo"
 
-#: models/nodetypemodel.cpp:200
+#: models/nodetypemodel.cpp:188
 #, kde-format
 msgctxt "@title:column"
 msgid "Node Type"
 msgstr "Tipo de nodo"
 
-#: models/nodetypepropertymodel.cpp:141
+#: models/nodetypepropertymodel.cpp:131
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeTypeProperty"

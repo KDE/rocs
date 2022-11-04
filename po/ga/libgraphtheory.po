@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"POT-Creation-Date: 2022-11-04 00:42+0000\n"
 "PO-Revision-Date: 2009-03-25 09:41-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -1333,56 +1333,56 @@ msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
 # makes more sense than "ciumhaiseanna"
-#: models/edgemodel.cpp:154
+#: models/edgemodel.cpp:141
 #, fuzzy, kde-format
 #| msgid "Edges"
 msgctxt "@title:column"
 msgid "Edge"
 msgstr "Naisc"
 
-#: models/edgepropertymodel.cpp:154
+#: models/edgepropertymodel.cpp:144
 #, fuzzy, kde-format
 #| msgid "Edge Properties"
 msgctxt "@title:column"
 msgid "EdgeProperty"
 msgstr "Airíonna Naisc"
 
-#: models/edgetypemodel.cpp:202
+#: models/edgetypemodel.cpp:190
 #, fuzzy, kde-format
 #| msgid "Edge style"
 msgctxt "@title:column"
 msgid "Edge Type"
 msgstr "Stíl an naisc"
 
-#: models/edgetypepropertymodel.cpp:141
+#: models/edgetypepropertymodel.cpp:131
 #, fuzzy, kde-format
 #| msgid "Edge Properties"
 msgctxt "@title:column"
 msgid "EdgeTypeProperty"
 msgstr "Airíonna Naisc"
 
-#: models/nodemodel.cpp:154
+#: models/nodemodel.cpp:142
 #, fuzzy, kde-format
 #| msgid "Nodes"
 msgctxt "@title:column"
 msgid "Node"
 msgstr "Nóid"
 
-#: models/nodepropertymodel.cpp:154
+#: models/nodepropertymodel.cpp:144
 #, fuzzy, kde-format
 #| msgid "Node Properties"
 msgctxt "@title:column"
 msgid "NodeProperty"
 msgstr "Airíonna Nóid"
 
-#: models/nodetypemodel.cpp:200
+#: models/nodetypemodel.cpp:188
 #, fuzzy, kde-format
 #| msgid "Node name"
 msgctxt "@title:column"
 msgid "Node Type"
 msgstr "Kevin Scannell"
 
-#: models/nodetypepropertymodel.cpp:141
+#: models/nodetypepropertymodel.cpp:131
 #, fuzzy, kde-format
 #| msgid "Node Properties"
 msgctxt "@title:column"

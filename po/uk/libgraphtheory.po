@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"POT-Creation-Date: 2022-11-04 00:42+0000\n"
 "PO-Revision-Date: 2021-10-24 09:39+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -1336,49 +1336,49 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Список вузлів, відстань до яких слід обчислити."
 
-#: models/edgemodel.cpp:154
+#: models/edgemodel.cpp:141
 #, kde-format
 msgctxt "@title:column"
 msgid "Edge"
 msgstr "Ребро"
 
-#: models/edgepropertymodel.cpp:154
+#: models/edgepropertymodel.cpp:144
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeProperty"
 msgstr "Властивість ребра"
 
-#: models/edgetypemodel.cpp:202
+#: models/edgetypemodel.cpp:190
 #, kde-format
 msgctxt "@title:column"
 msgid "Edge Type"
 msgstr "Тип ребра"
 
-#: models/edgetypepropertymodel.cpp:141
+#: models/edgetypepropertymodel.cpp:131
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeTypeProperty"
 msgstr "Властивість типу ребра"
 
-#: models/nodemodel.cpp:154
+#: models/nodemodel.cpp:142
 #, kde-format
 msgctxt "@title:column"
 msgid "Node"
 msgstr "Вузол"
 
-#: models/nodepropertymodel.cpp:154
+#: models/nodepropertymodel.cpp:144
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeProperty"
 msgstr "Властивість вузла"
 
-#: models/nodetypemodel.cpp:200
+#: models/nodetypemodel.cpp:188
 #, kde-format
 msgctxt "@title:column"
 msgid "Node Type"
 msgstr "Тип вузлів"
 
-#: models/nodetypepropertymodel.cpp:141
+#: models/nodetypepropertymodel.cpp:131
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeTypeProperty"

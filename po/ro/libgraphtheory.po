@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"POT-Creation-Date: 2022-11-04 00:42+0000\n"
 "PO-Revision-Date: 2010-01-20 00:03+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Română <kde-i18n-ro@kde.org>\n"
@@ -1350,56 +1350,56 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-#: models/edgemodel.cpp:154
+#: models/edgemodel.cpp:141
 #, fuzzy, kde-format
 #| msgid "Edge style"
 msgctxt "@title:column"
 msgid "Edge"
 msgstr "Stil muchie"
 
-#: models/edgepropertymodel.cpp:154
+#: models/edgepropertymodel.cpp:144
 #, fuzzy, kde-format
 #| msgid "Edge Properties"
 msgctxt "@title:column"
 msgid "EdgeProperty"
 msgstr "Proprietăți muchie"
 
-#: models/edgetypemodel.cpp:202
+#: models/edgetypemodel.cpp:190
 #, fuzzy, kde-format
 #| msgid "Edge style"
 msgctxt "@title:column"
 msgid "Edge Type"
 msgstr "Stil muchie"
 
-#: models/edgetypepropertymodel.cpp:141
+#: models/edgetypepropertymodel.cpp:131
 #, fuzzy, kde-format
 #| msgid "Edge Properties"
 msgctxt "@title:column"
 msgid "EdgeTypeProperty"
 msgstr "Proprietăți muchie"
 
-#: models/nodemodel.cpp:154
+#: models/nodemodel.cpp:142
 #, fuzzy, kde-format
 #| msgid "Nodes:"
 msgctxt "@title:column"
 msgid "Node"
 msgstr "Noduri:"
 
-#: models/nodepropertymodel.cpp:154
+#: models/nodepropertymodel.cpp:144
 #, fuzzy, kde-format
 #| msgid "Node Properties"
 msgctxt "@title:column"
 msgid "NodeProperty"
 msgstr "Proprietăți nod"
 
-#: models/nodetypemodel.cpp:200
+#: models/nodetypemodel.cpp:188
 #, fuzzy, kde-format
 #| msgid "Node size"
 msgctxt "@title:column"
 msgid "Node Type"
 msgstr "Dimensiune nod"
 
-#: models/nodetypepropertymodel.cpp:141
+#: models/nodetypepropertymodel.cpp:131
 #, fuzzy, kde-format
 #| msgid "Node Properties"
 msgctxt "@title:column"
