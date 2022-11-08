@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-23 00:40+0000\n"
+"POT-Creation-Date: 2022-11-04 00:42+0000\n"
 "PO-Revision-Date: 2013-11-22 19:16+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -764,8 +764,8 @@ msgstr ""
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+"css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
@@ -1271,49 +1271,49 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-#: models/edgemodel.cpp:154
+#: models/edgemodel.cpp:141
 #, kde-format
 msgctxt "@title:column"
 msgid "Edge"
 msgstr ""
 
-#: models/edgepropertymodel.cpp:154
+#: models/edgepropertymodel.cpp:144
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeProperty"
 msgstr ""
 
-#: models/edgetypemodel.cpp:202
+#: models/edgetypemodel.cpp:190
 #, kde-format
 msgctxt "@title:column"
 msgid "Edge Type"
 msgstr ""
 
-#: models/edgetypepropertymodel.cpp:141
+#: models/edgetypepropertymodel.cpp:131
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeTypeProperty"
 msgstr ""
 
-#: models/nodemodel.cpp:154
+#: models/nodemodel.cpp:142
 #, kde-format
 msgctxt "@title:column"
 msgid "Node"
 msgstr ""
 
-#: models/nodepropertymodel.cpp:154
+#: models/nodepropertymodel.cpp:144
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeProperty"
 msgstr ""
 
-#: models/nodetypemodel.cpp:200
+#: models/nodetypemodel.cpp:188
 #, kde-format
 msgctxt "@title:column"
 msgid "Node Type"
 msgstr ""
 
-#: models/nodetypepropertymodel.cpp:141
+#: models/nodetypepropertymodel.cpp:131
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeTypeProperty"
