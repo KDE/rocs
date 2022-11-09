@@ -449,7 +449,7 @@ Console.log("Vertex Cover bevat " + C.length + " knopen.");
 
 <chapter id="scripting">
 <title
->Scripts</title>
+>Scripts maken</title>
 <sect1>
     <title
 >Het  uitvoeren van algoritmes in &rocs; </title>
