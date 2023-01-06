@@ -1,183 +1,137 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-
-  <!ENTITY kappname "&rocs;">
   <!ENTITY % addindex "IGNORE">
-  <!ENTITY % German "INCLUDE">
+  <!ENTITY % English "INCLUDE">
 
 ]>
 <book id="rocs" lang="&language;">
 
 <bookinfo>
-<title
->Das Handbuch zu &rocs;</title>
+<title>The &rocs; Handbook</title>
 <authorgroup>
-<author
-><personname
-> <firstname
->Tomaz</firstname
-> <surname
->Canabrava</surname
-> </personname
-> <email
->tomaz.canabrava@gmail.com</email
-> </author>
-<author
-><personname
-> <firstname
->Andreas</firstname
-> <surname
->Cord-Landwehr</surname
-> </personname
-> <email
->cordlandwehr@kde.org</email
-> </author>
+<author>
+<personname>
+<firstname>Tomaz</firstname>
+<surname>Canabrava</surname>
+</personname>
+<email>tomaz.canabrava@gmail.com</email>
+</author>
+<author>
+<personname>
+<firstname>Andreas</firstname>
+<surname>Cord-Landwehr</surname>
+</personname>
+<email>cordlandwehr@kde.org</email>
+</author>
 
-<othercredit role="translator"
-><firstname
->Burkhard</firstname
-><surname
->Lück</surname
-><affiliation
-><address
-><email
->lueck@hube-lueck.de</email
-></address
-></affiliation
-><contrib
->Übersetzung</contrib
-></othercredit
-> 
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
-<date
->2016-04-10</date>
-<releaseinfo
->Rocs 2.1.50 (Anwendungen 16.04)</releaseinfo>
+<date>2021-10-23</date>
+<releaseinfo>KDE Gear 21.08</releaseinfo>
 
-<legalnotice
->&FDLNotice;</legalnotice>
+<legalnotice>&FDLNotice;</legalnotice>
 
 <abstract>
-<para
->&rocs; ist ein Graphentheorie-Programm von &kde;. </para>
+<para>
+&rocs; is a graph theory tool.
+</para>
 </abstract>
 
 <keywordset>
-<keyword
->KDE</keyword>
-<keyword
->kdeedu</keyword>
-<keyword
->Mathematik</keyword>
-<keyword
->Mathe</keyword>
-<keyword
->Graphen</keyword>
-<keyword
->Knoten</keyword>
-<keyword
->Kante</keyword>
+<keyword>KDE</keyword>
+<keyword>kdeedu</keyword>
+<keyword>mathematics</keyword>
+<keyword>math</keyword>
+<keyword>graphs</keyword>
+<keyword>node</keyword>
+<keyword>edge</keyword>
+<keyword>Rocs</keyword>
 </keywordset>
 
 </bookinfo>
 
 <chapter id="introduction">
-<title
->Einführung</title>
-<para
->In diesem Kapitel finden Sie einen Überblick über die wichtigsten Funktionen und den typischen Arbeitsablauf. Die wichtigsten Informationen finden Sie in <xref linkend="introduction-nutshell"/> und <xref linkend="scripting"/>. Damit sollten neue Benutzer problemlos mit &rocs; arbeiten können. </para>
+<title>Introduction</title>
+<para>
+This chapter provides an overview of the core features and the typical workflows.
+The most important parts are <xref linkend="introduction-nutshell"/> and <xref linkend="scripting" />, which together should allow every new user to directly start using &rocs;.
+</para>
 
 <sect1 id="introduction-goals">
-<title
->Ziel, Zielgruppe und Arbeitsabläufe</title>
-<para
->&rocs; ist eine Anwendung für Graphen-Theorie für Alle, die am Entwurf und Untersuchung von Graphen-Algorithmen arbeiten, unter anderem:</para>
+<title>Goals, Target Audience, and Workflows</title>
+<para>&rocs; is a Graph Theory Tool for everybody interested in designing and studying graph algorithms. In particular, those are</para>
 <itemizedlist>
-    <listitem
-><para
->Lehrer, die Ihren Studenten Algorithmen demonstrieren möchten,</para
-></listitem>
-    <listitem
-><para
->Studenten und Forscher, die verstehen und sehen möchten, wie ein Algorithmus funktioniert,</para
-></listitem>
-    <listitem
-><para
->Alle, die an Datenstrukturen und Algorithmen interessiert sind</para
-></listitem>
+    <listitem><para>lecturers, who want to demonstrate algorithms to their students,</para></listitem>
+    <listitem><para>students and researchers, who want to see how their algorithm perform, and</para></listitem>
+    <listitem><para>everybody who is interested in data structures and algorithms.</para></listitem>
 </itemizedlist>
-<para
->Für alle diese Benutzer stellt &rocs; einen einfach zu bedienenden Editor für die Erstellung von Graphen, ein leistungsfähiges Skriptmodul zur Ausführung von Algorithmen und mehrere Hilfswerkzeuge für Simulationen, Experimente und den export von Graphen bereit. Beim typischen Arbeitsablauf erstellen Sie als erstes einen Graphen entweder von hand, indem Sie Knoten und Kanten zur Zeichenfläche hinzufügen, oder mit einem der Graphen-Generatoren. Graphen-Algorithmen können dann implementiert und mit dem erzeugten Graphen ausgeführt werden. Alle Änderungen durch den Algorithmus sind sofort auf der Zeichenfläche im Editors sichtbar. </para>
+<para>For all them, &rocs; provides an easy to use graphical editor for creating graphs, a powerful scripting engine to execute algorithms, and several helper tools for simulations, experiments, and graph exports.
+The typical way of using &rocs; is to create a graph, either by hand (&ie;, dragging nodes and edges to the whiteboard), or by using one of the graph generators.
+Graph algorithms then can be implemented and executed on the created graph and all changes, which the algorithm performs, are visible immediately in the graph editor.
+</para>
 
 <screenshot>
-<screeninfo
->Bildschirmphoto von &rocs;</screeninfo>
-<mediaobject>
-<imageobject>
-<imagedata fileref="rocs-screenshot.png" format="PNG"/>
-</imageobject>
-<textobject>
-<phrase
->Bildschirmphoto von &rocs;</phrase>
-</textobject>
-</mediaobject>
+  <screeninfo>A Screenshot of &rocs;.</screeninfo>
+  <mediaobject>
+    <imageobject><imagedata fileref="rocs-screenshot.png" format="PNG" /></imageobject>
+    <textobject><phrase>A Screenshot of &rocs;.</phrase></textobject>
+  </mediaobject>
 </screenshot>
 </sect1>
 
 <sect1 id="introduction-nutshell">
-<title
->&rocs; kurz zusammengefasst</title>
-<para
->Jede &rocs;-Sitzung ist ein Projekt: Wenn Sie &rocs; starten, wird ein leeres Projekt erstellt, wenn Sie ein Projekt laden, wird es das aktive Projekt. Ein Projekt selbst besteht aus <emphasis
->Graphendokumenten</emphasis
->, <emphasis
->Skripten/Algorithmen</emphasis
-> und einem <emphasis
->Protokoll</emphasis
->. </para>
+<title>&rocs; in a Nutshell</title>
+<para>
+Every &rocs; session is a project: when opening &rocs; an empty project is created, when loading some project it becomes the current project.
+Hereby, a project itself consists of <emphasis>graph documents</emphasis>, <emphasis>scripts/algorithms</emphasis>, and a <emphasis>journal</emphasis>.
+</para>
 
 <sect2>
-<title
->Graphendokumente</title>
-<para
->Ein Graphendokument repräsentiert den Inhalt der Zeichenfläche im Graphen-Editor. Es enthält Informationen über die benutzerdefinierten Knoten- und Kantentypen. über deren Eigenschaften und über die bereits erstellten Knoten und Kanten. Daher kann &rocs; aus den Knoten und Kanten eines Graphendokuments einen nicht notwendigerweise verbundenen Graphen erzeugen. Mit dem Skriptmodul ist der Zugriff mit dem globalen Objekt <userinput
-><command
->Document</command
-></userinput
-> auf alle Elemente in einem Graphendokument möglich. </para>
+<title>Graph Documents</title>
+<para>
+A graph document represents the content of a whiteboard in the graph editor.
+It contains information about the user defined node and edge types, their properties, and about the already created nodes and edges.
+This is, &rocs; understands the set of all nodes and edges of a graph document to form a (not necessarily connected) graph.
+Everything belonging to a graph document is accessible by the script engine via the global object
+<userinput><command>Document</command></userinput>.
+</para>
 </sect2>
 
 <sect2>
-<title
->Kantentypen</title>
-<para
->Graphen können aus verschiedenen Kantentypen bestehen wie zum Beispiel aus einem ungerichteten Graphen und Baumkanten, die mit einem Algorithmus zur Breitensuche berechnet wurden. Um Kantentypen unterschiedlich zu behandeln und darzustellen, können Sie außer dem Standardtyp beliebige weitere Kantentypen definieren. Jeder Kantentyp hat eine eigene visuelle Darstellung, dynamische Eigenschaften und kann entweder gerichtet oder ungerichtet sein. Im Skriptmodul finden Sie nützliche Methoden, um nur auf bestimmte Kantentypen zuzugreifen. </para>
+<title>Edge Types</title>
+<para>
+In some scenarios, graphs consist of different types of edges (&eg;, an undirected graph plus the tree edges computed by a breadh-first-search algorithm) that shall be handled and displayed differently.
+For this, besides a default edge type, you can define arbitrary other edge types.
+Each edge type has its individual visual representation, dynamic properties, and can be set to be either undirected or directed.
+The scripting interface provides convenience methods to specifically access only edges of specific types.
+</para>
 </sect2>
 
 <sect2>
-<title
->Knotentypen</title>
-<para
->Wie bei den Kantentypen können Sie verschiedene Knotentypen für einen Graphen definieren, d. h. um einigen Knoten besondere Rollen zu geben. Jeder Knotentyp hat seine eigene visuelle Darstellung und dynamische Eigenschaften. </para>
+<title>Node Types</title>
+<para>
+Analog to edge types, you can define different types of nodes of a graph (&eg;, to give some nodes special roles).
+Each node type has its own visual representation and dynamic properties.
+</para>
 </sect2>
 
 <sect2>
-<title
->Eigenschaften</title>
-<para
->Alle Elemente wie Knoten und Kanten können Eigenschaften haben, sie müssen beim zugehörigen Knoten- oder Kantentyp definiert werden. Eigenschaften werden durch den Namen definiert und der Zugriff ist über diesen Namen möglich. Sie können beliebige Werte enthalten. Um neue Eigenschaften zu definieren oder vorhandene Eigenschaften zu bearbeiten, öffnen Sie die Seitenleiste <guilabel
->Elementtypen</guilabel
-> und klicken auf den Knopf <inlinemediaobject
-><imageobject
-><imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/> </imageobject
-></inlinemediaobject
-><guibutton
->Eigenschaften</guibutton
->, um den Dialog anzuzeigen. </para>
-<para
->Sie können auch das Skriptmodul zum Zugriff auf registrierte Eigenschaften zu erhalten und deren Werte zu ändern. Im folgenden Beispiel wird vorausgesetzt, dass die Eigenschaft „weight“ für den Standard-Kantentyp registriert ist. <programlisting
->var nodes = Document.nodes()
+<title>Properties</title>
+<para>
+Every (node or edge) element can have properties.
+Those properties must be setup at the corresponding node or edge type.
+Properties are identified and accessed by their names and can contain any value.
+To create new or change existing properties, use the <guilabel>Element Types</guilabel> sidebar and use the
+<inlinemediaobject><imageobject><imagedata fileref="document-properties.png" format="PNG"/>
+</imageobject></inlinemediaobject><guibutton>Properties</guibutton>
+button to open the property dialog.
+</para>
+<para>
+You can also use the scripting engine to access registered properties and change their values.
+In the following example we assume that the property <quote>weight</quote> is registered for the default edge type.
+<programlisting>
+var nodes = Document.nodes()
 for (var i = 0; i &lt; nodes.length; ++i){
     nodes[i].weight = i;
 }
@@ -190,468 +144,298 @@ for (var i = 0; i &lt; nodes.length; ++i){
 </sect1>
 
 <sect1 id="introduction-tutorial">
-<title
->Anleitung</title>
-<para
->In diesem Abschnitt wird ein Beispielprojekt erzeugt, um die wichtigsten Funktionen von &rocs; zu zeigen. Als Ziel soll ein Graph und ein Skript erstellt werden, um damit einen einfachen  Approximationsalgorithmus für das <emphasis
->Minimum-Knotenüberdeckungproblem</emphasis
-> zu zeigen, der eine Knotenüberdeckung mit Güte 2 berechnet. Mit dem Minimum-Knotenüberdeckungsproblem wird eine Untermenge von Graphenknoten C mit minimaler Größe gesucht, so dass jede Graphenkante mit mindestens einem Knoten in C verbunden ist. Dies Problem ist NP-vollständig. Es soll gezeigt werden, wie eine Approximation mit dem Faktor 2 durch Suchen nach Matching in den angegebenen Graphen berechnet wird. </para>
-<para
->Ziel ist die Visualisierung der Beziehung von Matching-Knotenüberdeckungen und Minimum-Knotenüberdeckungen. Dazu werden zwei Kantentypen definiert, einer für die Matching-Kanten und einer zur Darstellung normaler Kanten, außerdem noch zwei Datentypen, die zur Unterscheidung von in C enthaltenen bzw. nicht enthaltenen Knoten verwendet werden. </para>
+<title>Tutorial</title>
+<para>
+In this section we want to create an example project to explore some of the most important functions of &rocs;.
+The goal is to create a graph and a script that illustrates a simple 2-approximate algorithm for the <emphasis>minimum vertex cover</emphasis> problem.
+The minimum vertex cover problem is the problem to find a subset of graph nodes C of minimal size such that each graph edge is connected to at least one node in C.
+This problem is known to be NP-hard and we want to illustrate how to find an approximation of factor 2 by computing a matching in the given graph.
+</para>
+<para>
+Our goal is to visualize the relationship of the matching and the minimum vertex cover.
+For this, we want to specify two edge types, one to display matching edges and one type to display <quote>ordinary</quote> edges, as well as two node types that we use to distinguish nodes contained in C and those not contained in C.
+</para>
 
 <sect2>
-<title
->Graphen erstellen</title>
-<para
->Zum Erstellen eines Graphen verwenden Sie in der Voreinstellung den Graphen-Generator von &rocs;. Wählen Sie dazu im Menü <menuchoice
-><guimenu
->Graphendokument</guimenu
-> <guisubmenu
->Extras</guisubmenu
-> <guimenuitem
->Graph erstellen</guimenuitem
-></menuchoice
->. Wählen Sie einen <guilabel
->Zufälligen Graph</guilabel
-> mit 30 Knoten, 90 Kanten und mit Seed = 1. Seed ist der Startwert für den Generator des zufälligen Graphen. Wird der gleiche Seed verwendet, ergibt das auch reproduzierbar den gleichen Graphen. </para>
+<title>Generating the Graph</title>
+<para>
+For creating the graph, we use a default graph generator provided by &rocs;.
+This can be found in the main menu at <menuchoice><guimenu>Graph Document</guimenu> <guisubmenu>Tools</guisubmenu> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
+There, we select a <guilabel>Random Graph</guilabel> with 30 nodes, 90 edges, and with seed 1 (the seed is the starting seed for the random graph generator; using the same seed multiple times results in same and reproducible graphs).
+</para>
 </sect2>
 
 <sect2>
-<title
->Elementtypen erstellen</title>
-<para
->Öffnen Sie die Seitenleiste <guilabel
->Elementtypen</guilabel
-> und erstellen Sie einen zweiten Knotentyp und auch einen zweiten Kantentyp. Klicken Sie bei beiden neuen Typen auf den Knopf <guibutton
->Eigenschaften</guibutton
->, um einen Dialog zu öffnen. Setzen Sie die Kennung der neuen Typen auf <literal
->2</literal
-> und geben Sie ihnen eine andere Farbe, um si von den Standardtypen zu unterscheiden. Dann setzen Sie alle Kantentypen auf Bidirektional und stellen die Kennung der Standardtypen auf <literal
->1</literal
->. </para>
+<title>Creating the Element Types</title>
+<para>
+We use the <guilabel>Element Types</guilabel> and create a second node type as well as a second edge type. For both new types we open the properties dialog by using the respective <inlinemediaobject><imageobject><imagedata fileref="document-properties.png" format="PNG"/></imageobject></inlinemediaobject><guibutton>Properties</guibutton> buttons and set the IDs to <literal>2</literal>. Furthermore, we change the colors of elements of these two new types (to distinguish them from the default types). Finally, we set all edge types to be bidirectional, and the IDs of the default types to <literal>1</literal>.
+</para>
 </sect2>
 
 <sect2>
-<title
->Der Algorithmus</title>
-<para
->Dann muss der Algorithmus der Approximation wie im folgenden implementiert werden: </para>
-<programlisting
->for (var i=0; i &lt; Document.nodes.length; i++) {
+<title>The Algorithm</title>
+<para>
+At last we have to implement the approximation algorithm. For this we use the following implementation:
+</para>
+<programlisting>
+for (var i=0; i &lt; Document.nodes.length; i++) {
     Document.nodes[i].type = 1;
 }
 for (var i=0; i &lt; Document.edges.length; i++) {
     Document.edges[i].type = 1;
 }
 
-var E = Document.edges(); // Menge der nicht bearbeiteten Kanten
-var C = new Array();            // Matching-Kanten
-while (E.length 
-> 0) {
-    var e = E[0];        // die erste Kante e={u,v}
+var E = Document.edges(); // set of unprocessed edges
+var C = new Array();      // matching edges
+while (E.length > 0) {
+    var e = E[0];         // we take first edge e={u,v}
     var u = e.from();
     var v = e.to();
-    e.type = 2;        // als Matching-Kanten setzen
-    E.shift();            // e (i.e., E[0]) aus der Liste der Kanten entfernen
-    C.push(u);            // u zu C hinzufügen
-    C.push(v);            // v zu C hinzufügen
+    e.type = 2;           // set edge to be a matching edge
+    E.shift();            // remove e (i.e., E[0]) from edge list
+    C.push(u);            // add u to C
+    C.push(v);            // add v to C
 
-
-    // u,v als Knoten von C markieren C
+    // mark u,v as nodes in C
     u.type = 2;
     v.type = 2;
 
-    // von E alle Kanten entfernen, die inzident zu u oder v sind
+    // remove from E all edges incident to u or v
     var adjacent = u.edges();
     for (var i=0; i &lt; adjacent.length; i++) {
-        var index = E.indexOf(adjacent[i]); // Index suchen
+        var index = E.indexOf(adjacent[i]); // find the index
         if (index != -1) {
-            E.splice(index, 1); // Löschen, wenn gefunden
+            E.splice(index, 1); // remove it if really found
         }
     }
-    var adjacent = v.adj_edges();
+    var adjacent = v.edges();
     for (var i=0; i &lt; adjacent.length; i++) {
-        var index = E.indexOf(adjacent[i]); // Index suchen
-        if (index!=-1) {
-            E.splice(index, 1); // Löschen, wenn gefunden
+        var index = E.indexOf(adjacent[i]); // find the index
+        if (index != -1) {
+            E.splice(index, 1); // remove it if really found
         }
     }
 }
-Console.log("Knotenüberdeckung enthält " + C.length + " Knoten.");
+Console.log("Vertex Cover contains " + C.length + " nodes.");
 </programlisting>
 </sect2>
 
 <sect2>
-<title
->Ausführung des Algorithmus</title>
-<para
->Der Algorithmus kann ausgeführt werden, indem Sie auf den Knopf <guibutton
->Ausführen</guibutton
-> der Bedienelemente für Skripte drücken: </para>
+<title>Execute the Algorithm</title>
+<para>
+The algorithm can be executed by the <inlinemediaobject><imageobject><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject></inlinemediaobject><guibutton>Run</guibutton> button at the script control panel.
+</para>
 </sect2>
 </sect1>
 </chapter>
 
 <chapter id="user-interface">
-<title
->Die Benutzerschnittstelle von &rocs;</title>
+<title>The &rocs; User Interface</title>
 
 <sect1 id="user-interface-all">
-<title
->Hauptelemente der Benutzeroberfläche</title>
-<para
->Die Benutzerschnittstelle besteht aus mehreren logischen Teilen, die im folgenden Bildschirmfoto gezeigt werden. </para>
-<screenshot>
-    <screeninfo
->Bedienungselemente der &rocs;-Benutzeroberfläche</screeninfo>
-    <mediaobject>
-    <imageobject>
-    <imagedata fileref="rocs-interfaces.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-    <phrase
->Bedienungselemente der &rocs;-Benutzeroberfläche</phrase>
-    </textobject>
-    </mediaobject>
-</screenshot>
-<variablelist>
-<varlistentry>
-    <term
->Graphen-Editor</term>
-    <listitem
-><para
->Im Editor gibt es eine Zeichenfläche, auf der Knoten und Kanten erstellt werden können. Mit Doppelklick auf jedes dieser Elemente öffnen Sie das zugehörige Eigenschaftenmenü. Sie können auch die Aktionen aus der Werkzeugleiste benutzen, um Graphen zu erstellen und zu bearbeiten.</para
-></listitem>
-</varlistentry>
-<varlistentry>
-    <term
->Werkzeugleiste für den Graphen-Editor</term>
-    <listitem
-><para
->In dieser Werkzeugleiste finden Sie die Aktionen <inlinemediaobject
-><imageobject
-><imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject
-> </inlinemediaobject
-><guibutton
->Knoten erstellen</guibutton
-> oder <inlinemediaobject
-><imageobject
-><imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject
-></inlinemediaobject
-><guibutton
->Kante erstellen</guibutton
->, damit können Sie neue Elemente auf der Zeichenfläche erzeugen. Beachten Sie die zusätzliche Werkzeugleiste zur Auswahl des entsprechenden Knoten- oder Kantentyps, die angezeigt wird, wenn diese Aktionen ausgewählt sind. Hier finden Sie auch Aktionen zur Auswahl, zum Verschieben und zum Löschen von Elementen. Weitere Details finden Sie im Abschnitt <xref linkend="user-interface-toolbar"/>. </para
-></listitem>
-</varlistentry>
-<varlistentry>
-    <term
->Seitenleiste</term>
-    <listitem
-><para
->Rechts finden Sie die Seitenleiste mit mehreren Werkzeugen zur Unterstützung Ihres Arbeitsablaufs. <itemizedlist>
-        <listitem
-><para
->Elementtypen: Hier haben Sie direkten Zugriff auf alle vorhandenen Kanten- und Knotentypen.</para
-></listitem>
-        <listitem
-><para
->Journal: Für jedes Projekt gibt es ein Journal, um &eg; Aufgaben, Ergebnisse oder Beobachtungen festzuhalten.</para
-></listitem>
-        <listitem
-><para
->Skript-API: Benutzen Sie dieses Fenster zu Zugriff auf das Handbuch und dadurch auch zur Skriptdokumentation.</para
-></listitem>
-        </itemizedlist>
-    </para
-></listitem>
-</varlistentry>
-<varlistentry>
-    <term
->Skripteditor</term>
-    <listitem
-><para
->In diesem Texteditor können Sie Algorithmen schreiben, das wird im <xref linkend="scripting"/> erläutert. Sie können gleichzeitig an mehreren Skriptdokumenten arbeiten, indem Sie Unterfenster verwenden. </para
-></listitem>
-</varlistentry>
-<varlistentry>
-    <term
->Skriptausgabe</term>
-    <listitem
-><para
->In diesem Textfeld werden Fehlermeldungen oder Skriptausgaben Ihres Algorithmus angezeigt, abhängig von der gewählten Einstellung der Ausgabe oben. Tritt ein Fehler in Ihrem Skript auf, wird automatisch die Fehlerausgabe angezeigt. </para
-></listitem>
-</varlistentry>
-<varlistentry>
-    <term
->Bedienelemente</term>
-    <listitem
-><para
->In diesem Bereich finden Sie die Bedienelemente, um die Ausführung von Skripten zu steuern. Mit dem Knopf <guibutton
->Ausführen</guibutton
-> starten Sie das aktuell im Editor geöffnete Skript. Wird ein Skript ausgeführt, können Sie es mit <guibutton
->Anhalten</guibutton
-> stoppen. </para
-></listitem>
-</varlistentry>
-</variablelist>
-</sect1>
+<title>Main Elements of the User Interface</title>
+<para>
+The user interface is divided into several logical parts as presented at the screenshot below.
+</para>
 
-<sect1 id="user-interface-toolbar">
-<title
->Werkzeugleiste für den Graphen-Editor</title>
-<para
->Die Werkzeugleiste enthält die im Folgenden genannten Aktionen. Klicken Sie auf den Knopf für eine Aktion, dann können Sie diese Aktion anschließend mit dem Mauszeiger auf die Elemente auf der Zeichenfläche anwenden.</para>
-<itemizedlist>
-<listitem
-><para>
-<inlinemediaobject
-><imageobject>
-<imagedata fileref="hi22-actions-rocsselectmove.png" format="PNG"/></imageobject
-></inlinemediaobject
-> <guilabel
->Auswählen und Verschieben</guilabel
->: Um Elemente auszuwählen, klicken Sie entweder mit der &LMBn; auf eine freie Stelle auf der Zeichenfläche, halten die Maustaste gedrückt und ziehen ein Rechteck um Datenelemente und/oder Kanten, um sie auszuwählen oder klicken Sie sonst zur Auswahl auf ein nicht ausgewähltes Element. Klicken Sie dann auf ein oder mehrere ausgewählte Elemente und verschieben sie mit gedrückter Maustaste. Ausgewählte Elemente können auch mit den Pfeiltasten verschoben werden.</para
-></listitem>
-<listitem
-><para>
-<inlinemediaobject
-><imageobject>
-<imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject
-></inlinemediaobject
-> <guilabel
->Knoten erstellen</guilabel
->: Klicken Sie mit der &LMBn; auf eine beliebige Position auf der Zeichenfläche, um ein neues Datenelement für die gerade ausgewählte Datenstruktur zu erstellen. Halten Sie die Maustaste gedrückt, dann erscheint ein Menü, aus dem der Datentyp des neu erstellten Datenelements ausgewählt werden kann, wenn es mehrere Datentypen gibt.</para
-></listitem>
-<listitem
-><para>
-<inlinemediaobject
-><imageobject>
-<imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject
-></inlinemediaobject
-> <guilabel
->Kante erstellen</guilabel
->: Klicken Sie mit der &LMBn; auf ein Datenelement, halten Sie die Maustaste gedrückt und ziehen Sie eine Linie zu einem anderen Datenelement. Diese Aktion kann nur dann ausgeführt werden, wenn beim aktuellen Graphen diese Kante hinzugefügt werden kann. In einem ungerichteten Graphen dürfen Sie &eg; nicht mehrere Kanten zwischen zwei Datenelementen einfügen. Halten Sie die Maustaste gedrückt, dann erscheint ein Kontextmenü, aus dem der Datentyp der neu erstellten Kante ausgewählt werden kann, wenn es mehrere Kantentypen gibt.</para
-></listitem>
-<listitem
-><para>
-<inlinemediaobject
-><imageobject>
-<imagedata fileref="hi22-actions-rocsdelete.png" format="PNG"/></imageobject
-></inlinemediaobject
-> <guilabel
->Löschen</guilabel
->: Klicken Sie auf ein Element, um es zu löschen. Löschen Sie einen Knoten, dann werden alle anliegenden Kanten ebenfalls gelöscht.</para
-></listitem>
-</itemizedlist>
+<screenshot>
+  <screeninfo>&GUI; elements of the &rocs; interface.</screeninfo>
+  <mediaobject>
+    <imageobject><imagedata fileref="rocs-interfaces.png" format="PNG" /></imageobject>
+    <textobject><phrase>&GUI; elements of the &rocs; interface.</phrase></textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term>Graph Editor</term>
+    <listitem><para>
+    The editor provides a whiteboard at that nodes and edges can be placed.
+    Double-clicking at any of its elements opens a corresponding property menu.
+    You can use the tools from the <emphasis>Side Bar Tabs</emphasis> to create and modify graphs.</para>
+    <para>Available tools:</para>
+      <itemizedlist>
+        <listitem><para>Top left in the box, your found the following action icons. Clicking at an action means that your mouse pointer applies this action at the graph editor whiteboard:</para>
+          <itemizedlist>
+            <listitem><para><inlinemediaobject><imageobject><imagedata fileref="sc-actions-rocsselect.png" format="PNG"/></imageobject></inlinemediaobject><guiicon>Select and Move</guiicon>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some data elements and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
+
+            <listitem><para><inlinemediaobject><imageobject><imagedata fileref="sc-actions-rocsnode.png" format="PNG"/></imageobject></inlinemediaobject><guiicon>Add a Node</guiicon>: Click at an arbitrary position at the graph editor whiteboard to create a new data element that belongs to the currently selected data structure. By keeping the mouse pointer pressed at the button, a menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
+
+            <listitem><para><inlinemediaobject><imageobject><imagedata fileref="sc-actions-rocsedge.png" format="PNG"/></imageobject></inlinemediaobject><guiicon>Create an Edge</guiicon>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse pointer pressed at the button, a menu shows up at which the edge type of the new created edges can be selected (only if different edge types exist).</para></listitem>
+
+            <listitem><para><inlinemediaobject><imageobject><imagedata fileref="sc-actions-rocsdelete.png" format="PNG"/></imageobject></inlinemediaobject><guiicon>Delete element</guiicon>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>Side Bar</term>
+    <listitem><para>At the right, you can find the side bar that provides several tools for your workflow:</para>
+      <itemizedlist>
+        <listitem><para><guilabel>Element Types</guilabel>: This widget gives you direct access to the available edge and node types.</para></listitem>
+
+        <listitem><para><guilabel>Journal</guilabel>: Each project has its own journal that can be used to, &eg; note tasks, results, or observations.</para></listitem>
+
+        <listitem><para><guilabel>Scripting API</guilabel>: To get direct access to the script documentation, you can open this widget.</para></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>Script Editor</term>
+    <listitem><para>In this text editor you can write algorithms as explained in detail in <xref linkend="scripting" />. You can work on several script documents simultaneously by using several tabs.<!--FIXME link to katepart handbook? --></para></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>Script output:</term>
+    <listitem><para>This text area either shows debug information or the script output of your algorithm, depending on the toggled setting at the top of this widget. If the script throws an error, automatically the debug output is presented.</para></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>Controls</term>
+    <listitem><para>Here you can find the controls for executing scripts. You can execute the script that is currently open at the script editor by pressing the <inlinemediaobject><imageobject><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject></inlinemediaobject><guibutton>Run</guibutton> button. While the script is executed, it is possible to stop execution by pressing the <inlinemediaobject><imageobject><imagedata fileref="process-stop.png" format="PNG"/></imageobject></inlinemediaobject><guibutton>Stop</guibutton> button.</para></listitem>
+  </varlistentry>
+</variablelist>
 </sect1>
 
 <!--FIXME nop alignment action any more?-->
 </chapter>
 
 <chapter id="scripting">
-<title
->Skripte</title>
+<title>Scripting</title>
 <sect1>
-    <title
->Ausführen von Algorithmen in &rocs;</title>
-<para
->&rocs; verwendet intern das QtScript-/Javascript-Modul. Daher müssen Sie für alle implementierten Algorithmen Javascript benutzen. In diesem Abschnitt wird erklärt, wie der Zugriff und Änderung von Elementen eines Graphendokuments mit dem Skriptmodul erfolgt. Beachten Sie, dass Änderungen durch das Skriptmodul direkt die Eigenschaften der Elemente im Graphen-Editor beeinflussen. </para>
+    <title>Executing Algorithms in &rocs;</title>
+<para>
+&rocs; internally uses the QtScript &javascript; engine. <!--FIXME linkt to api docs ?-->
+This means, all algorithms that you implement must use &javascript;.
+In the following, we explain how to access and change elements of a graph document from the scripting engine.
+It is important to note that changes done by the scripting engine are directly reflected at the properties at the graph editor elements.
+</para>
 
 <sect2>
-<title
->Kontrolle der Skriptausführung</title>
-<para
->Es gibt verschiedene Ausführungsmodi für Ihre Algorithmen. </para>
+<title>Control Script Execution</title>
+<para>
+    There are different execution modes for your algorithms:
+</para>
 <itemizedlist>
-    <listitem
-><para>
-        <inlinemediaobject
-><imageobject>
-        <imagedata fileref="hi22-actions-controls-run.png" format="PNG"/></imageobject
-></inlinemediaobject
-> <guilabel
->Ausführen</guilabel
->: Führt das Skript bis zum Ende aus.</para
-></listitem>
-    <listitem
-><para>
-        <inlinemediaobject
-><imageobject>
-        <imagedata fileref="hi22-actions-control-stop.png" format="PNG"/></imageobject
-></inlinemediaobject
-> <guilabel
->Anhalten</guilabel
->: Hält die Ausführung eines Skripts an und ist nur während der Ausführung aktiviert.</para
-></listitem>
+    <listitem><para>
+        <inlinemediaobject><imageobject>
+        <imagedata fileref="media-playback-start.png" format="PNG"/></imageobject>
+        </inlinemediaobject>
+        <guibutton>Run</guibutton>: Execute the script until it finishes.</para></listitem>
+    <listitem><para>
+        <inlinemediaobject><imageobject>
+        <imagedata fileref="process-stop.png" format="PNG"/></imageobject>
+        </inlinemediaobject>
+        <guibutton>Stop</guibutton>: Stop script execution (only available while a script is executed).</para></listitem>
 </itemizedlist>
 </sect2>
 
 <sect2>
-<title
->Skriptausgabe</title>
-<para
->Bei der Ausführung eines Algorithmus werden Meldungen in der <emphasis
->Fehler- &amp; Skriptausgabe</emphasis
-> angezeigt. Erkennt das Skriptmodul einen Syntaxfehler in Ihrem Skript, wird der Fehler als Debug-Nachricht angezeigt. Auch alle Programmausgaben werden in der Fehlerausgabe als fett gedruckter Text angezeigt. </para>
-<para
->Sie können den angezeigten Text in der Skriptausgabe mit folgenden Funktionen steuern: </para>
-<programlisting
->Console.log(string message);            // zeigt message als Skriptausgabe
-    Console.debug(string message);             // zeigt message als Debug-Ausgabe 
-Console.error(string message);          //  zeigt message als Fehlerausgabe
+<title>Script Output</title>
+<para>
+    During the execution of an algorithm, debug and program output is displayed in the <emphasis>Debug &amp; Script Output</emphasis>.
+    If the scripting engine detects a syntax error in your script, the error is also displayed as debug message.
+    Note that all program messages are also displayed at the debug output (displayed as bold text).
+</para>
+<para>
+    You can control the text that is displayed at the script output by the following functions:
+</para>
+<programlisting>
+    Console.log(string message);            // displays the message as script output
+    Console.debug(string message);          // displays the message as debug output
+    Console.error(string message);          // displays the message as error output
 </programlisting>
 </sect2>
 
 <sect2>
-<title
->Skriptmodul-API</title>
-<para
->Die einzelnen Bestandteile von &rocs; stellen ein statisches Element bereit, auf das mit dem Skriptmodul zugegriffen werden kann: <itemizedlist
-> <listitem
-><para
-><userinput
-><command
->Document</command
-></userinput
-> für das Graphendokument</para
-></listitem
-> <listitem
-><para
-><userinput
-><command
->Console</command
-></userinput
-> für die Protokollausgabe der Konsole</para
-></listitem
-> </itemizedlist
->. Informationen über die Programmschnittstelle und eine Referenz der Methoden finden Sie in der Seitenleiste von &rocs;. </para>
+<title>Scripting Engine API</title>
+<para>
+The different parts of &rocs; each provide a static element that can be accessed by the scripting engine.
+These are:
+<itemizedlist>
+    <listitem><para><userinput><command>Document</command></userinput> for the graph document</para></listitem>
+    <listitem><para><userinput><command>Console</command></userinput> for the console log output</para></listitem>
+</itemizedlist>
+For the explicit API use and for a method reference, please see the inline help at the &rocs; side bar.
+</para>
 </sect2>
 </sect1>
 </chapter>
 
 <chapter id="import-export">
-<title
->Importieren und Exportieren</title>
+<title>Import and Export</title>
 <sect1 id="import-export-projects">
-    <title
->&rocs;-Projekte austauschen</title>
-    <para
->&rocs;-Projekte können als Archivdateien im Format <literal
->.tar.gz</literal
-> importiert und exportiert werden. Diese Archive können zum Austausch von Projekten benutzt werden. Der Import und Export erfolgt mit <menuchoice
-><guimenu
->Graphendokument</guimenu
-> <guimenuitem
->Graphen importieren</guimenuitem
-></menuchoice
-> beziehungsweise <menuchoice
-><guimenu
->Graphendokument</guimenu
-> <guimenuitem
->Graphen exportieren unter ...</guimenuitem
-></menuchoice
-> </para>
+    <title>Exchange &rocs; Projects</title>
+    <para>
+        &rocs; projects can be imported and exported as archived <literal role="extension">.tar.gz</literal> files.
+        These archives can be used to exchange projects.
+        Import and Export can be done with the <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Import Graph...</guimenuitem></menuchoice> and <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Export Graph As...</guimenuitem></menuchoice> menu items, respectively.
+    </para>
 
 <sect2 id="import-export-graphs">
-    <title
->Import und Export von Graphendokumenten</title>
-    <para
->&rocs; unterstützt zurzeit den Import und Export folgender Dateiformate:</para>
+    <title>Import and Export of Graph Documents</title>
+    <para>&rocs; currently supports import and export of the following file formats:</para>
     <itemizedlist>
-        <listitem
-><para
->DOT-Dateien, auch als Graphviz-Dateien bekannt.</para
-></listitem>
-        <listitem
-><para
->GML-Dateien</para
-></listitem>
-        <listitem
-><para
->„Trivial Graph“-Dateien</para
-></listitem>
-        <listitem
-><para
->Keyhole-Markup-Sprachformat</para
-></listitem>
+        <listitem><para>&DOT; files, also known as Graphviz files</para></listitem>
+        <listitem><para><acronym>GML</acronym> files</para></listitem>
+        <listitem><para>Trivial Graph Format files</para></listitem>
+        <listitem><para>Keyhole Markup Language Format</para></listitem>
     </itemizedlist>
 
 <sect3 id="format-specification-tgf">
-<title
->„Trivial Graph“-Dateiformat</title>
-<para
->Das <emphasis
->„Trivial Graph“-Format</emphasis
-> (TGF) ist ein einfaches textbasiertes Dateiformat zur Beschreibung von Graphen. Eine TGF-Datei besteht aus einer Liste von Knotendefinitionen mit der Zuordnung von Kennungen zu Beschriftungen, gefolgt von einer Liste von Kanten. In diesem Format kann es nur eine Beschriftung für einen Knoten und einen Wert für eine Kante geben. &rocs; interpretiert importierte Graphen als ungerichtet. Exportierte Graphen enthalten zwei Kanten für jede zweiseitige Verbindung. </para>
+<title>Trivial Graph File Format</title>
+<para>
+    The <emphasis>Trivial Graph Format</emphasis> (<acronym>TGF</acronym>) is a simple text-based file format for describing graphs.
+    A <acronym>TGF</acronym> file consists of a list of node definitions, that map the node IDs to labels, followed by a list of the edges.
+    In this format it is only possible to have one label per node and one value per edge.
+    &rocs; interprets imported graphs as undirected graphs.
+    Exported graphs will contain two edges per connection if connections are bidirectional.
+</para>
 
 <sect4>
-<title
->Beschreibung des Formats</title>
+<title>Format Specification</title>
     <itemizedlist>
-        <listitem
-><para
->Die Datei beginnt mit einer Liste der Knoten, jeder Knoten auf einer einzelnen Zeile. Dann folgt eine Zeile nur mit dem Zeichen  „#“, gefolgt von einer Liste von Kanten in einer eigenen Zeile.</para
-></listitem>
-        <listitem
-><para
->Ein Knoten wird durch eine ganze Zahl als Kennung, dann ein Leerzeichen und ein beliebiger Text beschrieben.</para
-></listitem>
-        <listitem
-><para
->Die Beschreibung einer Kante besteht aus zwei ganzen Zahlen (Kennungen von Knoten), durch Leerzeichen getrennt, dann folgt nach einem Leerzeichen ein beliebiger Text. Es wird angenommen, dass die gerichtete Kante von der ersten zur zweiten Kennung zeigt.</para
-></listitem>
+        <listitem><para>The file starts with a list of nodes (one node per line), followed by a line with the only character <quote>#</quote>, followed by a list of edges (one edge per line).</para></listitem>
+        <listitem><para>A node consists of an integer (identifier), followed by a space, followed by an arbitrary string.</para></listitem>
+        <listitem><para>An edge consists of two integers (identifiers) separated by a space, followed by a space, followed by an arbitrary string. It is assumed that the directed edge points from the first identifier to the second identifier.</para></listitem>
     </itemizedlist>
 </sect4>
 <sect4>
-<title
->Ein Beispiel</title>
-<programlisting
->1 Startknoten
-2 Sender
-3 Endknoten
+<title>Example</title>
+<programlisting>
+1 starting node
+2 transmitter
+3 sink
 #
-1 2 blau
-2 1 rot
-2 3 grün
+1 2 blue
+2 1 red
+2 3 green
 </programlisting>
 </sect4>
 </sect3>
 
 <sect3 id="format-specification-dot">
-<title
->DOT-Sprache / Graphviz-Graphendateiformat</title>
-<para
->„DOT“ ist eine Beschreibungssprache für Graphen, die ein einfaches Textformat verwendet. Damit ist die Darstellung von Graphen für den Benutzer gut lesbar und sie kann effizient durch Anzeigeprogramme für Graphen verarbeitet werden. „DOT“ ist das Standardformat für das Visualisierungsprogramm Graphviz, wird aber auch häufig von anderen Graphenprogrammen verwendet. „DOT“-Dateien haben üblicherweise die Erweiterung <emphasis
->.gv</emphasis
-> und <emphasis
->.dot</emphasis
->. </para>
+<title>&DOT; Language / Graphviz Graph File Format</title>
+<para>
+    The &DOT; language is a plain text graph description language that allows both,a good human readable representation of graphs as well as an efficient processing by graph layout programs.
+    &DOT; is the default file format for the Graphviz graph visualization suite, but is also widely used by other graph tools.
+    The usual file extensions for &DOT; are <literal role="extension">.gv</literal> and <literal role="extension">.dot</literal>.
+</para>
 
 <sect4>
-<title
->Nicht unterstützte Fähigkeiten</title>
-<para
->&rocs; kann jede Graphendatei einlesen und verarbeiten, die in der Sprache „DOT“<footnote
-><para
->http://www.graphviz.org/content/dot-language</para
-></footnote
-> spezifizierte Graphen enthält. Die Funktionen der Sprache werden vollständig mit folgenden Ausnahmen unterstützt: </para>
+<title>Unsupported Features</title>
+<para>
+    &rocs; can parse every graph file that contains a graph specified according to the &DOT; language specification<footnote><para>https://graphviz.org/doc/info/lang.html</para></footnote>.
+    The support of language features is complete, despite of the following exceptions:
+</para>
     <itemizedlist>
-        <listitem
-><para
->Untergraph: Wegen des fehlenden Konzepts für Untergraphen in &rocs; werden Untergraphen nur als Menge von Datenelementen und Verbindungen importiert. Besonders Verbindungen zu oder von Untergraphen werden nicht importiert.</para
-></listitem>
-        <listitem
-><para
->&HTML; und &XML; Attribute: Attribute wie Beschriftungen mit &HTML;- oder &XML;-Syntax werden unverändert eingelesen. Insbesondere werden keine Anpassungen für Schriften und Stile aus diesen Attributen eingelesen.</para
-></listitem>
+        <listitem><para>subgraph: Due to the lack of a subgraph concept in &rocs;, subgraphs are only imported as a set of date elements and connections. Especially, connections to or from subgraphs are not imported.</para></listitem>
+        <listitem><para>&HTML; and &XML; attributes: Attributes (like labels) that contain &HTML; or &XML; syntax are read unchanged. Especially, not adjustment of fonts and styles are read from those attributes.</para></listitem>
     </itemizedlist>
 </sect4>
 <sect4>
-<title
->Ein Beispiel</title>
-<programlisting
->digraph myGraph {
+<title>Example</title>
+<programlisting>
+digraph myGraph {
     a -> b -> c;
     b -> d;
 }
@@ -663,141 +447,94 @@ Console.error(string message);          //  zeigt message als Fehlerausgabe
 </chapter>
 
 <chapter id="graph-layout">
-    <title
->Graphenlayout</title>
-    
+    <title>Graph Layout</title>
+
     <sect1>
-        <title
->Automatisches Layout für Graphen in &rocs;</title>
-        <para
->&rocs; kann Layouts von Graphen automatisch anlegen. Benutzen Sie dazu im Hauptmenü  <menuchoice
-><guimenu
->Graphendokument</guimenu
-> <guisubmenu
->Extras</guisubmenu
-> <guimenuitem
->Graphenlayout</guimenuitem
-></menuchoice
->. Es gibt zwei verschiedene Layout-Algorithmen, die benutzt werden können: <guilabel
->Kraftbasiertes Layout</guilabel
-> und <guilabel
->Radiales Baumlayout</guilabel
->. Wählen Sie die die entsprechende Registerkarte im Dialog, stellen Sie die gewünschten Parameter ein und führen Sie den Algorithmus aus, indem Sie auf <guibutton
->OK</guibutton
-> klicken. Weitere Informationen zu den Layout-Algorithmen werden werden in den nächsten Abschnitten beschrieben. </para>
-    
+        <title>Laying out graphs automatically in &rocs;</title>
+        <para>
+            &rocs; can lay out graphs automatically. The &rocs; graph layout tool can be found in the main menu at <menuchoice><guimenu>Graph Document</guimenu> <guisubmenu>Tools</guisubmenu> <guimenuitem>Graph Layout</guimenuitem></menuchoice>.
+            There are two different layout algorithms that can be applied: Force Based Layout and Radial Tree Layout. To apply one of them, select the corresponding
+            tab of the graph layout tool, choose the desired parameters and execute the algorithm by pressing on the <guibutton>OK</guibutton> button. Details that are specific to each one of the layout algorithms are provided in the next sections.
+        </para>
+
     <sect2>
-        <title
->Kraftbasiertes Layout</title>
-        
-        <para
->Das <guilabel
->Kraftbasiertes Layout</guilabel
-> kann auf jeden Graphen angewendet werden. Dieser Algorithmus simuliert Kräfte, die zwischen den Knoten wirken. Es gibt abstoßende und anziehende Kräfte zwischen benachbarten Knotenpaaren. Die Größe dieser Kräfte kann mit Schiebereglern in der Benutzeroberfläche festgelegt werden. </para>
+        <title>Force Based Layout</title>
+
+        <para>
+            The Force Based Layout can be applied to any graph. Intuitively, this algorithm simulates forces acting in each node. There are repelling forces between pairs of nodes and attraction forces between pairs of nodes that are neighbours. The magnitude of these forces can be specified by moving the corresponding sliders in the user interface.
+        </para>
+
         <screenshot>
-            <screeninfo
->Ein Bildschirmphoto der Karteikarte „Kraftbasiertes Layout“ in den Layout-Einstellungen von &rocs;</screeninfo>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG"/>
-                </imageobject>
-                <textobject>
-                    <phrase
->Ein Bildschirmphoto der Karteikarte „Kraftbasiertes Layout“ in den Layout-Einstellungen von &rocs;</phrase>
-                </textobject>
-            </mediaobject>
+          <screeninfo>A Screenshot of the Force Based Layout tab of the &rocs; graph layout tool.</screeninfo>
+          <mediaobject>
+            <imageobject><imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG" /></imageobject>
+            <textobject><phrase>A Screenshot of the Force Based Layout tab of the &rocs; graph layout tool.</phrase></textobject>
+          </mediaobject>
         </screenshot>
 
-        <para
->Ein weiterer Parameter zur Anpassung des Layouts ist der Flächenfaktor. Dieser Parameter bestimmt die Verteilung der Knoten. Hohe Werte des Flächenfaktors führen zu großen Abständen zwischen den Knoten. </para>
-    
+        <para>
+            Another parameter that can be controlled is the Area Factor. This parameter controls how the nodes are spread. Layouts generated with high values of Area Factor have a tendency of  having large distances between nodes.
+        </para>
+
     <sect3>
-        <title
->Radiales Baumlayout</title>
-        <para
->Das „Radiale Baumlayout“ kann nur auf Bäume angewendet werden. Bei anderen Arten von Graphen, führt die Anwendung dieses Layout zu einer Fehlermeldung. Die Parameter für das „Radiale Baumlayout“ können über die Benutzeroberfläche eingestellt werden. </para>
-        
-        
+        <title>Radial Tree Layout</title>
+        <para>
+            The Radial Tree Layout can only be applied to trees. Any attempt to apply this layout algorithm to other kinds of graph will produce an error message.
+            Parameters for the Radial Tree Layout can be selected using the provided user interface.
+        </para>
+
+
         <screenshot>
-            <screeninfo
->Ein Bildschirmphoto der Karteikarte „Radiales Baumlayout“ in den Layout-Einstellungen von &rocs;</screeninfo>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG"/>
-                </imageobject>
-                <textobject>
-                    <phrase
->Ein Bildschirmphoto der Karteikarte „Radiales Baumlayout“ in den Layout-Einstellungen von &rocs;</phrase>
-                </textobject>
-            </mediaobject>
+          <screeninfo>A Screenshot of the Radial Tree Layout tab of the &rocs; graph layout tool.</screeninfo>
+          <mediaobject>
+            <imageobject><imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG" /></imageobject>
+            <textobject><phrase>A Screenshot of the Radial Tree Layout tab of the &rocs; graph layout tool.</phrase></textobject>
+          </mediaobject>
         </screenshot>
 
-        <para
->Als <guilabel
->Baumtyp</guilabel
-> können Sie zwischen einem freien Baum und einem Basisbaum wählen. In einem freien Baumlayout werden die Knoten frei ohne eine offensichtliche Hierarchie zwischen ihnen angeordnet. In einem Basisbaum-Layout wird der Basisknoten oben und die Unterbäume darunter angeordnet, so dass eine Hierarchie zwischen den Knoten entsteht. </para>
-        
-        <para
->Der Parameter <guilabel
->Zentrum/Basis</guilabel
-> legt fest, welcher Knoten als Basis für das Baumlayout oder als Zentrum für das freie Baumlayout verwendet wird. Das Zentrum eines eines freien Baumlayouts ist der erste Knoten, der vom Algorithmus platziert wird. Alle anderen Knoten werden auf Kreisen platziert, die um den Basisknoten zentriert sind. Ein Zentrum oder eine Basis kann vom Layout-Algorithmus automatisch ausgewählt werden. </para>
-        
-        <para
->Der Parameter „Knotenabstand“ steuert den Abstand zwischen den Knoten. Wenn Sie den Wert dieses Parameters erhöhen, wird der Abstand zwischen den Knoten vergrößert. Bei kleineren Werten dieses Parameters wird der Abstand zwischen den Knoten verringert. </para>
+        <para>
+            The tree type parameter selects between a free tree layout and a rooted tree layout. In a free tree layout, nodes are placed freely without any apparent hierarchy between them. In a rooted tree layout, the root node is placed at the top and sub-trees are laid out below it, giving an idea of a hierarchy between nodes.
+        </para>
+
+        <para>
+            The center/root parameter defines which node is going be used as root for the rooted tree layout or as center for the free tree layout. The center of a free tree layout is the first node to be placed by the algorithm. All other nodes are placed on circles centered at the center node. A center/root can be selected automatically by the layout algorithm.
+        </para>
+
+        <para>
+            The node separation parameter controls the distance between nodes. Increasing the value of this parameter will cause the distance between nodes to increase.
+            Similarly, decreasing the value of this parameter will cause the distance between nodes to decrease.
+        </para>
     </sect3>
     </sect2>
     </sect1>
 </chapter>
 
 <chapter id="credits">
-<title
->Danksagungen und Lizenz</title>
+<title>Credits and License</title>
 
-<para
->&rocs; </para>
-<para
->Copyright für das Programm:</para>
+<para>
+&rocs;
+</para>
+<para>Program Copyright:</para>
 <itemizedlist>
-	<listitem
-><para
->Copyright 2008 Ugo Sangiori (ugorox AT gmail.com)</para
-></listitem>
-	<listitem
-><para
->Copyright 2008-2012 Tomaz Canabrava (tcanabrava AT kde.org)</para
-></listitem>
-	<listitem
-><para
->Copyright 2008-2012 Wagner Reck (wagner.reck AT gmail.com)</para
-></listitem>
-	<listitem
-><para
->Copyright 2011-2015 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para
-></listitem>
+	<listitem><para>Copyright 2008       Ugo Sangiori (ugorox AT gmail.com)</para></listitem>
+	<listitem><para>Copyright 2008-2012  Tomaz Canabrava (tcanabrava AT kde.org)</para></listitem>
+	<listitem><para>Copyright 2008-2012  Wagner Reck (wagner.reck AT gmail.com)</para></listitem>
+	<listitem><para>Copyright 2011-2015  Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para></listitem>
 </itemizedlist>
 
-<para
->Copyright der Dokumentation:</para>
+<para>Documentation Copyright:</para>
 <itemizedlist>
-	<listitem
-><para
->Dokumentation Copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail; </para
-></listitem>
-	<listitem
-><para
->Dokumentation Copyright 2009 Tomaz Canabrava (tcanabrava AT kde.org)</para
-></listitem>
-	<listitem
-><para
->Dokumentation copyright 2011-2015 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para
-></listitem>
+	<listitem><para>Documentation copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para></listitem>
+	<listitem><para>Documentation copyright 2009 Tomaz Canabrava (tcanabrava AT kde.org)</para></listitem>
+	<listitem><para>Documentation copyright 2011-2015 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para></listitem>
 </itemizedlist>
 
-<para
->Übersetzung Burkhard Lück <email
->lueck@hube-lueck.de</email
-></para
-> &underFDL; &underGPL; </chapter>
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+&underFDL;               <!-- FDL: do not remove -->
+&underGPL;               <!-- GPL License -->
+
+</chapter>
 
 &documentation.index;
 </book>
