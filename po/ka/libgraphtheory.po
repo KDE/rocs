@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-04 00:42+0000\n"
-"PO-Revision-Date: 2022-08-23 06:46+0200\n"
+"PO-Revision-Date: 2023-01-21 09:44+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -143,7 +143,7 @@ msgstr "კვანძის თვისებები"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this node."
-msgstr ""
+msgstr "მონიშნული ID ამ კვანძისთვის."
 
 #: dialogs/nodeproperties.cpp:137
 #, kde-format
@@ -175,13 +175,13 @@ msgstr "კვანძები"
 #, kde-format
 msgctxt "@title:window"
 msgid "Node Type Properties"
-msgstr ""
+msgstr "კვანძის ტიპის თვისებები"
 
 #: dialogs/nodetypeproperties.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this node type."
-msgstr ""
+msgstr "მონიშნული ID ამ კვანძის ტიპისთვის."
 
 #: dialogs/nodetypeproperties.cpp:137
 #, kde-format
@@ -397,7 +397,7 @@ msgstr "გრაფიკის გენერაცია"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "%1 (ID %2)"
-msgstr ""
+msgstr "%1 (ID %2)"
 
 #: editorplugins/generategraph/generategraphwidget.cpp:529
 #, kde-format
@@ -425,55 +425,55 @@ msgstr ""
 #: editorplugins/generategraph/generategraphwidget.ui:26
 #, kde-format
 msgid "Mesh Graph"
-msgstr ""
+msgstr "გრაფი-ბადე"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:31
 #, kde-format
 msgid "Star Graph"
-msgstr ""
+msgstr "გრაფი-ვარსკვლავი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:36
 #, kde-format
 msgid "Circle Graph"
-msgstr ""
+msgstr "გრაფი-წრეწირი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:41
 #, kde-format
 msgid "Random Graph"
-msgstr ""
+msgstr "შემთხვევითი გრაფი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:46
 #, kde-format
 msgid "Erdös-Renyi Graph"
-msgstr ""
+msgstr "ერდიოს-რენიის გრაფი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:51
 #, kde-format
 msgid "Random Tree Graph"
-msgstr ""
+msgstr "შემთხვევითი ხისებური გრაფი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:56
 #, kde-format
 msgid "Random Dag Graph"
-msgstr ""
+msgstr "შემთხვევითი აციკლური გრაფი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:61
 #, kde-format
 msgid "Path Graph"
-msgstr ""
+msgstr "გრაფი-ბილიკი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:66
 #, kde-format
 msgid "Complete Graph"
-msgstr ""
+msgstr "სრული გრაფი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:71
@@ -485,7 +485,7 @@ msgstr ""
 #: editorplugins/generategraph/generategraphwidget.ui:91
 #, kde-format
 msgid "Show advanced settings."
-msgstr ""
+msgstr "დამატებითი პარამეტრების ჩვენება."
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
 #: editorplugins/generategraph/generategraphwidget.ui:106
@@ -509,7 +509,7 @@ msgstr ""
 #: editorplugins/generategraph/generategraphwidget.ui:119
 #, kde-format
 msgid "Node type:"
-msgstr ""
+msgstr "კვანძის ტიპი:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
 #: editorplugins/generategraph/generategraphwidget.ui:126
@@ -655,19 +655,19 @@ msgstr ""
 #: editorplugins/graphlayout/graphlayoutwidget.ui:57
 #, kde-format
 msgid "Area factor:"
-msgstr ""
+msgstr "სამუშაო ფართობი:"
 
 #. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:77
 #, kde-format
 msgid "Repelling force:"
-msgstr ""
+msgstr "განზიდვის ძალა:"
 
 #. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:97
 #, kde-format
 msgid "Attraction force:"
-msgstr ""
+msgstr "მიზიდულობის ძალა:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:119
@@ -685,7 +685,7 @@ msgstr ""
 #: editorplugins/graphlayout/graphlayoutwidget.ui:144
 #, kde-format
 msgid "Node separation:"
-msgstr ""
+msgstr "კვანძის გამოყოფა:"
 
 #. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:158
@@ -729,7 +729,7 @@ msgstr ""
 #: editorplugins/transformedges/transformedgeswidget.ui:25
 #, kde-format
 msgid "Complete graph"
-msgstr ""
+msgstr "სრული გრაფი"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:35
@@ -791,7 +791,7 @@ msgstr ""
 #: fileformats/dot/dotfileformat.cpp:45
 #, kde-format
 msgid "Graphviz Format (%1)"
-msgstr ""
+msgstr "Graphviz-ის ფორმატი (%1)"
 
 #: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
 #: fileformats/rocs1/rocs1fileformat.cpp:57
@@ -799,12 +799,12 @@ msgstr ""
 #: fileformats/tgf/tgffileformat.cpp:52
 #, kde-format
 msgid "Could not open file \"%1\" in read mode: %2"
-msgstr ""
+msgstr "ფაილის (\"%1\") წასაკითხად გახსნის შეცდომა: %2"
 
 #: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
 #, kde-format
 msgid "Could not parse file \"%1\"."
-msgstr ""
+msgstr "\"%1\" ფაილის დამუშავების შეცდომა."
 
 #: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
 #, kde-format
@@ -815,7 +815,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Plugin Error"
-msgstr ""
+msgstr "დამატების შეცდომა"
 
 #: fileformats/fileformatmanager.cpp:50
 #, kde-format
@@ -832,7 +832,7 @@ msgstr ""
 #: fileformats/gml/gmlfileformat.cpp:44
 #, kde-format
 msgid "Graph Markup Language Format (%1)"
-msgstr ""
+msgstr "გრაფის აღწერის ენის ფორმატი (%1)"
 
 #: fileformats/rocs1/rocs1fileformat.cpp:38
 #, kde-format
@@ -844,17 +844,17 @@ msgstr ""
 #: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
-msgstr ""
+msgstr "\"%1\" ფაილის ჩასაწერად გახსნის შეცდომა: %2"
 
 #: fileformats/rocs1/rocs1fileformat.cpp:269
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
-msgstr ""
+msgstr "ჩაწერა შეუძლებელია. შეცდომა: %1."
 
 #: fileformats/rocs2/rocs2fileformat.cpp:40
 #, kde-format
 msgid "Rocs Graph Format (%1)"
-msgstr ""
+msgstr "Rocs -ის გრაფის ფორმატი (%1)"
 
 #: fileformats/rocs2/rocs2fileformat.cpp:312
 #, kde-format
@@ -864,7 +864,7 @@ msgstr ""
 #: fileformats/tgf/tgffileformat.cpp:38
 #, kde-format
 msgid "Trivial Graph Format (%1)"
-msgstr ""
+msgstr "ტრივიალური გრაფის ფორმატი (%1)"
 
 #: fileformats/tgf/tgffileformat.cpp:73
 #, kde-format
@@ -879,7 +879,7 @@ msgstr ""
 #: fileformats/tikz/tikzfileformat.cpp:34
 #, kde-format
 msgid "TikZ (PGF) Format (%1)"
-msgstr ""
+msgstr "TikZ (PGF) ფორმატი (%1)"
 
 #: graphdocument.cpp:129
 #, kde-format
@@ -890,7 +890,7 @@ msgstr "ნაგულისხმები"
 #, kde-format
 msgctxt "@title:tab initial title for graph document"
 msgid "New Graph"
-msgstr ""
+msgstr "ახალი გრაფი"
 
 #: kernel/documentwrapper.cpp:88
 #, kde-format
@@ -941,7 +941,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info status message after successful script execution"
 msgid "<i>Execution Finished</i>"
-msgstr ""
+msgstr "<i>შესრულება დასრულდა</i>"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -961,7 +961,7 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given debug message."
-msgstr ""
+msgstr "მითითებული გამართვის შეტყობინებების გამოტანა."
 
 #: kernel/modules/console/console.xml:45
 #, kde-format
@@ -987,25 +987,25 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "Identifier of a node."
-msgstr ""
+msgstr "კვანძის იდენტიფიკატორი."
 
 #: kernel/modules/document/document.xml:33
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all nodes."
-msgstr ""
+msgstr "ყველა კვანძის სიის დაბრუნება."
 
 #: kernel/modules/document/document.xml:42
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all nodes of specified type."
-msgstr ""
+msgstr "მითითებული ტიპის კვანძების სიის დაბრუნება."
 
 #: kernel/modules/document/document.xml:49
 #, kde-format
 msgctxt "Scripting API"
 msgid "Identifier of a node type."
-msgstr ""
+msgstr "კვანძის ტიპის იდენტიფიკატორი."
 
 #: kernel/modules/document/document.xml:56
 #, kde-format
@@ -1038,13 +1038,13 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "X-coordinate of the node."
-msgstr ""
+msgstr "კვანძის X კოორდინატი."
 
 #: kernel/modules/document/document.xml:91
 #, kde-format
 msgctxt "Scripting API"
 msgid "Y-coordinate of the node."
-msgstr ""
+msgstr "კვანძის Y კოორდინატი."
 
 #: kernel/modules/document/document.xml:98
 #, kde-format
@@ -1074,7 +1074,7 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "The node to be deleted."
-msgstr ""
+msgstr "წასაშლელი კვანძი."
 
 #: kernel/modules/document/document.xml:131
 #, kde-format
@@ -1335,7 +1335,7 @@ msgstr "კვანძის შექმნა"
 #: qml/AddNodeAction.qml:16
 #, kde-format
 msgid "Add a node to the scene"
-msgstr ""
+msgstr "სცენისთვის კვანძის დამატება"
 
 #: qml/DeleteAction.qml:13
 #, kde-format
