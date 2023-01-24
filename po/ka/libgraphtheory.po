@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-04 00:42+0000\n"
-"PO-Revision-Date: 2023-01-21 19:36+0100\n"
+"PO-Revision-Date: 2023-01-23 08:38+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1279,7 +1279,7 @@ msgstr "კუთხე"
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeProperty"
-msgstr ""
+msgstr "EdgeProperty"
 
 #: models/edgetypemodel.cpp:190
 #, kde-format
@@ -1291,7 +1291,7 @@ msgstr "კიდის ტიპი"
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeTypeProperty"
-msgstr ""
+msgstr "EdgeTypeProperty"
 
 #: models/nodemodel.cpp:142
 #, kde-format
@@ -1303,7 +1303,7 @@ msgstr "კვანძი"
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeProperty"
-msgstr ""
+msgstr "NodeProperty"
 
 #: models/nodetypemodel.cpp:188
 #, kde-format
@@ -1315,7 +1315,7 @@ msgstr "კვანძის ტიპი"
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeTypeProperty"
-msgstr ""
+msgstr "NodeTypeProperty"
 
 #: qml/AddEdgeAction.qml:28
 #, kde-format
