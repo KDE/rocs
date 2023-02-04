@@ -1,22 +1,22 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Vít Pelčák <vit@pelcak.org>, 2014, 2015, 2016, 2019.
-# Vit Pelcak <vit@pelcak.org>, 2021.
+# Vit Pelcak <vit@pelcak.org>, 2021, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-04 00:42+0000\n"
-"PO-Revision-Date: 2021-03-25 13:33+0100\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2023-02-03 11:45+0100\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -70,7 +70,7 @@ msgstr "Hrany"
 #: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
 #, kde-format
 msgid "Property names"
-msgstr ""
+msgstr "Názvy vlastnosti"
 
 #: dialogs/edgetypeproperties.cpp:43
 #, kde-format
@@ -199,7 +199,7 @@ msgstr "Přidat vlastnost"
 #: dialogs/propertydelegate.cpp:49
 #, kde-format
 msgid "Delete this property."
-msgstr ""
+msgstr "Smazat tuto vlastnost."
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:33
 #, kde-format
@@ -215,7 +215,7 @@ msgstr "Všechny typy dat"
 #: editorplugins/assignvalues/assignvalueswidget.cpp:57
 #, kde-format
 msgid "All Edge Types"
-msgstr "Všechny typy okrajů"
+msgstr "Všechny typy hran"
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:81
 #, kde-format
@@ -509,7 +509,7 @@ msgstr ""
 #: editorplugins/generategraph/generategraphwidget.ui:119
 #, kde-format
 msgid "Node type:"
-msgstr ""
+msgstr "Typ uzlu:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
 #: editorplugins/generategraph/generategraphwidget.ui:126
@@ -557,7 +557,7 @@ msgstr ""
 #: editorplugins/generategraph/generategraphwidget.ui:293
 #, kde-format
 msgid "Generator seed:"
-msgstr ""
+msgstr "Použitý generátor:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
 #: editorplugins/generategraph/generategraphwidget.ui:325
@@ -589,7 +589,7 @@ msgstr "Počet uzlů"
 #: editorplugins/generategraph/generategraphwidget.ui:463
 #, kde-format
 msgid "Edge Probability"
-msgstr ""
+msgstr "Pravděpodobnost hrany"
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
 #: editorplugins/generategraph/generategraphwidget.ui:549
@@ -619,13 +619,13 @@ msgstr ""
 #: editorplugins/generategraph/generategraphwidget.ui:607
 #, kde-format
 msgid "Edge type:"
-msgstr ""
+msgstr "Typ hrany:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:614
 #, kde-format
 msgid "Graph generator:"
-msgstr ""
+msgstr "Generátor grafů:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:621
@@ -729,7 +729,7 @@ msgstr ""
 #: editorplugins/transformedges/transformedgeswidget.ui:25
 #, kde-format
 msgid "Complete graph"
-msgstr ""
+msgstr "Dokončit graf"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:35
@@ -741,7 +741,7 @@ msgstr ""
 #: editorplugins/transformedges/transformedgeswidget.ui:38
 #, kde-format
 msgid "Remove all edges"
-msgstr ""
+msgstr "Odstranit všechny hrany"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:45
@@ -755,7 +755,7 @@ msgstr ""
 #: editorplugins/transformedges/transformedgeswidget.ui:48
 #, kde-format
 msgid "Reverse all edges"
-msgstr ""
+msgstr "Obrátit všechny hrany"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:59
@@ -815,7 +815,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Plugin Error"
-msgstr ""
+msgstr "Chyba modulu"
 
 #: fileformats/fileformatmanager.cpp:50
 #, kde-format
@@ -1032,7 +1032,7 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "Create node at position (x,y)."
-msgstr ""
+msgstr "Vytvořit uzel na pozici (x,y)."
 
 #: kernel/modules/document/document.xml:86
 #, kde-format
@@ -1050,7 +1050,7 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "Create edge between the given nodes of default edge type."
-msgstr ""
+msgstr "Vytvořit hranu mezi danými uzly výchozího typu hrany."
 
 #: kernel/modules/document/document.xml:105
 #, kde-format
@@ -1068,25 +1068,25 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given node."
-msgstr ""
+msgstr "Smazat daný uzel."
 
 #: kernel/modules/document/document.xml:124
 #, kde-format
 msgctxt "Scripting API"
 msgid "The node to be deleted."
-msgstr ""
+msgstr "Uzel, jenž má být smazán."
 
 #: kernel/modules/document/document.xml:131
 #, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given edge."
-msgstr ""
+msgstr "Smazat daný okraj."
 
 #: kernel/modules/document/document.xml:138
 #, kde-format
 msgctxt "Scripting API"
 msgid "The edge to be deleted."
-msgstr ""
+msgstr "Okraj, jenž má být smazán."
 
 #: kernel/modules/document/edge.xml:9
 #, kde-format
@@ -1273,7 +1273,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:column"
 msgid "Edge"
-msgstr "Okraj"
+msgstr "Hrana"
 
 #: models/edgepropertymodel.cpp:144
 #, kde-format
@@ -1285,7 +1285,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:column"
 msgid "Edge Type"
-msgstr ""
+msgstr "Typ hrany"
 
 #: models/edgetypepropertymodel.cpp:131
 #, kde-format
@@ -1320,22 +1320,22 @@ msgstr ""
 #: qml/AddEdgeAction.qml:28
 #, kde-format
 msgid "Create Edge"
-msgstr ""
+msgstr "Vytvořit hranu"
 
 #: qml/AddEdgeAction.qml:31
 #, kde-format
 msgid "Create an edge between two nodes"
-msgstr ""
+msgstr "Vytvořit hranu mezi dvěma uzly"
 
 #: qml/AddNodeAction.qml:13
 #, kde-format
 msgid "Create Node"
-msgstr ""
+msgstr "Vytvořit uzel"
 
 #: qml/AddNodeAction.qml:16
 #, kde-format
 msgid "Add a node to the scene"
-msgstr ""
+msgstr "Přidat na obrazovku uzel"
 
 #: qml/DeleteAction.qml:13
 #, kde-format
@@ -1345,7 +1345,7 @@ msgstr "Smazat prvek"
 #: qml/DeleteAction.qml:16
 #, kde-format
 msgid "Delete element from scene"
-msgstr ""
+msgstr "Smazat prvek ze scény"
 
 #: qml/SelectMoveAction.qml:14
 #, kde-format
