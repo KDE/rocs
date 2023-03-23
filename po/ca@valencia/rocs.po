@@ -148,7 +148,7 @@ msgstr "Descripció"
 #, kde-format
 msgctxt "@title"
 msgid "Script Engine API"
-msgstr "La API del motor de script"
+msgstr "L'API del motor de script"
 
 #: plugins/scriptapi/scriptapimanager.cpp:260
 #, kde-format
