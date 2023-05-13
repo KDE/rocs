@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-04 00:42+0000\n"
-"PO-Revision-Date: 2023-05-12 00:05+0200\n"
+"PO-Revision-Date: 2023-05-12 07:47+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -73,8 +73,7 @@ msgid "Edges"
 msgstr "Arestas"
 
 #: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
-#, fuzzy, kde-format
-#| msgid "Property Names"
+#, kde-format
 msgid "Property names"
 msgstr "Nomes das propiedades"
 
@@ -85,10 +84,9 @@ msgid "Edge Type Properties"
 msgstr "Propiedades do tipo de aresta"
 
 #: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgid "Name:"
-msgstr "Nome"
+msgstr "Nome:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelId)
 #. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
@@ -117,16 +115,14 @@ msgid "Bidirectional"
 msgstr "Bidireccional"
 
 #: dialogs/edgetypeproperties.cpp:54
-#, fuzzy, kde-format
-#| msgid "Direction"
+#, kde-format
 msgid "Direction:"
-msgstr "Dirección"
+msgstr "Dirección:"
 
 #: dialogs/edgetypeproperties.cpp:61 dialogs/nodetypeproperties.cpp:59
-#, fuzzy, kde-format
-#| msgid "Visibility"
+#, kde-format
 msgid "Visibility:"
-msgstr "Visibilidade"
+msgstr "Visibilidade:"
 
 #: dialogs/edgetypeproperties.cpp:137
 #, kde-format
@@ -299,10 +295,9 @@ msgstr "Asignar un valor constante"
 
 #. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
 #: editorplugins/assignvalues/assignvalueswidget.ui:132
-#, fuzzy, kde-format
-#| msgid "Start ID"
+#, kde-format
 msgid "Start ID:"
-msgstr "ID inicial"
+msgstr "ID inicial:"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:167
@@ -378,10 +373,9 @@ msgstr "Vértices:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelProperty)
 #: editorplugins/assignvalues/assignvalueswidget.ui:447
-#, fuzzy, kde-format
-#| msgid "Property Name"
+#, kde-format
 msgid "Property name:"
-msgstr "Nome da propiedade"
+msgstr "Nome da propiedade:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
 #. i18n: ectx: property (text), widget (QLabel, labelConnection)
@@ -524,10 +518,9 @@ msgstr "O tipo de vértice co que se han crear os vértices do grafo."
 
 #. i18n: ectx: property (text), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:119
-#, fuzzy, kde-format
-#| msgid "Node type"
+#, kde-format
 msgid "Node type:"
-msgstr "Tipo de vértice"
+msgstr "Tipo de vértice:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
 #: editorplugins/generategraph/generategraphwidget.ui:126
@@ -573,8 +566,7 @@ msgstr "Permitir lazos:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
 #: editorplugins/generategraph/generategraphwidget.ui:293
-#, fuzzy, kde-format
-#| msgid "Generator Seed:"
+#, kde-format
 msgid "Generator seed:"
 msgstr "Semente do xerador:"
 
@@ -636,17 +628,15 @@ msgstr "O tipo de aresta co que se han crear as arestas do grafo."
 
 #. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:607
-#, fuzzy, kde-format
-#| msgid "Edge type"
+#, kde-format
 msgid "Edge type:"
-msgstr "Tipo de aresta"
+msgstr "Tipo de aresta:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:614
-#, fuzzy, kde-format
-#| msgid "Graph Generator"
+#, kde-format
 msgid "Graph generator:"
-msgstr "Xerador de grafos"
+msgstr "Xerador de grafos:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:621
@@ -658,76 +648,73 @@ msgstr "Seleccione o tipo dos vértices do grafo xerado."
 #, kde-format
 msgctxt "@title:window"
 msgid "Graph Layout"
-msgstr ""
+msgstr "Disposición do grafo"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:20
 #, kde-format
 msgid "Graph Layout"
-msgstr ""
+msgstr "Disposición do grafo"
 
 #. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:36
 #, kde-format
 msgid "Force Based Layout"
-msgstr ""
+msgstr "Disposición baseada en forzas"
 
 #. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:57
 #, kde-format
 msgid "Area factor:"
-msgstr ""
+msgstr "Factor de zona:"
 
 #. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:77
 #, kde-format
 msgid "Repelling force:"
-msgstr ""
+msgstr "Forza repelente:"
 
 #. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:97
 #, kde-format
 msgid "Attraction force:"
-msgstr ""
+msgstr "Forza de atracción:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:119
 #, kde-format
 msgid "Radial Tree Layout"
-msgstr ""
+msgstr "Disposición de árbore radial"
 
 #. i18n: ectx: property (text), widget (QLabel, rootLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:134
 #, kde-format
 msgid "Center/Root:"
-msgstr ""
+msgstr "Centro ou raíz:"
 
 #. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:144
 #, kde-format
 msgid "Node separation:"
-msgstr ""
+msgstr "Separación de nodos:"
 
 #. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:158
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgid "Tree type:"
-msgstr "Tipo:"
+msgstr "Tipo de árbore:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:165
 #, kde-format
 msgid "Free tree"
-msgstr ""
+msgstr "Árbore libre"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@title Displayed plugin name"
-#| msgid "RootedTree Structure"
+#, kde-format
 msgid "Rooted tree"
-msgstr "Estrutura en árbore con raíz"
+msgstr "Árbore enraizada"
 
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
 #, kde-format
@@ -753,8 +740,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
 #: editorplugins/transformedges/transformedgeswidget.ui:25
-#, fuzzy, kde-format
-#| msgid "Complete Graph"
+#, kde-format
 msgid "Complete graph"
 msgstr "Grafo completo"
 
@@ -766,8 +752,7 @@ msgstr "Esta alternativa retira todas as arestas do grafo."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:38
-#, fuzzy, kde-format
-#| msgid "Remove all Edges"
+#, kde-format
 msgid "Remove all edges"
 msgstr "Retirar todas as arestas"
 
@@ -783,8 +768,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:48
-#, fuzzy, kde-format
-#| msgid "Reverse all Edges"
+#, kde-format
 msgid "Reverse all edges"
 msgstr "Invertes todas as arestas"
 
@@ -822,15 +806,13 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:62
-#, fuzzy, kde-format
-#| msgid "Spanning Tree Transformation"
+#, kde-format
 msgid "Spanning tree transformation"
 msgstr "Transformación por árbore de extensión"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:69
-#, fuzzy, kde-format
-#| msgid "Remove all Self Edges"
+#, kde-format
 msgid "Remove all self edges"
 msgstr "Retirar todos os lazos"
 
@@ -858,8 +840,7 @@ msgid "Cannot open file %1 to write document. Error: %2"
 msgstr "Non se pode abrir o ficheiro %1 para escribir o documento. Erro: %2"
 
 #: fileformats/fileformatmanager.cpp:48
-#, fuzzy, kde-format
-#| msgid "Plugin Error"
+#, kde-format
 msgctxt "@title:window"
 msgid "Plugin Error"
 msgstr "Erro de complemento"
@@ -870,16 +851,13 @@ msgid "Plugins could not be found in specified directories:<br>"
 msgstr "Non se puideron atopar complementos nos directorios indicados:<br>"
 
 #: fileformats/fileformatmanager.cpp:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "<br><br> Check <a href='http://doc.qt.io/qt-5/deployment-plugins."
-#| "html'>this link</a> for further information."
+#, kde-format
 msgid ""
 "<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
 "link</a> for further information."
 msgstr ""
-"<br><br> Revise <a href='http://doc.qt.io/qt-5/deployment-plugins.html'>esta "
-"ligazón</a> para máis información."
+"<br><br> Revise <a href='https://doc.qt.io/qt-5/deployment-plugins."
+"html'>esta ligazón</a> para máis información."
 
 #: fileformats/gml/gmlfileformat.cpp:44
 #, kde-format
@@ -940,8 +918,7 @@ msgid "TikZ (PGF) Format (%1)"
 msgstr "Formato TikZ (PGF) (%1)"
 
 #: graphdocument.cpp:129
-#, fuzzy, kde-format
-#| msgid "default"
+#, kde-format
 msgid "Default"
 msgstr "Predeterminado"
 
