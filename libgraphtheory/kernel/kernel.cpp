@@ -12,7 +12,7 @@
 #include "nodewrapper.h"
 
 #include <KLocalizedString>
-#include <QScriptEngineDebugger>
+#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -20,30 +20,23 @@ class GraphTheory::KernelPrivate
 {
 public:
     KernelPrivate()
-        : m_engine(new QScriptEngine)
-        , m_debugger(new QScriptEngineDebugger)
+        : m_engine(new QJSEngine)
     {
     }
 
-    ~KernelPrivate()
-    {
-        m_debugger->detach();
-    }
+    QJSValue registerGlobalObject(QObject *qobject, const QString &name);
 
-    QScriptValue registerGlobalObject(QObject *qobject, const QString &name);
-
-    QScriptEngine *m_engine;
-    QScriptEngineDebugger *m_debugger;
+    QJSEngine *m_engine;
     ConsoleModule m_consoleModule;
 };
 
-QScriptValue KernelPrivate::registerGlobalObject(QObject *qobject, const QString &name)
+QJSValue KernelPrivate::registerGlobalObject(QObject *qobject, const QString &name)
 {
     if (!m_engine) {
         qCCritical(GRAPHTHEORY_KERNEL) << "No engine set, aborting global object creation.";
         return 0;
     }
-    QScriptValue globalObject = m_engine->newQObject(qobject);
+    QJSValue globalObject = m_engine->newQObject(qobject);
     m_engine->globalObject().setProperty(name, globalObject);
 
     return globalObject;
@@ -60,19 +53,19 @@ Kernel::~Kernel()
 {
 }
 
-QScriptValue Kernel::execute(GraphDocumentPtr document, const QString &script)
+QJSValue Kernel::execute(GraphDocumentPtr document, const QString &script)
 {
     // register meta types
-    qScriptRegisterSequenceMetaType<QList<GraphTheory::NodeWrapper *>>(d->m_engine);
-    qScriptRegisterSequenceMetaType<QList<GraphTheory::EdgeWrapper *>>(d->m_engine);
-    qRegisterMetaType<GraphTheory::NodeWrapper *>();
-    qRegisterMetaType<GraphTheory::EdgeWrapper *>();
+    qRegisterMetaType<QList<GraphTheory::NodeWrapper *>>("QList<GraphTheory::NodeWrapper *>");
+    qRegisterMetaType<QList<GraphTheory::EdgeWrapper *>>("QList<GraphTheory::EdgeWrapper *>");
+    qRegisterMetaType<GraphTheory::NodeWrapper *>("GraphTheory::NodeWrapper *");
+    qRegisterMetaType<GraphTheory::EdgeWrapper *>("GraphTheory::EdgeWrapper *");
 
-    if (d->m_engine->isEvaluating()) {
-        d->m_engine->abortEvaluation();
+    if (d->m_engine->isInterrupted()) {
+        d->m_engine->setInterrupted(false);
     }
+
     d->m_engine->collectGarbage();
-    d->m_engine->pushContext();
 
     // add document
     DocumentWrapper documentWrapper(document, d->m_engine);
@@ -82,31 +75,26 @@ QScriptValue Kernel::execute(GraphDocumentPtr document, const QString &script)
     // set modules
     d->m_engine->globalObject().setProperty("Console", d->m_engine->newQObject(&d->m_consoleModule));
 
-    // set evaluation
-    d->m_engine->setProcessEventsInterval(100); //! TODO: Make that changeable.
-
-    QScriptValue result = d->m_engine->evaluate(script).toString();
-    if (d->m_engine && d->m_engine->hasUncaughtException()) {
+    QJSValue result = d->m_engine->evaluate(script).toString();
+    if (result.isError()) {
         Q_EMIT message(result.toString(), WarningMessage);
-        Q_EMIT message(d->m_engine->uncaughtExceptionBacktrace().join("\n"), InfoMessage);
     }
-    if (d->m_engine) {
+    else {
         Q_EMIT message(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"), InfoMessage);
         Q_EMIT message(result.toString(), InfoMessage);
-        d->m_engine->popContext();
     }
     // end processing messages
     disconnect(&documentWrapper, &DocumentWrapper::message, this, &Kernel::processMessage);
 
     Q_EMIT executionFinished();
-    d->m_engine->globalObject().setProperty("Document", QScriptValue());
+    d->m_engine->globalObject().setProperty("Document", QJSValue());
 
     return result;
 }
 
 void Kernel::stop()
 {
-    d->m_engine->abortEvaluation();
+    d->m_engine->setInterrupted(true);
 }
 
 void Kernel::processMessage(const QString &messageString, Kernel::MessageType type)
@@ -116,18 +104,23 @@ void Kernel::processMessage(const QString &messageString, Kernel::MessageType ty
 
 void Kernel::attachDebugger()
 {
-    d->m_debugger->attachTo(d->m_engine);
+    QJSValue result = d->m_engine->evaluate("GraphTheory");
+    if(result.isError())
+        qDebug()
+            << "Uncaught exception at line"
+            << result.property("lineNumber").toInt()
+            << ":" << result.toString();;
 }
 
 void Kernel::detachDebugger()
 {
-    d->m_debugger->detach();
-    d->m_debugger = new QScriptEngineDebugger;
+    qDebug() << "detach\n";
 }
 
 void Kernel::triggerInterruptAction()
 {
-    d->m_debugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
+    qDebug()
+        << "Dunno what's goin'on here";
 }
 
 // END: Kernel

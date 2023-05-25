@@ -13,7 +13,7 @@
 
 using namespace GraphTheory;
 
-DocumentWrapper::DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engine)
+DocumentWrapper::DocumentWrapper(GraphDocumentPtr document, QJSEngine *engine)
     : m_document(document)
     , m_engine(engine)
 {
@@ -36,7 +36,7 @@ DocumentWrapper::~DocumentWrapper()
     qDeleteAll(m_nodeMap);
 }
 
-QScriptEngine *DocumentWrapper::engine() const
+QJSEngine *DocumentWrapper::engine() const
 {
     return m_engine;
 }
@@ -75,32 +75,32 @@ EdgeWrapper *DocumentWrapper::edgeWrapper(EdgePtr edge) const
     return m_edgeMap.value(edge);
 }
 
-QScriptValue DocumentWrapper::node(int id) const
+QJSValue DocumentWrapper::node(int id) const
 {
     // TODO average access time is linear, which might drastically be improved by
     //      using proper caching mechanisms at Document objects
     for (auto const &node : m_document->nodes()) {
         if (node->id() == id) {
-            return m_engine->newQObject(nodeWrapper(node), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
+            return m_engine->newQObject(nodeWrapper(node));
         }
     }
     QString command = QString("Document.node(%1)").arg(id);
     Q_EMIT message(i18nc("@info:shell", "%1: no node with ID %2 registered", command, id), Kernel::ErrorMessage);
-    return QScriptValue();
+    return QJSValue();
 }
 
-QScriptValue DocumentWrapper::nodes() const
+QJSValue DocumentWrapper::nodes() const
 {
     NodeList nodes = m_document->nodes();
-    QScriptValue array = m_engine->newArray(nodes.length());
+    QJSValue array = m_engine->newArray(nodes.length());
     for (int i = 0; i < nodes.length(); ++i) {
-        QScriptValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
+        QJSValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)));
         array.setProperty(i, nodeScriptValue);
     }
     return array;
 }
 
-QScriptValue DocumentWrapper::nodes(int type) const
+QJSValue DocumentWrapper::nodes(int type) const
 {
     NodeTypePtr typePtr;
     const auto nodeTypes = m_document->nodeTypes();
@@ -116,26 +116,26 @@ QScriptValue DocumentWrapper::nodes(int type) const
         return m_engine->newArray();
     }
     NodeList nodes = m_document->nodes(typePtr);
-    QScriptValue array = m_engine->newArray(nodes.length());
+    QJSValue array = m_engine->newArray(nodes.length());
     for (int i = 0; i < nodes.length(); ++i) {
-        QScriptValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
+        QJSValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)));
         array.setProperty(i, nodeScriptValue);
     }
     return array;
 }
 
-QScriptValue DocumentWrapper::edges() const
+QJSValue DocumentWrapper::edges() const
 {
     EdgeList edges = m_document->edges();
-    QScriptValue array = m_engine->newArray(edges.length());
+    QJSValue array = m_engine->newArray(edges.length());
     for (int i = 0; i < edges.length(); ++i) {
-        QScriptValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
+        QJSValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)));
         array.setProperty(i, edgeScriptValue);
     }
     return array;
 }
 
-QScriptValue DocumentWrapper::edges(int type) const
+QJSValue DocumentWrapper::edges(int type) const
 {
     EdgeTypePtr typePtr;
     const auto edgeTypes = m_document->edgeTypes();
@@ -151,36 +151,36 @@ QScriptValue DocumentWrapper::edges(int type) const
         return m_engine->newArray();
     }
     EdgeList edges = m_document->edges(typePtr);
-    QScriptValue array = m_engine->newArray(edges.length());
+    QJSValue array = m_engine->newArray(edges.length());
     for (int i = 0; i < edges.length(); ++i) {
-        QScriptValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
+        QJSValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)));
         array.setProperty(i, edgeScriptValue);
     }
     return array;
 }
 
-QScriptValue DocumentWrapper::createNode(int x, int y)
+QJSValue DocumentWrapper::createNode(int x, int y)
 {
     NodePtr node = Node::create(m_document);
     node->setX(x);
     node->setY(y);
-    return m_engine->newQObject(nodeWrapper(node), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
+    return m_engine->newQObject(nodeWrapper(node));
 }
 
-QScriptValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
+QJSValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
 {
     if (!from) {
         QString command = QString("Document.createEdge(from, to)");
         Q_EMIT message(i18nc("@info:shell", "%1: \"from\" is not a valid node object", command), Kernel::ErrorMessage);
-        return QScriptValue();
+        return QJSValue();
     }
     if (!to) {
         QString command = QString("Document.createEdge(from, to)");
         Q_EMIT message(i18nc("@info:shell", "%1: \"to\" is not a valid node object", command), Kernel::ErrorMessage);
-        return QScriptValue();
+        return QJSValue();
     }
     EdgePtr edge = Edge::create(from->node(), to->node());
-    return m_engine->newQObject(edgeWrapper(edge), QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);
+    return m_engine->newQObject(edgeWrapper(edge));
 }
 
 void DocumentWrapper::remove(NodeWrapper *node)
