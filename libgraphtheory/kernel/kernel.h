@@ -13,7 +13,7 @@
 #include "typenames.h"
 
 #include <QObject>
-#include <QScriptEngine>
+#include <QJSEngine>
 
 #include <QAction>
 
@@ -38,7 +38,7 @@ public:
     /**
      * execute javascript @p script on @p document and @return result as reported by engine
      */
-    QScriptValue execute(GraphTheory::GraphDocumentPtr document, const QString &script);
+    QJSValue execute(GraphTheory::GraphDocumentPtr document, const QString &script);
     void stop();
 
     void attachDebugger();

@@ -16,7 +16,7 @@
 
 #include <QColor>
 #include <QObject>
-#include <QScriptEngine>
+#include <QJSEngine>
 
 namespace GraphTheory
 {
@@ -33,10 +33,10 @@ class DocumentWrapper : public QObject
     Q_OBJECT
 
 public:
-    DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engine);
+    DocumentWrapper(GraphDocumentPtr document, QJSEngine *engine);
     ~DocumentWrapper() override;
 
-    QScriptEngine *engine() const;
+    QJSEngine *engine() const;
 
     /**
      * \return wrapper for \p node
@@ -48,13 +48,13 @@ public:
      */
     EdgeWrapper *edgeWrapper(EdgePtr edge) const;
 
-    Q_INVOKABLE QScriptValue node(int id) const;
-    Q_INVOKABLE QScriptValue nodes() const;
-    Q_INVOKABLE QScriptValue nodes(int type) const;
-    Q_INVOKABLE QScriptValue edges() const;
-    Q_INVOKABLE QScriptValue edges(int type) const;
-    Q_INVOKABLE QScriptValue createNode(int x, int y);
-    Q_INVOKABLE QScriptValue createEdge(GraphTheory::NodeWrapper *from, GraphTheory::NodeWrapper *to);
+    Q_INVOKABLE QJSValue node(int id) const;
+    Q_INVOKABLE QJSValue nodes() const;
+    Q_INVOKABLE QJSValue nodes(int type) const;
+    Q_INVOKABLE QJSValue edges() const;
+    Q_INVOKABLE QJSValue edges(int type) const;
+    Q_INVOKABLE QJSValue createNode(int x, int y);
+    Q_INVOKABLE QJSValue createEdge(GraphTheory::NodeWrapper *from, GraphTheory::NodeWrapper *to);
     Q_INVOKABLE void remove(GraphTheory::NodeWrapper *node);
     Q_INVOKABLE void remove(GraphTheory::EdgeWrapper *edge);
 
@@ -68,7 +68,7 @@ private Q_SLOTS:
 private:
     Q_DISABLE_COPY(DocumentWrapper)
     const GraphDocumentPtr m_document;
-    QScriptEngine *m_engine;
+    QJSEngine *m_engine;
     QMap<NodePtr, NodeWrapper *> m_nodeMap;
     QMap<EdgePtr, EdgeWrapper *> m_edgeMap;
 };

@@ -166,7 +166,7 @@ public:
     /**
      * @return array of distances to given set of nodes
      */
-    Q_INVOKABLE QScriptValue distance(const QString &lengthProperty, QList<GraphTheory::NodeWrapper *> targets);
+    Q_INVOKABLE QJSValue distance(const QString &lengthProperty, QList<GraphTheory::NodeWrapper *> targets);
 
     /** reimplemented from QObject **/
     bool event(QEvent *e) override;

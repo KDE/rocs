@@ -356,7 +356,7 @@ QList<NodeWrapper *> NodeWrapper::successors(int type) const
     return successors.values();
 }
 
-QScriptValue NodeWrapper::distance(const QString &lengthProperty, QList<NodeWrapper *> targets)
+QJSValue NodeWrapper::distance(const QString &lengthProperty, QList<NodeWrapper *> targets)
 {
     // TODO at a later point in time:
     //      factor this algorithm out into a self-contained graph algorithm class
@@ -418,7 +418,7 @@ QScriptValue NodeWrapper::distance(const QString &lengthProperty, QList<NodeWrap
     }
 
     // compute return statement
-    QScriptValue array = m_documentWrapper->engine()->newArray(targets.length());
+    QJSValue array = m_documentWrapper->engine()->newArray(targets.length());
     const int from = map[m_node->id()];
     for (int i = 0; i < targets.length(); ++i) {
         const qreal distance = D[from][map[targets.at(i)->id()]];

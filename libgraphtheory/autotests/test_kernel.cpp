@@ -47,7 +47,7 @@ void TestKernel::engineSetup()
     // create kernel
     QString script = "return true;";
     Kernel kernel;
-    QScriptValue result = kernel.execute(document, script);
+    QJSValue result = kernel.execute(document, script);
     QCOMPARE(result.toBool(), true);
 
     document->destroy();
@@ -70,15 +70,15 @@ void TestKernel::graphObjectAccess()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = "Document.nodes().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(2));
+    QCOMPARE(result.toInt(), qreal(2));
 
     script = "Document.edges().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     // cleanup
     document->destroy();
@@ -102,15 +102,15 @@ void TestKernel::graphObjectAccessWithTypes()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = QString("Document.nodes(%1).length;").arg(nodeTypeB->id());
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = QString("Document.edges(%1).length;").arg(edgeTypeB->id());
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     // cleanup
     document->destroy();
@@ -125,11 +125,11 @@ void TestKernel::nodeAccessMethods()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = "Document.node(42).id;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(42));
+    QCOMPARE(result.toInt(), qreal(42));
 
     // cleanup
     document->destroy();
@@ -146,19 +146,19 @@ void TestKernel::edgeAccessMethods()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = "Document.nodes()[0].edges().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[0].inEdges().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(0));
+    QCOMPARE(result.toInt(), qreal(0));
 
     script = "Document.nodes()[0].outEdges().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     // cleanup
     document->destroy();
@@ -182,19 +182,19 @@ void TestKernel::edgeAccessMethodsWithTypes()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = QString("Document.nodes()[1].edges(%1).length;").arg(edgeTypeB->id());
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = QString("Document.nodes()[1].inEdges(%1).length;").arg(edgeTypeB->id());
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(0));
+    QCOMPARE(result.toInt(), qreal(0));
 
     script = QString("Document.nodes()[1].outEdges(%1).length;").arg(edgeTypeB->id());
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     // cleanup
     document->destroy();
@@ -213,7 +213,7 @@ void TestKernel::nodeProperties()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = "Document.nodes()[0].id;";
     result = kernel.execute(document, script);
@@ -248,7 +248,7 @@ void TestKernel::nodeDynamicProperties()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     // property read-access from script
     node->setDynamicProperty("propertyA", "1");
@@ -281,7 +281,7 @@ void TestKernel::edgeProperties()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = "Document.nodes()[0].edges()[0].from().id;";
     result = kernel.execute(document, script);
@@ -314,7 +314,7 @@ void TestKernel::edgeDynamicProperties()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     // property read-access from script
     edge->setDynamicProperty("propertyA", "1");
@@ -347,7 +347,7 @@ void TestKernel::nodeTypes()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = "Document.nodes()[0].type;";
     result = kernel.execute(document, script);
@@ -378,7 +378,7 @@ void TestKernel::edgeTypes()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = "Document.edges()[0].type;";
     result = kernel.execute(document, script);
@@ -407,58 +407,58 @@ void TestKernel::neighborships()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     // test with unidirectional edge
     script = "Document.nodes()[0].neighbors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[1].neighbors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[0].successors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[1].successors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(0));
+    QCOMPARE(result.toInt(), qreal(0));
 
     script = "Document.nodes()[0].predecessors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(0));
+    QCOMPARE(result.toInt(), qreal(0));
 
     script = "Document.nodes()[1].predecessors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     // test with bidirectional edge
     document->edgeTypes().first()->setDirection(EdgeType::Bidirectional);
     script = "Document.nodes()[0].neighbors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[1].neighbors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[0].successors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[1].successors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[0].predecessors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[1].predecessors().length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     // cleanup
     document->destroy();
@@ -484,58 +484,58 @@ void TestKernel::neighborshipsWithTypes()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     // test with unidirectional edge
     script = "Document.nodes()[0].neighbors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[1].neighbors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[0].successors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[1].successors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(0));
+    QCOMPARE(result.toInt(), qreal(0));
 
     script = "Document.nodes()[0].predecessors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(0));
+    QCOMPARE(result.toInt(), qreal(0));
 
     script = "Document.nodes()[1].predecessors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     // test with bidirectional edge
     document->edgeTypes().first()->setDirection(EdgeType::Bidirectional);
     script = "Document.nodes()[0].neighbors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[1].neighbors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[0].successors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[1].successors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[0].predecessors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     script = "Document.nodes()[1].predecessors(1).length;";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(1));
+    QCOMPARE(result.toInt(), qreal(1));
 
     // cleanup
     document->destroy();
@@ -550,7 +550,7 @@ void TestKernel::automaticScriptObjectPropertyGeneration()
 
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     // For edges/nodes we can assign arbitrary dynamic properties during
     // script execution. However, they exist only during execution and are removed
@@ -576,7 +576,7 @@ void TestKernel::createNode()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = "Document.createNode(0, 0);";
     result = kernel.execute(document, script);
@@ -595,7 +595,7 @@ void TestKernel::createEdge()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = "Document.createEdge(Document.nodes()[0], Document.nodes()[1]);";
     result = kernel.execute(document, script);
@@ -613,7 +613,7 @@ void TestKernel::deleteNode()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
     QCOMPARE(document->nodes().count(), 1);
 
     script = "Document.remove(Document.nodes()[0]);";
@@ -634,7 +634,7 @@ void TestKernel::deleteEdge()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
     QCOMPARE(document->edges().count(), 1);
 
     script = "Document.remove(Document.edges()[0]);";
@@ -662,15 +662,15 @@ void TestKernel::distance()
     // test nodes
     Kernel kernel;
     QString script;
-    QScriptValue result;
+    QJSValue result;
 
     script = "Document.nodes()[0].distance(\"dist\", Document.nodes())[2];";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(2));
+    QCOMPARE(result.toInt(), qreal(2));
 
     script = "Document.nodes()[2].distance(\"dist\", Document.nodes())[0];";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(2));
+    QCOMPARE(result.toInt(), qreal(2));
 
     // cleanup
     document->destroy();
