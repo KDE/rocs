@@ -249,7 +249,7 @@ msgstr "Escoller as propiedades"
 #: editorplugins/assignvalues/assignvalueswidget.ui:59
 #, kde-format
 msgid "Show advanced options."
-msgstr "Mostrar as opcións avanzadas."
+msgstr "Amosar as opcións avanzadas."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: editorplugins/assignvalues/assignvalueswidget.ui:74
@@ -902,15 +902,14 @@ msgstr "Formato Trivial Graph (%1)"
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
 msgstr ""
-"Non se puido procesar o ficheiro «%1». O identificador «%1» estase xa a "
-"empregar."
+"Non se puido procesar o ficheiro «%1». O identificador «%1» estase xa a usar."
 
 #: fileformats/tgf/tgffileformat.cpp:85
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
 msgstr ""
-"Non se puido procesar o ficheiro. A aresta de «%1» a «%2» emprega vértices "
-"sen definir."
+"Non se puido procesar o ficheiro. A aresta de «%1» a «%2» usa vértices sen "
+"definir."
 
 #: fileformats/tikz/tikzfileformat.cpp:34
 #, kde-format
