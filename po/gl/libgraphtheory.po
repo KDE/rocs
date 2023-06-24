@@ -1186,7 +1186,7 @@ msgstr ""
 "Pode conter propiedades dinámicas arbitrarias definidas no editor ou "
 "asignadas en tempo de execución.\n"
 "Teña en conta que as propiedades dinámicas só están dispoñíbeis despois da "
-"execución do script, se están rexistradas para o tipo do vértice.\n"
+"execución do guión, se están rexistradas para o tipo do vértice.\n"
 
 #: kernel/modules/document/node.xml:19
 #, kde-format
