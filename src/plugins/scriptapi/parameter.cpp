@@ -50,3 +50,5 @@ QString Parameter::typeLink() const
 {
     return m_typeLink;
 }
+
+#include "moc_parameter.cpp"

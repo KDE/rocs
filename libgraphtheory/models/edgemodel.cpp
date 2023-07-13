@@ -140,3 +140,5 @@ QVariant EdgeModel::headerData(int section, Qt::Orientation orientation, int rol
     }
     return QVariant(i18nc("@title:column", "Edge"));
 }
+
+#include "moc_edgemodel.cpp"

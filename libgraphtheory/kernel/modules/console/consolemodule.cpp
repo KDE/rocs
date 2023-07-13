@@ -44,3 +44,5 @@ void ConsoleModule::error(const QString &messageString)
     m_backlog.append(qMakePair<Kernel::MessageType, QString>(Kernel::ErrorMessage, messageString));
     Q_EMIT message(messageString, Kernel::ErrorMessage);
 }
+
+#include "moc_consolemodule.cpp"

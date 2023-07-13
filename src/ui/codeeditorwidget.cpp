@@ -93,3 +93,5 @@ void CodeEditorWidget::closeTab(int index)
 {
     m_project->tryToRemoveCodeDocument(m_project->codeDocuments().at(index));
 }
+
+#include "moc_codeeditorwidget.cpp"

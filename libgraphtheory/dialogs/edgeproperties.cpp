@@ -103,3 +103,5 @@ void EdgeProperties::apply()
         m_edge->setDynamicProperty(name, value);
     }
 }
+
+#include "moc_edgeproperties.cpp"

@@ -31,3 +31,5 @@ void TestKernelScriptApi::xmlValidity()
 }
 
 QTEST_MAIN(TestKernelScriptApi)
+
+#include "moc_test_kernelscriptapi.cpp"

@@ -151,3 +151,5 @@ void TestRocs2FileFormat::parseVersion1Format()
 }
 
 QTEST_MAIN(TestRocs2FileFormat);
+
+#include "moc_testrocs2fileformat.cpp"

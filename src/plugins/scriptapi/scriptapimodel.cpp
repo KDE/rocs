@@ -254,3 +254,5 @@ void ScriptApiModel::setupModelData(QList<Object *> dataList, Item *parent)
         }
     }
 }
+
+#include "moc_scriptapimodel.cpp"

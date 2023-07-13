@@ -166,3 +166,5 @@ void LayoutEvaluator::showResults(std::ostream &outputStream) const
     showMetric(numberOfNodesWithIntersectionsMetric_m, outputStream);
     outputStream << std::endl;
 }
+
+#include "moc_layoutevaluator.cpp"

@@ -148,3 +148,5 @@ GraphDocumentPtr FileFormatDialog::importFile()
         return filePlugin->graphDocument();
     }
 }
+
+#include "moc_fileformatdialog.cpp"

@@ -143,3 +143,5 @@ QVariant EdgePropertyModel::headerData(int section, Qt::Orientation orientation,
     }
     return QVariant(i18nc("@title:column", "EdgeProperty"));
 }
+
+#include "moc_edgepropertymodel.cpp"

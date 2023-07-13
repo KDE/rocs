@@ -756,3 +756,5 @@ void DotFileFormatTest::writeAndParseTest()
 }
 
 QTEST_MAIN(DotFileFormatTest)
+
+#include "moc_testdotfileformat.cpp"

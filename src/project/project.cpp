@@ -444,3 +444,5 @@ bool Project::isModified() const
 
     return d->m_modified;
 }
+
+#include "moc_project.cpp"

@@ -168,3 +168,5 @@ void EdgeTypesDelegate::showPropertiesDialog()
     dialog->exec();
     delete dialog;
 }
+
+#include "moc_edgetypesdelegate.cpp"

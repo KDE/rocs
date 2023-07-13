@@ -177,3 +177,5 @@ void TestProject::loadBrokenFilesWithoutCrashing01()
 }
 
 QTEST_MAIN(TestProject)
+
+#include "moc_test_project.cpp"

@@ -109,3 +109,5 @@ void EdgeWrapper::updateDynamicProperties()
         }
     }
 }
+
+#include "moc_edgewrapper.cpp"

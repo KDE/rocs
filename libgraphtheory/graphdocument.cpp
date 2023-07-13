@@ -394,3 +394,5 @@ void GraphDocument::setModified(bool modified)
 }
 
 // END
+
+#include "moc_graphdocument.cpp"

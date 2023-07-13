@@ -124,3 +124,5 @@ QString Object::apiDocumentIdentifier()
 {
     return m_id;
 }
+
+#include "moc_object.cpp"

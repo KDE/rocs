@@ -189,3 +189,5 @@ GraphLayoutWidget::~GraphLayoutWidget()
 {
     delete ui;
 }
+
+#include "moc_graphlayoutwidget.cpp"

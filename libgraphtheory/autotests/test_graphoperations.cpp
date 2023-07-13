@@ -383,3 +383,5 @@ void TestGraphOperations::testDynamicPropertyRename()
 }
 
 QTEST_MAIN(TestGraphOperations)
+
+#include "moc_test_graphoperations.cpp"

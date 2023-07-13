@@ -189,3 +189,5 @@ QVariant EdgeTypeModel::headerData(int section, Qt::Orientation orientation, int
     }
     return QVariant(i18nc("@title:column", "Edge Type"));
 }
+
+#include "moc_edgetypemodel.cpp"

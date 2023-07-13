@@ -123,3 +123,5 @@ void TgfFileFormat::writeFile(GraphDocumentPtr document)
 }
 
 #include "tgffileformat.moc"
+
+#include "moc_tgffileformat.cpp"

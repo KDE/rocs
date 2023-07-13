@@ -49,3 +49,5 @@ void TestTikzFileFormat::serializeTest()
 }
 
 QTEST_MAIN(TestTikzFileFormat);
+
+#include "moc_testtikzfileformat.cpp"

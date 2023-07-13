@@ -80,3 +80,5 @@ void TestTgfFileFormat::serializeUnserializeTest()
 }
 
 QTEST_MAIN(TestTgfFileFormat);
+
+#include "moc_testtgffileformat.cpp"

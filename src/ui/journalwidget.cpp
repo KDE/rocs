@@ -51,3 +51,5 @@ bool JournalEditorWidget::isModified() const
 {
     return m_modified;
 }
+
+#include "moc_journalwidget.cpp"

@@ -164,3 +164,5 @@ void EdgeItem::updateVisibility()
         setOpacity(0);
     }
 }
+
+#include "moc_edgeitem.cpp"

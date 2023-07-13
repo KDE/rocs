@@ -84,3 +84,5 @@ bool NodeTypeStyle::isPropertyNamesVisible() const
 {
     return d->m_propertyNamesVisible;
 }
+
+#include "moc_nodetypestyle.cpp"

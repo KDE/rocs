@@ -308,3 +308,5 @@ void Node::setQpointer(NodePtr q)
 {
     d->q = q;
 }
+
+#include "moc_node.cpp"

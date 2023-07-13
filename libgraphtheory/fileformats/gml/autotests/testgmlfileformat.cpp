@@ -58,3 +58,5 @@ void TestGmlFileFormat::serializeTest()
 }
 
 QTEST_MAIN(TestGmlFileFormat)
+
+#include "moc_testgmlfileformat.cpp"

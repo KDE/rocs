@@ -335,3 +335,5 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
 }
 
 #include "rocs1fileformat.moc"
+
+#include "moc_rocs1fileformat.cpp"

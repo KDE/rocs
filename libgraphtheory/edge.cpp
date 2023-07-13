@@ -169,3 +169,5 @@ void Edge::setQpointer(EdgePtr q)
 {
     d->q = q;
 }
+
+#include "moc_edge.cpp"

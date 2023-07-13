@@ -83,3 +83,5 @@ bool EdgeTypeStyle::isPropertyNamesVisible() const
 {
     return d->m_propertyNamesVisible;
 }
+
+#include "moc_edgetypestyle.cpp"

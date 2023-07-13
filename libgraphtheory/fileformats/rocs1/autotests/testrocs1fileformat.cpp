@@ -138,3 +138,5 @@ void TestRocs1FileFormat::serializeUnserializeTypesTest()
 //  }
 
 QTEST_MAIN(TestRocs1FileFormat)
+
+#include "moc_testrocs1fileformat.cpp"

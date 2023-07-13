@@ -108,3 +108,5 @@ void DocumentTypesWidget::onCreateEdgeType()
     EdgeTypePtr type = EdgeType::create(m_document);
     type->setName(i18n("unnamed"));
 }
+
+#include "moc_documenttypeswidget.cpp"

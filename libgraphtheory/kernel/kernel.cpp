@@ -131,3 +131,5 @@ void Kernel::triggerInterruptAction()
 }
 
 // END: Kernel
+
+#include "moc_kernel.cpp"

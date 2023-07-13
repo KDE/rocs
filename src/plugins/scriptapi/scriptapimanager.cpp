@@ -298,3 +298,5 @@ QDomDocument ScriptApiManager::loadDomDocument(const QUrl &path, const QXmlSchem
     }
     return document;
 }
+
+#include "moc_scriptapimanager.cpp"

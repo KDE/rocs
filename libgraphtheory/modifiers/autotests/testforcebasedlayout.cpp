@@ -72,3 +72,5 @@ void ForceBasedLayoutTest::testMargin()
 }
 
 QTEST_MAIN(ForceBasedLayoutTest)
+
+#include "moc_testforcebasedlayout.cpp"

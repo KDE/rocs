@@ -142,3 +142,5 @@ static QString processNode(const NodePtr &node)
 }
 
 #include "dotfileformat.moc"
+
+#include "moc_dotfileformat.cpp"

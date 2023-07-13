@@ -180,3 +180,5 @@ void View::showEdgePropertiesDialog(Edge *edge)
     dialog->setData(edge->self());
     dialog->show(); // workaround: scene-drag not working with modal dialogs
 }
+
+#include "moc_view.cpp"

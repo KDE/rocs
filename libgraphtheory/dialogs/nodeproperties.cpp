@@ -138,3 +138,5 @@ void NodeProperties::validateIdInput()
     }
     ui->id->setPalette(palette);
 }
+
+#include "moc_nodeproperties.cpp"

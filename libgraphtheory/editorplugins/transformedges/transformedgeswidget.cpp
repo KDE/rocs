@@ -226,3 +226,5 @@ void TransformEdgesWidget::removeAllSelfEdges()
         }
     }
 }
+
+#include "moc_transformedgeswidget.cpp"

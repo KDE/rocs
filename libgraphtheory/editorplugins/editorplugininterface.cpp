@@ -37,3 +37,5 @@ QString EditorPluginInterface::displayName() const
     }
     return d->m_displayName;
 }
+
+#include "moc_editorplugininterface.cpp"

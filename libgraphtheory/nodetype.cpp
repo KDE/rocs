@@ -168,3 +168,5 @@ void NodeType::setQpointer(NodeTypePtr q)
 {
     d->q = q;
 }
+
+#include "moc_nodetype.cpp"

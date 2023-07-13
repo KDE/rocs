@@ -677,3 +677,5 @@ void TestKernel::distance()
 }
 
 QTEST_MAIN(TestKernel)
+
+#include "moc_test_kernel.cpp"

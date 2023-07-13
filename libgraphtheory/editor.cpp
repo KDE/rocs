@@ -73,3 +73,5 @@ GraphDocumentPtr Editor::openDocument(const QUrl &documentUrl)
     importer->graphDocument()->setDocumentUrl(documentUrl);
     return importer->graphDocument();
 }
+
+#include "moc_editor.cpp"

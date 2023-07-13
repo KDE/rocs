@@ -167,3 +167,5 @@ void RadialLayoutTest::minimumNodeDistance()
 }
 
 QTEST_MAIN(RadialLayoutTest)
+
+#include "moc_testradiallayout.cpp"

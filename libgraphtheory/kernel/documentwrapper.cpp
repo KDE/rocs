@@ -210,3 +210,5 @@ void DocumentWrapper::remove(EdgeWrapper *edge)
     // TODO: we need a mechanism that carefully implements on-the-fly object deletions
     edge->edge()->destroy();
 }
+
+#include "moc_documentwrapper.cpp"

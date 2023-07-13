@@ -108,3 +108,5 @@ FileFormatInterface *FileFormatManager::defaultBackend() const
 {
     return d->defaultGraphFilePlugin;
 }
+
+#include "moc_fileformatmanager.cpp"

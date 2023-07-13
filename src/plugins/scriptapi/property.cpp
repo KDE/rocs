@@ -60,3 +60,5 @@ QString Property::apiDocumentAnchor()
 {
     return QString("property").append(m_name);
 }
+
+#include "moc_property.cpp"

@@ -455,3 +455,5 @@ void NodeWrapper::updateDynamicProperties()
         }
     }
 }
+
+#include "moc_nodewrapper.cpp"

@@ -130,3 +130,5 @@ QVariant NodeTypePropertyModel::headerData(int section, Qt::Orientation orientat
     }
     return QVariant(i18nc("@title:column", "NodeTypeProperty"));
 }
+
+#include "moc_nodetypepropertymodel.cpp"

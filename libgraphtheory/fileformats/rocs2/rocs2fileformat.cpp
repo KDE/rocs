@@ -344,3 +344,5 @@ EdgeType::Direction Rocs2FileFormat::direction(QString direction) const
 }
 
 #include "rocs2fileformat.moc"
+
+#include "moc_rocs2fileformat.cpp"

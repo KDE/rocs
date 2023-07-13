@@ -30,3 +30,5 @@ qreal MetricSummarizer::average() const
     assert(not values_m.empty());
     return std::accumulate(values_m.begin(), values_m.end(), 0.) / values_m.size();
 }
+
+#include "moc_metricsummarizer.cpp"

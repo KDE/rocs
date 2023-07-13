@@ -150,3 +150,5 @@ QToolBar *SidedockWidget::toolbar() const
 {
     return _toolBar;
 }
+
+#include "moc_sidedockwidget.cpp"

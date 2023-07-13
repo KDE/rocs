@@ -123,3 +123,5 @@ static QString processNode(const NodePtr &n)
 }
 
 #include "gmlfileformat.moc"
+
+#include "moc_gmlfileformat.cpp"

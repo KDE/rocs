@@ -142,3 +142,5 @@ void EdgeTypeProperties::validateIdInput()
     }
     m_id->setPalette(palette);
 }
+
+#include "moc_edgetypeproperties.cpp"

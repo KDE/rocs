@@ -130,3 +130,5 @@ void TikzFileFormat::writeFile(GraphDocumentPtr graph)
 }
 
 #include "tikzfileformat.moc"
+
+#include "moc_tikzfileformat.cpp"

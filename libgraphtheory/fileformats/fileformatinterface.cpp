@@ -89,3 +89,5 @@ const QUrl &FileFormatInterface::file() const
 {
     return d->file;
 }
+
+#include "moc_fileformatinterface.cpp"

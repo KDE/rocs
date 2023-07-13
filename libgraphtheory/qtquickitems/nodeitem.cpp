@@ -171,3 +171,5 @@ void NodeItem::updateVisibility()
         setOpacity(0);
     }
 }
+
+#include "moc_nodeitem.cpp"

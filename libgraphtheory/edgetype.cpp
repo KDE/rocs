@@ -181,3 +181,5 @@ void EdgeType::setQpointer(EdgeTypePtr q)
 {
     d->q = q;
 }
+
+#include "moc_edgetype.cpp"

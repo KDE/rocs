@@ -100,3 +100,5 @@ void PropertiesWidget::renameProperty(const QModelIndex &index, const QString &n
         m_edgeType->renameDynamicProperty(m_edgeModel->data(index, NodeTypePropertyModel::NameRole).toString(), name);
     }
 }
+
+#include "moc_propertieswidget.cpp"

@@ -651,3 +651,5 @@ void GenerateGraphWidget::generateCompleteBipartiteGraph(int nodes_left, int nod
         }
     }
 }
+
+#include "moc_generategraphwidget.cpp"

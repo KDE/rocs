@@ -109,3 +109,5 @@ void PropertyDelegate::onDelete()
     const QModelIndex index = focusedIndex();
     Q_EMIT deleteProperty(index);
 }
+
+#include "moc_propertydelegate.cpp"

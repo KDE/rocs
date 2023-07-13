@@ -76,3 +76,5 @@ void ScriptOutputWidget::showDebugOutput(bool show)
         ui->output->setCurrentIndex(0);
     }
 }
+
+#include "moc_scriptoutputwidget.cpp"

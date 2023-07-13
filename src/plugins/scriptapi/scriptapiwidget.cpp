@@ -172,3 +172,5 @@ void ScriptApiWidget::historyGoForward()
         ui->buttonNext->setEnabled(false);
     }
 }
+
+#include "moc_scriptapiwidget.cpp"

@@ -590,3 +590,5 @@ void MainWindow::disableStopAction()
 {
     m_stopScript->setEnabled(false);
 }
+
+#include "moc_mainwindow.cpp"

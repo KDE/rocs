@@ -47,3 +47,5 @@ QList<EditorPluginInterface *> EditorPluginManager::plugins() const
 {
     return d->m_plugins;
 }
+
+#include "moc_editorpluginmanager.cpp"

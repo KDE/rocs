@@ -187,3 +187,5 @@ QVariant NodeTypeModel::headerData(int section, Qt::Orientation orientation, int
     }
     return QVariant(i18nc("@title:column", "Node Type"));
 }
+
+#include "moc_nodetypemodel.cpp"

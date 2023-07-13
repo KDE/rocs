@@ -145,3 +145,5 @@ void NodeTypesDelegate::showPropertiesDialog()
     dialog->exec();
     dialog->deleteLater();
 }
+
+#include "moc_nodetypesdelegate.cpp"

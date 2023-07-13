@@ -86,3 +86,5 @@ void GraphEditorWidget::showDocumentNameDialog(int index)
         m_viewWidgets->setTabText(index, name);
     }
 }
+
+#include "moc_grapheditorwidget.cpp"

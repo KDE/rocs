@@ -80,3 +80,5 @@ QString Method::returnTypeLink() const
 {
     return m_returnTypeLink;
 }
+
+#include "moc_method.cpp"
