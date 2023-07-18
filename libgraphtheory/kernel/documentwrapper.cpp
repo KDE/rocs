@@ -183,30 +183,29 @@ QJSValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
     return m_engine->newQObject(edgeWrapper(edge));
 }
 
-void DocumentWrapper::remove(NodeWrapper *node)
+void DocumentWrapper::remove(const QJSValue &object)
 {
-    if (!node) {
-        QString command = QString("Document.remove(node)");
-        Q_EMIT message(i18nc("@info:shell", "%1: \"node\" is not a valid node object", command), Kernel::ErrorMessage);
+    if (!object.isObject() || object.isNull()) {
+        QString command = QString("Document.remove(obj)");
+        Q_EMIT message(i18nc("@info:shell", "%1: \"obj\" is not called on an object", command), Kernel::ErrorMessage);
         return;
     }
-    // note: The NodeWrapper object explicitly is not removed from m_nodeMap and by this the node object is not removed.
-    // This has the benefit to not taking care validity of Node, NodeWrapper and its QScriptObject, but on the downside
-    // leads to much used memory, that is only freed after run.
-    // TODO: we need a mechanism that carefully implements on-the-fly object deletions
-    node->node()->destroy();
-}
 
-void DocumentWrapper::remove(EdgeWrapper *edge)
-{
-    if (!edge) {
-        QString command = QString("Document.remove(edge)");
-        Q_EMIT message(i18nc("@info:shell", "%1: \"edge\" is not a valid edge object", command), Kernel::ErrorMessage);
-        return;
+    auto qobj = object.toQObject();
+    if (auto edge = qobject_cast<EdgeWrapper *>(qobj)) {
+        // note: The EdgeWrapper object explicitly is not removed from m_edgeMap and by this the edge object is not removed.
+        // This has the benefit to not taking care validity of Edge, EdgeWrapper and its QScriptObject, but on the downside
+        // leads to much used memory, that is only freed after run.
+        // TODO: we need a mechanism that carefully implements on-the-fly object deletions
+        edge->edge()->destroy();
+    } else if (auto node = qobject_cast<NodeWrapper *>(qobj)) {
+        // note: The NodeWrapper object explicitly is not removed from m_nodeMap and by this the node object is not removed.
+        // This has the benefit to not taking care validity of Node, NodeWrapper and its QScriptObject, but on the downside
+        // leads to much used memory, that is only freed after run.
+        // TODO: we need a mechanism that carefully implements on-the-fly object deletions
+        node->node()->destroy();
+    } else {
+        QString command = QString("Document.remove(obj)");
+        Q_EMIT message(i18nc("@info:shell", "%1: \"obj\" is neither a valid node or edge object", command), Kernel::ErrorMessage);
     }
-    // note: The EdgeWrapper object explicitly is not removed from m_edgeMap and by this the edge object is not removed.
-    // This has the benefit to not taking care validity of Edge, EdgeWrapper and its QScriptObject, but on the downside
-    // leads to much used memory, that is only freed after run.
-    // TODO: we need a mechanism that carefully implements on-the-fly object deletions
-    edge->edge()->destroy();
 }
