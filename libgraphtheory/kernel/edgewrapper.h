@@ -7,12 +7,8 @@
 #ifndef EDGEWRAPPER_H
 #define EDGEWRAPPER_H
 
-#include "graphdocument.h"
-#include "graphtheory_export.h"
 #include "kernel.h"
-#include "node.h"
 #include "typenames.h"
-
 #include <QColor>
 #include <QObject>
 
@@ -26,7 +22,7 @@ class NodeWrapper;
 
 /**
  * \class EdgeWrapper
- * Wraps EdgePtr to be accessible via QtScript. All properties of the node object are available
+ * Wraps EdgePtr to be accessible via QtScript. All properties of the edge object are available
  * as common QObject properties.
  */
 class EdgeWrapper : public QObject
@@ -42,13 +38,13 @@ public:
     EdgePtr edge() const;
 
     /**
-     * @return EdgeType::id of corresponding node
+     * @return EdgeType::id of corresponding edge
      */
     int type() const;
 
     /**
-     * Set EdgeType of corresponding node by specifying its ID by @p typeId.
-     * If @p typeId does not name the ID of any NodeType, the type is not changed.
+     * Set EdgeType of corresponding edge by specifying its ID by @p typeId.
+     * If @p typeId does not name the ID of any EdgeType, the type is not changed.
      */
     void setType(int typeId);
 
@@ -56,11 +52,17 @@ public:
     Q_INVOKABLE GraphTheory::NodeWrapper *to() const;
     Q_INVOKABLE bool directed() const;
 
-    /** reimplemented from QObject **/
-    bool event(QEvent *e) override;
+    /**
+     * @brief update are set property of this edge
+     * @param name the identifier of the property
+     * @param value the value of the property
+     */
+    Q_INVOKABLE void setProperty(const QString &name, const QJSValue &value);
 
-public Q_SLOTS:
-    void updateDynamicProperties();
+    /**
+     * @return the property value identified by @p name
+     */
+    Q_INVOKABLE QJSValue property(const QString &name) const;
 
 Q_SIGNALS:
     void message(const QString &messageString, Kernel::MessageType type) const;

@@ -17,20 +17,13 @@ uint Edge::objectCounter = 0;
 class GraphTheory::EdgePrivate
 {
 public:
-    EdgePrivate()
-        : m_valid(false)
-    {
-    }
-
-    ~EdgePrivate()
-    {
-    }
-
     EdgePtr q;
     NodePtr m_from;
     NodePtr m_to;
     EdgeTypePtr m_type;
-    bool m_valid;
+    bool m_valid{false};
+    QStringList m_dynamicPropertiesModel; //!< provides the access public list for ListItemModel
+    QMap<QString, QVariant> m_dynamicProperties;
 };
 
 Edge::Edge()
@@ -128,24 +121,38 @@ void Edge::setType(EdgeTypePtr type)
 
 QVariant Edge::dynamicProperty(const QString &property) const
 {
-    return Edge::property(("_graph_" + property).toLatin1());
+    return d->m_dynamicProperties.value(property);
 }
 
 QStringList Edge::dynamicProperties() const
 {
-    return d->m_type->dynamicProperties();
+    return d->m_dynamicPropertiesModel;
 }
 
 void Edge::setDynamicProperty(const QString &property, const QVariant &value)
 {
-    if (!d->m_type) {
-        qCWarning(GRAPHTHEORY_GENERAL) << "No type registered, aborting to set property.";
-    }
     if (value.isValid() && !d->m_type->dynamicProperties().contains(property)) {
         qCWarning(GRAPHTHEORY_GENERAL) << "Dynamic property not registered at type, aborting to set property.";
     }
-    setProperty(("_graph_" + property).toLatin1(), value);
-    Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));
+    if (d->m_dynamicPropertiesModel.contains(property)) {
+        Q_ASSERT(d->m_dynamicProperties.contains(property));
+        if (value != QVariant::Invalid) {
+            d->m_dynamicProperties.insert(property, value);
+            Q_EMIT dynamicPropertyChanged(d->m_dynamicPropertiesModel.indexOf(property));
+        } else {
+            int index = d->m_dynamicPropertiesModel.indexOf(property);
+            Q_EMIT dynamicPropertiesAboutToBeRemoved(index, index);
+            d->m_dynamicProperties.remove(property);
+            d->m_dynamicPropertiesModel.removeAt(index);
+            Q_EMIT dynamicPropertyRemoved();
+        }
+    } else {
+        Q_ASSERT(!d->m_dynamicProperties.contains(property));
+        Q_EMIT dynamicPropertyAboutToBeAdded(property, d->m_dynamicPropertiesModel.size());
+        d->m_dynamicProperties.insert(property, value);
+        d->m_dynamicPropertiesModel << property;
+        Q_EMIT dynamicPropertyAdded();
+    }
 }
 
 void Edge::updateDynamicProperty(const QString &property)
@@ -154,15 +161,13 @@ void Edge::updateDynamicProperty(const QString &property)
     if (!d->m_type->dynamicProperties().contains(property)) {
         setDynamicProperty(property, QVariant::Invalid);
     }
-
-    Q_EMIT dynamicPropertiesChanged();
+    Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));
 }
 
 void Edge::renameDynamicProperty(const QString &oldProperty, const QString &newProperty)
 {
     setDynamicProperty(newProperty, dynamicProperty(oldProperty));
     setDynamicProperty(oldProperty, QVariant::Invalid);
-    Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(newProperty));
 }
 
 void Edge::setQpointer(EdgePtr q)

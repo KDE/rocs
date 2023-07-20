@@ -22,14 +22,10 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
     connect(m_edge.data(), &Edge::styleChanged, this, [=]() {
         Q_EMIT colorChanged(m_edge->type()->style()->color());
     });
-    connect(m_edge.data(), &Edge::dynamicPropertiesChanged, this, &EdgeWrapper::updateDynamicProperties);
     connect(m_edge.data(), &Edge::typeChanged, this, &EdgeWrapper::typeChanged);
-    updateDynamicProperties();
 }
 
-EdgeWrapper::~EdgeWrapper()
-{
-}
+EdgeWrapper::~EdgeWrapper() = default;
 
 EdgePtr EdgeWrapper::edge() const
 {
@@ -81,31 +77,12 @@ bool EdgeWrapper::directed() const
     return false;
 }
 
-bool EdgeWrapper::event(QEvent *e)
+void EdgeWrapper::setProperty(const QString &name, const QJSValue &value)
 {
-    if (e->type() == QEvent::DynamicPropertyChange) {
-        QDynamicPropertyChangeEvent *propertyEvent = static_cast<QDynamicPropertyChangeEvent *>(e);
-        QString name = QString::fromUtf8(propertyEvent->propertyName());
-        QVariant value = property(propertyEvent->propertyName());
-        // only propagate property to edge object if it is registered
-        if (m_edge->dynamicProperties().contains(name)) {
-            m_edge->setDynamicProperty(name, value);
-        }
-        return true;
-    }
-    return QObject::event(e);
+    m_edge->setDynamicProperty(name, value.toVariant());
 }
 
-void EdgeWrapper::updateDynamicProperties()
+QJSValue EdgeWrapper::property(const QString &name) const
 {
-    const auto dynamicProperties = m_edge->dynamicProperties();
-    for (const QString &property : dynamicProperties) {
-        // property value must not be set to QVariant::Invalid, else the properties are not accessible
-        // from the script engine
-        if (m_edge->dynamicProperty(property).isValid()) {
-            setProperty(property.toUtf8(), m_edge->dynamicProperty(property));
-        } else {
-            setProperty(property.toUtf8(), QVariant::Int);
-        }
-    }
+    return QJSValue(m_edge->dynamicProperty(name).toString());
 }
