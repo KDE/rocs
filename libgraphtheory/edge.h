@@ -87,6 +87,16 @@ public:
     void setType(EdgeTypePtr type);
 
     /**
+     * @return the weight of the edge
+     */
+    qreal weight() const;
+
+    /**
+     * set weight of edge to @param weight
+     */
+    void setWeight(qreal weight);
+
+    /**
      * @return return value of dynamic property, value is QVariant::Invalid if it is not set
      */
     QVariant dynamicProperty(const QString &property) const;
@@ -139,6 +149,7 @@ Q_SIGNALS:
      * about a change of the style object.
      **/
     void styleChanged();
+    void weightChanged(qreal weight);
 
 private Q_SLOTS:
     void updateDynamicProperty(const QString &property);

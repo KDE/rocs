@@ -23,6 +23,7 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
         Q_EMIT colorChanged(m_edge->type()->style()->color());
     });
     connect(m_edge.data(), &Edge::typeChanged, this, &EdgeWrapper::typeChanged);
+    connect(m_edge.data(), &Edge::weightChanged, this, &EdgeWrapper::weightChanged);
 }
 
 EdgeWrapper::~EdgeWrapper() = default;
@@ -57,6 +58,16 @@ void EdgeWrapper::setType(int typeId)
     }
     m_edge->setType(newType);
     // change signal will be emitted by connection to m_node signal
+}
+
+void EdgeWrapper::setWeight(qreal weight)
+{
+    m_edge->setWeight(weight);
+}
+
+qreal EdgeWrapper::weight() const
+{
+    return m_edge->weight();
 }
 
 GraphTheory::NodeWrapper *EdgeWrapper::from() const

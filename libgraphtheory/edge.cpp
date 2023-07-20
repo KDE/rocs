@@ -22,6 +22,7 @@ public:
     NodePtr m_to;
     EdgeTypePtr m_type;
     bool m_valid{false};
+    qreal m_weight{1.0};
     QStringList m_dynamicPropertiesModel; //!< provides the access public list for ListItemModel
     QMap<QString, QVariant> m_dynamicProperties;
 };
@@ -117,6 +118,19 @@ void Edge::setType(EdgeTypePtr type)
 
     Q_EMIT typeChanged(type);
     Q_EMIT styleChanged();
+}
+
+qreal Edge::weight() const
+{
+    return d->m_weight;
+}
+
+void Edge::setWeight(qreal weight)
+{
+    if (weight != d->m_weight) {
+        d->m_weight = weight;
+        Q_EMIT weightChanged(weight);
+    }
 }
 
 QVariant Edge::dynamicProperty(const QString &property) const

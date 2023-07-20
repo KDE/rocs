@@ -18,6 +18,13 @@ An edge is the connection of two nodes. Edges can be either directed or undirect
     </description>
     <type>string</type>
 </property>
+<property>
+    <name>weight</name>
+    <description>
+        <para>Read and set the weight of the edge.</para>
+    </description>
+    <type>real</type>
+</property>
 </properties>
 <methods>
 <method>

@@ -29,6 +29,7 @@ class EdgeWrapper : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
+    Q_PROPERTY(qreal weight READ weight WRITE setWeight NOTIFY weightChanged)
 
 public:
     EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper);
@@ -47,6 +48,9 @@ public:
      * If @p typeId does not name the ID of any EdgeType, the type is not changed.
      */
     void setType(int typeId);
+
+    void setWeight(qreal weight);
+    qreal weight() const;
 
     Q_INVOKABLE GraphTheory::NodeWrapper *from() const;
     Q_INVOKABLE GraphTheory::NodeWrapper *to() const;
@@ -68,6 +72,7 @@ Q_SIGNALS:
     void message(const QString &messageString, Kernel::MessageType type) const;
     void colorChanged(const QColor &color);
     void typeChanged();
+    void weightChanged(qreal weight);
 
 private:
     Q_DISABLE_COPY(EdgeWrapper)
