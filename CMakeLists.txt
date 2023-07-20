@@ -49,9 +49,7 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONEN
     Core
     Gui
     QuickWidgets
-    Script
     Widgets
-    ScriptTools
     Svg
     XmlPatterns
     ${QT_CONDITIONAL_COMPONENTS}

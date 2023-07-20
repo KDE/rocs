@@ -2,10 +2,6 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
-include_directories(
-    ./
-)
-
 # we use SOVERION 0 to make clear that this is neither stable API nor stable ABI
 # i.e., the library for now is only used internally in Rocs and we require the exact
 # version as released alongside Rocs
@@ -75,8 +71,6 @@ target_link_libraries(rocsgraphtheory
         Qt::Quick
         Qt::QuickWidgets
         Qt::Gui
-        Qt::Script
-        Qt::ScriptTools
         KF5::CoreAddons
         KF5::I18n
         KF5::ItemViews
