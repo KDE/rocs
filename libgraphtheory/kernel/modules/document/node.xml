@@ -51,6 +51,39 @@ Note that dynamic properties are only available after script execution, if they 
 </properties>
 <methods>
 <method>
+    <name>property(identifier)</name>
+    <description>
+        <para>Return the value of the property as currently set.</para>
+    </description>
+    <returnType>variant</returnType>
+    <parameters>
+        <parameter>
+            <name>identifier</name>
+            <type>string</type>
+            <info>Identifier the property</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>setProperty(identifier, value)</name>
+    <description>
+        <para>Set the property selected by identifier to the given value.</para>
+    </description>
+    <returnType>void</returnType>
+    <parameters>
+        <parameter>
+            <name>identifier</name>
+            <type>string</type>
+            <info>Identifier of the property</info>
+        </parameter>
+        <parameter>
+            <name>value</name>
+            <type>variant</type>
+            <info>The value to be set for the property (JavaScript val).</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
     <name>edges()</name>
     <description>
         <para>Return a list of all edges (incoming and outgoing) of this node.</para>

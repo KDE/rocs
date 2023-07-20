@@ -21,6 +21,39 @@ An edge is the connection of two nodes. Edges can be either directed or undirect
 </properties>
 <methods>
 <method>
+    <name>property(identifier)</name>
+    <description>
+        <para>Return the value of the property as currently set.</para>
+    </description>
+    <returnType>variant</returnType>
+    <parameters>
+        <parameter>
+            <name>identifier</name>
+            <type>string</type>
+            <info>Identifier of the property</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>setProperty(identifier, value)</name>
+    <description>
+        <para>Set the property selected by identifier to the given value.</para>
+    </description>
+    <returnType>void</returnType>
+    <parameters>
+        <parameter>
+            <name>identifier</name>
+            <type>string</type>
+            <info>Identifier the property</info>
+        </parameter>
+        <parameter>
+            <name>value</name>
+            <type>variant</type>
+            <info>The value to be set for the property (JavaScript val).</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
     <name>from()</name>
     <description>
         <para>Return the origin node of the edge.</para>
