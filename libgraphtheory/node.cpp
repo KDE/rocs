@@ -29,15 +29,15 @@ public:
     {
     }
 
-    ~NodePrivate()
-    {
-    }
+    ~NodePrivate() = default;
 
     NodePtr q;
     GraphDocumentPtr m_document;
     NodeTypePtr m_type;
     EdgeList m_edges;
     bool m_valid;
+    QStringList m_dynamicPropertiesModel; //!< provides the access public list for ListItemModel
+    QMap<QString, QVariant> m_dynamicProperties;
     qreal m_x;
     qreal m_y;
     QColor m_color;
@@ -265,27 +265,38 @@ void Node::setColor(const QColor &color)
 
 QVariant Node::dynamicProperty(const QString &property) const
 {
-    return Node::property(("_graph_" + property).toLatin1());
+    return d->m_dynamicProperties.value(property);
 }
 
 QStringList Node::dynamicProperties() const
 {
-    if (!d->m_type) {
-        return QStringList();
-    }
-    return d->m_type->dynamicProperties();
+    return d->m_dynamicPropertiesModel;
 }
 
 void Node::setDynamicProperty(const QString &property, const QVariant &value)
 {
-    if (!d->m_type) {
-        qCWarning(GRAPHTHEORY_GENERAL) << "No type registered, aborting to set property.";
-    }
     if (value.isValid() && !d->m_type->dynamicProperties().contains(property)) {
         qCWarning(GRAPHTHEORY_GENERAL) << "Dynamic property not registered at type, aborting to set property.";
     }
-    setProperty(("_graph_" + property).toLatin1(), value);
-    Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));
+    if (d->m_dynamicPropertiesModel.contains(property)) {
+        Q_ASSERT(d->m_dynamicProperties.contains(property));
+        if (value != QVariant::Invalid) {
+            d->m_dynamicProperties.insert(property, value);
+            Q_EMIT dynamicPropertyChanged(d->m_dynamicPropertiesModel.indexOf(property));
+        } else {
+            int index = d->m_dynamicPropertiesModel.indexOf(property);
+            Q_EMIT dynamicPropertiesAboutToBeRemoved(index, index);
+            d->m_dynamicProperties.remove(property);
+            d->m_dynamicPropertiesModel.removeAt(index);
+            Q_EMIT dynamicPropertyRemoved();
+        }
+    } else {
+        Q_ASSERT(!d->m_dynamicProperties.contains(property));
+        Q_EMIT dynamicPropertyAboutToBeAdded(property, d->m_dynamicPropertiesModel.size());
+        d->m_dynamicProperties.insert(property, value);
+        d->m_dynamicPropertiesModel << property;
+        Q_EMIT dynamicPropertyAdded();
+    }
 }
 
 void Node::updateDynamicProperty(const QString &property)
@@ -301,7 +312,6 @@ void Node::renameDynamicProperty(const QString &oldProperty, const QString &newP
 {
     setDynamicProperty(newProperty, dynamicProperty(oldProperty));
     setDynamicProperty(oldProperty, QVariant::Invalid);
-    Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(newProperty));
 }
 
 void Node::setQpointer(NodePtr q)

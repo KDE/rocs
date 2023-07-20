@@ -23,15 +23,10 @@ NodeWrapper::NodeWrapper(NodePtr node, DocumentWrapper *documentWrapper)
     connect(m_node.data(), &Node::idChanged, this, &NodeWrapper::idChanged);
     connect(m_node.data(), &Node::colorChanged, this, &NodeWrapper::colorChanged);
     connect(m_node.data(), &Node::positionChanged, this, &NodeWrapper::positionChanged);
-    connect(m_node.data(), &Node::dynamicPropertiesChanged, this, &NodeWrapper::updateDynamicProperties);
     connect(m_node.data(), &Node::typeChanged, this, &NodeWrapper::typeChanged);
-
-    updateDynamicProperties();
 }
 
-NodeWrapper::~NodeWrapper()
-{
-}
+NodeWrapper::~NodeWrapper() = default;
 
 NodePtr NodeWrapper::node() const
 {
@@ -427,31 +422,12 @@ QJSValue NodeWrapper::distance(const QString &lengthProperty, QList<NodeWrapper 
     return array;
 }
 
-bool NodeWrapper::event(QEvent *e)
+void NodeWrapper::setProperty(const QString &name, const QJSValue &value)
 {
-    if (e->type() == QEvent::DynamicPropertyChange) {
-        QDynamicPropertyChangeEvent *propertyEvent = static_cast<QDynamicPropertyChangeEvent *>(e);
-        QString name = QString::fromUtf8(propertyEvent->propertyName());
-        QVariant value = property(propertyEvent->propertyName());
-        // only propagate property to node object if it is registered
-        if (m_node->dynamicProperties().contains(name)) {
-            m_node->setDynamicProperty(name, value);
-        }
-        return true;
-    }
-    return QObject::event(e);
+    m_node->setDynamicProperty(name, value.toVariant());
 }
 
-void NodeWrapper::updateDynamicProperties()
+QJSValue NodeWrapper::property(const QString &name) const
 {
-    const auto dynamicProperties = m_node->dynamicProperties();
-    for (const auto &property : dynamicProperties) {
-        // property value must not be set to QVariant::Invalid, else the properties are not accessible
-        // from the script engine
-        if (m_node->dynamicProperty(property).isValid()) {
-            setProperty(property.toUtf8(), m_node->dynamicProperty(property));
-        } else {
-            setProperty(property.toUtf8(), QVariant::Int);
-        }
-    }
+    return QJSValue(m_node->dynamicProperty(name).toString());
 }

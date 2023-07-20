@@ -168,11 +168,17 @@ public:
      */
     Q_INVOKABLE QJSValue distance(const QString &lengthProperty, QList<GraphTheory::NodeWrapper *> targets);
 
-    /** reimplemented from QObject **/
-    bool event(QEvent *e) override;
+    /**
+     * @brief update are set property of this node
+     * @param name the identifier of the property
+     * @param value the value of the property
+     */
+    Q_INVOKABLE void setProperty(const QString &name, const QJSValue &value);
 
-public Q_SLOTS:
-    void updateDynamicProperties();
+    /**
+     * @return the property value identified by @p name
+     */
+    Q_INVOKABLE QJSValue property(const QString &name) const;
 
 Q_SIGNALS:
     void message(const QString &messageString, Kernel::MessageType type) const;

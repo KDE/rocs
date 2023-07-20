@@ -241,9 +241,9 @@ void TestKernel::nodeDynamicProperties()
     NodeTypePtr type = document->nodeTypes().first();
     NodePtr node = Node::create(document);
 
-    type->addDynamicProperty("propertyA");
-    type->addDynamicProperty("propertyB");
-    type->addDynamicProperty("propertyC");
+    type->addDynamicProperty("A");
+    type->addDynamicProperty("B");
+    type->addDynamicProperty("C");
 
     // test nodes
     Kernel kernel;
@@ -251,20 +251,20 @@ void TestKernel::nodeDynamicProperties()
     QJSValue result;
 
     // property read-access from script
-    node->setDynamicProperty("propertyA", "1");
-    script = "Document.nodes()[0].propertyA;";
+    node->setDynamicProperty("A", "1");
+    script = "Document.nodes()[0].property(\"A\");";
     result = kernel.execute(document, script);
     QCOMPARE(result.toString().toInt(), 1);
 
     // property local write/read-access in script
-    script = "Document.nodes()[0].propertyB = 2; Document.nodes()[0].propertyB";
+    script = "Document.nodes()[0].setProperty(\"B\", 2); Document.nodes()[0].property(\"B\")";
     kernel.execute(document, script);
-    QCOMPARE(node->dynamicProperty("propertyB").toInt(), 2);
+    QCOMPARE(node->dynamicProperty("B").toInt(), 2);
 
     // property write-access from script
-    script = "Document.nodes()[0].propertyC = 3";
+    script = "Document.nodes()[0].setProperty(\"C\", 3)";
     kernel.execute(document, script);
-    QCOMPARE(node->dynamicProperty("propertyC").toInt(), 3);
+    QCOMPARE(node->dynamicProperty("C").toInt(), 3);
 
     // cleanup
     document->destroy();
