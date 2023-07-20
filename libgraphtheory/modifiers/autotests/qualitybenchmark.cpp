@@ -34,6 +34,7 @@ void applyForceBasedLayout(GraphDocumentPtr document, const quint32 seed)
 // Applies the radial tree layout algorithm with fixed parameters.
 void applyRadialLayout(GraphDocumentPtr document, const quint32 seed)
 {
+    Q_UNUSED(seed);
     constexpr qreal nodeRadius = 10.;
     constexpr qreal margin = 5.;
     constexpr qreal nodeSeparation = 50.;
@@ -198,6 +199,8 @@ void benchmarkOnTrees(const quint32 genSeed, const quint32 runSeed, F applyLayou
 
 int main(int argc, char *argv[])
 {
+    Q_UNUSED(argc);
+    Q_UNUSED(argv);
     // Gets different random number generators seeds for each graph class,
     // making sure that we always generate the same graphs for each class.
     QRandomGenerator seedGenerator(0);
