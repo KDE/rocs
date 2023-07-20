@@ -21,7 +21,7 @@ function reset(G) {
     G.edges().forEach(unmark)
     
     G.nodes().forEach(function(node) {
-        node.seen = false
+        node.setProperty("seen", false)
     })
 }
 
@@ -44,11 +44,11 @@ function printOrder() {
 
 // Recursive version of the DFS, modified
 function topologicalSort(G, node) {
-    node.seen = true
+    node.setProperty("seen", true)
     mark(node)
     
     node.successors().forEach(function(succ) {
-        if (!succ.seen) {
+        if (!succ.property("seen")) {
             topologicalSort(G, succ)
         }
     })

@@ -12,14 +12,14 @@
  */
 function reset(G) {
     G.nodes().forEach(function (node) {
-        node.seen = false
-        node.leading_edge = ""
+        node.setProperty("seen", false)
+        node.setProperty("leading_edge", "")
     })
     
     G.edges().forEach(function (edge) {
-        edge.residual = false
-        edge.flow = 0
-        edge.capacity = parseInt(edge.capacity)
+        edge.setProperty("residual", false)
+        edge.setProperty("flow, 0)
+        edge.setProperty("capacity", parseInt(edge.capacity))
     })
 }
 
@@ -45,7 +45,7 @@ function applyToNodesInPath(path, func) {
 function removeResidualEdges(G) {
     edges = G.edges()
     edges.forEach(function (edge) {
-        if (edge.residual) {
+        if (edge.property("residual")) {
             G.remove(edge)
         }
     })
@@ -59,9 +59,9 @@ function createResidualEdges(G) {
     edges.forEach(function (edge) {
         residual_edge = G.createEdge(edge.to(), edge.from())
         residual_edge.type = 2
-        residual_edge.residual = true
-        edge.reverse = residual_edge
-        residual_edge.reverse = edge
+        residual_edge.setPropety("residual", true)
+        edge.setProperty("reverse", residual_edge)
+        residual_edge.setProperty("reverse", edge)
     })
 }
 
@@ -71,7 +71,7 @@ function createResidualEdges(G) {
  */
 function findAugmentingPath(G, source, sink) {
     G.nodes().forEach(function (node) {
-        node.seen = false
+        node.setProperty("seen", false)
     })
     
     var stack = [source]
@@ -79,29 +79,29 @@ function findAugmentingPath(G, source, sink) {
     while (stack.length > 0) {
         current = stack.pop()
         
-        if (current.seen)
+        if (current.property("seen"))
             continue
         
-        current.seen = true
+        current.setProperty("seen", true)
         
         current.outEdges()
         .filter(function (edge) {
-            return edge.flow < edge.capacity && !(edge.to().seen)
+            return edge.property("flow") < edge.property("capacity") && !(edge.to().property("seen"))
         })
         .forEach(function (edge) {
             
             stack.push(edge.to())
-            edge.to().leading_edge = edge
+            edge.to().setProperty("leading_edge", edge)
         })
     }
     
     //Build array of edges in the augmenting path
     path = []
-    if (sink.seen) {
+    if (sink.property("seen")) {
         
         end_node = sink
         while (end_node != source) {
-            edge = end_node.leading_edge
+            edge = end_node.property("leading_edge")
             path.push(edge)
             end_node = edge.from()
         }
@@ -114,7 +114,7 @@ function findAugmentingPath(G, source, sink) {
  */
 function increaseFlow(path) {
     flow_increase = path.map(function (edge) {
-      return edge.capacity - edge.flow  
+      return edge.property("capacity") - edge.property("flow")
     }).reduce(function (flow_increase, residual_capacity) {
         return Math.min(flow_increase, residual_capacity)
     }, Infinity)
@@ -122,12 +122,12 @@ function increaseFlow(path) {
     path.forEach(function (edge) {
         edge.flow += flow_increase
         
-        if (edge.residual) {
-            edge.capacity -= edge.flow
-            edge.reverse.flow -= edge.flow
-            edge.flow = 0
+        if (edge.property("residual")) {
+            edge.setProperty("capacity", edge.property("capacity") - edge.property("flow"))
+            edge.property("reverse").setProperty("flow", edge.property("reverse").property("flow") - edge.property("flow"))
+            edge.setProperty("flow", 0)
         } else {
-            edge.reverse.capacity += edge.flow
+            edge.property("reverse").setProperty("capacity", edge.property("reverse").property("capacity") + edge.property("flow"))
         }
     })
     
@@ -171,7 +171,7 @@ function maximumFlow(G, source, sink) {
     //Mark nodes in the same side as the sink in the min-cut
     G.nodes()
     .filter(function (node) {
-        return node.seen
+        return node.property("seen")
     })
     .forEach(markNode)
     

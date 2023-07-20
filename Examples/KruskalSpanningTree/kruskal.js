@@ -38,7 +38,7 @@ function unmark(node) {
 
 function getIndex(node, array) {
     for (var i = 0; i < array.length; i++) {
-        if (array[i].element.id == node.id) {
+        if (array[i].property("element").id == node.id) {
             return i
         }
     }
@@ -65,27 +65,27 @@ function PriorityQueue() {
     
     // Time Complexity: O(N)
     this.enqueue = function(node, weight) { 
-	var e = new Element(node, weight); 
-	var contain = false; 
+        var e = new Element(node, weight);
+        var contain = false;
 
-	for (var i = 0; i < this.items.length; i++) { 
-            if (this.items[i].priority > e.priority) { 
+        for (var i = 0; i < this.items.length; i++) {
+            if (this.items[i].property("priority") > e.property("priority")) {
                 this.items.splice(i, 0, e); 
                 contain = true; 
                 break; 
             } 
-	} 
+        }
 
-	if (!contain) { 
+        if (!contain) {
             this.items.push(e); 
-	} 
+        }
     }
 
     // Time Complexity: O(1)
     this.dequeue = function() { 
-	if (this.isEmpty()) 
+        if (this.isEmpty())
             return "Underflow"; 
-	return this.items.shift(); 
+        return this.items.shift();
     }
     
     // Time Complexity: O(N)
@@ -94,7 +94,7 @@ function PriorityQueue() {
         
         // In this case, we only update the PQ if the new priority
         // is lower
-        if (idx != -1 && weight < this.items[idx].priority) {
+        if (idx != -1 && weight < this.items[idx].property("priority")) {
             this.items.splice(idx, 1)
             this.enqueue(node, weight)
             return true
@@ -110,8 +110,8 @@ function PriorityQueue() {
     // Time Complexity: O(N)
     this.print = function() {
         this.items.forEach(function(item) {
-            Console.log(item.element.from().id + " - " + item.element.to().id)
-            Console.log(item.priority)
+            Console.log(item.property("element").from().id + " - " + item.property("element").to().id)
+            Console.log(item.property("priority"))
             Console.log("----")
         })
     }

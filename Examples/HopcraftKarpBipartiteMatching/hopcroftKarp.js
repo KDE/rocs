@@ -29,8 +29,8 @@ function reset(G) {
     G.edges().forEach(unmark)
     
     G.nodes().forEach(function(node) {
-	node.seen = false
-        node.bip  = 0
+        node.setProperty("seen", false)
+        node.setProperty("bip", 0)
     })
 }
 
@@ -72,37 +72,37 @@ function divideBipartite(G) {
         
         var top = Q.shift()
         
-        top.seen  = true
+        top.setProperty("seen", true)
         mark(top)
         
         neigh = top.neighbors()
         
         // Color the neighbors of top
         for (var i = 0; i < neigh.length; i++) {
-            if (neigh[i].bip == 0) {                    // Not assigned a set yet
-                neigh[i].bip = (top.bip == 1 ? 2 : 1)
+            if (neigh[i].property("bip") == 0) {                    // Not assigned a set yet
+                neigh[i].property("bip") = (top.property("bip") == 1 ? 2 : 1)
             } else {                                    // Assigned, check if correct
-                if (neigh[i].bip == top.bip && neigh[i].id != top.id) {
+                if (neigh[i].property("bip") == top.property("bip") && neigh[i].id != top.id) {
                     return false
                 }
             }
             
-            if (!neigh[i].seen) {
+            if (!neigh[i].property("seen")) {
                 Q.push(neigh[i])
             }
         }
     }
     
     G.nodes().forEach(function(node) {
-        if (node.bip == 1) {
+        if (node.property("bip") == 1) {
             L.push(node)
         }
         
-        if (node.bip == 2) {
+        if (node.property("bip") == 2) {
             R.push(node)
         }
         
-        if (node.bip == 0) {
+        if (node.property("bip") == 0) {
             Console.log("Unconnected nodes!")
         }
     })

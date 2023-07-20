@@ -22,7 +22,7 @@ function reset(G) {
     G.edges().forEach(unmark)
     
     G.nodes().forEach(function(node) {
-        node.seen = false
+        node.setProperty("seen", false)
     })
 }
 
@@ -37,12 +37,12 @@ function unmark(node) {
 function dfs(G, start) {
     
     var stk = [start]
-    start.seen = true
+    start.setProperty("seen", true)
     
     while (stk.length > 0) {
         // Get next node
         var top = stk.pop()
-        top.seen = true
+        top.setProperty("seen", true)
         
         // Mark the node
         mark(top)
@@ -50,7 +50,7 @@ function dfs(G, start) {
         // Process
         top.neighbors()
         .filter(function(x) {   // Only get the unseen neighbors
-            return !(x.seen)
+            return !(x.property("seen")
         })
         .forEach(function(x) {  // Push the unseen nodes
             stk.push(x)
