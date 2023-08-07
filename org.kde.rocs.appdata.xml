@@ -53,7 +53,7 @@
   <summary xml:lang="et">Rocs graafiteooria</summary>
   <summary xml:lang="fi">Rocs-graafiteoria</summary>
   <summary xml:lang="fr">Théorie des graphes Rocs</summary>
-  <summary xml:lang="gl">Teoría de gráficos con Rocs</summary>
+  <summary xml:lang="gl">Teoría de gráficos con Rocs.</summary>
   <summary xml:lang="id">Teori Grafik Rocs</summary>
   <summary xml:lang="it">Rocs - Teoria dei grafi</summary>
   <summary xml:lang="ka">Rocs -ის გრაფიკის თეორია</summary>
@@ -125,7 +125,7 @@
       <caption xml:lang="et">Graafidega töötamine Rocsis</caption>
       <caption xml:lang="fi">Graafityöskentely Rocsissa</caption>
       <caption xml:lang="fr">Travail sur des graphes grâce à Rocs</caption>
-      <caption xml:lang="gl">Traballando con grafos en Rocs</caption>
+      <caption xml:lang="gl">Traballando con grafos en Rocs.</caption>
       <caption xml:lang="id">Bekerja dengan grafik di Rocs</caption>
       <caption xml:lang="it">Lavorare coi grafi in Rocs</caption>
       <caption xml:lang="ka">გრაფიკებთან მუშაობა Rocs-ში</caption>
