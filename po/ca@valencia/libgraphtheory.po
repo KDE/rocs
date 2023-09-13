@@ -1210,7 +1210,7 @@ msgid ""
 "Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
 "for red)."
 msgstr ""
-"Llig i establix la cadena de color d'este node en valors hex (p. ex. "
+"Llig i establix la cadena de color d'este node en valors hex (p. ex., "
 "«#ff0000» per al roig)."
 
 #: kernel/modules/document/node.xml:47
