@@ -45,6 +45,8 @@ target_sources(rocs PRIVATE
     plugins/scriptapi/scriptapimanager.cpp
     plugins/scriptapi/scriptapimodel.cpp
     main.cpp
+
+    rocs.qrc
 )
 
 ki18n_wrap_ui(rocs
@@ -86,7 +88,6 @@ target_link_libraries(rocs
 ################## INSTALLS ##########################
 install(TARGETS rocs ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.rocs.desktop DESTINATION ${KDE_INSTALL_APPDIR})
-install(FILES rocsui.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/rocs)
 install(FILES rocs.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
 
 ecm_optional_add_subdirectory(plugins/scriptapi)
