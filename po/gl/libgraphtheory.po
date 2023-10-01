@@ -827,17 +827,17 @@ msgstr "Formato Graphviz (%1)"
 #: fileformats/tgf/tgffileformat.cpp:52
 #, kde-format
 msgid "Could not open file \"%1\" in read mode: %2"
-msgstr "Non se puido abrir o ficheiro «%1» no modo de lectura: %2"
+msgstr "Non foi posíbel abrir o ficheiro «%1» no modo de lectura: %2"
 
 #: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
 #, kde-format
 msgid "Could not parse file \"%1\"."
-msgstr "Non se puido procesar o ficheiro «%1»."
+msgstr "Non foi posíbel procesar o ficheiro «%1»."
 
 #: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
 #, kde-format
 msgid "Cannot open file %1 to write document. Error: %2"
-msgstr "Non se pode abrir o ficheiro %1 para escribir o documento. Erro: %2"
+msgstr "Non é posíbel abrir o ficheiro %1 para escribir o documento. Erro: %2"
 
 #: fileformats/fileformatmanager.cpp:48
 #, kde-format
@@ -848,7 +848,7 @@ msgstr "Erro de complemento"
 #: fileformats/fileformatmanager.cpp:50
 #, kde-format
 msgid "Plugins could not be found in specified directories:<br>"
-msgstr "Non se puideron atopar complementos nos directorios indicados:<br>"
+msgstr "Non foi posíbel atopar complementos nos directorios indicados:<br>"
 
 #: fileformats/fileformatmanager.cpp:52
 #, kde-format
@@ -874,12 +874,12 @@ msgstr "Formato de ficheiro de grafos de Rocs 1 (%1)"
 #: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
-msgstr "Non se puido abrir o ficheiro «%1» no modo de escritura: %2"
+msgstr "Non foi posíbel abrir o ficheiro «%1» no modo de escritura: %2"
 
 #: fileformats/rocs1/rocs1fileformat.cpp:269
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
-msgstr "Non se puideron escribir datos, interrompendo. Erro: %1."
+msgstr "Non foi posíbel escribir datos, interrompendo. Erro: %1."
 
 #: fileformats/rocs2/rocs2fileformat.cpp:40
 #, kde-format
@@ -902,14 +902,15 @@ msgstr "Formato Trivial Graph (%1)"
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
 msgstr ""
-"Non se puido procesar o ficheiro «%1». O identificador «%1» estase xa a usar."
+"Non foi posíbel procesar o ficheiro «%1». O identificador «%1» estase xa a "
+"usar."
 
 #: fileformats/tgf/tgffileformat.cpp:85
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
 msgstr ""
-"Non se puido procesar o ficheiro. A aresta de «%1» a «%2» usa vértices sen "
-"definir."
+"Non foi posíbel procesar o ficheiro. A aresta de «%1» a «%2» usa vértices "
+"sen definir."
 
 #: fileformats/tikz/tikzfileformat.cpp:34
 #, kde-format

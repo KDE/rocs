@@ -198,7 +198,7 @@ msgid ""
 "The Rocs project could not be imported because the project file could not be "
 "parsed."
 msgstr ""
-"Non se puido importar o proxecto de Rocs porque non se puido procesar o "
+"Non foi posíbel importar o proxecto de Rocs porque non se puido procesar o "
 "ficheiro de proxecto."
 
 #. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
