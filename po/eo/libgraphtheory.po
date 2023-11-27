@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: 2023-02-10 23:12+0100\n"
+"PO-Revision-Date: 2023-11-26 20:12+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -964,7 +964,7 @@ msgstr "%1: \"eĝo\" ne estas valida eĝobjekto"
 #, kde-format
 msgctxt "@info status message after successful script execution"
 msgid "<i>Execution Finished</i>"
-msgstr "<i>Ekzekuto Finita</i>"
+msgstr "<i>Efektivigo Finita</i>"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -1170,8 +1170,8 @@ msgstr ""
 "Nodo estas la datenelemento de grafeo.\n"
 "Ĝi povas havi arbitrajn dinamikajn ecojn kiuj estas aŭ agordita en la "
 "redaktilo aŭ simple asignitaj dum rultempo.\n"
-"Rimarku, ke dinamikaj trajtoj estas nur haveblaj post skriptekzekuto, se ili "
-"estas registritaj por la tipo de la nodo.\n"
+"Rimarku, ke dinamikaj trajtoj estas nur haveblaj post skriptefektivigo, se "
+"ili estas registritaj por la tipo de la nodo.\n"
 
 #: kernel/modules/document/node.xml:19
 #, kde-format
