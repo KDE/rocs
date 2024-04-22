@@ -1432,3 +1432,15 @@ msgstr "Selecciona i mou"
 #, kde-format
 msgid "Select and move elements on the scene"
 msgstr "Selecciona i mou els elements a l'escena"
+
+#~ msgid "Identifier"
+#~ msgstr "Identificador"
+
+#~ msgid "Color"
+#~ msgstr "Color"
+
+#~ msgid "unidirectional"
+#~ msgstr "Unidireccional"
+
+#~ msgid "bidirectional"
+#~ msgstr "Bidireccional"
