@@ -106,7 +106,7 @@
     <p xml:lang="zh-TW">Rocs 是一套圖形理論的整合介面環境，用來設計與分析圖形演算法。它提供一套易用的視覺編輯器，用來建立圖形；一套文稿引擎用來執行演算法；還有一些協助工具用來模擬與實驗 JavaScript 的 演算法。</p>
   </description>
   <content_rating type="oars-1.1"/>
-  <url type="homepage">https://edu.kde.org/applications/all/rocs</url>
+  <url type="homepage">https://apps.kde.org/rocs</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=rocs</url>
   <url type="help">https://docs.kde.org/?application=rocs</url>
   <url type="donation">https://www.kde.org/community/donations/?app=rocs&amp;source=appdata</url>
