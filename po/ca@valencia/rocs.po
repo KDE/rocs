@@ -429,7 +429,7 @@ msgstr "Guarda el projecte"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Project..."
-msgstr "Obri un projecte..."
+msgstr "Obri un projecte…"
 
 #: ui/mainwindow.cpp:278
 #, kde-format
@@ -441,7 +441,7 @@ msgstr "Projectes recents"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project As..."
-msgstr "Guarda el projecte com a..."
+msgstr "Guarda el projecte com a…"
 
 #: ui/mainwindow.cpp:284
 #, kde-format
@@ -453,31 +453,31 @@ msgstr "Document de graf nou"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Script File..."
-msgstr "Fitxer de script nou..."
+msgstr "Fitxer de script nou…"
 
 #: ui/mainwindow.cpp:286
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Graph..."
-msgstr "Importa un graf..."
+msgstr "Importa un graf…"
 
 #: ui/mainwindow.cpp:287
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Graph As..."
-msgstr "Exporta el graf com a..."
+msgstr "Exporta el graf com a…"
 
 #: ui/mainwindow.cpp:288
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Script..."
-msgstr "Importa un script..."
+msgstr "Importa un script…"
 
 #: ui/mainwindow.cpp:289
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Script..."
-msgstr "Exporta un script..."
+msgstr "Exporta un script…"
 
 #: ui/mainwindow.cpp:328
 #, kde-format
