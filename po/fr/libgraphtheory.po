@@ -2,22 +2,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Maxime Corteel <mcorteel@gmail.com>, 2015.
 # Simon Depiets <sdepiets@gmail.com>, 2018.
-# Xavier Besnard <xavier.besnard@kde.org>, 2020, 2021.
+# SPDX-FileCopyrightText: 2020, 2021, 2024 Xavier Besnard <xavier.besnard@kde.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: 2021-10-25 09:40+0200\n"
+"PO-Revision-Date: 2024-08-16 14:23+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -818,7 +818,7 @@ msgstr "Supprimer toutes les arêtes isolées"
 #: fileformats/dot/dotfileformat.cpp:45
 #, kde-format
 msgid "Graphviz Format (%1)"
-msgstr "Format Graphviz (%1)"
+msgstr "Format GraphViz (%1)"
 
 #: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
 #: fileformats/rocs1/rocs1fileformat.cpp:57
