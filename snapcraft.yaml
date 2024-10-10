@@ -37,6 +37,9 @@ parts:
     plugin: cmake
     source: .
     source-type: local
+    build-packages:
+      - libboost-dev
+      - libboost-graph-dev
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
