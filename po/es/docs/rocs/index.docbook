@@ -1,5 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+
+  <!ENTITY kappname "&rocs;">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % Spanish "INCLUDE">
 
@@ -8,7 +10,7 @@
 
 <bookinfo>
 <title
->El manual de &rocs;</title>
+>Manual de &rocs;</title>
 <authorgroup>
 <author
 ><personname
@@ -63,16 +65,16 @@
 </authorgroup>
 
 <date
->2021-10-23</date>
+>2016-04-10</date>
 <releaseinfo
->KDE Gear 21.08</releaseinfo>
+>Rocs 2.1.50 (Applications 16.04)</releaseinfo>
 
 <legalnotice
 >&FDLNotice;</legalnotice>
 
 <abstract>
 <para
->&rocs; es una herramienta de teoría de grafos. </para>
+>&rocs; is a graph theory tool by &kde;. </para>
 </abstract>
 
 <keywordset>
@@ -90,8 +92,6 @@
 >nodo</keyword>
 <keyword
 >arista</keyword>
-<keyword
->Rocs</keyword>
 </keywordset>
 
 </bookinfo>
@@ -122,19 +122,20 @@
 ></listitem>
 </itemizedlist>
 <para
->Para todos ellos, &rocs; proporciona un editor gráfico muy fácil de usar para crear grafos, un potente motor de guiones para ejecutar algoritmos y diversas herramientas auxiliares para realizar simulaciones, experimentos y exportar grafos. El modo usual de usar &rocs; consiste en crear un grafo, bien a mano (es decir, arrastrando nodos y aristas por la pizarra), o bien usando cualquiera de los generadores de grafos. A continuación puede implementar algoritmos de grafos y ejecutarlos sobre el grafo creado, con lo que cualquier cambio que realice el algoritmo se hará visible de forma inmediata en el editor de grafos. </para>
+>For all them, &rocs; provides an easy to use graphical editor for creating graphs, a powerful scripting engine to execute algorithms, and several helper tools for simulations, experiments, and graph exports. The typical way of using &rocs; is to create a graph, either by hand (i.e., dragging nodes and edges to the whiteboard), or by using one of the graph generators. Graph algorithms then can be implemented and executed on the created graph and all changes, which the algorithm performs, are visible immediately in the graph editor. </para>
 
 <screenshot>
-  <screeninfo
+<screeninfo
 >Una captura de pantalla de &rocs;.</screeninfo>
-  <mediaobject>
-    <imageobject
-><imagedata fileref="rocs-screenshot.png" format="PNG"/></imageobject>
-    <textobject
-><phrase
->Una captura de pantalla de &rocs;.</phrase
-></textobject>
-  </mediaobject>
+<mediaobject>
+<imageobject>
+<imagedata fileref="rocs-screenshot.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Una captura de pantalla de &rocs;.</phrase>
+</textobject>
+</mediaobject>
 </screenshot>
 </sect1>
 
@@ -165,31 +166,31 @@
 <title
 >Tipos de aristas</title>
 <para
->En algunos escenarios, los grafos consisten en distintos tipos de aristas (por ejemplo, un grafo no dirigido más las tres aristas calculadas por un algoritmo de búsqueda en anchura) que se deben manejar y mostrar de forma diferente. Para ello, además de un tipo de arista por omisión, puede definir otros tipos de aristas adicionales. Cada tipo de arista tiene su representación visual individual, sus propiedades dinámicas y se puede cambiar de dirigido a no dirigido. La interfaz de guiones proporciona los métodos necesarios para acceder de forma específica a las aristas de determinados tipos. </para>
+>In some scenarios, graphs consist of different types of edges (e.g., an undirected graph plus the tree edges computed by a breadh-first-search algorithm) that shall be handled and displayed differently. For this, besides a default edge type, you can define arbitrary other edge types. Each edge type has its individual visual representation, dynamic properties, and can be set to be either undirected or directed. The scripting interface provides convenience methods to specifically access only edges of specific types. </para>
 </sect2>
 
 <sect2>
 <title
 >Tipos de nodos</title>
 <para
->Del mismo modo que para los tipos de aristas, puede definir diferentes tipos de nodos de un grafo (por ejemplo, para proporcionar un papel especial a algunos nodos). Cada tipo de nodo posee su propia representación visual y propiedades dinámicas. </para>
+>Analog to edge types, you can define different types of nodes of a graph (e.g., to give some nodes special roles). Each node type has its own visual representation and dynamic properties. </para>
 </sect2>
 
 <sect2>
 <title
 >Propiedades</title>
 <para
->Cada elemento (nodo o arista) puede tener propiedades. Estas propiedades se deben configurar en el correspondiente tipo de nodo o arista. Los nombres de las propiedades pueden contener cualquier valor y sirven para identificarlas y para acceder a ellas. Para crear una nueva propiedad o para modificar una existente, use la barra lateral <guilabel
->Tipos de elementos</guilabel
->. Para abrir el diálogo de una propiedad, use el botón <inlinemediaobject
+>Every (node or edge) element can have properties. Those properties must be setup at the corresponding node or edge type. Properties are identified and accessed by their names and can contain any value. To create new or change existing properties, use the <guilabel
+>Element Types</guilabel
+> sidebar and use the <inlinemediaobject
 ><imageobject
-><imagedata fileref="document-properties.png" format="PNG"/> </imageobject
+><imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/> </imageobject
 ></inlinemediaobject
 ><guibutton
->Propiedades</guibutton
->. </para>
+>Properties</guibutton
+> button to open the property dialog. </para>
 <para
->También puede usar el motor de guiones para acceder a las propiedades registradas y modificar su valor. En el ejemplo siguiente se supondrá que la propiedad «weight» está registrada para el tipo de arista por omisión. <programlisting
+>You can also use the scripting engine to access registered properties and change their values. In the following example we assume that the property "weight" is registered for the default edge type. <programlisting
 >var nodes = Document.nodes()
 for (var i = 0; i &lt; nodes.length; ++i){
     nodes[i].weight = i;
@@ -210,7 +211,7 @@ for (var i = 0; i &lt; nodes.length; ++i){
 >cobertura de vértices mínima</emphasis
 >. En este problema se debe encontrar un subconjunto de nodos del grafo C del mínimo tamaño, de modo que cada arista de grafo esté conectada al menos a un nodo de C. Este problema es NP-complejo y deseamos ilustrar cómo encontrar una aproximación de factor 2 buscando una coincidencia en el grafo propuesto. </para>
 <para
->Nuestro objetivo es mostrar la correspondencia de las coincidencias y la cobertura de vértices mínima. Para ello, vamos a especificar dos tipos de aristas (uno para mostrar las aristas coincidentes y otro para mostrar las aristas «ordinarias»), así como dos tipos de nodos que vamos a usar para distinguir los nodos contenidos en C y los que no están contenidos en C. </para>
+>Our goal is to visualize the relationship of the matching and the minimum vertex cover. For this, we want to specify two edge types, one to display matching edges and one type to display "ordinary" edges, as well as two node types that we use to distinguish nodes contained in C and those not contained in C. </para>
 
 <sect2>
 <title
@@ -233,17 +234,13 @@ for (var i = 0; i &lt; nodes.length; ++i){
 <title
 >Creación de los tipos de elementos</title>
 <para
->Usaremos <guilabel
->Tipos de elementos</guilabel
-> para crear un segundo tipo de nodo y un segundo tipo de arista. Para estos dos nuevos tipos, abriremos el diálogo de propiedades usando sus respectivos botones <inlinemediaobject
-><imageobject
-><imagedata fileref="document-properties.png" format="PNG"/></imageobject
-></inlinemediaobject
-><guibutton
->Propiedades</guibutton
-> y fijaremos sus ID a <literal
+>We use the <guilabel
+>Element Types</guilabel
+> and create a second node type as well as a second edge type. For both new types we open the properties dialog by using the respective <guibutton
+>Properties</guibutton
+> buttons and set the IDs to <literal
 >2</literal
->. Además, cambiaremos los colores de los elementos de estos dos nuevos tipos (para distinguirlos de los tipos por omisión). Finalmente, indicaremos que todos los tipos de aristas sean bidireccionales y fijaremos el ID de los tipos por omisión a <literal
+>. Furthermore, we change the colors of elements of these two new types (to distinguish them from the default types). Finally, we set all edge types to be bidirectional, and the IDs of the default types to <literal
 >1</literal
 >. </para>
 </sect2>
@@ -301,13 +298,9 @@ Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
 <title
 >Ejecución del algoritmo</title>
 <para
->El algoritmo se puede ejecutar usando el botón <inlinemediaobject
-><imageobject
-><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
-></inlinemediaobject
-><guibutton
->Ejecutar</guibutton
-> que hay en el panel de control del guion. </para>
+>The algorithm can be executed by the <guibutton
+>Run</guibutton
+> button at the script control panel. </para>
 </sect2>
 </sect1>
 </chapter>
@@ -321,151 +314,150 @@ Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
 >Elementos principales de la interfaz de usuario</title>
 <para
 >La interfaz de usuario se divide en varias partes lógicas tal como se presentan en la captura de pantalla de más abajo. </para>
-
 <screenshot>
-  <screeninfo
+    <screeninfo
 >Elementos de la interfaz gráfica de usuario de &rocs;.</screeninfo>
-  <mediaobject>
-    <imageobject
-><imagedata fileref="rocs-interfaces.png" format="PNG"/></imageobject>
-    <textobject
-><phrase
->Elementos de la interfaz gráfica de usuario de &rocs;.</phrase
-></textobject>
-  </mediaobject>
+    <mediaobject>
+    <imageobject>
+    <imagedata fileref="rocs-interfaces.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+    <phrase
+>Elementos de la interfaz gráfica de usuario de &rocs;.</phrase>
+    </textobject>
+    </mediaobject>
 </screenshot>
-
 <variablelist>
-  <varlistentry>
+<varlistentry>
     <term
 >Editor de grafos</term>
     <listitem
 ><para
->El editor proporciona una pizarra en blanco en la que se pueden situar nodos y aristas. Si hace doble clic en cualquiera de sus elementos, se abrirá el correspondiente menú de propiedades. Puede usar las herramientas de las <emphasis
->pestañas de la barra lateral</emphasis
-> para crear y modificar grafos.</para>
-    <para
->Herramientas disponibles:</para>
-      <itemizedlist>
-        <listitem
-><para
->En la parte superior izquierda de la caja se pueden encontrar los siguientes iconos de acciones (al hacer clic en una acción, el puntero del ratón aplica dicha acción a la pizarra del editor de grafos):</para>
-          <itemizedlist>
-            <listitem
-><para
-><inlinemediaobject
-><imageobject
-><imagedata fileref="sc-actions-rocsselect.png" format="PNG"/></imageobject
-></inlinemediaobject
-><guiicon
->Seleccionar y mover</guiicon
->: para seleccionar elementos dispone de dos alternativas: puede pulsar en un espacio sin utilizar en la pizarra, mantener el ratón pulsado para dibujar un rectángulo que contenga elementos de datos o aristas para seleccionar dichos elementos, o bien hacer clic directamente en un elemento sin seleccionar para seleccionarlo. Si pulsa sobre un elemento seleccionado o un conjunto de elementos seleccionados, respectivamente, se pueden mover dichos elementos manteniendo el ratón pulsado y moviéndolo. También se pueden mover los elementos seleccionados mediante las teclas de las flechas.</para
+>The editor provides a whiteboard at that nodes and edges can be placed. Double-clicking at any of its elements opens a corresponding property menu. You can use the tools from the <emphasis
+>Graph Editor Toolbar</emphasis
+> to create and modify graphs.</para
 ></listitem>
-
-            <listitem
+</varlistentry>
+<varlistentry>
+    <term
+>Graph Editor Toolbar</term>
+    <listitem
 ><para
-><inlinemediaobject
+>The toolbar provides the <inlinemediaobject
 ><imageobject
-><imagedata fileref="sc-actions-rocsnode.png" format="PNG"/></imageobject
-></inlinemediaobject
-><guiicon
->Añadir un nodo</guiicon
->: haga clic en cualquier posición de la pizarra del editor visual de grafos para crear un nuevo elemento de datos que pertenezca a la estructura de datos seleccionada actualmente. Si mantiene pulsado el botón del ratón, se mostrará un menú donde puede seleccionar el tipo de datos de los nuevos elementos de datos creados (solo si existen diferentes tipos de datos).</para
-></listitem>
-
-            <listitem
-><para
-><inlinemediaobject
+><imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject
+> </inlinemediaobject
+><guibutton
+>Create Node</guibutton
+> or <inlinemediaobject
 ><imageobject
-><imagedata fileref="sc-actions-rocsedge.png" format="PNG"/></imageobject
+><imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject
 ></inlinemediaobject
-><guiicon
->Crear una arista</guiicon
->: haga clic en un elemento de dato, mantenga pulsado el ratón y dibuje una línea hacia otro elemento de dato al que debe apuntar la arista. Esta acción solo se podrá realizar correctamente si el grafo actual permite añadir dicha arista (&eg;, en un grafo no dirigido no se pueden añadir varias aristas entre dos elementos de datos). Si mantiene pulsado el botón del ratón se mostrará un menú en el que puede seleccionar el tipo de las aristas recién creadas (solo si existen diferentes tipos de aristas).</para
+><guibutton
+>Create Edge</guibutton
+> tools, for creating new elements on the whiteboard. Note the extra-toolbar for selecting the respective node or edge type that becomes visible of one of these tools is selected. Also tools for selecting and moving as well as deleting elements are available here. For details see <xref linkend="user-interface-toolbar"/>. </para
 ></listitem>
-
-            <listitem
-><para
-><inlinemediaobject
-><imageobject
-><imagedata fileref="sc-actions-rocsdelete.png" format="PNG"/></imageobject
-></inlinemediaobject
-><guiicon
->Borrar elemento</guiicon
->: haga clic en un elemento para borrarlo. Si borra un nodo, todas las aristas adyacentes también se borran.</para
-></listitem>
-          </itemizedlist>
-        </listitem>
-      </itemizedlist>
-    </listitem>
-  </varlistentry>
-  <varlistentry>
+</varlistentry>
+<varlistentry>
     <term
 >Barra lateral</term>
     <listitem
 ><para
->A la derecha puede encontrar la barra lateral que le proporciona diversas herramientas para su flujo de trabajo.</para>
-      <itemizedlist>
+>A la derecha puede encontrar la barra lateral que le proporciona diversas herramientas para su flujo de trabajo. <itemizedlist>
         <listitem
 ><para
-><guilabel
->Tipos de elementos</guilabel
->: esta ventana le proporciona acceso directo a los tipos de aristas y de nodos disponibles.</para
+>Element Types: This widget gives you direct access to the available edge and node types.</para
 ></listitem>
-
         <listitem
 ><para
-><guilabel
->Diario</guilabel
->: cada proyecto dispone de su propio diario que se puede usar para, &eg;, anotar tareas, resultados u observaciones.</para
+>Journal: Each project has its own journal that can be used to, &eg; note tasks, results, or observations.</para
 ></listitem>
-
         <listitem
 ><para
-><guilabel
->API de guiones</guilabel
->: abra este elemento gráfico para tener acceso directo a la documentación de guiones.</para
+>Scripting API: To get direct access to the script documentation, you can open this widget.</para
 ></listitem>
-      </itemizedlist>
-    </listitem>
-  </varlistentry>
-  <varlistentry>
+        </itemizedlist>
+    </para
+></listitem>
+</varlistentry>
+<varlistentry>
     <term
 >Editor de guiones</term>
     <listitem
 ><para
->En este editor de texto puede escribir algoritmos como se explica con más detalle en <xref linkend="scripting"/>. Puede trabajar en varios documentos de guiones al mismo tiempo usando varias pestañas.</para
+>En este editor de texto puede escribir algoritmos como se explica con más detalle en <xref linkend="scripting"/>. Puede trabajar en varios documentos de guiones al mismo tiempo usando varias pestañas. </para
 ></listitem>
-  </varlistentry>
-  <varlistentry>
+</varlistentry>
+<varlistentry>
     <term
->Salida del guion:</term>
+>Script Output</term>
     <listitem
 ><para
->Este área de texto muestra información de depuración o la salida del guion del algoritmo, dependiendo de la preferencia indicada en la parte superior de este elemento gráfico. Si el guion produce un error, se muestra de forma automática la salida de depuración.</para
+>Este área de texto muestra información de depuración o la salida del guion del algoritmo, dependiendo de la preferencia indicada en la parte superior de este elemento gráfico. Si el guion produce un error, se muestra de forma automática la salida de depuración. </para
 ></listitem>
-  </varlistentry>
-  <varlistentry>
+</varlistentry>
+<varlistentry>
     <term
 >Controles</term>
     <listitem
 ><para
->Aquí puede encontrar los controles para la ejecución de guiones. Se puede ejecutar el guion que esté abierto actualmente en el editor de guiones pulsando el botón <inlinemediaobject
-><imageobject
-><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
-></inlinemediaobject
-><guibutton
->Ejecutar</guibutton
->. Mientras ejecuta el guion, puede detener su ejecución pulsando el botón <inlinemediaobject
-><imageobject
-><imagedata fileref="process-stop.png" format="PNG"/></imageobject
-></inlinemediaobject
-><guibutton
->Detener</guibutton
->.</para
+>Here you can find the controls for executing scripts. You can execute the script that is currently open at the script editor by pressing <guiicon
+>Run</guiicon
+>. While the script is executed, it is possible to stop execution by pressing the <guiicon
+>Stop</guiicon
+> button. </para
 ></listitem>
-  </varlistentry>
+</varlistentry>
 </variablelist>
+</sect1>
+
+<sect1 id="user-interface-toolbar">
+<title
+>Graph Editor Toolbar</title>
+<para
+>This toolbar consists of the following actions. Clicking at an action means that your mouse pointer applies this action at the graph editor whiteboard:</para>
+<itemizedlist>
+<listitem
+><para>
+<inlinemediaobject
+><imageobject>
+<imagedata fileref="hi22-actions-rocsselectmove.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guilabel
+>Select and Move</guilabel
+>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some data elements and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para
+></listitem>
+<listitem
+><para>
+<inlinemediaobject
+><imageobject>
+<imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guilabel
+>Create Node</guilabel
+>: Click at an arbitrary position at the graph editor whiteboard to create a new data element that belongs to the currently selected data structure. By keeping the mouse pointer pressed at the button, a menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para
+></listitem>
+<listitem
+><para>
+<inlinemediaobject
+><imageobject>
+<imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guilabel
+>Create Edge</guilabel
+>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse pointer pressed at the button, a menu shows up at which the edge type of the new created edges can be selected (only if different edge types exist).</para
+></listitem>
+<listitem
+><para>
+<inlinemediaobject
+><imageobject>
+<imagedata fileref="hi22-actions-rocsdelete.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guilabel
+>Delete</guilabel
+>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para
+></listitem>
+</itemizedlist>
 </sect1>
 
 <!--FIXME nop alignment action any more?-->
@@ -478,7 +470,7 @@ Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
     <title
 >Ejecución de algoritmos en &rocs;</title>
 <para
->&rocs; usa internamente el motor de &javascript; de QtScript. Esto significa que todos los algoritmos que implemente deben usar &javascript;. A continuación explicaremos cómo acceder y modificar los elementos de un documento de grafos desde el motor de guiones. Es importante que tenga en cuenta que los cambios realizados por el motor de guiones se reflejan directamente en las propiedades de los elementos del editor de grafos. </para>
+>&rocs; internally uses the QtScript Java Script engine. This means, all algorithms that you implement must use Java Script. In the following, we explain how to access and change elements of a graph document from the scripting engine. It is important to note that changes done by the scripting engine are directly reflected at the properties at the graph editor elements. </para>
 
 <sect2>
 <title
@@ -490,28 +482,28 @@ Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
 ><para>
         <inlinemediaobject
 ><imageobject>
-        <imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+        <imagedata fileref="hi22-actions-controls-run.png" format="PNG"/></imageobject
 ></inlinemediaobject
-> <guibutton
->Ejecutar</guibutton
->: ejecuta el guion hasta su final.</para
+> <guilabel
+>Run</guilabel
+>: Execute the script until it finishes.</para
 ></listitem>
     <listitem
 ><para>
         <inlinemediaobject
 ><imageobject>
-        <imagedata fileref="process-stop.png" format="PNG"/></imageobject
+        <imagedata fileref="hi22-actions-control-stop.png" format="PNG"/></imageobject
 ></inlinemediaobject
-> <guibutton
->Detener</guibutton
->: detener la ejecución del guion (solo está disponible cuando se ejecuta un guion).</para
+> <guilabel
+>Stop</guilabel
+>: Stop script execution (only available while a script is executed).</para
 ></listitem>
 </itemizedlist>
 </sect2>
 
 <sect2>
 <title
->Salida del guion</title>
+>Script Output</title>
 <para
 >Durante la ejecución de un algoritmo, la salida de depuración y del programa se muestran en <emphasis
 >Depuración y Salida del guion</emphasis
@@ -559,21 +551,21 @@ Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
     <title
 >Intercambiar proyectos de &rocs;</title>
     <para
->Los proyectos de &rocs; se pueden importar y exportar como archivos comprimidos <literal role="extension"
+>&rocs; projects can be imported and exported as archived <literal
 >.tar.gz</literal
->. Estos archivos se puede usar para intercambiar proyectos. La importación y la exportación se pueden llevar a cabo con los elementos del menú <menuchoice
+> files. These archives can be used to exchange projects. Import and Export can be done with <menuchoice
 ><guimenu
->Documento de grafo</guimenu
+>Graph Document</guimenu
 > <guimenuitem
->Importar grafo...</guimenuitem
+>Import Graph</guimenuitem
 ></menuchoice
-> y <menuchoice
+> and <menuchoice
 ><guimenu
->Documento de grafo</guimenu
+>Graph Document</guimenu
 > <guimenuitem
->Exportar grafo como</guimenuitem
+>Export Graph as</guimenuitem
 ></menuchoice
->, respectivamente. </para>
+>, respectively. </para>
 
 <sect2 id="import-export-graphs">
     <title
@@ -583,13 +575,11 @@ Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
     <itemizedlist>
         <listitem
 ><para
->Archivos &DOT;, también conocidos como archivos Graphviz</para
+>DOT files, also known as Graphviz files</para
 ></listitem>
         <listitem
 ><para
->Archivos <acronym
->GML</acronym
-></para
+>GML files</para
 ></listitem>
         <listitem
 ><para
@@ -605,13 +595,9 @@ Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
 <title
 >El formato de archivo de grafos Trivial</title>
 <para
->El <emphasis
->Formato de grafo trivial</emphasis
-> (<acronym
->TGF</acronym
->) es un formato de archivo sencillo basado en texto para describir grafos. Un archivo <acronym
->TGF</acronym
-> consiste en una lista de definiciones de nodos, que enlazan los ID de los nodos con etiquetas, seguida por una lista de las aristas. En este formato solamente se puede tener una etiqueta por nodo y un valor por arista. &rocs; interpreta los grafos importados como grafos no dirigidos. Los grafos exportados contendrán dos aristas por conexión si la conexiones son bidireccionales. </para>
+>The <emphasis
+>Trivial Graph Format</emphasis
+> (TGF) is a simple text-based file format for describing graphs. A TGF file consists of a list of node definitions, that map the node IDs to labels, followed by a list of the edges. In this format it is only possible to have one label per node and one value per edge. &rocs; interprets imported graphs as undirected graphs. Exported graphs will contain two edges per connection if connections are bidirectional. </para>
 
 <sect4>
 <title
@@ -619,7 +605,7 @@ Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
     <itemizedlist>
         <listitem
 ><para
->El archivo comienza con una lista de nodos (un nodo por línea), seguida por una línea que contiene únicamente el carácter «#», seguida por una lista de aristas (una arista por línea).</para
+>The file starts with a list of nodes (one node per line), followed by a line with the only character "#", followed by a list of edges (one edge per line).</para
 ></listitem>
         <listitem
 ><para
@@ -648,23 +634,23 @@ Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
 
 <sect3 id="format-specification-dot">
 <title
->Lenguaje &DOT; / Formato de archivo de grafos Graphviz</title>
+>DOT Language / Graphviz Graph File Format</title>
 <para
->El lenguaje &DOT; es un lenguaje de descripción de grafos en texto sin formato que permite tanto una buena representación legible para humanos como un procesamiento eficiente para los programas de diseño de grafos. &DOT; es el formato de archivo por omisión para la suite de visualización de grafos Graphviz, aunque también se usa ampliamente en otras herramientas de grafos. Las extensiones típicas para &DOT; son <literal role="extension"
->.gv</literal
-> y <literal role="extension"
->.dot</literal
+>The DOT language is a plain text graph description language that allows both,a good human readable representation of graphs as well as an efficient processing by graph layout programs. DOT is the default file format for the Graphviz graph visualization suite, but is also widely used by other graph tools. The usual file extensions for DOT are <emphasis
+>.gv</emphasis
+> and <emphasis
+>.dot</emphasis
 >. </para>
 
 <sect4>
 <title
 >Funcionalidades no permitidas</title>
 <para
->&rocs; puede analizar cualquier archivo de grafos que contenga un grafo definido conforme a la especificación del lenguaje &DOT;<footnote
+>&rocs; can parse every graph file that contains a graph specified according to the DOT language specification<footnote
 ><para
->https://graphviz.org/doc/info/lang.html</para
+>http://www.graphviz.org/content/dot-language</para
 ></footnote
->. La implementación de las funcionalidades de este lenguaje es completa, a pesar de las siguientes excepciones: </para>
+>. The support of language features is complete, despite of the following exceptions: </para>
     <itemizedlist>
         <listitem
 ><para
@@ -689,82 +675,6 @@ Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
 </sect3>
 </sect2>
 </sect1>
-</chapter>
-
-<chapter id="graph-layout">
-    <title
->Diseño del gráfico</title>
-
-    <sect1>
-        <title
->Diseño de gráficos automático en &rocs;</title>
-        <para
->&rocs; puede diseñar gráficos automáticamente. La herramienta de diseño de gráficos &rocs; se puede encontrar en el menú principal, en <menuchoice
-><guimenu
->Documento de grafos</guimenu
-> <guisubmenu
->Herramientas</guisubmenu
-> <guimenuitem
->Diseño de gráfico</guimenuitem
-></menuchoice
->. Hay dos algoritmos de diseño diferentes que se pueden aplicar: diseño basado en fuerzas y diseño de árbol radial. Para aplicar cualquiera de ellos, seleccione la pestaña correspondiente en la herramienta de diseño de gráficos, elija los parámetros deseados y ejecute el algoritmo pulsando el botón <guibutton
->Aceptar</guibutton
->. Los detalles que son específicos de cada uno de los algoritmos de diseño se proporcionan en las siguientes secciones. </para>
-
-    <sect2>
-        <title
->Diseño basado en fuerzas</title>
-
-        <para
->El diseño basado en fuerzas se puede aplicar a cualquier gráfico. De manera intuitiva, este algoritmo simula las fuerzas que actúan en cada nodo. Hay fuerzas repelentes entre pares de nodos y fuerzas de atracción entre pares de nodos vecinos. La magnitud de estas fuerzas se puede indicar moviendo los controles deslizantes correspondientes en la interfaz de usuario. </para>
-
-        <screenshot>
-          <screeninfo
->Captura de pantalla de la pestaña de diseño basado en fuerzas de la herramienta de diseño de grafos &rocs;.</screeninfo>
-          <mediaobject>
-            <imageobject
-><imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG"/></imageobject>
-            <textobject
-><phrase
->Captura de pantalla de la pestaña de diseño basado en fuerzas de la herramienta de diseño de grafos &rocs;.</phrase
-></textobject>
-          </mediaobject>
-        </screenshot>
-
-        <para
->Otro parámetro que se puede controlar es el factor de área. Este parámetro controla cómo se distribuyen los nodos. Los diseños generados con valores altos de factor de área tienden a tener grandes distancias entre los nodos. </para>
-
-    <sect3>
-        <title
->Diseño de árbol radial</title>
-        <para
->El diseño de árbol radial solo se puede aplicar a árboles. Cualquier intento de aplicar este algoritmo de diseño a otros tipos de gráficos producirá un mensaje de error. Los parámetros para el diseño de árbol radial se pueden seleccionar usando la interfaz de usuario proporcionada. </para>
-
-
-        <screenshot>
-          <screeninfo
->Captura de pantalla de la pestaña de diseño de árbol radial de la herramienta de diseño de grafos &rocs;.</screeninfo>
-          <mediaobject>
-            <imageobject
-><imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG"/></imageobject>
-            <textobject
-><phrase
->Captura de pantalla de la pestaña de diseño de árbol radial de la herramienta de diseño de grafos &rocs;.</phrase
-></textobject>
-          </mediaobject>
-        </screenshot>
-
-        <para
->El parámetro de tipo de árbol selecciona entre un diseño de árbol libre y un diseño de árbol con raíz. En un diseño de árbol libre, los nodos se colocan libremente sin ninguna jerarquía aparente entre ellos. En un diseño de árbol con raíz, el nodo raíz se coloca en la parte superior y los subárboles se colocan debajo, lo que da una idea de jerarquía entre los nodos. </para>
-
-        <para
->El parámetro centro/raíz define qué nodo se usará como raíz para el diseño de árbol con raíz o como centro para el diseño de árbol libre. El centro de un diseño de árbol libre es el primer nodo que coloca el algoritmo. El resto de nodos se colocan en círculos centrados en el nodo central. El algoritmo de diseño puede seleccionar automáticamente un centro/raíz. </para>
-
-        <para
->El parámetro de separación de nodos controla la distancia entre nodos. Al incrementar el valor de este parámetro, aumentará la distancia entre los nodos. De manera similar, disminuir el valor de este parámetro hará que la distancia entre los nodos disminuya. </para>
-    </sect3>
-    </sect2>
-    </sect1>
 </chapter>
 
 <chapter id="credits">
