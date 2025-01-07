@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
                         "https://wiglot.wordpress.com");
 
     app.setApplicationVersion(aboutData.version());
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("rocs")));
 
     KCrash::initialize();
 
