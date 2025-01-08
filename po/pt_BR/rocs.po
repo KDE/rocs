@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2025-01-08 01:54+0000\n"
 "PO-Revision-Date: 2021-10-26 14:28-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -84,7 +84,7 @@ msgctxt "@info:credit Role"
 msgid "Developer"
 msgstr "Desenvolvedor"
 
-#: main.cpp:57
+#: main.cpp:58
 #, kde-format
 msgid "Project to open."
 msgstr "Projeto a abrir."
