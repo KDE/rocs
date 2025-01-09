@@ -6,13 +6,13 @@
 # obsoleteman <tulliana@gmail.com>, 2009.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
 # Volkan Gezer <volkangezer@gmail.com>, 2017.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeedu-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: 2023-07-17 15:29+0300\n"
+"PO-Revision-Date: 2025-01-08 21:24+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -211,7 +211,7 @@ msgstr "Özellik Ekle"
 #: dialogs/propertydelegate.cpp:49
 #, kde-format
 msgid "Delete this property."
-msgstr "Bu özelliği sil."
+msgstr "Bu özelliği silin."
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:33
 #, kde-format
@@ -298,7 +298,7 @@ msgstr "Sabit Değer Ata"
 #: editorplugins/assignvalues/assignvalueswidget.ui:132
 #, kde-format
 msgid "Start ID:"
-msgstr "Başlangıç Kimligi:"
+msgstr "Başlangıç kimliği:"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:167
@@ -419,7 +419,7 @@ msgstr "Yanlış Kenar Yönü"
 #: editorplugins/generategraph/generategraphwidget.cpp:529
 #, kde-format
 msgid "Edges in a Directed Acyclical Graph must be directional."
-msgstr "Bir Yönlendirilmiş Düzensiz Grafik'teki kenarlar yönlü olmalıdır."
+msgstr "Bir Yönlendirilmiş Düzensiz Grafik’teki kenarlar yönlü olmalıdır."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
 #: editorplugins/generategraph/generategraphwidget.ui:14
@@ -461,7 +461,7 @@ msgstr "Rastgele Grafik"
 #: editorplugins/generategraph/generategraphwidget.ui:46
 #, kde-format
 msgid "Erdös-Renyi Graph"
-msgstr "Erdös-Renyi Grafiği"
+msgstr "Erdös–Renyi Grafiği"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:51
@@ -533,19 +533,19 @@ msgstr "Oluşturulan grafiğin tanımlayıcısı (betikler için kullanılır)"
 #: editorplugins/generategraph/generategraphwidget.ui:148
 #, kde-format
 msgid "Number of Columns:"
-msgstr "Sütun Sayısı:"
+msgstr "Sütun sayısı:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_rows)
 #: editorplugins/generategraph/generategraphwidget.ui:168
 #, kde-format
 msgid "Number of Rows:"
-msgstr "Satır Sayısı:"
+msgstr "Satır sayısı:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
 #: editorplugins/generategraph/generategraphwidget.ui:196
 #, kde-format
 msgid "Satellite Nodes:"
-msgstr "Uydu Düğümleri:"
+msgstr "Uydu düğümleri:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
 #. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
@@ -555,7 +555,7 @@ msgstr "Uydu Düğümleri:"
 #: editorplugins/generategraph/generategraphwidget.ui:527
 #, kde-format
 msgid "Number of Nodes:"
-msgstr "Düğüm Sayısı:"
+msgstr "Düğüm sayısı:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
 #. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
@@ -581,7 +581,7 @@ msgstr "Düğümler (n):"
 #: editorplugins/generategraph/generategraphwidget.ui:349
 #, kde-format
 msgid "Edge Probability (p):"
-msgstr "Kenar Olasılığı (p):"
+msgstr "Kenar olasılığı (p):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
 #. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
@@ -589,7 +589,7 @@ msgstr "Kenar Olasılığı (p):"
 #: editorplugins/generategraph/generategraphwidget.ui:421
 #, kde-format
 msgid "Generator Seed:"
-msgstr "Üreteç Tohumu:"
+msgstr "Üreteç tohumu:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
 #: editorplugins/generategraph/generategraphwidget.ui:446
@@ -607,13 +607,13 @@ msgstr "Kenar Olasılığı"
 #: editorplugins/generategraph/generategraphwidget.ui:549
 #, kde-format
 msgid "Left Set Nodes:"
-msgstr "Sol Küme Düğümleri:"
+msgstr "Sol küme düğümleri:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
 #: editorplugins/generategraph/generategraphwidget.ui:563
 #, kde-format
 msgid "Right Set Nodes:"
-msgstr "Sağ Küme Düğümleri:"
+msgstr "Sağ küme düğümleri:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:590
@@ -637,7 +637,7 @@ msgstr "Kenar türü:"
 #: editorplugins/generategraph/generategraphwidget.ui:614
 #, kde-format
 msgid "Graph generator:"
-msgstr "Grafik oluşturucu:"
+msgstr "Grafik üreteci:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:621
@@ -800,7 +800,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Bu seçenek grafikte <span "
-"style=\" font-style:italic;\">Prim Minimal Genişleme Ağacı Algoritmasını</"
+"style=\" font-style:italic;\">Prim Minimal Genişleme Ağacı algoritmasını</"
 "span> çalıştırır. Ağırlıkları verilmeyen tüm kenarlar 1 ağırlığında alınır. "
 "Yönlendirilmiş ve yönlendirilmemiş grafikler buna göre işlenirler.</p></"
 "body></html>"
@@ -828,12 +828,12 @@ msgstr "Graphviz Biçimi (%1)"
 #: fileformats/tgf/tgffileformat.cpp:52
 #, kde-format
 msgid "Could not open file \"%1\" in read mode: %2"
-msgstr "\"%1\" dosyası okunmak için açılamadı: %2"
+msgstr "“%1” dosyası okunmak için açılamadı: %2"
 
 #: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
 #, kde-format
 msgid "Could not parse file \"%1\"."
-msgstr "\"%1\" dosyası ayrıştırılamadı."
+msgstr "“%1” dosyası ayrıştırılamadı."
 
 #: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
 #, kde-format
@@ -875,7 +875,7 @@ msgstr "Rocs 1 Grafik Dosya Biçimi (%1)"
 #: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
-msgstr "\"%1\" dosyası yazmak için açılamadı: %2"
+msgstr "“%1” dosyası yazmak için açılamadı: %2"
 
 #: fileformats/rocs1/rocs1fileformat.cpp:269
 #, kde-format
@@ -900,13 +900,13 @@ msgstr "Sıradan Grafik Biçimi (%1)"
 #: fileformats/tgf/tgffileformat.cpp:73
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
-msgstr "Dosya ayrıştırılamadı. \"%1\" tanımlayıcısı birden çok kullanılmış."
+msgstr "Dosya ayrıştırılamadı. “%1” tanımlayıcısı birden çok kullanılmış."
 
 #: fileformats/tgf/tgffileformat.cpp:85
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
 msgstr ""
-"Dosya ayrıştırılamadı. \"%1\" ile \"%2\" noktalarını birleştiren kenar "
+"Dosya ayrıştırılamadı. “%1” ile “%2” noktalarını birleştiren kenar "
 "tanımlanmamış düğümler kullanıyor."
 
 #: fileformats/tikz/tikzfileformat.cpp:34
@@ -950,31 +950,31 @@ msgstr "%1: kenar türü %2 kimliği kayıtlı değil"
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"from\" is not a valid node object"
-msgstr "%1: \"from\" geçerli bir düğüm nesnesi değil"
+msgstr "%1: “from” geçerli bir düğüm nesnesi değil"
 
 #: kernel/documentwrapper.cpp:179
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"to\" is not a valid node object"
-msgstr "%1: \"to\" geçerli bir düğüm nesnesi değil"
+msgstr "%1: “to” geçerli bir düğüm nesnesi değil"
 
 #: kernel/documentwrapper.cpp:190
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"node\" is not a valid node object"
-msgstr "%1: \"node\" geçerli bir düğüm nesnesi değil"
+msgstr "%1: “node” geçerli bir düğüm nesnesi değil"
 
 #: kernel/documentwrapper.cpp:204
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"edge\" is not a valid edge object"
-msgstr "%1: \"edge\" geçerli bir düğüm nesnesi değil"
+msgstr "%1: “edge” geçerli bir düğüm nesnesi değil"
 
 #: kernel/kernel.cpp:94
 #, kde-format
 msgctxt "@info status message after successful script execution"
 msgid "<i>Execution Finished</i>"
-msgstr "<i>Çalıştırma Tamamlandı</i>"
+msgstr "<i>Yürütme Tamamlandı</i>"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -1030,13 +1030,13 @@ msgstr "Bir düğümün tanımlayıcısı."
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all nodes."
-msgstr "Düğümleri bir listesini döndür."
+msgstr "Düğümleri bir listesini döndürün."
 
 #: kernel/modules/document/document.xml:42
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all nodes of specified type."
-msgstr "Belirli bir türdeki düğümlerin bir listesini döndür."
+msgstr "Belirli bir türdeki düğümlerin bir listesini döndürün."
 
 #: kernel/modules/document/document.xml:49
 #, kde-format
@@ -1048,13 +1048,13 @@ msgstr "Bir düğüm türünün tanımlayıcısı."
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all edges."
-msgstr "Tüm kenarların listesini döndür."
+msgstr "Tüm kenarların listesini döndürün."
 
 #: kernel/modules/document/document.xml:65
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all edges of specified type."
-msgstr "Belirli bir türdeki tüm kenarların listesini döndür."
+msgstr "Belirli bir türdeki tüm kenarların listesini döndürün."
 
 #: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
 #: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
@@ -1105,7 +1105,7 @@ msgstr "Kenarın hedef düğümü."
 #, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given node."
-msgstr "Verilen düğümü sil."
+msgstr "Verilen düğümü silin."
 
 #: kernel/modules/document/document.xml:124
 #, kde-format
@@ -1117,7 +1117,7 @@ msgstr "Düğüm silindi."
 #, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given edge."
-msgstr "Verilen kenarı sil."
+msgstr "Verilen kenarı silin."
 
 #: kernel/modules/document/document.xml:138
 #, kde-format
@@ -1151,13 +1151,13 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the origin node of the edge."
-msgstr "Kenarın kaynak düğümünü döndür."
+msgstr "Kenarın kaynak düğümünü döndürün."
 
 #: kernel/modules/document/edge.xml:35
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the target node of the edge."
-msgstr "Kenarın hedef düğümünü döndür."
+msgstr "Kenarın hedef düğümünü döndürün."
 
 #: kernel/modules/document/edge.xml:44
 #, kde-format
@@ -1187,19 +1187,19 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the unique identifier of this node."
-msgstr "Bu düğümün benzersiz tanımlayıcısını oku ve ayarla."
+msgstr "Bu düğümün benzersiz tanımlayıcısını okuyun ve ayarlayın."
 
 #: kernel/modules/document/node.xml:26
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the x-coordinate of the node."
-msgstr "Düğümün x koordinatını oku ve ayarla."
+msgstr "Düğümün x koordinatını okuyun ve ayarlayın."
 
 #: kernel/modules/document/node.xml:33
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the y-coordinate of the node."
-msgstr "Düğümün y koordinatını oku ve ayarla."
+msgstr "Düğümün y koordinatını okuyun ve ayarlayın."
 
 #: kernel/modules/document/node.xml:40
 #, kde-format
@@ -1208,8 +1208,8 @@ msgid ""
 "Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
 "for red)."
 msgstr ""
-"Bu düğümün renk dizisini on altılık değerde oku ve ayarla (örn., kırmızı "
-"için \"#ff0000\")"
+"Bu düğümün renk dizisini on altılık değerde okuyun ve ayarlayın (örneğin, "
+"kırmızı için “#ff0000”)."
 
 #: kernel/modules/document/node.xml:47
 #, kde-format
@@ -1218,14 +1218,14 @@ msgid ""
 "Read and set the identifier of the node's type. If setting, the node type "
 "identifier must exist."
 msgstr ""
-"Düğüm türünün tanımlayıcısını oku ve ayarla. Ayar varsa, düğüm türü "
-"tanımayıcısı da bulunmalıdır."
+"Düğüm türünün tanımlayıcısını okuyun ve ayarlayın. Ayar varsa düğüm türü "
+"tanımlayıcısı da bulunmalıdır."
 
 #: kernel/modules/document/node.xml:56
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all edges (incoming and outgoing) of this node."
-msgstr "Bu düğümün tüm kenarlarının (gelen ve giden) listesini döndür."
+msgstr "Bu düğümün tüm kenarlarının (gelen ve giden) listesini döndürün."
 
 #: kernel/modules/document/node.xml:65
 #, kde-format
@@ -1235,31 +1235,31 @@ msgid ""
 "specified type."
 msgstr ""
 "Belirli bir türdeki bir düğümün tüm kenarlarının (gelen ve giden) listesini "
-"döndür."
+"döndürün."
 
 #: kernel/modules/document/node.xml:79
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of incoming edges of this node."
-msgstr "Bu düğüme gelen kenarların listesini döndür."
+msgstr "Bu düğüme gelen kenarların listesini döndürün."
 
 #: kernel/modules/document/node.xml:88
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all incoming edges of this node of a specified type."
-msgstr "Belirtilen türde olan düğüme gelen kenarların listesini döndür."
+msgstr "Belirtilen türde olan düğüme gelen kenarların listesini döndürün."
 
 #: kernel/modules/document/node.xml:102
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all outgoing edges of this node."
-msgstr "Düğümden giden kenarların listesini döndür."
+msgstr "Düğümden giden kenarların listesini döndürün."
 
 #: kernel/modules/document/node.xml:111
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all outgoing edges of this node of a specified type."
-msgstr "Belirtilen türde olan düğümden giden kenarların listesini döndür."
+msgstr "Belirtilen türde olan düğümden giden kenarların listesini döndürün."
 
 #: kernel/modules/document/node.xml:125
 #, kde-format
@@ -1268,8 +1268,8 @@ msgid ""
 "Return list all nodes connected to this node. This method respects if edges "
 "are directed."
 msgstr ""
-"Bu düğüm ile bağlantılı tüm düğümleri listesini döndür. Bu yöntem, kenarlar "
-"yönlü ise çalışır."
+"Bu düğüm ile bağlantılı tüm düğümleri listesini döndürün. Bu yöntem, "
+"kenarlar yönlü ise çalışır."
 
 #: kernel/modules/document/node.xml:134
 #, kde-format
@@ -1279,7 +1279,7 @@ msgid ""
 "This method respects if edges are directed."
 msgstr ""
 "Belirtilen türdeki bir kenar vasıtasıyla bu düğüme bağlı olan tüm düğümlerin "
-"listesini döndür. Bu yöntem, kenarlar yönlü ise çalışır."
+"listesini döndürün. Bu yöntem, kenarlar yönlü ise çalışır."
 
 #: kernel/modules/document/node.xml:148
 #, kde-format
@@ -1287,7 +1287,7 @@ msgctxt "Scripting API"
 msgid "Return a list all nodes connected to this node by an incoming edge."
 msgstr ""
 "Bu düğüme gelen bir kenar ile bağlantılı olan tüm düğümlerin listesini "
-"döndür."
+"döndürün."
 
 #: kernel/modules/document/node.xml:157
 #, kde-format
@@ -1297,7 +1297,7 @@ msgid ""
 "specified type."
 msgstr ""
 "Bu düğüme, belirtilen türdeki bir kenar ile bağlantılı olan tüm düğümlerin "
-"listesini döndür."
+"listesini döndürün."
 
 #: kernel/modules/document/node.xml:171
 #, kde-format
@@ -1305,7 +1305,7 @@ msgctxt "Scripting API"
 msgid "Return list all nodes connected to this node by an outgoing edge."
 msgstr ""
 "Bu düğümden giden bir kenar ile bağlantılı olan tüm düğümlerin listesini "
-"döndür."
+"döndürün."
 
 #: kernel/modules/document/node.xml:180
 #, kde-format
@@ -1315,13 +1315,13 @@ msgid ""
 "specified type."
 msgstr ""
 "Belirli bir türdeki, giden kenarlar tarafında bu düğüme bağlı olan "
-"düğümlerin listesini döndür."
+"düğümlerin listesini döndürün."
 
 #: kernel/modules/document/node.xml:194
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return list of distances to specified targets in same order."
-msgstr "Belirli hedefe olan uzaklıkların listesini aynı sırada döndür."
+msgstr "Belirli hedefe olan uzaklıkların listesini aynı sırada döndürün."
 
 #: kernel/modules/document/node.xml:201
 #, kde-format
@@ -1406,12 +1406,12 @@ msgstr "Bir düğüm ekle"
 #: qml/DeleteAction.qml:13
 #, kde-format
 msgid "Delete Element"
-msgstr "Öge Sil"
+msgstr "Ögeyi Sil"
 
 #: qml/DeleteAction.qml:16
 #, kde-format
 msgid "Delete element from scene"
-msgstr "Nesne sil"
+msgstr "Ögeyi sahneden sil"
 
 #: qml/SelectMoveAction.qml:14
 #, kde-format

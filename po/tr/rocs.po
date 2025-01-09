@@ -5,13 +5,13 @@
 # Renan Cakirerk, 2010.
 # obsoleteman <tulliana@gmail.com>, 2009.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# SPDX-FileCopyrightText: 2022, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeedu-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: 2024-09-23 15:28+0300\n"
+"PO-Revision-Date: 2025-01-08 21:16+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -55,7 +55,7 @@ msgstr "© 2008–2016 Rocs Developers"
 #, kde-format
 msgctxt "@info:credit Developer name"
 msgid "Andreas Cord-Landwehr"
-msgstr "Andreas Cord-Landwehr"
+msgstr "Andreas Cord–Landwehr"
 
 #: main.cpp:34
 #, kde-format
@@ -96,7 +96,7 @@ msgstr "Açılacak proje"
 #, kde-format
 msgctxt "@title"
 msgid "Syntax"
-msgstr "Sözdizimi"
+msgstr "Sözdizim"
 
 #: plugins/scriptapi/scriptapimanager.cpp:112
 #, kde-format
@@ -120,7 +120,7 @@ msgstr "Parametre"
 #, kde-format
 msgctxt "@title"
 msgid "Methods"
-msgstr "Metodlar"
+msgstr "Yöntemler"
 
 #: plugins/scriptapi/scriptapimanager.cpp:116
 #, kde-format
@@ -150,7 +150,7 @@ msgstr "Açıklama"
 #, kde-format
 msgctxt "@title"
 msgid "Script Engine API"
-msgstr "Betik Motoru API"
+msgstr "Betik İşletkesi API’si"
 
 #: plugins/scriptapi/scriptapimanager.cpp:260
 #, kde-format
@@ -168,7 +168,7 @@ msgstr "Nesneler"
 #, kde-format
 msgctxt "@title"
 msgid "Script Engine Modules"
-msgstr "Betik Motoru Modülleri"
+msgstr "Betik İşletkesi Modülleri"
 
 #: plugins/scriptapi/scriptapimodel.cpp:111
 #, kde-format
@@ -183,13 +183,13 @@ msgstr "Özellikler"
 #: plugins/scriptapi/scriptapimodel.cpp:243
 #, kde-format
 msgid "Methods"
-msgstr "Methodlar"
+msgstr "Yöntemler"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: plugins/scriptapi/scriptapiwidget.ui:17
 #, kde-format
 msgid "Rocs Scripting API"
-msgstr "Rocs Betik API"
+msgstr "Rocs Betik Yazımı API’si"
 
 #: project/project.cpp:170
 #, kde-format
@@ -197,7 +197,7 @@ msgctxt "@info"
 msgid ""
 "The Rocs project could not be imported because the project file could not be "
 "parsed."
-msgstr "Rocs projesi içe aktarılamadı; çünkü proje dosyası ayrıştırılamadı."
+msgstr "Proje dosyası ayrıştırılamadığından Rocs projesi içe aktarılamadı."
 
 #. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
 #. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
@@ -210,7 +210,7 @@ msgstr "Simgeyle birlikte metni göster"
 #: rocs.kcfg:49
 #, kde-format
 msgid "Path where include manager seek for includes."
-msgstr "İçerilenler için yönetici aramasının olduğu yol."
+msgstr "Include’lar için yöneticinin arama yaptığı yol."
 
 #. i18n: ectx: Menu (project)
 #: rocsui.rc:23
@@ -290,7 +290,7 @@ msgstr "adsız"
 #: ui/edgetypesdelegate.cpp:57
 #, kde-format
 msgid "Direction of edges of edge type."
-msgstr "Kenar türünü kenarlarının yönü."
+msgstr "Kenar türünün kenarlarının yönü."
 
 #: ui/edgetypesdelegate.cpp:61
 #, kde-format
@@ -309,13 +309,13 @@ msgid ""
 "<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
 "want to overwrite it, change the file name to something else.</p>"
 msgstr ""
-"<p><br /><strong>'%1'</strong><br /> dosyası zaten var; eğer üzerine yazmak "
-"istemiyorsanız, dosyanın adını değiştirin.</p>"
+"<p><br /><strong>“%1”</strong><br /> dosyası halihazırda var; üzerine yazmak "
+"istemiyorsanız dosyanın adını değiştirin.</p>"
 
 #: ui/fileformatdialog.cpp:69
 #, kde-format
 msgid "File Exists"
-msgstr "Dosya Mevcut"
+msgstr "Dosya Var"
 
 #: ui/fileformatdialog.cpp:85
 #, kde-format
@@ -323,13 +323,13 @@ msgid ""
 "<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
 "backend. Aborting export.</p>"
 msgstr ""
-"<p>Kullanılabilir dosya arka yüzü için <strong>'%1'</strong> dosyasının "
+"<p>Kullanılabilir dosya arka ucu için <strong>“%1”</strong> dosyasının "
 "soneki çözülemedi. Dışa aktarma iptal ediliyor.</p>"
 
 #: ui/fileformatdialog.cpp:96
 #, kde-format
 msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
-msgstr "<p>Dosyaya yazarken hata oluşut: <strong>'%1'</strong></p>"
+msgstr "<p>Dosyaya yazarken hata oluştu: <strong>“%1”</strong></p>"
 
 #: ui/fileformatdialog.cpp:114
 #, kde-format
@@ -340,7 +340,7 @@ msgstr "*|Tüm dosyalar"
 #, kde-format
 msgctxt "@title:window"
 msgid "Import Graph File into Project"
-msgstr "Grafik Dosyasının Proje İçine Aktar"
+msgstr "Projeye Grafik Dosyası İçe Aktar"
 
 #: ui/grapheditorwidget.cpp:79
 #, kde-format
@@ -369,7 +369,7 @@ msgstr "Çalıştır"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Execute currently active script on active graph document."
-msgstr "Etkin grafik belgesindeki mevcut etkin betiği çalıştır."
+msgstr "Etkin grafik belgesindeki şu anda etkin betiği yürütün."
 
 #: ui/mainwindow.cpp:173
 #, kde-format
@@ -381,19 +381,19 @@ msgstr "Durdur"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop script execution."
-msgstr "Betiği çalıştırmayı durdur."
+msgstr "Betiği yürütmeyi durdurun."
 
 #: ui/mainwindow.cpp:176
 #, kde-format
 msgctxt "@action:intoolbar Open Debugger"
 msgid "Debugger"
-msgstr "Hata Ayıklayıcı"
+msgstr "Hata Ayıklayıcısı"
 
 #: ui/mainwindow.cpp:177
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open the Javascript code debugger."
-msgstr "JavaScript kod hata ayıklayıcısını açar."
+msgstr "JavaScript kodu için olan hata ayıklayıcısını açar."
 
 #: ui/mainwindow.cpp:212
 #, kde-format
@@ -410,7 +410,7 @@ msgstr "Günlük"
 #, kde-format
 msgctxt "@title"
 msgid "Scripting API"
-msgstr "Betik API"
+msgstr "Betik API’si"
 
 #: ui/mainwindow.cpp:258
 #, kde-format
@@ -428,19 +428,19 @@ msgstr "Projeyi Kaydet"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Project..."
-msgstr "Proje Aç..."
+msgstr "Proje Aç…"
 
 #: ui/mainwindow.cpp:278
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Recent Projects"
-msgstr "Son Projeler"
+msgstr "Son Kullanılan Projeler"
 
 #: ui/mainwindow.cpp:283
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project As..."
-msgstr "Projeyi Farklı Kaydet..."
+msgstr "Projeyi Farklı Kaydet…"
 
 #: ui/mainwindow.cpp:284
 #, kde-format
@@ -452,31 +452,31 @@ msgstr "Yeni Grafik Belgesi"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Script File..."
-msgstr "Yeni Betik Dosyası..."
+msgstr "Yeni Betik Dosyası…"
 
 #: ui/mainwindow.cpp:286
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Graph..."
-msgstr "Grafiği İçe Aktar..."
+msgstr "Grafik İçe Aktar…"
 
 #: ui/mainwindow.cpp:287
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Graph As..."
-msgstr "Grafiği Farklı Dışa Aktar..."
+msgstr "Grafiği Farklı Dışa Aktar…"
 
 #: ui/mainwindow.cpp:288
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Script..."
-msgstr "Betiği İçe Aktar..."
+msgstr "Betik İçe Aktar…"
 
 #: ui/mainwindow.cpp:289
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Script..."
-msgstr "Betiği Dışa Aktar..."
+msgstr "Betiği Dışa Aktar…"
 
 #: ui/mainwindow.cpp:328
 #, kde-format
@@ -509,7 +509,7 @@ msgstr "Projeyi Farklı Kaydet"
 #: ui/mainwindow.cpp:375
 #, kde-format
 msgid "Rocs Projects (*.rocs)"
-msgstr "Rocs Projeleri (*.rocs)"
+msgstr "Rocs projeleri (*.rocs)"
 
 #: ui/mainwindow.cpp:385
 #, kde-format
@@ -517,19 +517,20 @@ msgctxt "@info"
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
-"\"%1\" adlı bir dosya zaten var. Üzerine yazmak istediğinizden emin misiniz?"
+"“%1” adlı bir dosya halihazırda var. Üzerine yazmak istediğinizden emin "
+"misiniz?"
 
 #: ui/mainwindow.cpp:386
 #, kde-format
 msgctxt "@title:window"
 msgid "Overwrite File?"
-msgstr "Dosya Üzerine Yazılsın mı?"
+msgstr "Dosya Üzerine Yaz?"
 
 #: ui/mainwindow.cpp:409
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Project Files"
-msgstr "Proje Dosyalarını Aç"
+msgstr "Proje Dosyaları Aç"
 
 #: ui/mainwindow.cpp:409
 #, kde-format
@@ -580,27 +581,27 @@ msgstr "Betik çıktısı:"
 #: ui/scriptoutputwidget.ui:37
 #, kde-format
 msgid "Clear program output with each execution."
-msgstr "Her çalıştırmadan program çıktısını temizle."
+msgstr "Her yürütmeyle program çıktısını temizleyin."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
 #: ui/scriptoutputwidget.ui:56
 #, kde-format
 msgid "Show debug output."
-msgstr "Hata ayıklama çıktısını göster."
+msgstr "Hata ayıklama çıktısını gösterin."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
 #: ui/scriptoutputwidget.ui:82
 #, kde-format
 msgid "Clear output."
-msgstr "Çıktıyı temizle."
+msgstr "Çıktıyı temizleyin."
 
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
 msgid "Side Toolbar"
-msgstr "Yan Araç Çubuğu"
+msgstr "Kenar Araç Çubuğu"
 
 #: ui/sidedockwidget.cpp:133
 #, kde-format
 msgid "Toggle '%1' view."
-msgstr "\"%1\" görünümüne geç."
+msgstr "“%1” görünümünü açın/kapatın."
