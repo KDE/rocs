@@ -1,23 +1,23 @@
-# translation of rocs.po to Spanish
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Translation of rocs.po to Spanish
+# Copyright (C) 2009-2025 This_file_is_part_of_KDE
+# This file is distributed under the same license as the rocs package.
 #
-# Eloy Cuadra <ecuadra@eloihr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021.
-# Kira J. Fernandez <kirajfdez@gmail.com>, 2009.
-# Ignacio Poggi <ignaciop.3@gmail.com>, 2009.
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2009 Kira J. Fernandez <kirajfdez@gmail.com>
+# SPDX-FileCopyrightText: 2009 Ignacio Poggi <ignaciop.3@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-08 01:54+0000\n"
-"PO-Revision-Date: 2021-10-24 13:17+0200\n"
+"PO-Revision-Date: 2025-02-25 12:44+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.08.2\n"
+"X-Generator: Lokalize 24.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -428,7 +428,7 @@ msgstr "Guardar proyecto"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Project..."
-msgstr "Abrir proyecto..."
+msgstr "Abrir proyecto…"
 
 #: ui/mainwindow.cpp:278
 #, kde-format
@@ -440,7 +440,7 @@ msgstr "Proyectos recientes"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project As..."
-msgstr "Guardar proyecto como..."
+msgstr "Guardar proyecto como…"
 
 #: ui/mainwindow.cpp:284
 #, kde-format
@@ -452,31 +452,31 @@ msgstr "Nuevo documento de grafos"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Script File..."
-msgstr "Nuevo archivo de guion..."
+msgstr "Nuevo archivo de guion…"
 
 #: ui/mainwindow.cpp:286
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Graph..."
-msgstr "Importar grafo..."
+msgstr "Importar grafo…"
 
 #: ui/mainwindow.cpp:287
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Graph As..."
-msgstr "Exportar grafo como..."
+msgstr "Exportar grafo como…"
 
 #: ui/mainwindow.cpp:288
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Script..."
-msgstr "Importar guion..."
+msgstr "Importar guion…"
 
 #: ui/mainwindow.cpp:289
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Script..."
-msgstr "Exportar guion..."
+msgstr "Exportar guion…"
 
 #: ui/mainwindow.cpp:328
 #, kde-format
@@ -603,233 +603,3 @@ msgstr "Barra de herramientas lateral"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Conmutar la vista «%1»."
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Save Project as"
-#~ msgstr "Guardar proyecto como"
-
-#~ msgid "about:blank"
-#~ msgstr "about:blank"
-
-#~ msgid "Overwrite"
-#~ msgstr "Sobrescribir"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Barra de herramientas principal"
-
-#~ msgid "Align Toolbar"
-#~ msgstr "Barra de herramientas de alineación"
-
-#~ msgid "Rocs Handbook"
-#~ msgstr "Manual de Rocs"
-
-#~ msgid "http://docs.kde.org/stable/en/kdeedu/rocs/index.html"
-#~ msgstr "http://docs.kde.org/stable/es/kdeedu/rocs/index.html"
-
-#~ msgctxt "@title"
-#~ msgid "Handbook"
-#~ msgstr "Manual"
-
-#~ msgctxt "@title"
-#~ msgid "Data Structures"
-#~ msgstr "Estructuras de datos"
-
-#~ msgctxt "@title Short program description"
-#~ msgid "Rocs - Data Structure Analysis"
-#~ msgstr "Rocs - Análisis de la estructura de datos"
-
-#~ msgid "No Data Structure plugins found on your system. Exiting."
-#~ msgstr ""
-#~ "No se encuentran complementos de estructuras de datos en el sistema. "
-#~ "Saliendo."
-
-#~ msgid ""
-#~ "Rocs needs at least one data structure plugin to continue.\n"
-#~ "Try running kbuildsycoca4 from a console and after execute Rocs again."
-#~ msgstr ""
-#~ "Rocs necesita al menos un complemento de estructura de datos para "
-#~ "continuar.\n"
-#~ "Pruebe a ejecutar «kbuildsycoca4» en una consola y ejecute Rocs de nuevo."
-
-#~ msgid "Position where name and value of a node shall be shown."
-#~ msgstr "Posición donde se deben mostrar el nombre y el valor de un nodo."
-
-#~ msgid "Position where name and value of an edge shall be shown."
-#~ msgstr "Posición donde se deben mostrar el nombre y el valor de una arista."
-
-#~ msgid ""
-#~ "Specifies whether execution button for debug execution shall be shown."
-#~ msgstr "Especifica si se debe mostrar el botón para ejecutar el depurador."
-
-#~ msgid ""
-#~ "Specifies whether execution button for stepped execution shall be shown."
-#~ msgstr "Especifica si se debe mostrar el botón de ejecución paso a paso."
-
-#~ msgid "Script File"
-#~ msgstr "Archivo de guion"
-
-#~ msgid "Convert To"
-#~ msgstr "Convertir a"
-
-#~ msgid "Settings"
-#~ msgstr "Preferencias"
-
-#~ msgid "Help"
-#~ msgstr "Ayuda"
-
-#~ msgid ""
-#~ "A KDE Text Editor could not be found, \n"
-#~ " please, check your installation"
-#~ msgstr ""
-#~ "No se ha podido encontrar un editor de texto de KDE; \n"
-#~ " verifique su instalación"
-
-#~ msgid "Display of Element Properties"
-#~ msgstr "Visor de las propiedades del elemento"
-
-#~ msgid "Data Properties"
-#~ msgstr "Propiedades de los datos"
-
-#~ msgid "centered"
-#~ msgstr "centrada"
-
-#~ msgid "below"
-#~ msgstr "por debajo"
-
-#~ msgid "above"
-#~ msgstr "por encima"
-
-#~ msgid "Connection Properties"
-#~ msgstr "Propiedades de la conexión"
-
-#~ msgid "Execution Controls"
-#~ msgstr "Controles de la ejecución"
-
-#~ msgid "Show Debug Execution"
-#~ msgstr "Mostrar la ejecución del depurador"
-
-#~ msgid "Show One Step Execution"
-#~ msgstr "Mostrar la ejecución paso a paso"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Properties"
-#~ msgstr "Propiedades"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Set visibility of pointers"
-#~ msgstr "Fijar la visibilidad de los punteros"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Export graphs to file"
-#~ msgstr "Exportar grafos a archivo"
-
-#~ msgid "Loaded Plugins"
-#~ msgstr "Complementos cargados"
-
-#~ msgid "Graph File Plugins loaded for %1"
-#~ msgstr "Complementos de archivo de grafos cargados para %1"
-
-#~ msgid "*.js|Script files"
-#~ msgstr "*.js|Archivos de guiones"
-
-#~ msgid "Rocs Script Files"
-#~ msgstr "Archivos de guiones de Rocs"
-
-#~ msgid "Add your description here."
-#~ msgstr "Añada aquí su descripción."
-
-#~ msgctxt "@action:intoolbar Script Execution"
-#~ msgid "One Step"
-#~ msgstr "Un paso"
-
-#~ msgctxt "@action:inmenu Debug execution"
-#~ msgid "Debug run"
-#~ msgstr "Ejecutar el depurador"
-
-#~ msgctxt "@action:inmenu Debug execution"
-#~ msgid "Interrupt at first line"
-#~ msgstr "Interrumpir en la primera línea"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Download Examples"
-#~ msgstr "Descargar ejemplos"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Upload project"
-#~ msgstr "Enviar proyecto"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Possible Includes"
-#~ msgstr "Inclusiones posibles"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Loaded Plugins"
-#~ msgstr "Complementos cargados"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Configure Code Editor..."
-#~ msgstr "Configurar el editor de código..."
-
-#~ msgctxt "@title:tab"
-#~ msgid "Include Manager"
-#~ msgstr "Gestor de inclusiones"
-
-#~ msgctxt "@title:tab"
-#~ msgid "Default Settings"
-#~ msgstr "Preferencias por omisión"
-
-#~ msgctxt "@title:window"
-#~ msgid "Add Existing Script File to Project"
-#~ msgstr "Añadir archivo de guion existente al proyecto"
-
-#~ msgctxt "@info"
-#~ msgid "This does not seem to be a graph file."
-#~ msgstr "Esto no parece ser un archivo de grafos."
-
-#~ msgctxt "@title:window"
-#~ msgid "Invalid File"
-#~ msgstr "Archivo no válido"
-
-#~ msgid ""
-#~ "*.rocs|Rocs project files\n"
-#~ "*.rocsz|Compressed Rocs project files\n"
-#~ "*|All files"
-#~ msgstr ""
-#~ "*.rocs|Archivos de proyecto de Rocs\n"
-#~ "*.rocsz|Archivos comprimidos de proyecto de Rocs\n"
-#~ "*|Todos los archivos"
-
-#~ msgctxt "@title:window"
-#~ msgid "Save Project"
-#~ msgstr "Guardar proyecto"
-
-#~ msgid ""
-#~ "*rocs *.rocsz|All Rocs files\n"
-#~ "*.rocs|Rocs project files\n"
-#~ "*.rocsz|Compressed Rocs project files\n"
-#~ "*|All files"
-#~ msgstr ""
-#~ "*rocs *.rocsz|Todos los archivos de Rocs\n"
-#~ "*.rocs|Archivos de proyecto de Rocs\n"
-#~ "*.rocsz|Archivos comprimidos de proyecto de Rocs\n"
-#~ "*|Todos los archivos"
-
-#~ msgid ""
-#~ "*.graph|Rocs graph documents\n"
-#~ "*|All files"
-#~ msgstr ""
-#~ "*.graph|Archivos de grafos de Rocs\n"
-#~ "*|Todos los archivos"
-
-#~ msgctxt "@title:window"
-#~ msgid "Save Graph Document"
-#~ msgstr "Guardar documento de grafos"
-
-#~ msgid "Graph name"
-#~ msgstr "Nombre del grafo"
-
-#~ msgid "Enter the name of the Graph"
-#~ msgstr "Introduzca el nombre del grafo"
-
-#~ msgid "Possible Includes for Script Engine"
-#~ msgstr "Inclusiones posibles para el motor de guiones"
