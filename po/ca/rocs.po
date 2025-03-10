@@ -603,7 +603,3 @@ msgstr "Barra d'eines lateral"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Commuta la vista «%1»."
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Save Project as"
-#~ msgstr "Desa el projecte com a"
