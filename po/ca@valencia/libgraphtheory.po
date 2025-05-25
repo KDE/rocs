@@ -616,7 +616,7 @@ msgstr "Nodes del conjunt dret:"
 #: editorplugins/generategraph/generategraphwidget.ui:590
 #, kde-format
 msgid "Select the edge type for connections of the generated graph."
-msgstr "Escolliu el tipus d'aresta per a les connexions del graf generat."
+msgstr "Trieu el tipus d'aresta per a les connexions del graf generat."
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:604
