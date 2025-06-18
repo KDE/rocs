@@ -1,5 +1,5 @@
-# Translation of rocs.po to Spanish
-# Copyright (C) 2009-2025 This_file_is_part_of_KDE
+# Spanish translations for rocs.po package.
+# Copyright (C) 2009-2025 This file is copyright:
 # This file is distributed under the same license as the rocs package.
 #
 # SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2025 Eloy Cuadra <ecuadra@eloihr.net>
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-08 01:54+0000\n"
-"PO-Revision-Date: 2025-02-25 12:44+0100\n"
+"PO-Revision-Date: 2025-06-17 19:55+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"

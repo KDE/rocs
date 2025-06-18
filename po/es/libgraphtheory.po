@@ -1,15 +1,15 @@
 # Spanish translations for libgraphtheory.po package.
-# Copyright (C) 2014 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Copyright (C) 2014-2025 This file is copyright:
+# This file is distributed under the same license as the rocs package.
 # Automatically generated, 2014.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2014, 2015, 2016, 2019, 2020, 2021.
+#
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2019, 2020, 2021, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: 2021-10-24 13:16+0200\n"
+"PO-Revision-Date: 2025-06-17 19:53+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -1431,18 +1431,3 @@ msgstr "Seleccionar y mover"
 #, kde-format
 msgid "Select and move elements on the scene"
 msgstr "Seleccionar y mover elementos en la escena"
-
-#~ msgid "Identifier"
-#~ msgstr "Identificador"
-
-#~ msgid "Color"
-#~ msgstr "Color"
-
-#~ msgid "unidirectional"
-#~ msgstr "unidireccional"
-
-#~ msgid "bidirectional"
-#~ msgstr "bidireccional"
-
-#~ msgid "All Connection Types"
-#~ msgstr "Todos los tipos de conexiones"
