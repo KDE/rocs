@@ -106,7 +106,7 @@ void NodeWrapper::setType(int typeId)
     }
     if (newType == m_node->type()) {
         QString command = QString("node.type = %1)").arg(typeId);
-        Q_EMIT message(i18nc("@info:shell", "%1: node type ID %2 not registered", command, typeId), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: node type ID %2 not registered", command, typeId), GraphTheory::MessageType::ErrorMessage);
         return;
     }
     m_node->setType(newType);
@@ -135,7 +135,7 @@ QList<GraphTheory::EdgeWrapper *> NodeWrapper::edges(int type) const
     }
     if (!typePtr) {
         QString command = QString("node.edges(%1)").arg(type);
-        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), GraphTheory::MessageType::ErrorMessage);
         return QList<EdgeWrapper *>();
     }
     QList<EdgeWrapper *> edges;
@@ -169,7 +169,7 @@ QList<GraphTheory::EdgeWrapper *> NodeWrapper::inEdges(int type) const
     if (!typePtr) {
         ;
         QString command = QString("node.inEdges(%1)").arg(type);
-        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), GraphTheory::MessageType::ErrorMessage);
         return QList<EdgeWrapper *>();
     }
     QList<EdgeWrapper *> edges;
@@ -202,7 +202,7 @@ QList<GraphTheory::EdgeWrapper *> NodeWrapper::outEdges(int type) const
     }
     if (!typePtr) {
         QString command = QString("node.outEdges(%1)").arg(type);
-        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), GraphTheory::MessageType::ErrorMessage);
         return QList<EdgeWrapper *>();
     }
     QList<EdgeWrapper *> edges;
@@ -239,7 +239,7 @@ QList<NodeWrapper *> NodeWrapper::neighbors(int type) const
     }
     if (!typePtr) {
         QString command = QString("node.neighbors(%1)").arg(type);
-        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), GraphTheory::MessageType::ErrorMessage);
         return QList<NodeWrapper *>();
     }
     QSet<NodeWrapper *> neighbors;
@@ -285,7 +285,7 @@ QList<NodeWrapper *> NodeWrapper::predecessors(int type) const
     }
     if (!typePtr) {
         QString command = QString("node.predecessors(%1)").arg(type);
-        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), GraphTheory::MessageType::ErrorMessage);
         return QList<NodeWrapper *>();
     }
     QSet<NodeWrapper *> precessors;
@@ -336,7 +336,7 @@ QList<NodeWrapper *> NodeWrapper::successors(int type) const
     }
     if (!typePtr) {
         QString command = QString("node.successors(%1)").arg(type);
-        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), GraphTheory::MessageType::ErrorMessage);
         return QList<NodeWrapper *>();
     }
     QSet<NodeWrapper *> successors;

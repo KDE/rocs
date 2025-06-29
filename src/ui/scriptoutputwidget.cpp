@@ -43,17 +43,17 @@ bool ScriptOutputWidget::isOutputClearEnabled() const
     return !ui->buttonDisableClear->isChecked();
 }
 
-void ScriptOutputWidget::processMessage(const QString &message, Kernel::MessageType type)
+void ScriptOutputWidget::processMessage(const QString &message, GraphTheory::MessageType type)
 {
     switch (type) {
-    case Kernel::MessageType::InfoMessage:
+    case GraphTheory::MessageType::InfoMessage:
         ui->txtOutput->append(message);
         ui->dbgOutput->append("<i>" + message + "</i>");
         break;
-    case Kernel::MessageType::WarningMessage:
+    case GraphTheory::MessageType::WarningMessage:
         ui->dbgOutput->append("<span style=\"color: green\">" + message + "</span>");
         break;
-    case Kernel::MessageType::ErrorMessage:
+    case GraphTheory::MessageType::ErrorMessage:
         ui->txtOutput->append("<b style=\"color: red\">" + message + "</b>");
         ui->dbgOutput->append("<b style=\"color: red\">" + message + "</b>");
         break;

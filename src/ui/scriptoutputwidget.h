@@ -7,7 +7,7 @@
 #ifndef SCRIPTOUTPUTWIDGET_H
 #define SCRIPTOUTPUTWIDGET_H
 
-#include "libgraphtheory/kernel/kernel.h"
+#include "libgraphtheory/kernel/kerneltypes.h"
 #include "ui_scriptoutputwidget.h"
 #include <QWidget>
 
@@ -26,7 +26,7 @@ public:
     bool isOutputClearEnabled() const;
 
 public Q_SLOTS:
-    void processMessage(const QString &message, GraphTheory::Kernel::MessageType type);
+    void processMessage(const QString &message, GraphTheory::MessageType type);
     void showDebugOutput(bool show = true);
     void clear();
 

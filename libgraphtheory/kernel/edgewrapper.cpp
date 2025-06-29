@@ -56,7 +56,7 @@ void EdgeWrapper::setType(int typeId)
     }
     if (newType == m_edge->type()) {
         QString command = QString("edge.type = %1)").arg(typeId);
-        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, typeId), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, typeId), GraphTheory::MessageType::ErrorMessage);
         return;
     }
     m_edge->setType(newType);

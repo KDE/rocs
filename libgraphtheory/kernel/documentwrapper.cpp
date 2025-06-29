@@ -14,7 +14,8 @@
 using namespace GraphTheory;
 
 DocumentWrapper::DocumentWrapper(GraphDocumentPtr document, QJSEngine *engine)
-    : m_document(document)
+    : QObject(engine)
+    , m_document(document)
     , m_engine(engine)
 {
     const auto nodes = document->nodes();
@@ -85,7 +86,7 @@ QJSValue DocumentWrapper::node(int id) const
         }
     }
     QString command = QString("Document.node(%1)").arg(id);
-    Q_EMIT message(i18nc("@info:shell", "%1: no node with ID %2 registered", command, id), Kernel::ErrorMessage);
+    Q_EMIT message(i18nc("@info:shell", "%1: no node with ID %2 registered", command, id), GraphTheory::MessageType::ErrorMessage);
     return QJSValue();
 }
 
@@ -112,7 +113,7 @@ QJSValue DocumentWrapper::nodes(int type) const
     }
     if (!typePtr) {
         QString command = QString("Document.nodes(%1)").arg(type);
-        Q_EMIT message(i18nc("@info:shell", "%1: node type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: node type ID %2 not registered", command, type), GraphTheory::MessageType::ErrorMessage);
         return m_engine->newArray();
     }
     NodeList nodes = m_document->nodes(typePtr);
@@ -147,7 +148,7 @@ QJSValue DocumentWrapper::edges(int type) const
     }
     if (!typePtr) {
         QString command = QString("Document.edges(%1)").arg(type);
-        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), GraphTheory::MessageType::ErrorMessage);
         return m_engine->newArray();
     }
     EdgeList edges = m_document->edges(typePtr);
@@ -171,12 +172,12 @@ QJSValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
 {
     if (!from) {
         QString command = QString("Document.createEdge(from, to)");
-        Q_EMIT message(i18nc("@info:shell", "%1: \"from\" is not a valid node object", command), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: \"from\" is not a valid node object", command), GraphTheory::MessageType::ErrorMessage);
         return QJSValue();
     }
     if (!to) {
         QString command = QString("Document.createEdge(from, to)");
-        Q_EMIT message(i18nc("@info:shell", "%1: \"to\" is not a valid node object", command), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: \"to\" is not a valid node object", command), GraphTheory::MessageType::ErrorMessage);
         return QJSValue();
     }
     EdgePtr edge = Edge::create(from->node(), to->node());
@@ -187,7 +188,7 @@ void DocumentWrapper::remove(const QJSValue &object)
 {
     if (!object.isObject() || object.isNull()) {
         QString command = QString("Document.remove(obj)");
-        Q_EMIT message(i18nc("@info:shell", "%1: \"obj\" is not called on an object", command), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: \"obj\" is not called on an object", command), GraphTheory::MessageType::ErrorMessage);
         return;
     }
 
@@ -206,7 +207,7 @@ void DocumentWrapper::remove(const QJSValue &object)
         node->node()->destroy();
     } else {
         QString command = QString("Document.remove(obj)");
-        Q_EMIT message(i18nc("@info:shell", "%1: \"obj\" is neither a valid node or edge object", command), Kernel::ErrorMessage);
+        Q_EMIT message(i18nc("@info:shell", "%1: \"obj\" is neither a valid node or edge object", command), GraphTheory::MessageType::ErrorMessage);
     }
 }
 

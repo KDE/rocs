@@ -38,6 +38,9 @@ target_sources(rocsgraphtheory PRIVATE
     kernel/documentwrapper.cpp
     kernel/nodewrapper.cpp
     kernel/edgewrapper.cpp
+    kernel/engine.cpp
+    kernel/engine.h
+    kernel/kerneltypes.h
     kernel/kernel.cpp
     kernel/modules/console/consolemodule.cpp
     models/nodemodel.cpp
