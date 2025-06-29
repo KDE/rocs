@@ -8,12 +8,9 @@
 #define NODEWRAPPER_H
 
 #include "documentwrapper.h"
-#include "graphdocument.h"
-#include "graphtheory_export.h"
-#include "kernel.h"
+#include "kerneltypes.h"
 #include "node.h"
 #include "typenames.h"
-
 #include <QColor>
 #include <QObject>
 
@@ -175,7 +172,7 @@ public Q_SLOTS:
     void updateDynamicProperties();
 
 Q_SIGNALS:
-    void message(const QString &messageString, Kernel::MessageType type) const;
+    void message(const QString &messageString, GraphTheory::MessageType type) const;
     void idChanged(int id);
     void positionChanged(const QPointF &position);
     void colorChanged(const QColor &color);

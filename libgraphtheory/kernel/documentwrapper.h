@@ -10,10 +10,9 @@
 #include "edge.h"
 #include "graphdocument.h"
 #include "graphtheory_export.h"
-#include "kernel.h"
 #include "node.h"
+#include "kerneltypes.h"
 #include "typenames.h"
-
 #include <QColor>
 #include <QObject>
 #include <QJSEngine>
@@ -58,7 +57,7 @@ public:
     Q_INVOKABLE void remove(const QJSValue &object);
 
 Q_SIGNALS:
-    void message(const QString &messageString, Kernel::MessageType type) const;
+    void message(const QString &messageString, GraphTheory::MessageType type) const;
 
 private Q_SLOTS:
     void registerWrapper(NodePtr node);
