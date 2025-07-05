@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:21+0000\n"
+"POT-Creation-Date: 2025-07-05 05:53+0000\n"
 "PO-Revision-Date: 2013-07-31 11:57+0200\n"
 "Last-Translator: Claus Christensen <claus_chr@webspeed.dk>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -189,6 +189,12 @@ msgstr "Egenskaber"
 msgid "Methods"
 msgstr "Metoder"
 
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "API for Rocs-scripting"
+
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -196,6 +202,61 @@ msgid ""
 "The Rocs project could not be imported because the project file could not be "
 "parsed."
 msgstr ""
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Vis tekst ved siden af ikon"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Sti, hvor der ledes efter filer ved håndtering af inkluderingsfiler."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Projekt"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Script-dokument"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Grafdokument"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Graffil"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Redigér valgte data"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Layout"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Værktøjer"
 
 #: ui/codeeditorwidget.cpp:81
 #, fuzzy, kde-format
@@ -302,6 +363,12 @@ msgstr "Grafdokument"
 #| msgid "Enter the name of your new script"
 msgid "Enter the name of your graph document"
 msgstr "Angiv navn for dit nye script"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Projektjournal"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -538,6 +605,31 @@ msgstr "Dit projekt har ugemte ændringer. Vil du gemme dine ændringer?"
 msgid "Unique ID of the node type."
 msgstr ""
 
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, fuzzy, kde-format
+#| msgid "Script Output:"
+msgid "Script output:"
+msgstr "Output fra script:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Ryd programmets output ved hver kørsel."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Vis output fra fejlsøgning."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Ryd output."
+
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -548,54 +640,6 @@ msgstr "Sideværktøjslinje"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Slå visning  af \"%1\" til/fra."
-
-#~ msgid "Rocs Scripting API"
-#~ msgstr "API for Rocs-scripting"
-
-#~ msgid "Show text beside icon"
-#~ msgstr "Vis tekst ved siden af ikon"
-
-#~ msgid "Path where include manager seek for includes."
-#~ msgstr ""
-#~ "Sti, hvor der ledes efter filer ved håndtering af inkluderingsfiler."
-
-#~ msgid "Project"
-#~ msgstr "Projekt"
-
-#~ msgid "Script Document"
-#~ msgstr "Script-dokument"
-
-#~ msgid "Graph Document"
-#~ msgstr "Grafdokument"
-
-#~ msgid "Graph File"
-#~ msgstr "Graffil"
-
-#~ msgid "Edit Selected Data"
-#~ msgstr "Redigér valgte data"
-
-#~ msgid "Layout"
-#~ msgstr "Layout"
-
-#~ msgid "Tools"
-#~ msgstr "Værktøjer"
-
-#~ msgid "Project Journal"
-#~ msgstr "Projektjournal"
-
-#, fuzzy
-#~| msgid "Script Output:"
-#~ msgid "Script output:"
-#~ msgstr "Output fra script:"
-
-#~ msgid "Clear program output with each execution."
-#~ msgstr "Ryd programmets output ved hver kørsel."
-
-#~ msgid "Show debug output."
-#~ msgstr "Vis output fra fejlsøgning."
-
-#~ msgid "Clear output."
-#~ msgstr "Ryd output."
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Save Project as"

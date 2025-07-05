@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:21+0000\n"
+"POT-Creation-Date: 2025-07-05 05:53+0000\n"
 "PO-Revision-Date: 2015-12-08 19:58+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -44,6 +44,24 @@ msgstr "Navn"
 msgid "Value"
 msgstr "Værdi"
 
+#. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
+#: dialogs/edgeproperties.ui:26
+#, kde-format
+msgid "Edge Properties"
+msgstr "Kantegenskaber"
+
+#. i18n: ectx: property (text), widget (QLabel, labelType)
+#: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
+#, kde-format
+msgid "Type:"
+msgstr "Type:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
+#: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
+#, kde-format
+msgid "Dynamic Properties"
+msgstr "Dynamiske egenskaber"
+
 #: dialogs/edgetypeproperties.cpp:37
 #, kde-format
 msgid "Edges"
@@ -67,13 +85,19 @@ msgstr "Kantegenskaber"
 msgid "Name:"
 msgstr "Navn:"
 
-#: dialogs/edgetypeproperties.cpp:49 dialogs/nodetypeproperties.cpp:49
+#. i18n: ectx: property (text), widget (QLabel, labelId)
+#. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
+#: dialogs/edgetypeproperties.cpp:49 dialogs/nodeproperties.ui:119
+#: dialogs/nodetypeproperties.cpp:49
+#: editorplugins/generategraph/generategraphwidget.ui:129
 #, fuzzy, kde-format
 #| msgid "Identifier:"
 msgid "Identifier:"
 msgstr "Identifikator:"
 
-#: dialogs/edgetypeproperties.cpp:51 dialogs/nodetypeproperties.cpp:52
+#. i18n: ectx: property (text), widget (QLabel, labelColor)
+#: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
+#: dialogs/nodetypeproperties.cpp:52
 #, kde-format
 msgid "Color:"
 msgstr "Farve:"
@@ -138,6 +162,19 @@ msgid ""
 "one."
 msgstr ""
 
+#. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
+#: dialogs/nodeproperties.ui:26
+#, kde-format
+msgid "Node Properties"
+msgstr "Knudens egenskaber"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
+#. i18n: ectx: property (toolTip), widget (KColorCombo, color)
+#: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
+#, kde-format
+msgid "Node color"
+msgstr "Knudens farve"
+
 #: dialogs/nodetypeproperties.cpp:35
 #, kde-format
 msgid "Nodes"
@@ -200,6 +237,177 @@ msgstr "Kantstil"
 msgid "Enter Property Name"
 msgstr "Pointeregenskaber"
 
+#. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
+#: editorplugins/assignvalues/assignvalueswidget.ui:32
+#, kde-format
+msgid "Assign Values"
+msgstr "Tildel værdier"
+
+#. i18n: ectx: property (text), widget (QLabel, property_choice_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:40
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Choose Properties"
+msgstr "Knudens egenskaber"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/assignvalues/assignvalueswidget.ui:59
+#, fuzzy, kde-format
+#| msgid "Show values of pointers"
+msgid "Show advanced options."
+msgstr "Vis pointeres værdier"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: editorplugins/assignvalues/assignvalueswidget.ui:74
+#, kde-format
+msgid "Assignment Method"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:81
+#, kde-format
+msgid "Enumerate Items"
+msgstr "Optæl elementer"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:86
+#, fuzzy, kde-format
+#| msgid "Enumerate"
+msgid "Enumerate Alpha"
+msgstr "Optæl"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:91
+#, fuzzy, kde-format
+#| msgid "Enumerate"
+msgid "Enumerate Alpha-Numeric"
+msgstr "Optæl"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:96
+#, kde-format
+msgid "Assign Random Integers"
+msgstr "Tildel tilfældige hele tal"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:101
+#, kde-format
+msgid "Assign Random Reals"
+msgstr "Tildel tilfældige reelle tal"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:106
+#, fuzzy, kde-format
+#| msgid "Assign Values"
+msgid "Assign Constant Value"
+msgstr "Tildel værdier"
+
+#. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
+#: editorplugins/assignvalues/assignvalueswidget.ui:132
+#, fuzzy, kde-format
+#| msgid "Start ID"
+msgid "Start ID:"
+msgstr "Start-id"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:167
+#, kde-format
+msgid "Initial string"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:174
+#, kde-format
+msgid "a"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
+#: editorplugins/assignvalues/assignvalueswidget.ui:192
+#, kde-format
+msgid "Start ID"
+msgstr "Start-id"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
+#: editorplugins/assignvalues/assignvalueswidget.ui:209
+#, kde-format
+msgid "Prefix"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: editorplugins/assignvalues/assignvalueswidget.ui:230
+#: editorplugins/assignvalues/assignvalueswidget.ui:298
+#, kde-format
+msgid "Lower Limit"
+msgstr "Nedre grænse"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: editorplugins/assignvalues/assignvalueswidget.ui:250
+#: editorplugins/assignvalues/assignvalueswidget.ui:305
+#, kde-format
+msgid "Upper Limit"
+msgstr "Øvre grænse"
+
+#. i18n: ectx: property (text), widget (QLabel, label_dagGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: editorplugins/assignvalues/assignvalueswidget.ui:257
+#: editorplugins/assignvalues/assignvalueswidget.ui:312
+#: editorplugins/generategraph/generategraphwidget.ui:483
+#, kde-format
+msgid "Generator Seed"
+msgstr "Startværdi for generator"
+
+#. i18n: ectx: property (text), widget (QLabel, constant_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:372
+#, kde-format
+msgid "Constant"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:400
+#, kde-format
+msgid "Overwrite existing values"
+msgstr "Overskriv eksisterende værdier"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
+#. i18n: ectx: property (text), widget (QLabel, labelData)
+#: editorplugins/assignvalues/assignvalueswidget.ui:434
+#: editorplugins/generategraph/generategraphwidget.ui:252
+#: editorplugins/generategraph/generategraphwidget.ui:404
+#, kde-format
+msgid "Nodes:"
+msgstr "Knuder:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelProperty)
+#: editorplugins/assignvalues/assignvalueswidget.ui:447
+#, fuzzy, kde-format
+#| msgid "Property"
+msgid "Property name:"
+msgstr "Egenskab"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
+#. i18n: ectx: property (text), widget (QLabel, labelConnection)
+#: editorplugins/assignvalues/assignvalueswidget.ui:460
+#: editorplugins/generategraph/generategraphwidget.ui:272
+#, kde-format
+msgid "Edges:"
+msgstr "Kanter:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
+#: editorplugins/assignvalues/assignvalueswidget.ui:482
+#, kde-format
+msgid "Assign values to selected edges."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
+#: editorplugins/assignvalues/assignvalueswidget.ui:509
+#, kde-format
+msgid "Assign values to selected nodes."
+msgstr ""
+
 #: editorplugins/generategraph/generategraphwidget.cpp:79
 #, fuzzy, kde-format
 #| msgid "Generate Graph"
@@ -224,6 +432,250 @@ msgstr ""
 msgid "Edges in a Directed Acyclical Graph must be directional."
 msgstr ""
 
+#. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
+#: editorplugins/generategraph/generategraphwidget.ui:14
+#, kde-format
+msgid "Generate Graph"
+msgstr "Generér graf"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:22
+#, fuzzy, kde-format
+#| msgid "Graph File"
+msgid "Select the graph generator."
+msgstr "Graffil"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:26
+#, kde-format
+msgid "Mesh Graph"
+msgstr "Gittergraf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:31
+#, kde-format
+msgid "Star Graph"
+msgstr "Stjernegraf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:36
+#, kde-format
+msgid "Circle Graph"
+msgstr "Cirkelgraf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:41
+#, kde-format
+msgid "Random Graph"
+msgstr "Tilfældig graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:46
+#, kde-format
+msgid "Erdös-Renyi Graph"
+msgstr "Erdös-Renyi-graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:51
+#, fuzzy, kde-format
+#| msgid "Random Graph"
+msgid "Random Tree Graph"
+msgstr "Tilfældig graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:56
+#, fuzzy, kde-format
+#| msgid "Random Graph"
+msgid "Random Dag Graph"
+msgstr "Tilfældig graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:61
+#, fuzzy, kde-format
+#| msgid "Mesh Graph"
+msgid "Path Graph"
+msgstr "Gittergraf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:66
+#, kde-format
+msgid "Complete Graph"
+msgstr "Fuldfør graf"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:71
+#, fuzzy, kde-format
+#| msgid "Complete Graph"
+msgid "Complete Bipartite"
+msgstr "Fuldfør graf"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/generategraph/generategraphwidget.ui:91
+#, fuzzy, kde-format
+#| msgid "Show values of pointers"
+msgid "Show advanced settings."
+msgstr "Vis pointeres værdier"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:106
+#, fuzzy, kde-format
+#| msgid "This is the unique identifier for the pointer type."
+msgid "Set the unique identifier of the generated graph."
+msgstr "Dette er pointertypens unikke identifikator."
+
+#. i18n: ectx: property (text), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:109
+#, fuzzy, kde-format
+#| msgctxt "@label:inlistbox"
+#| msgid "Graph"
+msgid "Graph"
+msgstr "Graf"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:116
+#, kde-format
+msgid "The node type to create the nodes of the graph with"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:119
+#, fuzzy, kde-format
+#| msgid "Pointer Types"
+msgid "Node type:"
+msgstr "Pointertyper"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
+#: editorplugins/generategraph/generategraphwidget.ui:126
+#, fuzzy, kde-format
+#| msgid "This is the unique identifier for the pointer type."
+msgid "The identifier of the created graph (used for scripting)"
+msgstr "Dette er pointertypens unikke identifikator."
+
+#. i18n: ectx: property (text), widget (QLabel, label_columns)
+#: editorplugins/generategraph/generategraphwidget.ui:148
+#, kde-format
+msgid "Number of Columns:"
+msgstr "Antal kolonner:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_rows)
+#: editorplugins/generategraph/generategraphwidget.ui:168
+#, kde-format
+msgid "Number of Rows:"
+msgstr "Antal rækker:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
+#: editorplugins/generategraph/generategraphwidget.ui:196
+#, kde-format
+msgid "Satellite Nodes:"
+msgstr "Satellitknuder:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
+#. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_completeNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:224
+#: editorplugins/generategraph/generategraphwidget.ui:505
+#: editorplugins/generategraph/generategraphwidget.ui:527
+#, kde-format
+msgid "Number of Nodes:"
+msgstr "Antal knuder:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
+#. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
+#: editorplugins/generategraph/generategraphwidget.ui:286
+#: editorplugins/generategraph/generategraphwidget.ui:332
+#, kde-format
+msgid "Allow self-edges:"
+msgstr "Tillad løkker:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:293
+#, fuzzy, kde-format
+#| msgid "Generator Seed:"
+msgid "Generator seed:"
+msgstr "Startværdi for generator:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:325
+#, kde-format
+msgid "Nodes (n):"
+msgstr "Knuder (n):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:349
+#, kde-format
+msgid "Edge Probability (p):"
+msgstr "Kantsandsynlighed (p):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:356
+#: editorplugins/generategraph/generategraphwidget.ui:421
+#, kde-format
+msgid "Generator Seed:"
+msgstr "Startværdi for generator:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:446
+#, fuzzy, kde-format
+#| msgid "Number of Nodes:"
+msgid "Number of Nodes"
+msgstr "Antal knuder:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:463
+#, fuzzy, kde-format
+#| msgid "Edge Probability (p):"
+msgid "Edge Probability"
+msgstr "Kantsandsynlighed (p):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
+#: editorplugins/generategraph/generategraphwidget.ui:549
+#, fuzzy, kde-format
+#| msgid "Satellite Nodes:"
+msgid "Left Set Nodes:"
+msgstr "Satellitknuder:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
+#: editorplugins/generategraph/generategraphwidget.ui:563
+#, fuzzy, kde-format
+#| msgid "Satellite Nodes:"
+msgid "Right Set Nodes:"
+msgstr "Satellitknuder:"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:590
+#, fuzzy, kde-format
+#| msgid "This is the unique identifier for the pointer type."
+msgid "Select the edge type for connections of the generated graph."
+msgstr "Dette er pointertypens unikke identifikator."
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:604
+#, kde-format
+msgid "The edge type to create the edges of the graph with"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:607
+#, fuzzy, kde-format
+#| msgid "Edge style"
+msgid "Edge type:"
+msgstr "Kantstil"
+
+#. i18n: ectx: property (text), widget (QLabel, labelGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:614
+#, fuzzy, kde-format
+#| msgid "Graph File"
+msgid "Graph generator:"
+msgstr "Graffil"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:621
+#, fuzzy, kde-format
+#| msgid "This is the unique identifier for the pointer type."
+msgid "Select the node type for node elements of the generated graph."
+msgstr "Dette er pointertypens unikke identifikator."
+
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
 #, fuzzy, kde-format
 #| msgid "Graph Document"
@@ -231,12 +683,188 @@ msgctxt "@title:window"
 msgid "Graph Layout"
 msgstr "Grafdokument"
 
+#. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:20
+#, fuzzy, kde-format
+#| msgid "Graph Document"
+msgid "Graph Layout"
+msgstr "Grafdokument"
+
+#. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:36
+#, fuzzy, kde-format
+#| msgid "Graph Document"
+msgid "Force Based Layout"
+msgstr "Grafdokument"
+
+#. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:57
+#, kde-format
+msgid "Area factor:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:77
+#, kde-format
+msgid "Repelling force:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:97
+#, kde-format
+msgid "Attraction force:"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:119
+#, kde-format
+msgid "Radial Tree Layout"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, rootLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:134
+#, fuzzy, kde-format
+#| msgctxt "Alignment"
+#| msgid "Center"
+msgid "Center/Root:"
+msgstr "Midte"
+
+#. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:144
+#, fuzzy, kde-format
+#| msgid "Node Information"
+msgid "Node separation:"
+msgstr "Information om knuden"
+
+#. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:158
+#, fuzzy, kde-format
+#| msgid "Type:"
+msgid "Tree type:"
+msgstr "Type:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:165
+#, fuzzy, kde-format
+#| msgid "Type:"
+msgid "Free tree"
+msgstr "Type:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:175
+#, fuzzy, kde-format
+#| msgctxt "@title Displayed plugin name"
+#| msgid "RootedTree Structure"
+msgid "Rooted tree"
+msgstr "RootedTree-struktur"
+
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
 #, fuzzy, kde-format
 #| msgid "Transform Edges"
 msgctxt "@title:window"
 msgid "Transform Edges"
 msgstr "Transformér kanter"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
+#: editorplugins/transformedges/transformedgeswidget.ui:14
+#, kde-format
+msgid "Transform Edges"
+msgstr "Transformér kanter"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:22
+#, kde-format
+msgid ""
+"This option connects all nodes of the given graph. The new edges do not have "
+"any preset weights."
+msgstr ""
+"Denne handling forbinder alle knuder i den givne graf. De nye kanter har "
+"ingen foruddefinerede vægte."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:25
+#, fuzzy, kde-format
+#| msgid "Complete Graph"
+msgid "Complete graph"
+msgstr "Fuldfør graf"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:35
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return list all edges in the graph."
+msgid "This option removes all edges from the given graph."
+msgstr "Returnerer en liste med alle grafens kanter."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:38
+#, fuzzy, kde-format
+#| msgid "Remove all Edges"
+msgid "Remove all edges"
+msgstr "Fjern alle kanter"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:45
+#, kde-format
+msgid ""
+"This option reverses all edges of a directed graph. Note that this does not "
+"apply to undirected graphs."
+msgstr ""
+"Denne handling vender alle kanter i en orienteret graf. Bemærk, at dette "
+"ikke virker på en uorienteret graf."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:48
+#, fuzzy, kde-format
+#| msgid "Reverse all Edges"
+msgid "Reverse all edges"
+msgstr "Vend alle kanter"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:59
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes <span "
+"style=\" font-style:italic;\">Prim's Minimal Spanning Tree Algorithm</span> "
+"at the graph. All edges without given weights are assumed to have weights "
+"equals 1. Directed and undirected graphs are processed accordingly.</p></"
+"body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Denne handling anvender "
+"<span style=\" font-style:italic;\">Prims algoritme for et minimalt "
+"udspændende træ</span> på grafen. Alle kanter uden vægt antages at have vægt "
+"1. Kanter behandles i overensstemmelse med, om de er orienterede eller ej.</"
+"p></body></html>"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:62
+#, fuzzy, kde-format
+#| msgid "Spanning Tree Transformation"
+msgid "Spanning tree transformation"
+msgstr "Transformation af udspændende træ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:69
+#, fuzzy, kde-format
+#| msgid "Remove all Edges"
+msgid "Remove all self edges"
+msgstr "Fjern alle kanter"
 
 #: fileformats/dot/dotfileformat.cpp:45
 #, fuzzy, kde-format
@@ -404,6 +1032,447 @@ msgctxt "@info status message after successful script execution"
 msgid "<i>Execution Finished</i>"
 msgstr "<i>Kørsel afsluttet</i>"
 
+#: kernel/modules/console/console.xml:7
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "The Console object allows you to print messages of different importance "
+#| "to a log."
+msgctxt "Scripting API"
+msgid ""
+"The global Console object allows you to print messages of different "
+"importance to a log."
+msgstr ""
+"Objektet Console lader dig udskrive meddelelser af forskellig vigtighed til "
+"en log."
+
+#: kernel/modules/console/console.xml:17
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Print the given message of normal severity."
+msgctxt "Scripting API"
+msgid "Print the given message of normal severity."
+msgstr "Skriv den givne meddelelse af normal alvorlighed."
+
+#: kernel/modules/console/console.xml:31
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Print the given debug message."
+msgctxt "Scripting API"
+msgid "Print the given debug message."
+msgstr "Skriv den givne fejlsøgningsmeddelelse."
+
+#: kernel/modules/console/console.xml:45
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Print the given error message of high severity."
+msgctxt "Scripting API"
+msgid "Print the given error message of high severity."
+msgstr "Skriv den givne meget alvorlige meddelelse."
+
+#: kernel/modules/document/document.xml:9
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"The document object provides access to all elements.\n"
+msgstr ""
+
+#: kernel/modules/document/document.xml:19
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return list all nodes in the graph of specified type."
+msgctxt "Scripting API"
+msgid "Return the node with specified ID."
+msgstr "Returnerer en liste med alle grafens knuder af en given type."
+
+#: kernel/modules/document/document.xml:26
+#, fuzzy, kde-format
+#| msgid "Identifier"
+msgctxt "Scripting API"
+msgid "Identifier of a node."
+msgstr "Identifikator"
+
+#: kernel/modules/document/document.xml:33
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return list all nodes in the graph."
+msgctxt "Scripting API"
+msgid "Return a list of all nodes."
+msgstr "Returnerer en liste med alle grafens knuder."
+
+#: kernel/modules/document/document.xml:42
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return list all nodes in the graph of specified type."
+msgctxt "Scripting API"
+msgid "Return a list all nodes of specified type."
+msgstr "Returnerer en liste med alle grafens knuder af en given type."
+
+#: kernel/modules/document/document.xml:49
+#, fuzzy, kde-format
+#| msgid "Identifier for new Data Structure"
+msgctxt "Scripting API"
+msgid "Identifier of a node type."
+msgstr "Identifikator for ny datastruktur"
+
+#: kernel/modules/document/document.xml:56
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return a list of all outgoing edges of this node."
+msgctxt "Scripting API"
+msgid "Return a list of all edges."
+msgstr "Returnerer en liste med alle med denne knudes udgående kanter."
+
+#: kernel/modules/document/document.xml:65
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return list all edges in the graph of specified type."
+msgctxt "Scripting API"
+msgid "Return a list all edges of specified type."
+msgstr "Returnerer en liste med alle grafens kanter af en given type."
+
+#: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
+#: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
+#: kernel/modules/document/node.xml:141 kernel/modules/document/node.xml:164
+#: kernel/modules/document/node.xml:187
+#, fuzzy, kde-format
+#| msgid "Identifier for new Data Structure"
+msgctxt "Scripting API"
+msgid "Identifier of an edge type."
+msgstr "Identifikator for ny datastruktur"
+
+#: kernel/modules/document/document.xml:79
+#, fuzzy, kde-format
+#| msgid "Creates a new node at the click position."
+msgctxt "Scripting API"
+msgid "Create node at position (x,y)."
+msgstr "Opretter en ny knude, der hvor der klikkes."
+
+#: kernel/modules/document/document.xml:86
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "The x-coordinate of this data element."
+msgctxt "Scripting API"
+msgid "X-coordinate of the node."
+msgstr "Dette dataelements x-koordinat."
+
+#: kernel/modules/document/document.xml:91
+#, fuzzy, kde-format
+#| msgid "Y-coordinate "
+msgctxt "Scripting API"
+msgid "Y-coordinate of the node."
+msgstr "Y-Koordinat "
+
+#: kernel/modules/document/document.xml:98
+#, fuzzy, kde-format
+#| msgid "Creates a new edge between 2 nodes"
+msgctxt "Scripting API"
+msgid "Create edge between the given nodes of default edge type."
+msgstr "Opretter en ny kant imellem 2 knuder"
+
+#: kernel/modules/document/document.xml:105
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Add a new property to the connection."
+msgctxt "Scripting API"
+msgid "Start node of the edge."
+msgstr "Føj en ny egenskab til forbindelsen."
+
+#: kernel/modules/document/document.xml:110
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Add a new property to the connection."
+msgctxt "Scripting API"
+msgid "Target node of the edge."
+msgstr "Føj en ny egenskab til forbindelsen."
+
+#: kernel/modules/document/document.xml:117
+#, fuzzy, kde-format
+#| msgid "Delete the active graph"
+msgctxt "Scripting API"
+msgid "Delete the given node."
+msgstr "Slet den aktive graf"
+
+#: kernel/modules/document/document.xml:124
+#, fuzzy, kde-format
+#| msgid "Select Pointer Type:"
+msgctxt "Scripting API"
+msgid "The node to be deleted."
+msgstr "Vælg pointertype:"
+
+#: kernel/modules/document/document.xml:131
+#, fuzzy, kde-format
+#| msgid "Delete the active graph"
+msgctxt "Scripting API"
+msgid "Delete the given edge."
+msgstr "Slet den aktive graf"
+
+#: kernel/modules/document/document.xml:138
+#, fuzzy, kde-format
+#| msgid "Select Pointer Type:"
+msgctxt "Scripting API"
+msgid "The edge to be deleted."
+msgstr "Vælg pointertype:"
+
+#: kernel/modules/document/edge.xml:9
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "\n"
+#| "An Edge is the connection of two GraphNodes. Edges can be directed or "
+#| "undirected, depending on their type.\n"
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"An edge is the connection of two nodes. Edges can be either directed or "
+"undirected, depending on their type.\n"
+msgstr ""
+"\n"
+"En kant er en forbindelse imellem to af grafens knuder. Kanter kan være "
+"orienterede eller ikke-orienterede afhængigt af deres type.\n"
+
+#: kernel/modules/document/edge.xml:17
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the edge's type. If setting, the edge type "
+"identifier must exist."
+msgstr ""
+
+#: kernel/modules/document/edge.xml:26
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return head node of the list."
+msgctxt "Scripting API"
+msgid "Return the origin node of the edge."
+msgstr "Returnér listen hovedknude."
+
+#: kernel/modules/document/edge.xml:35
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return head node of the list."
+msgctxt "Scripting API"
+msgid "Return the target node of the edge."
+msgstr "Returnér listen hovedknude."
+
+#: kernel/modules/document/edge.xml:44
+#, kde-format
+msgctxt "Scripting API"
+msgid "Returns true if the edge's type is directed, otherwise false."
+msgstr ""
+
+#: kernel/modules/document/node.xml:11
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"A node is the data element of a graph.\n"
+"It can have arbitrary dynamic properties that are either set in the editor "
+"or simply assigned on run-time.\n"
+"Note that dynamic properties are only available after script execution, if "
+"they are registered for the node's type.\n"
+msgstr ""
+
+#: kernel/modules/document/node.xml:19
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "The unique identifier of this data element."
+msgctxt "Scripting API"
+msgid "Read and set the unique identifier of this node."
+msgstr "Denne datatypes unikke identifikator."
+
+#: kernel/modules/document/node.xml:26
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "The x-coordinate of this data element."
+msgctxt "Scripting API"
+msgid "Read and set the x-coordinate of the node."
+msgstr "Dette dataelements x-koordinat."
+
+#: kernel/modules/document/node.xml:33
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "The y-coordinate of this data element."
+msgctxt "Scripting API"
+msgid "Read and set the y-coordinate of the node."
+msgstr "Dette dataelements y-koordinat."
+
+#: kernel/modules/document/node.xml:40
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
+"for red)."
+msgstr ""
+
+#: kernel/modules/document/node.xml:47
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the node's type. If setting, the node type "
+"identifier must exist."
+msgstr ""
+
+#: kernel/modules/document/node.xml:56
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return a list of all edges (incoming and outgoing) of this node."
+msgctxt "Scripting API"
+msgid "Return a list of all edges (incoming and outgoing) of this node."
+msgstr ""
+"Returnerer en liste med alle denne knudes kanter (indkommende og udgående)."
+
+#: kernel/modules/document/node.xml:65
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return a list of all edges (incoming and outgoing) of this node of a "
+#| "specified type."
+msgctxt "Scripting API"
+msgid ""
+"Return a list of all edges (incoming and outgoing) of this node of a "
+"specified type."
+msgstr ""
+"Returnerer en liste med alle denne knudes kanter (indkommende og udgående) "
+"af en given type."
+
+#: kernel/modules/document/node.xml:79
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return a list of incoming edges of this node."
+msgctxt "Scripting API"
+msgid "Return a list of incoming edges of this node."
+msgstr "Returnerer en liste med denne knudes indkommende kanter."
+
+#: kernel/modules/document/node.xml:88
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return a list of all incoming edges of this node of a specified type."
+msgctxt "Scripting API"
+msgid "Return a list of all incoming edges of this node of a specified type."
+msgstr ""
+"Returnerer en liste med alle denne knudes indkommende kanter af en given "
+"type."
+
+#: kernel/modules/document/node.xml:102
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return a list of all outgoing edges of this node."
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node."
+msgstr "Returnerer en liste med alle med denne knudes udgående kanter."
+
+#: kernel/modules/document/node.xml:111
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return a list of all outgoing edges of this node of a specified type."
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node of a specified type."
+msgstr ""
+"Returnerer en liste med alle denne knudes udgående kanter af en given type."
+
+#: kernel/modules/document/node.xml:125
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node. This method respects if edges "
+"are directed."
+msgstr ""
+"Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
+"tager hensyn til om kanter er orienteriede."
+
+#: kernel/modules/document/node.xml:134
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node via an edge of specified type. "
+"This method respects if edges are directed."
+msgstr ""
+"Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
+"tager hensyn til om kanter er orienteriede."
+
+#: kernel/modules/document/node.xml:148
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid "Return a list all nodes connected to this node by an incoming edge."
+msgstr ""
+"Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
+"tager hensyn til om kanter er orienteriede."
+
+#: kernel/modules/document/node.xml:157
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return a list of all incoming edges of this node of a specified type."
+msgctxt "Scripting API"
+msgid ""
+"Return a list all nodes connected to this node by an incoming edge of "
+"specified type."
+msgstr ""
+"Returnerer en liste med alle denne knudes indkommende kanter af en given "
+"type."
+
+#: kernel/modules/document/node.xml:171
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid "Return list all nodes connected to this node by an outgoing edge."
+msgstr ""
+"Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
+"tager hensyn til om kanter er orienteriede."
+
+#: kernel/modules/document/node.xml:180
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid ""
+#| "Return list all nodes connected to this node. This method respects if "
+#| "edges are directed."
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node by an outgoing edge of "
+"specified type."
+msgstr ""
+"Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
+"tager hensyn til om kanter er orienteriede."
+
+#: kernel/modules/document/node.xml:194
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Return a list of all edges of this node to the specified node."
+msgctxt "Scripting API"
+msgid "Return list of distances to specified targets in same order."
+msgstr "Returnerer en liste med alle denne knudes kanter til en given knude."
+
+#: kernel/modules/document/node.xml:201
+#, kde-format
+msgctxt "Scripting API"
+msgid "Name of edge property that holds the edge length."
+msgstr ""
+
+#: kernel/modules/document/node.xml:206
+#, kde-format
+msgctxt "Scripting API"
+msgid "List of nodes to that the distances shall be computed."
+msgstr ""
+
 #: models/edgemodel.cpp:141
 #, fuzzy, kde-format
 #| msgid "Edges"
@@ -505,644 +1574,6 @@ msgstr "Markeret"
 #| msgid "Select and move items."
 msgid "Select and move elements on the scene"
 msgstr "Vælg og flyt elementer."
-
-#~ msgid "Edge Properties"
-#~ msgstr "Kantegenskaber"
-
-#~ msgid "Type:"
-#~ msgstr "Type:"
-
-#~ msgid "Dynamic Properties"
-#~ msgstr "Dynamiske egenskaber"
-
-#~ msgid "Node Properties"
-#~ msgstr "Knudens egenskaber"
-
-#~ msgid "Node color"
-#~ msgstr "Knudens farve"
-
-#~ msgid "Assign Values"
-#~ msgstr "Tildel værdier"
-
-#, fuzzy
-#~| msgid "Node Properties"
-#~ msgid "Choose Properties"
-#~ msgstr "Knudens egenskaber"
-
-#, fuzzy
-#~| msgid "Show values of pointers"
-#~ msgid "Show advanced options."
-#~ msgstr "Vis pointeres værdier"
-
-#~ msgid "Enumerate Items"
-#~ msgstr "Optæl elementer"
-
-#, fuzzy
-#~| msgid "Enumerate"
-#~ msgid "Enumerate Alpha"
-#~ msgstr "Optæl"
-
-#~ msgid "Assign Random Integers"
-#~ msgstr "Tildel tilfældige hele tal"
-
-#~ msgid "Assign Random Reals"
-#~ msgstr "Tildel tilfældige reelle tal"
-
-#, fuzzy
-#~| msgid "Assign Values"
-#~ msgid "Assign Constant Value"
-#~ msgstr "Tildel værdier"
-
-#, fuzzy
-#~| msgid "Start ID"
-#~ msgid "Start ID:"
-#~ msgstr "Start-id"
-
-#~ msgid "Start ID"
-#~ msgstr "Start-id"
-
-#~ msgid "Lower Limit"
-#~ msgstr "Nedre grænse"
-
-#~ msgid "Upper Limit"
-#~ msgstr "Øvre grænse"
-
-#~ msgid "Generator Seed"
-#~ msgstr "Startværdi for generator"
-
-#~ msgid "Overwrite existing values"
-#~ msgstr "Overskriv eksisterende værdier"
-
-#~ msgid "Nodes:"
-#~ msgstr "Knuder:"
-
-#, fuzzy
-#~| msgid "Property"
-#~ msgid "Property name:"
-#~ msgstr "Egenskab"
-
-#~ msgid "Edges:"
-#~ msgstr "Kanter:"
-
-#~ msgid "Generate Graph"
-#~ msgstr "Generér graf"
-
-#~ msgid "Mesh Graph"
-#~ msgstr "Gittergraf"
-
-#~ msgid "Star Graph"
-#~ msgstr "Stjernegraf"
-
-#~ msgid "Circle Graph"
-#~ msgstr "Cirkelgraf"
-
-#~ msgid "Random Graph"
-#~ msgstr "Tilfældig graf"
-
-#~ msgid "Erdös-Renyi Graph"
-#~ msgstr "Erdös-Renyi-graf"
-
-#, fuzzy
-#~| msgid "Random Graph"
-#~ msgid "Random Tree Graph"
-#~ msgstr "Tilfældig graf"
-
-#, fuzzy
-#~| msgid "Random Graph"
-#~ msgid "Random Dag Graph"
-#~ msgstr "Tilfældig graf"
-
-#, fuzzy
-#~| msgid "Mesh Graph"
-#~ msgid "Path Graph"
-#~ msgstr "Gittergraf"
-
-#~ msgid "Complete Graph"
-#~ msgstr "Fuldfør graf"
-
-#, fuzzy
-#~| msgid "Complete Graph"
-#~ msgid "Complete Bipartite"
-#~ msgstr "Fuldfør graf"
-
-#, fuzzy
-#~| msgid "This is the unique identifier for the pointer type."
-#~ msgid "Set the unique identifier of the generated graph."
-#~ msgstr "Dette er pointertypens unikke identifikator."
-
-#, fuzzy
-#~| msgctxt "@label:inlistbox"
-#~| msgid "Graph"
-#~ msgid "Graph"
-#~ msgstr "Graf"
-
-#, fuzzy
-#~| msgid "Pointer Types"
-#~ msgid "Node type:"
-#~ msgstr "Pointertyper"
-
-#~ msgid "Number of Columns:"
-#~ msgstr "Antal kolonner:"
-
-#~ msgid "Number of Rows:"
-#~ msgstr "Antal rækker:"
-
-#~ msgid "Satellite Nodes:"
-#~ msgstr "Satellitknuder:"
-
-#~ msgid "Number of Nodes:"
-#~ msgstr "Antal knuder:"
-
-#~ msgid "Allow self-edges:"
-#~ msgstr "Tillad løkker:"
-
-#, fuzzy
-#~| msgid "Generator Seed:"
-#~ msgid "Generator seed:"
-#~ msgstr "Startværdi for generator:"
-
-#~ msgid "Nodes (n):"
-#~ msgstr "Knuder (n):"
-
-#~ msgid "Edge Probability (p):"
-#~ msgstr "Kantsandsynlighed (p):"
-
-#~ msgid "Generator Seed:"
-#~ msgstr "Startværdi for generator:"
-
-#, fuzzy
-#~| msgid "Number of Nodes:"
-#~ msgid "Number of Nodes"
-#~ msgstr "Antal knuder:"
-
-#, fuzzy
-#~| msgid "Edge Probability (p):"
-#~ msgid "Edge Probability"
-#~ msgstr "Kantsandsynlighed (p):"
-
-#, fuzzy
-#~| msgid "Satellite Nodes:"
-#~ msgid "Left Set Nodes:"
-#~ msgstr "Satellitknuder:"
-
-#, fuzzy
-#~| msgid "Satellite Nodes:"
-#~ msgid "Right Set Nodes:"
-#~ msgstr "Satellitknuder:"
-
-#, fuzzy
-#~| msgid "Edge style"
-#~ msgid "Edge type:"
-#~ msgstr "Kantstil"
-
-#, fuzzy
-#~| msgid "Graph File"
-#~ msgid "Graph generator:"
-#~ msgstr "Graffil"
-
-#, fuzzy
-#~| msgid "Graph Document"
-#~ msgid "Graph Layout"
-#~ msgstr "Grafdokument"
-
-#, fuzzy
-#~| msgctxt "Alignment"
-#~| msgid "Center"
-#~ msgid "Center/Root:"
-#~ msgstr "Midte"
-
-#, fuzzy
-#~| msgid "Node Information"
-#~ msgid "Node separation:"
-#~ msgstr "Information om knuden"
-
-#, fuzzy
-#~| msgid "Type:"
-#~ msgid "Tree type:"
-#~ msgstr "Type:"
-
-#, fuzzy
-#~| msgctxt "@title Displayed plugin name"
-#~| msgid "RootedTree Structure"
-#~ msgid "Rooted tree"
-#~ msgstr "RootedTree-struktur"
-
-#~ msgid "Transform Edges"
-#~ msgstr "Transformér kanter"
-
-#~ msgid ""
-#~ "This option connects all nodes of the given graph. The new edges do not "
-#~ "have any preset weights."
-#~ msgstr ""
-#~ "Denne handling forbinder alle knuder i den givne graf. De nye kanter har "
-#~ "ingen foruddefinerede vægte."
-
-#, fuzzy
-#~| msgid "Complete Graph"
-#~ msgid "Complete graph"
-#~ msgstr "Fuldfør graf"
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return list all edges in the graph."
-#~ msgid "This option removes all edges from the given graph."
-#~ msgstr "Returnerer en liste med alle grafens kanter."
-
-#, fuzzy
-#~| msgid "Remove all Edges"
-#~ msgid "Remove all edges"
-#~ msgstr "Fjern alle kanter"
-
-#~ msgid ""
-#~ "This option reverses all edges of a directed graph. Note that this does "
-#~ "not apply to undirected graphs."
-#~ msgstr ""
-#~ "Denne handling vender alle kanter i en orienteret graf. Bemærk, at dette "
-#~ "ikke virker på en uorienteret graf."
-
-#, fuzzy
-#~| msgid "Reverse all Edges"
-#~ msgid "Reverse all edges"
-#~ msgstr "Vend alle kanter"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
-#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
-#~ "Algorithm</span> at the graph. All edges without given weights are "
-#~ "assumed to have weights equals 1. Directed and undirected graphs are "
-#~ "processed accordingly.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Denne handling anvender "
-#~ "<span style=\" font-style:italic;\">Prims algoritme for et minimalt "
-#~ "udspændende træ</span> på grafen. Alle kanter uden vægt antages at have "
-#~ "vægt 1. Kanter behandles i overensstemmelse med, om de er orienterede "
-#~ "eller ej.</p></body></html>"
-
-#, fuzzy
-#~| msgid "Spanning Tree Transformation"
-#~ msgid "Spanning tree transformation"
-#~ msgstr "Transformation af udspændende træ"
-
-#, fuzzy
-#~| msgid "Remove all Edges"
-#~ msgid "Remove all self edges"
-#~ msgstr "Fjern alle kanter"
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid ""
-#~| "The Console object allows you to print messages of different importance "
-#~| "to a log."
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "The global Console object allows you to print messages of different "
-#~ "importance to a log."
-#~ msgstr ""
-#~ "Objektet Console lader dig udskrive meddelelser af forskellig vigtighed "
-#~ "til en log."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Print the given message of normal severity."
-#~ msgctxt "Scripting API"
-#~ msgid "Print the given message of normal severity."
-#~ msgstr "Skriv den givne meddelelse af normal alvorlighed."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Print the given debug message."
-#~ msgctxt "Scripting API"
-#~ msgid "Print the given debug message."
-#~ msgstr "Skriv den givne fejlsøgningsmeddelelse."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Print the given error message of high severity."
-#~ msgctxt "Scripting API"
-#~ msgid "Print the given error message of high severity."
-#~ msgstr "Skriv den givne meget alvorlige meddelelse."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return list all nodes in the graph of specified type."
-#~ msgctxt "Scripting API"
-#~ msgid "Return the node with specified ID."
-#~ msgstr "Returnerer en liste med alle grafens knuder af en given type."
-
-#, fuzzy
-#~| msgid "Identifier"
-#~ msgctxt "Scripting API"
-#~ msgid "Identifier of a node."
-#~ msgstr "Identifikator"
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return list all nodes in the graph."
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list of all nodes."
-#~ msgstr "Returnerer en liste med alle grafens knuder."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return list all nodes in the graph of specified type."
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list all nodes of specified type."
-#~ msgstr "Returnerer en liste med alle grafens knuder af en given type."
-
-#, fuzzy
-#~| msgid "Identifier for new Data Structure"
-#~ msgctxt "Scripting API"
-#~ msgid "Identifier of a node type."
-#~ msgstr "Identifikator for ny datastruktur"
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return a list of all outgoing edges of this node."
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list of all edges."
-#~ msgstr "Returnerer en liste med alle med denne knudes udgående kanter."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return list all edges in the graph of specified type."
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list all edges of specified type."
-#~ msgstr "Returnerer en liste med alle grafens kanter af en given type."
-
-#, fuzzy
-#~| msgid "Identifier for new Data Structure"
-#~ msgctxt "Scripting API"
-#~ msgid "Identifier of an edge type."
-#~ msgstr "Identifikator for ny datastruktur"
-
-#, fuzzy
-#~| msgid "Creates a new node at the click position."
-#~ msgctxt "Scripting API"
-#~ msgid "Create node at position (x,y)."
-#~ msgstr "Opretter en ny knude, der hvor der klikkes."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "The x-coordinate of this data element."
-#~ msgctxt "Scripting API"
-#~ msgid "X-coordinate of the node."
-#~ msgstr "Dette dataelements x-koordinat."
-
-#, fuzzy
-#~| msgid "Y-coordinate "
-#~ msgctxt "Scripting API"
-#~ msgid "Y-coordinate of the node."
-#~ msgstr "Y-Koordinat "
-
-#, fuzzy
-#~| msgid "Creates a new edge between 2 nodes"
-#~ msgctxt "Scripting API"
-#~ msgid "Create edge between the given nodes of default edge type."
-#~ msgstr "Opretter en ny kant imellem 2 knuder"
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Add a new property to the connection."
-#~ msgctxt "Scripting API"
-#~ msgid "Start node of the edge."
-#~ msgstr "Føj en ny egenskab til forbindelsen."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Add a new property to the connection."
-#~ msgctxt "Scripting API"
-#~ msgid "Target node of the edge."
-#~ msgstr "Føj en ny egenskab til forbindelsen."
-
-#, fuzzy
-#~| msgid "Delete the active graph"
-#~ msgctxt "Scripting API"
-#~ msgid "Delete the given node."
-#~ msgstr "Slet den aktive graf"
-
-#, fuzzy
-#~| msgid "Select Pointer Type:"
-#~ msgctxt "Scripting API"
-#~ msgid "The node to be deleted."
-#~ msgstr "Vælg pointertype:"
-
-#, fuzzy
-#~| msgid "Delete the active graph"
-#~ msgctxt "Scripting API"
-#~ msgid "Delete the given edge."
-#~ msgstr "Slet den aktive graf"
-
-#, fuzzy
-#~| msgid "Select Pointer Type:"
-#~ msgctxt "Scripting API"
-#~ msgid "The edge to be deleted."
-#~ msgstr "Vælg pointertype:"
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid ""
-#~| "\n"
-#~| "An Edge is the connection of two GraphNodes. Edges can be directed or "
-#~| "undirected, depending on their type.\n"
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "\n"
-#~ "An edge is the connection of two nodes. Edges can be either directed or "
-#~ "undirected, depending on their type.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "En kant er en forbindelse imellem to af grafens knuder. Kanter kan være "
-#~ "orienterede eller ikke-orienterede afhængigt af deres type.\n"
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return head node of the list."
-#~ msgctxt "Scripting API"
-#~ msgid "Return the origin node of the edge."
-#~ msgstr "Returnér listen hovedknude."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return head node of the list."
-#~ msgctxt "Scripting API"
-#~ msgid "Return the target node of the edge."
-#~ msgstr "Returnér listen hovedknude."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "The unique identifier of this data element."
-#~ msgctxt "Scripting API"
-#~ msgid "Read and set the unique identifier of this node."
-#~ msgstr "Denne datatypes unikke identifikator."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "The x-coordinate of this data element."
-#~ msgctxt "Scripting API"
-#~ msgid "Read and set the x-coordinate of the node."
-#~ msgstr "Dette dataelements x-koordinat."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "The y-coordinate of this data element."
-#~ msgctxt "Scripting API"
-#~ msgid "Read and set the y-coordinate of the node."
-#~ msgstr "Dette dataelements y-koordinat."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return a list of all edges (incoming and outgoing) of this node."
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list of all edges (incoming and outgoing) of this node."
-#~ msgstr ""
-#~ "Returnerer en liste med alle denne knudes kanter (indkommende og "
-#~ "udgående)."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid ""
-#~| "Return a list of all edges (incoming and outgoing) of this node of a "
-#~| "specified type."
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return a list of all edges (incoming and outgoing) of this node of a "
-#~ "specified type."
-#~ msgstr ""
-#~ "Returnerer en liste med alle denne knudes kanter (indkommende og "
-#~ "udgående) af en given type."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return a list of incoming edges of this node."
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list of incoming edges of this node."
-#~ msgstr "Returnerer en liste med denne knudes indkommende kanter."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid ""
-#~| "Return a list of all incoming edges of this node of a specified type."
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return a list of all incoming edges of this node of a specified type."
-#~ msgstr ""
-#~ "Returnerer en liste med alle denne knudes indkommende kanter af en given "
-#~ "type."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return a list of all outgoing edges of this node."
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list of all outgoing edges of this node."
-#~ msgstr "Returnerer en liste med alle med denne knudes udgående kanter."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid ""
-#~| "Return a list of all outgoing edges of this node of a specified type."
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return a list of all outgoing edges of this node of a specified type."
-#~ msgstr ""
-#~ "Returnerer en liste med alle denne knudes udgående kanter af en given "
-#~ "type."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid ""
-#~| "Return list all nodes connected to this node. This method respects if "
-#~| "edges are directed."
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return list all nodes connected to this node. This method respects if "
-#~ "edges are directed."
-#~ msgstr ""
-#~ "Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
-#~ "tager hensyn til om kanter er orienteriede."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid ""
-#~| "Return list all nodes connected to this node. This method respects if "
-#~| "edges are directed."
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return list all nodes connected to this node via an edge of specified "
-#~ "type. This method respects if edges are directed."
-#~ msgstr ""
-#~ "Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
-#~ "tager hensyn til om kanter er orienteriede."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid ""
-#~| "Return list all nodes connected to this node. This method respects if "
-#~| "edges are directed."
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list all nodes connected to this node by an incoming edge."
-#~ msgstr ""
-#~ "Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
-#~ "tager hensyn til om kanter er orienteriede."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid ""
-#~| "Return a list of all incoming edges of this node of a specified type."
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return a list all nodes connected to this node by an incoming edge of "
-#~ "specified type."
-#~ msgstr ""
-#~ "Returnerer en liste med alle denne knudes indkommende kanter af en given "
-#~ "type."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid ""
-#~| "Return list all nodes connected to this node. This method respects if "
-#~| "edges are directed."
-#~ msgctxt "Scripting API"
-#~ msgid "Return list all nodes connected to this node by an outgoing edge."
-#~ msgstr ""
-#~ "Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
-#~ "tager hensyn til om kanter er orienteriede."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid ""
-#~| "Return list all nodes connected to this node. This method respects if "
-#~| "edges are directed."
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return list all nodes connected to this node by an outgoing edge of "
-#~ "specified type."
-#~ msgstr ""
-#~ "Returnerer liste med alle knuder forbundet til denne knude. Denne metode "
-#~ "tager hensyn til om kanter er orienteriede."
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Return a list of all edges of this node to the specified node."
-#~ msgctxt "Scripting API"
-#~ msgid "Return list of distances to specified targets in same order."
-#~ msgstr ""
-#~ "Returnerer en liste med alle denne knudes kanter til en given knude."
 
 #~ msgid "Identifier"
 #~ msgstr "Identifikator"

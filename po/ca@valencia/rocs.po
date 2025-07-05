@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:21+0000\n"
+"POT-Creation-Date: 2025-07-05 05:53+0000\n"
 "PO-Revision-Date: 2021-10-24 11:17+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -183,6 +183,12 @@ msgstr "Propietats"
 msgid "Methods"
 msgstr "Mètodes"
 
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "API de creació de scripts de Rocs"
+
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -192,6 +198,61 @@ msgid ""
 msgstr ""
 "El projecte Rocs no s'ha pogut importar perquè no s'ha pogut analitzar el "
 "fitxer del projecte."
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Mostra el text davall les icones"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "El camí on el gestor d'inclusions busca inclusions."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Projecte"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Document de script"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Document de graf"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Fitxer de graf"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Edita les dades seleccionades"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Disposició"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Eines"
 
 #: ui/codeeditorwidget.cpp:81
 #, kde-format
@@ -292,6 +353,12 @@ msgstr "Nom del document de graf"
 #, kde-format
 msgid "Enter the name of your graph document"
 msgstr "Introduïu el nom del document de graf"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Diari del projecte"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -501,6 +568,30 @@ msgstr "Hi ha canvis sense guardar al vostre projecte. Voleu guardar-los?"
 msgid "Unique ID of the node type."
 msgstr "ID únic del tipus node."
 
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, kde-format
+msgid "Script output:"
+msgstr "Eixida de l'script:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Neteja l'eixida del programa a cada execució."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Mostra l'eixida de depuració."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Neteja l'eixida."
+
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -511,48 +602,3 @@ msgstr "Barra d'eines lateral"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Canvia la vista «%1»."
-
-#~ msgid "Rocs Scripting API"
-#~ msgstr "API de creació de scripts de Rocs"
-
-#~ msgid "Show text beside icon"
-#~ msgstr "Mostra el text davall les icones"
-
-#~ msgid "Path where include manager seek for includes."
-#~ msgstr "El camí on el gestor d'inclusions busca inclusions."
-
-#~ msgid "Project"
-#~ msgstr "Projecte"
-
-#~ msgid "Script Document"
-#~ msgstr "Document de script"
-
-#~ msgid "Graph Document"
-#~ msgstr "Document de graf"
-
-#~ msgid "Graph File"
-#~ msgstr "Fitxer de graf"
-
-#~ msgid "Edit Selected Data"
-#~ msgstr "Edita les dades seleccionades"
-
-#~ msgid "Layout"
-#~ msgstr "Disposició"
-
-#~ msgid "Tools"
-#~ msgstr "Eines"
-
-#~ msgid "Project Journal"
-#~ msgstr "Diari del projecte"
-
-#~ msgid "Script output:"
-#~ msgstr "Eixida de l'script:"
-
-#~ msgid "Clear program output with each execution."
-#~ msgstr "Neteja l'eixida del programa a cada execució."
-
-#~ msgid "Show debug output."
-#~ msgstr "Mostra l'eixida de depuració."
-
-#~ msgid "Clear output."
-#~ msgstr "Neteja l'eixida."

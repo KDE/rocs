@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:21+0000\n"
+"POT-Creation-Date: 2025-07-05 05:53+0000\n"
 "PO-Revision-Date: 2023-11-26 20:12+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -181,6 +181,12 @@ msgstr "Propraĵoj"
 msgid "Methods"
 msgstr "Metodoj"
 
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "Rocs Scripting API"
+
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -190,6 +196,61 @@ msgid ""
 msgstr ""
 "La projekto Rocs ne povis esti importita ĉar la projektdosiero ne povis esti "
 "analizita."
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Montri tekston apud piktogramo"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Vojo kie inklud-mastrumilo serĉu inkludojn."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Projekto"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Skripto Dokumento"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Grafika Dokumento"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Grafea Dosiero"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Redakti Elektitajn Datumojn"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Aranĝo"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Iloj"
 
 #: ui/codeeditorwidget.cpp:81
 #, kde-format
@@ -289,6 +350,12 @@ msgstr "Grafea Dokumentnomo"
 #, kde-format
 msgid "Enter the name of your graph document"
 msgstr "Enigu la nomon de via grafea dokumento"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Projekta Revuo"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -502,6 +569,30 @@ msgstr ""
 msgid "Unique ID of the node type."
 msgstr "Unika ID de la noda tipo."
 
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, kde-format
+msgid "Script output:"
+msgstr "Skripto eligo:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Viŝi programeligon je ĉiu efektivigo."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Montri sencimigan eliron."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Forviŝi eligon."
+
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -512,48 +603,3 @@ msgstr "Flanka Ilobreto"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Ŝalti '%1'-vidon."
-
-#~ msgid "Rocs Scripting API"
-#~ msgstr "Rocs Scripting API"
-
-#~ msgid "Show text beside icon"
-#~ msgstr "Montri tekston apud piktogramo"
-
-#~ msgid "Path where include manager seek for includes."
-#~ msgstr "Vojo kie inklud-mastrumilo serĉu inkludojn."
-
-#~ msgid "Project"
-#~ msgstr "Projekto"
-
-#~ msgid "Script Document"
-#~ msgstr "Skripto Dokumento"
-
-#~ msgid "Graph Document"
-#~ msgstr "Grafika Dokumento"
-
-#~ msgid "Graph File"
-#~ msgstr "Grafea Dosiero"
-
-#~ msgid "Edit Selected Data"
-#~ msgstr "Redakti Elektitajn Datumojn"
-
-#~ msgid "Layout"
-#~ msgstr "Aranĝo"
-
-#~ msgid "Tools"
-#~ msgstr "Iloj"
-
-#~ msgid "Project Journal"
-#~ msgstr "Projekta Revuo"
-
-#~ msgid "Script output:"
-#~ msgstr "Skripto eligo:"
-
-#~ msgid "Clear program output with each execution."
-#~ msgstr "Viŝi programeligon je ĉiu efektivigo."
-
-#~ msgid "Show debug output."
-#~ msgstr "Montri sencimigan eliron."
-
-#~ msgid "Clear output."
-#~ msgstr "Forviŝi eligon."

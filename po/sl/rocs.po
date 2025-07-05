@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:21+0000\n"
+"POT-Creation-Date: 2025-07-05 05:53+0000\n"
 "PO-Revision-Date: 2021-10-25 07:42+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -187,6 +187,12 @@ msgstr "Lastnosti"
 msgid "Methods"
 msgstr "Metode"
 
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: plugins/scriptapi/scriptapiwidget.ui:17
+#, kde-format
+msgid "Rocs Scripting API"
+msgstr "Skriptni API za Rocs"
+
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -196,6 +202,61 @@ msgid ""
 msgstr ""
 "Projekta Rocs ni bilo mogoče uvoziti, ker projektne datoteke ni bilo mogoče "
 "razčlenjeniti."
+
+#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
+#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
+#: rocs.kcfg:9 rocs.kcfg:10
+#, kde-format
+msgid "Show text beside icon"
+msgstr "Pokaži besedilo poleg ikon"
+
+#. i18n: ectx: label, entry (includePath), group (IncludeManager)
+#: rocs.kcfg:49
+#, kde-format
+msgid "Path where include manager seek for includes."
+msgstr "Pot, ki jo bo upravljalnik vključitev preiskal."
+
+#. i18n: ectx: Menu (project)
+#: rocsui.rc:23
+#, kde-format
+msgid "Project"
+msgstr "Projekt"
+
+#. i18n: ectx: Menu (script)
+#: rocsui.rc:29
+#, kde-format
+msgid "Script Document"
+msgstr "Dokument s skriptom"
+
+#. i18n: ectx: Menu (graph)
+#: rocsui.rc:35
+#, kde-format
+msgid "Graph Document"
+msgstr "Dokument z grafom"
+
+#. i18n: ectx: Menu (graph_file)
+#: rocsui.rc:41
+#, kde-format
+msgid "Graph File"
+msgstr "Datoteka z grafom"
+
+#. i18n: ectx: Menu (graph_selected)
+#: rocsui.rc:45
+#, kde-format
+msgid "Edit Selected Data"
+msgstr "Uredi izbrane podatke"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:47
+#, kde-format
+msgid "Layout"
+msgstr "Razporeditev"
+
+#. i18n: ectx: Menu
+#: rocsui.rc:60
+#, kde-format
+msgid "Tools"
+msgstr "Orodja"
 
 #: ui/codeeditorwidget.cpp:81
 #, kde-format
@@ -296,6 +357,12 @@ msgstr "Ime dokumenta z grafom"
 #, kde-format
 msgid "Enter the name of your graph document"
 msgstr "Vnesite ime vašega dokumenta z grafom"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: ui/journalwidget.ui:17
+#, kde-format
+msgid "Project Journal"
+msgstr "Dnevnik projekta"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -507,6 +574,30 @@ msgstr "Spremembe v vašem projektu niso shranjene. Ali jih želite shraniti?"
 msgid "Unique ID of the node type."
 msgstr "Edinstven določilnik vrste vozlišča."
 
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/scriptoutputwidget.ui:24
+#, kde-format
+msgid "Script output:"
+msgstr "Izhod skripta:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
+#: ui/scriptoutputwidget.ui:37
+#, kde-format
+msgid "Clear program output with each execution."
+msgstr "Počisti izhod programa po vsakem izvajanju."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
+#: ui/scriptoutputwidget.ui:56
+#, kde-format
+msgid "Show debug output."
+msgstr "Pokaži razhroščevalni izhod."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
+#: ui/scriptoutputwidget.ui:82
+#, kde-format
+msgid "Clear output."
+msgstr "Počisti izhod."
+
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -517,51 +608,6 @@ msgstr "Stranska orodna vrstica"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Preklopi prikaz '%1'."
-
-#~ msgid "Rocs Scripting API"
-#~ msgstr "Skriptni API za Rocs"
-
-#~ msgid "Show text beside icon"
-#~ msgstr "Pokaži besedilo poleg ikon"
-
-#~ msgid "Path where include manager seek for includes."
-#~ msgstr "Pot, ki jo bo upravljalnik vključitev preiskal."
-
-#~ msgid "Project"
-#~ msgstr "Projekt"
-
-#~ msgid "Script Document"
-#~ msgstr "Dokument s skriptom"
-
-#~ msgid "Graph Document"
-#~ msgstr "Dokument z grafom"
-
-#~ msgid "Graph File"
-#~ msgstr "Datoteka z grafom"
-
-#~ msgid "Edit Selected Data"
-#~ msgstr "Uredi izbrane podatke"
-
-#~ msgid "Layout"
-#~ msgstr "Razporeditev"
-
-#~ msgid "Tools"
-#~ msgstr "Orodja"
-
-#~ msgid "Project Journal"
-#~ msgstr "Dnevnik projekta"
-
-#~ msgid "Script output:"
-#~ msgstr "Izhod skripta:"
-
-#~ msgid "Clear program output with each execution."
-#~ msgstr "Počisti izhod programa po vsakem izvajanju."
-
-#~ msgid "Show debug output."
-#~ msgstr "Pokaži razhroščevalni izhod."
-
-#~ msgid "Clear output."
-#~ msgstr "Počisti izhod."
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Save Project as"

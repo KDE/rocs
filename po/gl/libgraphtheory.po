@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:21+0000\n"
+"POT-Creation-Date: 2025-07-05 05:53+0000\n"
 "PO-Revision-Date: 2023-08-06 05:21+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -49,6 +49,24 @@ msgstr "Nome"
 msgid "Value"
 msgstr "Valor"
 
+#. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
+#: dialogs/edgeproperties.ui:26
+#, kde-format
+msgid "Edge Properties"
+msgstr "Propiedades da aresta"
+
+#. i18n: ectx: property (text), widget (QLabel, labelType)
+#: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
+#, kde-format
+msgid "Type:"
+msgstr "Tipo:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
+#: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
+#, kde-format
+msgid "Dynamic Properties"
+msgstr "Propiedades dinámicas"
+
 #: dialogs/edgetypeproperties.cpp:37
 #, kde-format
 msgid "Edges"
@@ -70,12 +88,18 @@ msgstr "Propiedades do tipo de aresta"
 msgid "Name:"
 msgstr "Nome:"
 
-#: dialogs/edgetypeproperties.cpp:49 dialogs/nodetypeproperties.cpp:49
+#. i18n: ectx: property (text), widget (QLabel, labelId)
+#. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
+#: dialogs/edgetypeproperties.cpp:49 dialogs/nodeproperties.ui:119
+#: dialogs/nodetypeproperties.cpp:49
+#: editorplugins/generategraph/generategraphwidget.ui:129
 #, kde-format
 msgid "Identifier:"
 msgstr "Identificador:"
 
-#: dialogs/edgetypeproperties.cpp:51 dialogs/nodetypeproperties.cpp:52
+#. i18n: ectx: property (text), widget (QLabel, labelColor)
+#: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
+#: dialogs/nodetypeproperties.cpp:52
 #, kde-format
 msgid "Color:"
 msgstr "Cor:"
@@ -138,6 +162,19 @@ msgstr ""
 "O identificador seleccionado xa se está a usar para outro vértice, "
 "seleccione un identificador distinto."
 
+#. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
+#: dialogs/nodeproperties.ui:26
+#, kde-format
+msgid "Node Properties"
+msgstr "Propiedades do vértice"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
+#. i18n: ectx: property (toolTip), widget (KColorCombo, color)
+#: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
+#, kde-format
+msgid "Node color"
+msgstr "Cor do vértice."
+
 #: dialogs/nodetypeproperties.cpp:35
 #, kde-format
 msgid "Nodes"
@@ -196,6 +233,170 @@ msgstr "Todos os tipos de aresta"
 msgid "Enter Property Name"
 msgstr "Inserir o nome da propiedade"
 
+#. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
+#: editorplugins/assignvalues/assignvalueswidget.ui:32
+#, kde-format
+msgid "Assign Values"
+msgstr "Asignar valores"
+
+#. i18n: ectx: property (text), widget (QLabel, property_choice_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:40
+#, kde-format
+msgid "Choose Properties"
+msgstr "Escoller as propiedades"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/assignvalues/assignvalueswidget.ui:59
+#, kde-format
+msgid "Show advanced options."
+msgstr "Amosar as opcións avanzadas."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: editorplugins/assignvalues/assignvalueswidget.ui:74
+#, kde-format
+msgid "Assignment Method"
+msgstr "Método de asignación"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:81
+#, kde-format
+msgid "Enumerate Items"
+msgstr "Enumerar os elementos"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:86
+#, kde-format
+msgid "Enumerate Alpha"
+msgstr "Enumeración alpha"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:91
+#, kde-format
+msgid "Enumerate Alpha-Numeric"
+msgstr "Enumeración alfanumérica"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:96
+#, kde-format
+msgid "Assign Random Integers"
+msgstr "Asignar números enteiros aleatorios"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:101
+#, kde-format
+msgid "Assign Random Reals"
+msgstr "Asignar números reais aleatorios"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
+#: editorplugins/assignvalues/assignvalueswidget.ui:106
+#, kde-format
+msgid "Assign Constant Value"
+msgstr "Asignar un valor constante"
+
+#. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
+#: editorplugins/assignvalues/assignvalueswidget.ui:132
+#, kde-format
+msgid "Start ID:"
+msgstr "ID inicial:"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:167
+#, kde-format
+msgid "Initial string"
+msgstr "Texto inicial"
+
+#. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
+#: editorplugins/assignvalues/assignvalueswidget.ui:174
+#, kde-format
+msgid "a"
+msgstr "a"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
+#: editorplugins/assignvalues/assignvalueswidget.ui:192
+#, kde-format
+msgid "Start ID"
+msgstr "ID inicial"
+
+#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
+#: editorplugins/assignvalues/assignvalueswidget.ui:209
+#, kde-format
+msgid "Prefix"
+msgstr "Prefixo"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: editorplugins/assignvalues/assignvalueswidget.ui:230
+#: editorplugins/assignvalues/assignvalueswidget.ui:298
+#, kde-format
+msgid "Lower Limit"
+msgstr "Límite inferior"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: editorplugins/assignvalues/assignvalueswidget.ui:250
+#: editorplugins/assignvalues/assignvalueswidget.ui:305
+#, kde-format
+msgid "Upper Limit"
+msgstr "Limite superior"
+
+#. i18n: ectx: property (text), widget (QLabel, label_dagGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: editorplugins/assignvalues/assignvalueswidget.ui:257
+#: editorplugins/assignvalues/assignvalueswidget.ui:312
+#: editorplugins/generategraph/generategraphwidget.ui:483
+#, kde-format
+msgid "Generator Seed"
+msgstr "Semente do xerador"
+
+#. i18n: ectx: property (text), widget (QLabel, constant_label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:372
+#, kde-format
+msgid "Constant"
+msgstr "Constante"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: editorplugins/assignvalues/assignvalueswidget.ui:400
+#, kde-format
+msgid "Overwrite existing values"
+msgstr "Substituír os valores existentes"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
+#. i18n: ectx: property (text), widget (QLabel, labelData)
+#: editorplugins/assignvalues/assignvalueswidget.ui:434
+#: editorplugins/generategraph/generategraphwidget.ui:252
+#: editorplugins/generategraph/generategraphwidget.ui:404
+#, kde-format
+msgid "Nodes:"
+msgstr "Vértices:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelProperty)
+#: editorplugins/assignvalues/assignvalueswidget.ui:447
+#, kde-format
+msgid "Property name:"
+msgstr "Nome da propiedade:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
+#. i18n: ectx: property (text), widget (QLabel, labelConnection)
+#: editorplugins/assignvalues/assignvalueswidget.ui:460
+#: editorplugins/generategraph/generategraphwidget.ui:272
+#, kde-format
+msgid "Edges:"
+msgstr "Arestas:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
+#: editorplugins/assignvalues/assignvalueswidget.ui:482
+#, kde-format
+msgid "Assign values to selected edges."
+msgstr "Asignar os valores das arestas seleccionadas."
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
+#: editorplugins/assignvalues/assignvalueswidget.ui:509
+#, kde-format
+msgid "Assign values to selected nodes."
+msgstr "Asignar os valores dos vértices seleccionados."
+
 #: editorplugins/generategraph/generategraphwidget.cpp:79
 #, kde-format
 msgctxt "@title:window"
@@ -219,17 +420,401 @@ msgstr "Dirección de aresta incorrecta"
 msgid "Edges in a Directed Acyclical Graph must be directional."
 msgstr "As arestas dun grafo acíclico dirixido deben ser direccionais."
 
+#. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
+#: editorplugins/generategraph/generategraphwidget.ui:14
+#, kde-format
+msgid "Generate Graph"
+msgstr "Xerar un grafo"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:22
+#, kde-format
+msgid "Select the graph generator."
+msgstr "Selecciona o xerador de grafos."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:26
+#, kde-format
+msgid "Mesh Graph"
+msgstr "Grafo en reixa"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:31
+#, kde-format
+msgid "Star Graph"
+msgstr "Grafo en estrela"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:36
+#, kde-format
+msgid "Circle Graph"
+msgstr "Grafo en círculo"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:41
+#, kde-format
+msgid "Random Graph"
+msgstr "Grafo aleatorio"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:46
+#, kde-format
+msgid "Erdös-Renyi Graph"
+msgstr "Grafo de Erdös-Renyi"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:51
+#, kde-format
+msgid "Random Tree Graph"
+msgstr "Grafo de árbore aleatoria"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:56
+#, kde-format
+msgid "Random Dag Graph"
+msgstr "Grafo acíclico dirixido aleatorio"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:61
+#, kde-format
+msgid "Path Graph"
+msgstr "Grafo lineal"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:66
+#, kde-format
+msgid "Complete Graph"
+msgstr "Grafo completo"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:71
+#, kde-format
+msgid "Complete Bipartite"
+msgstr "Bipartito completo"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
+#: editorplugins/generategraph/generategraphwidget.ui:91
+#, kde-format
+msgid "Show advanced settings."
+msgstr "Mostra a configuración avanzada."
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:106
+#, kde-format
+msgid "Set the unique identifier of the generated graph."
+msgstr "Define o identificador único do grafo xerado."
+
+#. i18n: ectx: property (text), widget (QLineEdit, identifier)
+#: editorplugins/generategraph/generategraphwidget.ui:109
+#, kde-format
+msgid "Graph"
+msgstr "Grafo"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:116
+#, kde-format
+msgid "The node type to create the nodes of the graph with"
+msgstr "O tipo de vértice co que se han crear os vértices do grafo."
+
+#. i18n: ectx: property (text), widget (QLabel, labelNodeType)
+#: editorplugins/generategraph/generategraphwidget.ui:119
+#, kde-format
+msgid "Node type:"
+msgstr "Tipo de vértice:"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
+#: editorplugins/generategraph/generategraphwidget.ui:126
+#, kde-format
+msgid "The identifier of the created graph (used for scripting)"
+msgstr "O identificador do grafo creado (úsase no scripting)."
+
+#. i18n: ectx: property (text), widget (QLabel, label_columns)
+#: editorplugins/generategraph/generategraphwidget.ui:148
+#, kde-format
+msgid "Number of Columns:"
+msgstr "Número de columnas:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_rows)
+#: editorplugins/generategraph/generategraphwidget.ui:168
+#, kde-format
+msgid "Number of Rows:"
+msgstr "Número de filas:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
+#: editorplugins/generategraph/generategraphwidget.ui:196
+#, kde-format
+msgid "Satellite Nodes:"
+msgstr "Vértices satélite:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
+#. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
+#. i18n: ectx: property (text), widget (QLabel, label_completeNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:224
+#: editorplugins/generategraph/generategraphwidget.ui:505
+#: editorplugins/generategraph/generategraphwidget.ui:527
+#, kde-format
+msgid "Number of Nodes:"
+msgstr "Número de vértices:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
+#. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
+#: editorplugins/generategraph/generategraphwidget.ui:286
+#: editorplugins/generategraph/generategraphwidget.ui:332
+#, kde-format
+msgid "Allow self-edges:"
+msgstr "Permitir lazos:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:293
+#, kde-format
+msgid "Generator seed:"
+msgstr "Semente do xerador:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:325
+#, kde-format
+msgid "Nodes (n):"
+msgstr "Vértices (n):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:349
+#, kde-format
+msgid "Edge Probability (p):"
+msgstr "Probabilidade da aresta (p):"
+
+#. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
+#. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
+#: editorplugins/generategraph/generategraphwidget.ui:356
+#: editorplugins/generategraph/generategraphwidget.ui:421
+#, kde-format
+msgid "Generator Seed:"
+msgstr "Semente do xerador:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
+#: editorplugins/generategraph/generategraphwidget.ui:446
+#, kde-format
+msgid "Number of Nodes"
+msgstr "Número de vértices"
+
+#. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
+#: editorplugins/generategraph/generategraphwidget.ui:463
+#, kde-format
+msgid "Edge Probability"
+msgstr "Probabilidade da aresta"
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
+#: editorplugins/generategraph/generategraphwidget.ui:549
+#, kde-format
+msgid "Left Set Nodes:"
+msgstr "Nodos do conxunto da esquerda:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
+#: editorplugins/generategraph/generategraphwidget.ui:563
+#, kde-format
+msgid "Right Set Nodes:"
+msgstr "Nodos do conxunto da dereita:"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:590
+#, kde-format
+msgid "Select the edge type for connections of the generated graph."
+msgstr "Seleccione o tipo de aresta das conexións do grafo xerado."
+
+#. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:604
+#, kde-format
+msgid "The edge type to create the edges of the graph with"
+msgstr "O tipo de aresta co que se han crear as arestas do grafo."
+
+#. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
+#: editorplugins/generategraph/generategraphwidget.ui:607
+#, kde-format
+msgid "Edge type:"
+msgstr "Tipo de aresta:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelGenerator)
+#: editorplugins/generategraph/generategraphwidget.ui:614
+#, kde-format
+msgid "Graph generator:"
+msgstr "Xerador de grafos:"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
+#: editorplugins/generategraph/generategraphwidget.ui:621
+#, kde-format
+msgid "Select the node type for node elements of the generated graph."
+msgstr "Seleccione o tipo dos vértices do grafo xerado."
+
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
 #, kde-format
 msgctxt "@title:window"
 msgid "Graph Layout"
 msgstr "Disposición do grafo"
 
+#. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:20
+#, kde-format
+msgid "Graph Layout"
+msgstr "Disposición do grafo"
+
+#. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:36
+#, kde-format
+msgid "Force Based Layout"
+msgstr "Disposición baseada en forzas"
+
+#. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:57
+#, kde-format
+msgid "Area factor:"
+msgstr "Factor de zona:"
+
+#. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:77
+#, kde-format
+msgid "Repelling force:"
+msgstr "Forza repelente:"
+
+#. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:97
+#, kde-format
+msgid "Attraction force:"
+msgstr "Forza de atracción:"
+
+#. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:119
+#, kde-format
+msgid "Radial Tree Layout"
+msgstr "Disposición de árbore radial"
+
+#. i18n: ectx: property (text), widget (QLabel, rootLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:134
+#, kde-format
+msgid "Center/Root:"
+msgstr "Centro ou raíz:"
+
+#. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:144
+#, kde-format
+msgid "Node separation:"
+msgstr "Separación de nodos:"
+
+#. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:158
+#, kde-format
+msgid "Tree type:"
+msgstr "Tipo de árbore:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:165
+#, kde-format
+msgid "Free tree"
+msgstr "Árbore libre"
+
+#. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
+#: editorplugins/graphlayout/graphlayoutwidget.ui:175
+#, kde-format
+msgid "Rooted tree"
+msgstr "Árbore enraizada"
+
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
 #, kde-format
 msgctxt "@title:window"
 msgid "Transform Edges"
 msgstr "Transformar as arestas"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
+#: editorplugins/transformedges/transformedgeswidget.ui:14
+#, kde-format
+msgid "Transform Edges"
+msgstr "Transformar as arestas"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:22
+#, kde-format
+msgid ""
+"This option connects all nodes of the given graph. The new edges do not have "
+"any preset weights."
+msgstr ""
+"Esta alternativa conecta todos os vértices do grafo. As novas arestas non "
+"teñen ningún peso predefinido."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
+#: editorplugins/transformedges/transformedgeswidget.ui:25
+#, kde-format
+msgid "Complete graph"
+msgstr "Grafo completo"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:35
+#, kde-format
+msgid "This option removes all edges from the given graph."
+msgstr "Esta alternativa retira todas as arestas do grafo."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:38
+#, kde-format
+msgid "Remove all edges"
+msgstr "Retirar todas as arestas"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:45
+#, kde-format
+msgid ""
+"This option reverses all edges of a directed graph. Note that this does not "
+"apply to undirected graphs."
+msgstr ""
+"Esta alternativa inverte todas as arestas dun grafo dirixido. Lembre que "
+"isto non se aplica en grafo non dirixidos."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:48
+#, kde-format
+msgid "Reverse all edges"
+msgstr "Invertes todas as arestas"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:59
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes <span "
+"style=\" font-style:italic;\">Prim's Minimal Spanning Tree Algorithm</span> "
+"at the graph. All edges without given weights are assumed to have weights "
+"equals 1. Directed and undirected graphs are processed accordingly.</p></"
+"body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Esta alternativa executa "
+"<span style=\" font-style:italic;\">o algoritmo de Prim de árbore de "
+"extensión mínima</span> no grafo. Asúmese que todas as arestas sen peso dado "
+"pesan un. Os grafos dirixidos e os non dirixidos procésanse en consecuencia."
+"</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
+#: editorplugins/transformedges/transformedgeswidget.ui:62
+#, kde-format
+msgid "Spanning tree transformation"
+msgstr "Transformación por árbore de extensión"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
+#: editorplugins/transformedges/transformedgeswidget.ui:69
+#, kde-format
+msgid "Remove all self edges"
+msgstr "Retirar todos os lazos"
 
 #: fileformats/dot/dotfileformat.cpp:45
 #, kde-format
@@ -394,6 +979,372 @@ msgctxt "@info status message after successful script execution"
 msgid "<i>Execution Finished</i>"
 msgstr "<i>Execución rematada</i>"
 
+#: kernel/modules/console/console.xml:7
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"The global Console object allows you to print messages of different "
+"importance to a log."
+msgstr ""
+"O obxecto global Console permítelle imprimir nun rexistro mensaxes de "
+"distinta importancia."
+
+#: kernel/modules/console/console.xml:17
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given message of normal severity."
+msgstr "Imprimir a mensaxe indicada cunha gravidade normal."
+
+#: kernel/modules/console/console.xml:31
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given debug message."
+msgstr "Imprimir a mensaxe de depuración indicada."
+
+#: kernel/modules/console/console.xml:45
+#, kde-format
+msgctxt "Scripting API"
+msgid "Print the given error message of high severity."
+msgstr "Imprimir a mensaxe de erro indicada cunha gravidade alta."
+
+#: kernel/modules/document/document.xml:9
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"The document object provides access to all elements.\n"
+msgstr ""
+"\n"
+"O obxecto do documento fornece acceso a todos os elementos.\n"
+
+#: kernel/modules/document/document.xml:19
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the node with specified ID."
+msgstr "Devolver o vértice co identificador indicado."
+
+#: kernel/modules/document/document.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of a node."
+msgstr "Identificador dun vértice."
+
+#: kernel/modules/document/document.xml:33
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all nodes."
+msgstr "Devolver unha lista de todos os vértices."
+
+#: kernel/modules/document/document.xml:42
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list all nodes of specified type."
+msgstr "Devolver unha lista de todos os vértices do tipo indicado."
+
+#: kernel/modules/document/document.xml:49
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of a node type."
+msgstr "Identificador dun tipo de vértice."
+
+#: kernel/modules/document/document.xml:56
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all edges."
+msgstr "Devolver unha lista de todas as arestas."
+
+#: kernel/modules/document/document.xml:65
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list all edges of specified type."
+msgstr "Devolver unha lista de todas as arestas do tipo indicado."
+
+#: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
+#: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
+#: kernel/modules/document/node.xml:141 kernel/modules/document/node.xml:164
+#: kernel/modules/document/node.xml:187
+#, kde-format
+msgctxt "Scripting API"
+msgid "Identifier of an edge type."
+msgstr "Identificador dun tipo de aresta."
+
+#: kernel/modules/document/document.xml:79
+#, kde-format
+msgctxt "Scripting API"
+msgid "Create node at position (x,y)."
+msgstr "Crear un vértice na posición (x, y)."
+
+#: kernel/modules/document/document.xml:86
+#, kde-format
+msgctxt "Scripting API"
+msgid "X-coordinate of the node."
+msgstr "Coordenada do vértice en X."
+
+#: kernel/modules/document/document.xml:91
+#, kde-format
+msgctxt "Scripting API"
+msgid "Y-coordinate of the node."
+msgstr "Coordenada do vértice en Y."
+
+#: kernel/modules/document/document.xml:98
+#, kde-format
+msgctxt "Scripting API"
+msgid "Create edge between the given nodes of default edge type."
+msgstr ""
+"Crear unha aresta entre os vértices indicados usando o tipo de aresta "
+"predeterminado."
+
+#: kernel/modules/document/document.xml:105
+#, kde-format
+msgctxt "Scripting API"
+msgid "Start node of the edge."
+msgstr "Vértice de orixe da aresta."
+
+#: kernel/modules/document/document.xml:110
+#, kde-format
+msgctxt "Scripting API"
+msgid "Target node of the edge."
+msgstr "Vértice de destino da aresta."
+
+#: kernel/modules/document/document.xml:117
+#, kde-format
+msgctxt "Scripting API"
+msgid "Delete the given node."
+msgstr "Eliminar o vértice indicado."
+
+#: kernel/modules/document/document.xml:124
+#, kde-format
+msgctxt "Scripting API"
+msgid "The node to be deleted."
+msgstr "O vértice para eliminar."
+
+#: kernel/modules/document/document.xml:131
+#, kde-format
+msgctxt "Scripting API"
+msgid "Delete the given edge."
+msgstr "Eliminar a aresta indicada."
+
+#: kernel/modules/document/document.xml:138
+#, kde-format
+msgctxt "Scripting API"
+msgid "The edge to be deleted."
+msgstr "A aresta para eliminar."
+
+#: kernel/modules/document/edge.xml:9
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"An edge is the connection of two nodes. Edges can be either directed or "
+"undirected, depending on their type.\n"
+msgstr ""
+"\n"
+"Unha aresta é a conexión entre dous vértices. As arestas poden estar ou non "
+"dirixidas, segundo o seu tipo.\n"
+
+#: kernel/modules/document/edge.xml:17
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the edge's type. If setting, the edge type "
+"identifier must exist."
+msgstr ""
+"Ler e definir o identificador do tipo de aresta. Ao definilo, o "
+"identificador do tipo de aresta debe existir."
+
+#: kernel/modules/document/edge.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the origin node of the edge."
+msgstr "Devolver o vértice de orixe da aresta."
+
+#: kernel/modules/document/edge.xml:35
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return the target node of the edge."
+msgstr "Devolver o vértice de destino da aresta."
+
+#: kernel/modules/document/edge.xml:44
+#, kde-format
+msgctxt "Scripting API"
+msgid "Returns true if the edge's type is directed, otherwise false."
+msgstr ""
+"Devolve certo se o tipo da aresta é dirixido, ou falso en caso contrario."
+
+#: kernel/modules/document/node.xml:11
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"\n"
+"A node is the data element of a graph.\n"
+"It can have arbitrary dynamic properties that are either set in the editor "
+"or simply assigned on run-time.\n"
+"Note that dynamic properties are only available after script execution, if "
+"they are registered for the node's type.\n"
+msgstr ""
+"\n"
+"Un vértice é un elemento de datos dun grafo.\n"
+"Pode conter propiedades dinámicas arbitrarias definidas no editor ou "
+"asignadas en tempo de execución.\n"
+"Teña en conta que as propiedades dinámicas só están dispoñíbeis despois da "
+"execución do guión, se están rexistradas para o tipo do vértice.\n"
+
+#: kernel/modules/document/node.xml:19
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the unique identifier of this node."
+msgstr "Ler e definir o identificador único do vértice."
+
+#: kernel/modules/document/node.xml:26
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the x-coordinate of the node."
+msgstr "Ler e definir a coordenada do vértice en X."
+
+#: kernel/modules/document/node.xml:33
+#, kde-format
+msgctxt "Scripting API"
+msgid "Read and set the y-coordinate of the node."
+msgstr "Ler e definir a coordenada do vértice en Y."
+
+#: kernel/modules/document/node.xml:40
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
+"for red)."
+msgstr ""
+"Ler e definir a cadea da cor do vértice en hexadecimal (por exemplo, "
+"«#ff0000» para vermello)."
+
+#: kernel/modules/document/node.xml:47
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Read and set the identifier of the node's type. If setting, the node type "
+"identifier must exist."
+msgstr ""
+"Ler e definir o identificador do tipo de vértice. Ao definilo, o "
+"identificador do tipo de nodo debe existir."
+
+#: kernel/modules/document/node.xml:56
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all edges (incoming and outgoing) of this node."
+msgstr "Devolver unha lista de todas as arestas que conteñen este vértice."
+
+#: kernel/modules/document/node.xml:65
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return a list of all edges (incoming and outgoing) of this node of a "
+"specified type."
+msgstr ""
+"Devolver unha lista de todas as arestas dun tipo indicado que conteñen este "
+"vértice."
+
+#: kernel/modules/document/node.xml:79
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of incoming edges of this node."
+msgstr "Devolver unha lista de arestas que rematan neste vértice."
+
+#: kernel/modules/document/node.xml:88
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all incoming edges of this node of a specified type."
+msgstr ""
+"Devolver unha lista de arestas dun tipo indicado que rematan neste vértice."
+
+#: kernel/modules/document/node.xml:102
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node."
+msgstr "Devolver unha lista de arestas que parten deste vértice."
+
+#: kernel/modules/document/node.xml:111
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list of all outgoing edges of this node of a specified type."
+msgstr ""
+"Devolver unha lista de arestas dun tipo indicado que parten deste vértice."
+
+#: kernel/modules/document/node.xml:125
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node. This method respects if edges "
+"are directed."
+msgstr ""
+"Devolver unha lista de todos os vértices conectados con este nodo. Este "
+"método respecta que as arestas sexan dirixidas."
+
+#: kernel/modules/document/node.xml:134
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node via an edge of specified type. "
+"This method respects if edges are directed."
+msgstr ""
+"Devolver unha lista de todos os vértices conectados con este nodo mediante "
+"unha aresta do tipo indicado. Este método respecta que as arestas sexan "
+"dirixidas."
+
+#: kernel/modules/document/node.xml:148
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return a list all nodes connected to this node by an incoming edge."
+msgstr ""
+"Devolver unha lista de todos os vértices conectados con este nodo por unha "
+"aresta entrante."
+
+#: kernel/modules/document/node.xml:157
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return a list all nodes connected to this node by an incoming edge of "
+"specified type."
+msgstr ""
+"Devolver unha lista de todos os vértices conectados con este nodo por unha "
+"aresta entrante do tipo indicado."
+
+#: kernel/modules/document/node.xml:171
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return list all nodes connected to this node by an outgoing edge."
+msgstr ""
+"Devolver unha lista de todos os vértices conectados con este nodo por unha "
+"aresta saínte."
+
+#: kernel/modules/document/node.xml:180
+#, kde-format
+msgctxt "Scripting API"
+msgid ""
+"Return list all nodes connected to this node by an outgoing edge of "
+"specified type."
+msgstr ""
+"Devolver unha lista de todos os vértices conectados con este nodo por unha "
+"aresta saínte do tipo indicado."
+
+#: kernel/modules/document/node.xml:194
+#, kde-format
+msgctxt "Scripting API"
+msgid "Return list of distances to specified targets in same order."
+msgstr ""
+"Devolver unha lista de distancias aos destinos indicados na mesma orde."
+
+#: kernel/modules/document/node.xml:201
+#, kde-format
+msgctxt "Scripting API"
+msgid "Name of edge property that holds the edge length."
+msgstr "Nome da propiedade de aresta que contén a lonxitude da aresta."
+
+#: kernel/modules/document/node.xml:206
+#, kde-format
+msgctxt "Scripting API"
+msgid "List of nodes to that the distances shall be computed."
+msgstr "Lista de vértices cuxas distancias deben calcularse."
+
 #: models/edgemodel.cpp:141
 #, kde-format
 msgctxt "@title:column"
@@ -485,569 +1436,6 @@ msgstr "Seleccionar e mover"
 #, kde-format
 msgid "Select and move elements on the scene"
 msgstr "Seleccionar e mover elementos na escena."
-
-#~ msgid "Edge Properties"
-#~ msgstr "Propiedades da aresta"
-
-#~ msgid "Type:"
-#~ msgstr "Tipo:"
-
-#~ msgid "Dynamic Properties"
-#~ msgstr "Propiedades dinámicas"
-
-#~ msgid "Node Properties"
-#~ msgstr "Propiedades do vértice"
-
-#~ msgid "Node color"
-#~ msgstr "Cor do vértice."
-
-#~ msgid "Assign Values"
-#~ msgstr "Asignar valores"
-
-#~ msgid "Choose Properties"
-#~ msgstr "Escoller as propiedades"
-
-#~ msgid "Show advanced options."
-#~ msgstr "Amosar as opcións avanzadas."
-
-#~ msgid "Assignment Method"
-#~ msgstr "Método de asignación"
-
-#~ msgid "Enumerate Items"
-#~ msgstr "Enumerar os elementos"
-
-#~ msgid "Enumerate Alpha"
-#~ msgstr "Enumeración alpha"
-
-#~ msgid "Enumerate Alpha-Numeric"
-#~ msgstr "Enumeración alfanumérica"
-
-#~ msgid "Assign Random Integers"
-#~ msgstr "Asignar números enteiros aleatorios"
-
-#~ msgid "Assign Random Reals"
-#~ msgstr "Asignar números reais aleatorios"
-
-#~ msgid "Assign Constant Value"
-#~ msgstr "Asignar un valor constante"
-
-#~ msgid "Start ID:"
-#~ msgstr "ID inicial:"
-
-#~ msgid "Initial string"
-#~ msgstr "Texto inicial"
-
-#~ msgid "a"
-#~ msgstr "a"
-
-#~ msgid "Start ID"
-#~ msgstr "ID inicial"
-
-#~ msgid "Prefix"
-#~ msgstr "Prefixo"
-
-#~ msgid "Lower Limit"
-#~ msgstr "Límite inferior"
-
-#~ msgid "Upper Limit"
-#~ msgstr "Limite superior"
-
-#~ msgid "Generator Seed"
-#~ msgstr "Semente do xerador"
-
-#~ msgid "Constant"
-#~ msgstr "Constante"
-
-#~ msgid "Overwrite existing values"
-#~ msgstr "Substituír os valores existentes"
-
-#~ msgid "Nodes:"
-#~ msgstr "Vértices:"
-
-#~ msgid "Property name:"
-#~ msgstr "Nome da propiedade:"
-
-#~ msgid "Edges:"
-#~ msgstr "Arestas:"
-
-#~ msgid "Assign values to selected edges."
-#~ msgstr "Asignar os valores das arestas seleccionadas."
-
-#~ msgid "Assign values to selected nodes."
-#~ msgstr "Asignar os valores dos vértices seleccionados."
-
-#~ msgid "Generate Graph"
-#~ msgstr "Xerar un grafo"
-
-#~ msgid "Select the graph generator."
-#~ msgstr "Selecciona o xerador de grafos."
-
-#~ msgid "Mesh Graph"
-#~ msgstr "Grafo en reixa"
-
-#~ msgid "Star Graph"
-#~ msgstr "Grafo en estrela"
-
-#~ msgid "Circle Graph"
-#~ msgstr "Grafo en círculo"
-
-#~ msgid "Random Graph"
-#~ msgstr "Grafo aleatorio"
-
-#~ msgid "Erdös-Renyi Graph"
-#~ msgstr "Grafo de Erdös-Renyi"
-
-#~ msgid "Random Tree Graph"
-#~ msgstr "Grafo de árbore aleatoria"
-
-#~ msgid "Random Dag Graph"
-#~ msgstr "Grafo acíclico dirixido aleatorio"
-
-#~ msgid "Path Graph"
-#~ msgstr "Grafo lineal"
-
-#~ msgid "Complete Graph"
-#~ msgstr "Grafo completo"
-
-#~ msgid "Complete Bipartite"
-#~ msgstr "Bipartito completo"
-
-#~ msgid "Show advanced settings."
-#~ msgstr "Mostra a configuración avanzada."
-
-#~ msgid "Set the unique identifier of the generated graph."
-#~ msgstr "Define o identificador único do grafo xerado."
-
-#~ msgid "Graph"
-#~ msgstr "Grafo"
-
-#~ msgid "The node type to create the nodes of the graph with"
-#~ msgstr "O tipo de vértice co que se han crear os vértices do grafo."
-
-#~ msgid "Node type:"
-#~ msgstr "Tipo de vértice:"
-
-#~ msgid "The identifier of the created graph (used for scripting)"
-#~ msgstr "O identificador do grafo creado (úsase no scripting)."
-
-#~ msgid "Number of Columns:"
-#~ msgstr "Número de columnas:"
-
-#~ msgid "Number of Rows:"
-#~ msgstr "Número de filas:"
-
-#~ msgid "Satellite Nodes:"
-#~ msgstr "Vértices satélite:"
-
-#~ msgid "Number of Nodes:"
-#~ msgstr "Número de vértices:"
-
-#~ msgid "Allow self-edges:"
-#~ msgstr "Permitir lazos:"
-
-#~ msgid "Generator seed:"
-#~ msgstr "Semente do xerador:"
-
-#~ msgid "Nodes (n):"
-#~ msgstr "Vértices (n):"
-
-#~ msgid "Edge Probability (p):"
-#~ msgstr "Probabilidade da aresta (p):"
-
-#~ msgid "Generator Seed:"
-#~ msgstr "Semente do xerador:"
-
-#~ msgid "Number of Nodes"
-#~ msgstr "Número de vértices"
-
-#~ msgid "Edge Probability"
-#~ msgstr "Probabilidade da aresta"
-
-#~ msgid "Left Set Nodes:"
-#~ msgstr "Nodos do conxunto da esquerda:"
-
-#~ msgid "Right Set Nodes:"
-#~ msgstr "Nodos do conxunto da dereita:"
-
-#~ msgid "Select the edge type for connections of the generated graph."
-#~ msgstr "Seleccione o tipo de aresta das conexións do grafo xerado."
-
-#~ msgid "The edge type to create the edges of the graph with"
-#~ msgstr "O tipo de aresta co que se han crear as arestas do grafo."
-
-#~ msgid "Edge type:"
-#~ msgstr "Tipo de aresta:"
-
-#~ msgid "Graph generator:"
-#~ msgstr "Xerador de grafos:"
-
-#~ msgid "Select the node type for node elements of the generated graph."
-#~ msgstr "Seleccione o tipo dos vértices do grafo xerado."
-
-#~ msgid "Graph Layout"
-#~ msgstr "Disposición do grafo"
-
-#~ msgid "Force Based Layout"
-#~ msgstr "Disposición baseada en forzas"
-
-#~ msgid "Area factor:"
-#~ msgstr "Factor de zona:"
-
-#~ msgid "Repelling force:"
-#~ msgstr "Forza repelente:"
-
-#~ msgid "Attraction force:"
-#~ msgstr "Forza de atracción:"
-
-#~ msgid "Radial Tree Layout"
-#~ msgstr "Disposición de árbore radial"
-
-#~ msgid "Center/Root:"
-#~ msgstr "Centro ou raíz:"
-
-#~ msgid "Node separation:"
-#~ msgstr "Separación de nodos:"
-
-#~ msgid "Tree type:"
-#~ msgstr "Tipo de árbore:"
-
-#~ msgid "Free tree"
-#~ msgstr "Árbore libre"
-
-#~ msgid "Rooted tree"
-#~ msgstr "Árbore enraizada"
-
-#~ msgid "Transform Edges"
-#~ msgstr "Transformar as arestas"
-
-#~ msgid ""
-#~ "This option connects all nodes of the given graph. The new edges do not "
-#~ "have any preset weights."
-#~ msgstr ""
-#~ "Esta alternativa conecta todos os vértices do grafo. As novas arestas non "
-#~ "teñen ningún peso predefinido."
-
-#~ msgid "Complete graph"
-#~ msgstr "Grafo completo"
-
-#~ msgid "This option removes all edges from the given graph."
-#~ msgstr "Esta alternativa retira todas as arestas do grafo."
-
-#~ msgid "Remove all edges"
-#~ msgstr "Retirar todas as arestas"
-
-#~ msgid ""
-#~ "This option reverses all edges of a directed graph. Note that this does "
-#~ "not apply to undirected graphs."
-#~ msgstr ""
-#~ "Esta alternativa inverte todas as arestas dun grafo dirixido. Lembre que "
-#~ "isto non se aplica en grafo non dirixidos."
-
-#~ msgid "Reverse all edges"
-#~ msgstr "Invertes todas as arestas"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
-#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
-#~ "Algorithm</span> at the graph. All edges without given weights are "
-#~ "assumed to have weights equals 1. Directed and undirected graphs are "
-#~ "processed accordingly.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Esta alternativa "
-#~ "executa <span style=\" font-style:italic;\">o algoritmo de Prim de árbore "
-#~ "de extensión mínima</span> no grafo. Asúmese que todas as arestas sen "
-#~ "peso dado pesan un. Os grafos dirixidos e os non dirixidos procésanse en "
-#~ "consecuencia.</p></body></html>"
-
-#~ msgid "Spanning tree transformation"
-#~ msgstr "Transformación por árbore de extensión"
-
-#~ msgid "Remove all self edges"
-#~ msgstr "Retirar todos os lazos"
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "The global Console object allows you to print messages of different "
-#~ "importance to a log."
-#~ msgstr ""
-#~ "O obxecto global Console permítelle imprimir nun rexistro mensaxes de "
-#~ "distinta importancia."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Print the given message of normal severity."
-#~ msgstr "Imprimir a mensaxe indicada cunha gravidade normal."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Print the given debug message."
-#~ msgstr "Imprimir a mensaxe de depuración indicada."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Print the given error message of high severity."
-#~ msgstr "Imprimir a mensaxe de erro indicada cunha gravidade alta."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "\n"
-#~ "The document object provides access to all elements.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "O obxecto do documento fornece acceso a todos os elementos.\n"
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return the node with specified ID."
-#~ msgstr "Devolver o vértice co identificador indicado."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Identifier of a node."
-#~ msgstr "Identificador dun vértice."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list of all nodes."
-#~ msgstr "Devolver unha lista de todos os vértices."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list all nodes of specified type."
-#~ msgstr "Devolver unha lista de todos os vértices do tipo indicado."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Identifier of a node type."
-#~ msgstr "Identificador dun tipo de vértice."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list of all edges."
-#~ msgstr "Devolver unha lista de todas as arestas."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list all edges of specified type."
-#~ msgstr "Devolver unha lista de todas as arestas do tipo indicado."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Identifier of an edge type."
-#~ msgstr "Identificador dun tipo de aresta."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Create node at position (x,y)."
-#~ msgstr "Crear un vértice na posición (x, y)."
-
-#~ msgctxt "Scripting API"
-#~ msgid "X-coordinate of the node."
-#~ msgstr "Coordenada do vértice en X."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Y-coordinate of the node."
-#~ msgstr "Coordenada do vértice en Y."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Create edge between the given nodes of default edge type."
-#~ msgstr ""
-#~ "Crear unha aresta entre os vértices indicados usando o tipo de aresta "
-#~ "predeterminado."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Start node of the edge."
-#~ msgstr "Vértice de orixe da aresta."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Target node of the edge."
-#~ msgstr "Vértice de destino da aresta."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Delete the given node."
-#~ msgstr "Eliminar o vértice indicado."
-
-#~ msgctxt "Scripting API"
-#~ msgid "The node to be deleted."
-#~ msgstr "O vértice para eliminar."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Delete the given edge."
-#~ msgstr "Eliminar a aresta indicada."
-
-#~ msgctxt "Scripting API"
-#~ msgid "The edge to be deleted."
-#~ msgstr "A aresta para eliminar."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "\n"
-#~ "An edge is the connection of two nodes. Edges can be either directed or "
-#~ "undirected, depending on their type.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Unha aresta é a conexión entre dous vértices. As arestas poden estar ou "
-#~ "non dirixidas, segundo o seu tipo.\n"
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Read and set the identifier of the edge's type. If setting, the edge type "
-#~ "identifier must exist."
-#~ msgstr ""
-#~ "Ler e definir o identificador do tipo de aresta. Ao definilo, o "
-#~ "identificador do tipo de aresta debe existir."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return the origin node of the edge."
-#~ msgstr "Devolver o vértice de orixe da aresta."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return the target node of the edge."
-#~ msgstr "Devolver o vértice de destino da aresta."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Returns true if the edge's type is directed, otherwise false."
-#~ msgstr ""
-#~ "Devolve certo se o tipo da aresta é dirixido, ou falso en caso contrario."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "\n"
-#~ "A node is the data element of a graph.\n"
-#~ "It can have arbitrary dynamic properties that are either set in the "
-#~ "editor or simply assigned on run-time.\n"
-#~ "Note that dynamic properties are only available after script execution, "
-#~ "if they are registered for the node's type.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Un vértice é un elemento de datos dun grafo.\n"
-#~ "Pode conter propiedades dinámicas arbitrarias definidas no editor ou "
-#~ "asignadas en tempo de execución.\n"
-#~ "Teña en conta que as propiedades dinámicas só están dispoñíbeis despois "
-#~ "da execución do guión, se están rexistradas para o tipo do vértice.\n"
-
-#~ msgctxt "Scripting API"
-#~ msgid "Read and set the unique identifier of this node."
-#~ msgstr "Ler e definir o identificador único do vértice."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Read and set the x-coordinate of the node."
-#~ msgstr "Ler e definir a coordenada do vértice en X."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Read and set the y-coordinate of the node."
-#~ msgstr "Ler e definir a coordenada do vértice en Y."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Read and set the color string of this node in hex values (e.g., "
-#~ "\"#ff0000\" for red)."
-#~ msgstr ""
-#~ "Ler e definir a cadea da cor do vértice en hexadecimal (por exemplo, "
-#~ "«#ff0000» para vermello)."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Read and set the identifier of the node's type. If setting, the node type "
-#~ "identifier must exist."
-#~ msgstr ""
-#~ "Ler e definir o identificador do tipo de vértice. Ao definilo, o "
-#~ "identificador do tipo de nodo debe existir."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list of all edges (incoming and outgoing) of this node."
-#~ msgstr "Devolver unha lista de todas as arestas que conteñen este vértice."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return a list of all edges (incoming and outgoing) of this node of a "
-#~ "specified type."
-#~ msgstr ""
-#~ "Devolver unha lista de todas as arestas dun tipo indicado que conteñen "
-#~ "este vértice."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list of incoming edges of this node."
-#~ msgstr "Devolver unha lista de arestas que rematan neste vértice."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return a list of all incoming edges of this node of a specified type."
-#~ msgstr ""
-#~ "Devolver unha lista de arestas dun tipo indicado que rematan neste "
-#~ "vértice."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list of all outgoing edges of this node."
-#~ msgstr "Devolver unha lista de arestas que parten deste vértice."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return a list of all outgoing edges of this node of a specified type."
-#~ msgstr ""
-#~ "Devolver unha lista de arestas dun tipo indicado que parten deste vértice."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return list all nodes connected to this node. This method respects if "
-#~ "edges are directed."
-#~ msgstr ""
-#~ "Devolver unha lista de todos os vértices conectados con este nodo. Este "
-#~ "método respecta que as arestas sexan dirixidas."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return list all nodes connected to this node via an edge of specified "
-#~ "type. This method respects if edges are directed."
-#~ msgstr ""
-#~ "Devolver unha lista de todos os vértices conectados con este nodo "
-#~ "mediante unha aresta do tipo indicado. Este método respecta que as "
-#~ "arestas sexan dirixidas."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return a list all nodes connected to this node by an incoming edge."
-#~ msgstr ""
-#~ "Devolver unha lista de todos os vértices conectados con este nodo por "
-#~ "unha aresta entrante."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return a list all nodes connected to this node by an incoming edge of "
-#~ "specified type."
-#~ msgstr ""
-#~ "Devolver unha lista de todos os vértices conectados con este nodo por "
-#~ "unha aresta entrante do tipo indicado."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return list all nodes connected to this node by an outgoing edge."
-#~ msgstr ""
-#~ "Devolver unha lista de todos os vértices conectados con este nodo por "
-#~ "unha aresta saínte."
-
-#~ msgctxt "Scripting API"
-#~ msgid ""
-#~ "Return list all nodes connected to this node by an outgoing edge of "
-#~ "specified type."
-#~ msgstr ""
-#~ "Devolver unha lista de todos os vértices conectados con este nodo por "
-#~ "unha aresta saínte do tipo indicado."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Return list of distances to specified targets in same order."
-#~ msgstr ""
-#~ "Devolver unha lista de distancias aos destinos indicados na mesma orde."
-
-#~ msgctxt "Scripting API"
-#~ msgid "Name of edge property that holds the edge length."
-#~ msgstr "Nome da propiedade de aresta que contén a lonxitude da aresta."
-
-#~ msgctxt "Scripting API"
-#~ msgid "List of nodes to that the distances shall be computed."
-#~ msgstr "Lista de vértices cuxas distancias deben calcularse."
 
 #~ msgid "Identifier"
 #~ msgstr "Identificador"
