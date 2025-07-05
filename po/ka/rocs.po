@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:54+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2022-08-23 06:38+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -180,12 +180,6 @@ msgstr "თვისებები"
 msgid "Methods"
 msgstr "მეთოდები"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: plugins/scriptapi/scriptapiwidget.ui:17
-#, kde-format
-msgid "Rocs Scripting API"
-msgstr "Rocs სკრიპტის API"
-
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -194,61 +188,6 @@ msgid ""
 "parsed."
 msgstr ""
 "Rocs-ის პროექტის შემოტანა შეუძლებელია პროექტის ფაილში არსებული შეცდომის გამო."
-
-#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
-#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
-#: rocs.kcfg:9 rocs.kcfg:10
-#, kde-format
-msgid "Show text beside icon"
-msgstr "ტექსტის ხატულის გვერდით ჩვენება"
-
-#. i18n: ectx: label, entry (includePath), group (IncludeManager)
-#: rocs.kcfg:49
-#, kde-format
-msgid "Path where include manager seek for includes."
-msgstr "ბილიკი, სადაც ჩასასმელი ფაილები იძებნება."
-
-#. i18n: ectx: Menu (project)
-#: rocsui.rc:23
-#, kde-format
-msgid "Project"
-msgstr "პროექტი"
-
-#. i18n: ectx: Menu (script)
-#: rocsui.rc:29
-#, kde-format
-msgid "Script Document"
-msgstr "სკრიპტის დოკუმენტი"
-
-#. i18n: ectx: Menu (graph)
-#: rocsui.rc:35
-#, kde-format
-msgid "Graph Document"
-msgstr "გრაფიკის დოკუმენტი"
-
-#. i18n: ectx: Menu (graph_file)
-#: rocsui.rc:41
-#, kde-format
-msgid "Graph File"
-msgstr "გრაფიკის ფაილი"
-
-#. i18n: ectx: Menu (graph_selected)
-#: rocsui.rc:45
-#, kde-format
-msgid "Edit Selected Data"
-msgstr "მონიშნული მონაცემების ჩასწორება"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:47
-#, kde-format
-msgid "Layout"
-msgstr "განლაგება"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:60
-#, kde-format
-msgid "Tools"
-msgstr "ხელსაწყოები"
 
 #: ui/codeeditorwidget.cpp:81
 #, kde-format
@@ -346,12 +285,6 @@ msgstr "გრაფიკის დოკუმენტის სახელ�
 #, kde-format
 msgid "Enter the name of your graph document"
 msgstr "შეიყვანეთ თქვენი გრაფიკის დოკუმენტის სახელი"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: ui/journalwidget.ui:17
-#, kde-format
-msgid "Project Journal"
-msgstr "პროექტის ჟურნალი"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -561,30 +494,6 @@ msgstr "პროექტში არსებობს შეუნახა�
 msgid "Unique ID of the node type."
 msgstr "კვანძის ტიპის უნიკალური ID."
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/scriptoutputwidget.ui:24
-#, kde-format
-msgid "Script output:"
-msgstr "სკრიპტის გამონატანი:"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
-#: ui/scriptoutputwidget.ui:37
-#, kde-format
-msgid "Clear program output with each execution."
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
-#: ui/scriptoutputwidget.ui:56
-#, kde-format
-msgid "Show debug output."
-msgstr "გამართვის გამოტანის ჩვენება."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
-#: ui/scriptoutputwidget.ui:82
-#, kde-format
-msgid "Clear output."
-msgstr "გამოტანის გასუფთავება."
-
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -595,3 +504,45 @@ msgstr "გვერდითი ხელსაწყოთა ზოლი"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "'%1'-ის ხედის გადართვა."
+
+#~ msgid "Rocs Scripting API"
+#~ msgstr "Rocs სკრიპტის API"
+
+#~ msgid "Show text beside icon"
+#~ msgstr "ტექსტის ხატულის გვერდით ჩვენება"
+
+#~ msgid "Path where include manager seek for includes."
+#~ msgstr "ბილიკი, სადაც ჩასასმელი ფაილები იძებნება."
+
+#~ msgid "Project"
+#~ msgstr "პროექტი"
+
+#~ msgid "Script Document"
+#~ msgstr "სკრიპტის დოკუმენტი"
+
+#~ msgid "Graph Document"
+#~ msgstr "გრაფიკის დოკუმენტი"
+
+#~ msgid "Graph File"
+#~ msgstr "გრაფიკის ფაილი"
+
+#~ msgid "Edit Selected Data"
+#~ msgstr "მონიშნული მონაცემების ჩასწორება"
+
+#~ msgid "Layout"
+#~ msgstr "განლაგება"
+
+#~ msgid "Tools"
+#~ msgstr "ხელსაწყოები"
+
+#~ msgid "Project Journal"
+#~ msgstr "პროექტის ჟურნალი"
+
+#~ msgid "Script output:"
+#~ msgstr "სკრიპტის გამონატანი:"
+
+#~ msgid "Show debug output."
+#~ msgstr "გამართვის გამოტანის ჩვენება."
+
+#~ msgid "Clear output."
+#~ msgstr "გამოტანის გასუფთავება."

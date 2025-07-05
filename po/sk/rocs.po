@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:54+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2022-04-07 18:26+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -179,12 +179,6 @@ msgstr "Vlastnosti"
 msgid "Methods"
 msgstr "Metódy"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: plugins/scriptapi/scriptapiwidget.ui:17
-#, kde-format
-msgid "Rocs Scripting API"
-msgstr "Skriptovacie API Rocs"
-
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -194,61 +188,6 @@ msgid ""
 msgstr ""
 "Projekt Rocs sa nepodarilo importovať, pretože súbor projektu sa nedal "
 "analyzovať."
-
-#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
-#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
-#: rocs.kcfg:9 rocs.kcfg:10
-#, kde-format
-msgid "Show text beside icon"
-msgstr "Zobraziť vedľa ikony text"
-
-#. i18n: ectx: label, entry (includePath), group (IncludeManager)
-#: rocs.kcfg:49
-#, kde-format
-msgid "Path where include manager seek for includes."
-msgstr "Cesta, kde správca rozšírení hľadá rozšírenia."
-
-#. i18n: ectx: Menu (project)
-#: rocsui.rc:23
-#, kde-format
-msgid "Project"
-msgstr "Projekt"
-
-#. i18n: ectx: Menu (script)
-#: rocsui.rc:29
-#, kde-format
-msgid "Script Document"
-msgstr "Dokument skriptu"
-
-#. i18n: ectx: Menu (graph)
-#: rocsui.rc:35
-#, kde-format
-msgid "Graph Document"
-msgstr "Dokument grafu"
-
-#. i18n: ectx: Menu (graph_file)
-#: rocsui.rc:41
-#, kde-format
-msgid "Graph File"
-msgstr "Súbor grafu"
-
-#. i18n: ectx: Menu (graph_selected)
-#: rocsui.rc:45
-#, kde-format
-msgid "Edit Selected Data"
-msgstr "Upraviť vybrané údaje"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:47
-#, kde-format
-msgid "Layout"
-msgstr "Usporiadanie"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:60
-#, kde-format
-msgid "Tools"
-msgstr "Nástroje"
 
 #: ui/codeeditorwidget.cpp:81
 #, kde-format
@@ -348,12 +287,6 @@ msgstr "Názov dokumentu grafu"
 #, kde-format
 msgid "Enter the name of your graph document"
 msgstr "Zadajte názov pre váš dokument grafu"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: ui/journalwidget.ui:17
-#, kde-format
-msgid "Project Journal"
-msgstr "Denník projektu"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -564,30 +497,6 @@ msgstr "Zmeny na vašom projekte sú neuložené. Chcete uložiť vaše zmeny?"
 msgid "Unique ID of the node type."
 msgstr "Jedinečné ID typu uzla."
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/scriptoutputwidget.ui:24
-#, kde-format
-msgid "Script output:"
-msgstr "Výstup skriptu:"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
-#: ui/scriptoutputwidget.ui:37
-#, kde-format
-msgid "Clear program output with each execution."
-msgstr "Vyčistiť výstup programu s každým spustením."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
-#: ui/scriptoutputwidget.ui:56
-#, kde-format
-msgid "Show debug output."
-msgstr "Zobraziť ladiaci výstup."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
-#: ui/scriptoutputwidget.ui:82
-#, kde-format
-msgid "Clear output."
-msgstr "Vyčistiť výstup."
-
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -598,6 +507,51 @@ msgstr "Bočný panel nástrojov"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Prepnúť pohľad '%1'."
+
+#~ msgid "Rocs Scripting API"
+#~ msgstr "Skriptovacie API Rocs"
+
+#~ msgid "Show text beside icon"
+#~ msgstr "Zobraziť vedľa ikony text"
+
+#~ msgid "Path where include manager seek for includes."
+#~ msgstr "Cesta, kde správca rozšírení hľadá rozšírenia."
+
+#~ msgid "Project"
+#~ msgstr "Projekt"
+
+#~ msgid "Script Document"
+#~ msgstr "Dokument skriptu"
+
+#~ msgid "Graph Document"
+#~ msgstr "Dokument grafu"
+
+#~ msgid "Graph File"
+#~ msgstr "Súbor grafu"
+
+#~ msgid "Edit Selected Data"
+#~ msgstr "Upraviť vybrané údaje"
+
+#~ msgid "Layout"
+#~ msgstr "Usporiadanie"
+
+#~ msgid "Tools"
+#~ msgstr "Nástroje"
+
+#~ msgid "Project Journal"
+#~ msgstr "Denník projektu"
+
+#~ msgid "Script output:"
+#~ msgstr "Výstup skriptu:"
+
+#~ msgid "Clear program output with each execution."
+#~ msgstr "Vyčistiť výstup programu s každým spustením."
+
+#~ msgid "Show debug output."
+#~ msgstr "Zobraziť ladiaci výstup."
+
+#~ msgid "Clear output."
+#~ msgstr "Vyčistiť výstup."
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Save Project as"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2022-09-12 15:36+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -48,24 +48,6 @@ msgstr "Nome"
 msgid "Value"
 msgstr "Valore"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
-#: dialogs/edgeproperties.ui:26
-#, kde-format
-msgid "Edge Properties"
-msgstr "Proprietà dell'arco"
-
-#. i18n: ectx: property (text), widget (QLabel, labelType)
-#: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
-#, kde-format
-msgid "Type:"
-msgstr "Tipo:"
-
-#. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
-#: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
-#, kde-format
-msgid "Dynamic Properties"
-msgstr "Proprietà dinamiche"
-
 #: dialogs/edgetypeproperties.cpp:37
 #, kde-format
 msgid "Edges"
@@ -87,18 +69,12 @@ msgstr "Proprietà del tipo di arco"
 msgid "Name:"
 msgstr "Nome:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelId)
-#. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
-#: dialogs/edgetypeproperties.cpp:49 dialogs/nodeproperties.ui:119
-#: dialogs/nodetypeproperties.cpp:49
-#: editorplugins/generategraph/generategraphwidget.ui:129
+#: dialogs/edgetypeproperties.cpp:49 dialogs/nodetypeproperties.cpp:49
 #, kde-format
 msgid "Identifier:"
 msgstr "Identificativo:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelColor)
-#: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
-#: dialogs/nodetypeproperties.cpp:52
+#: dialogs/edgetypeproperties.cpp:51 dialogs/nodetypeproperties.cpp:52
 #, kde-format
 msgid "Color:"
 msgstr "Colore:"
@@ -161,19 +137,6 @@ msgstr ""
 "L'identificato selezionato è già usato per un altro nodo, per favore "
 "selezionane un altro."
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
-#: dialogs/nodeproperties.ui:26
-#, kde-format
-msgid "Node Properties"
-msgstr "Proprietà del nodo"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
-#. i18n: ectx: property (toolTip), widget (KColorCombo, color)
-#: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
-#, kde-format
-msgid "Node color"
-msgstr "Colore del nodo"
-
 #: dialogs/nodetypeproperties.cpp:35
 #, kde-format
 msgid "Nodes"
@@ -232,170 +195,6 @@ msgstr "Tutti i tipi di arco"
 msgid "Enter Property Name"
 msgstr "Inserisci il nome della proprietà"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
-#: editorplugins/assignvalues/assignvalueswidget.ui:32
-#, kde-format
-msgid "Assign Values"
-msgstr "Assegna valori"
-
-#. i18n: ectx: property (text), widget (QLabel, property_choice_label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:40
-#, kde-format
-msgid "Choose Properties"
-msgstr "Scegli proprietà"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
-#: editorplugins/assignvalues/assignvalueswidget.ui:59
-#, kde-format
-msgid "Show advanced options."
-msgstr "Mostra opzioni avanzate"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: editorplugins/assignvalues/assignvalueswidget.ui:74
-#, kde-format
-msgid "Assignment Method"
-msgstr "Modalità di assegnazione"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:81
-#, kde-format
-msgid "Enumerate Items"
-msgstr "Numera elementi"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:86
-#, kde-format
-msgid "Enumerate Alpha"
-msgstr "Elencato in ordine alfabetico"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:91
-#, kde-format
-msgid "Enumerate Alpha-Numeric"
-msgstr "Numera alfanumerico"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:96
-#, kde-format
-msgid "Assign Random Integers"
-msgstr "Assegna numeri interi casuali"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:101
-#, kde-format
-msgid "Assign Random Reals"
-msgstr "Assegna numeri reali casuali"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:106
-#, kde-format
-msgid "Assign Constant Value"
-msgstr "Assegna valore costante"
-
-#. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
-#: editorplugins/assignvalues/assignvalueswidget.ui:132
-#, kde-format
-msgid "Start ID:"
-msgstr "Identificativo iniziale:"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
-#: editorplugins/assignvalues/assignvalueswidget.ui:167
-#, kde-format
-msgid "Initial string"
-msgstr "Stringa iniziale"
-
-#. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
-#: editorplugins/assignvalues/assignvalueswidget.ui:174
-#, kde-format
-msgid "a"
-msgstr "a"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
-#: editorplugins/assignvalues/assignvalueswidget.ui:192
-#, kde-format
-msgid "Start ID"
-msgstr "Identificativo iniziale"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
-#: editorplugins/assignvalues/assignvalueswidget.ui:209
-#, kde-format
-msgid "Prefix"
-msgstr "Prefisso"
-
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#. i18n: ectx: property (text), widget (QLabel, label_4)
-#: editorplugins/assignvalues/assignvalueswidget.ui:230
-#: editorplugins/assignvalues/assignvalueswidget.ui:298
-#, kde-format
-msgid "Lower Limit"
-msgstr "Limite inferiore"
-
-#. i18n: ectx: property (text), widget (QLabel, label_6)
-#. i18n: ectx: property (text), widget (QLabel, label_8)
-#: editorplugins/assignvalues/assignvalueswidget.ui:250
-#: editorplugins/assignvalues/assignvalueswidget.ui:305
-#, kde-format
-msgid "Upper Limit"
-msgstr "Limite superiore"
-
-#. i18n: ectx: property (text), widget (QLabel, label_dagGeneratorSeed)
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#. i18n: ectx: property (text), widget (QLabel, label_9)
-#: editorplugins/assignvalues/assignvalueswidget.ui:257
-#: editorplugins/assignvalues/assignvalueswidget.ui:312
-#: editorplugins/generategraph/generategraphwidget.ui:483
-#, kde-format
-msgid "Generator Seed"
-msgstr "Seme di generazione"
-
-#. i18n: ectx: property (text), widget (QLabel, constant_label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:372
-#, kde-format
-msgid "Constant"
-msgstr "Costante"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:400
-#, kde-format
-msgid "Overwrite existing values"
-msgstr "Sovrascrivi valori esistenti"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
-#. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
-#. i18n: ectx: property (text), widget (QLabel, labelData)
-#: editorplugins/assignvalues/assignvalueswidget.ui:434
-#: editorplugins/generategraph/generategraphwidget.ui:252
-#: editorplugins/generategraph/generategraphwidget.ui:404
-#, kde-format
-msgid "Nodes:"
-msgstr "Nodi:"
-
-#. i18n: ectx: property (text), widget (QLabel, labelProperty)
-#: editorplugins/assignvalues/assignvalueswidget.ui:447
-#, kde-format
-msgid "Property name:"
-msgstr "Nome della proprietà:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
-#. i18n: ectx: property (text), widget (QLabel, labelConnection)
-#: editorplugins/assignvalues/assignvalueswidget.ui:460
-#: editorplugins/generategraph/generategraphwidget.ui:272
-#, kde-format
-msgid "Edges:"
-msgstr "Archi:"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
-#: editorplugins/assignvalues/assignvalueswidget.ui:482
-#, kde-format
-msgid "Assign values to selected edges."
-msgstr "Assegna valori agli archi selezionati."
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
-#: editorplugins/assignvalues/assignvalueswidget.ui:509
-#, kde-format
-msgid "Assign values to selected nodes."
-msgstr "Assegna valori ai nodi selezionati."
-
 #: editorplugins/generategraph/generategraphwidget.cpp:79
 #, kde-format
 msgctxt "@title:window"
@@ -419,401 +218,17 @@ msgstr "Direzione dell'arco non corretta"
 msgid "Edges in a Directed Acyclical Graph must be directional."
 msgstr "Archi in un grafo aciclico orientato avere una direzione."
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
-#: editorplugins/generategraph/generategraphwidget.ui:14
-#, kde-format
-msgid "Generate Graph"
-msgstr "Genera grafo"
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:22
-#, kde-format
-msgid "Select the graph generator."
-msgstr "Seleziona il generatore del grafo."
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:26
-#, kde-format
-msgid "Mesh Graph"
-msgstr "Grafo a griglia"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:31
-#, kde-format
-msgid "Star Graph"
-msgstr "Grafo a stella"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:36
-#, kde-format
-msgid "Circle Graph"
-msgstr "Grafo circolare"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:41
-#, kde-format
-msgid "Random Graph"
-msgstr "Grafo casuale"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:46
-#, kde-format
-msgid "Erdös-Renyi Graph"
-msgstr "Grafo Erdős-Rényi"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:51
-#, kde-format
-msgid "Random Tree Graph"
-msgstr "Grafo ad albero casuale"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:56
-#, kde-format
-msgid "Random Dag Graph"
-msgstr "Grafo DAG casuale"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:61
-#, kde-format
-msgid "Path Graph"
-msgstr "Grafo a tracciato"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:66
-#, kde-format
-msgid "Complete Graph"
-msgstr "Grafo completo"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:71
-#, kde-format
-msgid "Complete Bipartite"
-msgstr "Grafo bipartito"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
-#: editorplugins/generategraph/generategraphwidget.ui:91
-#, kde-format
-msgid "Show advanced settings."
-msgstr "Mostra opzioni avanzate."
-
-#. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
-#: editorplugins/generategraph/generategraphwidget.ui:106
-#, kde-format
-msgid "Set the unique identifier of the generated graph."
-msgstr "Imposta l'identificativo univoco del grafo generato."
-
-#. i18n: ectx: property (text), widget (QLineEdit, identifier)
-#: editorplugins/generategraph/generategraphwidget.ui:109
-#, kde-format
-msgid "Graph"
-msgstr "Grafo"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
-#: editorplugins/generategraph/generategraphwidget.ui:116
-#, kde-format
-msgid "The node type to create the nodes of the graph with"
-msgstr "Il tipo di nodo con cui creare i nodi del grafo"
-
-#. i18n: ectx: property (text), widget (QLabel, labelNodeType)
-#: editorplugins/generategraph/generategraphwidget.ui:119
-#, kde-format
-msgid "Node type:"
-msgstr "Tipo del nodo:"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
-#: editorplugins/generategraph/generategraphwidget.ui:126
-#, kde-format
-msgid "The identifier of the created graph (used for scripting)"
-msgstr "L'identificativo del grafo creato (usato per gli script)"
-
-#. i18n: ectx: property (text), widget (QLabel, label_columns)
-#: editorplugins/generategraph/generategraphwidget.ui:148
-#, kde-format
-msgid "Number of Columns:"
-msgstr "Numero di colonne:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_rows)
-#: editorplugins/generategraph/generategraphwidget.ui:168
-#, kde-format
-msgid "Number of Rows:"
-msgstr "Numero di righe:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
-#: editorplugins/generategraph/generategraphwidget.ui:196
-#, kde-format
-msgid "Satellite Nodes:"
-msgstr "Nodi satellite:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
-#. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
-#. i18n: ectx: property (text), widget (QLabel, label_completeNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:224
-#: editorplugins/generategraph/generategraphwidget.ui:505
-#: editorplugins/generategraph/generategraphwidget.ui:527
-#, kde-format
-msgid "Number of Nodes:"
-msgstr "Numero di nodi:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
-#. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
-#: editorplugins/generategraph/generategraphwidget.ui:286
-#: editorplugins/generategraph/generategraphwidget.ui:332
-#, kde-format
-msgid "Allow self-edges:"
-msgstr "Permetti autoarchi:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
-#: editorplugins/generategraph/generategraphwidget.ui:293
-#, kde-format
-msgid "Generator seed:"
-msgstr "Seme di generazione:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:325
-#, kde-format
-msgid "Nodes (n):"
-msgstr "Nodi (n):"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
-#: editorplugins/generategraph/generategraphwidget.ui:349
-#, kde-format
-msgid "Edge Probability (p):"
-msgstr "Probabilità dell'arco (p):"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
-#. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
-#: editorplugins/generategraph/generategraphwidget.ui:356
-#: editorplugins/generategraph/generategraphwidget.ui:421
-#, kde-format
-msgid "Generator Seed:"
-msgstr "Seme di generazione:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:446
-#, kde-format
-msgid "Number of Nodes"
-msgstr "Numero di nodi"
-
-#. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
-#: editorplugins/generategraph/generategraphwidget.ui:463
-#, kde-format
-msgid "Edge Probability"
-msgstr "Probabilità dell'arco"
-
-#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
-#: editorplugins/generategraph/generategraphwidget.ui:549
-#, kde-format
-msgid "Left Set Nodes:"
-msgstr "Nodi dell'insieme di sinistra:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
-#: editorplugins/generategraph/generategraphwidget.ui:563
-#, kde-format
-msgid "Right Set Nodes:"
-msgstr "Nodi dell'insieme di destra:"
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
-#: editorplugins/generategraph/generategraphwidget.ui:590
-#, kde-format
-msgid "Select the edge type for connections of the generated graph."
-msgstr "Seleziona il tipo di arco per le connessioni del grafo generato."
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
-#: editorplugins/generategraph/generategraphwidget.ui:604
-#, kde-format
-msgid "The edge type to create the edges of the graph with"
-msgstr "Il tipo di arco con cui creare gli archi del grafo"
-
-#. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
-#: editorplugins/generategraph/generategraphwidget.ui:607
-#, kde-format
-msgid "Edge type:"
-msgstr "Tipo di arco:"
-
-#. i18n: ectx: property (text), widget (QLabel, labelGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:614
-#, kde-format
-msgid "Graph generator:"
-msgstr "Generatore di grafo:"
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
-#: editorplugins/generategraph/generategraphwidget.ui:621
-#, kde-format
-msgid "Select the node type for node elements of the generated graph."
-msgstr "Seleziona il tipo di nodo per i nodi del grafo generato."
-
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
 #, kde-format
 msgctxt "@title:window"
 msgid "Graph Layout"
 msgstr "Disposizione dei grafi"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:20
-#, kde-format
-msgid "Graph Layout"
-msgstr "Disposizione dei grafi"
-
-#. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:36
-#, kde-format
-msgid "Force Based Layout"
-msgstr "Disposizione basata sulla forza"
-
-#. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:57
-#, kde-format
-msgid "Area factor:"
-msgstr "Fattore area:"
-
-#. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:77
-#, kde-format
-msgid "Repelling force:"
-msgstr "Forza di repulsione:"
-
-#. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:97
-#, kde-format
-msgid "Attraction force:"
-msgstr "Forza di attrazione:"
-
-#. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:119
-#, kde-format
-msgid "Radial Tree Layout"
-msgstr "Disposizione ad albero radiale"
-
-#. i18n: ectx: property (text), widget (QLabel, rootLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:134
-#, kde-format
-msgid "Center/Root:"
-msgstr "Centro/Radice:"
-
-#. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:144
-#, kde-format
-msgid "Node separation:"
-msgstr "Separazione nodi:"
-
-#. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:158
-#, kde-format
-msgid "Tree type:"
-msgstr "Tipo di albero:"
-
-#. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:165
-#, kde-format
-msgid "Free tree"
-msgstr "Albero libero"
-
-#. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:175
-#, kde-format
-msgid "Rooted tree"
-msgstr "Albero con radice"
-
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
 #, kde-format
 msgctxt "@title:window"
 msgid "Transform Edges"
 msgstr "Trasforma archi"
-
-#. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
-#: editorplugins/transformedges/transformedgeswidget.ui:14
-#, kde-format
-msgid "Transform Edges"
-msgstr "Trasforma archi"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
-#: editorplugins/transformedges/transformedgeswidget.ui:22
-#, kde-format
-msgid ""
-"This option connects all nodes of the given graph. The new edges do not have "
-"any preset weights."
-msgstr ""
-"Questa opzione connette tutti i nodi del grafo dato. I nuovi archi non hanno "
-"dei pesi predefiniti."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
-#: editorplugins/transformedges/transformedgeswidget.ui:25
-#, kde-format
-msgid "Complete graph"
-msgstr "Grafo completo"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:35
-#, kde-format
-msgid "This option removes all edges from the given graph."
-msgstr "Questa opzione rimuove tutti gli archi dal grafico specificato."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:38
-#, kde-format
-msgid "Remove all edges"
-msgstr "Rimuovi tutti gli archi"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:45
-#, kde-format
-msgid ""
-"This option reverses all edges of a directed graph. Note that this does not "
-"apply to undirected graphs."
-msgstr ""
-"Questa opzione inverte tutti gli archi di un grafo orientato. Nota che non è "
-"applicabile ai grafi non orientati."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:48
-#, kde-format
-msgid "Reverse all edges"
-msgstr "Inverti tutti gli archi"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
-#: editorplugins/transformedges/transformedgeswidget.ui:59
-#, kde-format
-msgid ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-"REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes <span "
-"style=\" font-style:italic;\">Prim's Minimal Spanning Tree Algorithm</span> "
-"at the graph. All edges without given weights are assumed to have weights "
-"equals 1. Directed and undirected graphs are processed accordingly.</p></"
-"body></html>"
-msgstr ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-"REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Questa opzione esegue "
-"<span style=\" font-style:italic;\">L'algoritmo di Prim per gli alberi di "
-"connessione minimi</span> sul grafo. Si assume che tutti gli archi senza "
-"peso assegnato abbiano peso unitario. I grafi orientati e non sono elaborati "
-"secondo il loro tipo.</p></body></html>"
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
-#: editorplugins/transformedges/transformedgeswidget.ui:62
-#, kde-format
-msgid "Spanning tree transformation"
-msgstr "Trasformazione degli alberi di connessione"
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:69
-#, kde-format
-msgid "Remove all self edges"
-msgstr "Rimuovi tutti gli autoarchi"
 
 #: fileformats/dot/dotfileformat.cpp:45
 #, kde-format
@@ -975,373 +390,6 @@ msgctxt "@info status message after successful script execution"
 msgid "<i>Execution Finished</i>"
 msgstr "<i>Esecuzione conclusa</i>"
 
-#: kernel/modules/console/console.xml:7
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"The global Console object allows you to print messages of different "
-"importance to a log."
-msgstr ""
-"L'oggetto Console globale permette di scrivere messaggi di varia importanza "
-"in un registro."
-
-#: kernel/modules/console/console.xml:17
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given message of normal severity."
-msgstr "Stampa il messaggio di severità normale dato."
-
-#: kernel/modules/console/console.xml:31
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given debug message."
-msgstr "Stampa il messaggio di debug dato."
-
-#: kernel/modules/console/console.xml:45
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given error message of high severity."
-msgstr "Stampa il messaggio d'errore di severità alta dato."
-
-#: kernel/modules/document/document.xml:9
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"The document object provides access to all elements.\n"
-msgstr ""
-"\n"
-"L'oggetto document permette di accedere a tutti gli elementi.\n"
-
-#: kernel/modules/document/document.xml:19
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the node with specified ID."
-msgstr "Restituisce il nodo con un ID specificato."
-
-#: kernel/modules/document/document.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of a node."
-msgstr "Identificativo di un nodo."
-
-#: kernel/modules/document/document.xml:33
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all nodes."
-msgstr "Restituisce una lista di tutti i nodi."
-
-#: kernel/modules/document/document.xml:42
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all nodes of specified type."
-msgstr "Restituisce una lista di di tutti i nodi del tipo specificato."
-
-#: kernel/modules/document/document.xml:49
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of a node type."
-msgstr "Identificativo di un tipo di nodo."
-
-#: kernel/modules/document/document.xml:56
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all edges."
-msgstr "Restituisce una lista di tutti gli archi."
-
-#: kernel/modules/document/document.xml:65
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all edges of specified type."
-msgstr "Restituisce una lista di tutti gli archi del tipo specificato."
-
-#: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
-#: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
-#: kernel/modules/document/node.xml:141 kernel/modules/document/node.xml:164
-#: kernel/modules/document/node.xml:187
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of an edge type."
-msgstr "Identificativo di un tipo di archi."
-
-#: kernel/modules/document/document.xml:79
-#, kde-format
-msgctxt "Scripting API"
-msgid "Create node at position (x,y)."
-msgstr "Crea un nodo alla posizione (x,y)."
-
-#: kernel/modules/document/document.xml:86
-#, kde-format
-msgctxt "Scripting API"
-msgid "X-coordinate of the node."
-msgstr "Coordinata X del nodo."
-
-#: kernel/modules/document/document.xml:91
-#, kde-format
-msgctxt "Scripting API"
-msgid "Y-coordinate of the node."
-msgstr "Coordinata Y del nodo."
-
-#: kernel/modules/document/document.xml:98
-#, kde-format
-msgctxt "Scripting API"
-msgid "Create edge between the given nodes of default edge type."
-msgstr "Crea un arco tra i nodi dati del tipo predefinito di arco."
-
-#: kernel/modules/document/document.xml:105
-#, kde-format
-msgctxt "Scripting API"
-msgid "Start node of the edge."
-msgstr "Nodo di partenza del'arco."
-
-#: kernel/modules/document/document.xml:110
-#, kde-format
-msgctxt "Scripting API"
-msgid "Target node of the edge."
-msgstr "Nodi di arrivo dell'arco."
-
-#: kernel/modules/document/document.xml:117
-#, kde-format
-msgctxt "Scripting API"
-msgid "Delete the given node."
-msgstr "Elimina il nodo dato."
-
-#: kernel/modules/document/document.xml:124
-#, kde-format
-msgctxt "Scripting API"
-msgid "The node to be deleted."
-msgstr "Il nodo da eliminare."
-
-#: kernel/modules/document/document.xml:131
-#, kde-format
-msgctxt "Scripting API"
-msgid "Delete the given edge."
-msgstr "Elimina l'arco dato."
-
-#: kernel/modules/document/document.xml:138
-#, kde-format
-msgctxt "Scripting API"
-msgid "The edge to be deleted."
-msgstr "L'arco da eliminare."
-
-#: kernel/modules/document/edge.xml:9
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"An edge is the connection of two nodes. Edges can be either directed or "
-"undirected, depending on their type.\n"
-msgstr ""
-"\n"
-"Un arco è la connessione di due nodi. Gli archi possono essere direzionali o "
-"meno, a seconda del loro tipo.\n"
-
-#: kernel/modules/document/edge.xml:17
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the identifier of the edge's type. If setting, the edge type "
-"identifier must exist."
-msgstr ""
-"Legge e imposta l'identificativo di questo tipo di arco. Se impostato, "
-"l'identificativo del tipo di arco deve esistere."
-
-#: kernel/modules/document/edge.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the origin node of the edge."
-msgstr "Restituisce il nodo di origine dell'arco."
-
-#: kernel/modules/document/edge.xml:35
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the target node of the edge."
-msgstr "Restituisce il nodo di destinazione dell'arco."
-
-#: kernel/modules/document/edge.xml:44
-#, kde-format
-msgctxt "Scripting API"
-msgid "Returns true if the edge's type is directed, otherwise false."
-msgstr "Restituisce vero se il tipo dell'arco è direzionale, falso altrimenti."
-
-#: kernel/modules/document/node.xml:11
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"A node is the data element of a graph.\n"
-"It can have arbitrary dynamic properties that are either set in the editor "
-"or simply assigned on run-time.\n"
-"Note that dynamic properties are only available after script execution, if "
-"they are registered for the node's type.\n"
-msgstr ""
-"\n"
-"Un nodo è il dato fondamentale di un grafo.\n"
-"Può avere proprietà dinamiche arbitrarie, impostate usando l'editor oppure "
-"semplicemente assegnate durante l'esecuzione.\n"
-"Nota che le proprietà dinamiche sono disponibili solamente dopo l'esecuzione "
-"dello script, se sono state registrate per il tipo di nodo.\n"
-
-#: kernel/modules/document/node.xml:19
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the unique identifier of this node."
-msgstr "Legge e imposta l'identificativo univoco di questo nodo."
-
-#: kernel/modules/document/node.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the x-coordinate of the node."
-msgstr "Legge e imposta la coordinata X di questo nodo."
-
-#: kernel/modules/document/node.xml:33
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the y-coordinate of the node."
-msgstr "Legge e imposta la coordinata Y di questo nodo."
-
-#: kernel/modules/document/node.xml:40
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
-"for red)."
-msgstr ""
-"Legge e imposta la stringa del colore in esadecimale (ad es. \"#ff0000\" per "
-"rosso) di questo nodo."
-
-#: kernel/modules/document/node.xml:47
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the identifier of the node's type. If setting, the node type "
-"identifier must exist."
-msgstr ""
-"Legge e imposta l'identificativo di questo tipo di nodo. Se impostato, "
-"l'identificativo del tipo di nodo deve esistere."
-
-#: kernel/modules/document/node.xml:56
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all edges (incoming and outgoing) of this node."
-msgstr ""
-"Restituisce una lista di tutti gli archi (entranti e uscenti) di questo nodo."
-
-#: kernel/modules/document/node.xml:65
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return a list of all edges (incoming and outgoing) of this node of a "
-"specified type."
-msgstr ""
-"Restituisce una lista di tutti gli archi (entranti e uscenti) di questo nodo "
-"del tipo specificato."
-
-#: kernel/modules/document/node.xml:79
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of incoming edges of this node."
-msgstr "Restituisce una lista degli archi entranti di questo nodo."
-
-#: kernel/modules/document/node.xml:88
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all incoming edges of this node of a specified type."
-msgstr ""
-"Restituisce una lista di tutti gli archi entranti di questo nodo del tipo "
-"specificato."
-
-#: kernel/modules/document/node.xml:102
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all outgoing edges of this node."
-msgstr "Restituisce una lista di tutti gli archi uscenti di questo nodo."
-
-#: kernel/modules/document/node.xml:111
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all outgoing edges of this node of a specified type."
-msgstr ""
-"Restituisce una lista di tutti gli archi uscenti di questo nodo del tipo "
-"specificato."
-
-#: kernel/modules/document/node.xml:125
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node. This method respects if edges "
-"are directed."
-msgstr ""
-"Restituisce una lista di tutti i nodi collegati a questo. Questo metodo "
-"rispetta l'eventuale direzionalità degli archi."
-
-#: kernel/modules/document/node.xml:134
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node via an edge of specified type. "
-"This method respects if edges are directed."
-msgstr ""
-"Restituisce una lista di tutti i nodi collegati a questo attraverso un arco "
-"del tipo specificato. Questo metodo rispetta l'eventuale direzionalità degli "
-"archi."
-
-#: kernel/modules/document/node.xml:148
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all nodes connected to this node by an incoming edge."
-msgstr ""
-"Restituisce una lista di tutti i nodi collegati a questo nodo da un arco "
-"entrante."
-
-#: kernel/modules/document/node.xml:157
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return a list all nodes connected to this node by an incoming edge of "
-"specified type."
-msgstr ""
-"Restituisce una lista di tutti i nodi collegati a questo nodo da un arco "
-"entrante del tipo specificato."
-
-#: kernel/modules/document/node.xml:171
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return list all nodes connected to this node by an outgoing edge."
-msgstr ""
-"Restituisce una lista di tutti i nodi collegati a questo nodo da un arco "
-"uscente."
-
-#: kernel/modules/document/node.xml:180
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node by an outgoing edge of "
-"specified type."
-msgstr ""
-"Restituisce una lista di tutti i nodi collegati a questo nodo da un arco "
-"uscente del tipo specificato."
-
-#: kernel/modules/document/node.xml:194
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return list of distances to specified targets in same order."
-msgstr ""
-"Restituisce una lista di distanze ai nodi di destinazione specificati nello "
-"stesso ordine."
-
-#: kernel/modules/document/node.xml:201
-#, kde-format
-msgctxt "Scripting API"
-msgid "Name of edge property that holds the edge length."
-msgstr "Nome della proprietà dell'arco che rappresenta la lunghezza dell'arco."
-
-#: kernel/modules/document/node.xml:206
-#, kde-format
-msgctxt "Scripting API"
-msgid "List of nodes to that the distances shall be computed."
-msgstr "Lista dei nodi di cui calcolare le distanze."
-
 #: models/edgemodel.cpp:141
 #, kde-format
 msgctxt "@title:column"
@@ -1429,6 +477,572 @@ msgstr "Seleziona e sposta"
 #, kde-format
 msgid "Select and move elements on the scene"
 msgstr "Seleziona e sposta elementi sulla scena"
+
+#~ msgid "Edge Properties"
+#~ msgstr "Proprietà dell'arco"
+
+#~ msgid "Type:"
+#~ msgstr "Tipo:"
+
+#~ msgid "Dynamic Properties"
+#~ msgstr "Proprietà dinamiche"
+
+#~ msgid "Node Properties"
+#~ msgstr "Proprietà del nodo"
+
+#~ msgid "Node color"
+#~ msgstr "Colore del nodo"
+
+#~ msgid "Assign Values"
+#~ msgstr "Assegna valori"
+
+#~ msgid "Choose Properties"
+#~ msgstr "Scegli proprietà"
+
+#~ msgid "Show advanced options."
+#~ msgstr "Mostra opzioni avanzate"
+
+#~ msgid "Assignment Method"
+#~ msgstr "Modalità di assegnazione"
+
+#~ msgid "Enumerate Items"
+#~ msgstr "Numera elementi"
+
+#~ msgid "Enumerate Alpha"
+#~ msgstr "Elencato in ordine alfabetico"
+
+#~ msgid "Enumerate Alpha-Numeric"
+#~ msgstr "Numera alfanumerico"
+
+#~ msgid "Assign Random Integers"
+#~ msgstr "Assegna numeri interi casuali"
+
+#~ msgid "Assign Random Reals"
+#~ msgstr "Assegna numeri reali casuali"
+
+#~ msgid "Assign Constant Value"
+#~ msgstr "Assegna valore costante"
+
+#~ msgid "Start ID:"
+#~ msgstr "Identificativo iniziale:"
+
+#~ msgid "Initial string"
+#~ msgstr "Stringa iniziale"
+
+#~ msgid "a"
+#~ msgstr "a"
+
+#~ msgid "Start ID"
+#~ msgstr "Identificativo iniziale"
+
+#~ msgid "Prefix"
+#~ msgstr "Prefisso"
+
+#~ msgid "Lower Limit"
+#~ msgstr "Limite inferiore"
+
+#~ msgid "Upper Limit"
+#~ msgstr "Limite superiore"
+
+#~ msgid "Generator Seed"
+#~ msgstr "Seme di generazione"
+
+#~ msgid "Constant"
+#~ msgstr "Costante"
+
+#~ msgid "Overwrite existing values"
+#~ msgstr "Sovrascrivi valori esistenti"
+
+#~ msgid "Nodes:"
+#~ msgstr "Nodi:"
+
+#~ msgid "Property name:"
+#~ msgstr "Nome della proprietà:"
+
+#~ msgid "Edges:"
+#~ msgstr "Archi:"
+
+#~ msgid "Assign values to selected edges."
+#~ msgstr "Assegna valori agli archi selezionati."
+
+#~ msgid "Assign values to selected nodes."
+#~ msgstr "Assegna valori ai nodi selezionati."
+
+#~ msgid "Generate Graph"
+#~ msgstr "Genera grafo"
+
+#~ msgid "Select the graph generator."
+#~ msgstr "Seleziona il generatore del grafo."
+
+#~ msgid "Mesh Graph"
+#~ msgstr "Grafo a griglia"
+
+#~ msgid "Star Graph"
+#~ msgstr "Grafo a stella"
+
+#~ msgid "Circle Graph"
+#~ msgstr "Grafo circolare"
+
+#~ msgid "Random Graph"
+#~ msgstr "Grafo casuale"
+
+#~ msgid "Erdös-Renyi Graph"
+#~ msgstr "Grafo Erdős-Rényi"
+
+#~ msgid "Random Tree Graph"
+#~ msgstr "Grafo ad albero casuale"
+
+#~ msgid "Random Dag Graph"
+#~ msgstr "Grafo DAG casuale"
+
+#~ msgid "Path Graph"
+#~ msgstr "Grafo a tracciato"
+
+#~ msgid "Complete Graph"
+#~ msgstr "Grafo completo"
+
+#~ msgid "Complete Bipartite"
+#~ msgstr "Grafo bipartito"
+
+#~ msgid "Show advanced settings."
+#~ msgstr "Mostra opzioni avanzate."
+
+#~ msgid "Set the unique identifier of the generated graph."
+#~ msgstr "Imposta l'identificativo univoco del grafo generato."
+
+#~ msgid "Graph"
+#~ msgstr "Grafo"
+
+#~ msgid "The node type to create the nodes of the graph with"
+#~ msgstr "Il tipo di nodo con cui creare i nodi del grafo"
+
+#~ msgid "Node type:"
+#~ msgstr "Tipo del nodo:"
+
+#~ msgid "The identifier of the created graph (used for scripting)"
+#~ msgstr "L'identificativo del grafo creato (usato per gli script)"
+
+#~ msgid "Number of Columns:"
+#~ msgstr "Numero di colonne:"
+
+#~ msgid "Number of Rows:"
+#~ msgstr "Numero di righe:"
+
+#~ msgid "Satellite Nodes:"
+#~ msgstr "Nodi satellite:"
+
+#~ msgid "Number of Nodes:"
+#~ msgstr "Numero di nodi:"
+
+#~ msgid "Allow self-edges:"
+#~ msgstr "Permetti autoarchi:"
+
+#~ msgid "Generator seed:"
+#~ msgstr "Seme di generazione:"
+
+#~ msgid "Nodes (n):"
+#~ msgstr "Nodi (n):"
+
+#~ msgid "Edge Probability (p):"
+#~ msgstr "Probabilità dell'arco (p):"
+
+#~ msgid "Generator Seed:"
+#~ msgstr "Seme di generazione:"
+
+#~ msgid "Number of Nodes"
+#~ msgstr "Numero di nodi"
+
+#~ msgid "Edge Probability"
+#~ msgstr "Probabilità dell'arco"
+
+#~ msgid "Left Set Nodes:"
+#~ msgstr "Nodi dell'insieme di sinistra:"
+
+#~ msgid "Right Set Nodes:"
+#~ msgstr "Nodi dell'insieme di destra:"
+
+#~ msgid "Select the edge type for connections of the generated graph."
+#~ msgstr "Seleziona il tipo di arco per le connessioni del grafo generato."
+
+#~ msgid "The edge type to create the edges of the graph with"
+#~ msgstr "Il tipo di arco con cui creare gli archi del grafo"
+
+#~ msgid "Edge type:"
+#~ msgstr "Tipo di arco:"
+
+#~ msgid "Graph generator:"
+#~ msgstr "Generatore di grafo:"
+
+#~ msgid "Select the node type for node elements of the generated graph."
+#~ msgstr "Seleziona il tipo di nodo per i nodi del grafo generato."
+
+#~ msgid "Graph Layout"
+#~ msgstr "Disposizione dei grafi"
+
+#~ msgid "Force Based Layout"
+#~ msgstr "Disposizione basata sulla forza"
+
+#~ msgid "Area factor:"
+#~ msgstr "Fattore area:"
+
+#~ msgid "Repelling force:"
+#~ msgstr "Forza di repulsione:"
+
+#~ msgid "Attraction force:"
+#~ msgstr "Forza di attrazione:"
+
+#~ msgid "Radial Tree Layout"
+#~ msgstr "Disposizione ad albero radiale"
+
+#~ msgid "Center/Root:"
+#~ msgstr "Centro/Radice:"
+
+#~ msgid "Node separation:"
+#~ msgstr "Separazione nodi:"
+
+#~ msgid "Tree type:"
+#~ msgstr "Tipo di albero:"
+
+#~ msgid "Free tree"
+#~ msgstr "Albero libero"
+
+#~ msgid "Rooted tree"
+#~ msgstr "Albero con radice"
+
+#~ msgid "Transform Edges"
+#~ msgstr "Trasforma archi"
+
+#~ msgid ""
+#~ "This option connects all nodes of the given graph. The new edges do not "
+#~ "have any preset weights."
+#~ msgstr ""
+#~ "Questa opzione connette tutti i nodi del grafo dato. I nuovi archi non "
+#~ "hanno dei pesi predefiniti."
+
+#~ msgid "Complete graph"
+#~ msgstr "Grafo completo"
+
+#~ msgid "This option removes all edges from the given graph."
+#~ msgstr "Questa opzione rimuove tutti gli archi dal grafico specificato."
+
+#~ msgid "Remove all edges"
+#~ msgstr "Rimuovi tutti gli archi"
+
+#~ msgid ""
+#~ "This option reverses all edges of a directed graph. Note that this does "
+#~ "not apply to undirected graphs."
+#~ msgstr ""
+#~ "Questa opzione inverte tutti gli archi di un grafo orientato. Nota che "
+#~ "non è applicabile ai grafi non orientati."
+
+#~ msgid "Reverse all edges"
+#~ msgstr "Inverti tutti gli archi"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
+#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
+#~ "Algorithm</span> at the graph. All edges without given weights are "
+#~ "assumed to have weights equals 1. Directed and undirected graphs are "
+#~ "processed accordingly.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Questa opzione esegue "
+#~ "<span style=\" font-style:italic;\">L'algoritmo di Prim per gli alberi di "
+#~ "connessione minimi</span> sul grafo. Si assume che tutti gli archi senza "
+#~ "peso assegnato abbiano peso unitario. I grafi orientati e non sono "
+#~ "elaborati secondo il loro tipo.</p></body></html>"
+
+#~ msgid "Spanning tree transformation"
+#~ msgstr "Trasformazione degli alberi di connessione"
+
+#~ msgid "Remove all self edges"
+#~ msgstr "Rimuovi tutti gli autoarchi"
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "The global Console object allows you to print messages of different "
+#~ "importance to a log."
+#~ msgstr ""
+#~ "L'oggetto Console globale permette di scrivere messaggi di varia "
+#~ "importanza in un registro."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given message of normal severity."
+#~ msgstr "Stampa il messaggio di severità normale dato."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given debug message."
+#~ msgstr "Stampa il messaggio di debug dato."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given error message of high severity."
+#~ msgstr "Stampa il messaggio d'errore di severità alta dato."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "The document object provides access to all elements.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "L'oggetto document permette di accedere a tutti gli elementi.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the node with specified ID."
+#~ msgstr "Restituisce il nodo con un ID specificato."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of a node."
+#~ msgstr "Identificativo di un nodo."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all nodes."
+#~ msgstr "Restituisce una lista di tutti i nodi."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all nodes of specified type."
+#~ msgstr "Restituisce una lista di di tutti i nodi del tipo specificato."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of a node type."
+#~ msgstr "Identificativo di un tipo di nodo."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all edges."
+#~ msgstr "Restituisce una lista di tutti gli archi."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all edges of specified type."
+#~ msgstr "Restituisce una lista di tutti gli archi del tipo specificato."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of an edge type."
+#~ msgstr "Identificativo di un tipo di archi."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Create node at position (x,y)."
+#~ msgstr "Crea un nodo alla posizione (x,y)."
+
+#~ msgctxt "Scripting API"
+#~ msgid "X-coordinate of the node."
+#~ msgstr "Coordinata X del nodo."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Y-coordinate of the node."
+#~ msgstr "Coordinata Y del nodo."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Create edge between the given nodes of default edge type."
+#~ msgstr "Crea un arco tra i nodi dati del tipo predefinito di arco."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Start node of the edge."
+#~ msgstr "Nodo di partenza del'arco."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Target node of the edge."
+#~ msgstr "Nodi di arrivo dell'arco."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Delete the given node."
+#~ msgstr "Elimina il nodo dato."
+
+#~ msgctxt "Scripting API"
+#~ msgid "The node to be deleted."
+#~ msgstr "Il nodo da eliminare."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Delete the given edge."
+#~ msgstr "Elimina l'arco dato."
+
+#~ msgctxt "Scripting API"
+#~ msgid "The edge to be deleted."
+#~ msgstr "L'arco da eliminare."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "An edge is the connection of two nodes. Edges can be either directed or "
+#~ "undirected, depending on their type.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Un arco è la connessione di due nodi. Gli archi possono essere "
+#~ "direzionali o meno, a seconda del loro tipo.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the identifier of the edge's type. If setting, the edge type "
+#~ "identifier must exist."
+#~ msgstr ""
+#~ "Legge e imposta l'identificativo di questo tipo di arco. Se impostato, "
+#~ "l'identificativo del tipo di arco deve esistere."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the origin node of the edge."
+#~ msgstr "Restituisce il nodo di origine dell'arco."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the target node of the edge."
+#~ msgstr "Restituisce il nodo di destinazione dell'arco."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Returns true if the edge's type is directed, otherwise false."
+#~ msgstr ""
+#~ "Restituisce vero se il tipo dell'arco è direzionale, falso altrimenti."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "A node is the data element of a graph.\n"
+#~ "It can have arbitrary dynamic properties that are either set in the "
+#~ "editor or simply assigned on run-time.\n"
+#~ "Note that dynamic properties are only available after script execution, "
+#~ "if they are registered for the node's type.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Un nodo è il dato fondamentale di un grafo.\n"
+#~ "Può avere proprietà dinamiche arbitrarie, impostate usando l'editor "
+#~ "oppure semplicemente assegnate durante l'esecuzione.\n"
+#~ "Nota che le proprietà dinamiche sono disponibili solamente dopo "
+#~ "l'esecuzione dello script, se sono state registrate per il tipo di nodo.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the unique identifier of this node."
+#~ msgstr "Legge e imposta l'identificativo univoco di questo nodo."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the x-coordinate of the node."
+#~ msgstr "Legge e imposta la coordinata X di questo nodo."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the y-coordinate of the node."
+#~ msgstr "Legge e imposta la coordinata Y di questo nodo."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the color string of this node in hex values (e.g., "
+#~ "\"#ff0000\" for red)."
+#~ msgstr ""
+#~ "Legge e imposta la stringa del colore in esadecimale (ad es. \"#ff0000\" "
+#~ "per rosso) di questo nodo."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the identifier of the node's type. If setting, the node type "
+#~ "identifier must exist."
+#~ msgstr ""
+#~ "Legge e imposta l'identificativo di questo tipo di nodo. Se impostato, "
+#~ "l'identificativo del tipo di nodo deve esistere."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all edges (incoming and outgoing) of this node."
+#~ msgstr ""
+#~ "Restituisce una lista di tutti gli archi (entranti e uscenti) di questo "
+#~ "nodo."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all edges (incoming and outgoing) of this node of a "
+#~ "specified type."
+#~ msgstr ""
+#~ "Restituisce una lista di tutti gli archi (entranti e uscenti) di questo "
+#~ "nodo del tipo specificato."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of incoming edges of this node."
+#~ msgstr "Restituisce una lista degli archi entranti di questo nodo."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all incoming edges of this node of a specified type."
+#~ msgstr ""
+#~ "Restituisce una lista di tutti gli archi entranti di questo nodo del tipo "
+#~ "specificato."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all outgoing edges of this node."
+#~ msgstr "Restituisce una lista di tutti gli archi uscenti di questo nodo."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all outgoing edges of this node of a specified type."
+#~ msgstr ""
+#~ "Restituisce una lista di tutti gli archi uscenti di questo nodo del tipo "
+#~ "specificato."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node. This method respects if "
+#~ "edges are directed."
+#~ msgstr ""
+#~ "Restituisce una lista di tutti i nodi collegati a questo. Questo metodo "
+#~ "rispetta l'eventuale direzionalità degli archi."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node via an edge of specified "
+#~ "type. This method respects if edges are directed."
+#~ msgstr ""
+#~ "Restituisce una lista di tutti i nodi collegati a questo attraverso un "
+#~ "arco del tipo specificato. Questo metodo rispetta l'eventuale "
+#~ "direzionalità degli archi."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all nodes connected to this node by an incoming edge."
+#~ msgstr ""
+#~ "Restituisce una lista di tutti i nodi collegati a questo nodo da un arco "
+#~ "entrante."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list all nodes connected to this node by an incoming edge of "
+#~ "specified type."
+#~ msgstr ""
+#~ "Restituisce una lista di tutti i nodi collegati a questo nodo da un arco "
+#~ "entrante del tipo specificato."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return list all nodes connected to this node by an outgoing edge."
+#~ msgstr ""
+#~ "Restituisce una lista di tutti i nodi collegati a questo nodo da un arco "
+#~ "uscente."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node by an outgoing edge of "
+#~ "specified type."
+#~ msgstr ""
+#~ "Restituisce una lista di tutti i nodi collegati a questo nodo da un arco "
+#~ "uscente del tipo specificato."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return list of distances to specified targets in same order."
+#~ msgstr ""
+#~ "Restituisce una lista di distanze ai nodi di destinazione specificati "
+#~ "nello stesso ordine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Name of edge property that holds the edge length."
+#~ msgstr ""
+#~ "Nome della proprietà dell'arco che rappresenta la lunghezza dell'arco."
+
+#~ msgctxt "Scripting API"
+#~ msgid "List of nodes to that the distances shall be computed."
+#~ msgstr "Lista dei nodi di cui calcolare le distanze."
 
 #~ msgid "Identifier"
 #~ msgstr "Identificativo"

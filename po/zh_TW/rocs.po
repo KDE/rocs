@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:54+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2024-03-20 18:44+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -181,12 +181,6 @@ msgstr "屬性"
 msgid "Methods"
 msgstr "方法"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: plugins/scriptapi/scriptapiwidget.ui:17
-#, kde-format
-msgid "Rocs Scripting API"
-msgstr "Rocs 文稿 API"
-
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -194,61 +188,6 @@ msgid ""
 "The Rocs project could not be imported because the project file could not be "
 "parsed."
 msgstr "因為無法解析該 Rocs 專案檔，因此無法匯入該專案。"
-
-#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
-#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
-#: rocs.kcfg:9 rocs.kcfg:10
-#, kde-format
-msgid "Show text beside icon"
-msgstr "圖示旁顯示文字"
-
-#. i18n: ectx: label, entry (includePath), group (IncludeManager)
-#: rocs.kcfg:49
-#, kde-format
-msgid "Path where include manager seek for includes."
-msgstr "引入管理員搜尋引入檔的路徑。"
-
-#. i18n: ectx: Menu (project)
-#: rocsui.rc:23
-#, kde-format
-msgid "Project"
-msgstr "專案"
-
-#. i18n: ectx: Menu (script)
-#: rocsui.rc:29
-#, kde-format
-msgid "Script Document"
-msgstr "文稿文件"
-
-#. i18n: ectx: Menu (graph)
-#: rocsui.rc:35
-#, kde-format
-msgid "Graph Document"
-msgstr "圖形文件"
-
-#. i18n: ectx: Menu (graph_file)
-#: rocsui.rc:41
-#, kde-format
-msgid "Graph File"
-msgstr "圖形檔"
-
-#. i18n: ectx: Menu (graph_selected)
-#: rocsui.rc:45
-#, kde-format
-msgid "Edit Selected Data"
-msgstr "編輯選取的資料"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:47
-#, kde-format
-msgid "Layout"
-msgstr "佈局"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:60
-#, kde-format
-msgid "Tools"
-msgstr "工具"
 
 #: ui/codeeditorwidget.cpp:81
 #, kde-format
@@ -348,12 +287,6 @@ msgstr "圖形文件名稱"
 #, kde-format
 msgid "Enter the name of your graph document"
 msgstr "輸入您的圖形文件的名稱"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: ui/journalwidget.ui:17
-#, kde-format
-msgid "Project Journal"
-msgstr "專案日誌"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -563,30 +496,6 @@ msgstr "您專案的變更尚未儲存。您要現在儲存變更嗎？"
 msgid "Unique ID of the node type."
 msgstr "節點型態的獨一代碼。"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/scriptoutputwidget.ui:24
-#, kde-format
-msgid "Script output:"
-msgstr "文稿輸出："
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
-#: ui/scriptoutputwidget.ui:37
-#, kde-format
-msgid "Clear program output with each execution."
-msgstr "每次執行時清除程式輸出。"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
-#: ui/scriptoutputwidget.ui:56
-#, kde-format
-msgid "Show debug output."
-msgstr "顯示除錯輸出。"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
-#: ui/scriptoutputwidget.ui:82
-#, kde-format
-msgid "Clear output."
-msgstr "清除輸出。"
-
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -597,6 +506,51 @@ msgstr "側工具列"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "切換 '%1' 檢視。"
+
+#~ msgid "Rocs Scripting API"
+#~ msgstr "Rocs 文稿 API"
+
+#~ msgid "Show text beside icon"
+#~ msgstr "圖示旁顯示文字"
+
+#~ msgid "Path where include manager seek for includes."
+#~ msgstr "引入管理員搜尋引入檔的路徑。"
+
+#~ msgid "Project"
+#~ msgstr "專案"
+
+#~ msgid "Script Document"
+#~ msgstr "文稿文件"
+
+#~ msgid "Graph Document"
+#~ msgstr "圖形文件"
+
+#~ msgid "Graph File"
+#~ msgstr "圖形檔"
+
+#~ msgid "Edit Selected Data"
+#~ msgstr "編輯選取的資料"
+
+#~ msgid "Layout"
+#~ msgstr "佈局"
+
+#~ msgid "Tools"
+#~ msgstr "工具"
+
+#~ msgid "Project Journal"
+#~ msgstr "專案日誌"
+
+#~ msgid "Script output:"
+#~ msgstr "文稿輸出："
+
+#~ msgid "Clear program output with each execution."
+#~ msgstr "每次執行時清除程式輸出。"
+
+#~ msgid "Show debug output."
+#~ msgstr "顯示除錯輸出。"
+
+#~ msgid "Clear output."
+#~ msgstr "清除輸出。"
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Save Project as"

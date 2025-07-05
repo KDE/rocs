@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:54+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2022-01-01 15:57+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -180,12 +180,6 @@ msgstr "Properties"
 msgid "Methods"
 msgstr "Methods"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: plugins/scriptapi/scriptapiwidget.ui:17
-#, kde-format
-msgid "Rocs Scripting API"
-msgstr "Rocs Scripting API"
-
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -195,61 +189,6 @@ msgid ""
 msgstr ""
 "The Rocs project could not be imported because the project file could not be "
 "parsed."
-
-#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
-#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
-#: rocs.kcfg:9 rocs.kcfg:10
-#, kde-format
-msgid "Show text beside icon"
-msgstr "Show text beside icon"
-
-#. i18n: ectx: label, entry (includePath), group (IncludeManager)
-#: rocs.kcfg:49
-#, kde-format
-msgid "Path where include manager seek for includes."
-msgstr "Path where include manager seek for includes."
-
-#. i18n: ectx: Menu (project)
-#: rocsui.rc:23
-#, kde-format
-msgid "Project"
-msgstr "Project"
-
-#. i18n: ectx: Menu (script)
-#: rocsui.rc:29
-#, kde-format
-msgid "Script Document"
-msgstr "Script Document"
-
-#. i18n: ectx: Menu (graph)
-#: rocsui.rc:35
-#, kde-format
-msgid "Graph Document"
-msgstr "Graph Document"
-
-#. i18n: ectx: Menu (graph_file)
-#: rocsui.rc:41
-#, kde-format
-msgid "Graph File"
-msgstr "Graph File"
-
-#. i18n: ectx: Menu (graph_selected)
-#: rocsui.rc:45
-#, kde-format
-msgid "Edit Selected Data"
-msgstr "Edit Selected Data"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:47
-#, kde-format
-msgid "Layout"
-msgstr "Layout"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:60
-#, kde-format
-msgid "Tools"
-msgstr "Tools"
 
 #: ui/codeeditorwidget.cpp:81
 #, kde-format
@@ -349,12 +288,6 @@ msgstr "Graph Document Name"
 #, kde-format
 msgid "Enter the name of your graph document"
 msgstr "Enter the name of your graph document"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: ui/journalwidget.ui:17
-#, kde-format
-msgid "Project Journal"
-msgstr "Project Journal"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -565,30 +498,6 @@ msgstr "Changes on your project are unsaved. Do you want to save your changes?"
 msgid "Unique ID of the node type."
 msgstr "Unique ID of the node type."
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/scriptoutputwidget.ui:24
-#, kde-format
-msgid "Script output:"
-msgstr "Script output:"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
-#: ui/scriptoutputwidget.ui:37
-#, kde-format
-msgid "Clear program output with each execution."
-msgstr "Clear program output with each execution."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
-#: ui/scriptoutputwidget.ui:56
-#, kde-format
-msgid "Show debug output."
-msgstr "Show debug output."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
-#: ui/scriptoutputwidget.ui:82
-#, kde-format
-msgid "Clear output."
-msgstr "Clear output."
-
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -599,6 +508,51 @@ msgstr "Side Toolbar"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Toggle '%1' view."
+
+#~ msgid "Rocs Scripting API"
+#~ msgstr "Rocs Scripting API"
+
+#~ msgid "Show text beside icon"
+#~ msgstr "Show text beside icon"
+
+#~ msgid "Path where include manager seek for includes."
+#~ msgstr "Path where include manager seek for includes."
+
+#~ msgid "Project"
+#~ msgstr "Project"
+
+#~ msgid "Script Document"
+#~ msgstr "Script Document"
+
+#~ msgid "Graph Document"
+#~ msgstr "Graph Document"
+
+#~ msgid "Graph File"
+#~ msgstr "Graph File"
+
+#~ msgid "Edit Selected Data"
+#~ msgstr "Edit Selected Data"
+
+#~ msgid "Layout"
+#~ msgstr "Layout"
+
+#~ msgid "Tools"
+#~ msgstr "Tools"
+
+#~ msgid "Project Journal"
+#~ msgstr "Project Journal"
+
+#~ msgid "Script output:"
+#~ msgstr "Script output:"
+
+#~ msgid "Clear program output with each execution."
+#~ msgstr "Clear program output with each execution."
+
+#~ msgid "Show debug output."
+#~ msgstr "Show debug output."
+
+#~ msgid "Clear output."
+#~ msgstr "Clear output."
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Save Project as"

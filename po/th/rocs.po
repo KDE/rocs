@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:54+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2011-05-12 22:44+0700\n"
 "Last-Translator: Phuwanat Sakornsakolpat <narachai@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -193,79 +193,12 @@ msgstr "คุณสมบัติของโหนด"
 msgid "Methods"
 msgstr ""
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: plugins/scriptapi/scriptapiwidget.ui:17
-#, fuzzy, kde-format
-#| msgid "Rocs Script Files"
-msgid "Rocs Scripting API"
-msgstr "แฟ้มสคริปต์ Rocs"
-
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
 msgid ""
 "The Rocs project could not be imported because the project file could not be "
 "parsed."
-msgstr ""
-
-#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
-#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
-#: rocs.kcfg:9 rocs.kcfg:10
-#, kde-format
-msgid "Show text beside icon"
-msgstr ""
-
-#. i18n: ectx: label, entry (includePath), group (IncludeManager)
-#: rocs.kcfg:49
-#, kde-format
-msgid "Path where include manager seek for includes."
-msgstr ""
-
-#. i18n: ectx: Menu (project)
-#: rocsui.rc:23
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgid "Project"
-msgstr "คุณสมบัติของโหนด"
-
-#. i18n: ectx: Menu (script)
-#: rocsui.rc:29
-#, fuzzy, kde-format
-#| msgid "Save Script"
-msgid "Script Document"
-msgstr "บันทึกสคริปต์"
-
-#. i18n: ectx: Menu (graph)
-#: rocsui.rc:35
-#, fuzzy, kde-format
-#| msgid "New Graph"
-msgid "Graph Document"
-msgstr "กราฟใหม่"
-
-#. i18n: ectx: Menu (graph_file)
-#: rocsui.rc:41
-#, fuzzy, kde-format
-#| msgid "Graph Files"
-msgid "Graph File"
-msgstr "แฟ้มกราฟ"
-
-#. i18n: ectx: Menu (graph_selected)
-#: rocsui.rc:45
-#, fuzzy, kde-format
-#| msgid "Select"
-msgid "Edit Selected Data"
-msgstr "เลือก"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:47
-#, kde-format
-msgid "Layout"
-msgstr ""
-
-#. i18n: ectx: Menu
-#: rocsui.rc:60
-#, kde-format
-msgid "Tools"
 msgstr ""
 
 #: ui/codeeditorwidget.cpp:81
@@ -371,13 +304,6 @@ msgstr "กราฟใหม่"
 #| msgid "New Graph"
 msgid "Enter the name of your graph document"
 msgstr "กราฟใหม่"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: ui/journalwidget.ui:17
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgid "Project Journal"
-msgstr "คุณสมบัติของโหนด"
 
 #: ui/mainwindow.cpp:171
 #, fuzzy, kde-format
@@ -611,31 +537,6 @@ msgstr ""
 msgid "Unique ID of the node type."
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/scriptoutputwidget.ui:24
-#, fuzzy, kde-format
-#| msgid "Select"
-msgid "Script output:"
-msgstr "เลือก"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
-#: ui/scriptoutputwidget.ui:37
-#, kde-format
-msgid "Clear program output with each execution."
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
-#: ui/scriptoutputwidget.ui:56
-#, kde-format
-msgid "Show debug output."
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
-#: ui/scriptoutputwidget.ui:82
-#, kde-format
-msgid "Clear output."
-msgstr ""
-
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -646,6 +547,46 @@ msgstr ""
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr ""
+
+#, fuzzy
+#~| msgid "Rocs Script Files"
+#~ msgid "Rocs Scripting API"
+#~ msgstr "แฟ้มสคริปต์ Rocs"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Project"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Save Script"
+#~ msgid "Script Document"
+#~ msgstr "บันทึกสคริปต์"
+
+#, fuzzy
+#~| msgid "New Graph"
+#~ msgid "Graph Document"
+#~ msgstr "กราฟใหม่"
+
+#, fuzzy
+#~| msgid "Graph Files"
+#~ msgid "Graph File"
+#~ msgstr "แฟ้มกราฟ"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Edit Selected Data"
+#~ msgstr "เลือก"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgid "Project Journal"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Select"
+#~ msgid "Script output:"
+#~ msgstr "เลือก"
 
 #, fuzzy
 #~| msgid "Save Script"

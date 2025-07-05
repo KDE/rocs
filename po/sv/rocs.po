@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:54+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2021-10-24 13:44+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -182,12 +182,6 @@ msgstr "Egenskaper"
 msgid "Methods"
 msgstr "Metoder"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: plugins/scriptapi/scriptapiwidget.ui:17
-#, kde-format
-msgid "Rocs Scripting API"
-msgstr "Rocs programmeringsgränssnittet för skript"
-
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -196,61 +190,6 @@ msgid ""
 "parsed."
 msgstr ""
 "Rocs-projektet kunde inte importeras eftersom projektfilen inte kunde tolkas."
-
-#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
-#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
-#: rocs.kcfg:9 rocs.kcfg:10
-#, kde-format
-msgid "Show text beside icon"
-msgstr "Visa text bredvid ikoner"
-
-#. i18n: ectx: label, entry (includePath), group (IncludeManager)
-#: rocs.kcfg:49
-#, kde-format
-msgid "Path where include manager seek for includes."
-msgstr "Sökväg där deklararionshanteraren letar efter deklarationsfiler."
-
-#. i18n: ectx: Menu (project)
-#: rocsui.rc:23
-#, kde-format
-msgid "Project"
-msgstr "Projekt"
-
-#. i18n: ectx: Menu (script)
-#: rocsui.rc:29
-#, kde-format
-msgid "Script Document"
-msgstr "Skriptdokument"
-
-#. i18n: ectx: Menu (graph)
-#: rocsui.rc:35
-#, kde-format
-msgid "Graph Document"
-msgstr "Grafdokument"
-
-#. i18n: ectx: Menu (graph_file)
-#: rocsui.rc:41
-#, kde-format
-msgid "Graph File"
-msgstr "Graffil"
-
-#. i18n: ectx: Menu (graph_selected)
-#: rocsui.rc:45
-#, kde-format
-msgid "Edit Selected Data"
-msgstr "Redigera markerad data"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:47
-#, kde-format
-msgid "Layout"
-msgstr "Layout"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:60
-#, kde-format
-msgid "Tools"
-msgstr "Verktyg"
 
 #: ui/codeeditorwidget.cpp:81
 #, kde-format
@@ -351,12 +290,6 @@ msgstr "Grafdokumentets namn"
 #, kde-format
 msgid "Enter the name of your graph document"
 msgstr "Ange grafdokumentets namn"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: ui/journalwidget.ui:17
-#, kde-format
-msgid "Project Journal"
-msgstr "Projektjournal"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -569,30 +502,6 @@ msgstr "Ändringar i projektet har inte sparats. Vill du spara dina ändringar?"
 msgid "Unique ID of the node type."
 msgstr "Unik identifierare för nodtypen."
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/scriptoutputwidget.ui:24
-#, kde-format
-msgid "Script output:"
-msgstr "Skriptutmatning:"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
-#: ui/scriptoutputwidget.ui:37
-#, kde-format
-msgid "Clear program output with each execution."
-msgstr "Rensa programutmatning för varje körning."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
-#: ui/scriptoutputwidget.ui:56
-#, kde-format
-msgid "Show debug output."
-msgstr "Visa felsökningsutmatning."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
-#: ui/scriptoutputwidget.ui:82
-#, kde-format
-msgid "Clear output."
-msgstr "Rensa utmatning."
-
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -603,6 +512,51 @@ msgstr "Sidoverktygsrad"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Växla vyn '%1'."
+
+#~ msgid "Rocs Scripting API"
+#~ msgstr "Rocs programmeringsgränssnittet för skript"
+
+#~ msgid "Show text beside icon"
+#~ msgstr "Visa text bredvid ikoner"
+
+#~ msgid "Path where include manager seek for includes."
+#~ msgstr "Sökväg där deklararionshanteraren letar efter deklarationsfiler."
+
+#~ msgid "Project"
+#~ msgstr "Projekt"
+
+#~ msgid "Script Document"
+#~ msgstr "Skriptdokument"
+
+#~ msgid "Graph Document"
+#~ msgstr "Grafdokument"
+
+#~ msgid "Graph File"
+#~ msgstr "Graffil"
+
+#~ msgid "Edit Selected Data"
+#~ msgstr "Redigera markerad data"
+
+#~ msgid "Layout"
+#~ msgstr "Layout"
+
+#~ msgid "Tools"
+#~ msgstr "Verktyg"
+
+#~ msgid "Project Journal"
+#~ msgstr "Projektjournal"
+
+#~ msgid "Script output:"
+#~ msgstr "Skriptutmatning:"
+
+#~ msgid "Clear program output with each execution."
+#~ msgstr "Rensa programutmatning för varje körning."
+
+#~ msgid "Show debug output."
+#~ msgstr "Visa felsökningsutmatning."
+
+#~ msgid "Clear output."
+#~ msgstr "Rensa utmatning."
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Save Project as"

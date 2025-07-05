@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:54+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2013-07-13 11:59+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -189,12 +189,6 @@ msgstr "Tulajdonságok"
 msgid "Methods"
 msgstr "Metódusok"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: plugins/scriptapi/scriptapiwidget.ui:17
-#, kde-format
-msgid "Rocs Scripting API"
-msgstr "Rocs szkriptelés API"
-
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -202,61 +196,6 @@ msgid ""
 "The Rocs project could not be imported because the project file could not be "
 "parsed."
 msgstr ""
-
-#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
-#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
-#: rocs.kcfg:9 rocs.kcfg:10
-#, kde-format
-msgid "Show text beside icon"
-msgstr "Szöveg az ikon mellett"
-
-#. i18n: ectx: label, entry (includePath), group (IncludeManager)
-#: rocs.kcfg:49
-#, kde-format
-msgid "Path where include manager seek for includes."
-msgstr "Az elérési út, ahol a Beágyazáskezelő a fájlokat keresi."
-
-#. i18n: ectx: Menu (project)
-#: rocsui.rc:23
-#, kde-format
-msgid "Project"
-msgstr "Projekt"
-
-#. i18n: ectx: Menu (script)
-#: rocsui.rc:29
-#, kde-format
-msgid "Script Document"
-msgstr "Szkriptdokumentum"
-
-#. i18n: ectx: Menu (graph)
-#: rocsui.rc:35
-#, kde-format
-msgid "Graph Document"
-msgstr "Gráfdokumentum"
-
-#. i18n: ectx: Menu (graph_file)
-#: rocsui.rc:41
-#, kde-format
-msgid "Graph File"
-msgstr "Gráffájl"
-
-#. i18n: ectx: Menu (graph_selected)
-#: rocsui.rc:45
-#, kde-format
-msgid "Edit Selected Data"
-msgstr "A kijelölt adat szerkesztése"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:47
-#, kde-format
-msgid "Layout"
-msgstr "Elrendezés"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:60
-#, kde-format
-msgid "Tools"
-msgstr "Eszközök"
 
 #: ui/codeeditorwidget.cpp:81
 #, fuzzy, kde-format
@@ -364,12 +303,6 @@ msgstr "Gráfdokumentum"
 #| msgid "Enter the name of your new script"
 msgid "Enter the name of your graph document"
 msgstr "Adja meg az új szkriptje nevét"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: ui/journalwidget.ui:17
-#, kde-format
-msgid "Project Journal"
-msgstr "Projektnapló"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -609,31 +542,6 @@ msgstr ""
 msgid "Unique ID of the node type."
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/scriptoutputwidget.ui:24
-#, fuzzy, kde-format
-#| msgid "Script Output:"
-msgid "Script output:"
-msgstr "Szkript kimenet:"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
-#: ui/scriptoutputwidget.ui:37
-#, kde-format
-msgid "Clear program output with each execution."
-msgstr "Program kimenetének törlése minden végrehajtásnál."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
-#: ui/scriptoutputwidget.ui:56
-#, kde-format
-msgid "Show debug output."
-msgstr "Hibakereső kimenet megjelenítése."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
-#: ui/scriptoutputwidget.ui:82
-#, kde-format
-msgid "Clear output."
-msgstr "Kimenet törlése."
-
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -644,6 +552,53 @@ msgstr "Oldal eszköztár"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "„%1” nézet váltása."
+
+#~ msgid "Rocs Scripting API"
+#~ msgstr "Rocs szkriptelés API"
+
+#~ msgid "Show text beside icon"
+#~ msgstr "Szöveg az ikon mellett"
+
+#~ msgid "Path where include manager seek for includes."
+#~ msgstr "Az elérési út, ahol a Beágyazáskezelő a fájlokat keresi."
+
+#~ msgid "Project"
+#~ msgstr "Projekt"
+
+#~ msgid "Script Document"
+#~ msgstr "Szkriptdokumentum"
+
+#~ msgid "Graph Document"
+#~ msgstr "Gráfdokumentum"
+
+#~ msgid "Graph File"
+#~ msgstr "Gráffájl"
+
+#~ msgid "Edit Selected Data"
+#~ msgstr "A kijelölt adat szerkesztése"
+
+#~ msgid "Layout"
+#~ msgstr "Elrendezés"
+
+#~ msgid "Tools"
+#~ msgstr "Eszközök"
+
+#~ msgid "Project Journal"
+#~ msgstr "Projektnapló"
+
+#, fuzzy
+#~| msgid "Script Output:"
+#~ msgid "Script output:"
+#~ msgstr "Szkript kimenet:"
+
+#~ msgid "Clear program output with each execution."
+#~ msgstr "Program kimenetének törlése minden végrehajtásnál."
+
+#~ msgid "Show debug output."
+#~ msgstr "Hibakereső kimenet megjelenítése."
+
+#~ msgid "Clear output."
+#~ msgstr "Kimenet törlése."
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Save Project as"

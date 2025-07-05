@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:54+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2021-11-30 20:23+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -183,12 +183,6 @@ msgstr "Proprietà"
 msgid "Methods"
 msgstr "Metodi"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: plugins/scriptapi/scriptapiwidget.ui:17
-#, kde-format
-msgid "Rocs Scripting API"
-msgstr "API di scripting di Rocs"
-
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -198,61 +192,6 @@ msgid ""
 msgstr ""
 "Il progetto di Rocs non può essere importato perché il file del progetto non "
 "può essere elaborato."
-
-#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
-#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
-#: rocs.kcfg:9 rocs.kcfg:10
-#, kde-format
-msgid "Show text beside icon"
-msgstr "Mostra il testo accanto alle icone"
-
-#. i18n: ectx: label, entry (includePath), group (IncludeManager)
-#: rocs.kcfg:49
-#, kde-format
-msgid "Path where include manager seek for includes."
-msgstr "Percorso in cui il gestore delle inclusioni le cerca."
-
-#. i18n: ectx: Menu (project)
-#: rocsui.rc:23
-#, kde-format
-msgid "Project"
-msgstr "Progetto"
-
-#. i18n: ectx: Menu (script)
-#: rocsui.rc:29
-#, kde-format
-msgid "Script Document"
-msgstr "Script"
-
-#. i18n: ectx: Menu (graph)
-#: rocsui.rc:35
-#, kde-format
-msgid "Graph Document"
-msgstr "Grafo"
-
-#. i18n: ectx: Menu (graph_file)
-#: rocsui.rc:41
-#, kde-format
-msgid "Graph File"
-msgstr "File di grafi"
-
-#. i18n: ectx: Menu (graph_selected)
-#: rocsui.rc:45
-#, kde-format
-msgid "Edit Selected Data"
-msgstr "Modifica l'area selezionata"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:47
-#, kde-format
-msgid "Layout"
-msgstr "Disposizione"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:60
-#, kde-format
-msgid "Tools"
-msgstr "Strumenti"
 
 #: ui/codeeditorwidget.cpp:81
 #, kde-format
@@ -354,12 +293,6 @@ msgstr "Nome del grafo"
 #, kde-format
 msgid "Enter the name of your graph document"
 msgstr "Inserisci il nome del grafo"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: ui/journalwidget.ui:17
-#, kde-format
-msgid "Project Journal"
-msgstr "Diario del progetto"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -569,30 +502,6 @@ msgstr "Le modifiche al progetto non sono salvate. Le vuoi salvare?"
 msgid "Unique ID of the node type."
 msgstr "Identificativo univoco del tipo di nodi."
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/scriptoutputwidget.ui:24
-#, kde-format
-msgid "Script output:"
-msgstr "Risultato script:"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
-#: ui/scriptoutputwidget.ui:37
-#, kde-format
-msgid "Clear program output with each execution."
-msgstr "Pulisci il risultato del programma ad ogni esecuzione."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
-#: ui/scriptoutputwidget.ui:56
-#, kde-format
-msgid "Show debug output."
-msgstr "Mostra risultato del debug."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
-#: ui/scriptoutputwidget.ui:82
-#, kde-format
-msgid "Clear output."
-msgstr "Pulisci uscita."
-
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -603,6 +512,51 @@ msgstr "Barra laterale"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Commuta vista «%1»."
+
+#~ msgid "Rocs Scripting API"
+#~ msgstr "API di scripting di Rocs"
+
+#~ msgid "Show text beside icon"
+#~ msgstr "Mostra il testo accanto alle icone"
+
+#~ msgid "Path where include manager seek for includes."
+#~ msgstr "Percorso in cui il gestore delle inclusioni le cerca."
+
+#~ msgid "Project"
+#~ msgstr "Progetto"
+
+#~ msgid "Script Document"
+#~ msgstr "Script"
+
+#~ msgid "Graph Document"
+#~ msgstr "Grafo"
+
+#~ msgid "Graph File"
+#~ msgstr "File di grafi"
+
+#~ msgid "Edit Selected Data"
+#~ msgstr "Modifica l'area selezionata"
+
+#~ msgid "Layout"
+#~ msgstr "Disposizione"
+
+#~ msgid "Tools"
+#~ msgstr "Strumenti"
+
+#~ msgid "Project Journal"
+#~ msgstr "Diario del progetto"
+
+#~ msgid "Script output:"
+#~ msgstr "Risultato script:"
+
+#~ msgid "Clear program output with each execution."
+#~ msgstr "Pulisci il risultato del programma ad ogni esecuzione."
+
+#~ msgid "Show debug output."
+#~ msgstr "Mostra risultato del debug."
+
+#~ msgid "Clear output."
+#~ msgstr "Pulisci uscita."
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Save Project as"

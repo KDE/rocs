@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2022-05-07 02:17+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -47,24 +47,6 @@ msgstr "이름"
 msgid "Value"
 msgstr "값"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
-#: dialogs/edgeproperties.ui:26
-#, kde-format
-msgid "Edge Properties"
-msgstr "변 속성"
-
-#. i18n: ectx: property (text), widget (QLabel, labelType)
-#: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
-#, kde-format
-msgid "Type:"
-msgstr "형식:"
-
-#. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
-#: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
-#, kde-format
-msgid "Dynamic Properties"
-msgstr "동적 속성"
-
 #: dialogs/edgetypeproperties.cpp:37
 #, kde-format
 msgid "Edges"
@@ -86,18 +68,12 @@ msgstr "변 형식 속성"
 msgid "Name:"
 msgstr "이름:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelId)
-#. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
-#: dialogs/edgetypeproperties.cpp:49 dialogs/nodeproperties.ui:119
-#: dialogs/nodetypeproperties.cpp:49
-#: editorplugins/generategraph/generategraphwidget.ui:129
+#: dialogs/edgetypeproperties.cpp:49 dialogs/nodetypeproperties.cpp:49
 #, kde-format
 msgid "Identifier:"
 msgstr "식별자:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelColor)
-#: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
-#: dialogs/nodetypeproperties.cpp:52
+#: dialogs/edgetypeproperties.cpp:51 dialogs/nodetypeproperties.cpp:52
 #, kde-format
 msgid "Color:"
 msgstr "색상:"
@@ -156,19 +132,6 @@ msgid ""
 "one."
 msgstr "선택한 ID를 다른 꼭짓점에 사용하고 있습니다. 다른 ID를 사용하십시오."
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
-#: dialogs/nodeproperties.ui:26
-#, kde-format
-msgid "Node Properties"
-msgstr "꼭짓점 속성"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
-#. i18n: ectx: property (toolTip), widget (KColorCombo, color)
-#: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
-#, kde-format
-msgid "Node color"
-msgstr "꼭짓점 색상"
-
 #: dialogs/nodetypeproperties.cpp:35
 #, kde-format
 msgid "Nodes"
@@ -226,170 +189,6 @@ msgstr "모든 꼭짓점 형식"
 msgid "Enter Property Name"
 msgstr "속성 이름 입력"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
-#: editorplugins/assignvalues/assignvalueswidget.ui:32
-#, kde-format
-msgid "Assign Values"
-msgstr "값 할당"
-
-#. i18n: ectx: property (text), widget (QLabel, property_choice_label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:40
-#, kde-format
-msgid "Choose Properties"
-msgstr "속성 선택"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
-#: editorplugins/assignvalues/assignvalueswidget.ui:59
-#, kde-format
-msgid "Show advanced options."
-msgstr "고급 옵션을 표시합니다."
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: editorplugins/assignvalues/assignvalueswidget.ui:74
-#, kde-format
-msgid "Assignment Method"
-msgstr "할당 방법"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:81
-#, kde-format
-msgid "Enumerate Items"
-msgstr "항목 열거"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:86
-#, kde-format
-msgid "Enumerate Alpha"
-msgstr "알파벳 열거"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:91
-#, kde-format
-msgid "Enumerate Alpha-Numeric"
-msgstr "알파벳과 숫자 열거"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:96
-#, kde-format
-msgid "Assign Random Integers"
-msgstr "무작위 정수 부여"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:101
-#, kde-format
-msgid "Assign Random Reals"
-msgstr "무작위 실수 부여"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:106
-#, kde-format
-msgid "Assign Constant Value"
-msgstr "상수 값 할당"
-
-#. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
-#: editorplugins/assignvalues/assignvalueswidget.ui:132
-#, kde-format
-msgid "Start ID:"
-msgstr "시작 ID:"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
-#: editorplugins/assignvalues/assignvalueswidget.ui:167
-#, kde-format
-msgid "Initial string"
-msgstr "초기 문자열"
-
-#. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
-#: editorplugins/assignvalues/assignvalueswidget.ui:174
-#, kde-format
-msgid "a"
-msgstr "a"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
-#: editorplugins/assignvalues/assignvalueswidget.ui:192
-#, kde-format
-msgid "Start ID"
-msgstr "시작 ID"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
-#: editorplugins/assignvalues/assignvalueswidget.ui:209
-#, kde-format
-msgid "Prefix"
-msgstr "접두사"
-
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#. i18n: ectx: property (text), widget (QLabel, label_4)
-#: editorplugins/assignvalues/assignvalueswidget.ui:230
-#: editorplugins/assignvalues/assignvalueswidget.ui:298
-#, kde-format
-msgid "Lower Limit"
-msgstr "최소 한계"
-
-#. i18n: ectx: property (text), widget (QLabel, label_6)
-#. i18n: ectx: property (text), widget (QLabel, label_8)
-#: editorplugins/assignvalues/assignvalueswidget.ui:250
-#: editorplugins/assignvalues/assignvalueswidget.ui:305
-#, kde-format
-msgid "Upper Limit"
-msgstr "최대 한계"
-
-#. i18n: ectx: property (text), widget (QLabel, label_dagGeneratorSeed)
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#. i18n: ectx: property (text), widget (QLabel, label_9)
-#: editorplugins/assignvalues/assignvalueswidget.ui:257
-#: editorplugins/assignvalues/assignvalueswidget.ui:312
-#: editorplugins/generategraph/generategraphwidget.ui:483
-#, kde-format
-msgid "Generator Seed"
-msgstr "생성기 씨앗"
-
-#. i18n: ectx: property (text), widget (QLabel, constant_label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:372
-#, kde-format
-msgid "Constant"
-msgstr "상수"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:400
-#, kde-format
-msgid "Overwrite existing values"
-msgstr "기존 값 덮어쓰기"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
-#. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
-#. i18n: ectx: property (text), widget (QLabel, labelData)
-#: editorplugins/assignvalues/assignvalueswidget.ui:434
-#: editorplugins/generategraph/generategraphwidget.ui:252
-#: editorplugins/generategraph/generategraphwidget.ui:404
-#, kde-format
-msgid "Nodes:"
-msgstr "꼭짓점:"
-
-#. i18n: ectx: property (text), widget (QLabel, labelProperty)
-#: editorplugins/assignvalues/assignvalueswidget.ui:447
-#, kde-format
-msgid "Property name:"
-msgstr "속성 이름:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
-#. i18n: ectx: property (text), widget (QLabel, labelConnection)
-#: editorplugins/assignvalues/assignvalueswidget.ui:460
-#: editorplugins/generategraph/generategraphwidget.ui:272
-#, kde-format
-msgid "Edges:"
-msgstr "변:"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
-#: editorplugins/assignvalues/assignvalueswidget.ui:482
-#, kde-format
-msgid "Assign values to selected edges."
-msgstr "선택한 변에 값을 할당합니다."
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
-#: editorplugins/assignvalues/assignvalueswidget.ui:509
-#, kde-format
-msgid "Assign values to selected nodes."
-msgstr "선택한 꼭짓점에 값을 할당합니다."
-
 #: editorplugins/generategraph/generategraphwidget.cpp:79
 #, kde-format
 msgctxt "@title:window"
@@ -413,402 +212,17 @@ msgstr "잘못된 변 방향"
 msgid "Edges in a Directed Acyclical Graph must be directional."
 msgstr "유향 비순환 그래프의 변에는 방향을 지정해야 합니다."
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
-#: editorplugins/generategraph/generategraphwidget.ui:14
-#, kde-format
-msgid "Generate Graph"
-msgstr "그래프 생성"
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:22
-#, kde-format
-msgid "Select the graph generator."
-msgstr "그래프 생성기를 선택합니다."
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:26
-#, kde-format
-msgid "Mesh Graph"
-msgstr "격자 그래프"
-
-# 별 그래프로 번역하지 않음.
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:31
-#, kde-format
-msgid "Star Graph"
-msgstr "스타 그래프"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:36
-#, kde-format
-msgid "Circle Graph"
-msgstr "원 그래프"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:41
-#, kde-format
-msgid "Random Graph"
-msgstr "무작위 그래프"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:46
-#, kde-format
-msgid "Erdös-Renyi Graph"
-msgstr "에르되시-레니 그래프"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:51
-#, kde-format
-msgid "Random Tree Graph"
-msgstr "무작위 트리 그래프"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:56
-#, kde-format
-msgid "Random Dag Graph"
-msgstr "무작위 유향 비순환 그래프"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:61
-#, kde-format
-msgid "Path Graph"
-msgstr "경로 그래프"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:66
-#, kde-format
-msgid "Complete Graph"
-msgstr "완전 그래프"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:71
-#, kde-format
-msgid "Complete Bipartite"
-msgstr "완전 이분 그래프"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
-#: editorplugins/generategraph/generategraphwidget.ui:91
-#, kde-format
-msgid "Show advanced settings."
-msgstr "고급 설정을 표시합니다."
-
-#. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
-#: editorplugins/generategraph/generategraphwidget.ui:106
-#, kde-format
-msgid "Set the unique identifier of the generated graph."
-msgstr "생성된 그래프의 고유 식별자를 설정합니다."
-
-#. i18n: ectx: property (text), widget (QLineEdit, identifier)
-#: editorplugins/generategraph/generategraphwidget.ui:109
-#, kde-format
-msgid "Graph"
-msgstr "그래프"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
-#: editorplugins/generategraph/generategraphwidget.ui:116
-#, kde-format
-msgid "The node type to create the nodes of the graph with"
-msgstr "그래프의 꼭짓점을 만들 때 사용할 꼭짓점 형식"
-
-#. i18n: ectx: property (text), widget (QLabel, labelNodeType)
-#: editorplugins/generategraph/generategraphwidget.ui:119
-#, kde-format
-msgid "Node type:"
-msgstr "꼭짓점 형식:"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
-#: editorplugins/generategraph/generategraphwidget.ui:126
-#, kde-format
-msgid "The identifier of the created graph (used for scripting)"
-msgstr "생성된 그래프의 식별자(스크립트에서 사용)"
-
-#. i18n: ectx: property (text), widget (QLabel, label_columns)
-#: editorplugins/generategraph/generategraphwidget.ui:148
-#, kde-format
-msgid "Number of Columns:"
-msgstr "열 개수:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_rows)
-#: editorplugins/generategraph/generategraphwidget.ui:168
-#, kde-format
-msgid "Number of Rows:"
-msgstr "행 개수:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
-#: editorplugins/generategraph/generategraphwidget.ui:196
-#, kde-format
-msgid "Satellite Nodes:"
-msgstr "위성 꼭짓점:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
-#. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
-#. i18n: ectx: property (text), widget (QLabel, label_completeNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:224
-#: editorplugins/generategraph/generategraphwidget.ui:505
-#: editorplugins/generategraph/generategraphwidget.ui:527
-#, kde-format
-msgid "Number of Nodes:"
-msgstr "꼭짓점 개수:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
-#. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
-#: editorplugins/generategraph/generategraphwidget.ui:286
-#: editorplugins/generategraph/generategraphwidget.ui:332
-#, kde-format
-msgid "Allow self-edges:"
-msgstr "고리 허용:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
-#: editorplugins/generategraph/generategraphwidget.ui:293
-#, kde-format
-msgid "Generator seed:"
-msgstr "생성기 씨앗:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:325
-#, kde-format
-msgid "Nodes (n):"
-msgstr "꼭짓점(n):"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
-#: editorplugins/generategraph/generategraphwidget.ui:349
-#, kde-format
-msgid "Edge Probability (p):"
-msgstr "변 확률(p):"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
-#. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
-#: editorplugins/generategraph/generategraphwidget.ui:356
-#: editorplugins/generategraph/generategraphwidget.ui:421
-#, kde-format
-msgid "Generator Seed:"
-msgstr "생성기 씨앗:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:446
-#, kde-format
-msgid "Number of Nodes"
-msgstr "꼭짓점 개수"
-
-#. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
-#: editorplugins/generategraph/generategraphwidget.ui:463
-#, kde-format
-msgid "Edge Probability"
-msgstr "변 확률"
-
-#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
-#: editorplugins/generategraph/generategraphwidget.ui:549
-#, kde-format
-msgid "Left Set Nodes:"
-msgstr "왼쪽 집합 꼭짓점:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
-#: editorplugins/generategraph/generategraphwidget.ui:563
-#, kde-format
-msgid "Right Set Nodes:"
-msgstr "오른쪽 집합 꼭짓점:"
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
-#: editorplugins/generategraph/generategraphwidget.ui:590
-#, kde-format
-msgid "Select the edge type for connections of the generated graph."
-msgstr "생성된 그래프를 연결할 변 형식을 설정합니다."
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
-#: editorplugins/generategraph/generategraphwidget.ui:604
-#, kde-format
-msgid "The edge type to create the edges of the graph with"
-msgstr "그래프의 변을 생성할 때 사용할 변 형식"
-
-#. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
-#: editorplugins/generategraph/generategraphwidget.ui:607
-#, kde-format
-msgid "Edge type:"
-msgstr "변 형식:"
-
-#. i18n: ectx: property (text), widget (QLabel, labelGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:614
-#, kde-format
-msgid "Graph generator:"
-msgstr "그래프 생성기:"
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
-#: editorplugins/generategraph/generategraphwidget.ui:621
-#, kde-format
-msgid "Select the node type for node elements of the generated graph."
-msgstr "생성된 그래프의 꼭짓점 원소에 사용할 꼭짓점 형식을 설정합니다."
-
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
 #, kde-format
 msgctxt "@title:window"
 msgid "Graph Layout"
 msgstr "그래프 레이아웃"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:20
-#, kde-format
-msgid "Graph Layout"
-msgstr "그래프 레이아웃"
-
-#. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:36
-#, kde-format
-msgid "Force Based Layout"
-msgstr "힘 기반 레이아웃"
-
-#. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:57
-#, kde-format
-msgid "Area factor:"
-msgstr "영역 계수:"
-
-#. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:77
-#, kde-format
-msgid "Repelling force:"
-msgstr "밀어내는 힘:"
-
-#. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:97
-#, kde-format
-msgid "Attraction force:"
-msgstr "끌어당기는 힘:"
-
-#. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:119
-#, kde-format
-msgid "Radial Tree Layout"
-msgstr "방사형 트리 레이아웃"
-
-#. i18n: ectx: property (text), widget (QLabel, rootLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:134
-#, kde-format
-msgid "Center/Root:"
-msgstr "중심점/뿌리:"
-
-#. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:144
-#, kde-format
-msgid "Node separation:"
-msgstr "꼭짓점 구분:"
-
-#. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:158
-#, kde-format
-msgid "Tree type:"
-msgstr "트리 형식:"
-
-#. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:165
-#, kde-format
-msgid "Free tree"
-msgstr "자유 트리"
-
-#. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:175
-#, kde-format
-msgid "Rooted tree"
-msgstr "뿌리가 있는 트리"
-
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
 #, kde-format
 msgctxt "@title:window"
 msgid "Transform Edges"
 msgstr "변 변형"
-
-#. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
-#: editorplugins/transformedges/transformedgeswidget.ui:14
-#, kde-format
-msgid "Transform Edges"
-msgstr "변 변형"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
-#: editorplugins/transformedges/transformedgeswidget.ui:22
-#, kde-format
-msgid ""
-"This option connects all nodes of the given graph. The new edges do not have "
-"any preset weights."
-msgstr ""
-"이 옵션을 사용하면 지정한 그래프의 모든 꼭짓점을 연결합니다. 새로운 변에는 사"
-"전 설정된 가중치가 없습니다."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
-#: editorplugins/transformedges/transformedgeswidget.ui:25
-#, kde-format
-msgid "Complete graph"
-msgstr "완전 그래프"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:35
-#, kde-format
-msgid "This option removes all edges from the given graph."
-msgstr "이 옵션은 지정한 그래프의 모든 변을 삭제합니다."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:38
-#, kde-format
-msgid "Remove all edges"
-msgstr "모든 변 삭제"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:45
-#, kde-format
-msgid ""
-"This option reverses all edges of a directed graph. Note that this does not "
-"apply to undirected graphs."
-msgstr ""
-"이 옵션은 유향 그래프의 모든 변의 방향을 반전합니다. 무향 그래프에는 적용되"
-"지 않습니다."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:48
-#, kde-format
-msgid "Reverse all edges"
-msgstr "모든 변 반전"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
-#: editorplugins/transformedges/transformedgeswidget.ui:59
-#, kde-format
-msgid ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-"REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes <span "
-"style=\" font-style:italic;\">Prim's Minimal Spanning Tree Algorithm</span> "
-"at the graph. All edges without given weights are assumed to have weights "
-"equals 1. Directed and undirected graphs are processed accordingly.</p></"
-"body></html>"
-msgstr ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-"REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">이 옵션은 그래프에 <span "
-"style=\" font-style:italic;\">프림의 최소 신장 트리 알고리즘</span>을 실행합"
-"니다. at the graph. 가중치가 주어지지 않은 모든 변은 모두 같은 가중치 1을 가"
-"지고 있다고 가정합니다. 유향 그래프와 무향 그래프별로 처리 방식이 달라집니다."
-"</p></body></html>"
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
-#: editorplugins/transformedges/transformedgeswidget.ui:62
-#, kde-format
-msgid "Spanning tree transformation"
-msgstr "신장 트리 변형"
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:69
-#, kde-format
-msgid "Remove all self edges"
-msgstr "모든 고리 삭제"
 
 #: fileformats/dot/dotfileformat.cpp:45
 #, kde-format
@@ -969,358 +383,6 @@ msgctxt "@info status message after successful script execution"
 msgid "<i>Execution Finished</i>"
 msgstr "<i>실행 완료됨</i>"
 
-#: kernel/modules/console/console.xml:7
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"The global Console object allows you to print messages of different "
-"importance to a log."
-msgstr ""
-"전역 Console 객체를 사용하여 로그에 서로 다른 중요도 메시지를 출력할 수 있습"
-"니다."
-
-#: kernel/modules/console/console.xml:17
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given message of normal severity."
-msgstr "지정한 일반 등급 메시지를 출력합니다."
-
-#: kernel/modules/console/console.xml:31
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given debug message."
-msgstr "지정한 디버그 메시지를 출력합니다."
-
-#: kernel/modules/console/console.xml:45
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given error message of high severity."
-msgstr "지정한 심각한 오류 메시지를 출력합니다."
-
-#: kernel/modules/document/document.xml:9
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"The document object provides access to all elements.\n"
-msgstr ""
-"\n"
-"document 객체는 모든 원소에 접근할 수 있습니다.\n"
-
-#: kernel/modules/document/document.xml:19
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the node with specified ID."
-msgstr "지정한 ID를 가진 꼭짓점을 반환합니다."
-
-#: kernel/modules/document/document.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of a node."
-msgstr "꼭짓점의 식별자입니다."
-
-#: kernel/modules/document/document.xml:33
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all nodes."
-msgstr "모든 꼭짓점의 목록을 반환합니다."
-
-#: kernel/modules/document/document.xml:42
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all nodes of specified type."
-msgstr "지정한 형식의 모든 꼭짓점을 반환합니다."
-
-#: kernel/modules/document/document.xml:49
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of a node type."
-msgstr "꼭짓점 형식의 식별자입니다."
-
-#: kernel/modules/document/document.xml:56
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all edges."
-msgstr "모든 변의 목록을 반환합니다."
-
-#: kernel/modules/document/document.xml:65
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all edges of specified type."
-msgstr "지정한 형식을 가진 모든 변의 목록을 반환합니다."
-
-#: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
-#: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
-#: kernel/modules/document/node.xml:141 kernel/modules/document/node.xml:164
-#: kernel/modules/document/node.xml:187
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of an edge type."
-msgstr "변 형식 식별자입니다."
-
-#: kernel/modules/document/document.xml:79
-#, kde-format
-msgctxt "Scripting API"
-msgid "Create node at position (x,y)."
-msgstr "(x,y)에 꼭짓점을 만듭니다."
-
-#: kernel/modules/document/document.xml:86
-#, kde-format
-msgctxt "Scripting API"
-msgid "X-coordinate of the node."
-msgstr "이 꼭짓점의 X 좌표입니다."
-
-#: kernel/modules/document/document.xml:91
-#, kde-format
-msgctxt "Scripting API"
-msgid "Y-coordinate of the node."
-msgstr "이 꼭짓점의 Y 좌표입니다."
-
-#: kernel/modules/document/document.xml:98
-#, kde-format
-msgctxt "Scripting API"
-msgid "Create edge between the given nodes of default edge type."
-msgstr "지정한 꼭짓점 간을 잇는 기본 변 형식으로 변을 만듭니다."
-
-#: kernel/modules/document/document.xml:105
-#, kde-format
-msgctxt "Scripting API"
-msgid "Start node of the edge."
-msgstr "변의 시작 꼭짓점입니다."
-
-#: kernel/modules/document/document.xml:110
-#, kde-format
-msgctxt "Scripting API"
-msgid "Target node of the edge."
-msgstr "변의 종착 꼭짓점입니다."
-
-#: kernel/modules/document/document.xml:117
-#, kde-format
-msgctxt "Scripting API"
-msgid "Delete the given node."
-msgstr "지정한 꼭짓점을 삭제합니다."
-
-#: kernel/modules/document/document.xml:124
-#, kde-format
-msgctxt "Scripting API"
-msgid "The node to be deleted."
-msgstr "삭제할 꼭짓점입니다."
-
-#: kernel/modules/document/document.xml:131
-#, kde-format
-msgctxt "Scripting API"
-msgid "Delete the given edge."
-msgstr "지정한 변을 삭제합니다."
-
-#: kernel/modules/document/document.xml:138
-#, kde-format
-msgctxt "Scripting API"
-msgid "The edge to be deleted."
-msgstr "삭제할 변입니다."
-
-#: kernel/modules/document/edge.xml:9
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"An edge is the connection of two nodes. Edges can be either directed or "
-"undirected, depending on their type.\n"
-msgstr ""
-"\n"
-"변은 두 꼭짓점을 잇습니다. 변은 유향변이나 무향변일 수 있습니다.\n"
-
-#: kernel/modules/document/edge.xml:17
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the identifier of the edge's type. If setting, the edge type "
-"identifier must exist."
-msgstr ""
-"변 형식 식별자를 읽고 설정합니다. 설정하는 경우에는 변 식별자 인자가 있어야 "
-"합니다."
-
-#: kernel/modules/document/edge.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the origin node of the edge."
-msgstr "변의 시작 꼭짓점을 반환합니다."
-
-#: kernel/modules/document/edge.xml:35
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the target node of the edge."
-msgstr "변의 종착 꼭짓점을 반환합니다."
-
-#: kernel/modules/document/edge.xml:44
-#, kde-format
-msgctxt "Scripting API"
-msgid "Returns true if the edge's type is directed, otherwise false."
-msgstr "변이 유향변이면 true, 무향변이면 false를 반환합니다."
-
-#: kernel/modules/document/node.xml:11
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"A node is the data element of a graph.\n"
-"It can have arbitrary dynamic properties that are either set in the editor "
-"or simply assigned on run-time.\n"
-"Note that dynamic properties are only available after script execution, if "
-"they are registered for the node's type.\n"
-msgstr ""
-"\n"
-"꼭짓점은 그래프의 데이터 원소입니다.\n"
-"편집기에서 설정했거나 실행 시간에 할당된 임의의 동적 속성을 가질 수 있습니"
-"다.\n"
-"동적 속성이 꼭짓점의 형식에 등록되었다면 스크립트가 실행된 후에만 사용할 수 "
-"있습니다.\n"
-
-#: kernel/modules/document/node.xml:19
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the unique identifier of this node."
-msgstr "이 꼭짓점의 고유 식별자를 읽거나 설정합니다."
-
-#: kernel/modules/document/node.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the x-coordinate of the node."
-msgstr "이 꼭짓점의 X 좌표를 읽거나 설정합니다."
-
-#: kernel/modules/document/node.xml:33
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the y-coordinate of the node."
-msgstr "이 꼭짓점의 Y 좌표를 읽거나 설정합니다."
-
-#: kernel/modules/document/node.xml:40
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
-"for red)."
-msgstr ""
-"이 꼭짓점의 십육진 색상 문자열(예: 빨간색은 \"#ff0000\")을 읽거나 설정합니다."
-
-#: kernel/modules/document/node.xml:47
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the identifier of the node's type. If setting, the node type "
-"identifier must exist."
-msgstr ""
-"꼭짓점 형식 식별자를 읽고 설정합니다. 설정하는 경우에는 꼭짓점 식별자 인자가 "
-"있어야 합니다."
-
-#: kernel/modules/document/node.xml:56
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all edges (incoming and outgoing) of this node."
-msgstr "이 꼭짓점에 연결된 (들어오고 나가는) 모든 변의 목록을 반환합니다."
-
-#: kernel/modules/document/node.xml:65
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return a list of all edges (incoming and outgoing) of this node of a "
-"specified type."
-msgstr ""
-"이 꼭짓점에 연결된 지정한 형식의 (들어오고 나가는) 모든 변의 목록을 반환합니"
-"다."
-
-#: kernel/modules/document/node.xml:79
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of incoming edges of this node."
-msgstr "이 꼭짓점으로 들어오는 모든 변의 목록을 반환합니다."
-
-#: kernel/modules/document/node.xml:88
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all incoming edges of this node of a specified type."
-msgstr "이 꼭짓점으로 지정한 형식의 들어오는 모든 변의 목록을 반환합니다."
-
-#: kernel/modules/document/node.xml:102
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all outgoing edges of this node."
-msgstr "이 꼭짓점에서 나가는 모든 변의 목록을 반환합니다."
-
-#: kernel/modules/document/node.xml:111
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all outgoing edges of this node of a specified type."
-msgstr "이 꼭짓점에서 지정한 형식의 나가는 모든 변의 목록을 반환합니다."
-
-#: kernel/modules/document/node.xml:125
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node. This method respects if edges "
-"are directed."
-msgstr ""
-"이 꼭짓점에 연결된 모든 꼭짓점 목록을 반환합니다. 이 메서드는 방향성 있는 변"
-"을 인식합니다."
-
-#: kernel/modules/document/node.xml:134
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node via an edge of specified type. "
-"This method respects if edges are directed."
-msgstr ""
-"이 꼭짓점에 지정한 형식의 변을 통해 연결된 모든 꼭짓점 목록을 반환합니다. 이 "
-"메서드는 방향성 있는 변을 인식합니다."
-
-#: kernel/modules/document/node.xml:148
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all nodes connected to this node by an incoming edge."
-msgstr "이 꼭짓점에 들어오는 변으로 연결된 모든 꼭짓점 목록을 반환합니다."
-
-#: kernel/modules/document/node.xml:157
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return a list all nodes connected to this node by an incoming edge of "
-"specified type."
-msgstr ""
-"이 꼭짓점에 지정한 형식의 들어오는 변으로 연결된 모든 꼭짓점 목록을 반환합니"
-"다."
-
-#: kernel/modules/document/node.xml:171
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return list all nodes connected to this node by an outgoing edge."
-msgstr "이 꼭짓점에 나가는 변으로 연결된 모든 꼭짓점 목록을 반환합니다."
-
-#: kernel/modules/document/node.xml:180
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node by an outgoing edge of "
-"specified type."
-msgstr ""
-"이 꼭짓점에 지정한 형식의 나가는 변으로 연결된 모든 꼭짓점 목록을 반환합니다."
-
-#: kernel/modules/document/node.xml:194
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return list of distances to specified targets in same order."
-msgstr "지정한 대상으로의 거리 목록을 지정한 순서대로 반환합니다."
-
-#: kernel/modules/document/node.xml:201
-#, kde-format
-msgctxt "Scripting API"
-msgid "Name of edge property that holds the edge length."
-msgstr "변 길이를 저장하는 변 속성의 이름입니다."
-
-#: kernel/modules/document/node.xml:206
-#, kde-format
-msgctxt "Scripting API"
-msgid "List of nodes to that the distances shall be computed."
-msgstr "거리를 계산할 꼭짓점 목록입니다."
-
 #: models/edgemodel.cpp:141
 #, kde-format
 msgctxt "@title:column"
@@ -1408,6 +470,557 @@ msgstr "선택과 이동"
 #, kde-format
 msgid "Select and move elements on the scene"
 msgstr "장면의 원소를 선택하고 이동"
+
+#~ msgid "Edge Properties"
+#~ msgstr "변 속성"
+
+#~ msgid "Type:"
+#~ msgstr "형식:"
+
+#~ msgid "Dynamic Properties"
+#~ msgstr "동적 속성"
+
+#~ msgid "Node Properties"
+#~ msgstr "꼭짓점 속성"
+
+#~ msgid "Node color"
+#~ msgstr "꼭짓점 색상"
+
+#~ msgid "Assign Values"
+#~ msgstr "값 할당"
+
+#~ msgid "Choose Properties"
+#~ msgstr "속성 선택"
+
+#~ msgid "Show advanced options."
+#~ msgstr "고급 옵션을 표시합니다."
+
+#~ msgid "Assignment Method"
+#~ msgstr "할당 방법"
+
+#~ msgid "Enumerate Items"
+#~ msgstr "항목 열거"
+
+#~ msgid "Enumerate Alpha"
+#~ msgstr "알파벳 열거"
+
+#~ msgid "Enumerate Alpha-Numeric"
+#~ msgstr "알파벳과 숫자 열거"
+
+#~ msgid "Assign Random Integers"
+#~ msgstr "무작위 정수 부여"
+
+#~ msgid "Assign Random Reals"
+#~ msgstr "무작위 실수 부여"
+
+#~ msgid "Assign Constant Value"
+#~ msgstr "상수 값 할당"
+
+#~ msgid "Start ID:"
+#~ msgstr "시작 ID:"
+
+#~ msgid "Initial string"
+#~ msgstr "초기 문자열"
+
+#~ msgid "a"
+#~ msgstr "a"
+
+#~ msgid "Start ID"
+#~ msgstr "시작 ID"
+
+#~ msgid "Prefix"
+#~ msgstr "접두사"
+
+#~ msgid "Lower Limit"
+#~ msgstr "최소 한계"
+
+#~ msgid "Upper Limit"
+#~ msgstr "최대 한계"
+
+#~ msgid "Generator Seed"
+#~ msgstr "생성기 씨앗"
+
+#~ msgid "Constant"
+#~ msgstr "상수"
+
+#~ msgid "Overwrite existing values"
+#~ msgstr "기존 값 덮어쓰기"
+
+#~ msgid "Nodes:"
+#~ msgstr "꼭짓점:"
+
+#~ msgid "Property name:"
+#~ msgstr "속성 이름:"
+
+#~ msgid "Edges:"
+#~ msgstr "변:"
+
+#~ msgid "Assign values to selected edges."
+#~ msgstr "선택한 변에 값을 할당합니다."
+
+#~ msgid "Assign values to selected nodes."
+#~ msgstr "선택한 꼭짓점에 값을 할당합니다."
+
+#~ msgid "Generate Graph"
+#~ msgstr "그래프 생성"
+
+#~ msgid "Select the graph generator."
+#~ msgstr "그래프 생성기를 선택합니다."
+
+#~ msgid "Mesh Graph"
+#~ msgstr "격자 그래프"
+
+# 별 그래프로 번역하지 않음.
+#~ msgid "Star Graph"
+#~ msgstr "스타 그래프"
+
+#~ msgid "Circle Graph"
+#~ msgstr "원 그래프"
+
+#~ msgid "Random Graph"
+#~ msgstr "무작위 그래프"
+
+#~ msgid "Erdös-Renyi Graph"
+#~ msgstr "에르되시-레니 그래프"
+
+#~ msgid "Random Tree Graph"
+#~ msgstr "무작위 트리 그래프"
+
+#~ msgid "Random Dag Graph"
+#~ msgstr "무작위 유향 비순환 그래프"
+
+#~ msgid "Path Graph"
+#~ msgstr "경로 그래프"
+
+#~ msgid "Complete Graph"
+#~ msgstr "완전 그래프"
+
+#~ msgid "Complete Bipartite"
+#~ msgstr "완전 이분 그래프"
+
+#~ msgid "Show advanced settings."
+#~ msgstr "고급 설정을 표시합니다."
+
+#~ msgid "Set the unique identifier of the generated graph."
+#~ msgstr "생성된 그래프의 고유 식별자를 설정합니다."
+
+#~ msgid "Graph"
+#~ msgstr "그래프"
+
+#~ msgid "The node type to create the nodes of the graph with"
+#~ msgstr "그래프의 꼭짓점을 만들 때 사용할 꼭짓점 형식"
+
+#~ msgid "Node type:"
+#~ msgstr "꼭짓점 형식:"
+
+#~ msgid "The identifier of the created graph (used for scripting)"
+#~ msgstr "생성된 그래프의 식별자(스크립트에서 사용)"
+
+#~ msgid "Number of Columns:"
+#~ msgstr "열 개수:"
+
+#~ msgid "Number of Rows:"
+#~ msgstr "행 개수:"
+
+#~ msgid "Satellite Nodes:"
+#~ msgstr "위성 꼭짓점:"
+
+#~ msgid "Number of Nodes:"
+#~ msgstr "꼭짓점 개수:"
+
+#~ msgid "Allow self-edges:"
+#~ msgstr "고리 허용:"
+
+#~ msgid "Generator seed:"
+#~ msgstr "생성기 씨앗:"
+
+#~ msgid "Nodes (n):"
+#~ msgstr "꼭짓점(n):"
+
+#~ msgid "Edge Probability (p):"
+#~ msgstr "변 확률(p):"
+
+#~ msgid "Generator Seed:"
+#~ msgstr "생성기 씨앗:"
+
+#~ msgid "Number of Nodes"
+#~ msgstr "꼭짓점 개수"
+
+#~ msgid "Edge Probability"
+#~ msgstr "변 확률"
+
+#~ msgid "Left Set Nodes:"
+#~ msgstr "왼쪽 집합 꼭짓점:"
+
+#~ msgid "Right Set Nodes:"
+#~ msgstr "오른쪽 집합 꼭짓점:"
+
+#~ msgid "Select the edge type for connections of the generated graph."
+#~ msgstr "생성된 그래프를 연결할 변 형식을 설정합니다."
+
+#~ msgid "The edge type to create the edges of the graph with"
+#~ msgstr "그래프의 변을 생성할 때 사용할 변 형식"
+
+#~ msgid "Edge type:"
+#~ msgstr "변 형식:"
+
+#~ msgid "Graph generator:"
+#~ msgstr "그래프 생성기:"
+
+#~ msgid "Select the node type for node elements of the generated graph."
+#~ msgstr "생성된 그래프의 꼭짓점 원소에 사용할 꼭짓점 형식을 설정합니다."
+
+#~ msgid "Graph Layout"
+#~ msgstr "그래프 레이아웃"
+
+#~ msgid "Force Based Layout"
+#~ msgstr "힘 기반 레이아웃"
+
+#~ msgid "Area factor:"
+#~ msgstr "영역 계수:"
+
+#~ msgid "Repelling force:"
+#~ msgstr "밀어내는 힘:"
+
+#~ msgid "Attraction force:"
+#~ msgstr "끌어당기는 힘:"
+
+#~ msgid "Radial Tree Layout"
+#~ msgstr "방사형 트리 레이아웃"
+
+#~ msgid "Center/Root:"
+#~ msgstr "중심점/뿌리:"
+
+#~ msgid "Node separation:"
+#~ msgstr "꼭짓점 구분:"
+
+#~ msgid "Tree type:"
+#~ msgstr "트리 형식:"
+
+#~ msgid "Free tree"
+#~ msgstr "자유 트리"
+
+#~ msgid "Rooted tree"
+#~ msgstr "뿌리가 있는 트리"
+
+#~ msgid "Transform Edges"
+#~ msgstr "변 변형"
+
+#~ msgid ""
+#~ "This option connects all nodes of the given graph. The new edges do not "
+#~ "have any preset weights."
+#~ msgstr ""
+#~ "이 옵션을 사용하면 지정한 그래프의 모든 꼭짓점을 연결합니다. 새로운 변에"
+#~ "는 사전 설정된 가중치가 없습니다."
+
+#~ msgid "Complete graph"
+#~ msgstr "완전 그래프"
+
+#~ msgid "This option removes all edges from the given graph."
+#~ msgstr "이 옵션은 지정한 그래프의 모든 변을 삭제합니다."
+
+#~ msgid "Remove all edges"
+#~ msgstr "모든 변 삭제"
+
+#~ msgid ""
+#~ "This option reverses all edges of a directed graph. Note that this does "
+#~ "not apply to undirected graphs."
+#~ msgstr ""
+#~ "이 옵션은 유향 그래프의 모든 변의 방향을 반전합니다. 무향 그래프에는 적용"
+#~ "되지 않습니다."
+
+#~ msgid "Reverse all edges"
+#~ msgstr "모든 변 반전"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
+#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
+#~ "Algorithm</span> at the graph. All edges without given weights are "
+#~ "assumed to have weights equals 1. Directed and undirected graphs are "
+#~ "processed accordingly.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">이 옵션은 그래프에 "
+#~ "<span style=\" font-style:italic;\">프림의 최소 신장 트리 알고리즘</span>"
+#~ "을 실행합니다. at the graph. 가중치가 주어지지 않은 모든 변은 모두 같은 가"
+#~ "중치 1을 가지고 있다고 가정합니다. 유향 그래프와 무향 그래프별로 처리 방식"
+#~ "이 달라집니다.</p></body></html>"
+
+#~ msgid "Spanning tree transformation"
+#~ msgstr "신장 트리 변형"
+
+#~ msgid "Remove all self edges"
+#~ msgstr "모든 고리 삭제"
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "The global Console object allows you to print messages of different "
+#~ "importance to a log."
+#~ msgstr ""
+#~ "전역 Console 객체를 사용하여 로그에 서로 다른 중요도 메시지를 출력할 수 있"
+#~ "습니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given message of normal severity."
+#~ msgstr "지정한 일반 등급 메시지를 출력합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given debug message."
+#~ msgstr "지정한 디버그 메시지를 출력합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given error message of high severity."
+#~ msgstr "지정한 심각한 오류 메시지를 출력합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "The document object provides access to all elements.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "document 객체는 모든 원소에 접근할 수 있습니다.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the node with specified ID."
+#~ msgstr "지정한 ID를 가진 꼭짓점을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of a node."
+#~ msgstr "꼭짓점의 식별자입니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all nodes."
+#~ msgstr "모든 꼭짓점의 목록을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all nodes of specified type."
+#~ msgstr "지정한 형식의 모든 꼭짓점을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of a node type."
+#~ msgstr "꼭짓점 형식의 식별자입니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all edges."
+#~ msgstr "모든 변의 목록을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all edges of specified type."
+#~ msgstr "지정한 형식을 가진 모든 변의 목록을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of an edge type."
+#~ msgstr "변 형식 식별자입니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Create node at position (x,y)."
+#~ msgstr "(x,y)에 꼭짓점을 만듭니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "X-coordinate of the node."
+#~ msgstr "이 꼭짓점의 X 좌표입니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Y-coordinate of the node."
+#~ msgstr "이 꼭짓점의 Y 좌표입니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Create edge between the given nodes of default edge type."
+#~ msgstr "지정한 꼭짓점 간을 잇는 기본 변 형식으로 변을 만듭니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Start node of the edge."
+#~ msgstr "변의 시작 꼭짓점입니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Target node of the edge."
+#~ msgstr "변의 종착 꼭짓점입니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Delete the given node."
+#~ msgstr "지정한 꼭짓점을 삭제합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "The node to be deleted."
+#~ msgstr "삭제할 꼭짓점입니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Delete the given edge."
+#~ msgstr "지정한 변을 삭제합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "The edge to be deleted."
+#~ msgstr "삭제할 변입니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "An edge is the connection of two nodes. Edges can be either directed or "
+#~ "undirected, depending on their type.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "변은 두 꼭짓점을 잇습니다. 변은 유향변이나 무향변일 수 있습니다.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the identifier of the edge's type. If setting, the edge type "
+#~ "identifier must exist."
+#~ msgstr ""
+#~ "변 형식 식별자를 읽고 설정합니다. 설정하는 경우에는 변 식별자 인자가 있어"
+#~ "야 합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the origin node of the edge."
+#~ msgstr "변의 시작 꼭짓점을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the target node of the edge."
+#~ msgstr "변의 종착 꼭짓점을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Returns true if the edge's type is directed, otherwise false."
+#~ msgstr "변이 유향변이면 true, 무향변이면 false를 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "A node is the data element of a graph.\n"
+#~ "It can have arbitrary dynamic properties that are either set in the "
+#~ "editor or simply assigned on run-time.\n"
+#~ "Note that dynamic properties are only available after script execution, "
+#~ "if they are registered for the node's type.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "꼭짓점은 그래프의 데이터 원소입니다.\n"
+#~ "편집기에서 설정했거나 실행 시간에 할당된 임의의 동적 속성을 가질 수 있습니"
+#~ "다.\n"
+#~ "동적 속성이 꼭짓점의 형식에 등록되었다면 스크립트가 실행된 후에만 사용할 "
+#~ "수 있습니다.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the unique identifier of this node."
+#~ msgstr "이 꼭짓점의 고유 식별자를 읽거나 설정합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the x-coordinate of the node."
+#~ msgstr "이 꼭짓점의 X 좌표를 읽거나 설정합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the y-coordinate of the node."
+#~ msgstr "이 꼭짓점의 Y 좌표를 읽거나 설정합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the color string of this node in hex values (e.g., "
+#~ "\"#ff0000\" for red)."
+#~ msgstr ""
+#~ "이 꼭짓점의 십육진 색상 문자열(예: 빨간색은 \"#ff0000\")을 읽거나 설정합니"
+#~ "다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the identifier of the node's type. If setting, the node type "
+#~ "identifier must exist."
+#~ msgstr ""
+#~ "꼭짓점 형식 식별자를 읽고 설정합니다. 설정하는 경우에는 꼭짓점 식별자 인자"
+#~ "가 있어야 합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all edges (incoming and outgoing) of this node."
+#~ msgstr "이 꼭짓점에 연결된 (들어오고 나가는) 모든 변의 목록을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all edges (incoming and outgoing) of this node of a "
+#~ "specified type."
+#~ msgstr ""
+#~ "이 꼭짓점에 연결된 지정한 형식의 (들어오고 나가는) 모든 변의 목록을 반환합"
+#~ "니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of incoming edges of this node."
+#~ msgstr "이 꼭짓점으로 들어오는 모든 변의 목록을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all incoming edges of this node of a specified type."
+#~ msgstr "이 꼭짓점으로 지정한 형식의 들어오는 모든 변의 목록을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all outgoing edges of this node."
+#~ msgstr "이 꼭짓점에서 나가는 모든 변의 목록을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all outgoing edges of this node of a specified type."
+#~ msgstr "이 꼭짓점에서 지정한 형식의 나가는 모든 변의 목록을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node. This method respects if "
+#~ "edges are directed."
+#~ msgstr ""
+#~ "이 꼭짓점에 연결된 모든 꼭짓점 목록을 반환합니다. 이 메서드는 방향성 있는 "
+#~ "변을 인식합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node via an edge of specified "
+#~ "type. This method respects if edges are directed."
+#~ msgstr ""
+#~ "이 꼭짓점에 지정한 형식의 변을 통해 연결된 모든 꼭짓점 목록을 반환합니다. "
+#~ "이 메서드는 방향성 있는 변을 인식합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all nodes connected to this node by an incoming edge."
+#~ msgstr "이 꼭짓점에 들어오는 변으로 연결된 모든 꼭짓점 목록을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list all nodes connected to this node by an incoming edge of "
+#~ "specified type."
+#~ msgstr ""
+#~ "이 꼭짓점에 지정한 형식의 들어오는 변으로 연결된 모든 꼭짓점 목록을 반환합"
+#~ "니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return list all nodes connected to this node by an outgoing edge."
+#~ msgstr "이 꼭짓점에 나가는 변으로 연결된 모든 꼭짓점 목록을 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node by an outgoing edge of "
+#~ "specified type."
+#~ msgstr ""
+#~ "이 꼭짓점에 지정한 형식의 나가는 변으로 연결된 모든 꼭짓점 목록을 반환합니"
+#~ "다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return list of distances to specified targets in same order."
+#~ msgstr "지정한 대상으로의 거리 목록을 지정한 순서대로 반환합니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Name of edge property that holds the edge length."
+#~ msgstr "변 길이를 저장하는 변 속성의 이름입니다."
+
+#~ msgctxt "Scripting API"
+#~ msgid "List of nodes to that the distances shall be computed."
+#~ msgstr "거리를 계산할 꼭짓점 목록입니다."
 
 #~ msgid "Identifier"
 #~ msgstr "식별자"

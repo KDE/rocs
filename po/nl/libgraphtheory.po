@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2021-10-24 17:01+0200\n"
 "Last-Translator: J.J.H. Woldringh <jjhwoldringh@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -44,24 +44,6 @@ msgstr "Naam"
 msgid "Value"
 msgstr "Waarde"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
-#: dialogs/edgeproperties.ui:26
-#, kde-format
-msgid "Edge Properties"
-msgstr "Eigenschappen kant"
-
-#. i18n: ectx: property (text), widget (QLabel, labelType)
-#: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
-#, kde-format
-msgid "Type:"
-msgstr "Type:"
-
-#. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
-#: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
-#, kde-format
-msgid "Dynamic Properties"
-msgstr "Dynamische eigenschappen"
-
 #: dialogs/edgetypeproperties.cpp:37
 #, kde-format
 msgid "Edges"
@@ -83,18 +65,12 @@ msgstr "Eigenschappen kanttype"
 msgid "Name:"
 msgstr "Naam:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelId)
-#. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
-#: dialogs/edgetypeproperties.cpp:49 dialogs/nodeproperties.ui:119
-#: dialogs/nodetypeproperties.cpp:49
-#: editorplugins/generategraph/generategraphwidget.ui:129
+#: dialogs/edgetypeproperties.cpp:49 dialogs/nodetypeproperties.cpp:49
 #, kde-format
 msgid "Identifier:"
 msgstr "Naam:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelColor)
-#: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
-#: dialogs/nodetypeproperties.cpp:52
+#: dialogs/edgetypeproperties.cpp:51 dialogs/nodetypeproperties.cpp:52
 #, kde-format
 msgid "Color:"
 msgstr "Kleur:"
@@ -157,19 +133,6 @@ msgstr ""
 "De geselecteerde naam is al in gebruik voor een andere knoop, kies een "
 "andere naam."
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
-#: dialogs/nodeproperties.ui:26
-#, kde-format
-msgid "Node Properties"
-msgstr "Eigenschappen knoop"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
-#. i18n: ectx: property (toolTip), widget (KColorCombo, color)
-#: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
-#, kde-format
-msgid "Node color"
-msgstr "Kleur knoop"
-
 #: dialogs/nodetypeproperties.cpp:35
 #, kde-format
 msgid "Nodes"
@@ -228,170 +191,6 @@ msgstr "Alle kantttypen"
 msgid "Enter Property Name"
 msgstr "Naam eigenschap invoeren"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
-#: editorplugins/assignvalues/assignvalueswidget.ui:32
-#, kde-format
-msgid "Assign Values"
-msgstr "Waarden toekennen"
-
-#. i18n: ectx: property (text), widget (QLabel, property_choice_label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:40
-#, kde-format
-msgid "Choose Properties"
-msgstr "Eigenschappen kiezen"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
-#: editorplugins/assignvalues/assignvalueswidget.ui:59
-#, kde-format
-msgid "Show advanced options."
-msgstr "Gevorderde opties tonen."
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: editorplugins/assignvalues/assignvalueswidget.ui:74
-#, kde-format
-msgid "Assignment Method"
-msgstr "Toekenningsmethode"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:81
-#, kde-format
-msgid "Enumerate Items"
-msgstr "Opsommen"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:86
-#, kde-format
-msgid "Enumerate Alpha"
-msgstr "Alpha opsommen"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:91
-#, kde-format
-msgid "Enumerate Alpha-Numeric"
-msgstr "Alfanumeriek opsommen"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:96
-#, kde-format
-msgid "Assign Random Integers"
-msgstr "Willekeurige gehele getallen toekennen"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:101
-#, kde-format
-msgid "Assign Random Reals"
-msgstr "Willekeurige getallen toekennen"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:106
-#, kde-format
-msgid "Assign Constant Value"
-msgstr "Constante waarde toekennen"
-
-#. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
-#: editorplugins/assignvalues/assignvalueswidget.ui:132
-#, kde-format
-msgid "Start ID:"
-msgstr "Start ID:"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
-#: editorplugins/assignvalues/assignvalueswidget.ui:167
-#, kde-format
-msgid "Initial string"
-msgstr "Aanvankelijke tekenreeks"
-
-#. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
-#: editorplugins/assignvalues/assignvalueswidget.ui:174
-#, kde-format
-msgid "a"
-msgstr "a"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
-#: editorplugins/assignvalues/assignvalueswidget.ui:192
-#, kde-format
-msgid "Start ID"
-msgstr "Start ID"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
-#: editorplugins/assignvalues/assignvalueswidget.ui:209
-#, kde-format
-msgid "Prefix"
-msgstr "Voorvoegsel"
-
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#. i18n: ectx: property (text), widget (QLabel, label_4)
-#: editorplugins/assignvalues/assignvalueswidget.ui:230
-#: editorplugins/assignvalues/assignvalueswidget.ui:298
-#, kde-format
-msgid "Lower Limit"
-msgstr "Ondergrens"
-
-#. i18n: ectx: property (text), widget (QLabel, label_6)
-#. i18n: ectx: property (text), widget (QLabel, label_8)
-#: editorplugins/assignvalues/assignvalueswidget.ui:250
-#: editorplugins/assignvalues/assignvalueswidget.ui:305
-#, kde-format
-msgid "Upper Limit"
-msgstr "Bovengrens"
-
-#. i18n: ectx: property (text), widget (QLabel, label_dagGeneratorSeed)
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#. i18n: ectx: property (text), widget (QLabel, label_9)
-#: editorplugins/assignvalues/assignvalueswidget.ui:257
-#: editorplugins/assignvalues/assignvalueswidget.ui:312
-#: editorplugins/generategraph/generategraphwidget.ui:483
-#, kde-format
-msgid "Generator Seed"
-msgstr "Zaadje voor willekeurige getallen"
-
-#. i18n: ectx: property (text), widget (QLabel, constant_label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:372
-#, kde-format
-msgid "Constant"
-msgstr "Constante"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:400
-#, kde-format
-msgid "Overwrite existing values"
-msgstr "Bestaande waarden overschrijven"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
-#. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
-#. i18n: ectx: property (text), widget (QLabel, labelData)
-#: editorplugins/assignvalues/assignvalueswidget.ui:434
-#: editorplugins/generategraph/generategraphwidget.ui:252
-#: editorplugins/generategraph/generategraphwidget.ui:404
-#, kde-format
-msgid "Nodes:"
-msgstr "Knopen:"
-
-#. i18n: ectx: property (text), widget (QLabel, labelProperty)
-#: editorplugins/assignvalues/assignvalueswidget.ui:447
-#, kde-format
-msgid "Property name:"
-msgstr "Naam eigenschap:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
-#. i18n: ectx: property (text), widget (QLabel, labelConnection)
-#: editorplugins/assignvalues/assignvalueswidget.ui:460
-#: editorplugins/generategraph/generategraphwidget.ui:272
-#, kde-format
-msgid "Edges:"
-msgstr "Kanten:"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
-#: editorplugins/assignvalues/assignvalueswidget.ui:482
-#, kde-format
-msgid "Assign values to selected edges."
-msgstr "Waarden toekennen aan geselecteerde kanten."
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
-#: editorplugins/assignvalues/assignvalueswidget.ui:509
-#, kde-format
-msgid "Assign values to selected nodes."
-msgstr "Waarden toekennen aan geselecteerde knopen."
-
 #: editorplugins/generategraph/generategraphwidget.cpp:79
 #, kde-format
 msgctxt "@title:window"
@@ -415,401 +214,17 @@ msgstr "Niet correcte kantrichting"
 msgid "Edges in a Directed Acyclical Graph must be directional."
 msgstr "Kanten in een Directe Acyclische Graaf moeten gericht zijn."
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
-#: editorplugins/generategraph/generategraphwidget.ui:14
-#, kde-format
-msgid "Generate Graph"
-msgstr "Graaf aanmaken"
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:22
-#, kde-format
-msgid "Select the graph generator."
-msgstr "Selecteer de graafgenerator."
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:26
-#, kde-format
-msgid "Mesh Graph"
-msgstr "Netwerkgraaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:31
-#, kde-format
-msgid "Star Graph"
-msgstr "Stergraaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:36
-#, kde-format
-msgid "Circle Graph"
-msgstr "Cirkelgraaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:41
-#, kde-format
-msgid "Random Graph"
-msgstr "Willekeurige graaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:46
-#, kde-format
-msgid "Erdös-Renyi Graph"
-msgstr "Erdös-Renyi Graaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:51
-#, kde-format
-msgid "Random Tree Graph"
-msgstr "Willekeurige boomgraaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:56
-#, kde-format
-msgid "Random Dag Graph"
-msgstr "Willekeurige DAG-graaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:61
-#, kde-format
-msgid "Path Graph"
-msgstr "Padgraaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:66
-#, kde-format
-msgid "Complete Graph"
-msgstr "Graaf voltooien"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:71
-#, kde-format
-msgid "Complete Bipartite"
-msgstr "Tweeledigheid voltooien"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
-#: editorplugins/generategraph/generategraphwidget.ui:91
-#, kde-format
-msgid "Show advanced settings."
-msgstr "Gevorderde instellingen tonen."
-
-#. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
-#: editorplugins/generategraph/generategraphwidget.ui:106
-#, kde-format
-msgid "Set the unique identifier of the generated graph."
-msgstr "De unieke naam instellen voor de aangemaakte graaf."
-
-#. i18n: ectx: property (text), widget (QLineEdit, identifier)
-#: editorplugins/generategraph/generategraphwidget.ui:109
-#, kde-format
-msgid "Graph"
-msgstr "Graaf"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
-#: editorplugins/generategraph/generategraphwidget.ui:116
-#, kde-format
-msgid "The node type to create the nodes of the graph with"
-msgstr "Het knooptype voor de knopen van de aan te maken graaf"
-
-#. i18n: ectx: property (text), widget (QLabel, labelNodeType)
-#: editorplugins/generategraph/generategraphwidget.ui:119
-#, kde-format
-msgid "Node type:"
-msgstr "Knooptype:"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
-#: editorplugins/generategraph/generategraphwidget.ui:126
-#, kde-format
-msgid "The identifier of the created graph (used for scripting)"
-msgstr "De naam van de aangemaakte graaf (in scripts)"
-
-#. i18n: ectx: property (text), widget (QLabel, label_columns)
-#: editorplugins/generategraph/generategraphwidget.ui:148
-#, kde-format
-msgid "Number of Columns:"
-msgstr "Aantal kolommen:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_rows)
-#: editorplugins/generategraph/generategraphwidget.ui:168
-#, kde-format
-msgid "Number of Rows:"
-msgstr "Aantal rijen:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
-#: editorplugins/generategraph/generategraphwidget.ui:196
-#, kde-format
-msgid "Satellite Nodes:"
-msgstr "Satellietknopen:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
-#. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
-#. i18n: ectx: property (text), widget (QLabel, label_completeNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:224
-#: editorplugins/generategraph/generategraphwidget.ui:505
-#: editorplugins/generategraph/generategraphwidget.ui:527
-#, kde-format
-msgid "Number of Nodes:"
-msgstr "Aantal knopen:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
-#. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
-#: editorplugins/generategraph/generategraphwidget.ui:286
-#: editorplugins/generategraph/generategraphwidget.ui:332
-#, kde-format
-msgid "Allow self-edges:"
-msgstr "Lussen toestaan:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
-#: editorplugins/generategraph/generategraphwidget.ui:293
-#, kde-format
-msgid "Generator seed:"
-msgstr "Zaadje voor willekeurige getallen:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:325
-#, kde-format
-msgid "Nodes (n):"
-msgstr "Knopen (n):"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
-#: editorplugins/generategraph/generategraphwidget.ui:349
-#, kde-format
-msgid "Edge Probability (p):"
-msgstr "Kantkans (p):"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
-#. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
-#: editorplugins/generategraph/generategraphwidget.ui:356
-#: editorplugins/generategraph/generategraphwidget.ui:421
-#, kde-format
-msgid "Generator Seed:"
-msgstr "Zaadje voor willekeurige getallen:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:446
-#, kde-format
-msgid "Number of Nodes"
-msgstr "Aantal knopen"
-
-#. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
-#: editorplugins/generategraph/generategraphwidget.ui:463
-#, kde-format
-msgid "Edge Probability"
-msgstr "Kantkans"
-
-#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
-#: editorplugins/generategraph/generategraphwidget.ui:549
-#, kde-format
-msgid "Left Set Nodes:"
-msgstr "Linker set knopen:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
-#: editorplugins/generategraph/generategraphwidget.ui:563
-#, kde-format
-msgid "Right Set Nodes:"
-msgstr "Rechter set knopen:"
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
-#: editorplugins/generategraph/generategraphwidget.ui:590
-#, kde-format
-msgid "Select the edge type for connections of the generated graph."
-msgstr "Selecteer het kanttype voor de verbindingen in de aangemaakte graaf."
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
-#: editorplugins/generategraph/generategraphwidget.ui:604
-#, kde-format
-msgid "The edge type to create the edges of the graph with"
-msgstr "Het kanttype voor het aanmaken van de kanten van de graaf"
-
-#. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
-#: editorplugins/generategraph/generategraphwidget.ui:607
-#, kde-format
-msgid "Edge type:"
-msgstr "Kanttype:"
-
-#. i18n: ectx: property (text), widget (QLabel, labelGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:614
-#, kde-format
-msgid "Graph generator:"
-msgstr "Graafgenerator:"
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
-#: editorplugins/generategraph/generategraphwidget.ui:621
-#, kde-format
-msgid "Select the node type for node elements of the generated graph."
-msgstr "Selecteer het knooptype voor de knopen in de aangemaakte graaf."
-
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
 #, kde-format
 msgctxt "@title:window"
 msgid "Graph Layout"
 msgstr "Indeling grafen"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:20
-#, kde-format
-msgid "Graph Layout"
-msgstr "Indeling grafen"
-
-#. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:36
-#, kde-format
-msgid "Force Based Layout"
-msgstr "Op krachten gebaseerde indeling"
-
-#. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:57
-#, kde-format
-msgid "Area factor:"
-msgstr "Oppervlakte factor:"
-
-#. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:77
-#, kde-format
-msgid "Repelling force:"
-msgstr "Afstotende kracht:"
-
-#. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:97
-#, kde-format
-msgid "Attraction force:"
-msgstr "Aantrekkende kracht:"
-
-#. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:119
-#, kde-format
-msgid "Radial Tree Layout"
-msgstr "Radiële boom indeling"
-
-#. i18n: ectx: property (text), widget (QLabel, rootLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:134
-#, kde-format
-msgid "Center/Root:"
-msgstr "Midden/wortel:"
-
-#. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:144
-#, kde-format
-msgid "Node separation:"
-msgstr "Afstand tussen knopen:"
-
-#. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:158
-#, kde-format
-msgid "Tree type:"
-msgstr "Type boom:"
-
-#. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:165
-#, kde-format
-msgid "Free tree"
-msgstr "Losse boom"
-
-#. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:175
-#, kde-format
-msgid "Rooted tree"
-msgstr "Boom met wortel"
-
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
 #, kde-format
 msgctxt "@title:window"
 msgid "Transform Edges"
 msgstr "Kanten transformeren"
-
-#. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
-#: editorplugins/transformedges/transformedgeswidget.ui:14
-#, kde-format
-msgid "Transform Edges"
-msgstr "Kanten transformeren"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
-#: editorplugins/transformedges/transformedgeswidget.ui:22
-#, kde-format
-msgid ""
-"This option connects all nodes of the given graph. The new edges do not have "
-"any preset weights."
-msgstr ""
-"Met deze optie worden alle knopen van de gegeven graaf met elkaar verbonden. "
-"Aan de nieuwe kanten zijn nog geen gewichten toegekend."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
-#: editorplugins/transformedges/transformedgeswidget.ui:25
-#, kde-format
-msgid "Complete graph"
-msgstr "Graaf voltooien"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:35
-#, kde-format
-msgid "This option removes all edges from the given graph."
-msgstr "Met deze optie worden alle kanten van de gegeven graaf verwijderd."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:38
-#, kde-format
-msgid "Remove all edges"
-msgstr "Alle kanten verwijderen"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:45
-#, kde-format
-msgid ""
-"This option reverses all edges of a directed graph. Note that this does not "
-"apply to undirected graphs."
-msgstr ""
-"Met deze optie worden de richtingen van alle kanten in een gerichte graaf "
-"omgekeerd. Merk op dat dit alleen geldt voor gerichte grafen."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:48
-#, kde-format
-msgid "Reverse all edges"
-msgstr "Alle kanten omkeren"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
-#: editorplugins/transformedges/transformedgeswidget.ui:59
-#, kde-format
-msgid ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-"REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes <span "
-"style=\" font-style:italic;\">Prim's Minimal Spanning Tree Algorithm</span> "
-"at the graph. All edges without given weights are assumed to have weights "
-"equals 1. Directed and undirected graphs are processed accordingly.</p></"
-"body></html>"
-msgstr ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-"REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Met deze optie wordt de "
-"<span style=\" font-style:italic;\">\"Prim's Minimal Spanning Tree Algorithm"
-"\"</span> op de graaf uitgevoerd.Het gewicht van alle kanten zonder gegeven "
-"gewicht wordt op 1 gesteld. Het verwerken van zowel gerichte als ongerichte "
-"grafen wordt in overeenstemming daarmee gedaan.</p></body></html>"
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
-#: editorplugins/transformedges/transformedgeswidget.ui:62
-#, kde-format
-msgid "Spanning tree transformation"
-msgstr "Boomtransformatie omspannen"
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:69
-#, kde-format
-msgid "Remove all self edges"
-msgstr "Alle zelfkanten verwijderen"
 
 #: fileformats/dot/dotfileformat.cpp:45
 #, kde-format
@@ -969,374 +384,6 @@ msgctxt "@info status message after successful script execution"
 msgid "<i>Execution Finished</i>"
 msgstr "<i>UItvoeren is klaar</i>"
 
-#: kernel/modules/console/console.xml:7
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"The global Console object allows you to print messages of different "
-"importance to a log."
-msgstr ""
-"Het globale Consoleobject maakt het afdrukken van verschillend ernstige "
-"berichten mogelijk naar een logbestand."
-
-#: kernel/modules/console/console.xml:17
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given message of normal severity."
-msgstr "Druk het gegeven normaal ernstige bericht af"
-
-#: kernel/modules/console/console.xml:31
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given debug message."
-msgstr "Druk het gegeven foutbericht af."
-
-#: kernel/modules/console/console.xml:45
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given error message of high severity."
-msgstr "Druk het gegeven zeer ernstige foutbericht af."
-
-#: kernel/modules/document/document.xml:9
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"The document object provides access to all elements.\n"
-msgstr ""
-"\n"
-"Het documentobject geeft toegang tot alle elementen.\n"
-
-#: kernel/modules/document/document.xml:19
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the node with specified ID."
-msgstr "Geef een knoop terug met opgegeven ID."
-
-#: kernel/modules/document/document.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of a node."
-msgstr "Naam knoop."
-
-#: kernel/modules/document/document.xml:33
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all nodes."
-msgstr "Geef een lijst terug van alle knopen."
-
-#: kernel/modules/document/document.xml:42
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all nodes of specified type."
-msgstr "Geef een lijst terug van alle knopen van een bepaald type."
-
-#: kernel/modules/document/document.xml:49
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of a node type."
-msgstr "Naam van een knooptype."
-
-#: kernel/modules/document/document.xml:56
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all edges."
-msgstr "Geef een lijst terug van alle kanten."
-
-#: kernel/modules/document/document.xml:65
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all edges of specified type."
-msgstr "Geef een lijst terug van alle kanten van een bepaald type."
-
-#: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
-#: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
-#: kernel/modules/document/node.xml:141 kernel/modules/document/node.xml:164
-#: kernel/modules/document/node.xml:187
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of an edge type."
-msgstr "Naam van een kanttype."
-
-#: kernel/modules/document/document.xml:79
-#, kde-format
-msgctxt "Scripting API"
-msgid "Create node at position (x,y)."
-msgstr "Maak een knoop aan op positie (x,y)."
-
-#: kernel/modules/document/document.xml:86
-#, kde-format
-msgctxt "Scripting API"
-msgid "X-coordinate of the node."
-msgstr "X-coördinaat van de knoop. "
-
-#: kernel/modules/document/document.xml:91
-#, kde-format
-msgctxt "Scripting API"
-msgid "Y-coordinate of the node."
-msgstr "Y-coördinaat van de knoop."
-
-#: kernel/modules/document/document.xml:98
-#, kde-format
-msgctxt "Scripting API"
-msgid "Create edge between the given nodes of default edge type."
-msgstr "Kant aanmaken tussen de gegeven knopen van standaard kanttype."
-
-#: kernel/modules/document/document.xml:105
-#, kde-format
-msgctxt "Scripting API"
-msgid "Start node of the edge."
-msgstr "Startknoop van de kant."
-
-#: kernel/modules/document/document.xml:110
-#, kde-format
-msgctxt "Scripting API"
-msgid "Target node of the edge."
-msgstr "Eindknoop van de kant."
-
-#: kernel/modules/document/document.xml:117
-#, kde-format
-msgctxt "Scripting API"
-msgid "Delete the given node."
-msgstr "De gegeven knoop wissen."
-
-#: kernel/modules/document/document.xml:124
-#, kde-format
-msgctxt "Scripting API"
-msgid "The node to be deleted."
-msgstr "De te wissen knoop."
-
-#: kernel/modules/document/document.xml:131
-#, kde-format
-msgctxt "Scripting API"
-msgid "Delete the given edge."
-msgstr "De gegeven kant wissen.."
-
-#: kernel/modules/document/document.xml:138
-#, kde-format
-msgctxt "Scripting API"
-msgid "The edge to be deleted."
-msgstr "De te wissen kant."
-
-#: kernel/modules/document/edge.xml:9
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"An edge is the connection of two nodes. Edges can be either directed or "
-"undirected, depending on their type.\n"
-msgstr ""
-"\n"
-"Een kant is de verbinding tussen twee knopen. Kanten kunnen gericht zijn of "
-"ongericht, afhankelijk van het type.\n"
-
-#: kernel/modules/document/edge.xml:17
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the identifier of the edge's type. If setting, the edge type "
-"identifier must exist."
-msgstr ""
-"Lees en stel de naam in van het type van de kant. Bij het instellen moet de "
-"naam van het kanttype bestaan."
-
-#: kernel/modules/document/edge.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the origin node of the edge."
-msgstr "Geef de beginknoop van de kant terug."
-
-#: kernel/modules/document/edge.xml:35
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the target node of the edge."
-msgstr "Geef de eindknoop van de kant terug."
-
-#: kernel/modules/document/edge.xml:44
-#, kde-format
-msgctxt "Scripting API"
-msgid "Returns true if the edge's type is directed, otherwise false."
-msgstr ""
-"Geef true (waar) terug als het kanttype gericht is, en anders false (onwaar)."
-
-#: kernel/modules/document/node.xml:11
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"A node is the data element of a graph.\n"
-"It can have arbitrary dynamic properties that are either set in the editor "
-"or simply assigned on run-time.\n"
-"Note that dynamic properties are only available after script execution, if "
-"they are registered for the node's type.\n"
-msgstr ""
-"\n"
-"Een knoop is het gegevenselement van een graaf.\n"
-"Deze kan willekeurige dynamische eigenschappen hebben die of in de editor "
-"worden ingesteld, of gewoon tijdens de werking van het programma.\n"
-"Merk op dat de dynamische eigenschappen alleen na de uitvoering van het "
-"script beschikbaar zijn, als zij geregistreerd zijn voor het type van de "
-"knoop.\n"
-
-#: kernel/modules/document/node.xml:19
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the unique identifier of this node."
-msgstr "Lees en stel de unieke naam in voor deze knoop."
-
-#: kernel/modules/document/node.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the x-coordinate of the node."
-msgstr "Lees en stel de x-coördinaat in voor de knoop."
-
-#: kernel/modules/document/node.xml:33
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the y-coordinate of the node."
-msgstr "Lees en stel de y-coördinaat in voor de knoop."
-
-#: kernel/modules/document/node.xml:40
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
-"for red)."
-msgstr ""
-"Lees en stel de kleur in voor deze knoop, in hex-getallen (bv. \"#ff0000\" "
-"voor rood)."
-
-#: kernel/modules/document/node.xml:47
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the identifier of the node's type. If setting, the node type "
-"identifier must exist."
-msgstr ""
-"Lees en stel de naam in van het type van de knoop. Bij het instellen moet de "
-"naam van het knooptype bestaan."
-
-#: kernel/modules/document/node.xml:56
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all edges (incoming and outgoing) of this node."
-msgstr ""
-"Geef een lijst terug van alle kanten van deze knoop (inkomend en uitgaand). "
-
-#: kernel/modules/document/node.xml:65
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return a list of all edges (incoming and outgoing) of this node of a "
-"specified type."
-msgstr ""
-"Geef een lijst terug van alle kanten van deze knoop van een bepaald type "
-"(inkomend en uitgaand). "
-
-#: kernel/modules/document/node.xml:79
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of incoming edges of this node."
-msgstr "Geef een lijst terug van alle inkomende kanten van deze knoop."
-
-#: kernel/modules/document/node.xml:88
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all incoming edges of this node of a specified type."
-msgstr ""
-"Geef een lijst terug van alle inkomende kanten van deze knoop van een "
-"bepaald type."
-
-#: kernel/modules/document/node.xml:102
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all outgoing edges of this node."
-msgstr "Geef een lijst terug van alle uitgaande kanten van deze knoop."
-
-#: kernel/modules/document/node.xml:111
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all outgoing edges of this node of a specified type."
-msgstr ""
-"Geef een lijst terug van alle uitgaande kanten van deze knoop van een "
-"bepaald type."
-
-#: kernel/modules/document/node.xml:125
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node. This method respects if edges "
-"are directed."
-msgstr ""
-"Geef een lijst terug van alle met deze knoop verbonden knopen. Deze methode "
-"werkt ook indien de kanten gericht zijn."
-
-#: kernel/modules/document/node.xml:134
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node via an edge of specified type. "
-"This method respects if edges are directed."
-msgstr ""
-"Geef een lijst terug van alle met deze knoop verbonden knopen met een kant "
-"van een bepaald type.  Deze methode werkt ook indien de kanten gericht zijn."
-
-#: kernel/modules/document/node.xml:148
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all nodes connected to this node by an incoming edge."
-msgstr ""
-"Geef een lijst terug van alle knopen die met deze knoop verbonden zijn met "
-"een inkomende kant."
-
-#: kernel/modules/document/node.xml:157
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return a list all nodes connected to this node by an incoming edge of "
-"specified type."
-msgstr ""
-"Geef een lijst terug van alle knopen die met deze knoop verbonden zijn met "
-"een inkomende kant van een bepaald type."
-
-#: kernel/modules/document/node.xml:171
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return list all nodes connected to this node by an outgoing edge."
-msgstr ""
-"Geef een lijst terug van alle knopen die met deze knoop verbonden zijn met "
-"een uitgaande kant."
-
-#: kernel/modules/document/node.xml:180
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node by an outgoing edge of "
-"specified type."
-msgstr ""
-"Geef een lijst terug van alle knopen die met deze knoop verbonden zijn met "
-"een uitgaande kant van een bepaald type."
-
-#: kernel/modules/document/node.xml:194
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return list of distances to specified targets in same order."
-msgstr ""
-"Geef een lijst terug van afstanden naar opgegeven doelen in dezelfde "
-"volgorde."
-
-#: kernel/modules/document/node.xml:201
-#, kde-format
-msgctxt "Scripting API"
-msgid "Name of edge property that holds the edge length."
-msgstr "Naam van kanteigenschap met de lengte van de kant."
-
-#: kernel/modules/document/node.xml:206
-#, kde-format
-msgctxt "Scripting API"
-msgid "List of nodes to that the distances shall be computed."
-msgstr "Lijst van knopen waarheen de afstanden zullen worden berekend."
-
 #: models/edgemodel.cpp:141
 #, kde-format
 msgctxt "@title:column"
@@ -1424,6 +471,575 @@ msgstr "Selecteren & verplaatsen"
 #, kde-format
 msgid "Select and move elements on the scene"
 msgstr "Elementen selecteren en verplaatsen"
+
+#~ msgid "Edge Properties"
+#~ msgstr "Eigenschappen kant"
+
+#~ msgid "Type:"
+#~ msgstr "Type:"
+
+#~ msgid "Dynamic Properties"
+#~ msgstr "Dynamische eigenschappen"
+
+#~ msgid "Node Properties"
+#~ msgstr "Eigenschappen knoop"
+
+#~ msgid "Node color"
+#~ msgstr "Kleur knoop"
+
+#~ msgid "Assign Values"
+#~ msgstr "Waarden toekennen"
+
+#~ msgid "Choose Properties"
+#~ msgstr "Eigenschappen kiezen"
+
+#~ msgid "Show advanced options."
+#~ msgstr "Gevorderde opties tonen."
+
+#~ msgid "Assignment Method"
+#~ msgstr "Toekenningsmethode"
+
+#~ msgid "Enumerate Items"
+#~ msgstr "Opsommen"
+
+#~ msgid "Enumerate Alpha"
+#~ msgstr "Alpha opsommen"
+
+#~ msgid "Enumerate Alpha-Numeric"
+#~ msgstr "Alfanumeriek opsommen"
+
+#~ msgid "Assign Random Integers"
+#~ msgstr "Willekeurige gehele getallen toekennen"
+
+#~ msgid "Assign Random Reals"
+#~ msgstr "Willekeurige getallen toekennen"
+
+#~ msgid "Assign Constant Value"
+#~ msgstr "Constante waarde toekennen"
+
+#~ msgid "Start ID:"
+#~ msgstr "Start ID:"
+
+#~ msgid "Initial string"
+#~ msgstr "Aanvankelijke tekenreeks"
+
+#~ msgid "a"
+#~ msgstr "a"
+
+#~ msgid "Start ID"
+#~ msgstr "Start ID"
+
+#~ msgid "Prefix"
+#~ msgstr "Voorvoegsel"
+
+#~ msgid "Lower Limit"
+#~ msgstr "Ondergrens"
+
+#~ msgid "Upper Limit"
+#~ msgstr "Bovengrens"
+
+#~ msgid "Generator Seed"
+#~ msgstr "Zaadje voor willekeurige getallen"
+
+#~ msgid "Constant"
+#~ msgstr "Constante"
+
+#~ msgid "Overwrite existing values"
+#~ msgstr "Bestaande waarden overschrijven"
+
+#~ msgid "Nodes:"
+#~ msgstr "Knopen:"
+
+#~ msgid "Property name:"
+#~ msgstr "Naam eigenschap:"
+
+#~ msgid "Edges:"
+#~ msgstr "Kanten:"
+
+#~ msgid "Assign values to selected edges."
+#~ msgstr "Waarden toekennen aan geselecteerde kanten."
+
+#~ msgid "Assign values to selected nodes."
+#~ msgstr "Waarden toekennen aan geselecteerde knopen."
+
+#~ msgid "Generate Graph"
+#~ msgstr "Graaf aanmaken"
+
+#~ msgid "Select the graph generator."
+#~ msgstr "Selecteer de graafgenerator."
+
+#~ msgid "Mesh Graph"
+#~ msgstr "Netwerkgraaf"
+
+#~ msgid "Star Graph"
+#~ msgstr "Stergraaf"
+
+#~ msgid "Circle Graph"
+#~ msgstr "Cirkelgraaf"
+
+#~ msgid "Random Graph"
+#~ msgstr "Willekeurige graaf"
+
+#~ msgid "Erdös-Renyi Graph"
+#~ msgstr "Erdös-Renyi Graaf"
+
+#~ msgid "Random Tree Graph"
+#~ msgstr "Willekeurige boomgraaf"
+
+#~ msgid "Random Dag Graph"
+#~ msgstr "Willekeurige DAG-graaf"
+
+#~ msgid "Path Graph"
+#~ msgstr "Padgraaf"
+
+#~ msgid "Complete Graph"
+#~ msgstr "Graaf voltooien"
+
+#~ msgid "Complete Bipartite"
+#~ msgstr "Tweeledigheid voltooien"
+
+#~ msgid "Show advanced settings."
+#~ msgstr "Gevorderde instellingen tonen."
+
+#~ msgid "Set the unique identifier of the generated graph."
+#~ msgstr "De unieke naam instellen voor de aangemaakte graaf."
+
+#~ msgid "Graph"
+#~ msgstr "Graaf"
+
+#~ msgid "The node type to create the nodes of the graph with"
+#~ msgstr "Het knooptype voor de knopen van de aan te maken graaf"
+
+#~ msgid "Node type:"
+#~ msgstr "Knooptype:"
+
+#~ msgid "The identifier of the created graph (used for scripting)"
+#~ msgstr "De naam van de aangemaakte graaf (in scripts)"
+
+#~ msgid "Number of Columns:"
+#~ msgstr "Aantal kolommen:"
+
+#~ msgid "Number of Rows:"
+#~ msgstr "Aantal rijen:"
+
+#~ msgid "Satellite Nodes:"
+#~ msgstr "Satellietknopen:"
+
+#~ msgid "Number of Nodes:"
+#~ msgstr "Aantal knopen:"
+
+#~ msgid "Allow self-edges:"
+#~ msgstr "Lussen toestaan:"
+
+#~ msgid "Generator seed:"
+#~ msgstr "Zaadje voor willekeurige getallen:"
+
+#~ msgid "Nodes (n):"
+#~ msgstr "Knopen (n):"
+
+#~ msgid "Edge Probability (p):"
+#~ msgstr "Kantkans (p):"
+
+#~ msgid "Generator Seed:"
+#~ msgstr "Zaadje voor willekeurige getallen:"
+
+#~ msgid "Number of Nodes"
+#~ msgstr "Aantal knopen"
+
+#~ msgid "Edge Probability"
+#~ msgstr "Kantkans"
+
+#~ msgid "Left Set Nodes:"
+#~ msgstr "Linker set knopen:"
+
+#~ msgid "Right Set Nodes:"
+#~ msgstr "Rechter set knopen:"
+
+#~ msgid "Select the edge type for connections of the generated graph."
+#~ msgstr ""
+#~ "Selecteer het kanttype voor de verbindingen in de aangemaakte graaf."
+
+#~ msgid "The edge type to create the edges of the graph with"
+#~ msgstr "Het kanttype voor het aanmaken van de kanten van de graaf"
+
+#~ msgid "Edge type:"
+#~ msgstr "Kanttype:"
+
+#~ msgid "Graph generator:"
+#~ msgstr "Graafgenerator:"
+
+#~ msgid "Select the node type for node elements of the generated graph."
+#~ msgstr "Selecteer het knooptype voor de knopen in de aangemaakte graaf."
+
+#~ msgid "Graph Layout"
+#~ msgstr "Indeling grafen"
+
+#~ msgid "Force Based Layout"
+#~ msgstr "Op krachten gebaseerde indeling"
+
+#~ msgid "Area factor:"
+#~ msgstr "Oppervlakte factor:"
+
+#~ msgid "Repelling force:"
+#~ msgstr "Afstotende kracht:"
+
+#~ msgid "Attraction force:"
+#~ msgstr "Aantrekkende kracht:"
+
+#~ msgid "Radial Tree Layout"
+#~ msgstr "Radiële boom indeling"
+
+#~ msgid "Center/Root:"
+#~ msgstr "Midden/wortel:"
+
+#~ msgid "Node separation:"
+#~ msgstr "Afstand tussen knopen:"
+
+#~ msgid "Tree type:"
+#~ msgstr "Type boom:"
+
+#~ msgid "Free tree"
+#~ msgstr "Losse boom"
+
+#~ msgid "Rooted tree"
+#~ msgstr "Boom met wortel"
+
+#~ msgid "Transform Edges"
+#~ msgstr "Kanten transformeren"
+
+#~ msgid ""
+#~ "This option connects all nodes of the given graph. The new edges do not "
+#~ "have any preset weights."
+#~ msgstr ""
+#~ "Met deze optie worden alle knopen van de gegeven graaf met elkaar "
+#~ "verbonden. Aan de nieuwe kanten zijn nog geen gewichten toegekend."
+
+#~ msgid "Complete graph"
+#~ msgstr "Graaf voltooien"
+
+#~ msgid "This option removes all edges from the given graph."
+#~ msgstr "Met deze optie worden alle kanten van de gegeven graaf verwijderd."
+
+#~ msgid "Remove all edges"
+#~ msgstr "Alle kanten verwijderen"
+
+#~ msgid ""
+#~ "This option reverses all edges of a directed graph. Note that this does "
+#~ "not apply to undirected graphs."
+#~ msgstr ""
+#~ "Met deze optie worden de richtingen van alle kanten in een gerichte graaf "
+#~ "omgekeerd. Merk op dat dit alleen geldt voor gerichte grafen."
+
+#~ msgid "Reverse all edges"
+#~ msgstr "Alle kanten omkeren"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
+#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
+#~ "Algorithm</span> at the graph. All edges without given weights are "
+#~ "assumed to have weights equals 1. Directed and undirected graphs are "
+#~ "processed accordingly.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Met deze optie wordt de "
+#~ "<span style=\" font-style:italic;\">\"Prim's Minimal Spanning Tree "
+#~ "Algorithm\"</span> op de graaf uitgevoerd.Het gewicht van alle kanten "
+#~ "zonder gegeven gewicht wordt op 1 gesteld. Het verwerken van zowel "
+#~ "gerichte als ongerichte grafen wordt in overeenstemming daarmee gedaan.</"
+#~ "p></body></html>"
+
+#~ msgid "Spanning tree transformation"
+#~ msgstr "Boomtransformatie omspannen"
+
+#~ msgid "Remove all self edges"
+#~ msgstr "Alle zelfkanten verwijderen"
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "The global Console object allows you to print messages of different "
+#~ "importance to a log."
+#~ msgstr ""
+#~ "Het globale Consoleobject maakt het afdrukken van verschillend ernstige "
+#~ "berichten mogelijk naar een logbestand."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given message of normal severity."
+#~ msgstr "Druk het gegeven normaal ernstige bericht af"
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given debug message."
+#~ msgstr "Druk het gegeven foutbericht af."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given error message of high severity."
+#~ msgstr "Druk het gegeven zeer ernstige foutbericht af."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "The document object provides access to all elements.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Het documentobject geeft toegang tot alle elementen.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the node with specified ID."
+#~ msgstr "Geef een knoop terug met opgegeven ID."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of a node."
+#~ msgstr "Naam knoop."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all nodes."
+#~ msgstr "Geef een lijst terug van alle knopen."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all nodes of specified type."
+#~ msgstr "Geef een lijst terug van alle knopen van een bepaald type."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of a node type."
+#~ msgstr "Naam van een knooptype."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all edges."
+#~ msgstr "Geef een lijst terug van alle kanten."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all edges of specified type."
+#~ msgstr "Geef een lijst terug van alle kanten van een bepaald type."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of an edge type."
+#~ msgstr "Naam van een kanttype."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Create node at position (x,y)."
+#~ msgstr "Maak een knoop aan op positie (x,y)."
+
+#~ msgctxt "Scripting API"
+#~ msgid "X-coordinate of the node."
+#~ msgstr "X-coördinaat van de knoop. "
+
+#~ msgctxt "Scripting API"
+#~ msgid "Y-coordinate of the node."
+#~ msgstr "Y-coördinaat van de knoop."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Create edge between the given nodes of default edge type."
+#~ msgstr "Kant aanmaken tussen de gegeven knopen van standaard kanttype."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Start node of the edge."
+#~ msgstr "Startknoop van de kant."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Target node of the edge."
+#~ msgstr "Eindknoop van de kant."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Delete the given node."
+#~ msgstr "De gegeven knoop wissen."
+
+#~ msgctxt "Scripting API"
+#~ msgid "The node to be deleted."
+#~ msgstr "De te wissen knoop."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Delete the given edge."
+#~ msgstr "De gegeven kant wissen.."
+
+#~ msgctxt "Scripting API"
+#~ msgid "The edge to be deleted."
+#~ msgstr "De te wissen kant."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "An edge is the connection of two nodes. Edges can be either directed or "
+#~ "undirected, depending on their type.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Een kant is de verbinding tussen twee knopen. Kanten kunnen gericht zijn "
+#~ "of ongericht, afhankelijk van het type.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the identifier of the edge's type. If setting, the edge type "
+#~ "identifier must exist."
+#~ msgstr ""
+#~ "Lees en stel de naam in van het type van de kant. Bij het instellen moet "
+#~ "de naam van het kanttype bestaan."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the origin node of the edge."
+#~ msgstr "Geef de beginknoop van de kant terug."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the target node of the edge."
+#~ msgstr "Geef de eindknoop van de kant terug."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Returns true if the edge's type is directed, otherwise false."
+#~ msgstr ""
+#~ "Geef true (waar) terug als het kanttype gericht is, en anders false "
+#~ "(onwaar)."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "A node is the data element of a graph.\n"
+#~ "It can have arbitrary dynamic properties that are either set in the "
+#~ "editor or simply assigned on run-time.\n"
+#~ "Note that dynamic properties are only available after script execution, "
+#~ "if they are registered for the node's type.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Een knoop is het gegevenselement van een graaf.\n"
+#~ "Deze kan willekeurige dynamische eigenschappen hebben die of in de editor "
+#~ "worden ingesteld, of gewoon tijdens de werking van het programma.\n"
+#~ "Merk op dat de dynamische eigenschappen alleen na de uitvoering van het "
+#~ "script beschikbaar zijn, als zij geregistreerd zijn voor het type van de "
+#~ "knoop.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the unique identifier of this node."
+#~ msgstr "Lees en stel de unieke naam in voor deze knoop."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the x-coordinate of the node."
+#~ msgstr "Lees en stel de x-coördinaat in voor de knoop."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the y-coordinate of the node."
+#~ msgstr "Lees en stel de y-coördinaat in voor de knoop."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the color string of this node in hex values (e.g., "
+#~ "\"#ff0000\" for red)."
+#~ msgstr ""
+#~ "Lees en stel de kleur in voor deze knoop, in hex-getallen (bv. "
+#~ "\"#ff0000\" voor rood)."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the identifier of the node's type. If setting, the node type "
+#~ "identifier must exist."
+#~ msgstr ""
+#~ "Lees en stel de naam in van het type van de knoop. Bij het instellen moet "
+#~ "de naam van het knooptype bestaan."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all edges (incoming and outgoing) of this node."
+#~ msgstr ""
+#~ "Geef een lijst terug van alle kanten van deze knoop (inkomend en "
+#~ "uitgaand). "
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all edges (incoming and outgoing) of this node of a "
+#~ "specified type."
+#~ msgstr ""
+#~ "Geef een lijst terug van alle kanten van deze knoop van een bepaald type "
+#~ "(inkomend en uitgaand). "
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of incoming edges of this node."
+#~ msgstr "Geef een lijst terug van alle inkomende kanten van deze knoop."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all incoming edges of this node of a specified type."
+#~ msgstr ""
+#~ "Geef een lijst terug van alle inkomende kanten van deze knoop van een "
+#~ "bepaald type."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all outgoing edges of this node."
+#~ msgstr "Geef een lijst terug van alle uitgaande kanten van deze knoop."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all outgoing edges of this node of a specified type."
+#~ msgstr ""
+#~ "Geef een lijst terug van alle uitgaande kanten van deze knoop van een "
+#~ "bepaald type."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node. This method respects if "
+#~ "edges are directed."
+#~ msgstr ""
+#~ "Geef een lijst terug van alle met deze knoop verbonden knopen. Deze "
+#~ "methode werkt ook indien de kanten gericht zijn."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node via an edge of specified "
+#~ "type. This method respects if edges are directed."
+#~ msgstr ""
+#~ "Geef een lijst terug van alle met deze knoop verbonden knopen met een "
+#~ "kant van een bepaald type.  Deze methode werkt ook indien de kanten "
+#~ "gericht zijn."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all nodes connected to this node by an incoming edge."
+#~ msgstr ""
+#~ "Geef een lijst terug van alle knopen die met deze knoop verbonden zijn "
+#~ "met een inkomende kant."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list all nodes connected to this node by an incoming edge of "
+#~ "specified type."
+#~ msgstr ""
+#~ "Geef een lijst terug van alle knopen die met deze knoop verbonden zijn "
+#~ "met een inkomende kant van een bepaald type."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return list all nodes connected to this node by an outgoing edge."
+#~ msgstr ""
+#~ "Geef een lijst terug van alle knopen die met deze knoop verbonden zijn "
+#~ "met een uitgaande kant."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node by an outgoing edge of "
+#~ "specified type."
+#~ msgstr ""
+#~ "Geef een lijst terug van alle knopen die met deze knoop verbonden zijn "
+#~ "met een uitgaande kant van een bepaald type."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return list of distances to specified targets in same order."
+#~ msgstr ""
+#~ "Geef een lijst terug van afstanden naar opgegeven doelen in dezelfde "
+#~ "volgorde."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Name of edge property that holds the edge length."
+#~ msgstr "Naam van kanteigenschap met de lengte van de kant."
+
+#~ msgctxt "Scripting API"
+#~ msgid "List of nodes to that the distances shall be computed."
+#~ msgstr "Lijst van knopen waarheen de afstanden zullen worden berekend."
 
 #~ msgid "Identifier"
 #~ msgstr "Naam"

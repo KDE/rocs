@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2019-11-13 13:08+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -44,24 +44,6 @@ msgstr "Nimi"
 msgid "Value"
 msgstr "Väärtus"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
-#: dialogs/edgeproperties.ui:26
-#, kde-format
-msgid "Edge Properties"
-msgstr "Seose omadused"
-
-#. i18n: ectx: property (text), widget (QLabel, labelType)
-#: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
-#, kde-format
-msgid "Type:"
-msgstr "Tüüp:"
-
-#. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
-#: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
-#, kde-format
-msgid "Dynamic Properties"
-msgstr "Dünaamilised omadused"
-
 #: dialogs/edgetypeproperties.cpp:37
 #, kde-format
 msgid "Edges"
@@ -84,18 +66,12 @@ msgstr "Seose tüübi omadused"
 msgid "Name:"
 msgstr "Nimi:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelId)
-#. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
-#: dialogs/edgetypeproperties.cpp:49 dialogs/nodeproperties.ui:119
-#: dialogs/nodetypeproperties.cpp:49
-#: editorplugins/generategraph/generategraphwidget.ui:129
+#: dialogs/edgetypeproperties.cpp:49 dialogs/nodetypeproperties.cpp:49
 #, kde-format
 msgid "Identifier:"
 msgstr "Identifikaator:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelColor)
-#: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
-#: dialogs/nodetypeproperties.cpp:52
+#: dialogs/edgetypeproperties.cpp:51 dialogs/nodetypeproperties.cpp:52
 #, kde-format
 msgid "Color:"
 msgstr "Värv:"
@@ -159,19 +135,6 @@ msgid ""
 msgstr ""
 "Valitud ID on juba kasutusel teise seose tipu juures, palun vali midagi muud."
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
-#: dialogs/nodeproperties.ui:26
-#, kde-format
-msgid "Node Properties"
-msgstr "Tipu omadused"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
-#. i18n: ectx: property (toolTip), widget (KColorCombo, color)
-#: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
-#, kde-format
-msgid "Node color"
-msgstr "Tipu värv"
-
 #: dialogs/nodetypeproperties.cpp:35
 #, kde-format
 msgid "Nodes"
@@ -230,172 +193,6 @@ msgstr "Kõik seose tüübid"
 msgid "Enter Property Name"
 msgstr "Kirjuta omaduse nimi"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
-#: editorplugins/assignvalues/assignvalueswidget.ui:32
-#, kde-format
-msgid "Assign Values"
-msgstr "Väärtuste omistamine"
-
-#. i18n: ectx: property (text), widget (QLabel, property_choice_label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:40
-#, kde-format
-msgid "Choose Properties"
-msgstr "Vali omadused"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
-#: editorplugins/assignvalues/assignvalueswidget.ui:59
-#, kde-format
-msgid "Show advanced options."
-msgstr "Muude valikute näitamine."
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: editorplugins/assignvalues/assignvalueswidget.ui:74
-#, kde-format
-msgid "Assignment Method"
-msgstr "Omistamisviis"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:81
-#, kde-format
-msgid "Enumerate Items"
-msgstr "Elementide loendamine"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:86
-#, kde-format
-msgid "Enumerate Alpha"
-msgstr "Tähtede loendamine"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:91
-#, kde-format
-msgid "Enumerate Alpha-Numeric"
-msgstr "Tähtede-numbrite loendamine"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:96
-#, kde-format
-msgid "Assign Random Integers"
-msgstr "Juhuslike täisarvude omistamine"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:101
-#, kde-format
-msgid "Assign Random Reals"
-msgstr "Juhuslike reaalarvude omistamine"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
-#: editorplugins/assignvalues/assignvalueswidget.ui:106
-#, kde-format
-msgid "Assign Constant Value"
-msgstr "Konstantväärtuse omistamine"
-
-#. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
-#: editorplugins/assignvalues/assignvalueswidget.ui:132
-#, fuzzy, kde-format
-#| msgid "Start ID"
-msgid "Start ID:"
-msgstr "Alguse ID"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
-#: editorplugins/assignvalues/assignvalueswidget.ui:167
-#, kde-format
-msgid "Initial string"
-msgstr "Algstring"
-
-#. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
-#: editorplugins/assignvalues/assignvalueswidget.ui:174
-#, kde-format
-msgid "a"
-msgstr "a"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
-#: editorplugins/assignvalues/assignvalueswidget.ui:192
-#, kde-format
-msgid "Start ID"
-msgstr "Alguse ID"
-
-#. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
-#: editorplugins/assignvalues/assignvalueswidget.ui:209
-#, kde-format
-msgid "Prefix"
-msgstr "Prefiks"
-
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#. i18n: ectx: property (text), widget (QLabel, label_4)
-#: editorplugins/assignvalues/assignvalueswidget.ui:230
-#: editorplugins/assignvalues/assignvalueswidget.ui:298
-#, kde-format
-msgid "Lower Limit"
-msgstr "Alumine piir"
-
-#. i18n: ectx: property (text), widget (QLabel, label_6)
-#. i18n: ectx: property (text), widget (QLabel, label_8)
-#: editorplugins/assignvalues/assignvalueswidget.ui:250
-#: editorplugins/assignvalues/assignvalueswidget.ui:305
-#, kde-format
-msgid "Upper Limit"
-msgstr "Ülemine piir"
-
-#. i18n: ectx: property (text), widget (QLabel, label_dagGeneratorSeed)
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#. i18n: ectx: property (text), widget (QLabel, label_9)
-#: editorplugins/assignvalues/assignvalueswidget.ui:257
-#: editorplugins/assignvalues/assignvalueswidget.ui:312
-#: editorplugins/generategraph/generategraphwidget.ui:483
-#, kde-format
-msgid "Generator Seed"
-msgstr "Genereerija seeme"
-
-#. i18n: ectx: property (text), widget (QLabel, constant_label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:372
-#, kde-format
-msgid "Constant"
-msgstr "Konstant"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: editorplugins/assignvalues/assignvalueswidget.ui:400
-#, kde-format
-msgid "Overwrite existing values"
-msgstr "Olemasolevate väärtuste ülekirjutamine"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
-#. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
-#. i18n: ectx: property (text), widget (QLabel, labelData)
-#: editorplugins/assignvalues/assignvalueswidget.ui:434
-#: editorplugins/generategraph/generategraphwidget.ui:252
-#: editorplugins/generategraph/generategraphwidget.ui:404
-#, kde-format
-msgid "Nodes:"
-msgstr "Tipud:"
-
-#. i18n: ectx: property (text), widget (QLabel, labelProperty)
-#: editorplugins/assignvalues/assignvalueswidget.ui:447
-#, fuzzy, kde-format
-#| msgid "Property Name"
-msgid "Property name:"
-msgstr "Omaduse nimi"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
-#. i18n: ectx: property (text), widget (QLabel, labelConnection)
-#: editorplugins/assignvalues/assignvalueswidget.ui:460
-#: editorplugins/generategraph/generategraphwidget.ui:272
-#, kde-format
-msgid "Edges:"
-msgstr "Seosed:"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
-#: editorplugins/assignvalues/assignvalueswidget.ui:482
-#, kde-format
-msgid "Assign values to selected edges."
-msgstr "Väärtuste omistamine valitud seostele."
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
-#: editorplugins/assignvalues/assignvalueswidget.ui:509
-#, kde-format
-msgid "Assign values to selected nodes."
-msgstr "Väärtuste omistamine valitud tippudele."
-
 #: editorplugins/generategraph/generategraphwidget.cpp:79
 #, kde-format
 msgctxt "@title:window"
@@ -419,234 +216,6 @@ msgstr "Väär seose suund"
 msgid "Edges in a Directed Acyclical Graph must be directional."
 msgstr "Seosed suunatud atsüklilises graafis peavad olema suunaga."
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
-#: editorplugins/generategraph/generategraphwidget.ui:14
-#, kde-format
-msgid "Generate Graph"
-msgstr "Graafi genereerimine"
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:22
-#, kde-format
-msgid "Select the graph generator."
-msgstr "Graafi genereerija valimine."
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:26
-#, kde-format
-msgid "Mesh Graph"
-msgstr "Sõrestikgraaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:31
-#, kde-format
-msgid "Star Graph"
-msgstr "Tähtgraaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:36
-#, kde-format
-msgid "Circle Graph"
-msgstr "Ringgraaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:41
-#, kde-format
-msgid "Random Graph"
-msgstr "Juhuslik graaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:46
-#, kde-format
-msgid "Erdös-Renyi Graph"
-msgstr "Erdös-Renyi graaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:51
-#, kde-format
-msgid "Random Tree Graph"
-msgstr "Juhuslik puugraaf"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:56
-#, kde-format
-msgid "Random Dag Graph"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:61
-#, kde-format
-msgid "Path Graph"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:66
-#, kde-format
-msgid "Complete Graph"
-msgstr "Graafi lõpetamine"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:71
-#, kde-format
-msgid "Complete Bipartite"
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
-#: editorplugins/generategraph/generategraphwidget.ui:91
-#, kde-format
-msgid "Show advanced settings."
-msgstr "Muude seadistuste näitamine."
-
-#. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
-#: editorplugins/generategraph/generategraphwidget.ui:106
-#, kde-format
-msgid "Set the unique identifier of the generated graph."
-msgstr "Genereeritud graafi unikaalse identifikaatori määramine."
-
-#. i18n: ectx: property (text), widget (QLineEdit, identifier)
-#: editorplugins/generategraph/generategraphwidget.ui:109
-#, kde-format
-msgid "Graph"
-msgstr "Graaf"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
-#: editorplugins/generategraph/generategraphwidget.ui:116
-#, kde-format
-msgid "The node type to create the nodes of the graph with"
-msgstr "Tipu tüüp graafi tippude loomisel"
-
-#. i18n: ectx: property (text), widget (QLabel, labelNodeType)
-#: editorplugins/generategraph/generategraphwidget.ui:119
-#, fuzzy, kde-format
-#| msgid "Node type"
-msgid "Node type:"
-msgstr "Tipu tüüp"
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
-#: editorplugins/generategraph/generategraphwidget.ui:126
-#, kde-format
-msgid "The identifier of the created graph (used for scripting)"
-msgstr "Loodud graafi identifikaator (kasutatakse skriptimisel)"
-
-#. i18n: ectx: property (text), widget (QLabel, label_columns)
-#: editorplugins/generategraph/generategraphwidget.ui:148
-#, kde-format
-msgid "Number of Columns:"
-msgstr "Veergude arv:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_rows)
-#: editorplugins/generategraph/generategraphwidget.ui:168
-#, kde-format
-msgid "Number of Rows:"
-msgstr "Ridade arv:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
-#: editorplugins/generategraph/generategraphwidget.ui:196
-#, kde-format
-msgid "Satellite Nodes:"
-msgstr "Satelliittipud:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
-#. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
-#. i18n: ectx: property (text), widget (QLabel, label_completeNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:224
-#: editorplugins/generategraph/generategraphwidget.ui:505
-#: editorplugins/generategraph/generategraphwidget.ui:527
-#, kde-format
-msgid "Number of Nodes:"
-msgstr "Tippude arv:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
-#. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
-#: editorplugins/generategraph/generategraphwidget.ui:286
-#: editorplugins/generategraph/generategraphwidget.ui:332
-#, kde-format
-msgid "Allow self-edges:"
-msgstr "Omaseoste lubamine:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
-#: editorplugins/generategraph/generategraphwidget.ui:293
-#, fuzzy, kde-format
-#| msgid "Generator Seed:"
-msgid "Generator seed:"
-msgstr "Genereerija seeme:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:325
-#, kde-format
-msgid "Nodes (n):"
-msgstr "Tipud (n):"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
-#: editorplugins/generategraph/generategraphwidget.ui:349
-#, kde-format
-msgid "Edge Probability (p):"
-msgstr "Seose tõenäosus (p):"
-
-#. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
-#. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
-#: editorplugins/generategraph/generategraphwidget.ui:356
-#: editorplugins/generategraph/generategraphwidget.ui:421
-#, kde-format
-msgid "Generator Seed:"
-msgstr "Genereerija seeme:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
-#: editorplugins/generategraph/generategraphwidget.ui:446
-#, kde-format
-msgid "Number of Nodes"
-msgstr "Tippude arv"
-
-#. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
-#: editorplugins/generategraph/generategraphwidget.ui:463
-#, kde-format
-msgid "Edge Probability"
-msgstr "Seose tõenäosus"
-
-#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
-#: editorplugins/generategraph/generategraphwidget.ui:549
-#, kde-format
-msgid "Left Set Nodes:"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
-#: editorplugins/generategraph/generategraphwidget.ui:563
-#, kde-format
-msgid "Right Set Nodes:"
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
-#: editorplugins/generategraph/generategraphwidget.ui:590
-#, kde-format
-msgid "Select the edge type for connections of the generated graph."
-msgstr "Seose tüübi valimine genereeritud graafi ühendustele."
-
-#. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
-#: editorplugins/generategraph/generategraphwidget.ui:604
-#, kde-format
-msgid "The edge type to create the edges of the graph with"
-msgstr "Seose tüüp graafi seoste loomisel"
-
-#. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
-#: editorplugins/generategraph/generategraphwidget.ui:607
-#, fuzzy, kde-format
-#| msgid "Edge type"
-msgid "Edge type:"
-msgstr "Seose tüüp"
-
-#. i18n: ectx: property (text), widget (QLabel, labelGenerator)
-#: editorplugins/generategraph/generategraphwidget.ui:614
-#, fuzzy, kde-format
-#| msgid "Graph Generator"
-msgid "Graph generator:"
-msgstr "Graafi genereerija"
-
-#. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
-#: editorplugins/generategraph/generategraphwidget.ui:621
-#, kde-format
-msgid "Select the node type for node elements of the generated graph."
-msgstr "Seose tüübi valimine genereeritud graafi seoseelementidele."
-
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
 #, fuzzy, kde-format
 #| msgid "Graph Document"
@@ -654,182 +223,11 @@ msgctxt "@title:window"
 msgid "Graph Layout"
 msgstr "Graafidokument"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:20
-#, fuzzy, kde-format
-#| msgid "Graph Document"
-msgid "Graph Layout"
-msgstr "Graafidokument"
-
-#. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:36
-#, kde-format
-msgid "Force Based Layout"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:57
-#, kde-format
-msgid "Area factor:"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:77
-#, kde-format
-msgid "Repelling force:"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:97
-#, kde-format
-msgid "Attraction force:"
-msgstr ""
-
-#. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:119
-#, kde-format
-msgid "Radial Tree Layout"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, rootLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:134
-#, fuzzy, kde-format
-#| msgctxt "Alignment"
-#| msgid "Center"
-msgid "Center/Root:"
-msgstr "Keskele"
-
-#. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:144
-#, fuzzy, kde-format
-#| msgid "Node Information"
-msgid "Node separation:"
-msgstr "Tipu teave"
-
-#. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:158
-#, fuzzy, kde-format
-#| msgid "Type:"
-msgid "Tree type:"
-msgstr "Tüüp:"
-
-#. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:165
-#, kde-format
-msgid "Free tree"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
-#: editorplugins/graphlayout/graphlayoutwidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@title Displayed plugin name"
-#| msgid "RootedTree Structure"
-msgid "Rooted tree"
-msgstr "Juurega puu struktuur"
-
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
 #, kde-format
 msgctxt "@title:window"
 msgid "Transform Edges"
 msgstr "Seoste teisendamine"
-
-#. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
-#: editorplugins/transformedges/transformedgeswidget.ui:14
-#, kde-format
-msgid "Transform Edges"
-msgstr "Seoste teisendamine"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
-#: editorplugins/transformedges/transformedgeswidget.ui:22
-#, kde-format
-msgid ""
-"This option connects all nodes of the given graph. The new edges do not have "
-"any preset weights."
-msgstr ""
-"See valik seob kõik määratud graafi tipud. Uutel seostel pole eelnevalt "
-"määratud kaalu."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
-#: editorplugins/transformedges/transformedgeswidget.ui:25
-#, fuzzy, kde-format
-#| msgid "Complete Graph"
-msgid "Complete graph"
-msgstr "Graafi lõpetamine"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:35
-#, kde-format
-msgid "This option removes all edges from the given graph."
-msgstr "See valik eemaldab määratud graafilt kõik seosed."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:38
-#, fuzzy, kde-format
-#| msgid "Remove all Edges"
-msgid "Remove all edges"
-msgstr "Kõigi seoste eemaldamine"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:45
-#, kde-format
-msgid ""
-"This option reverses all edges of a directed graph. Note that this does not "
-"apply to undirected graphs."
-msgstr ""
-"See valik muudab kõigi orienteeritud graafi seoste orientatsiooni. Pane "
-"tähele, et seda ei saa kasutada orienteerimata graafide puhul."
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:48
-#, fuzzy, kde-format
-#| msgid "Reverse all Edges"
-msgid "Reverse all edges"
-msgstr "Kõik seosed teistpidi"
-
-#. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
-#: editorplugins/transformedges/transformedgeswidget.ui:59
-#, kde-format
-msgid ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-"REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes <span "
-"style=\" font-style:italic;\">Prim's Minimal Spanning Tree Algorithm</span> "
-"at the graph. All edges without given weights are assumed to have weights "
-"equals 1. Directed and undirected graphs are processed accordingly.</p></"
-"body></html>"
-msgstr ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-"REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">See valik käivitab graafil "
-"<span style=\" font-style:italic;\">Primi minimaalse katva puu algoritmi</"
-"span>. Kõigi määramata kaaluga seoste puhul eeldatakse kaalu 1. Töödeldakse "
-"vastavalt nii orienteeritud kui orienteerimata graafe.</p></body></html>"
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
-#: editorplugins/transformedges/transformedgeswidget.ui:62
-#, fuzzy, kde-format
-#| msgid "Spanning Tree Transformation"
-msgid "Spanning tree transformation"
-msgstr "Katva puu teisendus"
-
-#. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
-#: editorplugins/transformedges/transformedgeswidget.ui:69
-#, fuzzy, kde-format
-#| msgid "Remove all Edges"
-msgid "Remove all self edges"
-msgstr "Kõigi seoste eemaldamine"
 
 #: fileformats/dot/dotfileformat.cpp:45
 #, kde-format
@@ -993,366 +391,6 @@ msgctxt "@info status message after successful script execution"
 msgid "<i>Execution Finished</i>"
 msgstr "<i>Täitmine lõpetati</i>"
 
-#: kernel/modules/console/console.xml:7
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"The global Console object allows you to print messages of different "
-"importance to a log."
-msgstr ""
-"Globaalne Konsooli objekt võimaldab kirjutada eri tähtsusega sõnumeid "
-"logisse."
-
-#: kernel/modules/console/console.xml:17
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given message of normal severity."
-msgstr "Määratud tavalise raskusastmega teate näitamine."
-
-#: kernel/modules/console/console.xml:31
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given debug message."
-msgstr "Määratud silumisteate näitamine."
-
-#: kernel/modules/console/console.xml:45
-#, kde-format
-msgctxt "Scripting API"
-msgid "Print the given error message of high severity."
-msgstr "Määratud suure raskusastmega veateate näitamine."
-
-#: kernel/modules/document/document.xml:9
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"The document object provides access to all elements.\n"
-msgstr ""
-"\n"
-"Dokumendi objekt pakub ligipääsu kõigile elementidele.\n"
-
-#: kernel/modules/document/document.xml:19
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the node with specified ID."
-msgstr "Määratud ID-ga tipu tagastamine."
-
-#: kernel/modules/document/document.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of a node."
-msgstr "Tipu identifikaator."
-
-#: kernel/modules/document/document.xml:33
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all nodes."
-msgstr "Kõigi tippude loendi tagastamine."
-
-#: kernel/modules/document/document.xml:42
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all nodes of specified type."
-msgstr "Kõigi määratud tüübiga tippude loendi tagastamine."
-
-#: kernel/modules/document/document.xml:49
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of a node type."
-msgstr "Tipu tüübi identifikaator."
-
-#: kernel/modules/document/document.xml:56
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all edges."
-msgstr "Kõigi seoste loendi tagastamine."
-
-#: kernel/modules/document/document.xml:65
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all edges of specified type."
-msgstr "Kõigi määratud tüübiga seoste loendi tagastamine."
-
-#: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
-#: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
-#: kernel/modules/document/node.xml:141 kernel/modules/document/node.xml:164
-#: kernel/modules/document/node.xml:187
-#, kde-format
-msgctxt "Scripting API"
-msgid "Identifier of an edge type."
-msgstr "Seose tüübi identifikaator."
-
-#: kernel/modules/document/document.xml:79
-#, kde-format
-msgctxt "Scripting API"
-msgid "Create node at position (x,y)."
-msgstr "Seose loomine asukohas (x,y)."
-
-#: kernel/modules/document/document.xml:86
-#, kde-format
-msgctxt "Scripting API"
-msgid "X-coordinate of the node."
-msgstr "Seose X-koordinaat."
-
-#: kernel/modules/document/document.xml:91
-#, kde-format
-msgctxt "Scripting API"
-msgid "Y-coordinate of the node."
-msgstr "Seose Y-koordinaat."
-
-#: kernel/modules/document/document.xml:98
-#, kde-format
-msgctxt "Scripting API"
-msgid "Create edge between the given nodes of default edge type."
-msgstr "Vaikimisi seose tüübiga seose loomine määratud tippude vahele."
-
-#: kernel/modules/document/document.xml:105
-#, kde-format
-msgctxt "Scripting API"
-msgid "Start node of the edge."
-msgstr "Seose algustipp."
-
-#: kernel/modules/document/document.xml:110
-#, kde-format
-msgctxt "Scripting API"
-msgid "Target node of the edge."
-msgstr "Seose sihttipp."
-
-#: kernel/modules/document/document.xml:117
-#, kde-format
-msgctxt "Scripting API"
-msgid "Delete the given node."
-msgstr "Määratud tipu kustutamine."
-
-#: kernel/modules/document/document.xml:124
-#, kde-format
-msgctxt "Scripting API"
-msgid "The node to be deleted."
-msgstr "Kustutatav tipp."
-
-#: kernel/modules/document/document.xml:131
-#, kde-format
-msgctxt "Scripting API"
-msgid "Delete the given edge."
-msgstr "Määratud seose kustutamine."
-
-#: kernel/modules/document/document.xml:138
-#, kde-format
-msgctxt "Scripting API"
-msgid "The edge to be deleted."
-msgstr "Kustutatav seos."
-
-#: kernel/modules/document/edge.xml:9
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"An edge is the connection of two nodes. Edges can be either directed or "
-"undirected, depending on their type.\n"
-msgstr ""
-"\n"
-"Seos on kahe tipu ühendus. Seosed võivad sõltuvalt tüübist olla "
-"orienteeritud või orienteerimata.\n"
-
-#: kernel/modules/document/edge.xml:17
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the identifier of the edge's type. If setting, the edge type "
-"identifier must exist."
-msgstr ""
-"Seose tüübi identifikaatori lugemine ja määramine. Määramisel peab seose "
-"tüübi identifikaator olemas olema."
-
-#: kernel/modules/document/edge.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the origin node of the edge."
-msgstr "Seose algustipu tagastamine."
-
-#: kernel/modules/document/edge.xml:35
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return the target node of the edge."
-msgstr "Seose sihttipu tagastamine."
-
-#: kernel/modules/document/edge.xml:44
-#, kde-format
-msgctxt "Scripting API"
-msgid "Returns true if the edge's type is directed, otherwise false."
-msgstr ""
-"Tõese tagastamine, kui seose tüüp on orienteeritud, vastasel juhul väära "
-"tagastamine."
-
-#: kernel/modules/document/node.xml:11
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"\n"
-"A node is the data element of a graph.\n"
-"It can have arbitrary dynamic properties that are either set in the editor "
-"or simply assigned on run-time.\n"
-"Note that dynamic properties are only available after script execution, if "
-"they are registered for the node's type.\n"
-msgstr ""
-"\n"
-"Tipp on graafi andmeelement.\n"
-"Sel võivad olla suvalised dünaamilised omadused, mida saab määrata "
-"redaktoris või mis omistatakse käitusajal.\n"
-"Pane tähele, et dünaamilised omadused on saadaval alles pärast skripti "
-"täitmist, kui nad on tipu tüübi puhul registreeritud.\n"
-
-#: kernel/modules/document/node.xml:19
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the unique identifier of this node."
-msgstr "Selle tipu unikaalse identifikaatori lugemine ja määramine."
-
-#: kernel/modules/document/node.xml:26
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the x-coordinate of the node."
-msgstr "Tipu X-koordinaadi lugemine ja määramine."
-
-#: kernel/modules/document/node.xml:33
-#, kde-format
-msgctxt "Scripting API"
-msgid "Read and set the y-coordinate of the node."
-msgstr "Tipu Y-koordinaadi lugemine ja määramine."
-
-#: kernel/modules/document/node.xml:40
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
-"for red)."
-msgstr ""
-"Selle tipu värvistringi lugemine ja määramine kuueteistkümnendväärtusena (nt "
-"\"#ff0000\" punase puhul)."
-
-#: kernel/modules/document/node.xml:47
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Read and set the identifier of the node's type. If setting, the node type "
-"identifier must exist."
-msgstr ""
-"Tipu tüübi identifikaatori lugemine ja määramine. Määramisel peab tipu tüübi "
-"identifikaator olemas olema."
-
-#: kernel/modules/document/node.xml:56
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all edges (incoming and outgoing) of this node."
-msgstr "Selle tipu kõigi seoste (sisenevate ja väljuvate) loendi tagastamine."
-
-#: kernel/modules/document/node.xml:65
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return a list of all edges (incoming and outgoing) of this node of a "
-"specified type."
-msgstr ""
-"Selle määratud tüübiga tipu kõigi seoste (sisenevate ja väljuvate) loendi "
-"tagastamine."
-
-#: kernel/modules/document/node.xml:79
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of incoming edges of this node."
-msgstr "Selle tipu sisenevate seoste loendi tagastamine."
-
-#: kernel/modules/document/node.xml:88
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all incoming edges of this node of a specified type."
-msgstr ""
-"Selle määratud tüübiga tipu kõigi sisenevate seoste loendi tagastamine."
-
-#: kernel/modules/document/node.xml:102
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all outgoing edges of this node."
-msgstr "Selle tipu väljuvate seoste loendi tagastamine."
-
-#: kernel/modules/document/node.xml:111
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list of all outgoing edges of this node of a specified type."
-msgstr "Selle määratud tüübiga tipu kõigi väljuvate seoste loendi tagastamine."
-
-#: kernel/modules/document/node.xml:125
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node. This method respects if edges "
-"are directed."
-msgstr ""
-"Kõigi selle tipuga seotud tippude loendi tagastamine. Meetod arvestab, kas "
-"seosed on orienteeritud."
-
-#: kernel/modules/document/node.xml:134
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node via an edge of specified type. "
-"This method respects if edges are directed."
-msgstr ""
-"Kõigi selle tipuga määratud tüübiga seose kaudu seotud tippude loendi "
-"tagastamine. Meetod arvestab, kas seosed on orienteeritud."
-
-#: kernel/modules/document/node.xml:148
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return a list all nodes connected to this node by an incoming edge."
-msgstr ""
-"Kõigi selle tipuga siseneva seose kaudu seotud tippude loendi tagastamine."
-
-#: kernel/modules/document/node.xml:157
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return a list all nodes connected to this node by an incoming edge of "
-"specified type."
-msgstr ""
-"Kõigi selle tipuga määratud tüübiga siseneva seose kaudu seotud tippude "
-"loendi tagastamine."
-
-#: kernel/modules/document/node.xml:171
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return list all nodes connected to this node by an outgoing edge."
-msgstr ""
-"Kõigi selle tipuga väljuva seose kaudu seotud tippude loendi tagastamine."
-
-#: kernel/modules/document/node.xml:180
-#, kde-format
-msgctxt "Scripting API"
-msgid ""
-"Return list all nodes connected to this node by an outgoing edge of "
-"specified type."
-msgstr ""
-"Kõigi selle tipuga määratud tüübiga väljuva seose kaudu seotud tippude "
-"loendi tagastamine."
-
-#: kernel/modules/document/node.xml:194
-#, kde-format
-msgctxt "Scripting API"
-msgid "Return list of distances to specified targets in same order."
-msgstr "Määratud sihtmärkideni vahemaade loendi tagastamine."
-
-#: kernel/modules/document/node.xml:201
-#, kde-format
-msgctxt "Scripting API"
-msgid "Name of edge property that holds the edge length."
-msgstr "Seose pikkust sisaldava seose omaduse nimi."
-
-#: kernel/modules/document/node.xml:206
-#, kde-format
-msgctxt "Scripting API"
-msgid "List of nodes to that the distances shall be computed."
-msgstr "Tippude loend, milleni kaugused arvutada."
-
 #: models/edgemodel.cpp:141
 #, kde-format
 msgctxt "@title:column"
@@ -1440,6 +478,565 @@ msgstr "Vali ja liiguta"
 #, kde-format
 msgid "Select and move elements on the scene"
 msgstr "Elementide valimine ja liigutamine"
+
+#~ msgid "Edge Properties"
+#~ msgstr "Seose omadused"
+
+#~ msgid "Type:"
+#~ msgstr "Tüüp:"
+
+#~ msgid "Dynamic Properties"
+#~ msgstr "Dünaamilised omadused"
+
+#~ msgid "Node Properties"
+#~ msgstr "Tipu omadused"
+
+#~ msgid "Node color"
+#~ msgstr "Tipu värv"
+
+#~ msgid "Assign Values"
+#~ msgstr "Väärtuste omistamine"
+
+#~ msgid "Choose Properties"
+#~ msgstr "Vali omadused"
+
+#~ msgid "Show advanced options."
+#~ msgstr "Muude valikute näitamine."
+
+#~ msgid "Assignment Method"
+#~ msgstr "Omistamisviis"
+
+#~ msgid "Enumerate Items"
+#~ msgstr "Elementide loendamine"
+
+#~ msgid "Enumerate Alpha"
+#~ msgstr "Tähtede loendamine"
+
+#~ msgid "Enumerate Alpha-Numeric"
+#~ msgstr "Tähtede-numbrite loendamine"
+
+#~ msgid "Assign Random Integers"
+#~ msgstr "Juhuslike täisarvude omistamine"
+
+#~ msgid "Assign Random Reals"
+#~ msgstr "Juhuslike reaalarvude omistamine"
+
+#~ msgid "Assign Constant Value"
+#~ msgstr "Konstantväärtuse omistamine"
+
+#, fuzzy
+#~| msgid "Start ID"
+#~ msgid "Start ID:"
+#~ msgstr "Alguse ID"
+
+#~ msgid "Initial string"
+#~ msgstr "Algstring"
+
+#~ msgid "a"
+#~ msgstr "a"
+
+#~ msgid "Start ID"
+#~ msgstr "Alguse ID"
+
+#~ msgid "Prefix"
+#~ msgstr "Prefiks"
+
+#~ msgid "Lower Limit"
+#~ msgstr "Alumine piir"
+
+#~ msgid "Upper Limit"
+#~ msgstr "Ülemine piir"
+
+#~ msgid "Generator Seed"
+#~ msgstr "Genereerija seeme"
+
+#~ msgid "Constant"
+#~ msgstr "Konstant"
+
+#~ msgid "Overwrite existing values"
+#~ msgstr "Olemasolevate väärtuste ülekirjutamine"
+
+#~ msgid "Nodes:"
+#~ msgstr "Tipud:"
+
+#, fuzzy
+#~| msgid "Property Name"
+#~ msgid "Property name:"
+#~ msgstr "Omaduse nimi"
+
+#~ msgid "Edges:"
+#~ msgstr "Seosed:"
+
+#~ msgid "Assign values to selected edges."
+#~ msgstr "Väärtuste omistamine valitud seostele."
+
+#~ msgid "Assign values to selected nodes."
+#~ msgstr "Väärtuste omistamine valitud tippudele."
+
+#~ msgid "Generate Graph"
+#~ msgstr "Graafi genereerimine"
+
+#~ msgid "Select the graph generator."
+#~ msgstr "Graafi genereerija valimine."
+
+#~ msgid "Mesh Graph"
+#~ msgstr "Sõrestikgraaf"
+
+#~ msgid "Star Graph"
+#~ msgstr "Tähtgraaf"
+
+#~ msgid "Circle Graph"
+#~ msgstr "Ringgraaf"
+
+#~ msgid "Random Graph"
+#~ msgstr "Juhuslik graaf"
+
+#~ msgid "Erdös-Renyi Graph"
+#~ msgstr "Erdös-Renyi graaf"
+
+#~ msgid "Random Tree Graph"
+#~ msgstr "Juhuslik puugraaf"
+
+#~ msgid "Complete Graph"
+#~ msgstr "Graafi lõpetamine"
+
+#~ msgid "Show advanced settings."
+#~ msgstr "Muude seadistuste näitamine."
+
+#~ msgid "Set the unique identifier of the generated graph."
+#~ msgstr "Genereeritud graafi unikaalse identifikaatori määramine."
+
+#~ msgid "Graph"
+#~ msgstr "Graaf"
+
+#~ msgid "The node type to create the nodes of the graph with"
+#~ msgstr "Tipu tüüp graafi tippude loomisel"
+
+#, fuzzy
+#~| msgid "Node type"
+#~ msgid "Node type:"
+#~ msgstr "Tipu tüüp"
+
+#~ msgid "The identifier of the created graph (used for scripting)"
+#~ msgstr "Loodud graafi identifikaator (kasutatakse skriptimisel)"
+
+#~ msgid "Number of Columns:"
+#~ msgstr "Veergude arv:"
+
+#~ msgid "Number of Rows:"
+#~ msgstr "Ridade arv:"
+
+#~ msgid "Satellite Nodes:"
+#~ msgstr "Satelliittipud:"
+
+#~ msgid "Number of Nodes:"
+#~ msgstr "Tippude arv:"
+
+#~ msgid "Allow self-edges:"
+#~ msgstr "Omaseoste lubamine:"
+
+#, fuzzy
+#~| msgid "Generator Seed:"
+#~ msgid "Generator seed:"
+#~ msgstr "Genereerija seeme:"
+
+#~ msgid "Nodes (n):"
+#~ msgstr "Tipud (n):"
+
+#~ msgid "Edge Probability (p):"
+#~ msgstr "Seose tõenäosus (p):"
+
+#~ msgid "Generator Seed:"
+#~ msgstr "Genereerija seeme:"
+
+#~ msgid "Number of Nodes"
+#~ msgstr "Tippude arv"
+
+#~ msgid "Edge Probability"
+#~ msgstr "Seose tõenäosus"
+
+#~ msgid "Select the edge type for connections of the generated graph."
+#~ msgstr "Seose tüübi valimine genereeritud graafi ühendustele."
+
+#~ msgid "The edge type to create the edges of the graph with"
+#~ msgstr "Seose tüüp graafi seoste loomisel"
+
+#, fuzzy
+#~| msgid "Edge type"
+#~ msgid "Edge type:"
+#~ msgstr "Seose tüüp"
+
+#, fuzzy
+#~| msgid "Graph Generator"
+#~ msgid "Graph generator:"
+#~ msgstr "Graafi genereerija"
+
+#~ msgid "Select the node type for node elements of the generated graph."
+#~ msgstr "Seose tüübi valimine genereeritud graafi seoseelementidele."
+
+#, fuzzy
+#~| msgid "Graph Document"
+#~ msgid "Graph Layout"
+#~ msgstr "Graafidokument"
+
+#, fuzzy
+#~| msgctxt "Alignment"
+#~| msgid "Center"
+#~ msgid "Center/Root:"
+#~ msgstr "Keskele"
+
+#, fuzzy
+#~| msgid "Node Information"
+#~ msgid "Node separation:"
+#~ msgstr "Tipu teave"
+
+#, fuzzy
+#~| msgid "Type:"
+#~ msgid "Tree type:"
+#~ msgstr "Tüüp:"
+
+#, fuzzy
+#~| msgctxt "@title Displayed plugin name"
+#~| msgid "RootedTree Structure"
+#~ msgid "Rooted tree"
+#~ msgstr "Juurega puu struktuur"
+
+#~ msgid "Transform Edges"
+#~ msgstr "Seoste teisendamine"
+
+#~ msgid ""
+#~ "This option connects all nodes of the given graph. The new edges do not "
+#~ "have any preset weights."
+#~ msgstr ""
+#~ "See valik seob kõik määratud graafi tipud. Uutel seostel pole eelnevalt "
+#~ "määratud kaalu."
+
+#, fuzzy
+#~| msgid "Complete Graph"
+#~ msgid "Complete graph"
+#~ msgstr "Graafi lõpetamine"
+
+#~ msgid "This option removes all edges from the given graph."
+#~ msgstr "See valik eemaldab määratud graafilt kõik seosed."
+
+#, fuzzy
+#~| msgid "Remove all Edges"
+#~ msgid "Remove all edges"
+#~ msgstr "Kõigi seoste eemaldamine"
+
+#~ msgid ""
+#~ "This option reverses all edges of a directed graph. Note that this does "
+#~ "not apply to undirected graphs."
+#~ msgstr ""
+#~ "See valik muudab kõigi orienteeritud graafi seoste orientatsiooni. Pane "
+#~ "tähele, et seda ei saa kasutada orienteerimata graafide puhul."
+
+#, fuzzy
+#~| msgid "Reverse all Edges"
+#~ msgid "Reverse all edges"
+#~ msgstr "Kõik seosed teistpidi"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This option executes "
+#~ "<span style=\" font-style:italic;\">Prim's Minimal Spanning Tree "
+#~ "Algorithm</span> at the graph. All edges without given weights are "
+#~ "assumed to have weights equals 1. Directed and undirected graphs are "
+#~ "processed accordingly.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">See valik käivitab "
+#~ "graafil <span style=\" font-style:italic;\">Primi minimaalse katva puu "
+#~ "algoritmi</span>. Kõigi määramata kaaluga seoste puhul eeldatakse kaalu "
+#~ "1. Töödeldakse vastavalt nii orienteeritud kui orienteerimata graafe.</"
+#~ "p></body></html>"
+
+#, fuzzy
+#~| msgid "Spanning Tree Transformation"
+#~ msgid "Spanning tree transformation"
+#~ msgstr "Katva puu teisendus"
+
+#, fuzzy
+#~| msgid "Remove all Edges"
+#~ msgid "Remove all self edges"
+#~ msgstr "Kõigi seoste eemaldamine"
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "The global Console object allows you to print messages of different "
+#~ "importance to a log."
+#~ msgstr ""
+#~ "Globaalne Konsooli objekt võimaldab kirjutada eri tähtsusega sõnumeid "
+#~ "logisse."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given message of normal severity."
+#~ msgstr "Määratud tavalise raskusastmega teate näitamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given debug message."
+#~ msgstr "Määratud silumisteate näitamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Print the given error message of high severity."
+#~ msgstr "Määratud suure raskusastmega veateate näitamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "The document object provides access to all elements.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Dokumendi objekt pakub ligipääsu kõigile elementidele.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the node with specified ID."
+#~ msgstr "Määratud ID-ga tipu tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of a node."
+#~ msgstr "Tipu identifikaator."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all nodes."
+#~ msgstr "Kõigi tippude loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all nodes of specified type."
+#~ msgstr "Kõigi määratud tüübiga tippude loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of a node type."
+#~ msgstr "Tipu tüübi identifikaator."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all edges."
+#~ msgstr "Kõigi seoste loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all edges of specified type."
+#~ msgstr "Kõigi määratud tüübiga seoste loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Identifier of an edge type."
+#~ msgstr "Seose tüübi identifikaator."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Create node at position (x,y)."
+#~ msgstr "Seose loomine asukohas (x,y)."
+
+#~ msgctxt "Scripting API"
+#~ msgid "X-coordinate of the node."
+#~ msgstr "Seose X-koordinaat."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Y-coordinate of the node."
+#~ msgstr "Seose Y-koordinaat."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Create edge between the given nodes of default edge type."
+#~ msgstr "Vaikimisi seose tüübiga seose loomine määratud tippude vahele."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Start node of the edge."
+#~ msgstr "Seose algustipp."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Target node of the edge."
+#~ msgstr "Seose sihttipp."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Delete the given node."
+#~ msgstr "Määratud tipu kustutamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "The node to be deleted."
+#~ msgstr "Kustutatav tipp."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Delete the given edge."
+#~ msgstr "Määratud seose kustutamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "The edge to be deleted."
+#~ msgstr "Kustutatav seos."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "An edge is the connection of two nodes. Edges can be either directed or "
+#~ "undirected, depending on their type.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Seos on kahe tipu ühendus. Seosed võivad sõltuvalt tüübist olla "
+#~ "orienteeritud või orienteerimata.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the identifier of the edge's type. If setting, the edge type "
+#~ "identifier must exist."
+#~ msgstr ""
+#~ "Seose tüübi identifikaatori lugemine ja määramine. Määramisel peab seose "
+#~ "tüübi identifikaator olemas olema."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the origin node of the edge."
+#~ msgstr "Seose algustipu tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return the target node of the edge."
+#~ msgstr "Seose sihttipu tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Returns true if the edge's type is directed, otherwise false."
+#~ msgstr ""
+#~ "Tõese tagastamine, kui seose tüüp on orienteeritud, vastasel juhul väära "
+#~ "tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "\n"
+#~ "A node is the data element of a graph.\n"
+#~ "It can have arbitrary dynamic properties that are either set in the "
+#~ "editor or simply assigned on run-time.\n"
+#~ "Note that dynamic properties are only available after script execution, "
+#~ "if they are registered for the node's type.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Tipp on graafi andmeelement.\n"
+#~ "Sel võivad olla suvalised dünaamilised omadused, mida saab määrata "
+#~ "redaktoris või mis omistatakse käitusajal.\n"
+#~ "Pane tähele, et dünaamilised omadused on saadaval alles pärast skripti "
+#~ "täitmist, kui nad on tipu tüübi puhul registreeritud.\n"
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the unique identifier of this node."
+#~ msgstr "Selle tipu unikaalse identifikaatori lugemine ja määramine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the x-coordinate of the node."
+#~ msgstr "Tipu X-koordinaadi lugemine ja määramine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Read and set the y-coordinate of the node."
+#~ msgstr "Tipu Y-koordinaadi lugemine ja määramine."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the color string of this node in hex values (e.g., "
+#~ "\"#ff0000\" for red)."
+#~ msgstr ""
+#~ "Selle tipu värvistringi lugemine ja määramine kuueteistkümnendväärtusena "
+#~ "(nt \"#ff0000\" punase puhul)."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Read and set the identifier of the node's type. If setting, the node type "
+#~ "identifier must exist."
+#~ msgstr ""
+#~ "Tipu tüübi identifikaatori lugemine ja määramine. Määramisel peab tipu "
+#~ "tüübi identifikaator olemas olema."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all edges (incoming and outgoing) of this node."
+#~ msgstr ""
+#~ "Selle tipu kõigi seoste (sisenevate ja väljuvate) loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all edges (incoming and outgoing) of this node of a "
+#~ "specified type."
+#~ msgstr ""
+#~ "Selle määratud tüübiga tipu kõigi seoste (sisenevate ja väljuvate) loendi "
+#~ "tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of incoming edges of this node."
+#~ msgstr "Selle tipu sisenevate seoste loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all incoming edges of this node of a specified type."
+#~ msgstr ""
+#~ "Selle määratud tüübiga tipu kõigi sisenevate seoste loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list of all outgoing edges of this node."
+#~ msgstr "Selle tipu väljuvate seoste loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list of all outgoing edges of this node of a specified type."
+#~ msgstr ""
+#~ "Selle määratud tüübiga tipu kõigi väljuvate seoste loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node. This method respects if "
+#~ "edges are directed."
+#~ msgstr ""
+#~ "Kõigi selle tipuga seotud tippude loendi tagastamine. Meetod arvestab, "
+#~ "kas seosed on orienteeritud."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node via an edge of specified "
+#~ "type. This method respects if edges are directed."
+#~ msgstr ""
+#~ "Kõigi selle tipuga määratud tüübiga seose kaudu seotud tippude loendi "
+#~ "tagastamine. Meetod arvestab, kas seosed on orienteeritud."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return a list all nodes connected to this node by an incoming edge."
+#~ msgstr ""
+#~ "Kõigi selle tipuga siseneva seose kaudu seotud tippude loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return a list all nodes connected to this node by an incoming edge of "
+#~ "specified type."
+#~ msgstr ""
+#~ "Kõigi selle tipuga määratud tüübiga siseneva seose kaudu seotud tippude "
+#~ "loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return list all nodes connected to this node by an outgoing edge."
+#~ msgstr ""
+#~ "Kõigi selle tipuga väljuva seose kaudu seotud tippude loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid ""
+#~ "Return list all nodes connected to this node by an outgoing edge of "
+#~ "specified type."
+#~ msgstr ""
+#~ "Kõigi selle tipuga määratud tüübiga väljuva seose kaudu seotud tippude "
+#~ "loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Return list of distances to specified targets in same order."
+#~ msgstr "Määratud sihtmärkideni vahemaade loendi tagastamine."
+
+#~ msgctxt "Scripting API"
+#~ msgid "Name of edge property that holds the edge length."
+#~ msgstr "Seose pikkust sisaldava seose omaduse nimi."
+
+#~ msgctxt "Scripting API"
+#~ msgid "List of nodes to that the distances shall be computed."
+#~ msgstr "Tippude loend, milleni kaugused arvutada."
 
 #~ msgid "Identifier"
 #~ msgstr "Identifikaator"

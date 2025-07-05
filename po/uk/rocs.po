@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:54+0000\n"
+"POT-Creation-Date: 2025-07-05 03:21+0000\n"
 "PO-Revision-Date: 2021-10-24 09:40+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -182,12 +182,6 @@ msgstr "Властивості"
 msgid "Methods"
 msgstr "Методи"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: plugins/scriptapi/scriptapiwidget.ui:17
-#, kde-format
-msgid "Rocs Scripting API"
-msgstr "Інтерфейс (API) роботи зі скриптами Rocs"
-
 #: project/project.cpp:170
 #, kde-format
 msgctxt "@info"
@@ -197,61 +191,6 @@ msgid ""
 msgstr ""
 "Не вдалося імпортувати проєкт Rocs, оскільки не вдалося обробити файл "
 "проєкту."
-
-#. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
-#. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
-#: rocs.kcfg:9 rocs.kcfg:10
-#, kde-format
-msgid "Show text beside icon"
-msgstr "Показувати текст поряд з піктограмою"
-
-#. i18n: ectx: label, entry (includePath), group (IncludeManager)
-#: rocs.kcfg:49
-#, kde-format
-msgid "Path where include manager seek for includes."
-msgstr "Шлях, у якому керування включеннями шукатиме їх."
-
-#. i18n: ectx: Menu (project)
-#: rocsui.rc:23
-#, kde-format
-msgid "Project"
-msgstr "Проєкт"
-
-#. i18n: ectx: Menu (script)
-#: rocsui.rc:29
-#, kde-format
-msgid "Script Document"
-msgstr "Документ скрипту"
-
-#. i18n: ectx: Menu (graph)
-#: rocsui.rc:35
-#, kde-format
-msgid "Graph Document"
-msgstr "Документ графу"
-
-#. i18n: ectx: Menu (graph_file)
-#: rocsui.rc:41
-#, kde-format
-msgid "Graph File"
-msgstr "Файл графу"
-
-#. i18n: ectx: Menu (graph_selected)
-#: rocsui.rc:45
-#, kde-format
-msgid "Edit Selected Data"
-msgstr "Редагувати позначені дані"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:47
-#, kde-format
-msgid "Layout"
-msgstr "Компонування"
-
-#. i18n: ectx: Menu
-#: rocsui.rc:60
-#, kde-format
-msgid "Tools"
-msgstr "Інструменти"
 
 #: ui/codeeditorwidget.cpp:81
 #, kde-format
@@ -353,12 +292,6 @@ msgstr "Назва документа графу"
 #, kde-format
 msgid "Enter the name of your graph document"
 msgstr "Введіть назву вашого документа графу"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: ui/journalwidget.ui:17
-#, kde-format
-msgid "Project Journal"
-msgstr "Журнал проєкту"
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -570,30 +503,6 @@ msgstr ""
 msgid "Unique ID of the node type."
 msgstr "Унікальний ідентифікатор типу вузлів."
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/scriptoutputwidget.ui:24
-#, kde-format
-msgid "Script output:"
-msgstr "Дані, виведені скриптом:"
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
-#: ui/scriptoutputwidget.ui:37
-#, kde-format
-msgid "Clear program output with each execution."
-msgstr "Спорожняти панель виведення даних перед кожним виконанням."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
-#: ui/scriptoutputwidget.ui:56
-#, kde-format
-msgid "Show debug output."
-msgstr "Показувати діагностичні повідомлення."
-
-#. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
-#: ui/scriptoutputwidget.ui:82
-#, kde-format
-msgid "Clear output."
-msgstr "Спорожнити панель виведення."
-
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
@@ -604,6 +513,51 @@ msgstr "Бічна панель інструментів"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Увімкнути або вимкнути перегляд «%1»."
+
+#~ msgid "Rocs Scripting API"
+#~ msgstr "Інтерфейс (API) роботи зі скриптами Rocs"
+
+#~ msgid "Show text beside icon"
+#~ msgstr "Показувати текст поряд з піктограмою"
+
+#~ msgid "Path where include manager seek for includes."
+#~ msgstr "Шлях, у якому керування включеннями шукатиме їх."
+
+#~ msgid "Project"
+#~ msgstr "Проєкт"
+
+#~ msgid "Script Document"
+#~ msgstr "Документ скрипту"
+
+#~ msgid "Graph Document"
+#~ msgstr "Документ графу"
+
+#~ msgid "Graph File"
+#~ msgstr "Файл графу"
+
+#~ msgid "Edit Selected Data"
+#~ msgstr "Редагувати позначені дані"
+
+#~ msgid "Layout"
+#~ msgstr "Компонування"
+
+#~ msgid "Tools"
+#~ msgstr "Інструменти"
+
+#~ msgid "Project Journal"
+#~ msgstr "Журнал проєкту"
+
+#~ msgid "Script output:"
+#~ msgstr "Дані, виведені скриптом:"
+
+#~ msgid "Clear program output with each execution."
+#~ msgstr "Спорожняти панель виведення даних перед кожним виконанням."
+
+#~ msgid "Show debug output."
+#~ msgstr "Показувати діагностичні повідомлення."
+
+#~ msgid "Clear output."
+#~ msgstr "Спорожнити панель виведення."
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Save Project as"
