@@ -59,6 +59,20 @@
 ><contrib
 >Traducción</contrib
 ></othercredit
+> <othercredit role="translator"
+><firstname
+>Eloy</firstname
+><surname
+>Cuadra</surname
+><affiliation
+><address
+><email
+>ecuadra@eloihr.net</email
+></address
+></affiliation
+><contrib
+>Traducción</contrib
+></othercredit
 > 
 </authorgroup>
 
@@ -565,7 +579,7 @@ Console.log("La cobertura de vértices contiene " + C.length + " nodos.");
 ><guimenu
 >Documento de grafo</guimenu
 > <guimenuitem
->Importar grafo...</guimenuitem
+>Importar grafo…</guimenuitem
 ></menuchoice
 > y <menuchoice
 ><guimenu
