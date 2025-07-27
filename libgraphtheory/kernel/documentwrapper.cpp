@@ -82,7 +82,7 @@ QJSValue DocumentWrapper::node(int id) const
     //      using proper caching mechanisms at Document objects
     for (auto const &node : m_document->nodes()) {
         if (node->id() == id) {
-            return m_engine->newQObject(nodeWrapper(node));
+            return nodeWrapper(node)->toScriptValue(m_engine);
         }
     }
     QString command = QString("Document.node(%1)").arg(id);
@@ -95,7 +95,7 @@ QJSValue DocumentWrapper::nodes() const
     NodeList nodes = m_document->nodes();
     QJSValue array = m_engine->newArray(nodes.length());
     for (int i = 0; i < nodes.length(); ++i) {
-        QJSValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)));
+        QJSValue nodeScriptValue = nodeWrapper(nodes.at(i))->toScriptValue(m_engine);
         array.setProperty(i, nodeScriptValue);
     }
     return array;
@@ -119,7 +119,7 @@ QJSValue DocumentWrapper::nodes(int type) const
     NodeList nodes = m_document->nodes(typePtr);
     QJSValue array = m_engine->newArray(nodes.length());
     for (int i = 0; i < nodes.length(); ++i) {
-        QJSValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)));
+        QJSValue nodeScriptValue = nodeWrapper(nodes.at(i))->toScriptValue(m_engine);
         array.setProperty(i, nodeScriptValue);
     }
     return array;
@@ -130,7 +130,7 @@ QJSValue DocumentWrapper::edges() const
     EdgeList edges = m_document->edges();
     QJSValue array = m_engine->newArray(edges.length());
     for (int i = 0; i < edges.length(); ++i) {
-        QJSValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)));
+        QJSValue edgeScriptValue = edgeWrapper(edges.at(i))->toScriptValue(m_engine);
         array.setProperty(i, edgeScriptValue);
     }
     return array;
@@ -154,7 +154,7 @@ QJSValue DocumentWrapper::edges(int type) const
     EdgeList edges = m_document->edges(typePtr);
     QJSValue array = m_engine->newArray(edges.length());
     for (int i = 0; i < edges.length(); ++i) {
-        QJSValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)));
+        QJSValue edgeScriptValue = edgeWrapper(edges.at(i))->toScriptValue(m_engine);
         array.setProperty(i, edgeScriptValue);
     }
     return array;
@@ -165,7 +165,7 @@ QJSValue DocumentWrapper::createNode(int x, int y)
     NodePtr node = Node::create(m_document);
     node->setX(x);
     node->setY(y);
-    return m_engine->newQObject(nodeWrapper(node));
+    return nodeWrapper(node)->toScriptValue(m_engine);
 }
 
 QJSValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
@@ -181,7 +181,7 @@ QJSValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
         return QJSValue();
     }
     EdgePtr edge = Edge::create(from->node(), to->node());
-    return m_engine->newQObject(edgeWrapper(edge));
+    return edgeWrapper(edge)->toScriptValue(m_engine);
 }
 
 void DocumentWrapper::remove(const QJSValue &object)
@@ -208,6 +208,16 @@ void DocumentWrapper::remove(const QJSValue &object)
     } else {
         QString command = QString("Document.remove(obj)");
         Q_EMIT message(i18nc("@info:shell", "%1: \"obj\" is neither a valid node or edge object", command), GraphTheory::MessageType::ErrorMessage);
+    }
+}
+
+void DocumentWrapper::releaseScriptValue()
+{
+    for (auto iter = m_edgeMap.cbegin(); iter != m_edgeMap.cend(); ++iter) {
+        iter.value()->releaseScriptValue();
+    }
+    for (auto iter = m_nodeMap.cbegin(); iter != m_nodeMap.cend(); ++iter) {
+        iter.value()->releaseScriptValue();
     }
 }
 

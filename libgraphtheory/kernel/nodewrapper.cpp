@@ -356,6 +356,36 @@ QList<NodeWrapper *> NodeWrapper::successors(int type) const
     return successors.values();
 }
 
+QJSValue NodeWrapper::toScriptValue(QJSEngine *engine)
+{
+    if (m_scriptValue) {
+        return m_scriptValue.value();
+    }
+    if (!engine) {
+        qCritical() << "cannot create QJSValue, engine is null";
+        return QJSValue();
+    }
+
+    m_scriptValue = engine->newQObject(this);
+    const auto dynamicPropertyNames = m_node->dynamicProperties();
+    for (const auto &propertyName : dynamicPropertyNames) {
+        m_scriptValue->setProperty(propertyName, engine->toScriptValue(m_node->dynamicProperty(propertyName)));
+    }
+    return m_scriptValue.value();
+}
+
+void NodeWrapper::releaseScriptValue()
+{
+    if (!m_scriptValue.has_value()) {
+        return;
+    }
+    const auto dynamicPropertyNames = m_node->dynamicProperties();
+    for (const auto &propertyName : dynamicPropertyNames) {
+        QJSValue value = m_scriptValue->property(propertyName);
+        m_node->setDynamicProperty(propertyName, value.toVariant());
+    }
+}
+
 QJSValue NodeWrapper::distance(const QString &lengthProperty, QList<NodeWrapper *> targets)
 {
     // TODO at a later point in time:
