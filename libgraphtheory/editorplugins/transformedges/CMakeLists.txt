@@ -14,7 +14,7 @@ kcoreaddons_add_plugin(transformedgesplugin SOURCES ${transformedges_SRCS} INSTA
 target_link_libraries(transformedgesplugin
     PUBLIC
     rocsgraphtheory
-    KF5::Completion
+    KF6::Completion
 )
 
 if(BUILD_TESTING)

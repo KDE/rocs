@@ -1,11 +1,8 @@
-##
-#   This file is part of Rocs.
-#   SPDX-FileCopyrightText: 2008-2011 Tomaz Canabrava <tomaz.canabrava@gmail.com>
-#   SPDX-FileCopyrightText: 2010 Wagner Reck <wagner.reck@gmail.com>
-#   SPDX-FileCopyrightText: 2011-2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+# SPDX-FileCopyrightText: 2008-2011 Tomaz Canabrava <tomaz.canabrava@gmail.com>
+# SPDX-FileCopyrightText: 2010 Wagner Reck <wagner.reck@gmail.com>
+# SPDX-FileCopyrightText: 2011-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
-#   SPDX-License-Identifier: GPL-2.0-or-later
-##
+# SPDX-License-Identifier: GPL-2.0-or-later
 
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
@@ -17,8 +14,8 @@ set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_
 
 project(rocs LANGUAGES CXX VERSION ${RELEASE_SERVICE_VERSION})
 
-set(QT_MIN_VERSION "5.15.2")
-set(KF_MIN_VERSION "5.90.0")
+set(QT_MIN_VERSION "6.7.0")
+set(KF_MIN_VERSION "6.0.0")
 
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 
@@ -39,7 +36,6 @@ include(FeatureSummary)
 include(GenerateExportHeader)
 
 find_package(Boost "1.49" REQUIRED)
-find_package(Grantlee5 "5.0.0" REQUIRED)
 
 if(BUILD_TESTING)
     set(QT_CONDITIONAL_COMPONENTS Test)
@@ -51,10 +47,9 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONEN
     QuickWidgets
     Widgets
     Svg
-    XmlPatterns
     ${QT_CONDITIONAL_COMPONENTS}
 )
-find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Archive
     Config
     CoreAddons
@@ -62,9 +57,10 @@ find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     ItemViews
     TextEditor
+    TextTemplate
     XmlGui
 )
-find_package(KF5DocTools)
+find_package(KF6DocTools)
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}

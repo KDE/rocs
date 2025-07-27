@@ -78,10 +78,10 @@ target_link_libraries(rocsgraphtheory
         Qt::Quick
         Qt::QuickWidgets
         Qt::Gui
-        KF5::CoreAddons
-        KF5::I18n
-        KF5::ItemViews
-        KF5::XmlGui
+        KF6::CoreAddons
+        KF6::I18n
+        KF6::ItemViews
+        KF6::XmlGui
 )
 
 set(rocscore_LIB_HDRS

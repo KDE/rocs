@@ -21,7 +21,7 @@ ki18n_wrap_ui(graphlayoutplugin graphlayoutwidget.ui)
 target_link_libraries(graphlayoutplugin
     PUBLIC
     rocsgraphtheory
-    KF5::Completion
+    KF6::Completion
 )
 
 install(TARGETS graphlayoutplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/rocs/editorplugins)

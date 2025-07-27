@@ -10,7 +10,7 @@ macro(GRAPHTHEORY_UNIT_TESTS)
    foreach(_testname ${ARGN})
       add_executable(${_testname} ${_testname}.cpp)
       add_test(NAME graphtheory-${_testname} COMMAND ${_testname})
-      target_link_libraries(${_testname} rocsgraphtheory Qt::Test Qt::XmlPatterns )
+      target_link_libraries(${_testname} rocsgraphtheory Qt::Test )
       ecm_mark_as_test(${_testname})
    endforeach()
 endmacro()
@@ -18,5 +18,5 @@ endmacro()
 graphtheory_unit_tests(
    test_graphoperations
    test_kernel
-   test_kernelscriptapi
+   #   test_kernelscriptapi #TODO port to libxml2
 )

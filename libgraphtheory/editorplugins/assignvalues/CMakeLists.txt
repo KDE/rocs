@@ -13,7 +13,7 @@ kcoreaddons_add_plugin(assignvaluesplugin SOURCES ${assignvalues_SRCS} INSTALL_N
 target_link_libraries(assignvaluesplugin
     PUBLIC
     rocsgraphtheory
-    KF5::Completion
+    KF6::Completion
 )
 
 kde_source_files_enable_exceptions(assignvalueswidget.cpp)

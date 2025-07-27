@@ -71,18 +71,18 @@ ecm_add_app_icon(rocs
 target_link_libraries(rocs
     PUBLIC
         rocsgraphtheory
-        Grantlee5::Templates
-        KF5::Archive
-        KF5::CoreAddons
-        KF5::Crash
-        KF5::I18n
-        KF5::ItemViews
-        KF5::Parts
-        KF5::TextEditor
+	KF6::TextTemplate
+ 	KF6::Archive
+        KF6::CoreAddons
+        KF6::Crash
+        KF6::I18n
+        KF6::ItemViews
+        KF6::Parts
+        KF6::TextEditor
         Qt::Core
         Qt::Quick
         Qt::QuickWidgets
-        Qt::XmlPatterns
+#        Qt::XmlPatterns
 )
 
 ################## INSTALLS ##########################

@@ -20,7 +20,7 @@ kcoreaddons_add_plugin(generategraphplugin SOURCES ${generategraph_SRCS} INSTALL
 target_link_libraries(generategraphplugin
     PUBLIC
     rocsgraphtheory
-    KF5::Completion
+    KF6::Completion
 )
 
 if(BUILD_TESTING)
