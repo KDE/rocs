@@ -78,8 +78,6 @@ target_link_libraries(rocsgraphtheory
         Qt::Quick
         Qt::QuickWidgets
         Qt::Gui
-        Qt::Script
-        Qt::ScriptTools
         KF5::CoreAddons
         KF5::I18n
         KF5::ItemViews
