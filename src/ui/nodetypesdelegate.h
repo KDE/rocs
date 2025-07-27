@@ -25,7 +25,7 @@ public:
     /** reimplemented fromKWidgetItemDelegate **/
     QList<QWidget *> createItemWidgets(const QModelIndex &index) const override;
     /** reimplemented fromKWidgetItemDelegate **/
-    void updateItemWidgets(const QList<QWidget *> widgets, const QStyleOptionViewItem &option, const QPersistentModelIndex &index) const override;
+    void updateItemWidgets(const QList<QWidget *> &widgets, const QStyleOptionViewItem &option, const QPersistentModelIndex &index) const override;
 
 private Q_SLOTS:
     void onColorDialogOpened();

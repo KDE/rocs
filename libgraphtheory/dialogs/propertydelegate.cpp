@@ -57,7 +57,7 @@ QList<QWidget *> PropertyDelegate::createItemWidgets(const QModelIndex &index) c
     return QList<QWidget *>() << nameEdit << deleteButton;
 }
 
-void PropertyDelegate::updateItemWidgets(const QList<QWidget *> widgets, const QStyleOptionViewItem &option, const QPersistentModelIndex &index) const
+void PropertyDelegate::updateItemWidgets(const QList<QWidget *> &widgets, const QStyleOptionViewItem &option, const QPersistentModelIndex &index) const
 {
     // widgets:
     // Name || DeleteButton

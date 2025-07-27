@@ -79,6 +79,7 @@ target_link_libraries(rocs
         KF6::ItemViews
         KF6::Parts
         KF6::TextEditor
+        KF6::TextWidgets
         Qt::Core
         Qt::Quick
         Qt::QuickWidgets

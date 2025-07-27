@@ -14,6 +14,7 @@
 #include "typenames.h"
 #include <KPluginFactory>
 #include <QDialog>
+#include <QPointer>
 
 using namespace GraphTheory;
 

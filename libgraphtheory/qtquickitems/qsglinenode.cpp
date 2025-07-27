@@ -19,7 +19,7 @@ QSGLineNode::QSGLineNode()
     setMaterial(&m_material);
 
     setGeometry(&m_geometry);
-    m_geometry.setDrawingMode(GL_LINES);
+    m_geometry.setDrawingMode(QSGGeometry::DrawLines);
     m_geometry.setLineWidth(2);
 }
 

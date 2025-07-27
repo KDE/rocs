@@ -12,9 +12,25 @@
 #include "rocsversion.h"
 #include "settings.h"
 
+#include "grapheditorwidget.h"
 #include "libgraphtheory/kernel/kernel.h"
 #include "libgraphtheory/view.h"
-
+#include "plugins/scriptapi/scriptapiwidget.h"
+#include "project/project.h"
+#include "ui/codeeditorwidget.h"
+#include "ui/documenttypeswidget.h"
+#include "ui/fileformatdialog.h"
+#include "ui/journalwidget.h"
+#include "ui/scriptoutputwidget.h"
+#include "ui/sidedockwidget.h"
+#include <KActionCollection>
+#include <KActionMenu>
+#include <KConfigDialog>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KRecentFilesAction>
+#include <KTar>
+#include <KToolBar>
 #include <QActionGroup>
 #include <QApplication>
 #include <QCloseEvent>
@@ -29,32 +45,14 @@
 #include <QPointer>
 #include <QPushButton>
 #include <QQuickWidget>
+#include <QRegularExpression>
 #include <QSplitter>
 #include <QToolButton>
-
-#include <KActionCollection>
-#include <KActionMenu>
-#include <KConfigDialog>
-#include <KLocalizedString>
-#include <KMessageBox>
-#include <KRecentFilesAction>
-#include <KTar>
-#include <KToolBar>
 #include <ktexteditor/configpage.h>
 #include <ktexteditor/document.h>
 #include <ktexteditor/editor.h>
 #include <ktexteditor/view.h>
 #include <kwidgetsaddons_version.h>
-
-#include "grapheditorwidget.h"
-#include "plugins/scriptapi/scriptapiwidget.h"
-#include "project/project.h"
-#include "ui/codeeditorwidget.h"
-#include "ui/documenttypeswidget.h"
-#include "ui/fileformatdialog.h"
-#include "ui/journalwidget.h"
-#include "ui/scriptoutputwidget.h"
-#include "ui/sidedockwidget.h"
 
 using namespace GraphTheory;
 
@@ -439,9 +437,9 @@ QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suf
     QString fullPrefix = basePrefix;
 
     if (fullPrefix.isNull()) {
-        fullPrefix = m_currentProject->projectUrl().fileName().remove(QRegExp(".rocs*$"));
+        fullPrefix = m_currentProject->projectUrl().fileName().remove(QRegularExpression(".rocs*$"));
     } else if (fullPrefix.endsWith(fullSuffix)) {
-        fullPrefix.remove(QRegExp(fullSuffix + '$'));
+        fullPrefix.remove(QRegularExpression(fullSuffix + '$'));
     }
 
     targetFile.setFileName(basePath + fullPrefix + fullSuffix);

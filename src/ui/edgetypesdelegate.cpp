@@ -71,7 +71,7 @@ QList<QWidget *> EdgeTypesDelegate::createItemWidgets(const QModelIndex &index) 
     return {colorButton, direction, title, idLabel, propertiesButton};
 }
 
-void EdgeTypesDelegate::updateItemWidgets(const QList<QWidget *> widgets, const QStyleOptionViewItem &option, const QPersistentModelIndex &index) const
+void EdgeTypesDelegate::updateItemWidgets(const QList<QWidget *> &widgets, const QStyleOptionViewItem &option, const QPersistentModelIndex &index) const
 {
     // widgets:
     // Color | Direction | Title | ID
