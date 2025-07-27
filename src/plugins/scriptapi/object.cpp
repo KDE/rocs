@@ -6,6 +6,7 @@
 
 #include "object.h"
 #include <QDebug>
+#include <QVariant>
 
 Object::Object(QObject *parent)
     : QObject(parent)
@@ -13,9 +14,7 @@ Object::Object(QObject *parent)
 {
 }
 
-Object::~Object()
-{
-}
+Object::~Object() = default;
 
 void Object::setId(const QString &id)
 {

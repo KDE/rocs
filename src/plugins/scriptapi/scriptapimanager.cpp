@@ -9,12 +9,10 @@
 #include "object.h"
 #include "parameter.h"
 #include "property.h"
-
-#include <grantlee/engine.h>
-#include <grantlee/metatype.h>
-#include <grantlee/templateloader.h>
-
 #include <KLocalizedString>
+#include <KTextTemplate/Engine>
+#include <KTextTemplate/MetaType>
+#include <KTextTemplate/TemplateLoader>
 #include <QDebug>
 #include <QDir>
 #include <QDomDocument>
@@ -24,8 +22,7 @@
 #include <QStandardPaths>
 #include <QString>
 #include <QUrl>
-#include <QXmlSchema>
-#include <QXmlSchemaValidator>
+#include <QVariant>
 
 ScriptApiManager::ScriptApiManager(QObject *parent)
     : QObject(parent)
@@ -78,11 +75,12 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     }
 
     // initialize Grantlee engine
-    Grantlee::Engine *engine = new Grantlee::Engine(this);
-    QSharedPointer<Grantlee::FileSystemTemplateLoader> loader = QSharedPointer<Grantlee::FileSystemTemplateLoader>(new Grantlee::FileSystemTemplateLoader);
-    loader->setTemplateDirs(QStandardPaths::standardLocations(QStandardPaths::DataLocation));
+    KTextTemplate::Engine *engine = new KTextTemplate::Engine(this);
+    QSharedPointer<KTextTemplate::FileSystemTemplateLoader> loader =
+        QSharedPointer<KTextTemplate::FileSystemTemplateLoader>(new KTextTemplate::FileSystemTemplateLoader);
+    loader->setTemplateDirs(QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation));
     engine->addTemplateLoader(loader);
-    Grantlee::Template t = engine->loadByName("plugin/apidoc/objectApi.html");
+    KTextTemplate::Template t = engine->loadByName("plugin/apidoc/objectApi.html");
 
     // create mapping
     QVariantHash mapping;
@@ -118,7 +116,7 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     mapping.insert("i18nDetailedDescription", i18nc("@title", "Detailed Description"));
     mapping.insert("i18nDescription", i18nc("@title", "Description"));
 
-    Grantlee::Context c(mapping);
+    KTextTemplate::Context c(mapping);
 
     // create and cache HTML file
     m_objectApiDocuments.insert(objectApi->id(), t->render(&c));
@@ -133,12 +131,7 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
         return false;
     }
 
-    QXmlSchema schema = loadXmlSchema("kernelapi");
-    if (!schema.isValid()) {
-        return false;
-    }
-
-    QDomDocument document = loadDomDocument(path, schema);
+    QDomDocument document = loadDomDocument(path);
     if (document.isNull()) {
         qWarning() << "Could not parse document " << path.toLocalFile() << ", aborting.";
         return false;
@@ -224,11 +217,12 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
 QString ScriptApiManager::apiOverviewDocument() const
 {
     // initialize Grantlee engine
-    Grantlee::Engine engine;
-    QSharedPointer<Grantlee::FileSystemTemplateLoader> loader = QSharedPointer<Grantlee::FileSystemTemplateLoader>(new Grantlee::FileSystemTemplateLoader);
-    loader->setTemplateDirs(QStandardPaths::standardLocations(QStandardPaths::DataLocation));
+    KTextTemplate::Engine engine;
+    QSharedPointer<KTextTemplate::FileSystemTemplateLoader> loader =
+        QSharedPointer<KTextTemplate::FileSystemTemplateLoader>(new KTextTemplate::FileSystemTemplateLoader);
+    loader->setTemplateDirs(QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation));
     engine.addTemplateLoader(loader);
-    Grantlee::Template t = engine.loadByName("plugin/apidoc/overview.html");
+    KTextTemplate::Template t = engine.loadByName("plugin/apidoc/overview.html");
 
     // create mapping
     QVariantHash mapping;
@@ -261,32 +255,15 @@ QString ScriptApiManager::apiOverviewDocument() const
     mapping.insert("i18nObjects", i18nc("@title", "Objects"));
     mapping.insert("i18nEngineComponents", i18nc("@title", "Script Engine Modules"));
 
-    Grantlee::Context c(mapping);
+    KTextTemplate::Context c(mapping);
 
     // create HTML file
     return t->render(&c);
 }
 
-QXmlSchema ScriptApiManager::loadXmlSchema(const QString &schemeName) const
-{
-    QString relPath = QString("rocs/schemes/%1.xsd").arg(schemeName);
-    QUrl file = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, relPath));
-    QXmlSchema schema;
-    if (file.isEmpty() || schema.load(file) == false) {
-        qWarning() << "Schema at file " << file.toLocalFile() << " is invalid.";
-    }
-    return schema;
-}
-
-QDomDocument ScriptApiManager::loadDomDocument(const QUrl &path, const QXmlSchema &schema) const
+QDomDocument ScriptApiManager::loadDomDocument(const QUrl &path) const
 {
     QDomDocument document;
-    QXmlSchemaValidator validator(schema);
-    if (!validator.validate(path)) {
-        qWarning() << "Schema is not valid, aborting loading of XML document:" << path.toLocalFile();
-        return document;
-    }
-
     QString errorMsg;
     QFile file(path.toLocalFile());
     if (file.open(QIODevice::ReadOnly)) {

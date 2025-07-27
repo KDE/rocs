@@ -9,11 +9,10 @@
 
 #include "graphtheory_export.h"
 #include "typenames.h"
-
 #include <QObject>
 #include <QSharedPointer>
+#include <QStringList>
 
-class QStringList;
 namespace GraphTheory
 {
 

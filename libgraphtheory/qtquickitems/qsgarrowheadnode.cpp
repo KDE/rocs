@@ -17,7 +17,7 @@ QSGArrowHeadNode::QSGArrowHeadNode()
     setMaterial(&m_material);
 
     setGeometry(&m_geometry);
-    m_geometry.setDrawingMode(GL_TRIANGLES);
+    m_geometry.setDrawingMode(QSGGeometry::DrawTriangles);
 }
 
 QSGArrowHeadNode::~QSGArrowHeadNode()

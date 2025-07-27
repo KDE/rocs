@@ -66,7 +66,6 @@ void Rocs1FileFormat::readFile()
     addTypes(edgeTypeMap, document->edgeTypes());
 
     QTextStream in(&fileHandle);
-    in.setCodec("UTF-8");
 
     while (!in.atEnd()) {
         QString str = in.readLine().simplified();
@@ -260,7 +259,6 @@ void Rocs1FileFormat::writeFile(GraphDocumentPtr graph)
     }
 
     QTextStream stream(&saveFile);
-    stream.setCodec("UTF-8");
     // TODO test for successful serialization
     serialize(graph);
     stream << m_buffer;

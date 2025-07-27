@@ -11,6 +11,7 @@
 #include "graphdocument.h"
 #include "logging_p.h"
 #include <QFile>
+#include <QVariant>
 
 extern GmlParser::GmlGrammarHelper *phelper;
 

@@ -9,8 +9,8 @@
 #include "logging_p.h"
 #include "nodetype.h"
 #include "nodetypestyle.h"
-
 #include <QPointF>
+#include <QVariant>
 
 using namespace GraphTheory;
 

@@ -11,8 +11,8 @@
 #include "graphdocument.h"
 #include "logging_p.h"
 #include "node.h"
-
 #include <QFile>
+#include <QVariant>
 
 extern DotParser::DotGraphParsingHelper *phelper;
 

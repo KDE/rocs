@@ -74,22 +74,12 @@ Q_SIGNALS:
 
 private:
     /**
-     * Load XSD file given by its file name (without ".xsd" suffix). The method searches exclusively
-     * the standard install dir for XSD files in subdirectory "schemes/".
-     *
-     * \param schemeName name of the Xml schema without suffix
-     * \return loaded XML Schema
-     */
-    QXmlSchema loadXmlSchema(const QString &schemeName) const;
-
-    /**
-     * Load XML file given by \p file that confirms with XML schema \p scheme.
+     * Load XML file given by \p file.
      *
      * \param path is the path to the XML file to be loaded
-     * \param scheme is the XML schema describing the DOM
      * \return the loaded DOM document
      */
-    QDomDocument loadDomDocument(const QUrl &path, const QXmlSchema &schema) const;
+    QDomDocument loadDomDocument(const QUrl &path) const;
 
     QList<Object *> m_objectApiList;
     QHash<QString, QString> m_objectApiDocuments;

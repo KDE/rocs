@@ -9,6 +9,7 @@
 #include "gmlgrammar.h"
 #include "gmlgrammarhelper.h"
 #include "logging_p.h"
+#include <QVariant>
 
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<size_t>::max()
 #define BOOST_SPIRIT_DEBUG 1

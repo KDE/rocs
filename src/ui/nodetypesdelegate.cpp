@@ -69,7 +69,7 @@ QList<QWidget *> NodeTypesDelegate::createItemWidgets(const QModelIndex &index) 
     return {colorButton, title, idLabel, propertiesButton};
 }
 
-void NodeTypesDelegate::updateItemWidgets(const QList<QWidget *> widgets, const QStyleOptionViewItem &option, const QPersistentModelIndex &index) const
+void NodeTypesDelegate::updateItemWidgets(const QList<QWidget *> &widgets, const QStyleOptionViewItem &option, const QPersistentModelIndex &index) const
 {
     // widgets:
     // ColorButton | Title | ID
