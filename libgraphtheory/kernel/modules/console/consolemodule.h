@@ -61,7 +61,7 @@ Q_SIGNALS:
 
 private:
     Q_DISABLE_COPY(ConsoleModule)
-    QList<QPair<GraphTheory::MessageType, QString>> m_backlog;
+    QList<std::pair<GraphTheory::MessageType, QString>> m_backlog;
 };
 }
 
