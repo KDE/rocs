@@ -15,7 +15,7 @@ target_link_libraries(gmlfileformat
     PUBLIC
         Qt::Core
         Qt::Gui
-        KF5::I18n
+        KF6::I18n
         rocsgraphtheory
 )
 

@@ -12,5 +12,5 @@ target_link_libraries(scenetest
         Qt::Core
         Qt::Quick
         Qt::Widgets
-        KF5::I18n
+        KF6::I18n
 )

@@ -1,5 +1,4 @@
-# SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
-#
+# SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
 # SPDX-License-Identifier: BSD-2-Clause
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
@@ -15,7 +14,7 @@ target_compile_definitions(TestProject PRIVATE ADDITIONAL_PLUGIN_DIR="${CMAKE_LI
 ecm_mark_as_test(TestProject)
 target_link_libraries(TestProject
     rocsgraphtheory
-    KF5::TextEditor
-    KF5::Archive
+    KF6::TextEditor
+    KF6::Archive
     Qt::Test
 )
