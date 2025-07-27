@@ -56,6 +56,8 @@ public:
     Q_INVOKABLE QJSValue createEdge(GraphTheory::NodeWrapper *from, GraphTheory::NodeWrapper *to);
     Q_INVOKABLE void remove(const QJSValue &object);
 
+    void releaseScriptValue();
+
 Q_SIGNALS:
     void message(const QString &messageString, GraphTheory::MessageType type) const;
 

@@ -12,7 +12,7 @@
 #include "kernel.h"
 #include "node.h"
 #include "typenames.h"
-
+#include <optional>
 #include <QColor>
 #include <QObject>
 
@@ -40,6 +40,14 @@ public:
     ~EdgeWrapper() override;
 
     EdgePtr edge() const;
+
+    QJSValue toScriptValue(QJSEngine *engine);
+
+    /**
+     * retrieve dynamic property values from script value and release association
+     * @note QJSValue is owned by JS engine
+     */
+    void releaseScriptValue();
 
     /**
      * @return EdgeType::id of corresponding node
@@ -70,7 +78,8 @@ Q_SIGNALS:
 private:
     Q_DISABLE_COPY(EdgeWrapper)
     const EdgePtr m_edge;
-    const DocumentWrapper *m_documentWrapper;
+    const DocumentWrapper *m_documentWrapper{nullptr};
+    std::optional<QJSValue> m_scriptValue;
 };
 }
 

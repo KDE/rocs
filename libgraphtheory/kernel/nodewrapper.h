@@ -13,6 +13,7 @@
 #include "typenames.h"
 #include <QColor>
 #include <QObject>
+#include <optional>
 
 class QEvent;
 
@@ -168,6 +169,14 @@ public:
     /** reimplemented from QObject **/
     bool event(QEvent *e) override;
 
+    QJSValue toScriptValue(QJSEngine *engine);
+
+    /**
+     * retrieve dynamic property values from script value and release association
+     * @note QJSValue is owned by JS engine
+     */
+    void releaseScriptValue();
+
 public Q_SLOTS:
     void updateDynamicProperties();
 
@@ -181,7 +190,8 @@ Q_SIGNALS:
 private:
     Q_DISABLE_COPY(NodeWrapper)
     const NodePtr m_node;
-    const DocumentWrapper *m_documentWrapper;
+    const DocumentWrapper *m_documentWrapper{nullptr};
+    std::optional<QJSValue> m_scriptValue;
 };
 }
 

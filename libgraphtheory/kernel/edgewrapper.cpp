@@ -27,13 +27,41 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
     updateDynamicProperties();
 }
 
-EdgeWrapper::~EdgeWrapper()
-{
-}
+EdgeWrapper::~EdgeWrapper() = default;
 
 EdgePtr EdgeWrapper::edge() const
 {
     return m_edge;
+}
+
+QJSValue EdgeWrapper::toScriptValue(QJSEngine *engine)
+{
+    if (m_scriptValue) {
+        return m_scriptValue.value();
+    }
+    if (!engine) {
+        qCritical() << "cannot create QJSValue, engine is null";
+        return QJSValue();
+    }
+
+    m_scriptValue = engine->newQObject(this);
+    const auto dynamicPropertyNames = m_edge->dynamicProperties();
+    for (const auto &propertyName : dynamicPropertyNames) {
+        m_scriptValue->setProperty(propertyName, engine->toScriptValue(m_edge->dynamicProperty(propertyName)));
+    }
+    return m_scriptValue.value();
+}
+
+void EdgeWrapper::releaseScriptValue()
+{
+    if (!m_scriptValue.has_value()) {
+        return;
+    }
+    const auto dynamicPropertyNames = m_edge->dynamicProperties();
+    for (const auto &propertyName : dynamicPropertyNames) {
+        QJSValue value = m_scriptValue->property(propertyName);
+        m_edge->setDynamicProperty(propertyName, value.toVariant());
+    }
 }
 
 int EdgeWrapper::type() const

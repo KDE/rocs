@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "engine.h"
+#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -35,6 +36,8 @@ QJSValue Engine::execute(GraphDocumentPtr document, const QString &script)
         Q_EMIT message("Execution Finished", MessageType::InfoMessage); // TODO this used to be translated!
         Q_EMIT message(result.toString(), MessageType::InfoMessage);
     }
+
+    m_documentWrapper->releaseScriptValue();
 
     m_engine.globalObject().deleteProperty(m_documentIdentifier);
     disconnect(m_documentWrapper.get(), &DocumentWrapper::message, this, &Engine::processMessage);
