@@ -1,8 +1,8 @@
-# SPDX-FileCopyrightText: None
 # SPDX-License-Identifier: CC0-1.0
-
+# SPDX-FileCopyrightText: none
 include:
   - project: sysadmin/ci-utilities
     file:
-      - /gitlab-templates/linux.yml
+      - /gitlab-templates/linux-qt6.yml
+      - /gitlab-templates/linux-qt6-next.yml
       - /gitlab-templates/flatpak.yml
