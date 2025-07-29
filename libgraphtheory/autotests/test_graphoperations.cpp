@@ -176,7 +176,7 @@ void TestGraphOperations::testNodeDynamicProperties()
     node->type()->addDynamicProperty("property");
     node->setDynamicProperty("property", "value");
     QCOMPARE(node->dynamicProperty("property").toString(), QString("value"));
-    node->setDynamicProperty("property", QVariant::Invalid);
+    node->setDynamicProperty("property", QVariant());
     QCOMPARE(node->dynamicProperty("property").isValid(), false);
 
     // test removal of property by node type
@@ -199,7 +199,7 @@ void TestGraphOperations::testEdgeDynamicProperties()
     edge->type()->addDynamicProperty("property");
     edge->setDynamicProperty("property", "value");
     QCOMPARE(edge->dynamicProperty("property").toString(), QString("value"));
-    edge->setDynamicProperty("property", QVariant::Invalid);
+    edge->setDynamicProperty("property", QVariant());
     QCOMPARE(edge->dynamicProperty("property").isValid(), false);
 
     // test removal of property by edge type

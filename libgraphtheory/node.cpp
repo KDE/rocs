@@ -279,7 +279,7 @@ QStringList Node::dynamicProperties() const
 void Node::setDynamicProperty(const QString &property, const QVariant &value)
 {
     if (!d->m_type) {
-        qCWarning(GRAPHTHEORY_GENERAL) << "No type registered, aborting to set property.";
+        qCWarning(GRAPHTHEORY_GENERAL) << "No type registered, dynamic property will not be listed.";
     }
     if (value.isValid() && !d->m_type->dynamicProperties().contains(property)) {
         qCWarning(GRAPHTHEORY_GENERAL) << "Dynamic property not registered at type, aborting to set property.";
@@ -292,7 +292,7 @@ void Node::updateDynamicProperty(const QString &property)
 {
     // remove property if not registered at type
     if (!d->m_type->dynamicProperties().contains(property)) {
-        setDynamicProperty(property, QVariant::Invalid);
+        setDynamicProperty(property, QVariant());
     }
     Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));
 }
@@ -300,7 +300,7 @@ void Node::updateDynamicProperty(const QString &property)
 void Node::renameDynamicProperty(const QString &oldProperty, const QString &newProperty)
 {
     setDynamicProperty(newProperty, dynamicProperty(oldProperty));
-    setDynamicProperty(oldProperty, QVariant::Invalid);
+    setDynamicProperty(oldProperty, QVariant());
     Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(newProperty));
 }
 
