@@ -152,7 +152,7 @@ void Edge::updateDynamicProperty(const QString &property)
 {
     // remove property if not registered at type
     if (!d->m_type->dynamicProperties().contains(property)) {
-        setDynamicProperty(property, QVariant::Invalid);
+        setDynamicProperty(property, QVariant());
     }
 
     Q_EMIT dynamicPropertiesChanged();
@@ -161,7 +161,7 @@ void Edge::updateDynamicProperty(const QString &property)
 void Edge::renameDynamicProperty(const QString &oldProperty, const QString &newProperty)
 {
     setDynamicProperty(newProperty, dynamicProperty(oldProperty));
-    setDynamicProperty(oldProperty, QVariant::Invalid);
+    setDynamicProperty(oldProperty, QVariant());
     Q_EMIT dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(newProperty));
 }
 
