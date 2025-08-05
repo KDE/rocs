@@ -55,7 +55,7 @@ msgstr "Andreas Cord-Landwehr"
 #, kde-format
 msgctxt "@info:credit Role"
 msgid "Maintainer"
-msgstr "المصين"
+msgstr "الصائن"
 
 #: main.cpp:37
 #, kde-format
@@ -240,7 +240,7 @@ msgstr ""
 #: rocsui.rc:47
 #, kde-format
 msgid "Layout"
-msgstr "التّخطيط"
+msgstr "التخطيط"
 
 #. i18n: ectx: Menu
 #: rocsui.rc:60
