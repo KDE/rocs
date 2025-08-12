@@ -1,12 +1,9 @@
-/*
- *  SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
-import QtQuick 2.2
-import QtQuick.Controls 1.1
-import org.kde.rocs.graphtheory 1.0
+import QtQuick
+import QtQuick.Controls
+import org.kde.rocs.graphtheory
 
 Action {
     id: root
@@ -26,7 +23,7 @@ Action {
     }
 
     text: i18n("Create Edge")
-    iconSource: "qrc:/icons/edge"
+    icon.source: "qrc:/icons/edge"
     checkable: true
-    tooltip: i18n("Create an edge between two nodes")
+    //TODO tooltip: i18n("Create an edge between two nodes")
 }
