@@ -40,10 +40,10 @@ void TestProject::projectOperations()
     QCOMPARE(project.codeDocuments().length(), 2); // check correct adding
 
     qDebug() << "Project working dir  =" << project.workingDir();
-    qDebug() << "Project document path=" << project.codeDocuments().first()->url().toLocalFile();
+    qDebug() << "Project document path=" << project.codeDocuments().at(0)->url().toLocalFile();
     qDebug() << "Test working dir     =" << QDir::currentPath();
 
-    QVERIFY(project.codeDocuments().first()->url().toLocalFile().startsWith(QDir::currentPath())); // check working dir
+    QVERIFY(project.codeDocuments().at(0)->url().toLocalFile().startsWith(QDir::currentPath())); // check working dir
     QVERIFY(codeDoc1->url().toLocalFile() != codeDoc2->url().toLocalFile()); // check for distinct names
     project.tryToRemoveCodeDocument(codeDoc1); // check removal
     QCOMPARE(project.codeDocuments().length(), 1);
@@ -174,7 +174,7 @@ void TestProject::loadBrokenFilesWithoutCrashing01()
     GraphTheory::Editor *graphEditor = new GraphTheory::Editor;
     Project project(QUrl::fromLocalFile("testfiles/broken_01.rocs"), graphEditor);
     // TODO disable test until file format scheme comparison is implemented again
-    QSKIP("scheme parsing not implemented");
+    QSKIP("scheme checking not implemented");
     QCOMPARE(project.graphDocuments().count(), 0);
 }
 
