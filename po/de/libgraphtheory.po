@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2025-08-13 00:39+0000\n"
 "PO-Revision-Date: 2022-10-12 22:10+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -868,14 +868,14 @@ msgstr "Graph-Markup-Sprachformat (%1)"
 msgid "Rocs 1 Graph File Format (%1)"
 msgstr "Rocs1-Graphendatei-Format (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:258
+#: fileformats/rocs1/rocs1fileformat.cpp:257
 #: fileformats/rocs2/rocs2fileformat.cpp:211
 #: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
 msgstr "Die Datei „%1“ lässt sich nicht im Schreibmodus öffnen: %2"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:269
+#: fileformats/rocs1/rocs1fileformat.cpp:267
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
 msgstr ""
@@ -926,19 +926,19 @@ msgctxt "@title:tab initial title for graph document"
 msgid "New Graph"
 msgstr "Neuer Graph"
 
-#: kernel/documentwrapper.cpp:88
+#: kernel/documentwrapper.cpp:89
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: no node with ID %2 registered"
 msgstr "%1: Ein Knoten mit der Kennung %2 ist nicht registriert"
 
-#: kernel/documentwrapper.cpp:115 kernel/nodewrapper.cpp:109
+#: kernel/documentwrapper.cpp:116 kernel/nodewrapper.cpp:109
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: node type ID %2 not registered"
 msgstr "%1: Knotentyp mit der Kennung %2 ist nicht registriert"
 
-#: kernel/documentwrapper.cpp:150 kernel/edgewrapper.cpp:59
+#: kernel/documentwrapper.cpp:151 kernel/edgewrapper.cpp:87
 #: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
 #: kernel/nodewrapper.cpp:205 kernel/nodewrapper.cpp:242
 #: kernel/nodewrapper.cpp:288 kernel/nodewrapper.cpp:339
@@ -947,35 +947,33 @@ msgctxt "@info:shell"
 msgid "%1: edge type ID %2 not registered"
 msgstr "%1: Kantentyp mit der Kennung %2 ist nicht registriert"
 
-#: kernel/documentwrapper.cpp:174
+#: kernel/documentwrapper.cpp:175
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"from\" is not a valid node object"
 msgstr "%1: „from“ ist kein gültiges Knotenobjekt"
 
-#: kernel/documentwrapper.cpp:179
+#: kernel/documentwrapper.cpp:180
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"to\" is not a valid node object"
 msgstr "%1: „to“ ist kein gültiges Knotenobjekt"
 
-#: kernel/documentwrapper.cpp:190
-#, kde-format
+#: kernel/documentwrapper.cpp:191
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "%1: \"to\" is not a valid node object"
 msgctxt "@info:shell"
-msgid "%1: \"node\" is not a valid node object"
-msgstr "%1: „node“ ist kein gültiges Knotenobjekt"
+msgid "%1: \"obj\" is not called on an object"
+msgstr "%1: „to“ ist kein gültiges Knotenobjekt"
 
-#: kernel/documentwrapper.cpp:204
-#, kde-format
+#: kernel/documentwrapper.cpp:210
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "%1: \"to\" is not a valid node object"
 msgctxt "@info:shell"
-msgid "%1: \"edge\" is not a valid edge object"
-msgstr "%1: „edge“ ist kein gültiges Kantenobjekt"
-
-#: kernel/kernel.cpp:94
-#, kde-format
-msgctxt "@info status message after successful script execution"
-msgid "<i>Execution Finished</i>"
-msgstr "<i>Ausführung beendet</i>"
+msgid "%1: \"obj\" is neither a valid node or edge object"
+msgstr "%1: „to“ ist kein gültiges Knotenobjekt"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -1395,45 +1393,49 @@ msgctxt "@title:column"
 msgid "NodeTypeProperty"
 msgstr "Eigenschaften des Knotentyps"
 
-#: qml/AddEdgeAction.qml:28
+#: qml/AddEdgeAction.qml:25
 #, kde-format
 msgid "Create Edge"
 msgstr "Kante erstellen"
 
-#: qml/AddEdgeAction.qml:31
-#, kde-format
-msgid "Create an edge between two nodes"
-msgstr "Erstellt eine neue Kante zwischen zwei Knoten"
-
-#: qml/AddNodeAction.qml:13
+#: qml/AddNodeAction.qml:10
 #, kde-format
 msgid "Create Node"
 msgstr "Knoten erstellen"
 
-#: qml/AddNodeAction.qml:16
-#, kde-format
-msgid "Add a node to the scene"
-msgstr "Fügt einen neuen Knoten zum Graphen hinzu"
-
-#: qml/DeleteAction.qml:13
+#: qml/DeleteAction.qml:10
 #, kde-format
 msgid "Delete Element"
 msgstr "Element löschen"
 
-#: qml/DeleteAction.qml:16
-#, kde-format
-msgid "Delete element from scene"
-msgstr "Löscht ein Element vom Graphen"
-
-#: qml/SelectMoveAction.qml:14
+#: qml/SelectMoveAction.qml:11
 #, kde-format
 msgid "Select & Move"
 msgstr "Auswählen & verschieben"
 
-#: qml/SelectMoveAction.qml:17
-#, kde-format
-msgid "Select and move elements on the scene"
-msgstr "Elemente im Graphen auswählen und verschieben"
+#~ msgctxt "@info:shell"
+#~ msgid "%1: \"node\" is not a valid node object"
+#~ msgstr "%1: „node“ ist kein gültiges Knotenobjekt"
+
+#~ msgctxt "@info:shell"
+#~ msgid "%1: \"edge\" is not a valid edge object"
+#~ msgstr "%1: „edge“ ist kein gültiges Kantenobjekt"
+
+#~ msgctxt "@info status message after successful script execution"
+#~ msgid "<i>Execution Finished</i>"
+#~ msgstr "<i>Ausführung beendet</i>"
+
+#~ msgid "Create an edge between two nodes"
+#~ msgstr "Erstellt eine neue Kante zwischen zwei Knoten"
+
+#~ msgid "Add a node to the scene"
+#~ msgstr "Fügt einen neuen Knoten zum Graphen hinzu"
+
+#~ msgid "Delete element from scene"
+#~ msgstr "Löscht ein Element vom Graphen"
+
+#~ msgid "Select and move elements on the scene"
+#~ msgstr "Elemente im Graphen auswählen und verschieben"
 
 #~ msgid "Identifier"
 #~ msgstr "Kennung"

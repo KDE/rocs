@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2025-08-13 00:39+0000\n"
 "PO-Revision-Date: 2023-11-26 20:12+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -860,14 +860,14 @@ msgstr "Grafea Markad-Lingva Formato (%1)"
 msgid "Rocs 1 Graph File Format (%1)"
 msgstr "Rocs 1 Grafea Dosierformato (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:258
+#: fileformats/rocs1/rocs1fileformat.cpp:257
 #: fileformats/rocs2/rocs2fileformat.cpp:211
 #: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
 msgstr "Ne eblis malfermi la dosieron \"%1\" en skribreĝimo: %2"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:269
+#: fileformats/rocs1/rocs1fileformat.cpp:267
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
 msgstr "Ne eblis skribi datumojn, ĉesigante. Eraro: %1."
@@ -915,19 +915,19 @@ msgctxt "@title:tab initial title for graph document"
 msgid "New Graph"
 msgstr "Nova Grafeo"
 
-#: kernel/documentwrapper.cpp:88
+#: kernel/documentwrapper.cpp:89
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: no node with ID %2 registered"
 msgstr "%1: neniu nodo kun ID %2 registrita"
 
-#: kernel/documentwrapper.cpp:115 kernel/nodewrapper.cpp:109
+#: kernel/documentwrapper.cpp:116 kernel/nodewrapper.cpp:109
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: node type ID %2 not registered"
 msgstr "%1: nodo-tipo ID %2 ne registrita"
 
-#: kernel/documentwrapper.cpp:150 kernel/edgewrapper.cpp:59
+#: kernel/documentwrapper.cpp:151 kernel/edgewrapper.cpp:87
 #: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
 #: kernel/nodewrapper.cpp:205 kernel/nodewrapper.cpp:242
 #: kernel/nodewrapper.cpp:288 kernel/nodewrapper.cpp:339
@@ -936,35 +936,33 @@ msgctxt "@info:shell"
 msgid "%1: edge type ID %2 not registered"
 msgstr "%1: eĝtipa ID %2 ne registrita"
 
-#: kernel/documentwrapper.cpp:174
+#: kernel/documentwrapper.cpp:175
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"from\" is not a valid node object"
 msgstr "%1: \"de\" ne estas valida noda objekto"
 
-#: kernel/documentwrapper.cpp:179
+#: kernel/documentwrapper.cpp:180
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"to\" is not a valid node object"
 msgstr "%1: \"al\" ne estas valida noda objekto"
 
-#: kernel/documentwrapper.cpp:190
-#, kde-format
+#: kernel/documentwrapper.cpp:191
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "%1: \"to\" is not a valid node object"
 msgctxt "@info:shell"
-msgid "%1: \"node\" is not a valid node object"
-msgstr "%1: \"nodo\" ne estas valida noda objekto"
+msgid "%1: \"obj\" is not called on an object"
+msgstr "%1: \"al\" ne estas valida noda objekto"
 
-#: kernel/documentwrapper.cpp:204
-#, kde-format
+#: kernel/documentwrapper.cpp:210
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "%1: \"to\" is not a valid node object"
 msgctxt "@info:shell"
-msgid "%1: \"edge\" is not a valid edge object"
-msgstr "%1: \"eĝo\" ne estas valida eĝobjekto"
-
-#: kernel/kernel.cpp:94
-#, kde-format
-msgctxt "@info status message after successful script execution"
-msgid "<i>Execution Finished</i>"
-msgstr "<i>Efektivigo Finita</i>"
+msgid "%1: \"obj\" is neither a valid node or edge object"
+msgstr "%1: \"al\" ne estas valida noda objekto"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -1369,42 +1367,46 @@ msgctxt "@title:column"
 msgid "NodeTypeProperty"
 msgstr "NodTipTrajto"
 
-#: qml/AddEdgeAction.qml:28
+#: qml/AddEdgeAction.qml:25
 #, kde-format
 msgid "Create Edge"
 msgstr "Krei Eĝon"
 
-#: qml/AddEdgeAction.qml:31
-#, kde-format
-msgid "Create an edge between two nodes"
-msgstr "Krei eĝon inter du nodoj"
-
-#: qml/AddNodeAction.qml:13
+#: qml/AddNodeAction.qml:10
 #, kde-format
 msgid "Create Node"
 msgstr "Krei Nodon"
 
-#: qml/AddNodeAction.qml:16
-#, kde-format
-msgid "Add a node to the scene"
-msgstr "Aldoni nodon al la sceno"
-
-#: qml/DeleteAction.qml:13
+#: qml/DeleteAction.qml:10
 #, kde-format
 msgid "Delete Element"
 msgstr "Forigi Elementon"
 
-#: qml/DeleteAction.qml:16
-#, kde-format
-msgid "Delete element from scene"
-msgstr "Forigi elementon de sceno"
-
-#: qml/SelectMoveAction.qml:14
+#: qml/SelectMoveAction.qml:11
 #, kde-format
 msgid "Select & Move"
 msgstr "Elekti & Movi"
 
-#: qml/SelectMoveAction.qml:17
-#, kde-format
-msgid "Select and move elements on the scene"
-msgstr "Elekti kaj movi elementojn sur la sceno"
+#~ msgctxt "@info:shell"
+#~ msgid "%1: \"node\" is not a valid node object"
+#~ msgstr "%1: \"nodo\" ne estas valida noda objekto"
+
+#~ msgctxt "@info:shell"
+#~ msgid "%1: \"edge\" is not a valid edge object"
+#~ msgstr "%1: \"eĝo\" ne estas valida eĝobjekto"
+
+#~ msgctxt "@info status message after successful script execution"
+#~ msgid "<i>Execution Finished</i>"
+#~ msgstr "<i>Efektivigo Finita</i>"
+
+#~ msgid "Create an edge between two nodes"
+#~ msgstr "Krei eĝon inter du nodoj"
+
+#~ msgid "Add a node to the scene"
+#~ msgstr "Aldoni nodon al la sceno"
+
+#~ msgid "Delete element from scene"
+#~ msgstr "Forigi elementon de sceno"
+
+#~ msgid "Select and move elements on the scene"
+#~ msgstr "Elekti kaj movi elementojn sur la sceno"

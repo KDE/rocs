@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeedu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:54+0000\n"
+"POT-Creation-Date: 2025-08-13 00:39+0000\n"
 "PO-Revision-Date: 2014-10-20 20:13+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -89,79 +89,79 @@ msgstr "Glavni programer"
 msgid "Project to open."
 msgstr "Dnevnik projekta"
 
-#: plugins/scriptapi/scriptapimanager.cpp:111
+#: plugins/scriptapi/scriptapimanager.cpp:109
 #, kde-format
 msgctxt "@title"
 msgid "Syntax"
 msgstr "Sintaksa"
 
-#: plugins/scriptapi/scriptapimanager.cpp:112
+#: plugins/scriptapi/scriptapimanager.cpp:110
 #, kde-format
 msgctxt "@title"
 msgid "Properties"
 msgstr "Svojstva"
 
-#: plugins/scriptapi/scriptapimanager.cpp:113
+#: plugins/scriptapi/scriptapimanager.cpp:111
 #, kde-format
 msgctxt "@title"
 msgid "Parameters"
 msgstr "Parmetri"
 
-#: plugins/scriptapi/scriptapimanager.cpp:114
+#: plugins/scriptapi/scriptapimanager.cpp:112
 #, kde-format
 msgctxt "@title"
 msgid "Parameter"
 msgstr "Parametar"
 
-#: plugins/scriptapi/scriptapimanager.cpp:115
+#: plugins/scriptapi/scriptapimanager.cpp:113
 #, kde-format
 msgctxt "@title"
 msgid "Methods"
 msgstr "Metode"
 
-#: plugins/scriptapi/scriptapimanager.cpp:116
+#: plugins/scriptapi/scriptapimanager.cpp:114
 #, kde-format
 msgctxt "@title"
 msgid "Type"
 msgstr "Tip"
 
-#: plugins/scriptapi/scriptapimanager.cpp:117
+#: plugins/scriptapi/scriptapimanager.cpp:115
 #, kde-format
 msgctxt "@title"
 msgid "Return Type"
 msgstr "Povratni tip"
 
-#: plugins/scriptapi/scriptapimanager.cpp:118
+#: plugins/scriptapi/scriptapimanager.cpp:116
 #, kde-format
 msgctxt "@title"
 msgid "Detailed Description"
 msgstr "Detaljni opis"
 
-#: plugins/scriptapi/scriptapimanager.cpp:119
+#: plugins/scriptapi/scriptapimanager.cpp:117
 #, kde-format
 msgctxt "@title"
 msgid "Description"
 msgstr "Opis"
 
-#: plugins/scriptapi/scriptapimanager.cpp:259
+#: plugins/scriptapi/scriptapimanager.cpp:253
 #, kde-format
 msgctxt "@title"
 msgid "Script Engine API"
 msgstr "API skriptnog pogona"
 
-#: plugins/scriptapi/scriptapimanager.cpp:260
+#: plugins/scriptapi/scriptapimanager.cpp:254
 #, fuzzy, kde-format
 msgctxt "@title"
 msgid "The Graph Document"
 msgstr "Novi grafički dokument"
 
-#: plugins/scriptapi/scriptapimanager.cpp:261
+#: plugins/scriptapi/scriptapimanager.cpp:255
 #, kde-format
 msgctxt "@title"
 msgid "Objects"
 msgstr "Objekti"
 
-#: plugins/scriptapi/scriptapimanager.cpp:262
+#: plugins/scriptapi/scriptapimanager.cpp:256
 #, fuzzy, kde-format
 msgctxt "@title"
 msgid "Script Engine Modules"
@@ -354,74 +354,60 @@ msgstr "Unesi ime datoteke za novu skriptnu datoteku"
 msgid "Project Journal"
 msgstr "Dnevnik projekta"
 
-#: ui/mainwindow.cpp:171
+#: ui/mainwindow.cpp:169
 #, kde-format
 msgctxt "@action:intoolbar Script Execution"
 msgid "Run"
 msgstr "Pokreni"
 
-#: ui/mainwindow.cpp:172
+#: ui/mainwindow.cpp:170
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Execute currently active script on active graph document."
 msgstr ""
 
-#: ui/mainwindow.cpp:173
+#: ui/mainwindow.cpp:171
 #, kde-format
 msgctxt "@action:intoolbar Script Execution"
 msgid "Stop"
 msgstr "Prekini"
 
-#: ui/mainwindow.cpp:174
+#: ui/mainwindow.cpp:172
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop script execution."
 msgstr ""
 
-#: ui/mainwindow.cpp:176
-#, fuzzy, kde-format
-#| msgctxt "@title:menu Debug execution"
-#| msgid "Debug"
-msgctxt "@action:intoolbar Open Debugger"
-msgid "Debugger"
-msgstr "Ispravka grešaka"
-
-#: ui/mainwindow.cpp:177
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Open the Javascript code debugger."
-msgstr ""
-
-#: ui/mainwindow.cpp:212
+#: ui/mainwindow.cpp:204
 #, kde-format
 msgid "Element Types"
 msgstr "Tipovi elementa"
 
-#: ui/mainwindow.cpp:219
+#: ui/mainwindow.cpp:211
 #, kde-format
 msgctxt "@title"
 msgid "Journal"
 msgstr "Dnevnik"
 
-#: ui/mainwindow.cpp:223
+#: ui/mainwindow.cpp:215
 #, kde-format
 msgctxt "@title"
 msgid "Scripting API"
 msgstr "API za skripte"
 
-#: ui/mainwindow.cpp:258
+#: ui/mainwindow.cpp:250
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Project"
 msgstr "Novi projekat"
 
-#: ui/mainwindow.cpp:264
+#: ui/mainwindow.cpp:256
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project"
 msgstr "Snimi projekat"
 
-#: ui/mainwindow.cpp:270
+#: ui/mainwindow.cpp:262
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Open Project"
@@ -429,25 +415,25 @@ msgctxt "@action:inmenu"
 msgid "Open Project..."
 msgstr "Otvori projekat"
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:270
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Recent Projects"
 msgstr "Prethodni projekti"
 
-#: ui/mainwindow.cpp:283
+#: ui/mainwindow.cpp:275
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project As..."
 msgstr "Snimi projekat kao"
 
-#: ui/mainwindow.cpp:284
+#: ui/mainwindow.cpp:276
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Graph Document"
 msgstr "Novi grafički dokument"
 
-#: ui/mainwindow.cpp:285
+#: ui/mainwindow.cpp:277
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "New Script File"
@@ -455,7 +441,7 @@ msgctxt "@action:inmenu"
 msgid "New Script File..."
 msgstr "Nova skriptna datoteka"
 
-#: ui/mainwindow.cpp:286
+#: ui/mainwindow.cpp:278
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Import Graph"
@@ -463,7 +449,7 @@ msgctxt "@action:inmenu"
 msgid "Import Graph..."
 msgstr "Uvezi graf"
 
-#: ui/mainwindow.cpp:287
+#: ui/mainwindow.cpp:279
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Export Graph as"
@@ -471,7 +457,7 @@ msgctxt "@action:inmenu"
 msgid "Export Graph As..."
 msgstr "Izvezi graf kao"
 
-#: ui/mainwindow.cpp:288
+#: ui/mainwindow.cpp:280
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Import Script"
@@ -479,92 +465,92 @@ msgctxt "@action:inmenu"
 msgid "Import Script..."
 msgstr "Uvezi skriptu"
 
-#: ui/mainwindow.cpp:289
+#: ui/mainwindow.cpp:281
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Script..."
 msgstr "Izvezi skriptu kao"
 
-#: ui/mainwindow.cpp:328
+#: ui/mainwindow.cpp:320
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Import Script into Project"
 msgstr "Uvezi grafičku datoteku u projekat"
 
-#: ui/mainwindow.cpp:341
+#: ui/mainwindow.cpp:333
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Export Script"
 msgstr "Izvezi skriptu kao"
 
-#: ui/mainwindow.cpp:341
+#: ui/mainwindow.cpp:333
 #, kde-format
 msgid "JavaScript (*.js)"
 msgstr ""
 
-#: ui/mainwindow.cpp:352
+#: ui/mainwindow.cpp:344
 #, fuzzy, kde-format
 msgid "untitled"
 msgstr "[ bez naslova ]"
 
-#: ui/mainwindow.cpp:375
+#: ui/mainwindow.cpp:367
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Save Project As"
 msgstr "Snimi projekat kao"
 
-#: ui/mainwindow.cpp:375
+#: ui/mainwindow.cpp:367
 #, kde-format
 msgid "Rocs Projects (*.rocs)"
 msgstr ""
 
-#: ui/mainwindow.cpp:385
+#: ui/mainwindow.cpp:377
 #, kde-format
 msgctxt "@info"
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
 
-#: ui/mainwindow.cpp:386
+#: ui/mainwindow.cpp:378
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Overwrite File?"
 msgstr "Prepiši"
 
-#: ui/mainwindow.cpp:409
+#: ui/mainwindow.cpp:401
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Project Files"
 msgstr "Otvori projektne datoteke"
 
-#: ui/mainwindow.cpp:409
+#: ui/mainwindow.cpp:401
 #, kde-format
 msgid "Rocs projects (*.rocs)"
 msgstr ""
 
-#: ui/mainwindow.cpp:434
+#: ui/mainwindow.cpp:426
 #, fuzzy, kde-format
 msgctxt "caption text for temporary project"
 msgid "[ untitled ]%1"
 msgstr "[ bez naslova ]"
 
-#: ui/mainwindow.cpp:463
+#: ui/mainwindow.cpp:455
 #, kde-format
 msgid "ScriptName"
 msgstr "Skriptno ime"
 
-#: ui/mainwindow.cpp:463
+#: ui/mainwindow.cpp:455
 #, kde-format
 msgid "Enter the name of your new script"
 msgstr "Unesi ime datoteke za novu skriptnu datoteku"
 
-#: ui/mainwindow.cpp:472
+#: ui/mainwindow.cpp:464
 #, fuzzy, kde-format
 #| msgid "File Exists"
 msgid "File already exists."
 msgstr "Datoteka postoji"
 
-#: ui/mainwindow.cpp:498
+#: ui/mainwindow.cpp:490
 #, kde-format
 msgctxt "@info"
 msgid "Changes on your project are unsaved. Do you want to save your changes?"
@@ -611,6 +597,13 @@ msgstr "Bočna alatna traka"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Preklopi '%1' pogled."
+
+#, fuzzy
+#~| msgctxt "@title:menu Debug execution"
+#~| msgid "Debug"
+#~ msgctxt "@action:intoolbar Open Debugger"
+#~ msgid "Debugger"
+#~ msgstr "Ispravka grešaka"
 
 #~ msgctxt "@action:inmenu"
 #~ msgid "Save Project as"

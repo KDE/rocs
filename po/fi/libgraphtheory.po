@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2025-08-13 00:39+0000\n"
 "PO-Revision-Date: 2022-02-16 20:35+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -874,14 +874,14 @@ msgstr "Graph Markup Language -tiedostomuoto (%1)"
 msgid "Rocs 1 Graph File Format (%1)"
 msgstr "Rocs 1:n graafitiedostomuoto (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:258
+#: fileformats/rocs1/rocs1fileformat.cpp:257
 #: fileformats/rocs2/rocs2fileformat.cpp:211
 #: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
 msgstr "Tiedoston %1 avaaminen kirjoitustilaan epäonnistui: %2"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:269
+#: fileformats/rocs1/rocs1fileformat.cpp:267
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
 msgstr "Tietoa ei voi kirjoittaa: keskeytetään. Virhe: %1."
@@ -932,19 +932,19 @@ msgctxt "@title:tab initial title for graph document"
 msgid "New Graph"
 msgstr "Uusi graafi"
 
-#: kernel/documentwrapper.cpp:88
+#: kernel/documentwrapper.cpp:89
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: no node with ID %2 registered"
 msgstr "%1: solmua tunnisteella %2 ei ole rekisteröity"
 
-#: kernel/documentwrapper.cpp:115 kernel/nodewrapper.cpp:109
+#: kernel/documentwrapper.cpp:116 kernel/nodewrapper.cpp:109
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: node type ID %2 not registered"
 msgstr "%1: solmutyypin tunnistetta %2 ei ole rekisteröity"
 
-#: kernel/documentwrapper.cpp:150 kernel/edgewrapper.cpp:59
+#: kernel/documentwrapper.cpp:151 kernel/edgewrapper.cpp:87
 #: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
 #: kernel/nodewrapper.cpp:205 kernel/nodewrapper.cpp:242
 #: kernel/nodewrapper.cpp:288 kernel/nodewrapper.cpp:339
@@ -953,35 +953,33 @@ msgctxt "@info:shell"
 msgid "%1: edge type ID %2 not registered"
 msgstr "%1: välityypin tunnistetta %2 ei ole rekisteröity"
 
-#: kernel/documentwrapper.cpp:174
+#: kernel/documentwrapper.cpp:175
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"from\" is not a valid node object"
 msgstr "%1: ”from” ei ole kelvollinen solmuolio"
 
-#: kernel/documentwrapper.cpp:179
+#: kernel/documentwrapper.cpp:180
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"to\" is not a valid node object"
 msgstr "%1: ”to” ei ole kelvollinen solmuolio"
 
-#: kernel/documentwrapper.cpp:190
-#, kde-format
+#: kernel/documentwrapper.cpp:191
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "%1: \"to\" is not a valid node object"
 msgctxt "@info:shell"
-msgid "%1: \"node\" is not a valid node object"
-msgstr "%1: ”node” ei ole kelvollinen solmuolio"
+msgid "%1: \"obj\" is not called on an object"
+msgstr "%1: ”to” ei ole kelvollinen solmuolio"
 
-#: kernel/documentwrapper.cpp:204
-#, kde-format
+#: kernel/documentwrapper.cpp:210
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "%1: \"to\" is not a valid node object"
 msgctxt "@info:shell"
-msgid "%1: \"edge\" is not a valid edge object"
-msgstr "%1: ”edge” ei ole kelvollinen väliolio"
-
-#: kernel/kernel.cpp:94
-#, kde-format
-msgctxt "@info status message after successful script execution"
-msgid "<i>Execution Finished</i>"
-msgstr "<i>Suoritus valmis</i>"
+msgid "%1: \"obj\" is neither a valid node or edge object"
+msgstr "%1: ”to” ei ole kelvollinen solmuolio"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -1432,45 +1430,49 @@ msgctxt "@title:column"
 msgid "NodeTypeProperty"
 msgstr "Solmutyypin ominaisuus"
 
-#: qml/AddEdgeAction.qml:28
+#: qml/AddEdgeAction.qml:25
 #, kde-format
 msgid "Create Edge"
 msgstr "Luo väli"
 
-#: qml/AddEdgeAction.qml:31
-#, kde-format
-msgid "Create an edge between two nodes"
-msgstr "Luo väli kahden solmun väliin"
-
-#: qml/AddNodeAction.qml:13
+#: qml/AddNodeAction.qml:10
 #, kde-format
 msgid "Create Node"
 msgstr "Luo solmu"
 
-#: qml/AddNodeAction.qml:16
-#, kde-format
-msgid "Add a node to the scene"
-msgstr "Lisää solmu graafialueelle"
-
-#: qml/DeleteAction.qml:13
+#: qml/DeleteAction.qml:10
 #, kde-format
 msgid "Delete Element"
 msgstr "Poista alkio"
 
-#: qml/DeleteAction.qml:16
-#, kde-format
-msgid "Delete element from scene"
-msgstr "Poista alkio graafialueelta"
-
-#: qml/SelectMoveAction.qml:14
+#: qml/SelectMoveAction.qml:11
 #, kde-format
 msgid "Select & Move"
 msgstr "Valitse ja siirrä"
 
-#: qml/SelectMoveAction.qml:17
-#, kde-format
-msgid "Select and move elements on the scene"
-msgstr "Valitse ja siirrä alkioita graafialueella"
+#~ msgctxt "@info:shell"
+#~ msgid "%1: \"node\" is not a valid node object"
+#~ msgstr "%1: ”node” ei ole kelvollinen solmuolio"
+
+#~ msgctxt "@info:shell"
+#~ msgid "%1: \"edge\" is not a valid edge object"
+#~ msgstr "%1: ”edge” ei ole kelvollinen väliolio"
+
+#~ msgctxt "@info status message after successful script execution"
+#~ msgid "<i>Execution Finished</i>"
+#~ msgstr "<i>Suoritus valmis</i>"
+
+#~ msgid "Create an edge between two nodes"
+#~ msgstr "Luo väli kahden solmun väliin"
+
+#~ msgid "Add a node to the scene"
+#~ msgstr "Lisää solmu graafialueelle"
+
+#~ msgid "Delete element from scene"
+#~ msgstr "Poista alkio graafialueelta"
+
+#~ msgid "Select and move elements on the scene"
+#~ msgstr "Valitse ja siirrä alkioita graafialueella"
 
 #~ msgid "Identifier"
 #~ msgstr "Tunniste"

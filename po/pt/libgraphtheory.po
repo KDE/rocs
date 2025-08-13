@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2025-08-13 00:39+0000\n"
 "PO-Revision-Date: 2021-11-10 09:51+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -862,14 +862,14 @@ msgstr "Formato da Linguagem de Formatação de Grafos (%1)"
 msgid "Rocs 1 Graph File Format (%1)"
 msgstr "Formato do Ficheiro de Grafos do Rocs 1 (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:258
+#: fileformats/rocs1/rocs1fileformat.cpp:257
 #: fileformats/rocs2/rocs2fileformat.cpp:211
 #: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
 msgstr "Não foi possível aceder ao ficheiro \"%1\" para escrita: %2"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:269
+#: fileformats/rocs1/rocs1fileformat.cpp:267
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
 msgstr "Não foi possível gravar os dados; a interromper. Erro: %1."
@@ -919,19 +919,19 @@ msgctxt "@title:tab initial title for graph document"
 msgid "New Graph"
 msgstr "Novo Grafo"
 
-#: kernel/documentwrapper.cpp:88
+#: kernel/documentwrapper.cpp:89
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: no node with ID %2 registered"
 msgstr "%1: não existe nenhum nó registado com o ID %2"
 
-#: kernel/documentwrapper.cpp:115 kernel/nodewrapper.cpp:109
+#: kernel/documentwrapper.cpp:116 kernel/nodewrapper.cpp:109
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: node type ID %2 not registered"
 msgstr "%1: o ID do tipo de nó %2 não está registado"
 
-#: kernel/documentwrapper.cpp:150 kernel/edgewrapper.cpp:59
+#: kernel/documentwrapper.cpp:151 kernel/edgewrapper.cpp:87
 #: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
 #: kernel/nodewrapper.cpp:205 kernel/nodewrapper.cpp:242
 #: kernel/nodewrapper.cpp:288 kernel/nodewrapper.cpp:339
@@ -940,35 +940,33 @@ msgctxt "@info:shell"
 msgid "%1: edge type ID %2 not registered"
 msgstr "%1: o ID do tipo de aresta %2 não está registado"
 
-#: kernel/documentwrapper.cpp:174
+#: kernel/documentwrapper.cpp:175
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"from\" is not a valid node object"
 msgstr "%1: o \"from\" não é um objecto válido do nó"
 
-#: kernel/documentwrapper.cpp:179
+#: kernel/documentwrapper.cpp:180
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"to\" is not a valid node object"
 msgstr "%1: o \"to\" não é um objecto válido do nó"
 
-#: kernel/documentwrapper.cpp:190
-#, kde-format
+#: kernel/documentwrapper.cpp:191
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "%1: \"to\" is not a valid node object"
 msgctxt "@info:shell"
-msgid "%1: \"node\" is not a valid node object"
-msgstr "%1: o \"node\" não é um objecto válido do nó"
+msgid "%1: \"obj\" is not called on an object"
+msgstr "%1: o \"to\" não é um objecto válido do nó"
 
-#: kernel/documentwrapper.cpp:204
-#, kde-format
+#: kernel/documentwrapper.cpp:210
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "%1: \"to\" is not a valid node object"
 msgctxt "@info:shell"
-msgid "%1: \"edge\" is not a valid edge object"
-msgstr "%1: o \"edge\" não é um objecto válido da aresta"
-
-#: kernel/kernel.cpp:94
-#, kde-format
-msgctxt "@info status message after successful script execution"
-msgid "<i>Execution Finished</i>"
-msgstr "<i>Execução Terminada</i>"
+msgid "%1: \"obj\" is neither a valid node or edge object"
+msgstr "%1: o \"to\" não é um objecto válido do nó"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -1384,42 +1382,46 @@ msgctxt "@title:column"
 msgid "NodeTypeProperty"
 msgstr "Propriedade do Tipo de Nó"
 
-#: qml/AddEdgeAction.qml:28
+#: qml/AddEdgeAction.qml:25
 #, kde-format
 msgid "Create Edge"
 msgstr "Criar uma Aresta"
 
-#: qml/AddEdgeAction.qml:31
-#, kde-format
-msgid "Create an edge between two nodes"
-msgstr "Criar uma aresta entre dois nós"
-
-#: qml/AddNodeAction.qml:13
+#: qml/AddNodeAction.qml:10
 #, kde-format
 msgid "Create Node"
 msgstr "Criar um Nó"
 
-#: qml/AddNodeAction.qml:16
-#, kde-format
-msgid "Add a node to the scene"
-msgstr "Adicionar um nó à cena"
-
-#: qml/DeleteAction.qml:13
+#: qml/DeleteAction.qml:10
 #, kde-format
 msgid "Delete Element"
 msgstr "Apagar o Elemento"
 
-#: qml/DeleteAction.qml:16
-#, kde-format
-msgid "Delete element from scene"
-msgstr "Apagar o elemento da cena"
-
-#: qml/SelectMoveAction.qml:14
+#: qml/SelectMoveAction.qml:11
 #, kde-format
 msgid "Select & Move"
 msgstr "Seleccionar & Mover"
 
-#: qml/SelectMoveAction.qml:17
-#, kde-format
-msgid "Select and move elements on the scene"
-msgstr "Seleccionar e mover os elementos na cena"
+#~ msgctxt "@info:shell"
+#~ msgid "%1: \"node\" is not a valid node object"
+#~ msgstr "%1: o \"node\" não é um objecto válido do nó"
+
+#~ msgctxt "@info:shell"
+#~ msgid "%1: \"edge\" is not a valid edge object"
+#~ msgstr "%1: o \"edge\" não é um objecto válido da aresta"
+
+#~ msgctxt "@info status message after successful script execution"
+#~ msgid "<i>Execution Finished</i>"
+#~ msgstr "<i>Execução Terminada</i>"
+
+#~ msgid "Create an edge between two nodes"
+#~ msgstr "Criar uma aresta entre dois nós"
+
+#~ msgid "Add a node to the scene"
+#~ msgstr "Adicionar um nó à cena"
+
+#~ msgid "Delete element from scene"
+#~ msgstr "Apagar o elemento da cena"
+
+#~ msgid "Select and move elements on the scene"
+#~ msgstr "Seleccionar e mover os elementos na cena"

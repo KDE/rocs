@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2025-08-13 00:39+0000\n"
 "PO-Revision-Date: 2022-01-08 09:07+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -863,14 +863,14 @@ msgstr "Format Graph Markup Language (%1)"
 msgid "Rocs 1 Graph File Format (%1)"
 msgstr "Format plików grafów Rocs 1 (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:258
+#: fileformats/rocs1/rocs1fileformat.cpp:257
 #: fileformats/rocs2/rocs2fileformat.cpp:211
 #: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
 msgstr "Nie można otworzyć pliku \"%1\" w trybie do zapisu: %2"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:269
+#: fileformats/rocs1/rocs1fileformat.cpp:267
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
 msgstr "Nie można zapisać danych, przerywanie. Błąd: %1."
@@ -919,19 +919,19 @@ msgctxt "@title:tab initial title for graph document"
 msgid "New Graph"
 msgstr "Nowy graf"
 
-#: kernel/documentwrapper.cpp:88
+#: kernel/documentwrapper.cpp:89
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: no node with ID %2 registered"
 msgstr "%1: węzeł o ID %2 niezarejestrowany"
 
-#: kernel/documentwrapper.cpp:115 kernel/nodewrapper.cpp:109
+#: kernel/documentwrapper.cpp:116 kernel/nodewrapper.cpp:109
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: node type ID %2 not registered"
 msgstr "%1: ID o węźle rodzaju %2 jest niezarejestrowany"
 
-#: kernel/documentwrapper.cpp:150 kernel/edgewrapper.cpp:59
+#: kernel/documentwrapper.cpp:151 kernel/edgewrapper.cpp:87
 #: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
 #: kernel/nodewrapper.cpp:205 kernel/nodewrapper.cpp:242
 #: kernel/nodewrapper.cpp:288 kernel/nodewrapper.cpp:339
@@ -940,35 +940,33 @@ msgctxt "@info:shell"
 msgid "%1: edge type ID %2 not registered"
 msgstr "%1: ID o krawędzi rodzaju %2 jest niezarejestrowany"
 
-#: kernel/documentwrapper.cpp:174
+#: kernel/documentwrapper.cpp:175
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"from\" is not a valid node object"
 msgstr "%1: \"z\" nie jest prawidłowym obiektem węzła"
 
-#: kernel/documentwrapper.cpp:179
+#: kernel/documentwrapper.cpp:180
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"to\" is not a valid node object"
 msgstr "%1: \"do\" nie jest prawidłowym obiektem węzła"
 
-#: kernel/documentwrapper.cpp:190
-#, kde-format
+#: kernel/documentwrapper.cpp:191
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "%1: \"to\" is not a valid node object"
 msgctxt "@info:shell"
-msgid "%1: \"node\" is not a valid node object"
-msgstr "%1: \"węzeł\" nie jest prawidłowym obiektem węzła"
+msgid "%1: \"obj\" is not called on an object"
+msgstr "%1: \"do\" nie jest prawidłowym obiektem węzła"
 
-#: kernel/documentwrapper.cpp:204
-#, kde-format
+#: kernel/documentwrapper.cpp:210
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "%1: \"to\" is not a valid node object"
 msgctxt "@info:shell"
-msgid "%1: \"edge\" is not a valid edge object"
-msgstr "%1: \"krawędź\" nie jest prawidłowym obiektem krawędzi"
-
-#: kernel/kernel.cpp:94
-#, kde-format
-msgctxt "@info status message after successful script execution"
-msgid "<i>Execution Finished</i>"
-msgstr "<i>Ukończono wykonywanie</i>"
+msgid "%1: \"obj\" is neither a valid node or edge object"
+msgstr "%1: \"do\" nie jest prawidłowym obiektem węzła"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -1383,45 +1381,49 @@ msgctxt "@title:column"
 msgid "NodeTypeProperty"
 msgstr "Właściwości rodzaju węzła"
 
-#: qml/AddEdgeAction.qml:28
+#: qml/AddEdgeAction.qml:25
 #, kde-format
 msgid "Create Edge"
 msgstr "Utwórz krawędź"
 
-#: qml/AddEdgeAction.qml:31
-#, kde-format
-msgid "Create an edge between two nodes"
-msgstr "Tworzy krawędzie pomiędzy dwoma węzłami"
-
-#: qml/AddNodeAction.qml:13
+#: qml/AddNodeAction.qml:10
 #, kde-format
 msgid "Create Node"
 msgstr "Utwórz węzeł"
 
-#: qml/AddNodeAction.qml:16
-#, kde-format
-msgid "Add a node to the scene"
-msgstr "Dodawanie węzła do sceny"
-
-#: qml/DeleteAction.qml:13
+#: qml/DeleteAction.qml:10
 #, kde-format
 msgid "Delete Element"
 msgstr "Usuń element"
 
-#: qml/DeleteAction.qml:16
-#, kde-format
-msgid "Delete element from scene"
-msgstr "Usunięcie elementu ze sceny"
-
-#: qml/SelectMoveAction.qml:14
+#: qml/SelectMoveAction.qml:11
 #, kde-format
 msgid "Select & Move"
 msgstr "Wybierz i przesuń"
 
-#: qml/SelectMoveAction.qml:17
-#, kde-format
-msgid "Select and move elements on the scene"
-msgstr "Wybranie i przesunięcie elementów na scenie"
+#~ msgctxt "@info:shell"
+#~ msgid "%1: \"node\" is not a valid node object"
+#~ msgstr "%1: \"węzeł\" nie jest prawidłowym obiektem węzła"
+
+#~ msgctxt "@info:shell"
+#~ msgid "%1: \"edge\" is not a valid edge object"
+#~ msgstr "%1: \"krawędź\" nie jest prawidłowym obiektem krawędzi"
+
+#~ msgctxt "@info status message after successful script execution"
+#~ msgid "<i>Execution Finished</i>"
+#~ msgstr "<i>Ukończono wykonywanie</i>"
+
+#~ msgid "Create an edge between two nodes"
+#~ msgstr "Tworzy krawędzie pomiędzy dwoma węzłami"
+
+#~ msgid "Add a node to the scene"
+#~ msgstr "Dodawanie węzła do sceny"
+
+#~ msgid "Delete element from scene"
+#~ msgstr "Usunięcie elementu ze sceny"
+
+#~ msgid "Select and move elements on the scene"
+#~ msgstr "Wybranie i przesunięcie elementów na scenie"
 
 #~ msgid "Identifier"
 #~ msgstr "Identyfikator"
