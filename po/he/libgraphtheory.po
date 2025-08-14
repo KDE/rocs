@@ -1,93 +1,86 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the rocs package.
 #
-# Translators:
-# Renan Cakirerk, 2010.
-# obsoleteman <tulliana@gmail.com>, 2009.
-# Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# Volkan Gezer <volkangezer@gmail.com>, 2017.
-# SPDX-FileCopyrightText: 2022, 2023, 2025 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeedu-kde4\n"
+"Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:39+0000\n"
-"PO-Revision-Date: 2025-08-13 17:09+0300\n"
-"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
-"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
-"Language: tr\n"
+"PO-Revision-Date: 2025-08-13 15:16+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 25.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Serdar Soytetir, Renan Çakırerk, Kaan Özdinçer, Emir SARI"
+msgstr "צוות התרגום של KDE ישראל"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
-"tulliana@gmail.com, renan@pardus.org.tr, kaanozdincer@gmail.com, "
-"emir_sari@icloud.com"
+msgstr "kde-l10n-he@kde.org"
 
 #: dialogs/edgeproperties.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Edge Properties"
-msgstr "Kenar Özellikleri"
+msgstr "מאפייני צלע"
 
 #: dialogs/edgeproperties.cpp:80 dialogs/nodeproperties.cpp:86
 #, kde-format
 msgid "Name"
-msgstr "Ad"
+msgstr "שם"
 
 #: dialogs/edgeproperties.cpp:81 dialogs/nodeproperties.cpp:87
 #, kde-format
 msgid "Value"
-msgstr "Değer"
+msgstr "ערך"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
 #: dialogs/edgeproperties.ui:26
 #, kde-format
 msgid "Edge Properties"
-msgstr "Kenar Özellikleri"
+msgstr "מאפייני צלע"
 
 #. i18n: ectx: property (text), widget (QLabel, labelType)
 #: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
 #, kde-format
 msgid "Type:"
-msgstr "Tür:"
+msgstr "טיפוס:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
 #: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
 #, kde-format
 msgid "Dynamic Properties"
-msgstr "Devingen Özellikler"
+msgstr "מאפיינים דינמיים"
 
 #: dialogs/edgetypeproperties.cpp:37
 #, kde-format
 msgid "Edges"
-msgstr "Kenarlar"
+msgstr "צלעות"
 
 #: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
 #, kde-format
 msgid "Property names"
-msgstr "Özellik adları"
+msgstr "שמות מאפיינים"
 
 #: dialogs/edgetypeproperties.cpp:43
 #, kde-format
 msgctxt "@title:window"
 msgid "Edge Type Properties"
-msgstr "Kenar Türü Özellikleri"
+msgstr "מאפייני טיפוס צלע"
 
 #: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
 #, kde-format
 msgid "Name:"
-msgstr "Ad:"
+msgstr "שם:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelId)
 #. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
@@ -96,40 +89,40 @@ msgstr "Ad:"
 #: editorplugins/generategraph/generategraphwidget.ui:129
 #, kde-format
 msgid "Identifier:"
-msgstr "Tanımlayıcı:"
+msgstr "מזהה:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelColor)
 #: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
 #: dialogs/nodetypeproperties.cpp:52
 #, kde-format
 msgid "Color:"
-msgstr "Renk:"
+msgstr "צבע:"
 
 #: dialogs/edgetypeproperties.cpp:52 graphdocument.cpp:120
 #, kde-format
 msgid "Unidirectional"
-msgstr "Tek yönlü"
+msgstr "חד־כיווני"
 
 #: dialogs/edgetypeproperties.cpp:53 graphdocument.cpp:125
 #, kde-format
 msgid "Bidirectional"
-msgstr "Çift yönlü"
+msgstr "דו־כיוונית"
 
 #: dialogs/edgetypeproperties.cpp:54
 #, kde-format
 msgid "Direction:"
-msgstr "Yön:"
+msgstr "כיוון:"
 
 #: dialogs/edgetypeproperties.cpp:61 dialogs/nodetypeproperties.cpp:59
 #, kde-format
 msgid "Visibility:"
-msgstr "Görünürlük:"
+msgstr "חשיפה:"
 
 #: dialogs/edgetypeproperties.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this edge type."
-msgstr "Bu kenar türü için seçilen kimlik"
+msgstr "המזהה לטיפוס הצלע הזה."
 
 #: dialogs/edgetypeproperties.cpp:141
 #, kde-format
@@ -137,21 +130,19 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another edge type, please select a "
 "different one."
-msgstr ""
-"Seçilen kimlik başka bir kenar türü için kullanılıyor, lütfen başka bir tane "
-"seçin."
+msgstr "המזהה שנבחר כבר משמש לטיפוס אחר של צלע, נא לבחור מזהה אחר."
 
 #: dialogs/nodeproperties.cpp:26
 #, kde-format
 msgctxt "@title:window"
 msgid "Node Properties"
-msgstr "Düğüm Özellikleri"
+msgstr "מאפייני צומת"
 
 #: dialogs/nodeproperties.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this node."
-msgstr "Bu düğüm için seçilen kimlik"
+msgstr "המזהה הנבחר לצומת הזה."
 
 #: dialogs/nodeproperties.cpp:137
 #, kde-format
@@ -159,39 +150,37 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another node, please select a different "
 "one."
-msgstr ""
-"Seçilen kimlik başka bir düğüm için kullanılıyor, lütfen başka bir tane "
-"seçin."
+msgstr "המזהה שנבחר כבר משמש לצומת אחר, נא לבחור מזהה אחר."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
 #: dialogs/nodeproperties.ui:26
 #, kde-format
 msgid "Node Properties"
-msgstr "Düğüm Özellikleri"
+msgstr "מאפייני צומת"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
 #. i18n: ectx: property (toolTip), widget (KColorCombo, color)
 #: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
 #, kde-format
 msgid "Node color"
-msgstr "Düğüm rengi"
+msgstr "צבע צומת"
 
 #: dialogs/nodetypeproperties.cpp:35
 #, kde-format
 msgid "Nodes"
-msgstr "Düğümler"
+msgstr "צמתים"
 
 #: dialogs/nodetypeproperties.cpp:41
 #, kde-format
 msgctxt "@title:window"
 msgid "Node Type Properties"
-msgstr "Düğüm Türü Özellikleri"
+msgstr "מאפייני טיפוס צומת"
 
 #: dialogs/nodetypeproperties.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this node type."
-msgstr "Bu düğüm türü için seçilen kimlik"
+msgstr "המזהה הנבחר לטיפוס הצומת הזה."
 
 #: dialogs/nodetypeproperties.cpp:137
 #, kde-format
@@ -199,130 +188,128 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another node type, please select a "
 "different one."
-msgstr ""
-"Seçilen kimlik başka bir düğüm türü için kullanılıyor, lütfen başka bir tane "
-"seçin."
+msgstr "המזהה שנבחר כבר משמש לטיפוס צומת אחר, נא לבחור מזהה אחר."
 
 #: dialogs/propertieswidget.cpp:33
 #, kde-format
 msgid "Add Property"
-msgstr "Özellik Ekle"
+msgstr "הוספת מאפיין"
 
 #: dialogs/propertydelegate.cpp:49
 #, kde-format
 msgid "Delete this property."
-msgstr "Bu Özelliği Sil"
+msgstr "מחיקת המאפיין הזה."
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:33
 #, kde-format
 msgctxt "@title:window"
 msgid "Assign Values"
-msgstr "Değerler Ata"
+msgstr "השמת ערכים"
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:52
 #, kde-format
 msgid "All Data Types"
-msgstr "Tüm Veri Türleri"
+msgstr "כל טיפוסי הנתונים"
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:57
 #, kde-format
 msgid "All Edge Types"
-msgstr "Tüm Kenar Türleri"
+msgstr "כל טיפוסי הצלעות"
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:81
 #, kde-format
 msgid "Enter Property Name"
-msgstr "Özellik Adı Gir"
+msgstr "נא למלא שם מאפיין"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
 #: editorplugins/assignvalues/assignvalueswidget.ui:32
 #, kde-format
 msgid "Assign Values"
-msgstr "Değerler Ata"
+msgstr "השמת ערכים"
 
 #. i18n: ectx: property (text), widget (QLabel, property_choice_label)
 #: editorplugins/assignvalues/assignvalueswidget.ui:40
 #, kde-format
 msgid "Choose Properties"
-msgstr "Özellikler seç"
+msgstr "בחירת מאפיינים"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
 #: editorplugins/assignvalues/assignvalueswidget.ui:59
 #, kde-format
 msgid "Show advanced options."
-msgstr "Gelişmiş ayarları göster"
+msgstr "הצגת אפשרויות מתקדמות."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: editorplugins/assignvalues/assignvalueswidget.ui:74
 #, kde-format
 msgid "Assignment Method"
-msgstr "Atama Yöntemi"
+msgstr "שיטת השמה"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:81
 #, kde-format
 msgid "Enumerate Items"
-msgstr "Ögeleri numaralandır"
+msgstr "ספירת פריטים"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:86
 #, kde-format
 msgid "Enumerate Alpha"
-msgstr "Alfa numaralandır"
+msgstr "ספירת אלפא"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:91
 #, kde-format
 msgid "Enumerate Alpha-Numeric"
-msgstr "Alfanümerik numaralandır"
+msgstr "ספירת אלפא-נומריות"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:96
 #, kde-format
 msgid "Assign Random Integers"
-msgstr "Rastgele tamsayı ata"
+msgstr "השמת מספרים שלמים אקראיים"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:101
 #, kde-format
 msgid "Assign Random Reals"
-msgstr "Rastgele reel sayı ata"
+msgstr "השמת מספרים אמיתיים אקראיים"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:106
 #, kde-format
 msgid "Assign Constant Value"
-msgstr "Sabit değer ata"
+msgstr "השמת ערך קבוע"
 
 #. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
 #: editorplugins/assignvalues/assignvalueswidget.ui:132
 #, kde-format
 msgid "Start ID:"
-msgstr "Başlangıç kimliği:"
+msgstr "מזהה התחלה:"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:167
 #, kde-format
 msgid "Initial string"
-msgstr "Başlangıç dizisi"
+msgstr "מחרוזת התחלתית"
 
 #. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:174
 #, kde-format
 msgid "a"
-msgstr "a"
+msgstr "א"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
 #: editorplugins/assignvalues/assignvalueswidget.ui:192
 #, kde-format
 msgid "Start ID"
-msgstr "Başlangıç kimligi"
+msgstr "מזהה התחלה"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
 #: editorplugins/assignvalues/assignvalueswidget.ui:209
 #, kde-format
 msgid "Prefix"
-msgstr "Önek"
+msgstr "קידומת"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), widget (QLabel, label_4)
@@ -330,7 +317,7 @@ msgstr "Önek"
 #: editorplugins/assignvalues/assignvalueswidget.ui:298
 #, kde-format
 msgid "Lower Limit"
-msgstr "Alt sınır"
+msgstr "גבול תחתון"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #. i18n: ectx: property (text), widget (QLabel, label_8)
@@ -338,7 +325,7 @@ msgstr "Alt sınır"
 #: editorplugins/assignvalues/assignvalueswidget.ui:305
 #, kde-format
 msgid "Upper Limit"
-msgstr "Üst sınır"
+msgstr "גבול עליון"
 
 #. i18n: ectx: property (text), widget (QLabel, label_dagGeneratorSeed)
 #. i18n: ectx: property (text), widget (QLabel, label_7)
@@ -348,19 +335,19 @@ msgstr "Üst sınır"
 #: editorplugins/generategraph/generategraphwidget.ui:483
 #, kde-format
 msgid "Generator Seed"
-msgstr "Üreteç"
+msgstr "גרעין המחולל"
 
 #. i18n: ectx: property (text), widget (QLabel, constant_label)
 #: editorplugins/assignvalues/assignvalueswidget.ui:372
 #, kde-format
 msgid "Constant"
-msgstr "Sabit"
+msgstr "קבוע"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: editorplugins/assignvalues/assignvalueswidget.ui:400
 #, kde-format
 msgid "Overwrite existing values"
-msgstr "Var olan değerlerin üzerine yaz"
+msgstr "דריסת ערכים קיימים"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
 #. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
@@ -370,13 +357,13 @@ msgstr "Var olan değerlerin üzerine yaz"
 #: editorplugins/generategraph/generategraphwidget.ui:404
 #, kde-format
 msgid "Nodes:"
-msgstr "Düğümler:"
+msgstr "צמתים:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelProperty)
 #: editorplugins/assignvalues/assignvalueswidget.ui:447
 #, kde-format
 msgid "Property name:"
-msgstr "Özellik adı:"
+msgstr "שם מאפיין:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
 #. i18n: ectx: property (text), widget (QLabel, labelConnection)
@@ -384,168 +371,168 @@ msgstr "Özellik adı:"
 #: editorplugins/generategraph/generategraphwidget.ui:272
 #, kde-format
 msgid "Edges:"
-msgstr "Kenarlar:"
+msgstr "צלעות:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
 #: editorplugins/assignvalues/assignvalueswidget.ui:482
 #, kde-format
 msgid "Assign values to selected edges."
-msgstr "Seçilen köşelere değerler ata"
+msgstr "השמת ערכים לצלעות הנבחרות."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
 #: editorplugins/assignvalues/assignvalueswidget.ui:509
 #, kde-format
 msgid "Assign values to selected nodes."
-msgstr "Seçilen düğümlere değerler ata"
+msgstr "השמת ערכים לצמתים הנבחרים."
 
 #: editorplugins/generategraph/generategraphwidget.cpp:79
 #, kde-format
 msgctxt "@title:window"
 msgid "Generate Graph"
-msgstr "Grafik Oluştur"
+msgstr "יצירת גרף"
 
 #: editorplugins/generategraph/generategraphwidget.cpp:119
 #: editorplugins/generategraph/generategraphwidget.cpp:126
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "%1 (ID %2)"
-msgstr "%1 (Kimlik %2)"
+msgstr "%1 (מזהה %2)"
 
 #: editorplugins/generategraph/generategraphwidget.cpp:529
 #, kde-format
 msgid "Incorrect Edge Direction"
-msgstr "Yanlış Kenar Yönü"
+msgstr "כיוון צלע שגוי"
 
 #: editorplugins/generategraph/generategraphwidget.cpp:529
 #, kde-format
 msgid "Edges in a Directed Acyclical Graph must be directional."
-msgstr "Bir Yönlendirilmiş Düzensiz Grafik’teki kenarlar yönlü olmalıdır."
+msgstr "צלעות בגרף חסר מעגלים מכוון חייבות להיות כיווניות."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
 #: editorplugins/generategraph/generategraphwidget.ui:14
 #, kde-format
 msgid "Generate Graph"
-msgstr "Grafik Üret"
+msgstr "יצירת גרף"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:22
 #, kde-format
 msgid "Select the graph generator."
-msgstr "Grafik üretecini seç"
+msgstr "בחירת מחולל הגרפים."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:26
 #, kde-format
 msgid "Mesh Graph"
-msgstr "Örgü grafiği"
+msgstr "גרף רשת"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:31
 #, kde-format
 msgid "Star Graph"
-msgstr "Yıldız grafiği"
+msgstr "גרף כוכב"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:36
 #, kde-format
 msgid "Circle Graph"
-msgstr "Çember grafik"
+msgstr "גרף מעגלי"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:41
 #, kde-format
 msgid "Random Graph"
-msgstr "Rastgele grafik"
+msgstr "גרף אקראי"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:46
 #, kde-format
 msgid "Erdös-Renyi Graph"
-msgstr "Erdös–Renyi grafiği"
+msgstr "גרף ארדש-רניי"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:51
 #, kde-format
 msgid "Random Tree Graph"
-msgstr "Rastgele ağaç grafiği"
+msgstr "גרף עץ אקראי"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:56
 #, kde-format
 msgid "Random Dag Graph"
-msgstr "Rastgele asılı uç grafiği"
+msgstr "גרף חסר מעגלים מכוון אקראי"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:61
 #, kde-format
 msgid "Path Graph"
-msgstr "Yol grafiği"
+msgstr "גרף מסלול"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:66
 #, kde-format
 msgid "Complete Graph"
-msgstr "Tam grafik"
+msgstr "גרם מלא"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:71
 #, kde-format
 msgid "Complete Bipartite"
-msgstr "Tam iki partili"
+msgstr "גרף דו־צדדי מלא"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
 #: editorplugins/generategraph/generategraphwidget.ui:91
 #, kde-format
 msgid "Show advanced settings."
-msgstr "Gelişmiş ayarları göster"
+msgstr "הצגת הגדרות מתקדמות."
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
 #: editorplugins/generategraph/generategraphwidget.ui:106
 #, kde-format
 msgid "Set the unique identifier of the generated graph."
-msgstr "Oluşturulan grafiğin benzersiz tanımlayıcısını ayarlayın."
+msgstr "הגדרת המזהה הייחודי של הגרף שנוצר."
 
 #. i18n: ectx: property (text), widget (QLineEdit, identifier)
 #: editorplugins/generategraph/generategraphwidget.ui:109
 #, kde-format
 msgid "Graph"
-msgstr "Grafik"
+msgstr "גרף"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:116
 #, kde-format
 msgid "The node type to create the nodes of the graph with"
-msgstr "Grafiğin düğüm ögelerinin oluşturulacağı düğüm türü"
+msgstr "טיפוס הצומת ליצירת צמתים בגרף"
 
 #. i18n: ectx: property (text), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:119
 #, kde-format
 msgid "Node type:"
-msgstr "Düğüm türü:"
+msgstr "טיפוס צומת:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
 #: editorplugins/generategraph/generategraphwidget.ui:126
 #, kde-format
 msgid "The identifier of the created graph (used for scripting)"
-msgstr "Oluşturulan grafiğin tanımlayıcısı (betikler için kullanılır)"
+msgstr "מזהה הגרף שנוצר (שימושי לסקריפטים)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
 #: editorplugins/generategraph/generategraphwidget.ui:148
 #, kde-format
 msgid "Number of Columns:"
-msgstr "Sütun sayısı:"
+msgstr "מספר העמודות:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_rows)
 #: editorplugins/generategraph/generategraphwidget.ui:168
 #, kde-format
 msgid "Number of Rows:"
-msgstr "Satır sayısı:"
+msgstr "מספר השורות:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_numberSatellite)
 #: editorplugins/generategraph/generategraphwidget.ui:196
 #, kde-format
 msgid "Satellite Nodes:"
-msgstr "Uydu düğümleri:"
+msgstr "צמתים לווייניים:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
 #. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
@@ -555,7 +542,7 @@ msgstr "Uydu düğümleri:"
 #: editorplugins/generategraph/generategraphwidget.ui:527
 #, kde-format
 msgid "Number of Nodes:"
-msgstr "Düğüm sayısı:"
+msgstr "מספר הצמתים:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
 #. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
@@ -563,25 +550,25 @@ msgstr "Düğüm sayısı:"
 #: editorplugins/generategraph/generategraphwidget.ui:332
 #, kde-format
 msgid "Allow self-edges:"
-msgstr "Kendi kendine kenarlara izin ver:"
+msgstr "לאפשר צלעות עצמיות:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
 #: editorplugins/generategraph/generategraphwidget.ui:293
 #, kde-format
 msgid "Generator seed:"
-msgstr "Üreteç tohumu:"
+msgstr "גרעין המחולל:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
 #: editorplugins/generategraph/generategraphwidget.ui:325
 #, kde-format
 msgid "Nodes (n):"
-msgstr "Düğümler (n):"
+msgstr "צמתים (צ):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
 #: editorplugins/generategraph/generategraphwidget.ui:349
 #, kde-format
 msgid "Edge Probability (p):"
-msgstr "Kenar olasılığı (p):"
+msgstr "סבירות צלע (ס):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
 #. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
@@ -589,145 +576,145 @@ msgstr "Kenar olasılığı (p):"
 #: editorplugins/generategraph/generategraphwidget.ui:421
 #, kde-format
 msgid "Generator Seed:"
-msgstr "Üreteç tohumu:"
+msgstr "גרעין המחולל:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
 #: editorplugins/generategraph/generategraphwidget.ui:446
 #, kde-format
 msgid "Number of Nodes"
-msgstr "Düğüm sayısı"
+msgstr "מספר הצמתים"
 
 #. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
 #: editorplugins/generategraph/generategraphwidget.ui:463
 #, kde-format
 msgid "Edge Probability"
-msgstr "Kenar olasılığı"
+msgstr "סבירות צלע"
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
 #: editorplugins/generategraph/generategraphwidget.ui:549
 #, kde-format
 msgid "Left Set Nodes:"
-msgstr "Sol küme düğümleri:"
+msgstr "צומתי סדרה שמאלית:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
 #: editorplugins/generategraph/generategraphwidget.ui:563
 #, kde-format
 msgid "Right Set Nodes:"
-msgstr "Sağ küme düğümleri:"
+msgstr "צומתי סדרה ימנית:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:590
 #, kde-format
 msgid "Select the edge type for connections of the generated graph."
-msgstr "Oluşturulan grafiğin bağlantılarının kenar türünü seç"
+msgstr "נא לבחור את טיפוס הצלע לחיבורים של הגרף שנוצר."
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:604
 #, kde-format
 msgid "The edge type to create the edges of the graph with"
-msgstr "Grafiğin kenarlarının oluşturulacağı kenar türü"
+msgstr "טיפוס הצלע ליצירת צלעות הגרף"
 
 #. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:607
 #, kde-format
 msgid "Edge type:"
-msgstr "Kenar türü:"
+msgstr "טיפוס צלע:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:614
 #, kde-format
 msgid "Graph generator:"
-msgstr "Grafik üreteci:"
+msgstr "מחולל גרפים:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:621
 #, kde-format
 msgid "Select the node type for node elements of the generated graph."
-msgstr "Oluşturulan grafiğin düğüm ögelerinin düğüm türünü seç"
+msgstr "נא לבחור את טיפוס הצומת ליסודות הצומת של הגרף שנוצר."
 
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
 #, kde-format
 msgctxt "@title:window"
 msgid "Graph Layout"
-msgstr "Grafik Yerleşimi"
+msgstr "פריסת גרף"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:20
 #, kde-format
 msgid "Graph Layout"
-msgstr "Grafik Yerleşimi"
+msgstr "פריסת גרף"
 
 #. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:36
 #, kde-format
 msgid "Force Based Layout"
-msgstr "Temelli Yerleşimi Zorla"
+msgstr "פריסה מבוססת כוח"
 
 #. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:57
 #, kde-format
 msgid "Area factor:"
-msgstr "Alan çarpanı:"
+msgstr "מקדם אזור:"
 
 #. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:77
 #, kde-format
 msgid "Repelling force:"
-msgstr "Püskürtme gücü:"
+msgstr "כוח דוחה:"
 
 #. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:97
 #, kde-format
 msgid "Attraction force:"
-msgstr "Çekicilik gücü:"
+msgstr "כוח משיכה:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:119
 #, kde-format
 msgid "Radial Tree Layout"
-msgstr "Radyal Ağaç Yerleşimi"
+msgstr "פריסת עץ מעגלית"
 
 #. i18n: ectx: property (text), widget (QLabel, rootLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:134
 #, kde-format
 msgid "Center/Root:"
-msgstr "Merkez/kök:"
+msgstr "מרכז/שורש:"
 
 #. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:144
 #, kde-format
 msgid "Node separation:"
-msgstr "Düğüm ayrımı:"
+msgstr "הפרדת צמתים:"
 
 #. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:158
 #, kde-format
 msgid "Tree type:"
-msgstr "Ağaç türü:"
+msgstr "טיפוס עץ:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:165
 #, kde-format
 msgid "Free tree"
-msgstr "Boş ağaç"
+msgstr "עץ חופשי"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:175
 #, kde-format
 msgid "Rooted tree"
-msgstr "Köklü ağaç"
+msgstr "עץ מושרש"
 
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
 #, kde-format
 msgctxt "@title:window"
 msgid "Transform Edges"
-msgstr "Kenarları Dönüştür"
+msgstr "התמרת צלעות"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
 #: editorplugins/transformedges/transformedgeswidget.ui:14
 #, kde-format
 msgid "Transform Edges"
-msgstr "Kenarları Dönüştür"
+msgstr "התמרת צלעות"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
 #: editorplugins/transformedges/transformedgeswidget.ui:22
@@ -736,26 +723,26 @@ msgid ""
 "This option connects all nodes of the given graph. The new edges do not have "
 "any preset weights."
 msgstr ""
-"Bu seçenek verilen grafikteki tüm düğümleri birleştirir. Yeni kenarlar "
-"önceden ayarlanmış ağırlıklar içermezler."
+"האפשרות הזאת מחברת את כל הצמתים של גרף מסוים. לצלעות החדשות אין משקלות "
+"מוגדרות מראש."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
 #: editorplugins/transformedges/transformedgeswidget.ui:25
 #, kde-format
 msgid "Complete graph"
-msgstr "Grafiği tamamla"
+msgstr "גרף מלא"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:35
 #, kde-format
 msgid "This option removes all edges from the given graph."
-msgstr "Bu seçenek verilen grafiğin tüm kenarlarını kaldırır."
+msgstr "האפשרות הזאת מסירה את כל הצלעות מהגרף שצוין."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:38
 #, kde-format
 msgid "Remove all edges"
-msgstr "Tüm kenarları kaldır"
+msgstr "הסרת כל הצלעות"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:45
@@ -764,14 +751,14 @@ msgid ""
 "This option reverses all edges of a directed graph. Note that this does not "
 "apply to undirected graphs."
 msgstr ""
-"Bu seçenek yönlendirilmiş bir grafiğin tüm kenarlarını tersine çevirir. "
-"Bunun yönlendirilmemiş grafikler için çalışmayacağını unutmayın."
+"האפשרות הזאת הופכת את כל הצלעות של גרף כיווני. נא לשים לב שאין לזה השפעה על "
+"גרפים ללא כיוון."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:48
 #, kde-format
 msgid "Reverse all edges"
-msgstr "Tüm kenarları tersine çevir"
+msgstr "היפוך כל הצלעות"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:59
@@ -799,28 +786,27 @@ msgstr ""
 "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Bu seçenek grafikte <span "
-"style=\" font-style:italic;\">Prim Minimal Genişleme Ağacı algoritmasını</"
-"span> çalıştırır. Ağırlıkları verilmeyen tüm kenarlar 1 ağırlığında alınır. "
-"Yönlendirilmiş ve yönlendirilmemiş grafikler buna göre işlenirler.</p></"
-"body></html>"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">האפשרות הזאת מריצה <span "
+"style=\" font-style:italic;\">האלגוריתם של פרים למציאת עץ פורש מינימלי</"
+"span> בגרף. לכל הצלעות שלא צוינו עבורם משקלות מניחים שיש להם משקולות ששוותל־"
+"1. גרפים מכוונים וללא כיוון מעובדים בהתאם.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:62
 #, kde-format
 msgid "Spanning tree transformation"
-msgstr "Genişleme ağacı dönüşümü"
+msgstr "התמרת העץ הפורס"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:69
 #, kde-format
 msgid "Remove all self edges"
-msgstr "Tüm öz kenarları kaldır"
+msgstr "הסרת כל הצלעות העצמיות"
 
 #: fileformats/dot/dotfileformat.cpp:45
 #, kde-format
 msgid "Graphviz Format (%1)"
-msgstr "Graphviz biçimi (%1)"
+msgstr "תסדיר Graphviz‏ (%1)"
 
 #: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
 #: fileformats/rocs1/rocs1fileformat.cpp:57
@@ -828,28 +814,28 @@ msgstr "Graphviz biçimi (%1)"
 #: fileformats/tgf/tgffileformat.cpp:52
 #, kde-format
 msgid "Could not open file \"%1\" in read mode: %2"
-msgstr "“%1” dosyası okunmak için açılamadı: %2"
+msgstr "לא ניתן לפתוח את הקובץ „%1” במצב קריאה: %2"
 
 #: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
 #, kde-format
 msgid "Could not parse file \"%1\"."
-msgstr "“%1” dosyası ayrıştırılamadı."
+msgstr "לא ניתן לפענח את הקובץ „%1”."
 
 #: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
 #, kde-format
 msgid "Cannot open file %1 to write document. Error: %2"
-msgstr "%1 dosyası yazma kipinde açılamadı. Hata: %2"
+msgstr "לא ניתן לפתוח את הקובץ %1 לכתיבת מסמך. שגיאה: %2"
 
 #: fileformats/fileformatmanager.cpp:48
 #, kde-format
 msgctxt "@title:window"
 msgid "Plugin Error"
-msgstr "Eklenti Hatası"
+msgstr "שגיאת תוסף"
 
 #: fileformats/fileformatmanager.cpp:50
 #, kde-format
 msgid "Plugins could not be found in specified directories:<br>"
-msgstr "Eklentiler, belirtilen dizinlerde bulunamadı:<br>"
+msgstr "לא נמצאו תוספים בתיקיות שצוינו:<br>"
 
 #: fileformats/fileformatmanager.cpp:52
 #, kde-format
@@ -857,85 +843,83 @@ msgid ""
 "<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
 "link</a> for further information."
 msgstr ""
-"<br><br>Ek bilgi için <a href='https://doc.qt.io/qt-5/deployment-plugins."
-"html'>bu bağlantıya</a> bakın."
+"<br><br> כדאי לגשת ל<a href='https://doc.qt.io/qt-5/deployment-plugins."
+"html'>קישור הזה</a> לפרטים נוספים."
 
 #: fileformats/gml/gmlfileformat.cpp:44
 #, kde-format
 msgid "Graph Markup Language Format (%1)"
-msgstr "Grafik işaretleme dil biçimi (%1)"
+msgstr "תסדיר שפת סימון גרפים Graph‏ (%1)"
 
 #: fileformats/rocs1/rocs1fileformat.cpp:38
 #, kde-format
 msgid "Rocs 1 Graph File Format (%1)"
-msgstr "Rocs 1 grafik dosya biçimi (%1)"
+msgstr "תסדיר קובץ גרף Rocs 1‏ (%1)"
 
 #: fileformats/rocs1/rocs1fileformat.cpp:257
 #: fileformats/rocs2/rocs2fileformat.cpp:211
 #: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
-msgstr "“%1” dosyası yazmak için açılamadı: %2"
+msgstr "לא ניתן לפתוח את הקובץ „%1” במצב כתיבה: %2"
 
 #: fileformats/rocs1/rocs1fileformat.cpp:267
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
-msgstr "Veri yazılamadı, iptal ediliyor. Hata: %1."
+msgstr "לא ניתן לכתוב את הנתונים, הפעולה מבוטלת. שגיאה: %1."
 
 #: fileformats/rocs2/rocs2fileformat.cpp:40
 #, kde-format
 msgid "Rocs Graph Format (%1)"
-msgstr "Rocs grafik biçimi (%1)"
+msgstr "תסדיר גרף Rocs ‏(%1)"
 
 #: fileformats/rocs2/rocs2fileformat.cpp:312
 #, kde-format
 msgid "Error on serializing file format to file."
-msgstr "Dosya biçiminin serileştirilmesinde hata oluştu."
+msgstr "שגיאה בשרשור תסדיר קובץ לקובץ."
 
 #: fileformats/tgf/tgffileformat.cpp:38
 #, kde-format
 msgid "Trivial Graph Format (%1)"
-msgstr "Sıradan grafik biçimi (%1)"
+msgstr "תסדיר גרף Trivial ‏(%1)"
 
 #: fileformats/tgf/tgffileformat.cpp:73
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
-msgstr "Dosya ayrıştırılamadı. “%1” tanımlayıcısı birden çok kullanılmış."
+msgstr "לא ניתן לפענח את הקובץ. נעשה שימוש במזהה „%1” יותר מפעם אחת."
 
 #: fileformats/tgf/tgffileformat.cpp:85
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
-msgstr ""
-"Dosya ayrıştırılamadı. “%1” ile “%2” noktalarını birleştiren kenar "
-"tanımlanmamış düğümler kullanıyor."
+msgstr "לא ניתן לפענח את הקובץ. הצלע מ־„%1” ל־„%2” משתמשת בצמתים לא מוגדרים."
 
 #: fileformats/tikz/tikzfileformat.cpp:34
 #, kde-format
 msgid "TikZ (PGF) Format (%1)"
-msgstr "TikZ (PGF) biçimi (%1)"
+msgstr "תסדיר TikZ (PGF) ‏(%1)"
 
 #: graphdocument.cpp:129
 #, kde-format
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "ברירת מחדל"
 
 #: graphdocument.cpp:315
 #, kde-format
 msgctxt "@title:tab initial title for graph document"
 msgid "New Graph"
-msgstr "Yeni Grafik"
+msgstr "גרף חדש"
 
 #: kernel/documentwrapper.cpp:89
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: no node with ID %2 registered"
-msgstr "%1: %2 kimliğine sahip kayıtlı düğüm yok"
+msgstr "%1: לא נרשם צומת עם המזהה %2"
 
 #: kernel/documentwrapper.cpp:116 kernel/nodewrapper.cpp:109
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: node type ID %2 not registered"
-msgstr "%1: %2 kimliğine sahip kayıtlı düğüm türü yok"
+msgstr "%1: לא נרשם טיפוס צומת עם המזהה %2"
 
 #: kernel/documentwrapper.cpp:151 kernel/edgewrapper.cpp:87
 #: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
@@ -944,31 +928,31 @@ msgstr "%1: %2 kimliğine sahip kayıtlı düğüm türü yok"
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: edge type ID %2 not registered"
-msgstr "%1: kenar türü %2 kimliği kayıtlı değil"
+msgstr "%1: לא נרשם טיפוס צלעעם המזהה %2"
 
 #: kernel/documentwrapper.cpp:175
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"from\" is not a valid node object"
-msgstr "%1: “from” geçerli bir düğüm nesnesi değil"
+msgstr "%1: „from” (מ־) הוא לא עצם צומת תקף."
 
 #: kernel/documentwrapper.cpp:180
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"to\" is not a valid node object"
-msgstr "%1: “to” geçerli bir düğüm nesnesi değil"
+msgstr "%1: „from” (ל־) הוא לא עצם צומת תקף."
 
 #: kernel/documentwrapper.cpp:191
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is not called on an object"
-msgstr "%1: “obj” bir nesne üzerinde çağrılmıyor"
+msgstr "%1: „obj” לא נקרא על עצם"
 
 #: kernel/documentwrapper.cpp:210
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is neither a valid node or edge object"
-msgstr "%1: “obj” ne geçerli bir düğüm ne de kenar nesnesi"
+msgstr "%1: „obj” אינו עצם צומת או צומת תקף"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -976,27 +960,25 @@ msgctxt "Scripting API"
 msgid ""
 "The global Console object allows you to print messages of different "
 "importance to a log."
-msgstr ""
-"Evrensel Konsol nesnesi, farklı önemdeki iletileri, bir log dosyasına "
-"yazmanıza olanak sağlar."
+msgstr "עצם המסוף המקיף מאפשר לך להדפיס הודעות בדרגות חשיבות שונות ליומן."
 
 #: kernel/modules/console/console.xml:17
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given message of normal severity."
-msgstr "Normal önemdeki iletiyi yazın."
+msgstr "הצגת ההודעה שסופקה בחשיבות רגילה."
 
 #: kernel/modules/console/console.xml:31
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given debug message."
-msgstr "Verilen hata ayıklama iletisini yazın."
+msgstr "הדפסת הודעת ניפוי השגיאות שסופקה."
 
 #: kernel/modules/console/console.xml:45
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given error message of high severity."
-msgstr "Yüksek önemdeki hata iletisini yazın."
+msgstr "הדפסת הודעת השגיאה שסופקה בדרגת חומרה גבוהה."
 
 #: kernel/modules/document/document.xml:9
 #, kde-format
@@ -1006,49 +988,49 @@ msgid ""
 "The document object provides access to all elements.\n"
 msgstr ""
 "\n"
-"Belge nesnesi, tüm ögelere erişimi sağlar.\n"
+"עצם המסמך מספק גישה לכל הרכיבים.\n"
 
 #: kernel/modules/document/document.xml:19
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the node with specified ID."
-msgstr "Belirtilen kimlikteki düğüme gidin."
+msgstr "החזרת הצומת עם המזהה שצוין."
 
 #: kernel/modules/document/document.xml:26
 #, kde-format
 msgctxt "Scripting API"
 msgid "Identifier of a node."
-msgstr "Bir düğümün tanımlayıcısı"
+msgstr "מזהה צומת."
 
 #: kernel/modules/document/document.xml:33
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all nodes."
-msgstr "Düğümleri bir listesini döndürün."
+msgstr "החזרת רשימת כל הצמתים."
 
 #: kernel/modules/document/document.xml:42
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all nodes of specified type."
-msgstr "Belirli bir türdeki düğümlerin bir listesini döndürün."
+msgstr "החזרת רשימה של כל הצמתים מטיפוס מסוים."
 
 #: kernel/modules/document/document.xml:49
 #, kde-format
 msgctxt "Scripting API"
 msgid "Identifier of a node type."
-msgstr "Bir düğüm türünün tanımlayıcısı"
+msgstr "מזהה טיפוס צומת."
 
 #: kernel/modules/document/document.xml:56
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all edges."
-msgstr "Tüm kenarların listesini döndürün."
+msgstr "החזרת רשימת כל הצלעות."
 
 #: kernel/modules/document/document.xml:65
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all edges of specified type."
-msgstr "Belirli bir türdeki tüm kenarların listesini döndürün."
+msgstr "החזרת רשימה של כל הצלעות מטיפוס מסוים."
 
 #: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
 #: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
@@ -1057,67 +1039,67 @@ msgstr "Belirli bir türdeki tüm kenarların listesini döndürün."
 #, kde-format
 msgctxt "Scripting API"
 msgid "Identifier of an edge type."
-msgstr "Kenar dürünün tanımlayıcısı"
+msgstr "מזהה טיפוס צלע."
 
 #: kernel/modules/document/document.xml:79
 #, kde-format
 msgctxt "Scripting API"
 msgid "Create node at position (x,y)."
-msgstr "(x,y) konumunda bir düğüm oluşturun."
+msgstr "יצירת צומת בנקודה מסוימת (x,y)."
 
 #: kernel/modules/document/document.xml:86
 #, kde-format
 msgctxt "Scripting API"
 msgid "X-coordinate of the node."
-msgstr "Düğümün X koordinatı"
+msgstr "נקודת הציון ב־X של הצומת."
 
 #: kernel/modules/document/document.xml:91
 #, kde-format
 msgctxt "Scripting API"
 msgid "Y-coordinate of the node."
-msgstr "Düğümün Y koordinatı"
+msgstr "נקודת הציון ב־Y של הצומת."
 
 #: kernel/modules/document/document.xml:98
 #, kde-format
 msgctxt "Scripting API"
 msgid "Create edge between the given nodes of default edge type."
-msgstr "Öntanımlı kenar türünün düğümleri arasında bir kenar oluştur"
+msgstr "יצירת צלע בין הצמתים הנבחרים של טיפוס צלע כברירת מחדל."
 
 #: kernel/modules/document/document.xml:105
 #, kde-format
 msgctxt "Scripting API"
 msgid "Start node of the edge."
-msgstr "Kenarın düğümünü başlatın."
+msgstr "צומת התחלת הצלע."
 
 #: kernel/modules/document/document.xml:110
 #, kde-format
 msgctxt "Scripting API"
 msgid "Target node of the edge."
-msgstr "Kenarın hedef düğümü"
+msgstr "צומת יעד הצלע."
 
 #: kernel/modules/document/document.xml:117
 #, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given node."
-msgstr "Verilen düğümü silin."
+msgstr "מחיקת הצומת שסופק."
 
 #: kernel/modules/document/document.xml:124
 #, kde-format
 msgctxt "Scripting API"
 msgid "The node to be deleted."
-msgstr "Silinecek düğüm"
+msgstr "הצומת למחיקה."
 
 #: kernel/modules/document/document.xml:131
 #, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given edge."
-msgstr "Verilen kenarı silin."
+msgstr "מחיקת הצלע שסופקה."
 
 #: kernel/modules/document/document.xml:138
 #, kde-format
 msgctxt "Scripting API"
 msgid "The edge to be deleted."
-msgstr "Silinecek kenar"
+msgstr "הצלע למחיקה."
 
 #: kernel/modules/document/edge.xml:9
 #, kde-format
@@ -1128,8 +1110,8 @@ msgid ""
 "undirected, depending on their type.\n"
 msgstr ""
 "\n"
-"Bir kenar, iki düğümün bağlantısıdır. Kenarlar, türlerine bağlı olarak yönlü "
-"ve yönsüz olabilirler.\n"
+"צלע הוא החיבור בין שני צמתים. צלעות יכולות להיות כיווניות או ללא כיוון, "
+"כתלות בטיפוס שלהן.\n"
 
 #: kernel/modules/document/edge.xml:17
 #, kde-format
@@ -1138,26 +1120,26 @@ msgid ""
 "Read and set the identifier of the edge's type. If setting, the edge type "
 "identifier must exist."
 msgstr ""
-"Kenar türünün tanımlayıcısını oku ve ayarla. Ayar varsa, kenar türü "
-"tanımlayıcısı da bulunmalıdır."
+"קריאת והגדרת מזהה טיפוס הצלע. במקרה של הגדרה, מזהה טיפוס הצלע חייב להיות "
+"קיים."
 
 #: kernel/modules/document/edge.xml:26
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the origin node of the edge."
-msgstr "Kenarın kaynak düğümünü döndürün."
+msgstr "החזרת צומת המקור של הצלע."
 
 #: kernel/modules/document/edge.xml:35
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the target node of the edge."
-msgstr "Kenarın hedef düğümünü döndürün."
+msgstr "החזרת צומת היעד של הצלע."
 
 #: kernel/modules/document/edge.xml:44
 #, kde-format
 msgctxt "Scripting API"
 msgid "Returns true if the edge's type is directed, otherwise false."
-msgstr "Kenar türü yönlü ise true, değilse false döndürür."
+msgstr "החזרת חיובי (true) אם טיפוס הצלע זוהה, אחרת שלילי (false)."
 
 #: kernel/modules/document/node.xml:11
 #, kde-format
@@ -1171,29 +1153,29 @@ msgid ""
 "they are registered for the node's type.\n"
 msgstr ""
 "\n"
-"Bir düğüm, bir grafiğin veri ögesidir.\n"
-"Düzenleyicide ayarlanmış veya basitçe çalışma zamanında atanan keyfi "
-"devingen özelliklere sahip olabilir.\n"
-"Devingen özelliklerin yalnızca düğümün türü için kayıtlı olması durumunda, "
-"betiğin yürütülmesinden sonra kullanılabilir olduğunu unutmayın.\n"
+"צומת הוא רכיב הנתונים של גרף.\n"
+"יכולים להיות לו משתנים דינמיים שרירותיים שמוגדרים בעורך או פשוט מוקצים בזמן "
+"הריצה.\n"
+"נא לשיב לב שמאפיינים דינמיים זמינים רק לאחר הרצת סקריפטים, אם הם רשומים "
+"לטיפוס הצומת.\n"
 
 #: kernel/modules/document/node.xml:19
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the unique identifier of this node."
-msgstr "Bu düğümün benzersiz tanımlayıcısını okuyun ve ayarlayın."
+msgstr "קריאת והגדרת המזהה הייחודי של הצומת הזה."
 
 #: kernel/modules/document/node.xml:26
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the x-coordinate of the node."
-msgstr "Düğümün x koordinatını okuyun ve ayarlayın."
+msgstr "קריאת והגדרת נקודת הציון ב־x של הצומת."
 
 #: kernel/modules/document/node.xml:33
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the y-coordinate of the node."
-msgstr "Düğümün y koordinatını okuyun ve ayarlayın."
+msgstr "קריאת והגדרת נקודת הציון ב־y של הצומת."
 
 #: kernel/modules/document/node.xml:40
 #, kde-format
@@ -1202,8 +1184,8 @@ msgid ""
 "Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
 "for red)."
 msgstr ""
-"Bu düğümün renk dizisini on altılık değerde okuyun ve ayarlayın (örneğin, "
-"kırmızı için “#ff0000”)."
+"קריאת והגדרת מחרוזת צבע של הצומת הזה בערכים הקסדצימליים (למשל: „‎#ff0000” "
+"עבור אדום)."
 
 #: kernel/modules/document/node.xml:47
 #, kde-format
@@ -1212,14 +1194,14 @@ msgid ""
 "Read and set the identifier of the node's type. If setting, the node type "
 "identifier must exist."
 msgstr ""
-"Düğüm türünün tanımlayıcısını okuyun ve ayarlayın. Ayar varsa düğüm türü "
-"tanımlayıcısı da bulunmalıdır."
+"קריאת והגדרת מזהה טיפוס הצומת. במקרה של הגדרה, מזהה טיפוס הצומת חייב להיות "
+"קיים."
 
 #: kernel/modules/document/node.xml:56
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all edges (incoming and outgoing) of this node."
-msgstr "Bu düğümün tüm kenarlarının (gelen ve giden) listesini döndürün."
+msgstr "החזרת רשימת כל הצלעות (נכנסות ויוצאות) של הצומת הזה."
 
 #: kernel/modules/document/node.xml:65
 #, kde-format
@@ -1227,33 +1209,31 @@ msgctxt "Scripting API"
 msgid ""
 "Return a list of all edges (incoming and outgoing) of this node of a "
 "specified type."
-msgstr ""
-"Belirli bir türdeki bir düğümün tüm kenarlarının (gelen ve giden) listesini "
-"döndürün."
+msgstr "החזרת רשימת כל הצלעות (נכנסות ויוצאות) של הצומת הזה מטיפוס מסוים."
 
 #: kernel/modules/document/node.xml:79
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of incoming edges of this node."
-msgstr "Bu düğüme gelen kenarların listesini döndürün."
+msgstr "החזרת רשימה של צלעות נכנסות לצומת הזה."
 
 #: kernel/modules/document/node.xml:88
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all incoming edges of this node of a specified type."
-msgstr "Belirtilen türde olan düğüme gelen kenarların listesini döndürün."
+msgstr "החזרת רשימה של הצלעות הנכנסות לצומת הזה מטיפוס מסוים."
 
 #: kernel/modules/document/node.xml:102
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all outgoing edges of this node."
-msgstr "Düğümden giden kenarların listesini döndürün."
+msgstr "החזרת רשימה של כל הצלעות היוצאות מהצומת הזה."
 
 #: kernel/modules/document/node.xml:111
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all outgoing edges of this node of a specified type."
-msgstr "Belirtilen türde olan düğümden giden kenarların listesini döndürün."
+msgstr "החזרת רשימה של כל הצלעות היוצאות מהצומת הזה מטיפוס מסוים."
 
 #: kernel/modules/document/node.xml:125
 #, kde-format
@@ -1262,8 +1242,8 @@ msgid ""
 "Return list all nodes connected to this node. This method respects if edges "
 "are directed."
 msgstr ""
-"Bu düğüm ile bağlantılı tüm düğümleri listesini döndürün. Bu yöntem, "
-"kenarlar yönlü ise çalışır."
+"החזרת רשימה של כל הצמתים שמחוברים לצומת הזה. השיטה הזאת מכבדת את מצב "
+"כיווניות של צלעות."
 
 #: kernel/modules/document/node.xml:134
 #, kde-format
@@ -1272,16 +1252,14 @@ msgid ""
 "Return list all nodes connected to this node via an edge of specified type. "
 "This method respects if edges are directed."
 msgstr ""
-"Belirtilen türdeki bir kenar vasıtasıyla bu düğüme bağlı olan tüm düğümlerin "
-"listesini döndürün. Bu yöntem, kenarlar yönlü ise çalışır."
+"החזרת רשימה של כל הצמתים שמחוברים לצומת הזה דרך צלע מטיפוס שצוין. השיטה הזאת "
+"מכבדת מצב כיווניות של צלעות."
 
 #: kernel/modules/document/node.xml:148
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all nodes connected to this node by an incoming edge."
-msgstr ""
-"Bu düğüme gelen bir kenar ile bağlantılı olan tüm düğümlerin listesini "
-"döndürün."
+msgstr "החזרת רשימה של כל הצמתים המחוברים לצומת הזה על ידי צלע נכנסת."
 
 #: kernel/modules/document/node.xml:157
 #, kde-format
@@ -1290,16 +1268,13 @@ msgid ""
 "Return a list all nodes connected to this node by an incoming edge of "
 "specified type."
 msgstr ""
-"Bu düğüme, belirtilen türdeki bir kenar ile bağlantılı olan tüm düğümlerin "
-"listesini döndürün."
+"החזרת רשימה של כל הצמתים המחוברים לצומת הזה על ידי צלע נכנסת מטיפוס מסוים."
 
 #: kernel/modules/document/node.xml:171
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return list all nodes connected to this node by an outgoing edge."
-msgstr ""
-"Bu düğümden giden bir kenar ile bağlantılı olan tüm düğümlerin listesini "
-"döndürün."
+msgstr "החזרת רשימה של כל הצמתים המחוברים לצומת הזה על ידי צלע יוצאת."
 
 #: kernel/modules/document/node.xml:180
 #, kde-format
@@ -1308,115 +1283,90 @@ msgid ""
 "Return list all nodes connected to this node by an outgoing edge of "
 "specified type."
 msgstr ""
-"Belirli bir türdeki, giden kenarlar tarafında bu düğüme bağlı olan "
-"düğümlerin listesini döndürün."
+"החזרת רשימה של כל הצמתים המחוברים לצומת הזה על ידי צלע יוצאת מטיפוס מסוים."
 
 #: kernel/modules/document/node.xml:194
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return list of distances to specified targets in same order."
-msgstr "Belirli hedefe olan uzaklıkların listesini aynı sırada döndürün."
+msgstr "החזרת רשימה של מרחקים ליעדים מסוימים באותו הסדר."
 
 #: kernel/modules/document/node.xml:201
 #, kde-format
 msgctxt "Scripting API"
 msgid "Name of edge property that holds the edge length."
-msgstr "Kenar uzunluğunu tutan düğüm özelliğinin adı."
+msgstr "שם מאפיין צלע שמאחסן את אורך הצלע."
 
 #: kernel/modules/document/node.xml:206
 #, kde-format
 msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
-msgstr "Düğümlerin mesafelerinin hesaplanacağı liste."
+msgstr "רשימת הצמתים לחישוב המרחקים."
 
 #: models/edgemodel.cpp:141
 #, kde-format
 msgctxt "@title:column"
 msgid "Edge"
-msgstr "Kenar"
+msgstr "צלע"
 
 #: models/edgepropertymodel.cpp:144
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeProperty"
-msgstr "KenarÖzelliği"
+msgstr "מאפיין_צלע"
 
 #: models/edgetypemodel.cpp:190
 #, kde-format
 msgctxt "@title:column"
 msgid "Edge Type"
-msgstr "Kenar Türü"
+msgstr "טיפוס צלע"
 
 #: models/edgetypepropertymodel.cpp:131
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeTypeProperty"
-msgstr "KenarTürÖzelliği"
+msgstr "מאפיין_טיפוס_צלע"
 
 #: models/nodemodel.cpp:142
 #, kde-format
 msgctxt "@title:column"
 msgid "Node"
-msgstr "Düğüm"
+msgstr "צומת"
 
 #: models/nodepropertymodel.cpp:144
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeProperty"
-msgstr "DüğümÖzelliği"
+msgstr "מאפיין_צומת"
 
 #: models/nodetypemodel.cpp:188
 #, kde-format
 msgctxt "@title:column"
 msgid "Node Type"
-msgstr "Düğüm Türü"
+msgstr "טיפוס צומת"
 
 #: models/nodetypepropertymodel.cpp:131
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeTypeProperty"
-msgstr "DüğümTürÖzelliği"
+msgstr "מאפיין_טיפוס_צומת"
 
 #: qml/AddEdgeAction.qml:25
 #, kde-format
 msgid "Create Edge"
-msgstr "Kenar Oluştur"
+msgstr "יצירת צלע"
 
 #: qml/AddNodeAction.qml:10
 #, kde-format
 msgid "Create Node"
-msgstr "Düğüm Oluştur"
+msgstr "יצירת צומת"
 
 #: qml/DeleteAction.qml:10
 #, kde-format
 msgid "Delete Element"
-msgstr "Ögeyi Sil"
+msgstr "מחיקת רכיב"
 
 #: qml/SelectMoveAction.qml:11
 #, kde-format
 msgid "Select & Move"
-msgstr "Seç ve Taşı"
-
-#~ msgctxt "@info:shell"
-#~ msgid "%1: \"node\" is not a valid node object"
-#~ msgstr "%1: “node” geçerli bir düğüm nesnesi değil"
-
-#~ msgctxt "@info:shell"
-#~ msgid "%1: \"edge\" is not a valid edge object"
-#~ msgstr "%1: “edge” geçerli bir düğüm nesnesi değil"
-
-#~ msgctxt "@info status message after successful script execution"
-#~ msgid "<i>Execution Finished</i>"
-#~ msgstr "<i>Yürütme Tamamlandı</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "İki düğüm arasına bir kenar oluştur"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Bir düğüm ekle"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Ögeyi sahneden sil"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Nesneleri seç ve taşı"
+msgstr "בחירה והזזה"

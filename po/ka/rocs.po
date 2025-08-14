@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:39+0000\n"
-"PO-Revision-Date: 2022-08-23 06:38+0200\n"
+"PO-Revision-Date: 2025-08-13 06:38+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.6\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -38,7 +38,7 @@ msgstr "Rocs"
 #, kde-format
 msgctxt "@title Short program description"
 msgid "Graph Theory Simulator"
-msgstr "გრაფიკის თეორიის სიმულატორი"
+msgstr "გრაფის თეორიის სიმულატორი"
 
 #: main.cpp:32
 #, kde-format
@@ -151,7 +151,7 @@ msgstr "სკრიპტის ძრავის API"
 #, kde-format
 msgctxt "@title"
 msgid "The Graph Document"
-msgstr "გრაფიკის დოკუმენტი"
+msgstr "გრაფის დოკუმენტი"
 
 #: plugins/scriptapi/scriptapimanager.cpp:255
 #, kde-format
@@ -224,13 +224,13 @@ msgstr "სკრიპტის დოკუმენტი"
 #: rocsui.rc:35
 #, kde-format
 msgid "Graph Document"
-msgstr "გრაფიკის დოკუმენტი"
+msgstr "გრაფის დოკუმენტი"
 
 #. i18n: ectx: Menu (graph_file)
 #: rocsui.rc:41
 #, kde-format
 msgid "Graph File"
-msgstr "გრაფიკის ფაილი"
+msgstr "გრაფის ფაილი"
 
 #. i18n: ectx: Menu (graph_selected)
 #: rocsui.rc:45
@@ -319,6 +319,8 @@ msgid ""
 "<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
 "backend. Aborting export.</p>"
 msgstr ""
+"<p>ფაილის <strong>'%1'</strong> სუფქსის ამოხსნა ხელმისაწვდომ ფაილის "
+"უკანაბოლოში ამოხსნა შეუძლებელია. გატანა შეწყდება.</p>"
 
 #: ui/fileformatdialog.cpp:96
 #, kde-format
@@ -340,12 +342,12 @@ msgstr "გრაფის ფაილის პროექტში შემ
 #, kde-format
 msgctxt "@title"
 msgid "Graph Document Name"
-msgstr "გრაფიკის დოკუმენტის სახელი"
+msgstr "გრაფის დოკუმენტის სახელი"
 
 #: ui/grapheditorwidget.cpp:80
 #, kde-format
 msgid "Enter the name of your graph document"
-msgstr "შეიყვანეთ თქვენი გრაფიკის დოკუმენტის სახელი"
+msgstr "შეიყვანეთ თქვენი გრაფის დოკუმენტის სახელი"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: ui/journalwidget.ui:17
@@ -363,7 +365,7 @@ msgstr "გაშვება"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Execute currently active script on active graph document."
-msgstr ""
+msgstr "ამჟამად აქტიური სკრიპტის აქტიურ გრაფის დოკუმენტზე გაშვება."
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -428,7 +430,7 @@ msgstr "პროექტის შენახვა, &როგორც..."
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Graph Document"
-msgstr "გრაფიკის ახალი დოკუმენტი"
+msgstr "ახალი გრაფის დოკუმენტი"
 
 #: ui/mainwindow.cpp:277
 #, kde-format
@@ -440,13 +442,13 @@ msgstr "სკრიპტის ახალი ფაილი..."
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Graph..."
-msgstr "გრაფიკის შემოტანა..."
+msgstr "გრაფის შემოტანა..."
 
 #: ui/mainwindow.cpp:279
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Graph As..."
-msgstr "გრაფიკის გატანა, როგორც..."
+msgstr "გრაფის გატანა, როგორც..."
 
 #: ui/mainwindow.cpp:280
 #, kde-format
@@ -559,7 +561,7 @@ msgstr "სკრიპტის გამონატანი:"
 #: ui/scriptoutputwidget.ui:37
 #, kde-format
 msgid "Clear program output with each execution."
-msgstr ""
+msgstr "პროგრამის გამონატანის გასუფთავება თითოეული გაშვებისას."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
 #: ui/scriptoutputwidget.ui:56

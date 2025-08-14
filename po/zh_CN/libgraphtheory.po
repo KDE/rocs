@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/rocs/libgraphtheory.pot\n"
-"X-Crowdin-File-ID: 5141\n"
+"X-Crowdin-File: /kf6-trunk/messages/rocs/libgraphtheory.pot\n"
+"X-Crowdin-File-ID: 58458\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1339,7 +1339,3 @@ msgstr "删除元素"
 #, kde-format
 msgid "Select & Move"
 msgstr ""
-
-#~ msgctxt "@info status message after successful script execution"
-#~ msgid "<i>Execution Finished</i>"
-#~ msgstr "<i>执行完毕</i>"

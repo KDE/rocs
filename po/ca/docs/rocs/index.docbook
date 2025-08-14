@@ -161,9 +161,7 @@
 >Propietats</guibutton
 > per a obrir el diàleg. </para>
 <para
->També podeu emprar el motor de crear scripts per a accedir a les propietats registrades i canviar els seus valors. En el següent exemple se suposa que la propietat <quote
->weight</quote
-> està registrada per al tipus d'aresta predeterminat. <programlisting
+>També podeu emprar el motor de crear scripts per a accedir a les propietats registrades i canviar els seus valors. En el següent exemple se suposa que la propietat «weight» està registrada per al tipus d'aresta predeterminat. <programlisting
 >var nodes = Document.nodes()
 for (var i = 0; i &lt; nodes.length; ++i){
     nodes[i].weight = i;
@@ -184,9 +182,7 @@ for (var i = 0; i &lt; nodes.length; ++i){
 >cobertura de vèrtexs mínima</emphasis
 >. En aquest problema s'han de trobar un subconjunt de nodes del graf C de mida mínima, de manera que cada aresta del graf estarà connectada a almenys un node de C. Se sap que aquest problema és NP-complex i volem il·lustrar com trobar una aproximació de factor 2 cercant una coincidència en el graf donat. </para>
 <para
->El nostre objectiu és visualitzar la relació de les coincidències i la cobertura de vèrtexs mínima. Per això, volem especificar dos tipus d'arestes, un per a mostrar les arestes coincidents i un per a mostrar les arestes <quote
->comunes</quote
->, així com dos tipus de nodes que utilitzarem per a distingir els nodes continguts en C i els que no estan continguts en C. </para>
+>El nostre objectiu és visualitzar la relació de les coincidències i la cobertura de vèrtexs mínima. Per això, volem especificar dos tipus d'arestes, un per a mostrar les arestes coincidents i un per a mostrar les arestes «comunes», així com dos tipus de nodes que utilitzarem per a distingir els nodes continguts en C i els que no estan continguts en C. </para>
 
 <sect2>
 <title
@@ -595,9 +591,7 @@ Console.log("Vertex Cover contains " + C.length + " nodes.");
     <itemizedlist>
         <listitem
 ><para
->El fitxer comença amb una llista de nodes (un node per línia), seguit per una línia amb el caràcter únic <quote
->#</quote
->, seguit per una llista d'arestes (una aresta per línia).</para
+>El fitxer comença amb una llista de nodes (un node per línia), seguit per una línia amb el caràcter únic «#», seguit per una llista d'arestes (una aresta per línia).</para
 ></listitem>
         <listitem
 ><para
@@ -650,7 +644,7 @@ Console.log("Vertex Cover contains " + C.length + " nodes.");
 ></listitem>
         <listitem
 ><para
->Els atributs &HTML; i &XML;: Els atributs (com les etiquetes) que contenen la sintaxi &HTML; o &XML; es llegeixen sense canvis. En especial, no es llegeix cap atribut com el tipus de lletra i estil.</para
+>Els atributs &HTML; i &XML;: Els atributs (com les etiquetes) que contenen la sintaxi &HTML; o &XML; es llegeixen sense canvis. En especial, no es llegeix cap atribut com la lletra o l'estil.</para
 ></listitem>
     </itemizedlist>
 </sect4>

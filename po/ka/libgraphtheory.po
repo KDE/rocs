@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:39+0000\n"
-"PO-Revision-Date: 2023-01-21 09:44+0100\n"
+"PO-Revision-Date: 2025-08-13 08:06+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -123,7 +123,7 @@ msgstr "ხილვადობა:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this edge type."
-msgstr ""
+msgstr "მონიშნული ID ამ წიბოს ტიპისთვის."
 
 #: dialogs/edgetypeproperties.cpp:141
 #, kde-format
@@ -131,7 +131,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another edge type, please select a "
 "different one."
-msgstr ""
+msgstr "მონიშნული ID უკვე გამოიყენება სხვა წიბოს ტიპისთვის. აირჩიეთ სხვა."
 
 #: dialogs/nodeproperties.cpp:26
 #, kde-format
@@ -151,7 +151,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another node, please select a different "
 "one."
-msgstr ""
+msgstr "მონიშნული ID უკვე გამოიყენება სხვა კვანძისთვის. აირჩიეთ სხვა."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
 #: dialogs/nodeproperties.ui:26
@@ -189,7 +189,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another node type, please select a "
 "different one."
-msgstr ""
+msgstr "მონიშნული ID უკვე გამოიყენება სხვა კვანძის ტიპისთვის. აირჩიეთ სხვა."
 
 #: dialogs/propertieswidget.cpp:33
 #, kde-format
@@ -378,19 +378,19 @@ msgstr "კიდეები:"
 #: editorplugins/assignvalues/assignvalueswidget.ui:482
 #, kde-format
 msgid "Assign values to selected edges."
-msgstr ""
+msgstr "მნიშვნელობების მინიჭება მონიშნული წიბოებისთვის."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
 #: editorplugins/assignvalues/assignvalueswidget.ui:509
 #, kde-format
 msgid "Assign values to selected nodes."
-msgstr ""
+msgstr "მნიშვნელობების მინიჭება მონიშნული კვანძებისთვის."
 
 #: editorplugins/generategraph/generategraphwidget.cpp:79
 #, kde-format
 msgctxt "@title:window"
 msgid "Generate Graph"
-msgstr "გრაფიკის გენერაცია"
+msgstr "გრაფის გენერაცია"
 
 #: editorplugins/generategraph/generategraphwidget.cpp:119
 #: editorplugins/generategraph/generategraphwidget.cpp:126
@@ -402,24 +402,24 @@ msgstr "%1 (ID %2)"
 #: editorplugins/generategraph/generategraphwidget.cpp:529
 #, kde-format
 msgid "Incorrect Edge Direction"
-msgstr ""
+msgstr "არასწორი წიბოს მიმართულება"
 
 #: editorplugins/generategraph/generategraphwidget.cpp:529
 #, kde-format
 msgid "Edges in a Directed Acyclical Graph must be directional."
-msgstr ""
+msgstr "მიმართულ აციკლურ გრაფში წიბოები მიმართული უნდა იყოს."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
 #: editorplugins/generategraph/generategraphwidget.ui:14
 #, kde-format
 msgid "Generate Graph"
-msgstr "გრაფიკის გენერაცია"
+msgstr "გრაფის გენერაცია"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:22
 #, kde-format
 msgid "Select the graph generator."
-msgstr ""
+msgstr "აირჩიეთ გრაფის გენერატორი."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:26
@@ -479,7 +479,7 @@ msgstr "სრული გრაფი"
 #: editorplugins/generategraph/generategraphwidget.ui:71
 #, kde-format
 msgid "Complete Bipartite"
-msgstr ""
+msgstr "სრული ორმხრივი"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
 #: editorplugins/generategraph/generategraphwidget.ui:91
@@ -491,19 +491,19 @@ msgstr "დამატებითი პარამეტრების ჩ�
 #: editorplugins/generategraph/generategraphwidget.ui:106
 #, kde-format
 msgid "Set the unique identifier of the generated graph."
-msgstr ""
+msgstr "გენერირებული გრაფის უნიკალური იდენტიფიკატორის დაყენება."
 
 #. i18n: ectx: property (text), widget (QLineEdit, identifier)
 #: editorplugins/generategraph/generategraphwidget.ui:109
 #, kde-format
 msgid "Graph"
-msgstr "გრაფიკი"
+msgstr "გრაფი"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:116
 #, kde-format
 msgid "The node type to create the nodes of the graph with"
-msgstr ""
+msgstr "კვანძის ტიპი გრაფის კვანძების შესაქმნელად"
 
 #. i18n: ectx: property (text), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:119
@@ -515,7 +515,7 @@ msgstr "კვანძის ტიპი:"
 #: editorplugins/generategraph/generategraphwidget.ui:126
 #, kde-format
 msgid "The identifier of the created graph (used for scripting)"
-msgstr ""
+msgstr "შექმნილი გრაფის იდენტიფიკატორი (გამოიყენება სკრიპტებში)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
 #: editorplugins/generategraph/generategraphwidget.ui:148
@@ -551,7 +551,7 @@ msgstr "კვანძების რიცხვი:"
 #: editorplugins/generategraph/generategraphwidget.ui:332
 #, kde-format
 msgid "Allow self-edges:"
-msgstr ""
+msgstr "თვითწიბოების დაშვება:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
 #: editorplugins/generategraph/generategraphwidget.ui:293
@@ -569,7 +569,7 @@ msgstr "კვანძები (n):"
 #: editorplugins/generategraph/generategraphwidget.ui:349
 #, kde-format
 msgid "Edge Probability (p):"
-msgstr ""
+msgstr "წიბოს ალბათობა (p):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
 #. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
@@ -589,31 +589,31 @@ msgstr "კვანძების რიცხვი"
 #: editorplugins/generategraph/generategraphwidget.ui:463
 #, kde-format
 msgid "Edge Probability"
-msgstr ""
+msgstr "წიბოს ალბათობა"
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
 #: editorplugins/generategraph/generategraphwidget.ui:549
 #, kde-format
 msgid "Left Set Nodes:"
-msgstr ""
+msgstr "მარცხნივ დაყენებული კვანძები:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
 #: editorplugins/generategraph/generategraphwidget.ui:563
 #, kde-format
 msgid "Right Set Nodes:"
-msgstr ""
+msgstr "მარჯვნივ დაყენებული კვანძები:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:590
 #, kde-format
 msgid "Select the edge type for connections of the generated graph."
-msgstr ""
+msgstr "აირჩიეთ წიბოს ტიპი გენერირებული გრაფის კავშირებისთვის."
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:604
 #, kde-format
 msgid "The edge type to create the edges of the graph with"
-msgstr ""
+msgstr "წიბოს ტიპი გრაფის წიბოების შესაქმნელად"
 
 #. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:607
@@ -625,31 +625,31 @@ msgstr "კიდის ტიპი:"
 #: editorplugins/generategraph/generategraphwidget.ui:614
 #, kde-format
 msgid "Graph generator:"
-msgstr "გრაფიკის გენერატორი:"
+msgstr "გრაფის გენერატორი:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:621
 #, kde-format
 msgid "Select the node type for node elements of the generated graph."
-msgstr ""
+msgstr "აირჩიეთ კვანძის ტიპი გენერირებული გრაფის კვანძის ელემენტებისთვის."
 
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
 #, kde-format
 msgctxt "@title:window"
 msgid "Graph Layout"
-msgstr "გრაფიკის განლაგება"
+msgstr "გრაფის განლაგება"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:20
 #, kde-format
 msgid "Graph Layout"
-msgstr "გრაფიკის განლაგება"
+msgstr "გრაფის განლაგება"
 
 #. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:36
 #, kde-format
 msgid "Force Based Layout"
-msgstr ""
+msgstr "განლაგება ძალით"
 
 #. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:57
@@ -673,13 +673,13 @@ msgstr "მიზიდულობის ძალა:"
 #: editorplugins/graphlayout/graphlayoutwidget.ui:119
 #, kde-format
 msgid "Radial Tree Layout"
-msgstr ""
+msgstr "რადიალური ხის განლაგება"
 
 #. i18n: ectx: property (text), widget (QLabel, rootLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:134
 #, kde-format
 msgid "Center/Root:"
-msgstr ""
+msgstr "ცენტრი/ძირითადი:"
 
 #. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:144
@@ -724,6 +724,8 @@ msgid ""
 "This option connects all nodes of the given graph. The new edges do not have "
 "any preset weights."
 msgstr ""
+"ეს არჩევანი მოცემული გრაფის ყველა კვანძს დააკავშირებს. ახალ წიბოებს არ აქვს "
+"წინასწარ დაყენებული წონა."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
 #: editorplugins/transformedges/transformedgeswidget.ui:25
@@ -735,13 +737,13 @@ msgstr "სრული გრაფი"
 #: editorplugins/transformedges/transformedgeswidget.ui:35
 #, kde-format
 msgid "This option removes all edges from the given graph."
-msgstr ""
+msgstr "ეს არჩევანი მოცემული გრაფის ყველა წიბოს წაშლის."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:38
 #, kde-format
 msgid "Remove all edges"
-msgstr ""
+msgstr "ყველა წიბოს წაშლა"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:45
@@ -750,12 +752,14 @@ msgid ""
 "This option reverses all edges of a directed graph. Note that this does not "
 "apply to undirected graphs."
 msgstr ""
+"ეს არჩევანი მიმართული გრაფის ყველა წიბოს შეაბრუნებს. გაითვალისწინეთ, რომ ეს "
+"არ ეხება არამიმართულ გრაფებს."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:48
 #, kde-format
 msgid "Reverse all edges"
-msgstr ""
+msgstr "ყველა წიბოს შებრუნება"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:59
@@ -775,18 +779,31 @@ msgid ""
 "equals 1. Directed and undirected graphs are processed accordingly.</p></"
 "body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">ეს არჩევანი "
+"შეასრულებს<span style=\" font-style:italic;\">Prim-ის მინიმალური ძირითადი "
+"ხის ალგორითმს</span> გრაფთან. ყველა წიბო, რომელსაც არ აქვს მოცემული წონა, "
+"აღქმული იქნება, როგორც 1-ის ტოლი წონის. მიმართული და არამიმართული გრაფები "
+"შესაბამისად დამუშავდება.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:62
 #, kde-format
 msgid "Spanning tree transformation"
-msgstr ""
+msgstr "ძირითადი ხის გარდაქმნა"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:69
 #, kde-format
 msgid "Remove all self edges"
-msgstr ""
+msgstr "ყველა თვითწიბოს წაშლა"
 
 #: fileformats/dot/dotfileformat.cpp:45
 #, kde-format
@@ -809,7 +826,7 @@ msgstr "\"%1\" ფაილის დამუშავების შეცდ
 #: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
 #, kde-format
 msgid "Cannot open file %1 to write document. Error: %2"
-msgstr ""
+msgstr "ვერ გავხსენი ფაილი %1 დოკუმენტის ჩასაწერად. შეცდომა: %2"
 
 #: fileformats/fileformatmanager.cpp:48
 #, kde-format
@@ -820,7 +837,7 @@ msgstr "დამატების შეცდომა"
 #: fileformats/fileformatmanager.cpp:50
 #, kde-format
 msgid "Plugins could not be found in specified directories:<br>"
-msgstr ""
+msgstr "მითითებულ საქაღალდეებში დამატებები აღმოჩენილი არაა:<br>"
 
 #: fileformats/fileformatmanager.cpp:52
 #, kde-format
@@ -828,6 +845,8 @@ msgid ""
 "<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
 "link</a> for further information."
 msgstr ""
+"<br><br> მეტი ინფორმაციისთვის გადახედეთ <a href='https://doc.qt.io/qt-5/"
+"deployment-plugins.html'>ამ ბმულს</a>."
 
 #: fileformats/gml/gmlfileformat.cpp:44
 #, kde-format
@@ -837,7 +856,7 @@ msgstr "გრაფის აღწერის ენის ფორმატ
 #: fileformats/rocs1/rocs1fileformat.cpp:38
 #, kde-format
 msgid "Rocs 1 Graph File Format (%1)"
-msgstr ""
+msgstr "Rocs 1-ის გრაფის ფაილის ფორმატი (%1)"
 
 #: fileformats/rocs1/rocs1fileformat.cpp:257
 #: fileformats/rocs2/rocs2fileformat.cpp:211
@@ -859,7 +878,7 @@ msgstr "Rocs -ის გრაფის ფორმატი (%1)"
 #: fileformats/rocs2/rocs2fileformat.cpp:312
 #, kde-format
 msgid "Error on serializing file format to file."
-msgstr ""
+msgstr "ფაილის ფორმატის ფაილამდე სერიალიზაციის შეცდომა."
 
 #: fileformats/tgf/tgffileformat.cpp:38
 #, kde-format
@@ -870,11 +889,14 @@ msgstr "ტრივიალური გრაფის ფორმატი 
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
 msgstr ""
+"ფაილის ანალიზი შეუძლებელია. იდენტიფიკატორი \"%1\" ერთზე მეტჯერ გამოიყენება."
 
 #: fileformats/tgf/tgffileformat.cpp:85
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
 msgstr ""
+"ფაილის ანალიზი შეუძლებელია. წიბო \"%1\"-დან \"%2\"-მდე დაუზუსტებელ კვანძებს "
+"იყენებს."
 
 #: fileformats/tikz/tikzfileformat.cpp:34
 #, kde-format
@@ -896,13 +918,13 @@ msgstr "ახალი გრაფი"
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: no node with ID %2 registered"
-msgstr ""
+msgstr "%1: ID-ით %2 რეგისტრირებული კვანძი აღმოჩენილი არაა"
 
 #: kernel/documentwrapper.cpp:116 kernel/nodewrapper.cpp:109
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: node type ID %2 not registered"
-msgstr ""
+msgstr "%1: კვანძის ტიპი ID-ით %2 რეგისტრირებული არაა"
 
 #: kernel/documentwrapper.cpp:151 kernel/edgewrapper.cpp:87
 #: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
@@ -911,31 +933,31 @@ msgstr ""
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: edge type ID %2 not registered"
-msgstr ""
+msgstr "%1: წიბოს ტიპი ID-ით %2 რეგისტრირებული არაა"
 
 #: kernel/documentwrapper.cpp:175
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"from\" is not a valid node object"
-msgstr ""
+msgstr "%1: *from* სწორი კვანძის ობიექტი არაა"
 
 #: kernel/documentwrapper.cpp:180
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"to\" is not a valid node object"
-msgstr ""
+msgstr "%1: \"to\" სწორი კვანძის ობიექტი არაა"
 
 #: kernel/documentwrapper.cpp:191
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is not called on an object"
-msgstr ""
+msgstr "%1: ობიექტზე \"obj\" გამოძახებული არაა"
 
 #: kernel/documentwrapper.cpp:210
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is neither a valid node or edge object"
-msgstr ""
+msgstr "%1: \"obj\" არც სწორი კვანძია, არც წიბოს ობიექტი"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -944,12 +966,14 @@ msgid ""
 "The global Console object allows you to print messages of different "
 "importance to a log."
 msgstr ""
+"გლობალური ობიექტი 'Console' საშუალებას გაძლევთ, სხვადასხვა მნიშვნელოვნობის "
+"მქონე შეტყობინებები ჟურნალში ჩაწეროთ."
 
 #: kernel/modules/console/console.xml:17
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given message of normal severity."
-msgstr ""
+msgstr "ნორმალური სიმძიმის მქონე მითითებული შეტყობინების გამოტანა."
 
 #: kernel/modules/console/console.xml:31
 #, kde-format
@@ -961,7 +985,7 @@ msgstr "მითითებული გამართვის შეტყ�
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given error message of high severity."
-msgstr ""
+msgstr "მაღალი სიმძიმის მქონე მითითებული შეტყობინების გამოტანა."
 
 #: kernel/modules/document/document.xml:9
 #, kde-format
@@ -970,12 +994,14 @@ msgid ""
 "\n"
 "The document object provides access to all elements.\n"
 msgstr ""
+"\n"
+"დოკუმენტის ობიექტი წვდომას ყველა ობიექტთან მოგაწვდით.\n"
 
 #: kernel/modules/document/document.xml:19
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the node with specified ID."
-msgstr ""
+msgstr "აბრუნებს მითითებული ID-ის მქონე კვანძს."
 
 #: kernel/modules/document/document.xml:26
 #, kde-format
@@ -1005,13 +1031,13 @@ msgstr "კვანძის ტიპის იდენტიფიკატ�
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all edges."
-msgstr ""
+msgstr "აბრუნებს ყველა წიბოს სიას."
 
 #: kernel/modules/document/document.xml:65
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all edges of specified type."
-msgstr ""
+msgstr "აბრუნებს მითითებული ტიპის ყველა წიბოს სიას."
 
 #: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
 #: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
@@ -1020,13 +1046,13 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "Identifier of an edge type."
-msgstr ""
+msgstr "წიბოს ტიპის იდენტიფიკატორი."
 
 #: kernel/modules/document/document.xml:79
 #, kde-format
 msgctxt "Scripting API"
 msgid "Create node at position (x,y)."
-msgstr ""
+msgstr "კვანძის შექმნა პოზიციაზე (x,y)."
 
 #: kernel/modules/document/document.xml:86
 #, kde-format
@@ -1044,25 +1070,25 @@ msgstr "კვანძის Y კოორდინატი."
 #, kde-format
 msgctxt "Scripting API"
 msgid "Create edge between the given nodes of default edge type."
-msgstr ""
+msgstr "წიბოს შექმნა ნაგულისხმევი წიბოს ტიპის მითითებულ კვანძებს შორის."
 
 #: kernel/modules/document/document.xml:105
 #, kde-format
 msgctxt "Scripting API"
 msgid "Start node of the edge."
-msgstr ""
+msgstr "წიბოს საწყისი კვანძი."
 
 #: kernel/modules/document/document.xml:110
 #, kde-format
 msgctxt "Scripting API"
 msgid "Target node of the edge."
-msgstr ""
+msgstr "წიბოს სამიზნე კვანძი."
 
 #: kernel/modules/document/document.xml:117
 #, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given node."
-msgstr ""
+msgstr "მოცემული კვანძის წაშლა."
 
 #: kernel/modules/document/document.xml:124
 #, kde-format
@@ -1074,13 +1100,13 @@ msgstr "წასაშლელი კვანძი."
 #, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given edge."
-msgstr ""
+msgstr "მოცემული წიბოს წაშლა."
 
 #: kernel/modules/document/document.xml:138
 #, kde-format
 msgctxt "Scripting API"
 msgid "The edge to be deleted."
-msgstr ""
+msgstr "წასაშლელი წიბო."
 
 #: kernel/modules/document/edge.xml:9
 #, kde-format
@@ -1090,6 +1116,9 @@ msgid ""
 "An edge is the connection of two nodes. Edges can be either directed or "
 "undirected, depending on their type.\n"
 msgstr ""
+"\n"
+"წიბო ორი კვანძის კავშირია. წიბო შეიძლება ან მიმართული იყოს, ან არამიმართული, "
+"მათი ტიპის მიხედვით.\n"
 
 #: kernel/modules/document/edge.xml:17
 #, kde-format
@@ -1098,24 +1127,26 @@ msgid ""
 "Read and set the identifier of the edge's type. If setting, the edge type "
 "identifier must exist."
 msgstr ""
+"წიბოს ტიპის იდენტიფიკატორის წაკითხვა და დაყენება. თუ ეს პარამეტრია, წიბოს "
+"ტიპის იდენტიფიკატორი უნდა არსებობდეს."
 
 #: kernel/modules/document/edge.xml:26
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the origin node of the edge."
-msgstr ""
+msgstr "აბრუნებს წიბოს საწყის კვანძს."
 
 #: kernel/modules/document/edge.xml:35
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the target node of the edge."
-msgstr ""
+msgstr "აბრუნებს წიბოს სამიზნე კვანძს."
 
 #: kernel/modules/document/edge.xml:44
 #, kde-format
 msgctxt "Scripting API"
 msgid "Returns true if the edge's type is directed, otherwise false."
-msgstr ""
+msgstr "აბრუნებს ჭეშმარიტს, თუ წიბოს ტიპი მიმართულია და ცრუს, თუ არა."
 
 #: kernel/modules/document/node.xml:11
 #, kde-format
@@ -1128,24 +1159,30 @@ msgid ""
 "Note that dynamic properties are only available after script execution, if "
 "they are registered for the node's type.\n"
 msgstr ""
+"\n"
+"კვანძი გრაფის მონაცემთა ელემენტია.\n"
+"მას შეიძლება ჰქონდეს ნებისმიერი დინამიკური თვისებები, რომლებიც ან "
+"რედაქტორშია დაყენებული, ან უმარტივესად ენიჭება შესრულების დროს.\n"
+"გაითვალისწინეთ, რომ დინამიკური თვისებები, მხოლოდ, სკრიპტის შესრულების "
+"შემდეგაა ხელმისაწვდომი, თუ ისინი რეგისტრირებულია ამ კვანძის იტიპისთვის.\n"
 
 #: kernel/modules/document/node.xml:19
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the unique identifier of this node."
-msgstr ""
+msgstr "ამ კვანძის უნიკალური იდენტიფიკატორის წაკითხვა და დაყენება."
 
 #: kernel/modules/document/node.xml:26
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the x-coordinate of the node."
-msgstr ""
+msgstr "კვანძის X კოორდინატის წაკითხვა და დაყენება."
 
 #: kernel/modules/document/node.xml:33
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the y-coordinate of the node."
-msgstr ""
+msgstr "კვანძის Y კოორდინატის წაკითხვა და დაყენება."
 
 #: kernel/modules/document/node.xml:40
 #, kde-format
@@ -1154,6 +1191,8 @@ msgid ""
 "Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
 "for red)."
 msgstr ""
+"ამ კვანძის ფერის სტრიქონის დაყენება და წაკითხვა თექვსმეტობით მნიშვნელობაში "
+"(მაგ: \"#ff0000\" წითელია)."
 
 #: kernel/modules/document/node.xml:47
 #, kde-format
@@ -1162,12 +1201,14 @@ msgid ""
 "Read and set the identifier of the node's type. If setting, the node type "
 "identifier must exist."
 msgstr ""
+"კვანძის ტიპის იდენტიფიკატორის წაკითხვა და დაყენება. კვანძის ტიპი "
+"იდენტიფიკატორი უნდა არსებობდეს."
 
 #: kernel/modules/document/node.xml:56
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all edges (incoming and outgoing) of this node."
-msgstr ""
+msgstr "აბრუნებს ამ კვანძის ყველა წიბოს (შემომავალი და გამავალი) სიას."
 
 #: kernel/modules/document/node.xml:65
 #, kde-format
@@ -1176,30 +1217,32 @@ msgid ""
 "Return a list of all edges (incoming and outgoing) of this node of a "
 "specified type."
 msgstr ""
+"აბრუნებს მითითებული ტიპის ამ კვანძის ყველა წიბოს (შემომავალი და გამავალი) "
+"სიას."
 
 #: kernel/modules/document/node.xml:79
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of incoming edges of this node."
-msgstr ""
+msgstr "აბრუნებს ამ კვანძის შემომავალი წიბოების სიას."
 
 #: kernel/modules/document/node.xml:88
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all incoming edges of this node of a specified type."
-msgstr ""
+msgstr "აბრუნებს მითითებული ტიპის ამ კვანძის ყველა შემომავალი წიბოს სიას."
 
 #: kernel/modules/document/node.xml:102
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all outgoing edges of this node."
-msgstr ""
+msgstr "აბრუნებს ამ კვანძის გამავალი წიბოების სიას."
 
 #: kernel/modules/document/node.xml:111
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all outgoing edges of this node of a specified type."
-msgstr ""
+msgstr "აბრუნებს მითითებული ტიპის ამ კვანძის ყველა გამავალი წიბოს სიას."
 
 #: kernel/modules/document/node.xml:125
 #, kde-format
@@ -1208,6 +1251,8 @@ msgid ""
 "Return list all nodes connected to this node. This method respects if edges "
 "are directed."
 msgstr ""
+"აბრუნებს ამ კვანძთან დაკავშირებული ყველა კვანძის სიას. ეს მეთოდი "
+"ითვალისწინებს იმ წიბოებს, რომლებიც მიმართულია."
 
 #: kernel/modules/document/node.xml:134
 #, kde-format
@@ -1216,12 +1261,17 @@ msgid ""
 "Return list all nodes connected to this node via an edge of specified type. "
 "This method respects if edges are directed."
 msgstr ""
+"აბრუნებს ყველა იმ კვანძს, რომელიც ამ კვანძთან მითითებული ტიპის წიბოს "
+"გავლითაა დაკავშირებული. ეს მეთოდი ითვალისწინებს იმ წიბოებს, რომლებიც "
+"მიმართულია."
 
 #: kernel/modules/document/node.xml:148
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all nodes connected to this node by an incoming edge."
 msgstr ""
+"აბრუნებს ყველა იმ კვანძის სას, რომლებიც ამ კვანძთან შემომავალი წიბოთია "
+"დაკავშირებული."
 
 #: kernel/modules/document/node.xml:157
 #, kde-format
@@ -1230,12 +1280,16 @@ msgid ""
 "Return a list all nodes connected to this node by an incoming edge of "
 "specified type."
 msgstr ""
+"აბრუნებს ყველა იმ კვანძის სას, რომლებიც ამ კვანძთან შემომავალი, მითითებული "
+"ტიპის წიბოთია დაკავშირებული."
 
 #: kernel/modules/document/node.xml:171
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return list all nodes connected to this node by an outgoing edge."
 msgstr ""
+"აბრუნებს ყველა იმ კვანძის სას, რომლებიც ამ კვანძთან გამავალი წიბოთია "
+"დაკავშირებული."
 
 #: kernel/modules/document/node.xml:180
 #, kde-format
@@ -1244,24 +1298,26 @@ msgid ""
 "Return list all nodes connected to this node by an outgoing edge of "
 "specified type."
 msgstr ""
+"აბრუნებს ყველა იმ კვანძის სას, რომლებიც ამ კვანძთან გამავალი, მითითებული "
+"ტიპის წიბოთია დაკავშირებული."
 
 #: kernel/modules/document/node.xml:194
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return list of distances to specified targets in same order."
-msgstr ""
+msgstr "აბრუნებს მითითებულ სამიზნეებამდე მანძილის სიას იგივე მიმდევრობით."
 
 #: kernel/modules/document/node.xml:201
 #, kde-format
 msgctxt "Scripting API"
 msgid "Name of edge property that holds the edge length."
-msgstr ""
+msgstr "წიბოს თვისების სახელი, რომელიც წიბოს სიგრძეს შეიცავს."
 
 #: kernel/modules/document/node.xml:206
 #, kde-format
 msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
-msgstr ""
+msgstr "კვანძების სია, რომლებამდე მანძილიც უნდა გამოითვალოს."
 
 #: models/edgemodel.cpp:141
 #, kde-format
@@ -1273,7 +1329,7 @@ msgstr "კუთხე"
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeProperty"
-msgstr ""
+msgstr "წიბოსთვისება"
 
 #: models/edgetypemodel.cpp:190
 #, kde-format
@@ -1285,7 +1341,7 @@ msgstr "კიდის ტიპი"
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeTypeProperty"
-msgstr ""
+msgstr "წიბოსტიპისთვისება"
 
 #: models/nodemodel.cpp:142
 #, kde-format
@@ -1297,7 +1353,7 @@ msgstr "კვანძი"
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeProperty"
-msgstr ""
+msgstr "კვანძისთვისება"
 
 #: models/nodetypemodel.cpp:188
 #, kde-format
@@ -1309,7 +1365,7 @@ msgstr "კვანძის ტიპი"
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeTypeProperty"
-msgstr ""
+msgstr "კვანძისტიპისთვისება"
 
 #: qml/AddEdgeAction.qml:25
 #, kde-format
