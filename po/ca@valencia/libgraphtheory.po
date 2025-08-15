@@ -1,23 +1,23 @@
 # Translation of libgraphtheory.po to Catalan (Valencian)
-# Copyright (C) 2009-2021 This_file_is_part_of_KDE
+# Copyright (C) 2009-2025 This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Orestes Mas <orestes@tsc.upc.edu>, 2009, 2010, 2011, 2012, 2013.
-# Josep M. Ferrer <txemaq@gmail.com>, 2011, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2011, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2025 Josep M. Ferrer <txemaq@gmail.com>
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2013, 2015, 2019, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:39+0000\n"
-"PO-Revision-Date: 2021-10-24 11:16+0200\n"
+"PO-Revision-Date: 2025-08-13 08:46+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 25.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -959,20 +959,16 @@ msgid "%1: \"to\" is not a valid node object"
 msgstr "%1: «to» no és cap objecte vàlid de node"
 
 #: kernel/documentwrapper.cpp:191
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "%1: \"to\" is not a valid node object"
+#, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is not called on an object"
-msgstr "%1: «to» no és cap objecte vàlid de node"
+msgstr "%1: «obj» no s'invoca en un objecte"
 
 #: kernel/documentwrapper.cpp:210
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "%1: \"to\" is not a valid node object"
+#, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is neither a valid node or edge object"
-msgstr "%1: «to» no és cap objecte vàlid de node"
+msgstr "%1: «obj» no és és un node vàlid ni un objecte d'aresta"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -1409,27 +1405,3 @@ msgstr "Suprimix l'element"
 #, kde-format
 msgid "Select & Move"
 msgstr "Selecciona i mou"
-
-#~ msgctxt "@info:shell"
-#~ msgid "%1: \"node\" is not a valid node object"
-#~ msgstr "%1: «node» no és cap objecte vàlid de node"
-
-#~ msgctxt "@info:shell"
-#~ msgid "%1: \"edge\" is not a valid edge object"
-#~ msgstr "%1: «edge» no és cap objecte vàlid d'aresta"
-
-#~ msgctxt "@info status message after successful script execution"
-#~ msgid "<i>Execution Finished</i>"
-#~ msgstr "<i>Execució finalitzada</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Crea una aresta entre dos nodes"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Afig un node a l'escena"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Suprimix l'element de l'escena"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Selecciona i mou els elements a l'escena"

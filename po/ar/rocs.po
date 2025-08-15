@@ -532,7 +532,7 @@ msgstr ""
 #: ui/mainwindow.cpp:464
 #, kde-format
 msgid "File already exists."
-msgstr "الملفّ موجود بالفعل"
+msgstr "الملفّ موجود فعلًا"
 
 #: ui/mainwindow.cpp:490
 #, kde-format
