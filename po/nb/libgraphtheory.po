@@ -1332,7 +1332,3 @@ msgstr ""
 #, kde-format
 msgid "Select & Move"
 msgstr ""
-
-#~ msgctxt "@info status message after successful script execution"
-#~ msgid "<i>Execution Finished</i>"
-#~ msgstr "<i>Kjøring fullført</i>"
