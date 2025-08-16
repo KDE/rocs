@@ -5,3 +5,4 @@ include:
     file:
       - /gitlab-templates/linux-qt6.yml
       - /gitlab-templates/linux-qt6-next.yml
+      - /gitlab-templates/flatpak.yml
