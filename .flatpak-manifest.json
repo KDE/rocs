@@ -1,17 +1,35 @@
 {
     "id": "org.kde.rocs",
     "branch": "master",
-    "base": "io.qt.qtwebengine.BaseApp",
-    "base-version": "5.15-24.08",
     "runtime": "org.kde.Platform",
-    "runtime-version": "5.15-24.08",
+    "runtime-version": "6.9",
     "sdk": "org.kde.Sdk",
     "command": "rocs",
     "tags": ["nightly"],
     "desktop-file-name-suffix": " (Nightly)",
-    "finish-args": ["--share=ipc", "--socket=x11", "--socket=wayland", "--filesystem=host" ],
-
+    "finish-args": [
+        "--share=ipc",
+        "--socket=x11",
+        "--socket=wayland",
+        "--filesystem=host"
+    ],
     "modules": [
+        {
+            "name": "ktexttemplate",
+            "config-opts": [
+                "-DBUILD_TESTING=OFF",
+                "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+            ],
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://invent.kde.org/frameworks/ktexttemplate",
+                    "branch": "v6.13.0"
+                }
+            ]
+        },
         {
             "name": "boost",
             "buildsystem": "simple",
@@ -22,16 +40,10 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://archives.boost.io/release/1.78.0/source/boost_1_78_0.tar.bz2",
-                    "sha256": "8681f175d4bdb26c52222665793eef08490d7758529330f98d3b29dd0735bccc"
+                    "url": "https://archives.boost.io/release/1.83.0/source/boost_1_83_0.tar.bz2",
+                    "sha256": "6478edfe2f3305127cffe8caf73ea0176c53769f4bf1585be237eb30798c3b8e"
                 }
             ]
-        },
-        {
-            "name": "grantlee",
-            "config-opts": [ "-DENABLE_TESTING=OFF" ],
-            "buildsystem": "cmake-ninja",
-            "sources": [ { "type": "git", "url": "https://github.com/steveire/grantlee.git" } ]
         },
         {
             "name": "rocs",
