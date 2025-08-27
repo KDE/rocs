@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Maxime Corteel <mcorteel@gmail.com>, 2015.
 # Simon Depiets <sdepiets@gmail.com>, 2018.
-# SPDX-FileCopyrightText: 2020, 2021, 2024 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2020, 2021, 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:39+0000\n"
-"PO-Revision-Date: 2024-08-16 14:23+0200\n"
+"PO-Revision-Date: 2025-08-14 09:01+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.07.90\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -962,20 +962,16 @@ msgid "%1: \"to\" is not a valid node object"
 msgstr "%1 : « to » n'est pas un objet de sommet valable"
 
 #: kernel/documentwrapper.cpp:191
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "%1: \"to\" is not a valid node object"
+#, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is not called on an object"
-msgstr "%1 : « to » n'est pas un objet de sommet valable"
+msgstr "%1 : « obj » n'est pas appelé par un objet"
 
 #: kernel/documentwrapper.cpp:210
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "%1: \"to\" is not a valid node object"
+#, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is neither a valid node or edge object"
-msgstr "%1 : « to » n'est pas un objet de sommet valable"
+msgstr "%1 : « obj » n'est ni un nœud valable ni un objet de bord"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
