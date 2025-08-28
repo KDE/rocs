@@ -581,11 +581,3 @@ msgstr "Postranní panel nástrojů"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr ""
-
-#~ msgctxt "@action:intoolbar Open Debugger"
-#~ msgid "Debugger"
-#~ msgstr "Ladicí program"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Open the Javascript code debugger."
-#~ msgstr "Otevřít ladicí nástroj pro JavaScript."

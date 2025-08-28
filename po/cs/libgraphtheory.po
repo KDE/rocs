@@ -1330,12 +1330,3 @@ msgstr "Smazat prvek"
 #, kde-format
 msgid "Select & Move"
 msgstr ""
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Vytvořit hranu mezi dvěma uzly"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Přidat na obrazovku uzel"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Smazat prvek ze scény"
