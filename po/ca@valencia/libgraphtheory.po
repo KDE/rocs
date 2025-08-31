@@ -135,8 +135,8 @@ msgid ""
 "The selected ID is already used for another edge type, please select a "
 "different one."
 msgstr ""
-"L'ID seleccionat ja s'utilitza per a un altre tipus d'aresta, seleccioneu-ne "
-"un de diferent."
+"L'ID seleccionat ja s'utilitza per a un altre tipus d'aresta, trieu-ne un de "
+"diferent."
 
 #: dialogs/nodeproperties.cpp:26
 #, kde-format
@@ -157,8 +157,7 @@ msgid ""
 "The selected ID is already used for another node, please select a different "
 "one."
 msgstr ""
-"L'ID seleccionat ja s'utilitza per a un altre node, seleccioneu-ne un de "
-"diferent."
+"L'ID seleccionat ja s'utilitza per a un altre node, trieu-ne un de diferent."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
 #: dialogs/nodeproperties.ui:26
@@ -197,8 +196,8 @@ msgid ""
 "The selected ID is already used for another node type, please select a "
 "different one."
 msgstr ""
-"L'ID seleccionat ja s'utilitza per a un altre tipus de node, seleccioneu-ne "
-"un de diferent."
+"L'ID seleccionat ja s'utilitza per a un altre tipus de node, trieu-ne un de "
+"diferent."
 
 #: dialogs/propertieswidget.cpp:33
 #, kde-format
@@ -241,7 +240,7 @@ msgstr "Assigna valors"
 #: editorplugins/assignvalues/assignvalueswidget.ui:40
 #, kde-format
 msgid "Choose Properties"
-msgstr "Seleccioneu les propietats"
+msgstr "Trieu les propietats"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
 #: editorplugins/assignvalues/assignvalueswidget.ui:59
@@ -428,7 +427,7 @@ msgstr "Genera el graf"
 #: editorplugins/generategraph/generategraphwidget.ui:22
 #, kde-format
 msgid "Select the graph generator."
-msgstr "Seleccioneu el generador de grafs."
+msgstr "Trieu el generador de grafs."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:26
@@ -640,8 +639,7 @@ msgstr "Generador de grafs:"
 #: editorplugins/generategraph/generategraphwidget.ui:621
 #, kde-format
 msgid "Select the node type for node elements of the generated graph."
-msgstr ""
-"Seleccioneu el tipus de node per als elements de node del graf generat."
+msgstr "Trieu el tipus de node per als elements de node del graf generat."
 
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
 #, kde-format
@@ -1425,9 +1423,9 @@ msgstr "Suprimix l'element de l'escena"
 #: qml/SelectMoveAction.qml:14
 #, kde-format
 msgid "Select & Move"
-msgstr "Selecciona i mou"
+msgstr "Tria i mou"
 
 #: qml/SelectMoveAction.qml:17
 #, kde-format
 msgid "Select and move elements on the scene"
-msgstr "Selecciona i mou els elements a l'escena"
+msgstr "Tria i mou els elements a l'escena"
