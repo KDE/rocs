@@ -1,6 +1,5 @@
 {
     "KPlugin": {
-        "Id": "rocs_rocs1fileformat",
         "Name": "Rocs File Format (old)",
         "Name[ca@valencia]": "Format de fitxer de Rocs (antic)",
         "Name[ca]": "Format de fitxer del Rocs (antic)",

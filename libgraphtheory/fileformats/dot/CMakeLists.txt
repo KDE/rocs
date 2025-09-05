@@ -4,9 +4,13 @@
 
 set(dotformat_SRCS
     dotfileformat.cpp
+    dotfileformat.h
     dotgrammar.cpp
+    dotgrammar.h
     dotgrammarhelper.cpp
+    dotgrammarhelper.h
     ../../logging.cpp
+    dotfileformat.json
 )
 
 # Boost requires exceptions

@@ -5,8 +5,6 @@
  */
 
 #include "editorplugins/editorplugininterface.h"
-
-#include "graphdocument.h"
 #include "graphlayoutwidget.h"
 #include "logging_p.h"
 #include "typenames.h"

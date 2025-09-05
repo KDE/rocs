@@ -10,7 +10,9 @@ add_library(graphlayoutplugin MODULE)
 target_sources(graphlayoutplugin PRIVATE
     graphlayoutplugin.cpp
     graphlayoutwidget.cpp
+    graphlayoutwidget.h
     ../../logging.cpp
+    graphlayoutplugin.json
 )
 
 #boost requires exceptions

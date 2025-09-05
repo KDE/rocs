@@ -4,7 +4,9 @@
 
 set(rocs1format_SRCS
     rocs1fileformat.cpp
+    rocs1fileformat.h
     ../../logging.cpp
+    rocs1fileformat.json
 )
 
 kcoreaddons_add_plugin(rocs1fileformat SOURCES ${rocs1format_SRCS} INSTALL_NAMESPACE "rocs/fileformats")

@@ -4,9 +4,12 @@
 
 set(gmlformat_SRCS
     gmlfileformat.cpp
+    gmlfileformat.h
     gmlgrammar.cpp
+    gmlgrammar.h
     gmlgrammarhelper.cpp
     ../../logging.cpp
+    gmlfileformat.json
 )
 
 kcoreaddons_add_plugin(gmlfileformat SOURCES ${gmlformat_SRCS} INSTALL_NAMESPACE "rocs/fileformats")

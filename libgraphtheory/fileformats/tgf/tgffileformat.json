@@ -1,6 +1,5 @@
 {
     "KPlugin": {
-        "Id": "rocs_tgffileformat",
         "Name": "TGF Graph File Format",
         "Name[ca@valencia]": "Format de fitxer de grafs TGF",
         "Name[ca]": "Format de fitxer de grafs TGF",

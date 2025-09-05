@@ -4,7 +4,9 @@
 
 set(tikzformat_SRCS
     tikzfileformat.cpp
+    tikzfileformat.h
     ../../logging.cpp
+    tikzfileformat.json
 )
 
 kcoreaddons_add_plugin(tikzfileformat SOURCES ${tikzformat_SRCS} INSTALL_NAMESPACE "rocs/fileformats")

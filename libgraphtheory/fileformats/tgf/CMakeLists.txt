@@ -4,7 +4,9 @@
 
 set(tgfformat_SRCS
     tgffileformat.cpp
+    tgffileformat.h
     ../../logging.cpp
+    tgffileformat.json
 )
 
 kcoreaddons_add_plugin(tgffileformat SOURCES ${tgfformat_SRCS} INSTALL_NAMESPACE "rocs/fileformats")
