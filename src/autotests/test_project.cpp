@@ -78,6 +78,7 @@ void TestProject::loadSave()
     codeFile.open();
     project.importCodeDocument(QUrl::fromLocalFile(codeFile.fileName()));
     project.addGraphDocument(GraphTheory::GraphDocument::create());
+    QCOMPARE(project.graphDocuments().size(), 1);
     QVERIFY(project.projectSave());
 
     // Now the documents live in the test dir
@@ -88,8 +89,8 @@ void TestProject::loadSave()
     }
 
     Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), &graphEditor);
-    QCOMPARE(loadedProject.codeDocuments().count(), project.codeDocuments().count());
-    QCOMPARE(loadedProject.graphDocuments().count(), project.graphDocuments().count());
+    QCOMPARE(loadedProject.codeDocuments().size(), project.codeDocuments().size());
+    QCOMPARE(loadedProject.graphDocuments().size(), project.graphDocuments().size());
 
     // After load, they live in the project dir
     const auto loadedDocs = loadedProject.codeDocuments();

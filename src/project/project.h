@@ -110,6 +110,11 @@ public:
      */
     void setDocumentName(KTextEditor::Document *document, const QString &name);
 
+    /**
+     * @return false if the project could not be initialized e.g. due to a file parsing error
+     */
+    bool isValid() const;
+
 public Q_SLOTS:
     /**
      * Set the currently active graph document index to @p index.

@@ -403,11 +403,15 @@ void MainWindow::openProject(const QUrl &fileName)
         return;
     }
     Project *project = new Project(file, m_graphEditor);
-    setProject(project);
-    m_recentProjects->addUrl(file);
-    updateCaption();
+    if (!project->isValid()) {
+        KMessageBox::error(nullptr, i18nc("@info", "The Rocs project could not be imported because the project file could not be parsed."));
+    } else {
+        setProject(project);
+        m_recentProjects->addUrl(file);
+        updateCaption();
 
-    Settings::setLastOpenedDirectory(file.path());
+        Settings::setLastOpenedDirectory(file.path());
+    }
 }
 
 void MainWindow::updateCaption()

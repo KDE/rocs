@@ -38,6 +38,7 @@ public:
     KTextEditor::Document *m_journal{nullptr};
     GraphTheory::Editor *m_graphEditor{nullptr};
     bool m_modified{false};
+    bool m_valid{false};
 
     int m_activeGraphDocumentIndex{-1};
     int m_activeCodeDocumentIndex{-1};
@@ -138,7 +139,6 @@ bool ProjectPrivate::writeProjectMetaInfo()
     return true;
 }
 
-// TODO make graphEditor singleton
 Project::Project(GraphTheory::Editor *graphEditor)
     : d(new ProjectPrivate)
 {
@@ -147,30 +147,36 @@ Project::Project(GraphTheory::Editor *graphEditor)
     d->m_journal->saveAs(QUrl::fromLocalFile(workingDir() + QChar('/') + QString("journal.txt")));
 }
 
-// TODO make graphEditor singleton
 Project::Project(const QUrl &projectFile, GraphTheory::Editor *graphEditor)
     : d(new ProjectPrivate)
 {
     d->m_graphEditor = graphEditor;
     d->m_projectUrl = projectFile;
-    if (!d->loadProject(projectFile)) {
+    if (d->loadProject(projectFile)) {
+        for (const auto &document : std::as_const(d->m_codeDocuments)) {
+            connect(document, &KTextEditor::Document::modifiedChanged, this, &Project::modifiedChanged);
+        }
+        for (const auto &document : std::as_const(d->m_graphDocuments)) {
+            connect(document.data(), &GraphDocument::modifiedChanged, this, &Project::modifiedChanged);
+        }
+        d->m_valid = true;
+    } else {
+        qCritical() << "Could not parse project, omitting further loading";
+        d->m_valid = false;
+    }
+
+    if (isValid() && d->m_graphDocuments.size() == 0) {
         addGraphDocument(graphEditor->createDocument());
-        setModified(false);
-        d->m_journal = KTextEditor::Editor::instance()->createDocument(nullptr);
-
-        KMessageBox::error(nullptr, i18nc("@info", "The Rocs project could not be imported because the project file could not be parsed."));
     }
-
-    for (const auto &document : d->m_codeDocuments) {
-        connect(document, &KTextEditor::Document::modifiedChanged, this, &Project::modifiedChanged);
-    }
-    for (const auto &document : d->m_graphDocuments) {
-        connect(document.data(), &GraphDocument::modifiedChanged, this, &Project::modifiedChanged);
-    }
+    d->m_journal = KTextEditor::Editor::instance()->createDocument(nullptr);
+    setModified(false);
 }
 
-Project::~Project()
+Project::~Project() = default;
+
+bool Project::isValid() const
 {
+    return d->m_valid;
 }
 
 QUrl Project::projectUrl() const
