@@ -30,26 +30,17 @@ using namespace GraphTheory;
 class ProjectPrivate
 {
 public:
-    ProjectPrivate()
-        : m_journal(nullptr)
-        , m_graphEditor(nullptr)
-        , m_modified(false)
-        , m_activeGraphDocumentIndex(-1)
-        , m_activeCodeDocumentIndex(-1)
-    {
-    }
-
     QUrl m_projectUrl; //!< the project's archive file
     QTemporaryDir m_workingDirectory; //!< temporary directory where all project files are organized
     QList<KTextEditor::Document *> m_codeDocuments;
     QList<GraphDocumentPtr> m_graphDocuments;
     QHash<KTextEditor::Document *, QString> m_documentNames;
-    KTextEditor::Document *m_journal;
-    GraphTheory::Editor *m_graphEditor;
-    bool m_modified;
+    KTextEditor::Document *m_journal{nullptr};
+    GraphTheory::Editor *m_graphEditor{nullptr};
+    bool m_modified{false};
 
-    int m_activeGraphDocumentIndex;
-    int m_activeCodeDocumentIndex;
+    int m_activeGraphDocumentIndex{-1};
+    int m_activeCodeDocumentIndex{-1};
 
     /**
      * Set project from project archive file.
@@ -216,7 +207,7 @@ KTextEditor::Document *Project::createCodeDocument(const QString &filePath)
 
 KTextEditor::Document *Project::openCodeDocument(const QUrl &url)
 {
-    auto doc = KTextEditor::Editor::instance()->createDocument(nullptr);
+    auto doc = KTextEditor::Editor::instance()->createDocument(this);
     if (!doc->openUrl(url)) {
         qCritical() << "Error when opening code file, aborting.";
         return nullptr;
@@ -245,7 +236,9 @@ bool Project::addCodeDocument(KTextEditor::Document *document)
 
 KTextEditor::Document *Project::importCodeDocument(const QUrl &url)
 {
-    return openCodeDocument(url);
+    const QString importedUrl = workingDir() + '/' + url.fileName();
+    QFile::copy(url.toLocalFile(), importedUrl);
+    return openCodeDocument(QUrl::fromLocalFile(importedUrl));
 }
 
 void Project::tryToRemoveCodeDocument(KTextEditor::Document *document)
@@ -332,10 +325,13 @@ bool Project::addGraphDocument(GraphDocumentPtr document)
     return true;
 }
 
-GraphTheory::GraphDocumentPtr Project::importGraphDocument(const QUrl &documentUrl)
+GraphTheory::GraphDocumentPtr Project::importGraphDocument(const QUrl &url)
 {
     Q_ASSERT(d->m_graphEditor);
-    GraphTheory::GraphDocumentPtr document = d->m_graphEditor->openDocument(documentUrl);
+    const QString importedUrl = workingDir() + '/' + url.fileName();
+    QFile::copy(url.toLocalFile(), importedUrl);
+
+    GraphTheory::GraphDocumentPtr document = d->m_graphEditor->openDocument(QUrl::fromLocalFile(importedUrl));
     Q_ASSERT(document);
     addGraphDocument(document);
     return document;
@@ -344,19 +340,22 @@ GraphTheory::GraphDocumentPtr Project::importGraphDocument(const QUrl &documentU
 void Project::removeGraphDocument(GraphDocumentPtr document)
 {
     QString path = document->documentUrl().toLocalFile();
-    d->m_graphDocuments.removeAll(document);
     if (!path.startsWith(d->m_workingDirectory.path())) {
         qCritical() << "Aborting removal of graph document with path " << path << ", not in temporary working directory" << d->m_workingDirectory.path();
         return;
     }
     if (!QFile::remove(path)) {
-        qCritical() << "Could not remove graph file" << path;
+        qWarning() << "Could not remove graph file, but cleanup up project anyways" << path;
     }
     int index = d->m_graphDocuments.indexOf(document);
-    Q_EMIT graphDocumentAboutToBeRemoved(index, index);
-    d->m_graphDocuments.removeAt(index);
-    Q_EMIT graphDocumentRemoved();
-    setModified(true);
+    if (index >= 0) {
+        Q_EMIT graphDocumentAboutToBeRemoved(index, index);
+        d->m_graphDocuments.removeAt(index);
+        Q_EMIT graphDocumentRemoved();
+        setModified(true);
+    } else {
+        qCritical() << "Could not find file index" << path;
+    }
 }
 
 void Project::setActiveGraphDocument(int index)

@@ -5,10 +5,8 @@
  */
 
 #include "editor.h"
-#include "edge.h"
 #include "fileformats/fileformatmanager.h"
 #include "logging_p.h"
-#include "node.h"
 #include "typenames.h"
 #include <QFileInfo>
 #include <QUrl>
@@ -36,9 +34,7 @@ Editor::Editor()
 {
 }
 
-Editor::~Editor()
-{
-}
+Editor::~Editor() = default;
 
 QList<GraphDocumentPtr> Editor::documents() const
 {

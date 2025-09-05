@@ -322,7 +322,6 @@ void MainWindow::importCodeDocument()
     if (fileUrl.isEmpty()) {
         return;
     }
-
     m_currentProject->importCodeDocument(fileUrl);
     Settings::setLastOpenedDirectory(startDirectory);
 }

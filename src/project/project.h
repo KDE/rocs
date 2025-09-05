@@ -9,7 +9,6 @@
 
 #include "libgraphtheory/editor.h"
 #include "libgraphtheory/typenames.h"
-
 #include <QList>
 #include <QScopedPointer>
 #include <QString>

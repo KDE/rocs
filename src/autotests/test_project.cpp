@@ -43,7 +43,7 @@ void TestProject::projectOperations()
     qDebug() << "Project document path=" << project.codeDocuments().at(0)->url().toLocalFile();
     qDebug() << "Test working dir     =" << QDir::currentPath();
 
-    QVERIFY(project.codeDocuments().at(0)->url().toLocalFile().startsWith(QDir::currentPath())); // check working dir
+    QVERIFY(project.codeDocuments().at(0)->url().toLocalFile().startsWith(project.workingDir())); // check working dir
     QVERIFY(codeDoc1->url().toLocalFile() != codeDoc2->url().toLocalFile()); // check for distinct names
     project.tryToRemoveCodeDocument(codeDoc1); // check removal
     QCOMPARE(project.codeDocuments().length(), 1);
@@ -55,7 +55,7 @@ void TestProject::projectOperations()
     graphFile.open();
     GraphTheory::GraphDocumentPtr graphDoc = project.importGraphDocument(QUrl::fromLocalFile(graphFile.fileName()));
     QCOMPARE(project.graphDocuments().length(), 1);
-    QVERIFY(project.graphDocuments().first()->documentUrl().toLocalFile().startsWith(project.workingDir()));
+    QVERIFY(project.graphDocuments().at(0)->documentUrl().toLocalFile().startsWith(project.workingDir()));
     project.removeGraphDocument(graphDoc);
     QCOMPARE(project.graphDocuments().length(), 0);
 
@@ -65,8 +65,8 @@ void TestProject::projectOperations()
 
 void TestProject::loadSave()
 {
-    GraphTheory::Editor *graphEditor = new GraphTheory::Editor;
-    Project project(graphEditor);
+    GraphTheory::Editor graphEditor;
+    Project project(&graphEditor);
 
     QTemporaryFile projectFile;
     projectFile.open();
@@ -84,10 +84,10 @@ void TestProject::loadSave()
     const auto docs = project.codeDocuments();
     for (const auto &d : docs) {
         qDebug() << "Code document path=" << d->url().toLocalFile();
-        QVERIFY(d->url().toLocalFile().startsWith(QDir::currentPath()));
+        QVERIFY(d->url().toLocalFile().startsWith(project.workingDir()));
     }
 
-    Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), graphEditor);
+    Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), &graphEditor);
     QCOMPARE(loadedProject.codeDocuments().count(), project.codeDocuments().count());
     QCOMPARE(loadedProject.graphDocuments().count(), project.graphDocuments().count());
 
@@ -97,8 +97,6 @@ void TestProject::loadSave()
         qDebug() << "Code document path=" << d->url().toLocalFile();
         QVERIFY(d->url().toLocalFile().startsWith(loadedProject.workingDir()));
     }
-
-    graphEditor->deleteLater();
 }
 
 void TestProject::loadSaveMultipleGraphDocuments()

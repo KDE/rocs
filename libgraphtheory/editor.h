@@ -8,11 +8,9 @@
 #define EDITOR_H
 
 #include "graphdocument.h"
+#include "typenames.h"
 #include "graphtheory_export.h"
 #include <QObject>
-
-class QQuickWidget;
-class QQmlEngine;
 
 namespace GraphTheory
 {
