@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:39+0000\n"
+"POT-Creation-Date: 2025-09-06 00:38+0000\n"
 "PO-Revision-Date: 2013-07-01 03:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -193,14 +193,6 @@ msgstr "Әдістер"
 #, kde-format
 msgid "Rocs Scripting API"
 msgstr "Rocs скрипт API-і"
-
-#: project/project.cpp:170
-#, kde-format
-msgctxt "@info"
-msgid ""
-"The Rocs project could not be imported because the project file could not be "
-"parsed."
-msgstr ""
 
 #. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
 #. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
@@ -498,7 +490,7 @@ msgctxt "@title:window"
 msgid "Import Script into Project"
 msgstr "Жобаға граф файлын импорттау"
 
-#: ui/mainwindow.cpp:333
+#: ui/mainwindow.cpp:332
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Export Script as"
@@ -506,18 +498,18 @@ msgctxt "@title:window"
 msgid "Export Script"
 msgstr "Скриптті былай экспорттау"
 
-#: ui/mainwindow.cpp:333
+#: ui/mainwindow.cpp:332
 #, fuzzy, kde-format
 #| msgid "Save Script as"
 msgid "JavaScript (*.js)"
 msgstr "Скриптті былай сақтау"
 
-#: ui/mainwindow.cpp:344
+#: ui/mainwindow.cpp:343
 #, kde-format
 msgid "untitled"
 msgstr "аталмаған"
 
-#: ui/mainwindow.cpp:367
+#: ui/mainwindow.cpp:366
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save Project as"
@@ -525,37 +517,45 @@ msgctxt "@title:window"
 msgid "Save Project As"
 msgstr "Жобаны былай сақтау"
 
-#: ui/mainwindow.cpp:367
+#: ui/mainwindow.cpp:366
 #, kde-format
 msgid "Rocs Projects (*.rocs)"
 msgstr ""
 
-#: ui/mainwindow.cpp:377
+#: ui/mainwindow.cpp:376
 #, kde-format
 msgctxt "@info"
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
 
-#: ui/mainwindow.cpp:378
+#: ui/mainwindow.cpp:377
 #, fuzzy, kde-format
 #| msgid "Overwrite"
 msgctxt "@title:window"
 msgid "Overwrite File?"
 msgstr "Үстінен жазу"
 
-#: ui/mainwindow.cpp:401
+#: ui/mainwindow.cpp:400
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Project Files"
 msgstr "Жоба файлдарын ашу"
 
-#: ui/mainwindow.cpp:401
+#: ui/mainwindow.cpp:400
 #, kde-format
 msgid "Rocs projects (*.rocs)"
 msgstr ""
 
-#: ui/mainwindow.cpp:426
+#: ui/mainwindow.cpp:407
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+
+#: ui/mainwindow.cpp:429
 #, fuzzy, kde-format
 #| msgctxt "caption text for temporary project"
 #| msgid "[ untitled ]"
@@ -563,23 +563,23 @@ msgctxt "caption text for temporary project"
 msgid "[ untitled ]%1"
 msgstr "[ аталмаған ]"
 
-#: ui/mainwindow.cpp:455
+#: ui/mainwindow.cpp:458
 #, kde-format
 msgid "ScriptName"
 msgstr "СкриптАтауы"
 
-#: ui/mainwindow.cpp:455
+#: ui/mainwindow.cpp:458
 #, kde-format
 msgid "Enter the name of your new script"
 msgstr "Жаңа скрипт файлының атауын келтіру"
 
-#: ui/mainwindow.cpp:464
+#: ui/mainwindow.cpp:467
 #, fuzzy, kde-format
 #| msgid "File Exists"
 msgid "File already exists."
 msgstr "Файл бар екен"
 
-#: ui/mainwindow.cpp:490
+#: ui/mainwindow.cpp:493
 #, kde-format
 msgctxt "@info"
 msgid "Changes on your project are unsaved. Do you want to save your changes?"

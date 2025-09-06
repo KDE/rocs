@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:39+0000\n"
+"POT-Creation-Date: 2025-09-06 00:38+0000\n"
 "PO-Revision-Date: 2021-10-26 14:28-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -187,16 +187,6 @@ msgstr "Métodos"
 #, kde-format
 msgid "Rocs Scripting API"
 msgstr "API de script do Rocs"
-
-#: project/project.cpp:170
-#, kde-format
-msgctxt "@info"
-msgid ""
-"The Rocs project could not be imported because the project file could not be "
-"parsed."
-msgstr ""
-"O projeto Rocs não pode ser importado pois o arquivo de projeto não pode ser "
-"analisado."
 
 #. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
 #. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
@@ -471,79 +461,89 @@ msgctxt "@title:window"
 msgid "Import Script into Project"
 msgstr "Importar um script para o projeto"
 
-#: ui/mainwindow.cpp:333
+#: ui/mainwindow.cpp:332
 #, kde-format
 msgctxt "@title:window"
 msgid "Export Script"
 msgstr "Exportar script"
 
-#: ui/mainwindow.cpp:333
+#: ui/mainwindow.cpp:332
 #, kde-format
 msgid "JavaScript (*.js)"
 msgstr "JavaScript (*.js)"
 
-#: ui/mainwindow.cpp:344
+#: ui/mainwindow.cpp:343
 #, kde-format
 msgid "untitled"
 msgstr "sem título"
 
-#: ui/mainwindow.cpp:367
+#: ui/mainwindow.cpp:366
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Project As"
 msgstr "Salvar projeto como"
 
-#: ui/mainwindow.cpp:367
+#: ui/mainwindow.cpp:366
 #, kde-format
 msgid "Rocs Projects (*.rocs)"
 msgstr "Projetos do Rocs (*.rocs)"
 
-#: ui/mainwindow.cpp:377
+#: ui/mainwindow.cpp:376
 #, kde-format
 msgctxt "@info"
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Já existe um arquivo chamado \"%1\". Deseja sobrescrevê-lo?"
 
-#: ui/mainwindow.cpp:378
+#: ui/mainwindow.cpp:377
 #, kde-format
 msgctxt "@title:window"
 msgid "Overwrite File?"
 msgstr "Sobrescrever o arquivo?"
 
-#: ui/mainwindow.cpp:401
+#: ui/mainwindow.cpp:400
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Project Files"
 msgstr "Abrir arquivos de projeto"
 
-#: ui/mainwindow.cpp:401
+#: ui/mainwindow.cpp:400
 #, kde-format
 msgid "Rocs projects (*.rocs)"
 msgstr "Projetos do Rocs (*.rocs)"
 
-#: ui/mainwindow.cpp:426
+#: ui/mainwindow.cpp:407
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+"O projeto Rocs não pode ser importado pois o arquivo de projeto não pode ser "
+"analisado."
+
+#: ui/mainwindow.cpp:429
 #, kde-format
 msgctxt "caption text for temporary project"
 msgid "[ untitled ]%1"
 msgstr "[ sem título ]%1"
 
-#: ui/mainwindow.cpp:455
+#: ui/mainwindow.cpp:458
 #, kde-format
 msgid "ScriptName"
 msgstr "Nome do script"
 
-#: ui/mainwindow.cpp:455
+#: ui/mainwindow.cpp:458
 #, kde-format
 msgid "Enter the name of your new script"
 msgstr "Digite o nome do seu novo script"
 
-#: ui/mainwindow.cpp:464
+#: ui/mainwindow.cpp:467
 #, kde-format
 msgid "File already exists."
 msgstr "O arquivo já existe."
 
-#: ui/mainwindow.cpp:490
+#: ui/mainwindow.cpp:493
 #, kde-format
 msgctxt "@info"
 msgid "Changes on your project are unsaved. Do you want to save your changes?"

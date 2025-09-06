@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:39+0000\n"
+"POT-Creation-Date: 2025-09-06 00:38+0000\n"
 "PO-Revision-Date: 2023-11-26 20:12+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -186,16 +186,6 @@ msgstr "Metodoj"
 #, kde-format
 msgid "Rocs Scripting API"
 msgstr "Rocs Scripting API"
-
-#: project/project.cpp:170
-#, kde-format
-msgctxt "@info"
-msgid ""
-"The Rocs project could not be imported because the project file could not be "
-"parsed."
-msgstr ""
-"La projekto Rocs ne povis esti importita ĉar la projektdosiero ne povis esti "
-"analizita."
 
 #. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
 #. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
@@ -470,34 +460,34 @@ msgctxt "@title:window"
 msgid "Import Script into Project"
 msgstr "Importi Skripton en Projekton"
 
-#: ui/mainwindow.cpp:333
+#: ui/mainwindow.cpp:332
 #, kde-format
 msgctxt "@title:window"
 msgid "Export Script"
 msgstr "Eksporti Skripton"
 
-#: ui/mainwindow.cpp:333
+#: ui/mainwindow.cpp:332
 #, kde-format
 msgid "JavaScript (*.js)"
 msgstr "JavaScript (*.js)"
 
-#: ui/mainwindow.cpp:344
+#: ui/mainwindow.cpp:343
 #, kde-format
 msgid "untitled"
 msgstr "sentitola"
 
-#: ui/mainwindow.cpp:367
+#: ui/mainwindow.cpp:366
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Project As"
 msgstr "Konservi Projekton Kiel"
 
-#: ui/mainwindow.cpp:367
+#: ui/mainwindow.cpp:366
 #, kde-format
 msgid "Rocs Projects (*.rocs)"
 msgstr "Rocs-Projektoj (*.rocs)"
 
-#: ui/mainwindow.cpp:377
+#: ui/mainwindow.cpp:376
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -506,45 +496,55 @@ msgstr ""
 "Dosiero nomita \"%1\" jam ekzistas. Ĉu vi certas, ke vi volas anstataŭigi "
 "ĝin?"
 
-#: ui/mainwindow.cpp:378
+#: ui/mainwindow.cpp:377
 #, kde-format
 msgctxt "@title:window"
 msgid "Overwrite File?"
 msgstr "Ĉu anstataŭigi dosieron?"
 
-#: ui/mainwindow.cpp:401
+#: ui/mainwindow.cpp:400
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Project Files"
 msgstr "Malfermi Projektdosierojn"
 
-#: ui/mainwindow.cpp:401
+#: ui/mainwindow.cpp:400
 #, kde-format
 msgid "Rocs projects (*.rocs)"
 msgstr "Rocs-projektoj (*.rocs)"
 
-#: ui/mainwindow.cpp:426
+#: ui/mainwindow.cpp:407
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The Rocs project could not be imported because the project file could not be "
+"parsed."
+msgstr ""
+"La projekto Rocs ne povis esti importita ĉar la projektdosiero ne povis esti "
+"analizita."
+
+#: ui/mainwindow.cpp:429
 #, kde-format
 msgctxt "caption text for temporary project"
 msgid "[ untitled ]%1"
 msgstr "[ untitled ]%1"
 
-#: ui/mainwindow.cpp:455
+#: ui/mainwindow.cpp:458
 #, kde-format
 msgid "ScriptName"
 msgstr "ScriptName"
 
-#: ui/mainwindow.cpp:455
+#: ui/mainwindow.cpp:458
 #, kde-format
 msgid "Enter the name of your new script"
 msgstr "Enigu la nomon de via nova skripto"
 
-#: ui/mainwindow.cpp:464
+#: ui/mainwindow.cpp:467
 #, kde-format
 msgid "File already exists."
 msgstr "Dosiero jam ekzistas."
 
-#: ui/mainwindow.cpp:490
+#: ui/mainwindow.cpp:493
 #, kde-format
 msgctxt "@info"
 msgid "Changes on your project are unsaved. Do you want to save your changes?"
