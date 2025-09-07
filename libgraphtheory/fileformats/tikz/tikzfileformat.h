@@ -1,8 +1,5 @@
-/*
- *  SPDX-FileCopyrightText: 2012-2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2012-2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #ifndef TIKZFILEFORMAT_H
 #define TIKZFILEFORMAT_H
@@ -19,9 +16,8 @@ namespace GraphTheory
 
 class TikzFileFormat : public FileFormatInterface
 {
-    Q_OBJECT
 public:
-    explicit TikzFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
+    explicit TikzFileFormat();
     ~TikzFileFormat() override;
 
     FileFormatInterface::PluginType pluginCapability() const override;

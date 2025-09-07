@@ -1,8 +1,5 @@
-/*
- *  SPDX-FileCopyrightText: 2012-2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2012-2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "testtgffileformat.h"
 #include "../tgffileformat.h"
@@ -13,10 +10,6 @@
 #include <QTest>
 
 using namespace GraphTheory;
-
-TestTgfFileFormat::TestTgfFileFormat()
-{
-}
 
 void TestTgfFileFormat::serializeUnserializeTest()
 {
@@ -46,13 +39,13 @@ void TestTgfFileFormat::serializeUnserializeTest()
     Edge::create(dataList["e"], dataList["a"]);
 
     // create exporter plugin
-    TgfFileFormat serializer(this, KPluginMetaData(), QVariantList());
+    TgfFileFormat serializer;
     serializer.setFile(QUrl::fromLocalFile("test.tgf"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);
 
     // create importer
-    TgfFileFormat importer(this, KPluginMetaData(), QVariantList());
+    TgfFileFormat importer;
     importer.setFile(QUrl::fromLocalFile("test.tgf"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);

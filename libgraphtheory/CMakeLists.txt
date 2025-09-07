@@ -1,5 +1,4 @@
-# SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
-#
+# SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
 # SPDX-License-Identifier: BSD-2-Clause
 
 # we use SOVERION 0 to make clear that this is neither stable API nor stable ABI
@@ -51,13 +50,14 @@ target_sources(rocsgraphtheory PRIVATE
     modifiers/topology.cpp
     fileformats/fileformatinterface.cpp
     fileformats/fileformatmanager.cpp
+    fileformats/fileformatmanager.h
+    fileformats/fileformatmanager_p.h
     editorplugins/editorplugininterface.cpp
     editorplugins/editorpluginmanager.cpp
     qtquickitems/nodeitem.cpp
     qtquickitems/edgeitem.cpp
     qtquickitems/qsgarrowheadnode.cpp
     qtquickitems/qsglinenode.cpp
-
     qml/rocs.qrc
 )
 
@@ -67,6 +67,8 @@ ki18n_wrap_ui(rocsgraphtheory
 )
 
 generate_export_header(rocsgraphtheory BASE_NAME graphtheory)
+
+add_subdirectory(fileformats)
 
 target_link_libraries(rocsgraphtheory
     PUBLIC
@@ -95,7 +97,6 @@ install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${KDE_INSTALL_INCLUDEDIR}/rocs  
 # Boost requires exceptions
 kde_source_files_enable_exceptions(modifiers/topology.cpp modifiers/valueassign.cpp)
 
-ecm_optional_add_subdirectory(fileformats)
 ecm_optional_add_subdirectory(editorplugins)
 ecm_optional_add_subdirectory(kernel)
 ecm_optional_add_subdirectory(modifiers)

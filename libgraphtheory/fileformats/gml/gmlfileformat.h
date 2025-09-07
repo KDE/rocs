@@ -18,9 +18,8 @@ namespace GraphTheory
 
 class GmlFileFormat : public FileFormatInterface
 {
-    Q_OBJECT
 public:
-    explicit GmlFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
+    explicit GmlFileFormat();
     ~GmlFileFormat() override;
 
     /**

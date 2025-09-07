@@ -28,10 +28,8 @@ static QString processNode(const NodePtr &n);
 
 extern GmlParser::GmlGrammarHelper *phelper;
 
-K_PLUGIN_CLASS_WITH_JSON(GmlFileFormat, "gmlfileformat.json")
-
-GmlFileFormat::GmlFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
-    : FileFormatInterface(parent, data)
+GmlFileFormat::GmlFileFormat()
+    : FileFormatInterface()
 {
 }
 
@@ -121,7 +119,3 @@ static QString processNode(const NodePtr &n)
 
     return node;
 }
-
-#include "gmlfileformat.moc"
-
-#include "moc_gmlfileformat.cpp"

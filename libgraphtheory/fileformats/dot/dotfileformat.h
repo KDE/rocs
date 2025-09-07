@@ -18,9 +18,8 @@ namespace GraphTheory
 
 class DotFileFormat : public FileFormatInterface
 {
-    Q_OBJECT
 public:
-    explicit DotFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
+    explicit DotFileFormat();
     ~DotFileFormat() override;
 
     /**

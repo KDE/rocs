@@ -18,16 +18,12 @@
 
 using namespace GraphTheory;
 
-K_PLUGIN_CLASS_WITH_JSON(TikzFileFormat, "tikzfileformat.json")
-
-TikzFileFormat::TikzFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
-    : FileFormatInterface(parent, data)
+TikzFileFormat::TikzFileFormat()
+    : FileFormatInterface()
 {
 }
 
-TikzFileFormat::~TikzFileFormat()
-{
-}
+TikzFileFormat::~TikzFileFormat() = default;
 
 const QStringList TikzFileFormat::extensions() const
 {
@@ -128,7 +124,3 @@ void TikzFileFormat::writeFile(GraphDocumentPtr graph)
 
     setError(None);
 }
-
-#include "tikzfileformat.moc"
-
-#include "moc_tikzfileformat.cpp"

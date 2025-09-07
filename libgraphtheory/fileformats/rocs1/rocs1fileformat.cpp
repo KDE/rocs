@@ -22,16 +22,12 @@
 
 using namespace GraphTheory;
 
-K_PLUGIN_CLASS_WITH_JSON(Rocs1FileFormat, "rocs1fileformat.json")
-
-Rocs1FileFormat::Rocs1FileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
-    : FileFormatInterface(parent, data)
+Rocs1FileFormat::Rocs1FileFormat()
+    : FileFormatInterface()
 {
 }
 
-Rocs1FileFormat::~Rocs1FileFormat()
-{
-}
+Rocs1FileFormat::~Rocs1FileFormat() = default;
 
 const QStringList Rocs1FileFormat::extensions() const
 {
@@ -331,7 +327,3 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
 
     return m_buffer;
 }
-
-#include "rocs1fileformat.moc"
-
-#include "moc_rocs1fileformat.cpp"

@@ -1,19 +1,14 @@
-/*
- *  SPDX-FileCopyrightText: 2014-2015 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014-2015 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "rocs2fileformat.h"
 #include "edge.h"
 #include "edgetypestyle.h"
 #include "graphdocument.h"
 #include "logging_p.h"
-#include "modifiers/topology.h"
 #include "node.h"
 #include "nodetypestyle.h"
 #include <KLocalizedString>
-#include <KPluginFactory>
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -23,16 +18,12 @@
 
 using namespace GraphTheory;
 
-K_PLUGIN_CLASS_WITH_JSON(Rocs2FileFormat, "rocs2fileformat.json")
-
-Rocs2FileFormat::Rocs2FileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
-    : FileFormatInterface(parent, data)
+Rocs2FileFormat::Rocs2FileFormat()
+    : FileFormatInterface()
 {
 }
 
-Rocs2FileFormat::~Rocs2FileFormat()
-{
-}
+Rocs2FileFormat::~Rocs2FileFormat() = default;
 
 const QStringList Rocs2FileFormat::extensions() const
 {
@@ -342,7 +333,3 @@ EdgeType::Direction Rocs2FileFormat::direction(QString direction) const
     qCCritical(GRAPHTHEORY_FILEFORMAT) << "Unknown direction, cannot convert and defaulting to Bidirectional";
     return EdgeType::Unidirectional;
 }
-
-#include "rocs2fileformat.moc"
-
-#include "moc_rocs2fileformat.cpp"

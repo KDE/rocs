@@ -8,7 +8,6 @@
 #include "dotgrammarhelper.h"
 #include "dotgrammar.h"
 #include "edge.h"
-#include "graphdocument.h"
 #include "logging_p.h"
 #include "node.h"
 #include <QFile>

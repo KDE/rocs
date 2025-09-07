@@ -9,7 +9,6 @@
 
 #include "graphtheory_export.h"
 #include "typenames.h"
-#include <KPluginMetaData>
 #include <QObject>
 
 class QUrl;
@@ -30,10 +29,8 @@ class FileFormatInterfacePrivate;
  * - pluginCapability()
  * to specify the plugin capabilities.
  */
-class GRAPHTHEORY_EXPORT FileFormatInterface : public QObject
+class GRAPHTHEORY_EXPORT FileFormatInterface
 {
-    Q_OBJECT
-
 public:
     /**
      * Describes the last error of the plugin.
@@ -47,13 +44,10 @@ public:
     enum PluginType { ImportOnly, ExportOnly, ImportAndExport };
 
     /**
-     * Constructor.
-     *
-     * \param aboutData is description of the plugin
-     * \param parent is the object parent
+     * Constructor
      */
-    FileFormatInterface(QObject *parent, const KPluginMetaData &data);
-    ~FileFormatInterface() override;
+    FileFormatInterface();
+    virtual ~FileFormatInterface();
 
     /**
      * Returns \p PluginType to indicate whether the plugin only provides import, only export
@@ -149,7 +143,7 @@ protected:
     void setError(Error error, const QString &message = QString());
 
 private:
-    const QScopedPointer<FileFormatInterfacePrivate> d;
+    const std::unique_ptr<FileFormatInterfacePrivate> d;
 };
 }
 

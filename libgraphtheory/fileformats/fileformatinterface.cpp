@@ -5,7 +5,6 @@
  */
 
 #include "fileformats/fileformatinterface.h"
-
 #include "graphdocument.h"
 #include <QStringList>
 #include <QUrl>
@@ -15,28 +14,18 @@ using namespace GraphTheory;
 class GraphTheory::FileFormatInterfacePrivate
 {
 public:
-    FileFormatInterfacePrivate(const KPluginMetaData &data)
-        : componentName(data.name())
-    {
-        lastError = FileFormatInterface::None;
-    }
-
-    const QString componentName;
-    FileFormatInterface::Error lastError;
+    FileFormatInterface::Error lastError = FileFormatInterface::None;
     QString lastErrorString;
     GraphDocumentPtr graphDocument;
     QUrl file;
 };
 
-FileFormatInterface::FileFormatInterface(QObject *parent, const KPluginMetaData &data)
-    : QObject(parent)
-    , d(new FileFormatInterfacePrivate(data))
+FileFormatInterface::FileFormatInterface()
+    : d(std::make_unique<FileFormatInterfacePrivate>())
 {
 }
 
-FileFormatInterface::~FileFormatInterface()
-{
-}
+FileFormatInterface::~FileFormatInterface() = default;
 
 FileFormatInterface::PluginType FileFormatInterface::pluginCapability() const
 {

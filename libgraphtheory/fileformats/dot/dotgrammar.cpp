@@ -9,11 +9,9 @@
 #include "dotgrammarhelper.h"
 #include "graphdocument.h"
 #include "logging_p.h"
-#include "node.h"
-
-#include <boost/spirit/include/phoenix_core.hpp>
-#include <boost/spirit/include/phoenix_operator.hpp>
-#include <boost/spirit/include/phoenix_stl.hpp>
+#include <boost/phoenix/core.hpp>
+#include <boost/phoenix/operator.hpp>
+#include <boost/phoenix/stl.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/qi_int.hpp>
 #include <boost/spirit/include/qi_real.hpp>
@@ -31,15 +29,6 @@ using namespace GraphTheory;
 
 // define skipper for spaces, c style comments, and c++ style comments
 #define SKIPPER space | confix("//", eol)[*(char_ - eol)] | confix("/*", "*/")[*(char_ - "*/")]
-
-// workaround for linking boost
-namespace boost
-{
-void throw_exception(std::exception const &e)
-{
-    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Exception:" << e.what();
-}
-}
 
 // create distinct parser for dot keywords
 namespace distinct

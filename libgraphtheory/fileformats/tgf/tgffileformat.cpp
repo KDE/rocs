@@ -1,18 +1,13 @@
-/*
-    This file is part of Rocs.
-    SPDX-FileCopyrightText: 2010-2011 Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    SPDX-FileCopyrightText: 2010 Wagner Reck <wagner.reck@gmail.com>
-    SPDX-FileCopyrightText: 2012 Andreas Cord-Landwehr <cordlandwehr@kde.org>
-
-    SPDX-License-Identifier: GPL-2.0-or-later
-*/
+// SPDX-FileCopyrightText: 2010-2011 Tomaz Canabrava <tomaz.canabrava@gmail.com>
+// SPDX-FileCopyrightText: 2010 Wagner Reck <wagner.reck@gmail.com>
+// SPDX-FileCopyrightText: 2012 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "tgffileformat.h"
 #include "edge.h"
 #include "graphdocument.h"
 #include "modifiers/topology.h"
 #include "node.h"
-#include <KAboutData>
 #include <KLocalizedString>
 #include <KPluginFactory>
 #include <QFile>
@@ -22,16 +17,12 @@
 
 using namespace GraphTheory;
 
-K_PLUGIN_CLASS_WITH_JSON(TgfFileFormat, "tgffileformat.json")
-
-TgfFileFormat::TgfFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
-    : FileFormatInterface(parent, data)
+TgfFileFormat::TgfFileFormat()
+    : FileFormatInterface()
 {
 }
 
-TgfFileFormat::~TgfFileFormat()
-{
-}
+TgfFileFormat::~TgfFileFormat() = default;
 
 const QStringList TgfFileFormat::extensions() const
 {
@@ -121,7 +112,3 @@ void TgfFileFormat::writeFile(GraphDocumentPtr document)
     }
     setError(None);
 }
-
-#include "tgffileformat.moc"
-
-#include "moc_tgffileformat.cpp"

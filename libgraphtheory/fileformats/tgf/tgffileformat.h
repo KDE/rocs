@@ -1,11 +1,7 @@
-/*
-    This file is part of Rocs.
-    SPDX-FileCopyrightText: 2010-2011 Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    SPDX-FileCopyrightText: 2010 Wagner Reck <wagner.reck@gmail.com>
-    SPDX-FileCopyrightText: 2012-2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
-
-    SPDX-License-Identifier: GPL-2.0-or-later
-*/
+// SPDX-FileCopyrightText: 2010-2011 Tomaz Canabrava <tomaz.canabrava@gmail.com>
+// SPDX-FileCopyrightText: 2010 Wagner Reck <wagner.reck@gmail.com>
+// SPDX-FileCopyrightText: 2012-2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #ifndef TGFFILEFORMAT_H
 #define TGFFILEFORMAT_H
@@ -32,9 +28,8 @@ namespace GraphTheory
 
 class TgfFileFormat : public FileFormatInterface
 {
-    Q_OBJECT
 public:
-    explicit TgfFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
+    explicit TgfFileFormat();
     ~TgfFileFormat() override;
 
     /**
@@ -55,7 +50,10 @@ public:
     void readFile() override;
 
 private:
-    enum ReadMode { Nodes, Edges };
+    enum ReadMode {
+        Nodes,
+        Edges
+    };
 };
 }
 

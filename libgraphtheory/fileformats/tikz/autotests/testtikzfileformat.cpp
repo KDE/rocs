@@ -1,8 +1,5 @@
-/*
- *  SPDX-FileCopyrightText: 2012-2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2012-2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "testtikzfileformat.h"
 #include "../tikzfileformat.h"
@@ -42,7 +39,7 @@ void TestTikzFileFormat::serializeTest()
     Edge::create(nodes["e"], nodes["a"]);
 
     // create exporter plugin
-    TikzFileFormat serializer(this, KPluginMetaData(), QVariantList());
+    TikzFileFormat serializer;
     serializer.setFile(QUrl::fromLocalFile("test.tgf"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);

@@ -1,8 +1,5 @@
-/*
- *  SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "testrocs2fileformat.h"
 #include "../rocs2fileformat.h"
@@ -15,10 +12,6 @@
 #include <QTest>
 
 using namespace GraphTheory;
-
-TestRocs2FileFormat::TestRocs2FileFormat()
-{
-}
 
 // test serialization and import of edge and node types
 void TestRocs2FileFormat::documentTypesTest()
@@ -44,13 +37,13 @@ void TestRocs2FileFormat::documentTypesTest()
     QCOMPARE(document->edgeTypes().count(), 2); // 2 = default type + custom type
 
     // create exporter plugin
-    Rocs2FileFormat serializer(this, KPluginMetaData(), QVariantList());
+    Rocs2FileFormat serializer;
     serializer.setFile(QUrl::fromLocalFile("test.graph2"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);
 
     // create importer
-    Rocs2FileFormat importer(this, KPluginMetaData(), QVariantList());
+    Rocs2FileFormat importer;
     importer.setFile(QUrl::fromLocalFile("test.graph2"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);
@@ -105,13 +98,13 @@ void TestRocs2FileFormat::nodeAndEdgeTest()
     Edge::create(dataList["a"], dataList["b"])->setDynamicProperty("label", "test value");
 
     // create exporter plugin
-    Rocs2FileFormat serializer(this, KPluginMetaData(), QVariantList());
+    Rocs2FileFormat serializer;
     serializer.setFile(QUrl::fromLocalFile("test.graph2"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);
 
     // create importer
-    Rocs2FileFormat importer(this, KPluginMetaData(), QVariantList());
+    Rocs2FileFormat importer;
     importer.setFile(QUrl::fromLocalFile("test.graph2"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);
@@ -144,7 +137,7 @@ void TestRocs2FileFormat::nodeAndEdgeTest()
 // regression test: test parsing of format version 1
 void TestRocs2FileFormat::parseVersion1Format()
 {
-    Rocs2FileFormat importer(this, KPluginMetaData(), QVariantList());
+    Rocs2FileFormat importer;
     importer.setFile(QUrl::fromLocalFile("importtest_v1.graph2"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());

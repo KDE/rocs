@@ -1,9 +1,5 @@
-/*
-    This file is part of Rocs.
-    SPDX-FileCopyrightText: 2012 Andreas Cord-Landwehr <cordlandwehr@kde.org>
-
-    SPDX-License-Identifier: GPL-2.0-or-later
-*/
+// SPDX-FileCopyrightText: 2012 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #ifndef ROCS1FILEFORMAT_H
 #define ROCS1FILEFORMAT_H
@@ -102,10 +98,8 @@ namespace GraphTheory
 
 class Rocs1FileFormat : public FileFormatInterface
 {
-    Q_OBJECT
-
 public:
-    explicit Rocs1FileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
+    explicit Rocs1FileFormat();
     ~Rocs1FileFormat() override;
 
     /**

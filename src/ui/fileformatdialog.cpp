@@ -131,8 +131,8 @@ GraphDocumentPtr FileFormatDialog::importFile()
         return GraphDocumentPtr();
     }
 
-    qDebug() << fileName.right(fileName.count() - index);
-    filePlugin = manager.backendByExtension(fileName.right(fileName.count() - index));
+    qDebug() << fileName.right(fileName.size() - index);
+    filePlugin = manager.backendByExtension(fileName.right(fileName.size() - index));
 
     if (!filePlugin) {
         qDebug() << "Cannot handle extension " << fileName.right(3);

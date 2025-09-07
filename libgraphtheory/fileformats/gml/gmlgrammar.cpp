@@ -16,15 +16,6 @@
 
 using namespace GraphTheory;
 
-// workaround for linking boost
-namespace boost
-{
-void throw_exception(std::exception const &e)
-{
-    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Exception:" << e.what();
-}
-}
-
 namespace GmlParser
 {
 

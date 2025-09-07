@@ -1,8 +1,5 @@
-/*
- *  SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #ifndef ROCS2FILEFORMAT_H
 #define ROCS2FILEFORMAT_H
@@ -17,9 +14,8 @@ namespace GraphTheory
  */
 class Rocs2FileFormat : public FileFormatInterface
 {
-    Q_OBJECT
 public:
-    explicit Rocs2FileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &);
+    explicit Rocs2FileFormat();
     ~Rocs2FileFormat() override;
 
     /**

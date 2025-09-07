@@ -29,14 +29,10 @@ using namespace GraphTheory;
 static QString processNode(const NodePtr &node);
 static QString processEdge(const EdgePtr &edge);
 
-K_PLUGIN_CLASS_WITH_JSON(DotFileFormat, "dotfileformat.json")
+DotFileFormat::~DotFileFormat() = default;
 
-DotFileFormat::~DotFileFormat()
-{
-}
-
-DotFileFormat::DotFileFormat(QObject *parent, const KPluginMetaData &data, const QVariantList &)
-    : FileFormatInterface(parent, data)
+DotFileFormat::DotFileFormat()
+    : FileFormatInterface()
 {
 }
 
@@ -131,7 +127,8 @@ static QString processNode(const NodePtr &node)
         nodeStr.append(QString("label=\"%1\" ").arg(node->dynamicProperty("name").toString()));
     }
 
-    for (const QByteArray &property : node->dynamicPropertyNames()) {
+    const auto propertyNames = node->dynamicPropertyNames();
+    for (const QByteArray &property : propertyNames) {
         nodeStr.append(", ");
         nodeStr.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(node->property(property).toString()));
     }
@@ -140,7 +137,3 @@ static QString processNode(const NodePtr &node)
     nodeStr.append("]");
     return nodeStr.append(";\n");
 }
-
-#include "dotfileformat.moc"
-
-#include "moc_dotfileformat.cpp"

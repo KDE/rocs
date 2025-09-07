@@ -2,9 +2,9 @@
 #
 # SPDX-License-Identifier: BSD-2-Clause
 
-ecm_optional_add_subdirectory(tgf)
-ecm_optional_add_subdirectory(tikz)
-ecm_optional_add_subdirectory(dot)
-ecm_optional_add_subdirectory(gml)
-ecm_optional_add_subdirectory(rocs1)
-ecm_optional_add_subdirectory(rocs2)
+add_subdirectory(tgf)
+add_subdirectory(tikz)
+add_subdirectory(dot)
+add_subdirectory(gml)
+add_subdirectory(rocs1)
+add_subdirectory(rocs2)

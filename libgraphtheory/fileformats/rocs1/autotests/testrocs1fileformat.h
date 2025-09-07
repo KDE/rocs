@@ -12,8 +12,6 @@
 class TestRocs1FileFormat : public QObject
 {
     Q_OBJECT
-public:
-    TestRocs1FileFormat();
 
 private Q_SLOTS:
     void serializeUnserializeTest();

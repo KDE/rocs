@@ -8,25 +8,21 @@
 #define FILEFORMATMANAGER_H
 
 #include "fileformatinterface.h"
+#include "fileformatmanager_p.h"
 #include "graphtheory_export.h"
-#include "typenames.h"
 #include <QList>
 #include <QObject>
-
 #include <memory>
 
 namespace GraphTheory
 {
 
-class FileFormatManagerPrivate;
-
 /** \class FileFormatManager
  * The FileFormatManager provides access to all graph file format plugins. The backend manager loads
  * plugins on creation. For loading, the path "$QT_PLUGIN_PATH/rocs/fileformats" is searched for all plugins.
  */
-class GRAPHTHEORY_EXPORT FileFormatManager : public QObject
+class GRAPHTHEORY_EXPORT FileFormatManager
 {
-    Q_OBJECT
 public:
     /**
      * Selector for graph file backend with specific capability.
@@ -34,8 +30,7 @@ public:
     enum PluginType { Import, Export };
 
     FileFormatManager();
-
-    ~FileFormatManager() override;
+    ~FileFormatManager() = default;
 
     /**
      * Returns list of loaded backends. Backends are loaded with first call to \see self().
@@ -72,8 +67,6 @@ public:
     FileFormatInterface *defaultBackend() const;
 
 private:
-    static FileFormatManager *instance;
-
     const std::unique_ptr<FileFormatManagerPrivate> d;
 };
 }
