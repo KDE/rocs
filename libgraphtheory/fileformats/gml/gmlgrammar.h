@@ -15,10 +15,8 @@
 
 #include "typenames.h"
 #include <boost/config/warning_disable.hpp>
-#include <boost/spirit/include/phoenix_operator.hpp>
+#include <boost/phoenix/operator.hpp>
 #include <boost/spirit/include/qi.hpp>
-
-#include <iostream>
 #include <string>
 
 class Document;
