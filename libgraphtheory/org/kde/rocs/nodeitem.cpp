@@ -7,7 +7,6 @@
 #include "nodeitem.h"
 #include "nodetypestyle.h"
 #include <QPainter>
-#include <qmath.h>
 
 using namespace GraphTheory;
 
@@ -23,9 +22,7 @@ public:
     {
     }
 
-    ~NodeItemPrivate()
-    {
-    }
+    ~NodeItemPrivate() = default;
 
     Node *m_node;
     QPointF m_origin;
@@ -43,9 +40,7 @@ NodeItem::NodeItem(QQuickPaintedItem *parent)
     setHeight(32);
 }
 
-NodeItem::~NodeItem()
-{
-}
+NodeItem::~NodeItem() = default;
 
 Node *NodeItem::node() const
 {

@@ -1,13 +1,9 @@
-/*
- *  SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "edgemodel.h"
 #include "edge.h"
 #include "graphdocument.h"
-#include <KLocalizedString>
 #include <QDebug>
 #include <QSignalMapper>
 
@@ -128,17 +124,6 @@ void EdgeModel::emitEdgeChanged(int row)
 {
     Q_EMIT edgeChanged(row);
     Q_EMIT dataChanged(index(row, 0), index(row, 0));
-}
-
-QVariant EdgeModel::headerData(int section, Qt::Orientation orientation, int role) const
-{
-    if (role != Qt::DisplayRole) {
-        return QVariant();
-    }
-    if (orientation == Qt::Vertical) {
-        return QVariant(section + 1);
-    }
-    return QVariant(i18nc("@title:column", "Edge"));
 }
 
 #include "moc_edgemodel.cpp"

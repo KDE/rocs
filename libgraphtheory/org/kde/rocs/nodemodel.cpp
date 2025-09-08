@@ -1,13 +1,8 @@
-/*
- *  SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "nodemodel.h"
 #include "graphdocument.h"
-
-#include <KLocalizedString>
 #include <QSignalMapper>
 
 using namespace GraphTheory;
@@ -129,17 +124,6 @@ void NodeModel::emitNodeChanged(int row)
 {
     Q_EMIT nodeChanged(row);
     Q_EMIT dataChanged(index(row, 0), index(row, 0));
-}
-
-QVariant NodeModel::headerData(int section, Qt::Orientation orientation, int role) const
-{
-    if (role != Qt::DisplayRole) {
-        return QVariant();
-    }
-    if (orientation == Qt::Vertical) {
-        return QVariant(section + 1);
-    }
-    return QVariant(i18nc("@title:column", "Node"));
 }
 
 #include "moc_nodemodel.cpp"

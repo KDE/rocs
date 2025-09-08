@@ -1,8 +1,5 @@
-/*
- *  SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #ifndef EDGEPROPERTYMODEL_H
 #define EDGEPROPERTYMODEL_H
@@ -10,8 +7,7 @@
 #include "graphtheory_export.h"
 #include "typenames.h"
 #include <QAbstractListModel>
-
-class QSignalMapper;
+#include <QQmlEngine>
 
 namespace GraphTheory
 {
@@ -21,6 +17,7 @@ class EdgePropertyModelPrivate;
 class GRAPHTHEORY_EXPORT EdgePropertyModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_PROPERTY(GraphTheory::Edge *edge READ edge WRITE setEdge NOTIFY edgeChanged)
 
 public:
@@ -40,7 +37,6 @@ public:
     Edge *edge() const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
 Q_SIGNALS:
     void edgeChanged();

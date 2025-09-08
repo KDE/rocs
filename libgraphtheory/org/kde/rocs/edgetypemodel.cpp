@@ -1,15 +1,10 @@
-/*
- *  SPDX-FileCopyrightText: 2014-2015 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "edgetypemodel.h"
 #include "edgetypestyle.h"
 #include "graphdocument.h"
 #include "logging_p.h"
-
-#include <KLocalizedString>
 #include <QSignalMapper>
 
 using namespace GraphTheory;
@@ -42,8 +37,7 @@ QHash<int, QByteArray> EdgeTypeModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
-    roles[TitleRole] = "titleRole";
-    roles[DataRole] = "dataRole";
+    roles[TitleRole] = "title";
 
     return roles;
 }
@@ -177,17 +171,6 @@ void EdgeTypeModel::emitEdgeTypeChanged(int row)
 {
     Q_EMIT edgeChanged(row);
     Q_EMIT dataChanged(index(row, 0), index(row, 0));
-}
-
-QVariant EdgeTypeModel::headerData(int section, Qt::Orientation orientation, int role) const
-{
-    if (role != Qt::DisplayRole) {
-        return QVariant();
-    }
-    if (orientation == Qt::Vertical) {
-        return QVariant(section + 1);
-    }
-    return QVariant(i18nc("@title:column", "Edge Type"));
 }
 
 #include "moc_edgetypemodel.cpp"

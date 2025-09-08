@@ -1,18 +1,13 @@
-/*
- *  SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #ifndef NODETYPEMODEL_H
 #define NODETYPEMODEL_H
 
 #include "graphtheory_export.h"
 #include "typenames.h"
-
 #include <QAbstractListModel>
-
-class QSignalMapper;
+#include <QQmlEngine>
 
 namespace GraphTheory
 {
@@ -22,6 +17,7 @@ class NodeTypeModelPrivate;
 class GRAPHTHEORY_EXPORT NodeTypeModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_PROPERTY(GraphTheory::GraphDocumentPtr document READ document WRITE setDocument NOTIFY documentChanged)
 
 public:
@@ -44,7 +40,6 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
 Q_SIGNALS:
     void nodeChanged(int index);

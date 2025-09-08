@@ -6,9 +6,9 @@
 
 #include "propertieswidget.h"
 #include "edgetype.h"
-#include "models/edgetypepropertymodel.h"
-#include "models/nodetypepropertymodel.h"
 #include "nodetype.h"
+#include "org/kde/rocs/edgetypepropertymodel.h"
+#include "org/kde/rocs/nodetypepropertymodel.h"
 #include "propertydelegate.h"
 #include <KLocalizedString>
 #include <QDebug>

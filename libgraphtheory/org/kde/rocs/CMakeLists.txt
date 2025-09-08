@@ -10,8 +10,24 @@ qt6_add_qml_module(rocsgrapheditor_backing
     SOURCES
         edgeitem.cpp
         edgeitem.h
+        edgemodel.cpp
+        edgemodel.h
+        edgepropertymodel.cpp
+        edgepropertymodel.h
+        edgetypemodel.cpp
+        edgetypemodel.h
+        edgetypepropertymodel.cpp
+        edgetypepropertymodel.h
         nodeitem.cpp
         nodeitem.h
+        nodemodel.cpp
+        nodemodel.h
+        nodepropertymodel.cpp
+        nodepropertymodel.h
+        nodetypemodel.cpp
+        nodetypemodel.h
+        nodetypepropertymodel.cpp
+        nodetypepropertymodel.h
         qsgarrowheadnode.cpp
         qsgarrowheadnode.h
         qsglinenode.cpp

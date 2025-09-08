@@ -6,7 +6,7 @@
 
 #include "edgetypesdelegate.h"
 #include "libgraphtheory/dialogs/edgetypeproperties.h"
-#include "libgraphtheory/models/edgetypemodel.h"
+#include "libgraphtheory/org/kde/rocs/edgetypemodel.h"
 #include <KColorButton>
 #include <KLocalizedString>
 #include <QAbstractItemView>

@@ -8,8 +8,8 @@
 #define DOCUMENTTYPESWIDGET_H
 
 #include "libgraphtheory/edgetype.h"
-#include "libgraphtheory/models/edgetypemodel.h"
-#include "libgraphtheory/models/nodetypemodel.h"
+#include "libgraphtheory/org/kde/rocs/edgetypemodel.h"
+#include "libgraphtheory/org/kde/rocs/nodetypemodel.h"
 #include <QWidget>
 
 class QPushButton;

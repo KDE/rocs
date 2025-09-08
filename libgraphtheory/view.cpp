@@ -1,19 +1,16 @@
-/*
- *  SPDX-FileCopyrightText: 2014-2015 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "view.h"
 #include "dialogs/edgeproperties.h"
 #include "dialogs/nodeproperties.h"
 #include "logging_p.h"
-#include "models/edgemodel.h"
-#include "models/edgepropertymodel.h"
-#include "models/edgetypemodel.h"
-#include "models/nodemodel.h"
-#include "models/nodepropertymodel.h"
-#include "models/nodetypemodel.h"
+#include "org/kde/rocs/edgemodel.h"
+#include "org/kde/rocs/edgepropertymodel.h"
+#include "org/kde/rocs/edgetypemodel.h"
+#include "org/kde/rocs/nodemodel.h"
+#include "org/kde/rocs/nodepropertymodel.h"
+#include "org/kde/rocs/nodetypemodel.h"
 #include <KLocalizedContext>
 #include <QPointer>
 #include <QQmlApplicationEngine>
@@ -27,32 +24,26 @@ using namespace GraphTheory;
 class GraphTheory::ViewPrivate
 {
 public:
-    ViewPrivate()
-        : m_edgeModel(new EdgeModel())
-        , m_nodeModel(new NodeModel())
-        , m_edgeTypeModel(new EdgeTypeModel())
-        , m_nodeTypeModel(new NodeTypeModel)
+    ViewPrivate(QObject *q)
+        : m_nodeModel(q)
+        , m_edgeModel(q)
+        , m_nodeTypeModel(q)
+        , m_edgeTypeModel(q)
     {
     }
 
-    ~ViewPrivate()
-    {
-        delete m_edgeModel;
-        delete m_nodeModel;
-        delete m_edgeTypeModel;
-        delete m_nodeTypeModel;
-    }
+    ~ViewPrivate() = default;
 
     GraphDocumentPtr m_document;
-    EdgeModel *m_edgeModel;
-    NodeModel *m_nodeModel;
-    EdgeTypeModel *m_edgeTypeModel;
-    NodeTypeModel *m_nodeTypeModel;
+    NodeModel m_nodeModel;
+    EdgeModel m_edgeModel;
+    NodeTypeModel m_nodeTypeModel;
+    EdgeTypeModel m_edgeTypeModel;
 };
 
 View::View(QWidget *parent)
     : QQuickWidget(parent)
-    , d(new ViewPrivate)
+    , d(new ViewPrivate(this))
 {
     setResizeMode(QQuickWidget::SizeRootObjectToView);
 
@@ -66,31 +57,23 @@ View::View(QWidget *parent)
 
     qmlRegisterType<GraphTheory::Node>("org.kde.rocs.graphtheory", 1, 0, "Node");
     qmlRegisterType<GraphTheory::Edge>("org.kde.rocs.graphtheory", 1, 0, "Edge");
-    qmlRegisterType<GraphTheory::NodeType>("org.kde.rocs.graphtheory", 1, 0, "NodeType");
-    qmlRegisterType<GraphTheory::EdgeType>("org.kde.rocs.graphtheory", 1, 0, "EdgeType");
-    qmlRegisterType<GraphTheory::NodeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeModel");
-    qmlRegisterType<GraphTheory::EdgeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeModel");
-    qmlRegisterType<GraphTheory::NodePropertyModel>("org.kde.rocs.graphtheory", 1, 0, "NodePropertyModel");
-    qmlRegisterType<GraphTheory::EdgePropertyModel>("org.kde.rocs.graphtheory", 1, 0, "EdgePropertyModel");
-    qmlRegisterType<GraphTheory::NodeTypeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeTypeModel");
-    qmlRegisterType<GraphTheory::EdgeTypeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeTypeModel");
 
-    QUrl path = QUrl("qrc:/org/kde/rocs/Scene.qml");
+    const QUrl path = QUrl("qrc:/org/kde/rocs/Scene.qml");
     QQmlComponent *component = new QQmlComponent(engine());
+    const QVariantMap initialViewProperties = QVariantMap{
+        {"edgeModel", QVariant::fromValue(&d->m_edgeModel)},
+        {"nodeModel", QVariant::fromValue(&d->m_nodeModel)},
+        {"edgeTypeModel", QVariant::fromValue(&d->m_edgeTypeModel)},
+        {"nodeTypeModel", QVariant::fromValue(&d->m_nodeTypeModel)},
+    };
     component->loadUrl(path);
     if (!component->isReady()) {
         qCWarning(GRAPHTHEORY_GENERAL) << component->errorString();
         return;
     }
 
-    // register editor elements at context
-    engine()->rootContext()->setContextProperty("nodeModel", d->m_nodeModel);
-    engine()->rootContext()->setContextProperty("edgeModel", d->m_edgeModel);
-    engine()->rootContext()->setContextProperty("nodeTypeModel", d->m_nodeTypeModel);
-    engine()->rootContext()->setContextProperty("edgeTypeModel", d->m_edgeTypeModel);
-
     // create rootObject after context is set up
-    QObject *topLevel = component->create();
+    QObject *topLevel = component->createWithInitialProperties(initialViewProperties);
 
     // connections to QML signals
     connect(topLevel, SIGNAL(createNode(qreal, qreal, int)), this, SLOT(createNode(qreal, qreal, int)));
@@ -104,17 +87,15 @@ View::View(QWidget *parent)
     setContent(path, component, topLevel);
 }
 
-View::~View()
-{
-}
+View::~View() = default;
 
 void View::setGraphDocument(GraphDocumentPtr document)
 {
     d->m_document = document;
-    d->m_nodeModel->setDocument(d->m_document);
-    d->m_edgeModel->setDocument(d->m_document);
-    d->m_nodeTypeModel->setDocument(d->m_document);
-    d->m_edgeTypeModel->setDocument(d->m_document);
+    d->m_nodeModel.setDocument(d->m_document);
+    d->m_edgeModel.setDocument(d->m_document);
+    d->m_nodeTypeModel.setDocument(d->m_document);
+    d->m_edgeTypeModel.setDocument(d->m_document);
 }
 
 GraphDocumentPtr View::graphDocument() const
@@ -125,9 +106,9 @@ GraphDocumentPtr View::graphDocument() const
 void View::createNode(qreal x, qreal y, int typeIndex)
 {
     Q_ASSERT(typeIndex >= 0);
-    Q_ASSERT(typeIndex < d->m_nodeTypeModel->rowCount());
+    Q_ASSERT(typeIndex < d->m_nodeTypeModel.rowCount());
     NodePtr node = Node::create(d->m_document);
-    node->setType(d->m_nodeTypeModel->type(typeIndex));
+    node->setType(d->m_nodeTypeModel.type(typeIndex));
     node->setX(x);
     node->setY(y);
 }
@@ -135,7 +116,7 @@ void View::createNode(qreal x, qreal y, int typeIndex)
 void View::createEdge(Node *from, Node *to, int typeIndex)
 {
     Q_ASSERT(typeIndex >= 0);
-    Q_ASSERT(typeIndex < d->m_edgeTypeModel->rowCount());
+    Q_ASSERT(typeIndex < d->m_edgeTypeModel.rowCount());
     if (!from || !to) {
         return;
     }
@@ -143,7 +124,7 @@ void View::createEdge(Node *from, Node *to, int typeIndex)
         return;
     }
     EdgePtr edge = Edge::create(from->self(), to->self());
-    edge->setType(d->m_edgeTypeModel->type(typeIndex));
+    edge->setType(d->m_edgeTypeModel.type(typeIndex));
 }
 
 void View::deleteNode(GraphTheory::Node *node)

@@ -38,14 +38,6 @@ target_sources(rocsgraphtheory PRIVATE
     kernel/kerneltypes.h
     kernel/kernel.cpp
     kernel/modules/console/consolemodule.cpp
-    models/nodemodel.cpp
-    models/edgemodel.cpp
-    models/nodepropertymodel.cpp
-    models/edgepropertymodel.cpp
-    models/nodetypemodel.cpp
-    models/nodetypepropertymodel.cpp
-    models/edgetypemodel.cpp
-    models/edgetypepropertymodel.cpp
     modifiers/valueassign.cpp
     modifiers/topology.cpp
     fileformats/fileformatinterface.cpp

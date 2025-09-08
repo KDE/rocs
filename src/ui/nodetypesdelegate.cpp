@@ -6,8 +6,8 @@
 
 #include "nodetypesdelegate.h"
 #include "libgraphtheory/dialogs/nodetypeproperties.h"
-#include "libgraphtheory/models/nodetypemodel.h"
 #include "libgraphtheory/nodetype.h"
+#include "libgraphtheory/org/kde/rocs/nodetypemodel.h"
 #include <KColorButton>
 #include <KLocalizedString>
 #include <QAbstractItemView>

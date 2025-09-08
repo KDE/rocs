@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQml.StateMachine as DSM
+import org.kde.rocs
 import org.kde.rocs.graphtheory
 
 Item {
@@ -13,6 +14,11 @@ Item {
     height: 600
 
     focus: true
+
+    required property EdgeModel edgeModel
+    required property NodeModel nodeModel
+    required property EdgeTypeModel edgeTypeModel
+    required property NodeTypeModel nodeTypeModel
 
     // element create/remove actions
     signal createNode(real x, real y, int typeIndex);
@@ -37,7 +43,7 @@ Item {
         }
     }
 
-    Keys.onPressed: {
+    Keys.onPressed: event => {
         switch(event.key) {
         case Qt.Key_Escape:
             scene.clearSelection();
@@ -143,7 +149,7 @@ Item {
                 property point lastMousePosition: Qt.point(0, 0)
                 property bool nodePressed: false // if true, the current mouse-press event started at a node
 
-                onClicked: {
+                onClicked: mouse => {
                     lastMouseClicked = Qt.point(mouse.x, mouse.y)
                     if (addNodeAction.checked) {
                         mouse.accepted = true
@@ -151,14 +157,14 @@ Item {
                         return
                     }
                 }
-                onPressed: {
+                onPressed: mouse => {
                     lastMousePressed = Qt.point(mouse.x, mouse.y)
                     lastMousePosition = Qt.point(mouse.x, mouse.y)
                 }
-                onPositionChanged: {
+                onPositionChanged: mouse => {
                     lastMousePosition = Qt.point(mouse.x, mouse.y)
                 }
-                onReleased: {
+                onReleased: mouse => {
                     lastMouseReleased = Qt.point(mouse.x, mouse.y)
                     sceneAction.nodePressed = false
                 }
@@ -179,7 +185,7 @@ Item {
             }
 
             Repeater {
-                model: edgeModel
+                model: root.edgeModel
                 EdgeItem {
                     id: edgeItem
                     edge: model.dataRole
@@ -207,7 +213,7 @@ Item {
             }
 
             Repeater {
-                model: nodeModel
+                model: root.nodeModel
                 NodeItem {
                     id: nodeItem
                     node: model.dataRole
@@ -366,8 +372,10 @@ Item {
         }
         ComboBox {
             id: nodeTypeSelector
-            model: nodeTypeModel
-            textRole: "titleRole"
+            model: root.nodeTypeModel
+            textRole: "title"
+            valueRole: "id"
+            Component.onCompleted: currentIndex = 0
         }
     }
     RowLayout {
@@ -381,8 +389,10 @@ Item {
         }
         ComboBox {
             id: edgeTypeSelector
-            model: edgeTypeModel
-            textRole: "titleRole"
+            model: root.edgeTypeModel
+            textRole: "title"
+            valueRole: "id"
+            Component.onCompleted: currentIndex = 0
         }
     }
 

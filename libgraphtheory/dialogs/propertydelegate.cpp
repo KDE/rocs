@@ -5,7 +5,7 @@
  */
 
 #include "propertydelegate.h"
-#include "models/nodetypepropertymodel.h"
+#include "org/kde/rocs/nodetypepropertymodel.h"
 #include <KLocalizedString>
 #include <QApplication>
 #include <QDebug>

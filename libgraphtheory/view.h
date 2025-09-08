@@ -8,14 +8,10 @@
 #define VIEW_H
 
 #include "edge.h"
-#include "edgetype.h"
-#include "editor.h"
 #include "graphdocument.h"
 #include "graphtheory_export.h"
 #include "node.h"
-#include "nodetype.h"
 #include "typenames.h"
-
 #include <QList>
 #include <QObject>
 #include <QQuickWidget>
