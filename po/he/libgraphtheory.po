@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:39+0000\n"
+"POT-Creation-Date: 2025-09-08 00:39+0000\n"
 "PO-Revision-Date: 2025-08-13 15:16+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -804,97 +804,77 @@ msgstr "התמרת העץ הפורס"
 msgid "Remove all self edges"
 msgstr "הסרת כל הצלעות העצמיות"
 
-#: fileformats/dot/dotfileformat.cpp:45
+#: fileformats/dot/dotfileformat.cpp:41
 #, kde-format
 msgid "Graphviz Format (%1)"
 msgstr "תסדיר Graphviz‏ (%1)"
 
-#: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
-#: fileformats/rocs1/rocs1fileformat.cpp:57
-#: fileformats/rocs2/rocs2fileformat.cpp:48
-#: fileformats/tgf/tgffileformat.cpp:52
+#: fileformats/dot/dotfileformat.cpp:51 fileformats/gml/gmlfileformat.cpp:52
+#: fileformats/rocs1/rocs1fileformat.cpp:53
+#: fileformats/rocs2/rocs2fileformat.cpp:39
+#: fileformats/tgf/tgffileformat.cpp:43
 #, kde-format
 msgid "Could not open file \"%1\" in read mode: %2"
 msgstr "לא ניתן לפתוח את הקובץ „%1” במצב קריאה: %2"
 
-#: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
+#: fileformats/dot/dotfileformat.cpp:56 fileformats/gml/gmlfileformat.cpp:58
 #, kde-format
 msgid "Could not parse file \"%1\"."
 msgstr "לא ניתן לפענח את הקובץ „%1”."
 
-#: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
+#: fileformats/dot/dotfileformat.cpp:69 fileformats/gml/gmlfileformat.cpp:72
 #, kde-format
 msgid "Cannot open file %1 to write document. Error: %2"
 msgstr "לא ניתן לפתוח את הקובץ %1 לכתיבת מסמך. שגיאה: %2"
 
-#: fileformats/fileformatmanager.cpp:48
-#, kde-format
-msgctxt "@title:window"
-msgid "Plugin Error"
-msgstr "שגיאת תוסף"
-
-#: fileformats/fileformatmanager.cpp:50
-#, kde-format
-msgid "Plugins could not be found in specified directories:<br>"
-msgstr "לא נמצאו תוספים בתיקיות שצוינו:<br>"
-
-#: fileformats/fileformatmanager.cpp:52
-#, kde-format
-msgid ""
-"<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
-"link</a> for further information."
-msgstr ""
-"<br><br> כדאי לגשת ל<a href='https://doc.qt.io/qt-5/deployment-plugins."
-"html'>קישור הזה</a> לפרטים נוספים."
-
-#: fileformats/gml/gmlfileformat.cpp:44
+#: fileformats/gml/gmlfileformat.cpp:42
 #, kde-format
 msgid "Graph Markup Language Format (%1)"
 msgstr "תסדיר שפת סימון גרפים Graph‏ (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:38
+#: fileformats/rocs1/rocs1fileformat.cpp:34
 #, kde-format
 msgid "Rocs 1 Graph File Format (%1)"
 msgstr "תסדיר קובץ גרף Rocs 1‏ (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:257
-#: fileformats/rocs2/rocs2fileformat.cpp:211
-#: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
+#: fileformats/rocs1/rocs1fileformat.cpp:253
+#: fileformats/rocs2/rocs2fileformat.cpp:202
+#: fileformats/tgf/tgffileformat.cpp:93 fileformats/tikz/tikzfileformat.cpp:49
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
 msgstr "לא ניתן לפתוח את הקובץ „%1” במצב כתיבה: %2"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:267
+#: fileformats/rocs1/rocs1fileformat.cpp:263
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
 msgstr "לא ניתן לכתוב את הנתונים, הפעולה מבוטלת. שגיאה: %1."
 
-#: fileformats/rocs2/rocs2fileformat.cpp:40
+#: fileformats/rocs2/rocs2fileformat.cpp:31
 #, kde-format
 msgid "Rocs Graph Format (%1)"
 msgstr "תסדיר גרף Rocs ‏(%1)"
 
-#: fileformats/rocs2/rocs2fileformat.cpp:312
+#: fileformats/rocs2/rocs2fileformat.cpp:303
 #, kde-format
 msgid "Error on serializing file format to file."
 msgstr "שגיאה בשרשור תסדיר קובץ לקובץ."
 
-#: fileformats/tgf/tgffileformat.cpp:38
+#: fileformats/tgf/tgffileformat.cpp:29
 #, kde-format
 msgid "Trivial Graph Format (%1)"
 msgstr "תסדיר גרף Trivial ‏(%1)"
 
-#: fileformats/tgf/tgffileformat.cpp:73
+#: fileformats/tgf/tgffileformat.cpp:64
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
 msgstr "לא ניתן לפענח את הקובץ. נעשה שימוש במזהה „%1” יותר מפעם אחת."
 
-#: fileformats/tgf/tgffileformat.cpp:85
+#: fileformats/tgf/tgffileformat.cpp:76
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
 msgstr "לא ניתן לפענח את הקובץ. הצלע מ־„%1” ל־„%2” משתמשת בצמתים לא מוגדרים."
 
-#: fileformats/tikz/tikzfileformat.cpp:34
+#: fileformats/tikz/tikzfileformat.cpp:30
 #, kde-format
 msgid "TikZ (PGF) Format (%1)"
 msgstr "תסדיר TikZ (PGF) ‏(%1)"
@@ -1371,3 +1351,17 @@ msgstr "מחיקת רכיב"
 #, kde-format
 msgid "Select & Move"
 msgstr "בחירה והזזה"
+
+#~ msgctxt "@title:window"
+#~ msgid "Plugin Error"
+#~ msgstr "שגיאת תוסף"
+
+#~ msgid "Plugins could not be found in specified directories:<br>"
+#~ msgstr "לא נמצאו תוספים בתיקיות שצוינו:<br>"
+
+#~ msgid ""
+#~ "<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins."
+#~ "html'>this link</a> for further information."
+#~ msgstr ""
+#~ "<br><br> כדאי לגשת ל<a href='https://doc.qt.io/qt-5/deployment-plugins."
+#~ "html'>קישור הזה</a> לפרטים נוספים."

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:39+0000\n"
+"POT-Creation-Date: 2025-09-08 00:39+0000\n"
 "PO-Revision-Date: 2025-08-13 08:46+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -814,101 +814,81 @@ msgstr "Transformació de l'arbre d'extensió"
 msgid "Remove all self edges"
 msgstr "Elimina totes les autoarestes"
 
-#: fileformats/dot/dotfileformat.cpp:45
+#: fileformats/dot/dotfileformat.cpp:41
 #, kde-format
 msgid "Graphviz Format (%1)"
 msgstr "Format Graphviz (%1)"
 
-#: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
-#: fileformats/rocs1/rocs1fileformat.cpp:57
-#: fileformats/rocs2/rocs2fileformat.cpp:48
-#: fileformats/tgf/tgffileformat.cpp:52
+#: fileformats/dot/dotfileformat.cpp:51 fileformats/gml/gmlfileformat.cpp:52
+#: fileformats/rocs1/rocs1fileformat.cpp:53
+#: fileformats/rocs2/rocs2fileformat.cpp:39
+#: fileformats/tgf/tgffileformat.cpp:43
 #, kde-format
 msgid "Could not open file \"%1\" in read mode: %2"
 msgstr "No s'ha pogut obrir el fitxer «%1» en mode de lectura: %2"
 
-#: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
+#: fileformats/dot/dotfileformat.cpp:56 fileformats/gml/gmlfileformat.cpp:58
 #, kde-format
 msgid "Could not parse file \"%1\"."
 msgstr "No s'ha pogut interpretar el fitxer «%1»."
 
-#: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
+#: fileformats/dot/dotfileformat.cpp:69 fileformats/gml/gmlfileformat.cpp:72
 #, kde-format
 msgid "Cannot open file %1 to write document. Error: %2"
 msgstr "No s'ha pogut obrir el fitxer %1 per a escriure el document. Error: %2"
 
-#: fileformats/fileformatmanager.cpp:48
-#, kde-format
-msgctxt "@title:window"
-msgid "Plugin Error"
-msgstr "Error del connector"
-
-#: fileformats/fileformatmanager.cpp:50
-#, kde-format
-msgid "Plugins could not be found in specified directories:<br>"
-msgstr "Els connectors no s'han pogut trobar als directoris especificats:<br>"
-
-#: fileformats/fileformatmanager.cpp:52
-#, kde-format
-msgid ""
-"<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
-"link</a> for further information."
-msgstr ""
-"<br><br> Vegeu <a href='https://doc.qt.io/qt-5/deployment-plugins."
-"html'>aquest enllaç</a> per a informació addicional."
-
-#: fileformats/gml/gmlfileformat.cpp:44
+#: fileformats/gml/gmlfileformat.cpp:42
 #, kde-format
 msgid "Graph Markup Language Format (%1)"
 msgstr "Format del llenguatge de marques de Grafs (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:38
+#: fileformats/rocs1/rocs1fileformat.cpp:34
 #, kde-format
 msgid "Rocs 1 Graph File Format (%1)"
 msgstr "Format de fitxer de graf del Rocs (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:257
-#: fileformats/rocs2/rocs2fileformat.cpp:211
-#: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
+#: fileformats/rocs1/rocs1fileformat.cpp:253
+#: fileformats/rocs2/rocs2fileformat.cpp:202
+#: fileformats/tgf/tgffileformat.cpp:93 fileformats/tikz/tikzfileformat.cpp:49
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
 msgstr "No s'ha pogut obrir el fitxer «%1» en mode d'escriptura: %2"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:267
+#: fileformats/rocs1/rocs1fileformat.cpp:263
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
 msgstr "No s'han pogut escriure les dades, s'interromp. Error: %1."
 
-#: fileformats/rocs2/rocs2fileformat.cpp:40
+#: fileformats/rocs2/rocs2fileformat.cpp:31
 #, kde-format
 msgid "Rocs Graph Format (%1)"
 msgstr "Format de graf del Rocs (%1)"
 
-#: fileformats/rocs2/rocs2fileformat.cpp:312
+#: fileformats/rocs2/rocs2fileformat.cpp:303
 #, kde-format
 msgid "Error on serializing file format to file."
 msgstr "Error en serialitzar el format de fitxer al fitxer."
 
-#: fileformats/tgf/tgffileformat.cpp:38
+#: fileformats/tgf/tgffileformat.cpp:29
 #, kde-format
 msgid "Trivial Graph Format (%1)"
 msgstr "Format de grafs trivial (%1)"
 
-#: fileformats/tgf/tgffileformat.cpp:73
+#: fileformats/tgf/tgffileformat.cpp:64
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
 msgstr ""
 "No s'ha pogut analitzar el fitxer. L'identificador «%1» s'usa més d'una "
 "vegada."
 
-#: fileformats/tgf/tgffileformat.cpp:85
+#: fileformats/tgf/tgffileformat.cpp:76
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
 msgstr ""
 "No s'ha pogut analitzar el fitxer. L'aresta que va de «%1» a «%2» usa nodes "
 "no definits."
 
-#: fileformats/tikz/tikzfileformat.cpp:34
+#: fileformats/tikz/tikzfileformat.cpp:30
 #, kde-format
 msgid "TikZ (PGF) Format (%1)"
 msgstr "Format TikZ (PGF) (%1)"
@@ -1406,6 +1386,21 @@ msgstr "Suprimeix l'element"
 #, kde-format
 msgid "Select & Move"
 msgstr "Selecciona i mou"
+
+#~ msgctxt "@title:window"
+#~ msgid "Plugin Error"
+#~ msgstr "Error del connector"
+
+#~ msgid "Plugins could not be found in specified directories:<br>"
+#~ msgstr ""
+#~ "Els connectors no s'han pogut trobar als directoris especificats:<br>"
+
+#~ msgid ""
+#~ "<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins."
+#~ "html'>this link</a> for further information."
+#~ msgstr ""
+#~ "<br><br> Vegeu <a href='https://doc.qt.io/qt-5/deployment-plugins."
+#~ "html'>aquest enllaç</a> per a informació addicional."
 
 #~ msgctxt "@info:shell"
 #~ msgid "%1: \"node\" is not a valid node object"

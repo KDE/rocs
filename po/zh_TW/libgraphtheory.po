@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:39+0000\n"
+"POT-Creation-Date: 2025-09-08 00:39+0000\n"
 "PO-Revision-Date: 2019-11-26 21:23+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -818,98 +818,77 @@ msgstr "生成樹轉換"
 msgid "Remove all self edges"
 msgstr "移除所有邊緣"
 
-#: fileformats/dot/dotfileformat.cpp:45
+#: fileformats/dot/dotfileformat.cpp:41
 #, kde-format
 msgid "Graphviz Format (%1)"
 msgstr "Graphviz 格式 (%1)"
 
-#: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
-#: fileformats/rocs1/rocs1fileformat.cpp:57
-#: fileformats/rocs2/rocs2fileformat.cpp:48
-#: fileformats/tgf/tgffileformat.cpp:52
+#: fileformats/dot/dotfileformat.cpp:51 fileformats/gml/gmlfileformat.cpp:52
+#: fileformats/rocs1/rocs1fileformat.cpp:53
+#: fileformats/rocs2/rocs2fileformat.cpp:39
+#: fileformats/tgf/tgffileformat.cpp:43
 #, kde-format
 msgid "Could not open file \"%1\" in read mode: %2"
 msgstr "無法以讀取模式開啟檔案 %1：%2"
 
-#: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
+#: fileformats/dot/dotfileformat.cpp:56 fileformats/gml/gmlfileformat.cpp:58
 #, kde-format
 msgid "Could not parse file \"%1\"."
 msgstr "無法剖析檔案 %1。"
 
-#: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
+#: fileformats/dot/dotfileformat.cpp:69 fileformats/gml/gmlfileformat.cpp:72
 #, kde-format
 msgid "Cannot open file %1 to write document. Error: %2"
 msgstr "無法開啟檔案 %1 以寫入文件。錯誤：%2"
 
-#: fileformats/fileformatmanager.cpp:48
-#, fuzzy, kde-format
-#| msgid "Plugin Error"
-msgctxt "@title:window"
-msgid "Plugin Error"
-msgstr "外掛程式錯誤"
-
-#: fileformats/fileformatmanager.cpp:50
-#, kde-format
-msgid "Plugins could not be found in specified directories:<br>"
-msgstr "無法在指定目錄找到外掛程式：<br>"
-
-#: fileformats/fileformatmanager.cpp:52
-#, kde-format
-msgid ""
-"<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
-"link</a> for further information."
-msgstr ""
-"<br><br> 參閱<a href='https://doc.qt.io/qt-5/deployment-plugins.html'>這個連"
-"結</a>以取得更多資訊。"
-
-#: fileformats/gml/gmlfileformat.cpp:44
+#: fileformats/gml/gmlfileformat.cpp:42
 #, kde-format
 msgid "Graph Markup Language Format (%1)"
 msgstr "Graph Markup Language 格式 (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:38
+#: fileformats/rocs1/rocs1fileformat.cpp:34
 #, kde-format
 msgid "Rocs 1 Graph File Format (%1)"
 msgstr "Rocs 1 圖形檔案格式（%1）"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:257
-#: fileformats/rocs2/rocs2fileformat.cpp:211
-#: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
+#: fileformats/rocs1/rocs1fileformat.cpp:253
+#: fileformats/rocs2/rocs2fileformat.cpp:202
+#: fileformats/tgf/tgffileformat.cpp:93 fileformats/tikz/tikzfileformat.cpp:49
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
 msgstr "無法以寫入模式開啟檔案 %1：%2"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:267
+#: fileformats/rocs1/rocs1fileformat.cpp:263
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
 msgstr "無法寫入資料。操作中止。錯誤：%1。"
 
-#: fileformats/rocs2/rocs2fileformat.cpp:40
+#: fileformats/rocs2/rocs2fileformat.cpp:31
 #, kde-format
 msgid "Rocs Graph Format (%1)"
 msgstr "Rocs 圖形檔案格式（%1）"
 
-#: fileformats/rocs2/rocs2fileformat.cpp:312
+#: fileformats/rocs2/rocs2fileformat.cpp:303
 #, kde-format
 msgid "Error on serializing file format to file."
 msgstr "將檔案格式序列成檔案時發生錯誤。"
 
-#: fileformats/tgf/tgffileformat.cpp:38
+#: fileformats/tgf/tgffileformat.cpp:29
 #, kde-format
 msgid "Trivial Graph Format (%1)"
 msgstr "Trivial Graph 格式 (%1)"
 
-#: fileformats/tgf/tgffileformat.cpp:73
+#: fileformats/tgf/tgffileformat.cpp:64
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
 msgstr "無法剖析檔案 。辨識子 %1 使用了一次以上。"
 
-#: fileformats/tgf/tgffileformat.cpp:85
+#: fileformats/tgf/tgffileformat.cpp:76
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
 msgstr "無法剖析檔案 。從 %1 到 %2 的邊緣使用了未定義的節點。"
 
-#: fileformats/tikz/tikzfileformat.cpp:34
+#: fileformats/tikz/tikzfileformat.cpp:30
 #, kde-format
 msgid "TikZ (PGF) Format (%1)"
 msgstr "TikZ (PGF) 格式 (%1)"
@@ -1393,6 +1372,22 @@ msgstr "刪除元素"
 #, kde-format
 msgid "Select & Move"
 msgstr "選擇並移動"
+
+#, fuzzy
+#~| msgid "Plugin Error"
+#~ msgctxt "@title:window"
+#~ msgid "Plugin Error"
+#~ msgstr "外掛程式錯誤"
+
+#~ msgid "Plugins could not be found in specified directories:<br>"
+#~ msgstr "無法在指定目錄找到外掛程式：<br>"
+
+#~ msgid ""
+#~ "<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins."
+#~ "html'>this link</a> for further information."
+#~ msgstr ""
+#~ "<br><br> 參閱<a href='https://doc.qt.io/qt-5/deployment-plugins.html'>這個"
+#~ "連結</a>以取得更多資訊。"
 
 #~ msgctxt "@info:shell"
 #~ msgid "%1: \"node\" is not a valid node object"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:39+0000\n"
+"POT-Creation-Date: 2025-09-08 00:39+0000\n"
 "PO-Revision-Date: 2013-08-10 16:35+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -862,104 +862,86 @@ msgstr "Feszítőfa-átalakítás"
 msgid "Remove all self edges"
 msgstr "Összes él eltávolítása"
 
-#: fileformats/dot/dotfileformat.cpp:45
+#: fileformats/dot/dotfileformat.cpp:41
 #, fuzzy, kde-format
 #| msgid "*.dot *.gv|Graphviz Format"
 msgid "Graphviz Format (%1)"
 msgstr "*.dot *.gv|Graphviz formátum"
 
-#: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
-#: fileformats/rocs1/rocs1fileformat.cpp:57
-#: fileformats/rocs2/rocs2fileformat.cpp:48
-#: fileformats/tgf/tgffileformat.cpp:52
+#: fileformats/dot/dotfileformat.cpp:51 fileformats/gml/gmlfileformat.cpp:52
+#: fileformats/rocs1/rocs1fileformat.cpp:53
+#: fileformats/rocs2/rocs2fileformat.cpp:39
+#: fileformats/tgf/tgffileformat.cpp:43
 #, kde-format
 msgid "Could not open file \"%1\" in read mode: %2"
 msgstr "Nem lehet megnyitni a(z) „%1” fájlt olvasási módban: %2"
 
-#: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
+#: fileformats/dot/dotfileformat.cpp:56 fileformats/gml/gmlfileformat.cpp:58
 #, kde-format
 msgid "Could not parse file \"%1\"."
 msgstr "Nem lehet feldolgozni a(z) „%1” fájlt."
 
-#: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
+#: fileformats/dot/dotfileformat.cpp:69 fileformats/gml/gmlfileformat.cpp:72
 #, kde-format
 msgid "Cannot open file %1 to write document. Error: %2"
 msgstr "Nem lehet megnyitni a(z) %1 fájlt a dokumentum írásához. Hiba: %2"
 
-#: fileformats/fileformatmanager.cpp:48
-#, kde-format
-msgctxt "@title:window"
-msgid "Plugin Error"
-msgstr ""
-
-#: fileformats/fileformatmanager.cpp:50
-#, kde-format
-msgid "Plugins could not be found in specified directories:<br>"
-msgstr ""
-
-#: fileformats/fileformatmanager.cpp:52
-#, kde-format
-msgid ""
-"<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
-"link</a> for further information."
-msgstr ""
-
-#: fileformats/gml/gmlfileformat.cpp:44
+#: fileformats/gml/gmlfileformat.cpp:42
 #, fuzzy, kde-format
 #| msgid "*.gml|Graph Markup Language Format"
 msgid "Graph Markup Language Format (%1)"
 msgstr "*.gml|Gráf jelölő nyelv formátum"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:38
+#: fileformats/rocs1/rocs1fileformat.cpp:34
 #, fuzzy, kde-format
 #| msgid "*.graph|Rocs Graph File Format"
 msgid "Rocs 1 Graph File Format (%1)"
 msgstr "*.graph|Rocs gráf fájl formátum"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:257
-#: fileformats/rocs2/rocs2fileformat.cpp:211
-#: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
+#: fileformats/rocs1/rocs1fileformat.cpp:253
+#: fileformats/rocs2/rocs2fileformat.cpp:202
+#: fileformats/tgf/tgffileformat.cpp:93 fileformats/tikz/tikzfileformat.cpp:49
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
 msgstr "Nem lehet megnyitni a(z) „%1” fájlt írás módban: %2"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:267
+#: fileformats/rocs1/rocs1fileformat.cpp:263
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
 msgstr "Nem lehet írni az adatot, megszakítás. Hiba: %1."
 
-#: fileformats/rocs2/rocs2fileformat.cpp:40
+#: fileformats/rocs2/rocs2fileformat.cpp:31
 #, fuzzy, kde-format
 #| msgid "*.graph|Rocs Graph File Format"
 msgid "Rocs Graph Format (%1)"
 msgstr "*.graph|Rocs gráf fájl formátum"
 
-#: fileformats/rocs2/rocs2fileformat.cpp:312
+#: fileformats/rocs2/rocs2fileformat.cpp:303
 #, kde-format
 msgid "Error on serializing file format to file."
 msgstr ""
 
-#: fileformats/tgf/tgffileformat.cpp:38
+#: fileformats/tgf/tgffileformat.cpp:29
 #, fuzzy, kde-format
 #| msgid "*.tgf|Trivial Graph Format"
 msgid "Trivial Graph Format (%1)"
 msgstr "*.tgf|Triviális gráf formátum"
 
-#: fileformats/tgf/tgffileformat.cpp:73
+#: fileformats/tgf/tgffileformat.cpp:64
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
 msgstr ""
 "Nem lehet feldolgozni a fájlt. A(z) „%1” azonosító több mint egyszer van "
 "használva."
 
-#: fileformats/tgf/tgffileformat.cpp:85
+#: fileformats/tgf/tgffileformat.cpp:76
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
 msgstr ""
 "Nem lehet feldolgozni a fájlt. Az ettől „%1” eddig: „%2” tartó él nem "
 "meghatározott csúcsokat használ."
 
-#: fileformats/tikz/tikzfileformat.cpp:34
+#: fileformats/tikz/tikzfileformat.cpp:30
 #, fuzzy, kde-format
 #| msgid "*.pgf|TikZ (PGF) Format"
 msgid "TikZ (PGF) Format (%1)"

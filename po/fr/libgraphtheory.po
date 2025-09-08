@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:39+0000\n"
+"POT-Creation-Date: 2025-09-08 00:39+0000\n"
 "PO-Revision-Date: 2025-08-14 09:01+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -815,104 +815,82 @@ msgstr "Transformation de l'arbre de répartition"
 msgid "Remove all self edges"
 msgstr "Supprimer toutes les arêtes isolées"
 
-#: fileformats/dot/dotfileformat.cpp:45
+#: fileformats/dot/dotfileformat.cpp:41
 #, kde-format
 msgid "Graphviz Format (%1)"
 msgstr "Format GraphViz (%1)"
 
-#: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
-#: fileformats/rocs1/rocs1fileformat.cpp:57
-#: fileformats/rocs2/rocs2fileformat.cpp:48
-#: fileformats/tgf/tgffileformat.cpp:52
+#: fileformats/dot/dotfileformat.cpp:51 fileformats/gml/gmlfileformat.cpp:52
+#: fileformats/rocs1/rocs1fileformat.cpp:53
+#: fileformats/rocs2/rocs2fileformat.cpp:39
+#: fileformats/tgf/tgffileformat.cpp:43
 #, kde-format
 msgid "Could not open file \"%1\" in read mode: %2"
 msgstr "Impossible d'ouvrir le fichier « %1 » en lecture : %2"
 
-#: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
+#: fileformats/dot/dotfileformat.cpp:56 fileformats/gml/gmlfileformat.cpp:58
 #, kde-format
 msgid "Could not parse file \"%1\"."
 msgstr "Impossible de lire le fichier « %1 »."
 
-#: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
+#: fileformats/dot/dotfileformat.cpp:69 fileformats/gml/gmlfileformat.cpp:72
 #, kde-format
 msgid "Cannot open file %1 to write document. Error: %2"
 msgstr ""
 "Impossible d'ouvrir le fichier %1 pour y écrire le document. Erreur : %2"
 
-#: fileformats/fileformatmanager.cpp:48
-#, kde-format
-msgctxt "@title:window"
-msgid "Plugin Error"
-msgstr "Erreur du module externe"
-
-#: fileformats/fileformatmanager.cpp:50
-#, kde-format
-msgid "Plugins could not be found in specified directories:<br>"
-msgstr ""
-"Les modules externes ne pourraient pas être trouvés dans les dossiers "
-"indiqués : <br>"
-
-#: fileformats/fileformatmanager.cpp:52
-#, kde-format
-msgid ""
-"<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
-"link</a> for further information."
-msgstr ""
-"<br><br>Veuillez consulter <a href='https://doc.qt.io/qt-5/deployment-"
-"plugins.html'>ce lien</a> pour plus d'informations."
-
-#: fileformats/gml/gmlfileformat.cpp:44
+#: fileformats/gml/gmlfileformat.cpp:42
 #, kde-format
 msgid "Graph Markup Language Format (%1)"
 msgstr "Format Graph Markup Language (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:38
+#: fileformats/rocs1/rocs1fileformat.cpp:34
 #, kde-format
 msgid "Rocs 1 Graph File Format (%1)"
 msgstr "Format de fichier de graphe de Rocs 1 (%1)"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:257
-#: fileformats/rocs2/rocs2fileformat.cpp:211
-#: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
+#: fileformats/rocs1/rocs1fileformat.cpp:253
+#: fileformats/rocs2/rocs2fileformat.cpp:202
+#: fileformats/tgf/tgffileformat.cpp:93 fileformats/tikz/tikzfileformat.cpp:49
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
 msgstr "Impossible d'ouvrir le fichier « %1 » en écriture : %2"
 
-#: fileformats/rocs1/rocs1fileformat.cpp:267
+#: fileformats/rocs1/rocs1fileformat.cpp:263
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
 msgstr "Impossible d'écrire les données, annulation. Erreur : %1."
 
-#: fileformats/rocs2/rocs2fileformat.cpp:40
+#: fileformats/rocs2/rocs2fileformat.cpp:31
 #, kde-format
 msgid "Rocs Graph Format (%1)"
 msgstr "Format de fichier de graphe de Rocs (%1)"
 
-#: fileformats/rocs2/rocs2fileformat.cpp:312
+#: fileformats/rocs2/rocs2fileformat.cpp:303
 #, kde-format
 msgid "Error on serializing file format to file."
 msgstr "Erreur lors de la mise au format vers le fichier."
 
-#: fileformats/tgf/tgffileformat.cpp:38
+#: fileformats/tgf/tgffileformat.cpp:29
 #, kde-format
 msgid "Trivial Graph Format (%1)"
 msgstr "Trivial Graph Format (%1)"
 
-#: fileformats/tgf/tgffileformat.cpp:73
+#: fileformats/tgf/tgffileformat.cpp:64
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
 msgstr ""
 "Impossible de lire le fichier. L'identifiant « %1 » est utilisé plus d'une "
 "fois."
 
-#: fileformats/tgf/tgffileformat.cpp:85
+#: fileformats/tgf/tgffileformat.cpp:76
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
 msgstr ""
 "Impossible de lire le fichier. L'arête de « %1 » à « %2 » utilise des "
 "sommets non définis."
 
-#: fileformats/tikz/tikzfileformat.cpp:34
+#: fileformats/tikz/tikzfileformat.cpp:30
 #, kde-format
 msgid "TikZ (PGF) Format (%1)"
 msgstr "Format TikZ (PGF) (%1)"
@@ -1405,6 +1383,22 @@ msgstr "Supprimer l'élément"
 #, kde-format
 msgid "Select & Move"
 msgstr "Sélectionner & déplacer"
+
+#~ msgctxt "@title:window"
+#~ msgid "Plugin Error"
+#~ msgstr "Erreur du module externe"
+
+#~ msgid "Plugins could not be found in specified directories:<br>"
+#~ msgstr ""
+#~ "Les modules externes ne pourraient pas être trouvés dans les dossiers "
+#~ "indiqués : <br>"
+
+#~ msgid ""
+#~ "<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins."
+#~ "html'>this link</a> for further information."
+#~ msgstr ""
+#~ "<br><br>Veuillez consulter <a href='https://doc.qt.io/qt-5/deployment-"
+#~ "plugins.html'>ce lien</a> pour plus d'informations."
 
 #~ msgctxt "@info:shell"
 #~ msgid "%1: \"node\" is not a valid node object"
