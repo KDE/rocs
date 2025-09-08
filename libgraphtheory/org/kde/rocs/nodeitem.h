@@ -7,7 +7,6 @@
 #ifndef NODEITEM_H
 #define NODEITEM_H
 
-#include "graphtheory_export.h"
 #include "node.h"
 #include <QQuickPaintedItem>
 
@@ -18,6 +17,7 @@ class NodeItemPrivate;
 class NodeItem : public QQuickPaintedItem
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_PROPERTY(GraphTheory::Node *node READ node WRITE setNode NOTIFY nodeChanged)
     Q_PROPERTY(QPointF origin READ origin WRITE setOrigin)
     Q_PROPERTY(bool highlighted READ isHighlighted WRITE setHighlighted NOTIFY highlightedChanged)

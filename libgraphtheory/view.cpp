@@ -14,9 +14,6 @@
 #include "models/nodemodel.h"
 #include "models/nodepropertymodel.h"
 #include "models/nodetypemodel.h"
-#include "qtquickitems/edgeitem.h"
-#include "qtquickitems/nodeitem.h"
-
 #include <KLocalizedContext>
 #include <QPointer>
 #include <QQmlApplicationEngine>
@@ -71,8 +68,6 @@ View::View(QWidget *parent)
     qmlRegisterType<GraphTheory::Edge>("org.kde.rocs.graphtheory", 1, 0, "Edge");
     qmlRegisterType<GraphTheory::NodeType>("org.kde.rocs.graphtheory", 1, 0, "NodeType");
     qmlRegisterType<GraphTheory::EdgeType>("org.kde.rocs.graphtheory", 1, 0, "EdgeType");
-    qmlRegisterType<GraphTheory::NodeItem>("org.kde.rocs.graphtheory", 1, 0, "NodeItem");
-    qmlRegisterType<GraphTheory::EdgeItem>("org.kde.rocs.graphtheory", 1, 0, "EdgeItem");
     qmlRegisterType<GraphTheory::NodeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeModel");
     qmlRegisterType<GraphTheory::EdgeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeModel");
     qmlRegisterType<GraphTheory::NodePropertyModel>("org.kde.rocs.graphtheory", 1, 0, "NodePropertyModel");
@@ -80,7 +75,7 @@ View::View(QWidget *parent)
     qmlRegisterType<GraphTheory::NodeTypeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeTypeModel");
     qmlRegisterType<GraphTheory::EdgeTypeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeTypeModel");
 
-    QUrl path = QUrl("qrc:/libgraphtheory/qml/Scene.qml");
+    QUrl path = QUrl("qrc:/org/kde/rocs/Scene.qml");
     QQmlComponent *component = new QQmlComponent(engine());
     component->loadUrl(path);
     if (!component->isReady()) {

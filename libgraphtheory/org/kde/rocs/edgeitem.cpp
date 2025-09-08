@@ -98,6 +98,7 @@ void EdgeItem::setOrigin(const QPointF &origin)
     }
     d->m_origin = origin;
     updatePosition();
+    Q_EMIT originChanged();
 }
 
 QSGNode *EdgeItem::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *)

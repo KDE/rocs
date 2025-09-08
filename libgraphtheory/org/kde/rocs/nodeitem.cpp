@@ -6,7 +6,6 @@
 
 #include "nodeitem.h"
 #include "nodetypestyle.h"
-
 #include <QPainter>
 #include <qmath.h>
 

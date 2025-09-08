@@ -7,9 +7,8 @@
 #ifndef EDGEITEM_H
 #define EDGEITEM_H
 
-#include "edge.h"
-#include "graphtheory_export.h"
 #include <QQuickItem>
+#include <libgraphtheory/edge.h>
 
 class QSGNode;
 
@@ -20,8 +19,9 @@ class EdgeItemPrivate;
 class EdgeItem : public QQuickItem
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_PROPERTY(GraphTheory::Edge *edge READ edge WRITE setEdge NOTIFY edgeChanged)
-    Q_PROPERTY(QPointF origin READ origin WRITE setOrigin)
+    Q_PROPERTY(QPointF origin READ origin WRITE setOrigin NOTIFY originChanged)
 
 public:
     explicit EdgeItem(QQuickItem *parent = nullptr);
@@ -38,6 +38,7 @@ protected:
 
 Q_SIGNALS:
     void edgeChanged();
+    void originChanged();
 
 private Q_SLOTS:
     void updatePosition();

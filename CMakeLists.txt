@@ -64,15 +64,17 @@ find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
 find_package(KF6DocTools)
 
 include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_BINARY_DIR}
     ${Boost_INCLUDE_DIRS}
 )
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 # added by KDE_COMPILERSETTINGS_LEVEL 5.85.0
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
+add_definitions(-DQT_QML_GENERATE_QMLLS_INI)
 
 ecm_optional_add_subdirectory(libgraphtheory)
 ecm_optional_add_subdirectory(src)

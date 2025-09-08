@@ -4,7 +4,6 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtQuick.Dialogs
 import QtQml.StateMachine as DSM
 import org.kde.rocs.graphtheory
 

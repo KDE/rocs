@@ -54,11 +54,6 @@ target_sources(rocsgraphtheory PRIVATE
     fileformats/fileformatmanager_p.h
     editorplugins/editorplugininterface.cpp
     editorplugins/editorpluginmanager.cpp
-    qtquickitems/nodeitem.cpp
-    qtquickitems/edgeitem.cpp
-    qtquickitems/qsgarrowheadnode.cpp
-    qtquickitems/qsglinenode.cpp
-    qml/rocs.qrc
 )
 
 ki18n_wrap_ui(rocsgraphtheory
@@ -71,36 +66,47 @@ generate_export_header(rocsgraphtheory BASE_NAME graphtheory)
 add_subdirectory(fileformats)
 
 target_link_libraries(rocsgraphtheory
-    PUBLIC
-        Qt::Core
-        Qt::Quick
-        Qt::QuickWidgets
-        Qt::Gui
-        KF6::CoreAddons
-        KF6::I18n
-        KF6::ItemViews
-        KF6::XmlGui
+PUBLIC
+    Qt::Core
+    Qt::Quick
+    Qt::QuickWidgets
+    Qt::Gui
+    KF6::CoreAddons
+    KF6::I18n
+    KF6::ItemViews
+    KF6::XmlGui
+PRIVATE
+    rocsgrapheditor_backing
+    rocsgrapheditor_backingplugin
 )
 
 set(rocscore_LIB_HDRS
     edge.h
+    edgetype.h
     graphdocument.h
     node.h
+    nodetype.h
+    ${CMAKE_CURRENT_BINARY_DIR}/graphtheory_export.h
 )
 
 # KI18N Translation Domain for library
 add_definitions(-DTRANSLATION_DOMAIN=\"libgraphtheory\")
 
 install(TARGETS rocsgraphtheory  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${KDE_INSTALL_INCLUDEDIR}/rocs  COMPONENT Devel)
+install(FILES ${rocscore_LIB_HDRS} DESTINATION ${KDE_INSTALL_INCLUDEDIR}/rocs  COMPONENT Devel)
+
+target_include_directories(rocsgraphtheory PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+    $<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}>
+)
 
 # Boost requires exceptions
 kde_source_files_enable_exceptions(modifiers/topology.cpp modifiers/valueassign.cpp)
 
-ecm_optional_add_subdirectory(editorplugins)
-ecm_optional_add_subdirectory(kernel)
-ecm_optional_add_subdirectory(modifiers)
-ecm_optional_add_subdirectory(qml)
+add_subdirectory(editorplugins)
+add_subdirectory(kernel)
+add_subdirectory(org/kde/rocs)
 
 if(BUILD_TESTING)
     ecm_optional_add_subdirectory(autotests)

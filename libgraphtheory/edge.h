@@ -8,10 +8,9 @@
 #define EDGE_H
 
 #include "edgetype.h"
-#include "graphtheory_export.h"
+#include <libgraphtheory/graphtheory_export.h>
 #include "node.h"
 #include "typenames.h"
-
 #include <QObject>
 #include <QSharedPointer>
 
