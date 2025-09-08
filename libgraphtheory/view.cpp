@@ -8,6 +8,7 @@
 #include "org/kde/rocs/edgemodel.h"
 #include "org/kde/rocs/edgepropertymodel.h"
 #include "org/kde/rocs/edgetypemodel.h"
+#include "org/kde/rocs/graph.h"
 #include "org/kde/rocs/nodemodel.h"
 #include "org/kde/rocs/nodepropertymodel.h"
 #include "org/kde/rocs/nodetypemodel.h"
@@ -25,16 +26,19 @@ class GraphTheory::ViewPrivate
 {
 public:
     ViewPrivate(QObject *q)
-        : m_nodeModel(q)
+        : m_graph(q)
+        , m_nodeModel(q)
         , m_edgeModel(q)
         , m_nodeTypeModel(q)
         , m_edgeTypeModel(q)
     {
+        m_graph.setGraphDocument(m_document);
     }
 
     ~ViewPrivate() = default;
 
     GraphDocumentPtr m_document;
+    Graph m_graph;
     NodeModel m_nodeModel;
     EdgeModel m_edgeModel;
     NodeTypeModel m_nodeTypeModel;
@@ -55,12 +59,10 @@ View::View(QWidget *parent)
     context->setTranslationDomain("libgraphtheory");
     engine()->rootContext()->setContextObject(context);
 
-    qmlRegisterType<GraphTheory::Node>("org.kde.rocs.graphtheory", 1, 0, "Node");
-    qmlRegisterType<GraphTheory::Edge>("org.kde.rocs.graphtheory", 1, 0, "Edge");
-
     const QUrl path = QUrl("qrc:/org/kde/rocs/Scene.qml");
     QQmlComponent *component = new QQmlComponent(engine());
     const QVariantMap initialViewProperties = QVariantMap{
+        {"graph", QVariant::fromValue(&d->m_graph)},
         {"edgeModel", QVariant::fromValue(&d->m_edgeModel)},
         {"nodeModel", QVariant::fromValue(&d->m_nodeModel)},
         {"edgeTypeModel", QVariant::fromValue(&d->m_edgeTypeModel)},
@@ -76,12 +78,8 @@ View::View(QWidget *parent)
     QObject *topLevel = component->createWithInitialProperties(initialViewProperties);
 
     // connections to QML signals
-    connect(topLevel, SIGNAL(createNode(qreal, qreal, int)), this, SLOT(createNode(qreal, qreal, int)));
-    connect(topLevel, SIGNAL(createEdge(GraphTheory::Node *, GraphTheory::Node *, int)), this, SLOT(createEdge(GraphTheory::Node *, GraphTheory::Node *, int)));
-    connect(topLevel, SIGNAL(deleteNode(GraphTheory::Node *)), this, SLOT(deleteNode(GraphTheory::Node *)));
-    connect(topLevel, SIGNAL(deleteEdge(GraphTheory::Edge *)), this, SLOT(deleteEdge(GraphTheory::Edge *)));
-    connect(topLevel, SIGNAL(showNodePropertiesDialog(GraphTheory::Node *)), this, SLOT(showNodePropertiesDialog(GraphTheory::Node *)));
-    connect(topLevel, SIGNAL(showEdgePropertiesDialog(GraphTheory::Edge *)), this, SLOT(showEdgePropertiesDialog(GraphTheory::Edge *)));
+    // connect(topLevel, SIGNAL(showNodePropertiesDialog(GraphTheory::NodeProxy *)), this, SLOT(showNodePropertiesDialog(GraphTheory::NodeProxy *)));
+    // connect(topLevel, SIGNAL(showEdgePropertiesDialog(GraphTheory::EdgeProxy *)), this, SLOT(showEdgePropertiesDialog(GraphTheory::EdgeProxy *)));
 
     // create widget
     setContent(path, component, topLevel);
@@ -92,6 +90,7 @@ View::~View() = default;
 void View::setGraphDocument(GraphDocumentPtr document)
 {
     d->m_document = document;
+    d->m_graph.setGraphDocument(d->m_document);
     d->m_nodeModel.setDocument(d->m_document);
     d->m_edgeModel.setDocument(d->m_document);
     d->m_nodeTypeModel.setDocument(d->m_document);
@@ -103,58 +102,19 @@ GraphDocumentPtr View::graphDocument() const
     return d->m_document;
 }
 
-void View::createNode(qreal x, qreal y, int typeIndex)
-{
-    Q_ASSERT(typeIndex >= 0);
-    Q_ASSERT(typeIndex < d->m_nodeTypeModel.rowCount());
-    NodePtr node = Node::create(d->m_document);
-    node->setType(d->m_nodeTypeModel.type(typeIndex));
-    node->setX(x);
-    node->setY(y);
-}
+// TODO move
+// void View::showNodePropertiesDialog(NodeProxy *node)
+// {
+//     QPointer<NodeProperties> dialog = new NodeProperties();
+//     dialog->setData(node->node()->self());
+//     dialog->show(); // workaround: scene-drag not working with modal dialogs
+// }
 
-void View::createEdge(Node *from, Node *to, int typeIndex)
-{
-    Q_ASSERT(typeIndex >= 0);
-    Q_ASSERT(typeIndex < d->m_edgeTypeModel.rowCount());
-    if (!from || !to) {
-        return;
-    }
-    if (!from->isValid() || !to->isValid()) {
-        return;
-    }
-    EdgePtr edge = Edge::create(from->self(), to->self());
-    edge->setType(d->m_edgeTypeModel.type(typeIndex));
-}
-
-void View::deleteNode(GraphTheory::Node *node)
-{
-    if (!node || !node->isValid()) {
-        return;
-    }
-    node->destroy();
-}
-
-void View::deleteEdge(GraphTheory::Edge *edge)
-{
-    if (!edge || !edge->isValid()) {
-        return;
-    }
-    edge->destroy();
-}
-
-void View::showNodePropertiesDialog(Node *node)
-{
-    QPointer<NodeProperties> dialog = new NodeProperties();
-    dialog->setData(node->self());
-    dialog->show(); // workaround: scene-drag not working with modal dialogs
-}
-
-void View::showEdgePropertiesDialog(Edge *edge)
-{
-    QPointer<EdgeProperties> dialog = new EdgeProperties();
-    dialog->setData(edge->self());
-    dialog->show(); // workaround: scene-drag not working with modal dialogs
-}
+// void View::showEdgePropertiesDialog(EdgeProxy *edge)
+// {
+//     QPointer<EdgeProperties> dialog = new EdgeProperties();
+//     dialog->setData(edge->edge()->self());
+//     dialog->show(); // workaround: scene-drag not working with modal dialogs
+// }
 
 #include "moc_view.cpp"

@@ -1,11 +1,11 @@
-// SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #ifndef NODEPROPERTYMODEL_H
 #define NODEPROPERTYMODEL_H
 
 #include "graphtheory_export.h"
-#include "typenames.h"
+#include "nodeproxy.h"
 #include <QAbstractListModel>
 #include <QQmlEngine>
 
@@ -18,7 +18,7 @@ class GRAPHTHEORY_EXPORT NodePropertyModel : public QAbstractListModel
 {
     Q_OBJECT
     QML_ELEMENT
-    Q_PROPERTY(GraphTheory::Node *node READ node WRITE setNode NOTIFY nodeChanged)
+    Q_PROPERTY(GraphTheory::NodeProxy *node READ node WRITE setNode NOTIFY nodeChanged)
 
 public:
     enum NodePropertyRoles {
@@ -33,8 +33,8 @@ public:
      * Reimplemented from QAbstractListModel::roleNames()
      */
     QHash<int, QByteArray> roleNames() const override;
-    void setNode(Node *node);
-    Node *node() const;
+    void setNode(NodeProxy *node);
+    NodeProxy *node() const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 

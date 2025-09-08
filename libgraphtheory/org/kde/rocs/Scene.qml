@@ -1,12 +1,13 @@
-// SPDX-FileCopyrightText: 2014-2015 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
+
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQml.StateMachine as DSM
 import org.kde.rocs
-import org.kde.rocs.graphtheory
 
 Item {
     id: root
@@ -15,33 +16,15 @@ Item {
 
     focus: true
 
+    required property Graph graph
     required property EdgeModel edgeModel
     required property NodeModel nodeModel
     required property EdgeTypeModel edgeTypeModel
     required property NodeTypeModel nodeTypeModel
 
-    // element create/remove actions
-    signal createNode(real x, real y, int typeIndex);
-    signal createEdge(Node from, Node to, int typeIndex);
-    signal deleteNode(Node node);
-    signal deleteEdge(Edge edge);
-
     // exec dialog signals
     signal showNodePropertiesDialog(Node node);
     signal showEdgePropertiesDialog(Edge edge);
-
-    Connections {
-        target: selectMoveAction
-        function onToggled() {
-            dsmSelectMove.running = selectMoveAction.checked
-        }
-    }
-    Connections {
-        target: addEdgeAction
-        function onToggled() {
-            dsmCreateEdge.running = addEdgeAction.checked
-        }
-    }
 
     Keys.onPressed: event => {
         switch(event.key) {
@@ -66,31 +49,53 @@ Item {
 
     ButtonGroup {
         id: editToolButton
-         buttons: toolbar.children
+        exclusive: true
     }
     ColumnLayout {
         id: toolbar
         ToolButton {
-            action: SelectMoveAction {
-                id: selectMoveAction
-                checked: true
-            }
+            id: selectMoveToolButton
+            text: i18n("Select & Move")
+            icon.source: "qrc:/icons/select"
+            ToolTip.text: i18n("Select and move elements on the scene")
+            checkable: true
+            checked: true
+            ButtonGroup.group: editToolButton
         }
         ToolButton {
-            action: AddNodeAction {
-                id: addNodeAction
-            }
+            id: addNodeToolButton
+            text: i18n("Create Node")
+            icon.source: "qrc:/icons/node"
+            checkable: true
+            ToolTip.text: i18n("Add a node to the scene")
+            ButtonGroup.group: editToolButton
         }
         ToolButton {
-            action: AddEdgeAction {
-                id: addEdgeAction
-                onCreateEdge: root.createEdge(from, to, edgeTypeSelector.currentIndex)
+            id: addEdgeToolButton
+            property Node from: null
+            property Node to: null
+
+            function apply() {
+                if (from && to) {
+                    root.graph.createEdge(from, to, edgeTypeSelector.currentValue)
+                }
+                from = null;
+                to = null;
             }
+
+            text: i18n("Create Edge")
+            icon.source: "qrc:/icons/edge"
+            checkable: true
+            ToolTip.text: i18n("Create an edge between two nodes")
+            ButtonGroup.group: editToolButton
         }
         ToolButton {
-            action: DeleteAction {
-                id: deleteAction
-            }
+            id: deleteToolButton
+            text: i18n("Delete Element")
+            icon.source: "qrc:/icons/delete"
+            checkable: true
+            ToolTip.text: i18n("Delete element from scene")
+            ButtonGroup.group: editToolButton
         }
     }
     ScrollView {
@@ -102,12 +107,6 @@ Item {
             leftMargin: 10
         }
 
-        Rectangle { // white background
-            color: "#ffffff"
-            width: parent.width
-            height: parent.height
-        }
-
         Item {
             id: scene
             width: sceneScrollView.width - 30
@@ -116,25 +115,26 @@ Item {
             signal deleteSelected();
             signal startMoveSelected();
             signal finishMoveSelected();
-            signal updateSelection();
             signal createEdgeUpdateFromNode();
             signal createEdgeUpdateToNode();
             function clearSelection()
             {
-                selectionRect.from = Qt.point(0, 0)
-                selectionRect.to = Qt.point(0, 0)
-                updateSelection();
+                selectionArea.from = Qt.point(0, 0)
+                selectionArea.to = Qt.point(0, 0)
+                selectionArea.visible = false
+                selectionArea.selecting = false
             }
             function setEdgeFromNode()
             {
-                addEdgeAction.to = null
+                addEdgeToolButton.to = null
                 createEdgeUpdateFromNode();
             }
             function selectAll()
             {
-                selectionRect.from = Qt.point(0, 0)
-                selectionRect.to = Qt.point(width,height)
-                updateSelection();
+                selectionArea.from = Qt.point(0, 0)
+                selectionArea.to = Qt.point(width,height)
+                selectionArea.visible = false
+                selectionArea.selecting = true
             }
 
             MouseArea {
@@ -142,6 +142,8 @@ Item {
                 anchors.fill: parent
                 z: -10 // must lie behind everything else
                 preventStealing: true
+
+                signal pressStarted()
 
                 property point lastMouseClicked: Qt.point(0, 0)
                 property point lastMousePressed: Qt.point(0, 0)
@@ -151,15 +153,16 @@ Item {
 
                 onClicked: mouse => {
                     lastMouseClicked = Qt.point(mouse.x, mouse.y)
-                    if (addNodeAction.checked) {
+                    if (addNodeToolButton.checked) {
                         mouse.accepted = true
-                        createNode(mouse.x, mouse.y, nodeTypeSelector.currentIndex);
+                        root.graph.createNode(mouse.x, mouse.y, nodeTypeSelector.currentValue);
                         return
                     }
                 }
                 onPressed: mouse => {
                     lastMousePressed = Qt.point(mouse.x, mouse.y)
                     lastMousePosition = Qt.point(mouse.x, mouse.y)
+                    pressStarted()
                 }
                 onPositionChanged: mouse => {
                     lastMousePosition = Qt.point(mouse.x, mouse.y)
@@ -170,9 +173,12 @@ Item {
                 }
             }
 
-            SelectionRectangle {
-                id: selectionRect
+            GraphSelectionRectangle {
+                id: selectionArea
+                property bool selecting: false // indicates if nodes shall evaluate
                 visible: false
+                from: Qt.point(0, 0)
+                to: Qt.point(0, 0)
             }
 
             Line {
@@ -188,25 +194,25 @@ Item {
                 model: root.edgeModel
                 EdgeItem {
                     id: edgeItem
-                    edge: model.dataRole
+                    required edge
                     z: -1 // edges must be below nodes
 
                     EdgePropertyItem {
                         anchors.centerIn: parent
-                        edge: model.dataRole
+                        edge: edgeItem.edge
                     }
 
                     MouseArea {
                         anchors.fill: parent
                         propagateComposedEvents: true
-                        onPressed: {
-                            if (deleteAction.checked) {
-                                deleteEdge(edge)
+                        onPressed: mouse => {
+                            if (deleteToolButton.checked) {
+                                root.graph.deleteEdge(edgeItem.edge)
                                 mouse.accepted = true
                             }
                         }
                         onDoubleClicked: {
-                            showEdgePropertiesDialog(edgeItem.edge);
+                            root.showEdgePropertiesDialog(edgeItem.edge);
                         }
                     }
                 }
@@ -214,102 +220,50 @@ Item {
 
             Repeater {
                 model: root.nodeModel
-                NodeItem {
+                delegate: NodeItem {
                     id: nodeItem
-                    node: model.dataRole
-                    highlighted: addEdgeAction.from === node || addEdgeAction.to === node
-                    property bool __modifyingPosition: false
-                    property point __moveStartedPosition: Qt.point(0, 0)
-                    Connections {
-                        target: selectionRect
-                        onChanged: {
-                            if (selectMoveAction.checked && selectionRect.contains(x, y)) {
-                                highlighted = true
-                            } else {
-                                highlighted = false
+                    required node
+                    highlighted: addEdgeToolButton.from === node || (addEdgeToolButton.from !== null && addEdgeToolButton.checked && contains(sceneAction.lastMousePosition))
+                                 || (selectionArea.selecting && selectionArea.contains(x, y))
+                                 || Drag.active
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onPressed: mouse => {
+                            if (deleteToolButton.checked) {
+                                root.graph.deleteNode(nodeItem.node)
+                                mouse.accepted = true
                             }
+                            mouse.accepted = false
+                        }
+                        onDoubleClicked: mouse => {
+                            root.showNodePropertiesDialog(nodeItem.node);
+                            mouse.accepted = true
                         }
                     }
+
                     Connections {
                         target: scene
-                        onUpdateSelection: {
-                            if (selectionRect.contains(x, y)) {
-                                highlighted = true
-                            } else {
-                                highlighted = false
+                        function onDeleteSelected() {
+                            if (nodeItem.highlighted) {
+                                root.graph.deleteNode(nodeItem.node)
                             }
                         }
-                        onDeleteSelected: {
-                            if (highlighted) {
-                                deleteNode(node)
-                            }
-                        }
-                        onStartMoveSelected: {
-                            if (!highlighted) {
-                                return
-                            }
-                            __moveStartedPosition.x = node.x
-                            __moveStartedPosition.y = node.y
-                            node.x = Qt.binding(function() { return __moveStartedPosition.x + sceneAction.lastMousePosition.x - sceneAction.lastMousePressed.x })
-                            node.y = Qt.binding(function() { return __moveStartedPosition.y + sceneAction.lastMousePosition.y - sceneAction.lastMousePressed.y })
-                        }
-                        onFinishMoveSelected: {
-                            if (!highlighted) {
-                                return
-                            }
-                            node.x = __moveStartedPosition.x + sceneAction.lastMousePosition.x - sceneAction.lastMousePressed.x
-                            node.y = __moveStartedPosition.y + sceneAction.lastMousePosition.y - sceneAction.lastMousePressed.y
-                            __moveStartedPosition.x = 0
-                            __moveStartedPosition.y = 0
-                        }
-                        onCreateEdgeUpdateFromNode: {
+                        function onCreateEdgeUpdateFromNode() {
                             if (nodeItem.contains(Qt.point(sceneAction.lastMousePressed.x, sceneAction.lastMousePressed.y))) {
-                                node.highlighted = true
-                                addEdgeAction.from = node
+                                addEdgeToolButton.from = nodeItem.node
                             }
                         }
-                        onCreateEdgeUpdateToNode: {
+                        function onCreateEdgeUpdateToNode() {
                             if (nodeItem.contains(Qt.point(sceneAction.lastMouseReleased.x, sceneAction.lastMouseReleased.y))) {
-                                node.highlighted = true
-                                addEdgeAction.to = node
+                                addEdgeToolButton.to = nodeItem.node
                             }
                         }
                     }
-                    onXChanged: {
-                        if (x < 10) {
-                            nodeItem.__modifyingPosition = true;
-                            var delta = Math.max((10 - x), 10)
-                            scene.width += delta;
-                            nodeItem.__modifyingPosition = false;
-                            return;
-                        }
-                        if (x + width + 10 > scene.width) {
-                            nodeItem.__modifyingPosition = true;
-                            var delta = Math.max(scene.width - (x + width) + 10, 10);
-                            scene.width += delta;
-                            nodeItem.__modifyingPosition = false;
-                            return;
-                        }
-                    }
-                    onYChanged: {
-                        if (y < 10) {
-                            nodeItem.__modifyingPosition = true;
-                            var delta = (10 - y)
-                            scene.height += delta;
-                            nodeItem.__modifyingPosition = false;
-                            return;
-                        }
-                        if (y + height + 10 > scene.height) {
-                            nodeItem.__modifyingPosition = true;
-                            var delta = Math.max(scene.height - (y + height) + 10, 10);
-                            scene.height += delta;
-                            nodeItem.__modifyingPosition = false;
-                            return;
-                        }
-                    }
+
                     NodePropertyItem {
                         anchors.centerIn: parent
-                        node: model.dataRole
+                        node: nodeItem.node
                     }
 
                     Drag.active: dragArea.drag.active
@@ -318,41 +272,40 @@ Item {
                         anchors.fill: parent
                         propagateComposedEvents: true
                         drag.target: { // only enable drag when move/select checked
-                            selectMoveAction.checked ? parent : undefined
+                            selectMoveToolButton.checked ? parent : undefined
                         }
                         Loader {
                             id: nodeDialogLoader
                         }
                         onDoubleClicked: {
-                            showNodePropertiesDialog(nodeItem.node);
+                            root.graph.showNodePropertiesDialog(nodeItem.node);
                             mouse.accepted = true
                         }
-                        onPressed: {
+                        onPressed: mouse => {
                             // never handle undefined actions signals
-                            if (!(selectMoveAction.checked || deleteAction.checked)) {
+                            if (!(selectMoveToolButton.checked || deleteToolButton.checked)) {
                                 mouse.accepted = false
                                 return
                             }
-                            if (deleteAction.checked) {
-                                deleteNode(nodeItem.node)
+                            if (deleteToolButton.checked) {
+                                root.graph.deleteNode(nodeItem.node)
                                 mouse.accepted = true
                                 return
                             }
                             // single-node move action: directly handle it
                             sceneAction.nodePressed = true
-                            if (selectMoveAction.checked && !nodeItem.highlighted) {
+                            if (selectMoveToolButton.checked && !nodeItem.highlighted) {
                                 scene.clearSelection()
-                                nodeItem.highlighted = true
                                 mouse.accepted = true
                                 return
                             }
                             // multi-node move action: gets handled by state-machine
-                            if (selectMoveAction.checked && nodeItem.highlighted) {
+                            if (selectMoveToolButton.checked && nodeItem.highlighted) {
                                 mouse.accepted = false
                                 return
                             }
                         }
-                        onReleased: {
+                        onReleased: mouse => {
                             sceneAction.nodePressed = false
                         }
                     }
@@ -363,7 +316,7 @@ Item {
 
     RowLayout {
         id: extraToolbarCreateNode
-        visible: addNodeAction.checked
+        visible: addNodeToolButton.checked
         anchors {
             top: sceneScrollView.top
             right:sceneScrollView.right
@@ -380,7 +333,7 @@ Item {
     }
     RowLayout {
         id: extraToolbarCreateEdge
-        visible: addEdgeAction.checked
+        visible: addEdgeToolButton.checked
         anchors {
             top: sceneScrollView.top
             right:sceneScrollView.right
@@ -400,21 +353,21 @@ Item {
     DSM.StateMachine {
         id: dsmSelectMove
         initialState: smStateIdle
-        running: true
+        running: selectMoveToolButton.checked
         DSM.State {
             id: smStateIdle
             DSM.SignalTransition {
                 targetState: smStateMoving
-                signal: sceneAction.onPressed
+                signal: sceneAction.pressStarted
                 guard: sceneAction.nodePressed
             }
             DSM.SignalTransition {
                 targetState: smStateSelecting
-                signal: sceneAction.onPressed
+                signal: sceneAction.pressStarted
                 guard: !sceneAction.nodePressed
             }
             DSM.SignalTransition {
-                signal: sceneAction.onClicked
+                signal: sceneAction.clicked
                 onTriggered: {
                     scene.clearSelection
                 }
@@ -423,29 +376,33 @@ Item {
         DSM.State {
             id: smStateSelecting
             DSM.SignalTransition {
-                signal: sceneAction.onPositionChanged
+                signal: sceneAction.positionChanged
                 onTriggered: {
-                    selectionRect.visible = true
-                    selectionRect.to = sceneAction.lastMousePosition
+                    if (!sceneAction.nodePressed && selectionArea.selecting === false) {
+                        selectionArea.selecting = true
+                        selectionArea.visible = true
+                        selectionArea.from = sceneAction.lastMousePosition
+                    }
+                    selectionArea.to = sceneAction.lastMousePosition
                 }
             }
             DSM.SignalTransition {
                 targetState: smStateIdle
-                signal: sceneAction.onReleased
+                signal: sceneAction.released
             }
             onEntered: {
                 scene.clearSelection()
-                selectionRect.from = sceneAction.lastMousePressed
+                selectionArea.from = sceneAction.lastMousePressed
             }
             onExited: {
-                selectionRect.visible = false
+                selectionArea.visible = false
             }
         }
         DSM.State {
             id: smStateMoving
             DSM.SignalTransition {
                 targetState: smStateIdle
-                signal: sceneAction.onReleased
+                signal: sceneAction.released
             }
             onEntered: {
                 scene.startMoveSelected();
@@ -460,15 +417,15 @@ Item {
     DSM.StateMachine {
         id: dsmCreateEdge
         initialState: ceStateIdle
-        running: false
+        running: addEdgeToolButton.checked
         DSM.State {
             id: ceStateIdle
             DSM.SignalTransition {
                 targetState: ceStateCreateEdgeTo
-                signal: sceneAction.onPressed
+                signal: sceneAction.pressStarted
             }
             onExited: {
-                addEdgeAction.to = null
+                addEdgeToolButton.to = null
                 scene.createEdgeUpdateFromNode()
             }
         }
@@ -476,14 +433,14 @@ Item {
             id: ceStateCreateEdgeTo
             DSM.SignalTransition {
                 targetState: ceStateIdle
-                signal: sceneAction.onReleased
+                signal: sceneAction.released
             }
             onEntered: {
                 createLineMarker.visible = true
             }
             onExited: {
                 scene.createEdgeUpdateToNode()
-                addEdgeAction.apply()
+                addEdgeToolButton.apply()
                 createLineMarker.visible = false
             }
         }

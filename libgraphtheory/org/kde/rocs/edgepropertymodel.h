@@ -1,11 +1,11 @@
-// SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #ifndef EDGEPROPERTYMODEL_H
 #define EDGEPROPERTYMODEL_H
 
+#include "edgeproxy.h"
 #include "graphtheory_export.h"
-#include "typenames.h"
 #include <QAbstractListModel>
 #include <QQmlEngine>
 
@@ -18,7 +18,7 @@ class GRAPHTHEORY_EXPORT EdgePropertyModel : public QAbstractListModel
 {
     Q_OBJECT
     QML_ELEMENT
-    Q_PROPERTY(GraphTheory::Edge *edge READ edge WRITE setEdge NOTIFY edgeChanged)
+    Q_PROPERTY(GraphTheory::EdgeProxy *edge READ edge WRITE setEdge NOTIFY edgeChanged)
 
 public:
     enum EdgePropertyRoles {
@@ -33,8 +33,8 @@ public:
      * Reimplemented from QAbstractListModel::roleNames()
      */
     QHash<int, QByteArray> roleNames() const override;
-    void setEdge(Edge *edge);
-    Edge *edge() const;
+    void setEdge(EdgeProxy *edge);
+    EdgeProxy *edge() const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 

@@ -70,11 +70,11 @@ include_directories(
 )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(QT_QML_GENERATE_QMLLS_INI ON)
 
 # added by KDE_COMPILERSETTINGS_LEVEL 5.85.0
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
-add_definitions(-DQT_QML_GENERATE_QMLLS_INI)
 
 ecm_optional_add_subdirectory(libgraphtheory)
 ecm_optional_add_subdirectory(src)

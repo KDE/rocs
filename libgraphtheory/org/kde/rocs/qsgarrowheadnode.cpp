@@ -1,8 +1,5 @@
-/*
- *  SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "qsgarrowheadnode.h"
 #include <QColor>
@@ -31,6 +28,9 @@ void QSGArrowHeadNode::setArrow(const QPointF &from, const QPointF &to)
 
     // compute main axis of head
     QVector2D normale(to - from);
+    if (qFuzzyCompare(normale.length(), 0.0f)) {
+        return;
+    }
     normale.normalize();
     normale = normale * baseSize;
 

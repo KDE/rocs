@@ -1,8 +1,5 @@
-/*
- *  SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "nodeitem.h"
 #include "nodetypestyle.h"
@@ -24,7 +21,7 @@ public:
 
     ~NodeItemPrivate() = default;
 
-    Node *m_node;
+    NodeProxy *m_node;
     QPointF m_origin;
     bool m_visible;
     bool m_highlighted;
@@ -42,20 +39,25 @@ NodeItem::NodeItem(QQuickPaintedItem *parent)
 
 NodeItem::~NodeItem() = default;
 
-Node *NodeItem::node() const
+NodeProxy *NodeItem::node() const
 {
     return d->m_node;
 }
 
-void NodeItem::setNode(Node *node)
+void NodeItem::setNode(NodeProxy *proxy)
 {
-    if (d->m_node == node) {
+    if (proxy == nullptr || proxy->node() == nullptr) {
+        qCritical() << "Skip setting of node==nullptr";
         return;
     }
+    if (d->m_node == proxy) {
+        return;
+    }
+    auto node = proxy->node().get();
     if (d->m_node) {
         d->m_node->disconnect(this);
     }
-    d->m_node = node;
+    d->m_node = proxy;
     setGlobalPosition(QPointF(node->x(), node->y()));
     connect(node, &Node::positionChanged, this, &NodeItem::setGlobalPosition);
     connect(node, &Node::styleChanged, this, [&]() {
@@ -88,7 +90,7 @@ void NodeItem::setOrigin(const QPointF &origin)
     }
     // update position with new origin
     d->m_origin = origin;
-    setGlobalPosition(QPointF(d->m_node->x(), d->m_node->y()));
+    setGlobalPosition(QPointF(d->m_node->node()->x(), d->m_node->node()->y()));
     update();
 }
 
@@ -116,8 +118,10 @@ void NodeItem::paint(QPainter *painter)
         painter->setBrush(QColor(246, 116, 0, 125)); // beware orange, half transparent
         painter->drawEllipse(QRectF(0, 0, width(), height()));
     }
-    painter->setPen(QPen(QColor(d->m_node->type()->style()->color()), 2, Qt::SolidLine));
-    painter->setBrush(QBrush(d->m_node->color()));
+    if (d->m_node) {
+        painter->setPen(QPen(QColor(d->m_node->node()->type()->style()->color()), 2, Qt::SolidLine));
+        painter->setBrush(QBrush(d->m_node->node()->color()));
+    }
     painter->drawEllipse(QRectF(4, 4, width() - 8, height() - 8));
 }
 
@@ -134,12 +138,12 @@ bool NodeItem::contains(const QPointF &point) const
 
 void NodeItem::updatePositionfromScene()
 {
-    if (d->m_node->x() == x() + d->m_origin.x() && d->m_node->y() == y() + d->m_origin.y()) {
+    if (d->m_node->node()->x() == x() + d->m_origin.x() && d->m_node->node()->y() == y() + d->m_origin.y()) {
         return;
     }
     d->m_updating = true;
-    d->m_node->setX(x() + d->m_origin.x() + width() / 2);
-    d->m_node->setY(y() + d->m_origin.y() + height() / 2);
+    d->m_node->node()->setX(x() + d->m_origin.x() + width() / 2);
+    d->m_node->node()->setY(y() + d->m_origin.y() + height() / 2);
     d->m_updating = false;
 }
 
@@ -155,10 +159,10 @@ void NodeItem::setGlobalPosition(const QPointF &position)
 
 void NodeItem::updateVisibility()
 {
-    if (d->m_visible == d->m_node->type()->style()->isVisible()) {
+    if (d->m_visible == d->m_node->node()->type()->style()->isVisible()) {
         return;
     }
-    d->m_visible = d->m_node->type()->style()->isVisible();
+    d->m_visible = d->m_node->node()->type()->style()->isVisible();
     if (d->m_visible) {
         setOpacity(1);
     } else {

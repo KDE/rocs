@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "edgepropertymodel.h"
@@ -11,7 +11,7 @@ using namespace GraphTheory;
 class GraphTheory::EdgePropertyModelPrivate
 {
 public:
-    EdgePtr m_edge;
+    EdgeProxy *m_edge{nullptr};
 };
 
 EdgePropertyModel::EdgePropertyModel(QObject *parent)
@@ -32,59 +32,59 @@ QHash<int, QByteArray> EdgePropertyModel::roleNames() const
     return roles;
 }
 
-void EdgePropertyModel::setEdge(Edge *edge)
+void EdgePropertyModel::setEdge(EdgeProxy *edge)
 {
-    if (d->m_edge == edge->self()) {
+    if (!edge || !edge->edge() || d->m_edge == edge) {
         return;
     }
 
     beginResetModel();
     if (d->m_edge) {
-        d->m_edge.data()->disconnect(this);
+        d->m_edge->edge().get()->disconnect(this);
     }
-    d->m_edge = edge->self();
+    d->m_edge = edge;
     if (d->m_edge) {
-        connect(d->m_edge.data(), &Edge::dynamicPropertyAboutToBeAdded, this, &EdgePropertyModel::onDynamicPropertyAboutToBeAdded);
-        connect(d->m_edge.data(), &Edge::dynamicPropertyAdded, this, &EdgePropertyModel::onDynamicPropertyAdded);
-        connect(d->m_edge.data(), &Edge::dynamicPropertiesAboutToBeRemoved, this, &EdgePropertyModel::onDynamicPropertiesAboutToBeRemoved);
-        connect(d->m_edge.data(), &Edge::dynamicPropertyRemoved, this, &EdgePropertyModel::onDynamicPropertyRemoved);
-        connect(d->m_edge.data(), &Edge::dynamicPropertyChanged, this, &EdgePropertyModel::onDynamicPropertyChanged);
-        connect(d->m_edge.data(), &Edge::styleChanged, [=]() {
+        connect(d->m_edge->edge().get(), &Edge::dynamicPropertyAboutToBeAdded, this, &EdgePropertyModel::onDynamicPropertyAboutToBeAdded);
+        connect(d->m_edge->edge().get(), &Edge::dynamicPropertyAdded, this, &EdgePropertyModel::onDynamicPropertyAdded);
+        connect(d->m_edge->edge().get(), &Edge::dynamicPropertiesAboutToBeRemoved, this, &EdgePropertyModel::onDynamicPropertiesAboutToBeRemoved);
+        connect(d->m_edge->edge().get(), &Edge::dynamicPropertyRemoved, this, &EdgePropertyModel::onDynamicPropertyRemoved);
+        connect(d->m_edge->edge().get(), &Edge::dynamicPropertyChanged, this, &EdgePropertyModel::onDynamicPropertyChanged);
+        connect(d->m_edge->edge().get(), &Edge::styleChanged, this, [=]() {
             QVector<int> changedRoles;
             changedRoles.append(VisibilityRole);
-            Q_EMIT dataChanged(index(0), index(d->m_edge->dynamicProperties().count() - 1), changedRoles);
+            Q_EMIT dataChanged(index(0), index(d->m_edge->edge()->dynamicProperties().count() - 1), changedRoles);
         });
     }
     endResetModel();
     Q_EMIT edgeChanged();
 }
 
-Edge *EdgePropertyModel::edge() const
+EdgeProxy *EdgePropertyModel::edge() const
 {
-    return d->m_edge.data();
+    return d->m_edge;
 }
 
 QVariant EdgePropertyModel::data(const QModelIndex &index, int role) const
 {
     Q_ASSERT(d->m_edge);
 
-    if (!index.isValid()) {
+    if (!index.isValid() || !d->m_edge->edge()) {
         return QVariant();
     }
 
-    if (index.row() >= d->m_edge->dynamicProperties().count()) {
+    if (index.row() >= d->m_edge->edge()->dynamicProperties().count()) {
         return QVariant();
     }
 
-    QString const property = d->m_edge->dynamicProperties().at(index.row());
+    QString const property = d->m_edge->edge()->dynamicProperties().at(index.row());
 
     switch (role) {
     case NameRole:
         return property;
     case ValueRole:
-        return d->m_edge->dynamicProperty(property);
+        return d->m_edge->edge()->dynamicProperty(property);
     case VisibilityRole:
-        return d->m_edge->type()->style()->isPropertyNamesVisible();
+        return d->m_edge->edge()->type()->style()->isPropertyNamesVisible();
     default:
         return QVariant();
     }
@@ -100,7 +100,7 @@ int EdgePropertyModel::rowCount(const QModelIndex &parent) const
         return 0;
     }
 
-    return d->m_edge->dynamicProperties().count();
+    return d->m_edge->edge()->dynamicProperties().count();
 }
 
 void EdgePropertyModel::onDynamicPropertyAboutToBeAdded(const QString &property, int index)

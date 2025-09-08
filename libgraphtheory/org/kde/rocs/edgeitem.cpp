@@ -1,8 +1,5 @@
-/*
- *  SPDX-FileCopyrightText: 2014-2015 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "edgeitem.h"
 #include "edgetypestyle.h"
@@ -29,10 +26,7 @@ public:
     {
     }
 
-    ~EdgeItemPrivate()
-    {
-    }
-    Edge *m_edge;
+    EdgeProxy *m_edge{nullptr};
     QPointF m_origin;
     QPointF m_pointFrom, m_pointTo;
     const int m_nodeWidth;
@@ -48,38 +42,39 @@ EdgeItem::EdgeItem(QQuickItem *parent)
     setFlag(QQuickItem::ItemHasContents, true);
 }
 
-EdgeItem::~EdgeItem()
-{
-}
+EdgeItem::~EdgeItem() = default;
 
-Edge *EdgeItem::edge() const
+EdgeProxy *EdgeItem::edge() const
 {
     return d->m_edge;
 }
 
-void EdgeItem::setEdge(Edge *edge)
+void EdgeItem::setEdge(EdgeProxy *edge)
 {
+    if (!edge || !edge->edge()) {
+        return;
+    }
     if (d->m_edge == edge) {
         return;
     }
     if (d->m_edge) {
-        d->m_edge->from().data()->disconnect(this);
-        d->m_edge->to().data()->disconnect(this);
+        d->m_edge->edge()->from().get()->disconnect(this);
+        d->m_edge->edge()->to().get()->disconnect(this);
         d->m_edge->disconnect(this);
     }
     d->m_edge = edge;
-    d->m_visible = edge->type()->style()->isVisible();
-    connect(edge->from().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
-    connect(edge->to().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
-    connect(edge, &Edge::typeChanged, this, [&](EdgeTypePtr) {
+    d->m_visible = edge->edge()->type()->style()->isVisible();
+    connect(edge->edge()->from().get(), &Node::positionChanged, this, &EdgeItem::updatePosition);
+    connect(edge->edge()->to().get(), &Node::positionChanged, this, &EdgeItem::updatePosition);
+    connect(edge->edge().get(), &Edge::typeChanged, this, [&](EdgeTypePtr) {
         update();
     });
-    connect(edge, &Edge::styleChanged, this, &EdgeItem::updateColor);
-    connect(edge, &Edge::directionChanged, this, &EdgeItem::updateDirection);
+    connect(edge->edge().get(), &Edge::styleChanged, this, &EdgeItem::updateColor);
+    connect(edge->edge().get(), &Edge::directionChanged, this, &EdgeItem::updateDirection);
 
-    connect(edge, &Edge::styleChanged, this, &EdgeItem::updateVisibility);
-    connect(edge->from().data(), &Node::styleChanged, this, &EdgeItem::updateVisibility);
-    connect(edge->to().data(), &Node::styleChanged, this, &EdgeItem::updateVisibility);
+    connect(edge->edge().get(), &Edge::styleChanged, this, &EdgeItem::updateVisibility);
+    connect(edge->edge()->from().get(), &Node::styleChanged, this, &EdgeItem::updateVisibility);
+    connect(edge->edge()->to().get(), &Node::styleChanged, this, &EdgeItem::updateVisibility);
 
     updatePosition();
     updateVisibility();
@@ -106,15 +101,15 @@ QSGNode *EdgeItem::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeDat
     QSGLineNode *n = static_cast<QSGLineNode *>(node);
     if (!n) {
         n = new QSGLineNode();
-        n->setDirection(d->m_edge->type()->direction());
-        n->setColor(d->m_edge->type()->style()->color());
+        n->setDirection(d->m_edge->edge()->type()->direction());
+        n->setColor(d->m_edge->edge()->type()->style()->color());
     }
     if (d->m_colorDirty) {
-        n->setColor(d->m_edge->type()->style()->color());
+        n->setColor(d->m_edge->edge()->type()->style()->color());
         d->m_colorDirty = false;
     }
     if (d->m_directionDirty) {
-        n->setDirection(d->m_edge->type()->direction());
+        n->setDirection(d->m_edge->edge()->type()->direction());
         d->m_directionDirty = false;
     }
 
@@ -126,10 +121,10 @@ void EdgeItem::updatePosition()
 {
     // compute bounding box
     // the box possibly has to be enlarged to contain at least the whole width of the line
-    qreal boxXglobal = qMin(d->m_edge->from()->x(), d->m_edge->to()->x()); // global coordinate
-    qreal boxYglobal = qMin(d->m_edge->from()->y(), d->m_edge->to()->y()); // global coordinate
-    qreal boxWidth = qAbs(d->m_edge->to()->x() - d->m_edge->from()->x());
-    qreal boxHeight = qAbs(d->m_edge->to()->y() - d->m_edge->from()->y());
+    qreal boxXglobal = qMin(d->m_edge->edge()->from()->x(), d->m_edge->edge()->to()->x()); // global coordinate
+    qreal boxYglobal = qMin(d->m_edge->edge()->from()->y(), d->m_edge->edge()->to()->y()); // global coordinate
+    qreal boxWidth = qAbs(d->m_edge->edge()->to()->x() - d->m_edge->edge()->from()->x());
+    qreal boxHeight = qAbs(d->m_edge->edge()->to()->y() - d->m_edge->edge()->from()->y());
 
     // set coordinates
     setX(boxXglobal - d->m_origin.x());
@@ -138,8 +133,8 @@ void EdgeItem::updatePosition()
     setHeight(boxHeight);
 
     // set from/to values relative to box x/y position
-    d->m_pointFrom = QPointF(d->m_edge->from()->x(), d->m_edge->from()->y()) - d->m_origin - QPointF(x(), y());
-    d->m_pointTo = QPointF(d->m_edge->to()->x(), d->m_edge->to()->y()) - d->m_origin - QPointF(x(), y());
+    d->m_pointFrom = QPointF(d->m_edge->edge()->from()->x(), d->m_edge->edge()->from()->y()) - d->m_origin - QPointF(x(), y());
+    d->m_pointTo = QPointF(d->m_edge->edge()->to()->x(), d->m_edge->edge()->to()->y()) - d->m_origin - QPointF(x(), y());
     update();
 }
 
@@ -157,7 +152,8 @@ void EdgeItem::updateDirection()
 
 void EdgeItem::updateVisibility()
 {
-    bool visible = d->m_edge->type()->style()->isVisible() && d->m_edge->from()->type()->style()->isVisible() && d->m_edge->to()->type()->style()->isVisible();
+    bool visible = d->m_edge->edge()->type()->style()->isVisible() && d->m_edge->edge()->from()->type()->style()->isVisible()
+        && d->m_edge->edge()->to()->type()->style()->isVisible();
     d->m_visible = visible;
     if (d->m_visible) {
         setOpacity(1);

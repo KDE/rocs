@@ -1,14 +1,11 @@
-/*
- *  SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
- */
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #ifndef EDGEITEM_H
 #define EDGEITEM_H
 
+#include "edgeproxy.h"
 #include <QQuickItem>
-#include <libgraphtheory/edge.h>
 
 class QSGNode;
 
@@ -20,14 +17,14 @@ class EdgeItem : public QQuickItem
 {
     Q_OBJECT
     QML_ELEMENT
-    Q_PROPERTY(GraphTheory::Edge *edge READ edge WRITE setEdge NOTIFY edgeChanged)
+    Q_PROPERTY(GraphTheory::EdgeProxy *edge READ edge WRITE setEdge NOTIFY edgeChanged REQUIRED)
     Q_PROPERTY(QPointF origin READ origin WRITE setOrigin NOTIFY originChanged)
 
 public:
     explicit EdgeItem(QQuickItem *parent = nullptr);
     ~EdgeItem() override;
-    Edge *edge() const;
-    void setEdge(Edge *edge);
+    EdgeProxy *edge() const;
+    void setEdge(EdgeProxy *edge);
     /** translation of global origin (0,0) into scene coordinates **/
     QPointF origin() const;
     /** set translation of global origin (0,0) into scene coordinates **/

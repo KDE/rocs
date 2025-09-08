@@ -22,10 +22,6 @@ public:
     {
     }
 
-    ~EdgePrivate()
-    {
-    }
-
     EdgePtr q;
     NodePtr m_from;
     NodePtr m_to;

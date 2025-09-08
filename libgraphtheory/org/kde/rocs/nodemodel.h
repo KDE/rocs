@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #ifndef NODEMODEL_H
@@ -22,6 +22,7 @@ class GRAPHTHEORY_EXPORT NodeModel : public QAbstractListModel
 public:
     enum NodeRoles {
         IdRole = Qt::UserRole + 1, //!< unique identifier of node
+        PositionRole,
         DataRole //!< access to Node object
     };
 
@@ -39,7 +40,7 @@ Q_SIGNALS:
     void nodeChanged(int index);
 
 private Q_SLOTS:
-    void onNodeAboutToBeAdded(NodePtr node, int index);
+    void onNodeAboutToBeAdded(GraphTheory::NodePtr node, int index);
     void onNodeAdded();
     void onNodesAboutToBeRemoved(int first, int last);
     void onNodesRemoved();

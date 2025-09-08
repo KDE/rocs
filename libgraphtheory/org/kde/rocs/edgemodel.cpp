@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "edgemodel.h"
-#include "edge.h"
+#include "edgeproxy.h"
 #include "graphdocument.h"
 #include <QDebug>
 #include <QSignalMapper>
@@ -20,6 +20,7 @@ public:
         }
     }
 
+    QList<EdgeProxy *> m_edgeProxyList;
     GraphDocumentPtr m_document;
     QSignalMapper m_signalMapper;
 };
@@ -37,7 +38,7 @@ QHash<int, QByteArray> EdgeModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
-    roles[DataRole] = "dataRole";
+    roles[DataRole] = "edge";
 
     return roles;
 }
@@ -59,6 +60,9 @@ void EdgeModel::setDocument(GraphDocumentPtr document)
         connect(d->m_document.data(), &GraphDocument::edgesAboutToBeRemoved, this, &EdgeModel::onEdgesAboutToBeRemoved);
         connect(d->m_document.data(), &GraphDocument::edgesRemoved, this, &EdgeModel::onEdgesRemoved);
     }
+    for (const auto &edge : d->m_document->edges()) {
+        d->m_edgeProxyList.push_back(new EdgeProxy(edge));
+    }
     endResetModel();
 }
 
@@ -78,7 +82,7 @@ QVariant EdgeModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case DataRole:
-        return QVariant::fromValue<QObject *>(edge.data());
+        return QVariant::fromValue<EdgeProxy *>(d->m_edgeProxyList.at(index.row()));
     default:
         return QVariant();
     }
@@ -100,6 +104,7 @@ int EdgeModel::rowCount(const QModelIndex &parent) const
 void EdgeModel::onEdgeAboutToBeAdded(EdgePtr edge, int index)
 {
     Q_UNUSED(edge)
+    d->m_edgeProxyList.insert(index, new EdgeProxy(edge));
     // TODO add missing signals
     beginInsertRows(QModelIndex(), index, index);
 }
@@ -113,6 +118,11 @@ void EdgeModel::onEdgeAdded()
 void EdgeModel::onEdgesAboutToBeRemoved(int first, int last)
 {
     beginRemoveRows(QModelIndex(), first, last);
+    const auto removalStagedProxies = d->m_edgeProxyList.sliced(first, last - first);
+    d->m_edgeProxyList.remove(first, last - first);
+    for (const auto proxy : removalStagedProxies) {
+        proxy->deleteLater();
+    }
 }
 
 void EdgeModel::onEdgesRemoved()

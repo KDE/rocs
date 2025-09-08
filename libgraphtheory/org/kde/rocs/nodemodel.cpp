@@ -1,8 +1,9 @@
-// SPDX-FileCopyrightText: 2014 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+// SPDX-FileCopyrightText: 2014-2025 Andreas Cord-Landwehr <cordlandwehr@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "nodemodel.h"
 #include "graphdocument.h"
+#include "nodeproxy.h"
 #include <QSignalMapper>
 
 using namespace GraphTheory;
@@ -18,6 +19,7 @@ public:
         }
     }
 
+    QList<NodeProxy *> m_nodeProxyList;
     GraphDocumentPtr m_document;
     QSignalMapper m_signalMapper;
 };
@@ -35,7 +37,8 @@ QHash<int, QByteArray> NodeModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
-    roles[DataRole] = "dataRole";
+    roles[PositionRole] = "position";
+    roles[DataRole] = "node";
 
     return roles;
 }
@@ -57,6 +60,9 @@ void NodeModel::setDocument(GraphDocumentPtr document)
         connect(d->m_document.data(), &GraphDocument::nodesAboutToBeRemoved, this, &NodeModel::onNodesAboutToBeRemoved);
         connect(d->m_document.data(), &GraphDocument::nodesRemoved, this, &NodeModel::onNodesRemoved);
     }
+    for (const auto &node : d->m_document->nodes()) {
+        d->m_nodeProxyList.push_back(new NodeProxy(node));
+    }
     endResetModel();
 }
 
@@ -72,13 +78,15 @@ QVariant NodeModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    NodePtr const node = d->m_document->nodes().at(index.row());
+    NodeProxy *proxy = d->m_nodeProxyList.at(index.row());
 
     switch (role) {
     case IdRole:
-        return node->id();
+        return proxy->node()->id();
+    case PositionRole:
+        return QPointF(proxy->node()->x(), proxy->node()->y());
     case DataRole:
-        return QVariant::fromValue<QObject *>(node.data());
+        return QVariant::fromValue<NodeProxy *>(proxy);
     default:
         return QVariant();
     }
@@ -100,6 +108,7 @@ int NodeModel::rowCount(const QModelIndex &parent) const
 void NodeModel::onNodeAboutToBeAdded(NodePtr node, int index)
 {
     Q_UNUSED(node)
+    d->m_nodeProxyList.insert(index, new NodeProxy(node));
     // TODO add missing signals
     beginInsertRows(QModelIndex(), index, index);
 }
@@ -107,12 +116,18 @@ void NodeModel::onNodeAboutToBeAdded(NodePtr node, int index)
 void NodeModel::onNodeAdded()
 {
     d->updateMappings();
+
     endInsertRows();
 }
 
 void NodeModel::onNodesAboutToBeRemoved(int first, int last)
 {
     beginRemoveRows(QModelIndex(), first, last);
+    const auto removalStagedProxies = d->m_nodeProxyList.sliced(first, last - first);
+    d->m_nodeProxyList.remove(first, last - first);
+    for (const auto proxy : removalStagedProxies) {
+        proxy->deleteLater();
+    }
 }
 
 void NodeModel::onNodesRemoved()

@@ -12,12 +12,18 @@ qt6_add_qml_module(rocsgrapheditor_backing
         edgeitem.h
         edgemodel.cpp
         edgemodel.h
+        edgeproxy.cpp
+        edgeproxy.h
         edgepropertymodel.cpp
         edgepropertymodel.h
         edgetypemodel.cpp
         edgetypemodel.h
         edgetypepropertymodel.cpp
         edgetypepropertymodel.h
+        graph.cpp
+        graph.h
+        nodeproxy.cpp
+        nodeproxy.h
         nodeitem.cpp
         nodeitem.h
         nodemodel.cpp
@@ -33,15 +39,11 @@ qt6_add_qml_module(rocsgrapheditor_backing
         qsglinenode.cpp
         qsglinenode.h
     QML_FILES
-        AddEdgeAction.qml
-        AddNodeAction.qml
-        DeleteAction.qml
         EdgePropertyItem.qml
         Line.qml
         NodePropertyItem.qml
         Scene.qml
-        SelectMoveAction.qml
-        SelectionRectangle.qml
+        GraphSelectionRectangle.qml
 )
 
 target_include_directories(rocsgrapheditor_backing PRIVATE
