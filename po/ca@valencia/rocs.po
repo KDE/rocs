@@ -441,7 +441,7 @@ msgstr "Projectes recents"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project As..."
-msgstr "Guarda el projecte com a…"
+msgstr "Anomena i guarda el projecte…"
 
 #: ui/mainwindow.cpp:284
 #, kde-format
@@ -505,7 +505,7 @@ msgstr "sense títol"
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Project As"
-msgstr "Guarda el projecte com a"
+msgstr "Anomeneu i guardeu el projecte"
 
 #: ui/mainwindow.cpp:375
 #, kde-format
