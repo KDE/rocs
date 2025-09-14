@@ -419,7 +419,7 @@ msgstr "Projectes recents"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project As..."
-msgstr "Guarda el projecte com a…"
+msgstr "Anomena i guarda el projecte…"
 
 #: ui/mainwindow.cpp:276
 #, kde-format
@@ -483,7 +483,7 @@ msgstr "sense títol"
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Project As"
-msgstr "Guarda el projecte com a"
+msgstr "Anomeneu i guardeu el projecte"
 
 #: ui/mainwindow.cpp:366
 #, kde-format
@@ -590,11 +590,3 @@ msgstr "Barra d'eines lateral"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Canvia la vista «%1»."
-
-#~ msgctxt "@action:intoolbar Open Debugger"
-#~ msgid "Debugger"
-#~ msgstr "Depurador"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Open the Javascript code debugger."
-#~ msgstr "Obri el depurador de codi JavaScript."

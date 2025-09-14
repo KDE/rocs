@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2025-08-14 09:01+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -1316,73 +1316,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Liste des nœuds pour lesquels les distances doivent être calculées."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Arête"
+msgid "Select & Move"
+msgstr "Sélectionner & déplacer"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Propriété d'arête"
+msgid "Select and move elements on the scene"
+msgstr "Sélectionner et déplacer un élément de la vue"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Type d'arête"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Propriété du type d'arête"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Sommet"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Propriété de sommet"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Type de sommet"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Propriété du type de sommet"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Créer une arête"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Créer un sommet"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Ajouter un sommet à la vue"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Créer une arête"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Créer une arête entre deux sommets"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Supprimer l'élément"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Sélectionner & déplacer"
+msgid "Delete element from scene"
+msgstr "Supprimer l'élément de la vue"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Arête"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Propriété d'arête"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Type d'arête"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Propriété du type d'arête"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Sommet"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Propriété de sommet"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Type de sommet"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Propriété du type de sommet"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1411,18 +1415,6 @@ msgstr "Sélectionner & déplacer"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Exécution terminée</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Créer une arête entre deux sommets"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Ajouter un sommet à la vue"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Supprimer l'élément de la vue"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Sélectionner et déplacer un élément de la vue"
 
 #~ msgid "Identifier"
 #~ msgstr "Identifiant"

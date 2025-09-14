@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2025-08-13 08:46+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1315,74 +1315,85 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Llista de nodes als quals s'ha de calcular la distància."
 
-#: models/edgemodel.cpp:141
+# What selected? And how many?
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Aresta"
+msgid "Select & Move"
+msgstr "Tria i mou"
 
-#: models/edgepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Propietats de l'aresta"
+#: org/kde/rocs/Scene.qml:60
+#, fuzzy, kde-format
+#| msgid "Select the node type for node elements of the generated graph."
+msgid "Select and move elements on the scene"
+msgstr "Trieu el tipus de node per als elements de node del graf generat."
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Tipus d'aresta"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Propietats del tipus d'aresta"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Node"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Propietats del node"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Tipus de node"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Propietats del tipus de node"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Crea una aresta"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Crea un node"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, fuzzy, kde-format
+#| msgctxt "Scripting API"
+#| msgid "Start node of the edge."
+msgid "Add a node to the scene"
+msgstr "Node d'inici de l'aresta."
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Crea una aresta"
+
+#: org/kde/rocs/Scene.qml:89
+#, fuzzy, kde-format
+#| msgctxt "Scripting API"
+#| msgid "Create edge between the given nodes of default edge type."
+msgid "Create an edge between two nodes"
+msgstr ""
+"Crea una aresta entre els nodes donats amb el tipus d'aresta predeterminada."
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Suprimix l'element"
 
-# What selected? And how many?
-#: qml/SelectMoveAction.qml:11
-#, kde-format
-msgid "Select & Move"
-msgstr "Tria i mou"
+#: org/kde/rocs/Scene.qml:97
+#, fuzzy, kde-format
+#| msgid "Delete Element"
+msgid "Delete element from scene"
+msgstr "Suprimix l'element"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Aresta"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Propietats de l'aresta"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Tipus d'aresta"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Propietats del tipus d'aresta"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Node"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Propietats del node"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Tipus de node"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Propietats del tipus de node"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"

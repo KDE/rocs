@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2025-08-13 08:24+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -1308,73 +1308,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Lista med noder för vilka avstånd ska beräknas."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Båge"
+msgid "Select & Move"
+msgstr "Markera och flytta"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Bågegenskap"
+msgid "Select and move elements on the scene"
+msgstr "Markera och flytta element på scenen"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Bågtyp"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Bågtypegenskap"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Nod"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Nodegenskap"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Nodtyp"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Nodtypegenskaper"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Skapa båge"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Skapa nod"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Lägg till en nod i scenen"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Skapa båge"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Skapar en båge mellan två noder"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Ta bort element"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Markera och flytta"
+msgid "Delete element from scene"
+msgstr "Ta bort element från scenen"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Båge"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Bågegenskap"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Bågtyp"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Bågtypegenskap"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Nod"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Nodegenskap"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Nodtyp"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Nodtypegenskaper"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1401,18 +1405,6 @@ msgstr "Markera och flytta"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Körning klar</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Skapar en båge mellan två noder"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Lägg till en nod i scenen"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Ta bort element från scenen"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Markera och flytta element på scenen"
 
 #~ msgid "Identifier"
 #~ msgstr "Identifierare"

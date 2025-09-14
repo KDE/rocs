@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2010-01-20 00:03+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Română <kde-i18n-ro@kde.org>\n"
@@ -1326,93 +1326,99 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-#: models/edgemodel.cpp:141
-#, fuzzy, kde-format
-#| msgid "Edge style"
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Stil muchie"
-
-#: models/edgepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Proprietăți muchie"
-
-#: models/edgetypemodel.cpp:190
-#, fuzzy, kde-format
-#| msgid "Edge style"
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Stil muchie"
-
-#: models/edgetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Proprietăți muchie"
-
-#: models/nodemodel.cpp:142
-#, fuzzy, kde-format
-#| msgid "Nodes:"
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Noduri:"
-
-#: models/nodepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Proprietăți nod"
-
-#: models/nodetypemodel.cpp:188
-#, fuzzy, kde-format
-#| msgid "Node size"
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Dimensiune nod"
-
-#: models/nodetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Proprietăți nod"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr ""
-
-#: qml/AddNodeAction.qml:10
-#, kde-format
-msgid "Create Node"
-msgstr ""
-
-#: qml/DeleteAction.qml:10
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgid "Delete Element"
-msgstr "Proprietăți nod"
-
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:58
 #, fuzzy, kde-format
 #| msgid "Select"
 msgid "Select & Move"
 msgstr "Alege"
 
-#, fuzzy
-#~| msgid "Creates a new edge between 2 nodes"
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Creează o nouă muchie între două noduri"
+#: org/kde/rocs/Scene.qml:60
+#, fuzzy, kde-format
+#| msgid "Align on the center"
+msgid "Select and move elements on the scene"
+msgstr "Aliniază pe centru"
+
+#: org/kde/rocs/Scene.qml:67
+#, kde-format
+msgid "Create Node"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:70
+#, fuzzy, kde-format
+#| msgid "Align on the center"
+msgid "Add a node to the scene"
+msgstr "Aliniază pe centru"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:89
+#, fuzzy, kde-format
+#| msgid "Creates a new edge between 2 nodes"
+msgid "Create an edge between two nodes"
+msgstr "Creează o nouă muchie între două noduri"
+
+#: org/kde/rocs/Scene.qml:94
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Delete Element"
+msgstr "Proprietăți nod"
+
+#: org/kde/rocs/Scene.qml:97
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Delete element from scene"
+msgstr "Proprietăți nod"
 
 #, fuzzy
-#~| msgid "Align on the center"
-#~ msgid "Add a node to the scene"
-#~ msgstr "Aliniază pe centru"
+#~| msgid "Edge style"
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Stil muchie"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Proprietăți muchie"
+
+#, fuzzy
+#~| msgid "Edge style"
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Stil muchie"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Proprietăți muchie"
+
+#, fuzzy
+#~| msgid "Nodes:"
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Noduri:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Proprietăți nod"
+
+#, fuzzy
+#~| msgid "Node size"
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Dimensiune nod"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Proprietăți nod"
 
 #, fuzzy
 #~| msgid "Color:"

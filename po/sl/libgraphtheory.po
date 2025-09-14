@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2025-08-14 07:35+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1304,73 +1304,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Seznam vozlišč, do katerih bo izračunana razdalja."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Povezava"
+msgid "Select & Move"
+msgstr "Izberi in premakni"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "LastnostPovezave"
+msgid "Select and move elements on the scene"
+msgstr "Izberi in premakni predmete na sceni"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Vrsta povezave"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "LastnostVrstePovezave"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Vozlišče"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "LastnostVozlišča"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Vrsta vozlišča"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "LastnostVrsteVozlišča"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Ustvari povezavo"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Ustvari vozlišče"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Sceni dodaj vozlišče"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Ustvari povezavo"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Ustvari povezavo med dvema vozliščema"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Izbriši predmet"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Izberi in premakni"
+msgid "Delete element from scene"
+msgstr "Izbriši predmet s scene"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Povezava"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "LastnostPovezave"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Vrsta povezave"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "LastnostVrstePovezave"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Vozlišče"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "LastnostVozlišča"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Vrsta vozlišča"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "LastnostVrsteVozlišča"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1397,18 +1401,6 @@ msgstr "Izberi in premakni"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Izvajanje zaključeno</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Ustvari povezavo med dvema vozliščema"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Sceni dodaj vozlišče"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Izbriši predmet s scene"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Izberi in premakni predmete na sceni"
 
 #~ msgid "Identifier"
 #~ msgstr "Določilnik"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2025-08-21 18:28+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -1316,73 +1316,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Lista dei nodi di cui calcolare le distanze."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Arco"
+msgid "Select & Move"
+msgstr "Seleziona e sposta"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Proprietà dell'arco"
+msgid "Select and move elements on the scene"
+msgstr "Seleziona e sposta elementi sulla scena"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Tipo di arco"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Proprietà del tipo di arco"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Nodo"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Proprietà del nodo"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Tipo di nodo"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Proprietà del tipo di nodo"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Crea arco"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Crea nodo"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Aggiungi un nuovo nodo alla scena"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Crea arco"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Crea un arco tra due nodi"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Elimina elemento"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Seleziona e sposta"
+msgid "Delete element from scene"
+msgstr "Elimina elemento dalla scena"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Arco"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Proprietà dell'arco"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Tipo di arco"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Proprietà del tipo di arco"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Nodo"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Proprietà del nodo"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Tipo di nodo"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Proprietà del tipo di nodo"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1409,18 +1413,6 @@ msgstr "Seleziona e sposta"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Esecuzione conclusa</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Crea un arco tra due nodi"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Aggiungi un nuovo nodo alla scena"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Elimina elemento dalla scena"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Seleziona e sposta elementi sulla scena"
 
 #~ msgid "Identifier"
 #~ msgstr "Identificativo"

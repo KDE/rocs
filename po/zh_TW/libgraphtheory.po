@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2019-11-26 21:23+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -1305,73 +1305,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "邊緣"
+msgid "Select & Move"
+msgstr "選擇並移動"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "邊緣屬性"
+msgid "Select and move elements on the scene"
+msgstr "在場景選擇與移動項目"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "邊緣型態"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "邊緣型態屬性"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "節點"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "節點屬性"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "節點型態"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "節點型態屬性"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "建立邊緣"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "建立節點"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "新增節點到此場景"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "建立邊緣"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "在兩個節點間建立新邊緣"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "刪除元素"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "選擇並移動"
+msgid "Delete element from scene"
+msgstr "從場景刪除元素"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "邊緣"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "邊緣屬性"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "邊緣型態"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "邊緣型態屬性"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "節點"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "節點屬性"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "節點型態"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "節點型態屬性"
 
 #, fuzzy
 #~| msgid "Plugin Error"
@@ -1400,18 +1404,6 @@ msgstr "選擇並移動"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>執行已完成</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "在兩個節點間建立新邊緣"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "新增節點到此場景"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "從場景刪除元素"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "在場景選擇與移動項目"
 
 #~ msgid "Identifier"
 #~ msgstr "識別子"

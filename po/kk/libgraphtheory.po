@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2013-09-14 04:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -1435,103 +1435,104 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-#: models/edgemodel.cpp:141
-#, fuzzy, kde-format
-#| msgid "Edges"
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Қырлар"
-
-#: models/edgepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Қырының қасиеттері"
-
-#: models/edgetypemodel.cpp:190
-#, fuzzy, kde-format
-#| msgid "Edge style"
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Қырының стилі"
-
-#: models/edgetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Қырының қасиеттері"
-
-#: models/nodemodel.cpp:142
-#, fuzzy, kde-format
-#| msgid "Nodes"
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Төбелер"
-
-#: models/nodepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Төбенің қасиеттері"
-
-#: models/nodetypemodel.cpp:188
-#, fuzzy, kde-format
-#| msgid "Pointer Types"
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Көрсеткіш түрлері"
-
-#: models/nodetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Төбенің қасиеттері"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr ""
-
-#: qml/AddNodeAction.qml:10
-#, kde-format
-msgid "Create Node"
-msgstr ""
-
-#: qml/DeleteAction.qml:10
-#, fuzzy, kde-format
-#| msgid "Element"
-msgid "Delete Element"
-msgstr "Элемент"
-
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:58
 #, fuzzy, kde-format
 #| msgid "Selected"
 msgid "Select & Move"
 msgstr "Таңдалғанды"
 
+#: org/kde/rocs/Scene.qml:60
+#, fuzzy, kde-format
+#| msgid "Select and move items."
+msgid "Select and move elements on the scene"
+msgstr "Бірдемені таңдап алып жылжыту."
+
+#: org/kde/rocs/Scene.qml:67
+#, kde-format
+msgid "Create Node"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:70
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Add a new property to the connection."
+msgid "Add a node to the scene"
+msgstr "Байланысқа жаңа қасиетті қосу."
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:89
+#, fuzzy, kde-format
+#| msgid "Creates a new edge between 2 nodes"
+msgid "Create an edge between two nodes"
+msgstr "Екі төбе арасындағы қырын құру"
+
+#: org/kde/rocs/Scene.qml:94
+#, fuzzy, kde-format
+#| msgid "Element"
+msgid "Delete Element"
+msgstr "Элемент"
+
+#: org/kde/rocs/Scene.qml:97
+#, fuzzy, kde-format
+#| msgid "Select and move items."
+msgid "Delete element from scene"
+msgstr "Бірдемені таңдап алып жылжыту."
+
+#, fuzzy
+#~| msgid "Edges"
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Қырлар"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Қырының қасиеттері"
+
+#, fuzzy
+#~| msgid "Edge style"
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Қырының стилі"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Қырының қасиеттері"
+
+#, fuzzy
+#~| msgid "Nodes"
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Төбелер"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Төбенің қасиеттері"
+
+#, fuzzy
+#~| msgid "Pointer Types"
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Көрсеткіш түрлері"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Төбенің қасиеттері"
+
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Орындау аяқталды</i>"
-
-#, fuzzy
-#~| msgid "Creates a new edge between 2 nodes"
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Екі төбе арасындағы қырын құру"
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Add a new property to the connection."
-#~ msgid "Add a node to the scene"
-#~ msgstr "Байланысқа жаңа қасиетті қосу."
-
-#, fuzzy
-#~| msgid "Select and move items."
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Бірдемені таңдап алып жылжыту."
 
 #, fuzzy
 #~| msgid "Identifier:"

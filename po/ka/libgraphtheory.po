@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2025-08-13 08:06+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -1299,73 +1299,80 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "კვანძების სია, რომლებამდე მანძილიც უნდა გამოითვალოს."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "კუთხე"
+msgid "Select & Move"
+msgstr "მონიშნეთ & გადაიტანეთ"
 
-#: models/edgepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "წიბოსთვისება"
+#: org/kde/rocs/Scene.qml:60
+#, fuzzy, kde-format
+#| msgid "Delete element from scene"
+msgid "Select and move elements on the scene"
+msgstr "ელემენტის წაშლა სცენიდან"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "კიდის ტიპი"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "წიბოსტიპისთვისება"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "კვანძი"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "კვანძისთვისება"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "კვანძის ტიპი"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "კვანძისტიპისთვისება"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "კიდის შექმნა"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "კვანძის შექმნა"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "სცენისთვის კვანძის დამატება"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "კიდის შექმნა"
+
+#: org/kde/rocs/Scene.qml:89
+#, fuzzy, kde-format
+#| msgctxt "Scripting API"
+#| msgid "Create edge between the given nodes of default edge type."
+msgid "Create an edge between two nodes"
+msgstr "წიბოს შექმნა ნაგულისხმევი წიბოს ტიპის მითითებულ კვანძებს შორის."
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "ელემენტის წაშლა"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "მონიშნეთ & გადაიტანეთ"
+msgid "Delete element from scene"
+msgstr "ელემენტის წაშლა სცენიდან"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "კუთხე"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "წიბოსთვისება"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "კიდის ტიპი"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "წიბოსტიპისთვისება"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "კვანძი"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "კვანძისთვისება"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "კვანძის ტიპი"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "კვანძისტიპისთვისება"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1384,9 +1391,3 @@ msgstr "მონიშნეთ & გადაიტანეთ"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>შესრულება დასრულდა</i>"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "სცენისთვის კვანძის დამატება"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "ელემენტის წაშლა სცენიდან"

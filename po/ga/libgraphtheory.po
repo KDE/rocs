@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2009-03-25 09:41-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -1308,83 +1308,96 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-# makes more sense than "ciumhaiseanna"
-#: models/edgemodel.cpp:141
-#, fuzzy, kde-format
-#| msgid "Edges"
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Naisc"
-
-#: models/edgepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Airíonna Naisc"
-
-#: models/edgetypemodel.cpp:190
-#, fuzzy, kde-format
-#| msgid "Edge style"
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Stíl an naisc"
-
-#: models/edgetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Airíonna Naisc"
-
-#: models/nodemodel.cpp:142
-#, fuzzy, kde-format
-#| msgid "Nodes"
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Nóid"
-
-#: models/nodepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Airíonna Nóid"
-
-#: models/nodetypemodel.cpp:188
-#, fuzzy, kde-format
-#| msgid "Node name"
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Kevin Scannell"
-
-#: models/nodetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Airíonna Nóid"
-
-#: qml/AddEdgeAction.qml:25
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgid "Create Edge"
+msgid "Select & Move"
 msgstr ""
 
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:60
+#, kde-format
+msgid "Select and move elements on the scene"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr ""
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:94
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgid "Delete Element"
 msgstr "Scrios"
 
-#: qml/SelectMoveAction.qml:11
-#, kde-format
-msgid "Select & Move"
-msgstr ""
+#: org/kde/rocs/Scene.qml:97
+#, fuzzy, kde-format
+#| msgid "Delete"
+msgid "Delete element from scene"
+msgstr "Scrios"
+
+# makes more sense than "ciumhaiseanna"
+#, fuzzy
+#~| msgid "Edges"
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Naisc"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Airíonna Naisc"
+
+#, fuzzy
+#~| msgid "Edge style"
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Stíl an naisc"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Airíonna Naisc"
+
+#, fuzzy
+#~| msgid "Nodes"
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Nóid"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Airíonna Nóid"
+
+#, fuzzy
+#~| msgid "Node name"
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Kevin Scannell"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Airíonna Nóid"
 
 #, fuzzy
 #~| msgid "Color:"

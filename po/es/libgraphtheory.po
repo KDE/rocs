@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2025-08-13 18:30+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -1317,73 +1317,84 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Lista de nodos para los que se deben calcular las distancias."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Arista"
+msgid "Select & Move"
+msgstr "Seleccionar y mover"
 
-#: models/edgepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Propiedad de la arista"
+#: org/kde/rocs/Scene.qml:60
+#, fuzzy, kde-format
+#| msgid "Select the node type for node elements of the generated graph."
+msgid "Select and move elements on the scene"
+msgstr ""
+"Seleccionar el tipo de nodo para los elementos de nodo del grafo generado."
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Tipo de arista"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Propiedad del tipo de arista"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Nodo"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Propiedad del nodo"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Tipo de nodo"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Propiedad del tipo de nodo"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Crear arista"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Crear nodo"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, fuzzy, kde-format
+#| msgctxt "Scripting API"
+#| msgid "Start node of the edge."
+msgid "Add a node to the scene"
+msgstr "Nodo de inicio de la arista."
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Crear arista"
+
+#: org/kde/rocs/Scene.qml:89
+#, fuzzy, kde-format
+#| msgctxt "Scripting API"
+#| msgid "Create edge between the given nodes of default edge type."
+msgid "Create an edge between two nodes"
+msgstr "Crear una arista del tipo por omisión entre dos nodos indicados."
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Borrar elemento"
 
-#: qml/SelectMoveAction.qml:11
-#, kde-format
-msgid "Select & Move"
-msgstr "Seleccionar y mover"
+#: org/kde/rocs/Scene.qml:97
+#, fuzzy, kde-format
+#| msgid "Delete Element"
+msgid "Delete element from scene"
+msgstr "Borrar elemento"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Arista"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Propiedad de la arista"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Tipo de arista"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Propiedad del tipo de arista"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Nodo"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Propiedad del nodo"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Tipo de nodo"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Propiedad del tipo de nodo"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"

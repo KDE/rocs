@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2019-11-13 13:08+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -1330,73 +1330,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Tippude loend, milleni kaugused arvutada."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Seos"
+msgid "Select & Move"
+msgstr "Vali ja liiguta"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Seose omadus"
+msgid "Select and move elements on the scene"
+msgstr "Elementide valimine ja liigutamine"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Seose tüüp"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Seose tüübi omadus"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Tipp"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Tipu omadus"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Tipu tüüp"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Tipu tüübi omadus"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Loo seos"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Loo tipp"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Tipu lisamine"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Loo seos"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Seose loomine kahe tipu vahele"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Kustuta element"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Vali ja liiguta"
+msgid "Delete element from scene"
+msgstr "Elemendi kustutamine"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Seos"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Seose omadus"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Seose tüüp"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Seose tüübi omadus"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Tipp"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Tipu omadus"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Tipu tüüp"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Tipu tüübi omadus"
 
 #, fuzzy
 #~| msgid "Plugin Error"
@@ -1425,18 +1429,6 @@ msgstr "Vali ja liiguta"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Täitmine lõpetati</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Seose loomine kahe tipu vahele"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Tipu lisamine"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Elemendi kustutamine"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Elementide valimine ja liigutamine"
 
 #~ msgid "Identifier"
 #~ msgstr "Identifikaator"

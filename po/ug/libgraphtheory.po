@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -1307,86 +1307,99 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-#: models/edgemodel.cpp:141
-#, fuzzy, kde-format
-#| msgctxt "@action:intoolbar"
-#| msgid "Add Edge"
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "گىرۋەك قوش"
-
-#: models/edgepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Property"
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "خاسلىق"
-
-#: models/edgetypemodel.cpp:190
-#, fuzzy, kde-format
-#| msgid "Type"
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "تىپى"
-
-#: models/edgetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Property"
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "خاسلىق"
-
-#: models/nodemodel.cpp:142
-#, fuzzy, kde-format
-#| msgid "Nodes"
-msgctxt "@title:column"
-msgid "Node"
-msgstr "تۈگۈنلەر"
-
-#: models/nodepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Property"
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "خاسلىق"
-
-#: models/nodetypemodel.cpp:188
-#, fuzzy, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Pointer Types"
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "خاسلىق"
-
-#: models/nodetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Property"
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "خاسلىق"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr ""
-
-#: qml/AddNodeAction.qml:10
-#, kde-format
-msgid "Create Node"
-msgstr ""
-
-#: qml/DeleteAction.qml:10
-#, fuzzy, kde-format
-#| msgid "Element"
-msgid "Delete Element"
-msgstr "ئېلېمېنت"
-
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:58
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "Selected"
 msgid "Select & Move"
 msgstr "تاللانغان"
+
+#: org/kde/rocs/Scene.qml:60
+#, kde-format
+msgid "Select and move elements on the scene"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:67
+#, kde-format
+msgid "Create Node"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:94
+#, fuzzy, kde-format
+#| msgid "Element"
+msgid "Delete Element"
+msgstr "ئېلېمېنت"
+
+#: org/kde/rocs/Scene.qml:97
+#, fuzzy, kde-format
+#| msgid "Element"
+msgid "Delete element from scene"
+msgstr "ئېلېمېنت"
+
+#, fuzzy
+#~| msgctxt "@action:intoolbar"
+#~| msgid "Add Edge"
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "گىرۋەك قوش"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "خاسلىق"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "تىپى"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "خاسلىق"
+
+#, fuzzy
+#~| msgid "Nodes"
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "تۈگۈنلەر"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "خاسلىق"
+
+#, fuzzy
+#~| msgctxt "@title:tab"
+#~| msgid "Pointer Types"
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "خاسلىق"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "خاسلىق"
 
 #, fuzzy
 #~| msgid "Color:"

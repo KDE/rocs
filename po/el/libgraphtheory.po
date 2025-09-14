@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2021-07-08 11:33+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -1346,73 +1346,77 @@ msgstr ""
 "Η λίστα των κόμβων για τους οποίους πρέπει να γίνει υπολογισμός των "
 "αποστάσεων."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Ακμή"
+msgid "Select & Move"
+msgstr "Επιλογή & μετακίνηση"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Ιδιότητα ακμής"
+msgid "Select and move elements on the scene"
+msgstr "Επιλογή και μετακίνηση αντικειμένων στη σκηνή"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Τύπος ακμής"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Ιδιότητα τύπου ακμής"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Κόμβος"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Ιδιότητα κόμβου"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Τύπος κόμβου"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Ιδιότητα τύπου κόμβου"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Δημιουργία ακμής"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Δημιουργία κόμβου"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Προσθήκη κόμβου στη σκηνή"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Δημιουργία ακμής"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Δημιουργία ακμής μεταξύ δύο κόμβων"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Διαγραφή αντικειμένου"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Επιλογή & μετακίνηση"
+msgid "Delete element from scene"
+msgstr "Διαγραφή αντικειμένου από τη σκηνή"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Ακμή"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Ιδιότητα ακμής"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Τύπος ακμής"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Ιδιότητα τύπου ακμής"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Κόμβος"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Ιδιότητα κόμβου"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Τύπος κόμβου"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Ιδιότητα τύπου κόμβου"
 
 #, fuzzy
 #~| msgid "Plugin Error"
@@ -1441,18 +1445,6 @@ msgstr "Επιλογή & μετακίνηση"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Η εκτέλεση ολοκληρώθηκε</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Δημιουργία ακμής μεταξύ δύο κόμβων"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Προσθήκη κόμβου στη σκηνή"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Διαγραφή αντικειμένου από τη σκηνή"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Επιλογή και μετακίνηση αντικειμένων στη σκηνή"
 
 #~ msgid "Identifier"
 #~ msgstr "Αναγνωριστικό"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2025-08-29 09:26-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -1312,73 +1312,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Lista dos nós aos quais podem ser calculadas as distâncias."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Borda"
+msgid "Select & Move"
+msgstr "Selecionar e mover"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Propriedades da borda"
+msgid "Select and move elements on the scene"
+msgstr "Seleciona e move os elementos da cena"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Tipo de borda"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Propriedades do tipo de borda"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Nó"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Propriedades do nó"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Tipo do nó"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Propriedades do tipo do nó"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Criar borda"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Criar nó"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Adicionar um nó à cena"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Criar borda"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Criar uma borda entre dois nós"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Excluir elemento"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Selecionar e mover"
+msgid "Delete element from scene"
+msgstr "Excluir o elemento da cena"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Borda"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Propriedades da borda"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Tipo de borda"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Propriedades do tipo de borda"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Nó"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Propriedades do nó"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Tipo do nó"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Propriedades do tipo do nó"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1405,18 +1409,6 @@ msgstr "Selecionar e mover"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Execução concluída</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Criar uma borda entre dois nós"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Adicionar um nó à cena"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Excluir o elemento da cena"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Seleciona e move os elementos da cena"
 
 #~ msgid "Identifier"
 #~ msgstr "Identificador"

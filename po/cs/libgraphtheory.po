@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2023-02-03 11:45+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -1245,73 +1245,64 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Hrana"
-
-#: models/edgepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
+msgid "Select & Move"
 msgstr ""
 
-#: models/edgetypemodel.cpp:190
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Typ hrany"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
+msgid "Select and move elements on the scene"
 msgstr ""
 
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Uzel"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr ""
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Typ uzlu"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr ""
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Vytvořit hranu"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Vytvořit uzel"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Vytvořit hranu"
+
+#: org/kde/rocs/Scene.qml:89
+#, fuzzy, kde-format
+#| msgctxt "Scripting API"
+#| msgid "Create edge between the given nodes of default edge type."
+msgid "Create an edge between two nodes"
+msgstr "Vytvořit hranu mezi danými uzly výchozího typu hrany."
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Smazat prvek"
 
-#: qml/SelectMoveAction.qml:11
-#, kde-format
-msgid "Select & Move"
-msgstr ""
+#: org/kde/rocs/Scene.qml:97
+#, fuzzy, kde-format
+#| msgid "Delete Element"
+msgid "Delete element from scene"
+msgstr "Smazat prvek"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Hrana"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Typ hrany"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Uzel"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Typ uzlu"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"

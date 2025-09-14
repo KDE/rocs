@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2011-05-12 22:44+0700\n"
 "Last-Translator: Phuwanat Sakornsakolpat <narachai@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -1333,93 +1333,99 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-#: models/edgemodel.cpp:141
-#, fuzzy, kde-format
-#| msgid "Nodes:"
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "โหนด:"
-
-#: models/edgepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Property"
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "คุณสมบัติ"
-
-#: models/edgetypemodel.cpp:190
-#, fuzzy, kde-format
-#| msgid "Type"
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "ชนิด"
-
-#: models/edgetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Property"
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "คุณสมบัติ"
-
-#: models/nodemodel.cpp:142
-#, fuzzy, kde-format
-#| msgid "Nodes:"
-msgctxt "@title:column"
-msgid "Node"
-msgstr "โหนด:"
-
-#: models/nodepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "คุณสมบัติของโหนด"
-
-#: models/nodetypemodel.cpp:188
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "คุณสมบัติของโหนด"
-
-#: models/nodetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "คุณสมบัติของโหนด"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr ""
-
-#: qml/AddNodeAction.qml:10
-#, kde-format
-msgid "Create Node"
-msgstr ""
-
-#: qml/DeleteAction.qml:10
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgid "Delete Element"
-msgstr "คุณสมบัติของโหนด"
-
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:58
 #, fuzzy, kde-format
 #| msgid "Select"
 msgid "Select & Move"
 msgstr "เลือก"
 
-#, fuzzy
-#~| msgid "Creates a new edge between 2 nodes"
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "สร้างขอบใหม่ระหว่าง 2 จุด"
+#: org/kde/rocs/Scene.qml:60
+#, fuzzy, kde-format
+#| msgid "Align on the center"
+msgid "Select and move elements on the scene"
+msgstr "จัดไว้ตรงกลาง"
+
+#: org/kde/rocs/Scene.qml:67
+#, kde-format
+msgid "Create Node"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:70
+#, fuzzy, kde-format
+#| msgid "Align on the center"
+msgid "Add a node to the scene"
+msgstr "จัดไว้ตรงกลาง"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:89
+#, fuzzy, kde-format
+#| msgid "Creates a new edge between 2 nodes"
+msgid "Create an edge between two nodes"
+msgstr "สร้างขอบใหม่ระหว่าง 2 จุด"
+
+#: org/kde/rocs/Scene.qml:94
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Delete Element"
+msgstr "คุณสมบัติของโหนด"
+
+#: org/kde/rocs/Scene.qml:97
+#, fuzzy, kde-format
+#| msgid "Node Properties"
+msgid "Delete element from scene"
+msgstr "คุณสมบัติของโหนด"
 
 #, fuzzy
-#~| msgid "Align on the center"
-#~ msgid "Add a node to the scene"
-#~ msgstr "จัดไว้ตรงกลาง"
+#~| msgid "Nodes:"
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "โหนด:"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "คุณสมบัติ"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "ชนิด"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "คุณสมบัติ"
+
+#, fuzzy
+#~| msgid "Nodes:"
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "โหนด:"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "คุณสมบัติของโหนด"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "คุณสมบัติของโหนด"
 
 #, fuzzy
 #~| msgid "Color:"

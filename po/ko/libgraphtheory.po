@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2022-05-07 02:17+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1299,73 +1299,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "거리를 계산할 꼭짓점 목록입니다."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "변"
+msgid "Select & Move"
+msgstr "선택과 이동"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "변속성"
+msgid "Select and move elements on the scene"
+msgstr "장면의 원소를 선택하고 이동"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "변 형식"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "변형식속성"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "꼭짓점"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "꼭짓점속성"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "꼭짓점형식"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "꼭짓점형식속성"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "변 만들기"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "꼭짓점 만들기"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "장면에 꼭짓점 추가"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "변 만들기"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "두 꼭짓점을 잇는 변 만들기"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "원소 삭제"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "선택과 이동"
+msgid "Delete element from scene"
+msgstr "장면에서 원소 삭제"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "변"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "변속성"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "변 형식"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "변형식속성"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "꼭짓점"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "꼭짓점속성"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "꼭짓점형식"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "꼭짓점형식속성"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1392,18 +1396,6 @@ msgstr "선택과 이동"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>실행 완료됨</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "두 꼭짓점을 잇는 변 만들기"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "장면에 꼭짓점 추가"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "장면에서 원소 삭제"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "장면의 원소를 선택하고 이동"
 
 #~ msgid "Identifier"
 #~ msgstr "식별자"

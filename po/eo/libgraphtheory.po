@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2023-11-26 20:12+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -1299,73 +1299,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Listo de nodoj al kiuj la distancoj devas esti kalkulitaj."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Eĝo"
+msgid "Select & Move"
+msgstr "Elekti & Movi"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "EĝTrajto"
+msgid "Select and move elements on the scene"
+msgstr "Elekti kaj movi elementojn sur la sceno"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Eĝotipo"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "EĝTipTrajto"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Nodo"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "NodoTrajto"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Noda Tipo"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "NodTipTrajto"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Krei Eĝon"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Krei Nodon"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Aldoni nodon al la sceno"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Krei Eĝon"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Krei eĝon inter du nodoj"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Forigi Elementon"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Elekti & Movi"
+msgid "Delete element from scene"
+msgstr "Forigi elementon de sceno"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Eĝo"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "EĝTrajto"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Eĝotipo"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "EĝTipTrajto"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Nodo"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "NodoTrajto"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Noda Tipo"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "NodTipTrajto"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1392,15 +1396,3 @@ msgstr "Elekti & Movi"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Efektivigo Finita</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Krei eĝon inter du nodoj"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Aldoni nodon al la sceno"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Forigi elementon de sceno"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Elekti kaj movi elementojn sur la sceno"

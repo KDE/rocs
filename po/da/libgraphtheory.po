@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2015-12-08 19:58+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -1441,103 +1441,104 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-#: models/edgemodel.cpp:141
-#, fuzzy, kde-format
-#| msgid "Edges"
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Kanter"
-
-#: models/edgepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Kantegenskaber"
-
-#: models/edgetypemodel.cpp:190
-#, fuzzy, kde-format
-#| msgid "Edge style"
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Kantstil"
-
-#: models/edgetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Kantegenskaber"
-
-#: models/nodemodel.cpp:142
-#, fuzzy, kde-format
-#| msgid "Nodes"
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Knuder"
-
-#: models/nodepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Knudens egenskaber"
-
-#: models/nodetypemodel.cpp:188
-#, fuzzy, kde-format
-#| msgid "Pointer Types"
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Pointertyper"
-
-#: models/nodetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Knudens egenskaber"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr ""
-
-#: qml/AddNodeAction.qml:10
-#, kde-format
-msgid "Create Node"
-msgstr ""
-
-#: qml/DeleteAction.qml:10
-#, fuzzy, kde-format
-#| msgid "Element"
-msgid "Delete Element"
-msgstr "Element"
-
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:58
 #, fuzzy, kde-format
 #| msgid "Selected"
 msgid "Select & Move"
 msgstr "Markeret"
 
+#: org/kde/rocs/Scene.qml:60
+#, fuzzy, kde-format
+#| msgid "Select and move items."
+msgid "Select and move elements on the scene"
+msgstr "Vælg og flyt elementer."
+
+#: org/kde/rocs/Scene.qml:67
+#, kde-format
+msgid "Create Node"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:70
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Add a new property to the connection."
+msgid "Add a node to the scene"
+msgstr "Føj en ny egenskab til forbindelsen."
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:89
+#, fuzzy, kde-format
+#| msgid "Creates a new edge between 2 nodes"
+msgid "Create an edge between two nodes"
+msgstr "Opretter en ny kant imellem 2 knuder"
+
+#: org/kde/rocs/Scene.qml:94
+#, fuzzy, kde-format
+#| msgid "Element"
+msgid "Delete Element"
+msgstr "Element"
+
+#: org/kde/rocs/Scene.qml:97
+#, fuzzy, kde-format
+#| msgid "Select and move items."
+msgid "Delete element from scene"
+msgstr "Vælg og flyt elementer."
+
+#, fuzzy
+#~| msgid "Edges"
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Kanter"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Kantegenskaber"
+
+#, fuzzy
+#~| msgid "Edge style"
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Kantstil"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Kantegenskaber"
+
+#, fuzzy
+#~| msgid "Nodes"
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Knuder"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Knudens egenskaber"
+
+#, fuzzy
+#~| msgid "Pointer Types"
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Pointertyper"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Knudens egenskaber"
+
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Kørsel afsluttet</i>"
-
-#, fuzzy
-#~| msgid "Creates a new edge between 2 nodes"
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Opretter en ny kant imellem 2 knuder"
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Add a new property to the connection."
-#~ msgid "Add a node to the scene"
-#~ msgstr "Føj en ny egenskab til forbindelsen."
-
-#, fuzzy
-#~| msgid "Select and move items."
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Vælg og flyt elementer."
 
 #~ msgid "Identifier"
 #~ msgstr "Identifikator"

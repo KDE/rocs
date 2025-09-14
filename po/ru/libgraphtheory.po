@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2021-11-23 10:31+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -1318,73 +1318,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Список вершин, для которых требуется рассчитать длину направления."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Рёбер"
+msgid "Select & Move"
+msgstr "Выделение и перемещение"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Свойство ребра"
+msgid "Select and move elements on the scene"
+msgstr "Выделить и переместить элементы на рабочей области"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Тип ребра"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Свойство типа ребра"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Вершин"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Свойство вершины"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Тип вершины"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Свойство типа вершины"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Добавить ребро"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Добавить вершину"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Добавить вершину на рабочую область"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Добавить ребро"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Добавить ребро между двумя вершинами"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Удалить элемент"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Выделение и перемещение"
+msgid "Delete element from scene"
+msgstr "Удалить элемент с рабочей области"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Рёбер"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Свойство ребра"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Тип ребра"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Свойство типа ребра"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Вершин"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Свойство вершины"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Тип вершины"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Свойство типа вершины"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1411,18 +1415,6 @@ msgstr "Выделение и перемещение"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Выполнение завершено</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Добавить ребро между двумя вершинами"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Добавить вершину на рабочую область"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Удалить элемент с рабочей области"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Выделить и переместить элементы на рабочей области"
 
 #~ msgid "Color"
 #~ msgstr "Цвет"

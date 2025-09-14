@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2022-02-16 20:35+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1362,73 +1362,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Väli"
+msgid "Select & Move"
+msgstr "Valitse ja siirrä"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Välin ominaisuus"
+msgid "Select and move elements on the scene"
+msgstr "Valitse ja siirrä alkioita graafialueella"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Välityyppi"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Välityypin ominaisuus"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Solmu"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Solmun ominaisuus"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Solmutyyppi"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Solmutyypin ominaisuus"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Luo väli"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Luo solmu"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Lisää solmu graafialueelle"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Luo väli"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Luo väli kahden solmun väliin"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Poista alkio"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Valitse ja siirrä"
+msgid "Delete element from scene"
+msgstr "Poista alkio graafialueelta"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Väli"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Välin ominaisuus"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Välityyppi"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Välityypin ominaisuus"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Solmu"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Solmun ominaisuus"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Solmutyyppi"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Solmutyypin ominaisuus"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1455,18 +1459,6 @@ msgstr "Valitse ja siirrä"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Suoritus valmis</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Luo väli kahden solmun väliin"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Lisää solmu graafialueelle"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Poista alkio graafialueelta"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Valitse ja siirrä alkioita graafialueella"
 
 #~ msgid "Identifier"
 #~ msgstr "Tunniste"

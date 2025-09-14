@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2021-11-10 09:51+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -1314,73 +1314,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Lista dos nós aos quais podem ser calculadas as distâncias."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Aresta"
+msgid "Select & Move"
+msgstr "Seleccionar & Mover"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Propriedade da Aresta"
+msgid "Select and move elements on the scene"
+msgstr "Seleccionar e mover os elementos na cena"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Tipo de Aresta"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Propriedade do Tipo de Aresta"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Nó"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Propriedade do Nó"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Tipo de Nó"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Propriedade do Tipo de Nó"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Criar uma Aresta"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Criar um Nó"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Adicionar um nó à cena"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Criar uma Aresta"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Criar uma aresta entre dois nós"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Apagar o Elemento"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Seleccionar & Mover"
+msgid "Delete element from scene"
+msgstr "Apagar o elemento da cena"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Aresta"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Propriedade da Aresta"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Tipo de Aresta"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Propriedade do Tipo de Aresta"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Nó"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Propriedade do Nó"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Tipo de Nó"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Propriedade do Tipo de Nó"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1407,15 +1411,3 @@ msgstr "Seleccionar & Mover"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Execução Terminada</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Criar uma aresta entre dois nós"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Adicionar um nó à cena"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Apagar o elemento da cena"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Seleccionar e mover os elementos na cena"

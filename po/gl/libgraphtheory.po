@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2023-08-06 05:21+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -1323,77 +1323,81 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Lista de vértices cuxas distancias deben calcularse."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Aresta"
+msgid "Select & Move"
+msgstr "Seleccionar e mover"
 
-# well-spelled: PropiedadeDeAresta
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "PropiedadeDeAresta"
+msgid "Select and move elements on the scene"
+msgstr "Seleccionar e mover elementos na escena."
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Tipo de aresta"
-
-# well-spelled: PropiedadeDeTipoDeAresta
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "PropiedadeDeTipoDeAresta"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Vértice"
-
-# well-spelled: PropiedadeDeVertice
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "PropiedadeDeVertice"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Tipo de vértice"
-
-# well-spelled: PropiedadeDeTipoDeVertice
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "PropiedadeDeTipoDeVertice"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Crear unha aresta"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Crear un vértice"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Engadir un vértice á escena"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Crear unha aresta"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Crear unha aresta entre dous vértices"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Eliminar o elemento"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Seleccionar e mover"
+msgid "Delete element from scene"
+msgstr "Eliminar o elemento seleccionado da escena."
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Aresta"
+
+# well-spelled: PropiedadeDeAresta
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "PropiedadeDeAresta"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Tipo de aresta"
+
+# well-spelled: PropiedadeDeTipoDeAresta
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "PropiedadeDeTipoDeAresta"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Vértice"
+
+# well-spelled: PropiedadeDeVertice
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "PropiedadeDeVertice"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Tipo de vértice"
+
+# well-spelled: PropiedadeDeTipoDeVertice
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "PropiedadeDeTipoDeVertice"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1420,18 +1424,6 @@ msgstr "Seleccionar e mover"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Execución rematada</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Crear unha aresta entre dous vértices"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Engadir un vértice á escena"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Eliminar o elemento seleccionado da escena."
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Seleccionar e mover elementos na escena."
 
 #~ msgid "Identifier"
 #~ msgstr "Identificador"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeedu-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2025-08-13 17:09+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -1309,73 +1309,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Düğümlerin mesafelerinin hesaplanacağı liste."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Kenar"
+msgid "Select & Move"
+msgstr "Seç ve Taşı"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "KenarÖzelliği"
+msgid "Select and move elements on the scene"
+msgstr "Nesneleri seç ve taşı"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Kenar Türü"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "KenarTürÖzelliği"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Düğüm"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "DüğümÖzelliği"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Düğüm Türü"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "DüğümTürÖzelliği"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Kenar Oluştur"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Düğüm Oluştur"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Bir düğüm ekle"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Kenar Oluştur"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "İki düğüm arasına bir kenar oluştur"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Ögeyi Sil"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Seç ve Taşı"
+msgid "Delete element from scene"
+msgstr "Ögeyi sahneden sil"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Kenar"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "KenarÖzelliği"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Kenar Türü"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "KenarTürÖzelliği"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Düğüm"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "DüğümÖzelliği"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Düğüm Türü"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "DüğümTürÖzelliği"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1402,15 +1406,3 @@ msgstr "Seç ve Taşı"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>Yürütme Tamamlandı</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "İki düğüm arasına bir kenar oluştur"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Bir düğüm ekle"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Ögeyi sahneden sil"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Nesneleri seç ve taşı"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2013-08-10 16:35+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1388,106 +1388,108 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
-#: models/edgemodel.cpp:141
-#, fuzzy, kde-format
-#| msgid "Edges"
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Élek"
-
-#: models/edgepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "Éltulajdonságok"
-
-#: models/edgetypemodel.cpp:190
-#, fuzzy, kde-format
-#| msgid "Edge style"
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Élstílus"
-
-#: models/edgetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "Éltulajdonságok"
-
-#: models/nodemodel.cpp:142
-#, fuzzy, kde-format
-#| msgid "Nodes"
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Csúcsok"
-
-#: models/nodepropertymodel.cpp:144
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "Csúcstulajdonságok"
-
-#: models/nodetypemodel.cpp:188
-#, fuzzy, kde-format
-#| msgid "Node size"
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Csomópont méret"
-
-#: models/nodetypepropertymodel.cpp:131
-#, fuzzy, kde-format
-#| msgid "Node Properties"
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "Csúcstulajdonságok"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr ""
-
-#: qml/AddNodeAction.qml:10
-#, kde-format
-msgid "Create Node"
-msgstr ""
-
-#: qml/DeleteAction.qml:10
-#, fuzzy, kde-format
-#| msgid "Element"
-msgid "Delete Element"
-msgstr "Elem"
-
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:58
 #, fuzzy, kde-format
 #| msgctxt "@title:menu"
 #| msgid "Selected"
 msgid "Select & Move"
 msgstr "Kijelölve"
 
+#: org/kde/rocs/Scene.qml:60
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Select and move items."
+msgid "Select and move elements on the scene"
+msgstr "Elemek kijelölése és áthelyezése."
+
+#: org/kde/rocs/Scene.qml:67
+#, kde-format
+msgid "Create Node"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:70
+#, fuzzy, kde-format
+#| msgctxt "Scripting API Description"
+#| msgid "Add a new property to the connection."
+msgid "Add a node to the scene"
+msgstr "Egy új tulajdonság hozzáadása a kapcsolathoz."
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr ""
+
+#: org/kde/rocs/Scene.qml:89
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Creates a new edge between 2 nodes"
+msgid "Create an edge between two nodes"
+msgstr "Egy új szél hozzáadása 2 csomópont között"
+
+#: org/kde/rocs/Scene.qml:94
+#, fuzzy, kde-format
+#| msgid "Element"
+msgid "Delete Element"
+msgstr "Elem"
+
+#: org/kde/rocs/Scene.qml:97
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Select and move items."
+msgid "Delete element from scene"
+msgstr "Elemek kijelölése és áthelyezése."
+
+#, fuzzy
+#~| msgid "Edges"
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Élek"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "Éltulajdonságok"
+
+#, fuzzy
+#~| msgid "Edge style"
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Élstílus"
+
+#, fuzzy
+#~| msgid "Edge Properties"
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "Éltulajdonságok"
+
+#, fuzzy
+#~| msgid "Nodes"
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Csúcsok"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "Csúcstulajdonságok"
+
+#, fuzzy
+#~| msgid "Node size"
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Csomópont méret"
+
+#, fuzzy
+#~| msgid "Node Properties"
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "Csúcstulajdonságok"
+
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>A végrehajtás befejeződött</i>"
-
-#, fuzzy
-#~| msgctxt "@info:tooltip"
-#~| msgid "Creates a new edge between 2 nodes"
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Egy új szél hozzáadása 2 csomópont között"
-
-#, fuzzy
-#~| msgctxt "Scripting API Description"
-#~| msgid "Add a new property to the connection."
-#~ msgid "Add a node to the scene"
-#~ msgstr "Egy új tulajdonság hozzáadása a kapcsolathoz."
-
-#, fuzzy
-#~| msgctxt "@info:tooltip"
-#~| msgid "Select and move items."
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Elemek kijelölése és áthelyezése."
 
 #, fuzzy
 #~| msgid "Identifier:"

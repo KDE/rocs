@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-08 00:39+0000\n"
+"POT-Creation-Date: 2025-09-14 00:38+0000\n"
 "PO-Revision-Date: 2025-08-14 14:53+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -1311,73 +1311,77 @@ msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
 msgstr "Lijst van knopen waarheen de afstanden zullen worden berekend."
 
-#: models/edgemodel.cpp:141
+#: org/kde/rocs/Scene.qml:58
 #, kde-format
-msgctxt "@title:column"
-msgid "Edge"
-msgstr "Kant"
+msgid "Select & Move"
+msgstr "Selecteren & verplaatsen"
 
-#: models/edgepropertymodel.cpp:144
+#: org/kde/rocs/Scene.qml:60
 #, kde-format
-msgctxt "@title:column"
-msgid "EdgeProperty"
-msgstr "EdgeProperty"
+msgid "Select and move elements on the scene"
+msgstr "Elementen selecteren en verplaatsen"
 
-#: models/edgetypemodel.cpp:190
-#, kde-format
-msgctxt "@title:column"
-msgid "Edge Type"
-msgstr "Kanttype"
-
-#: models/edgetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "EdgeTypeProperty"
-msgstr "EdgeTypeProperty"
-
-#: models/nodemodel.cpp:142
-#, kde-format
-msgctxt "@title:column"
-msgid "Node"
-msgstr "Knoop"
-
-#: models/nodepropertymodel.cpp:144
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeProperty"
-msgstr "NodeProperty"
-
-#: models/nodetypemodel.cpp:188
-#, kde-format
-msgctxt "@title:column"
-msgid "Node Type"
-msgstr "Knooptype"
-
-#: models/nodetypepropertymodel.cpp:131
-#, kde-format
-msgctxt "@title:column"
-msgid "NodeTypeProperty"
-msgstr "NodeTypeProperty"
-
-#: qml/AddEdgeAction.qml:25
-#, kde-format
-msgid "Create Edge"
-msgstr "Kant aanmaken"
-
-#: qml/AddNodeAction.qml:10
+#: org/kde/rocs/Scene.qml:67
 #, kde-format
 msgid "Create Node"
 msgstr "Knoop aanmaken"
 
-#: qml/DeleteAction.qml:10
+#: org/kde/rocs/Scene.qml:70
+#, kde-format
+msgid "Add a node to the scene"
+msgstr "Een knoop toevoegen"
+
+#: org/kde/rocs/Scene.qml:86
+#, kde-format
+msgid "Create Edge"
+msgstr "Kant aanmaken"
+
+#: org/kde/rocs/Scene.qml:89
+#, kde-format
+msgid "Create an edge between two nodes"
+msgstr "Een kant aanmaken tussen twee knopen"
+
+#: org/kde/rocs/Scene.qml:94
 #, kde-format
 msgid "Delete Element"
 msgstr "Element wissen"
 
-#: qml/SelectMoveAction.qml:11
+#: org/kde/rocs/Scene.qml:97
 #, kde-format
-msgid "Select & Move"
-msgstr "Selecteren & verplaatsen"
+msgid "Delete element from scene"
+msgstr "Element wissen"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge"
+#~ msgstr "Kant"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeProperty"
+#~ msgstr "EdgeProperty"
+
+#~ msgctxt "@title:column"
+#~ msgid "Edge Type"
+#~ msgstr "Kanttype"
+
+#~ msgctxt "@title:column"
+#~ msgid "EdgeTypeProperty"
+#~ msgstr "EdgeTypeProperty"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node"
+#~ msgstr "Knoop"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeProperty"
+#~ msgstr "NodeProperty"
+
+#~ msgctxt "@title:column"
+#~ msgid "Node Type"
+#~ msgstr "Knooptype"
+
+#~ msgctxt "@title:column"
+#~ msgid "NodeTypeProperty"
+#~ msgstr "NodeTypeProperty"
 
 #~ msgctxt "@title:window"
 #~ msgid "Plugin Error"
@@ -1404,18 +1408,6 @@ msgstr "Selecteren & verplaatsen"
 #~ msgctxt "@info status message after successful script execution"
 #~ msgid "<i>Execution Finished</i>"
 #~ msgstr "<i>UItvoeren is klaar</i>"
-
-#~ msgid "Create an edge between two nodes"
-#~ msgstr "Een kant aanmaken tussen twee knopen"
-
-#~ msgid "Add a node to the scene"
-#~ msgstr "Een knoop toevoegen"
-
-#~ msgid "Delete element from scene"
-#~ msgstr "Element wissen"
-
-#~ msgid "Select and move elements on the scene"
-#~ msgstr "Elementen selecteren en verplaatsen"
 
 #~ msgid "Identifier"
 #~ msgstr "Naam"
