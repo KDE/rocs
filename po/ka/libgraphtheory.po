@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-14 00:38+0000\n"
-"PO-Revision-Date: 2025-08-13 08:06+0200\n"
+"PO-Revision-Date: 2025-09-14 06:23+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1305,10 +1305,9 @@ msgid "Select & Move"
 msgstr "მონიშნეთ & გადაიტანეთ"
 
 #: org/kde/rocs/Scene.qml:60
-#, fuzzy, kde-format
-#| msgid "Delete element from scene"
+#, kde-format
 msgid "Select and move elements on the scene"
-msgstr "ელემენტის წაშლა სცენიდან"
+msgstr "მონიშნეთ და გადაიტანეთ ელემენტები სცენაზე"
 
 #: org/kde/rocs/Scene.qml:67
 #, kde-format
@@ -1326,11 +1325,9 @@ msgid "Create Edge"
 msgstr "კიდის შექმნა"
 
 #: org/kde/rocs/Scene.qml:89
-#, fuzzy, kde-format
-#| msgctxt "Scripting API"
-#| msgid "Create edge between the given nodes of default edge type."
+#, kde-format
 msgid "Create an edge between two nodes"
-msgstr "წიბოს შექმნა ნაგულისხმევი წიბოს ტიპის მითითებულ კვანძებს შორის."
+msgstr "წიბოს შექმნა ორ კვანძს შორის"
 
 #: org/kde/rocs/Scene.qml:94
 #, kde-format
