@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libgraphtheory\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-14 00:38+0000\n"
-"PO-Revision-Date: 2025-08-13 18:30+0100\n"
+"PO-Revision-Date: 2025-09-15 15:00+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1323,11 +1323,9 @@ msgid "Select & Move"
 msgstr "Seleccionar y mover"
 
 #: org/kde/rocs/Scene.qml:60
-#, fuzzy, kde-format
-#| msgid "Select the node type for node elements of the generated graph."
+#, kde-format
 msgid "Select and move elements on the scene"
-msgstr ""
-"Seleccionar el tipo de nodo para los elementos de nodo del grafo generado."
+msgstr "Seleccionar y mover elementos de la escena"
 
 #: org/kde/rocs/Scene.qml:67
 #, kde-format
@@ -1335,11 +1333,9 @@ msgid "Create Node"
 msgstr "Crear nodo"
 
 #: org/kde/rocs/Scene.qml:70
-#, fuzzy, kde-format
-#| msgctxt "Scripting API"
-#| msgid "Start node of the edge."
+#, kde-format
 msgid "Add a node to the scene"
-msgstr "Nodo de inicio de la arista."
+msgstr "Añadir un nodo a la escena"
 
 #: org/kde/rocs/Scene.qml:86
 #, kde-format
@@ -1347,11 +1343,9 @@ msgid "Create Edge"
 msgstr "Crear arista"
 
 #: org/kde/rocs/Scene.qml:89
-#, fuzzy, kde-format
-#| msgctxt "Scripting API"
-#| msgid "Create edge between the given nodes of default edge type."
+#, kde-format
 msgid "Create an edge between two nodes"
-msgstr "Crear una arista del tipo por omisión entre dos nodos indicados."
+msgstr "Crear una arista entre dos nodos"
 
 #: org/kde/rocs/Scene.qml:94
 #, kde-format
@@ -1359,55 +1353,6 @@ msgid "Delete Element"
 msgstr "Borrar elemento"
 
 #: org/kde/rocs/Scene.qml:97
-#, fuzzy, kde-format
-#| msgid "Delete Element"
+#, kde-format
 msgid "Delete element from scene"
-msgstr "Borrar elemento"
-
-#~ msgctxt "@title:column"
-#~ msgid "Edge"
-#~ msgstr "Arista"
-
-#~ msgctxt "@title:column"
-#~ msgid "EdgeProperty"
-#~ msgstr "Propiedad de la arista"
-
-#~ msgctxt "@title:column"
-#~ msgid "Edge Type"
-#~ msgstr "Tipo de arista"
-
-#~ msgctxt "@title:column"
-#~ msgid "EdgeTypeProperty"
-#~ msgstr "Propiedad del tipo de arista"
-
-#~ msgctxt "@title:column"
-#~ msgid "Node"
-#~ msgstr "Nodo"
-
-#~ msgctxt "@title:column"
-#~ msgid "NodeProperty"
-#~ msgstr "Propiedad del nodo"
-
-#~ msgctxt "@title:column"
-#~ msgid "Node Type"
-#~ msgstr "Tipo de nodo"
-
-#~ msgctxt "@title:column"
-#~ msgid "NodeTypeProperty"
-#~ msgstr "Propiedad del tipo de nodo"
-
-#~ msgctxt "@title:window"
-#~ msgid "Plugin Error"
-#~ msgstr "Error del complemento"
-
-#~ msgid "Plugins could not be found in specified directories:<br>"
-#~ msgstr ""
-#~ "No ha sido posible encontrar complementos en los directorios indicados:"
-#~ "<br>"
-
-#~ msgid ""
-#~ "<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins."
-#~ "html'>this link</a> for further information."
-#~ msgstr ""
-#~ "<br><br> Consulte <a href='https://doc.qt.io/qt-5/deployment-plugins."
-#~ "html'>este enlace</a> para obtener más información."
+msgstr "Borrar elemento de la escena"
