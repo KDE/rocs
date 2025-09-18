@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-14 00:38+0000\n"
-"PO-Revision-Date: 2025-08-13 15:16+0300\n"
+"PO-Revision-Date: 2025-09-17 10:38+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1290,10 +1290,9 @@ msgid "Select & Move"
 msgstr "בחירה והזזה"
 
 #: org/kde/rocs/Scene.qml:60
-#, fuzzy, kde-format
-#| msgid "Select the node type for node elements of the generated graph."
+#, kde-format
 msgid "Select and move elements on the scene"
-msgstr "נא לבחור את טיפוס הצומת ליסודות הצומת של הגרף שנוצר."
+msgstr "אפשר לבחור ולהזיז פריטים בסצנה"
 
 #: org/kde/rocs/Scene.qml:67
 #, kde-format
@@ -1301,11 +1300,9 @@ msgid "Create Node"
 msgstr "יצירת צומת"
 
 #: org/kde/rocs/Scene.qml:70
-#, fuzzy, kde-format
-#| msgctxt "Scripting API"
-#| msgid "Start node of the edge."
+#, kde-format
 msgid "Add a node to the scene"
-msgstr "צומת התחלת הצלע."
+msgstr "הוספת נקודה לסצנה"
 
 #: org/kde/rocs/Scene.qml:86
 #, kde-format
@@ -1313,11 +1310,9 @@ msgid "Create Edge"
 msgstr "יצירת צלע"
 
 #: org/kde/rocs/Scene.qml:89
-#, fuzzy, kde-format
-#| msgctxt "Scripting API"
-#| msgid "Create edge between the given nodes of default edge type."
+#, kde-format
 msgid "Create an edge between two nodes"
-msgstr "יצירת צלע בין הצמתים הנבחרים של טיפוס צלע כברירת מחדל."
+msgstr "יצירת צלע בין שתי נקודות"
 
 #: org/kde/rocs/Scene.qml:94
 #, kde-format
@@ -1325,10 +1320,9 @@ msgid "Delete Element"
 msgstr "מחיקת רכיב"
 
 #: org/kde/rocs/Scene.qml:97
-#, fuzzy, kde-format
-#| msgid "Delete Element"
+#, kde-format
 msgid "Delete element from scene"
-msgstr "מחיקת רכיב"
+msgstr "מחיקת פריט מהסצנה"
 
 #~ msgctxt "@title:column"
 #~ msgid "Edge"
