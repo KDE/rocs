@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the rocs package.
+# SPDX-FileCopyrightText: 2022, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: 2022-01-29 17:59+0400\n"
+"PO-Revision-Date: 2025-09-27 10:37+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -31,7 +32,7 @@ msgstr "zayed.alsaidi@gmail.com"
 #, kde-format
 msgctxt "@title:window"
 msgid "Edge Properties"
-msgstr ""
+msgstr "خصائص الحافة"
 
 #: dialogs/edgeproperties.cpp:80 dialogs/nodeproperties.cpp:86
 #, kde-format
@@ -47,7 +48,7 @@ msgstr "القيمة"
 #: dialogs/edgeproperties.ui:26
 #, kde-format
 msgid "Edge Properties"
-msgstr ""
+msgstr "خصائص الحافة"
 
 #. i18n: ectx: property (text), widget (QLabel, labelType)
 #: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
@@ -59,23 +60,23 @@ msgstr "النوع:"
 #: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
 #, kde-format
 msgid "Dynamic Properties"
-msgstr ""
+msgstr "الخصائص الديناميكية"
 
 #: dialogs/edgetypeproperties.cpp:37
 #, kde-format
 msgid "Edges"
-msgstr ""
+msgstr "الحواف"
 
 #: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
 #, kde-format
 msgid "Property names"
-msgstr ""
+msgstr "أسماء الخاصيات"
 
 #: dialogs/edgetypeproperties.cpp:43
 #, kde-format
 msgctxt "@title:window"
 msgid "Edge Type Properties"
-msgstr ""
+msgstr "خصائص نوع الحافة"
 
 #: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
 #, kde-format
@@ -101,12 +102,12 @@ msgstr "اللون:"
 #: dialogs/edgetypeproperties.cpp:52 graphdocument.cpp:120
 #, kde-format
 msgid "Unidirectional"
-msgstr ""
+msgstr "أحادي الاتّجاه"
 
 #: dialogs/edgetypeproperties.cpp:53 graphdocument.cpp:125
 #, kde-format
 msgid "Bidirectional"
-msgstr ""
+msgstr "ثنائي الاتّجاه"
 
 #: dialogs/edgetypeproperties.cpp:54
 #, kde-format
@@ -122,7 +123,7 @@ msgstr "الظّهور:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this edge type."
-msgstr ""
+msgstr "المعرّف المختار لنوع الحافة هذا."
 
 #: dialogs/edgetypeproperties.cpp:141
 #, kde-format
@@ -130,19 +131,19 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another edge type, please select a "
 "different one."
-msgstr ""
+msgstr "المعرّف المختار قيد الاستخدام بالفعل لنوع حافة آخر، اختر معرّفًا مختلفًا."
 
 #: dialogs/nodeproperties.cpp:26
 #, kde-format
 msgctxt "@title:window"
 msgid "Node Properties"
-msgstr ""
+msgstr "خصائص العقدة"
 
 #: dialogs/nodeproperties.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this node."
-msgstr ""
+msgstr "المعرّف المختار لهذه العقدة."
 
 #: dialogs/nodeproperties.cpp:137
 #, kde-format
@@ -150,20 +151,20 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another node, please select a different "
 "one."
-msgstr ""
+msgstr "المعرّف المختار قيد الاستخدام بالفعل لعقدة أخرى، اختر معرّفًا مختلفًا."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
 #: dialogs/nodeproperties.ui:26
 #, kde-format
 msgid "Node Properties"
-msgstr ""
+msgstr "خصائص العقدة"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
 #. i18n: ectx: property (toolTip), widget (KColorCombo, color)
 #: dialogs/nodeproperties.ui:99 dialogs/nodeproperties.ui:112
 #, kde-format
 msgid "Node color"
-msgstr ""
+msgstr "لون العقدة"
 
 #: dialogs/nodetypeproperties.cpp:35
 #, kde-format
@@ -174,13 +175,13 @@ msgstr "العقد"
 #, kde-format
 msgctxt "@title:window"
 msgid "Node Type Properties"
-msgstr ""
+msgstr "خصائص نوع العقدة"
 
 #: dialogs/nodetypeproperties.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this node type."
-msgstr ""
+msgstr "المعرّف المختار لنوع العقدة هذا."
 
 #: dialogs/nodetypeproperties.cpp:137
 #, kde-format
@@ -188,7 +189,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another node type, please select a "
 "different one."
-msgstr ""
+msgstr "المعرّف المختار قيد الاستخدام بالفعل لنوع عقدة آخر، اختر معرّفًا مختلفًا."
 
 #: dialogs/propertieswidget.cpp:33
 #, kde-format
@@ -198,40 +199,40 @@ msgstr "أضف خاصية"
 #: dialogs/propertydelegate.cpp:49
 #, kde-format
 msgid "Delete this property."
-msgstr ""
+msgstr "احذف هذه الخاصية."
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:33
 #, kde-format
 msgctxt "@title:window"
 msgid "Assign Values"
-msgstr ""
+msgstr "اسند قيمًا"
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:52
 #, kde-format
 msgid "All Data Types"
-msgstr ""
+msgstr "جميع أنواع البيانات"
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:57
 #, kde-format
 msgid "All Edge Types"
-msgstr ""
+msgstr "جميع أنواع الحواف"
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:81
 #, kde-format
 msgid "Enter Property Name"
-msgstr ""
+msgstr "أدخل اسم الخاصية"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
 #: editorplugins/assignvalues/assignvalueswidget.ui:32
 #, kde-format
 msgid "Assign Values"
-msgstr ""
+msgstr "اسند قيمًا"
 
 #. i18n: ectx: property (text), widget (QLabel, property_choice_label)
 #: editorplugins/assignvalues/assignvalueswidget.ui:40
 #, kde-format
 msgid "Choose Properties"
-msgstr ""
+msgstr "اختر الخاصيات"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
 #: editorplugins/assignvalues/assignvalueswidget.ui:59
@@ -243,67 +244,67 @@ msgstr "أظهر الخيارات المتقدّمة"
 #: editorplugins/assignvalues/assignvalueswidget.ui:74
 #, kde-format
 msgid "Assignment Method"
-msgstr ""
+msgstr "طريقة الإسناد"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:81
 #, kde-format
 msgid "Enumerate Items"
-msgstr ""
+msgstr "عدّد العناصر"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:86
 #, kde-format
 msgid "Enumerate Alpha"
-msgstr ""
+msgstr "عدّد أبجدياً"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:91
 #, kde-format
 msgid "Enumerate Alpha-Numeric"
-msgstr ""
+msgstr "عدّد أبجدياً رقمياً"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:96
 #, kde-format
 msgid "Assign Random Integers"
-msgstr ""
+msgstr "اسند أعداداً صحيحة عشوائية"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:101
 #, kde-format
 msgid "Assign Random Reals"
-msgstr ""
+msgstr "اسند أعداداً حقيقية عشوائية"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:106
 #, kde-format
 msgid "Assign Constant Value"
-msgstr ""
+msgstr "اسند قيمة ثابتة"
 
 #. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
 #: editorplugins/assignvalues/assignvalueswidget.ui:132
 #, kde-format
 msgid "Start ID:"
-msgstr ""
+msgstr "المعرّف البادئ:"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:167
 #, kde-format
 msgid "Initial string"
-msgstr ""
+msgstr "سلسلة نصية بادئة"
 
 #. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:174
-#, fuzzy, kde-format
+#, kde-format
 msgid "a"
-msgstr "ن"
+msgstr "أ"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
 #: editorplugins/assignvalues/assignvalueswidget.ui:192
 #, kde-format
 msgid "Start ID"
-msgstr ""
+msgstr "المعرّف البادئ"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
 #: editorplugins/assignvalues/assignvalueswidget.ui:209
@@ -335,7 +336,7 @@ msgstr "النهاية العليا"
 #: editorplugins/generategraph/generategraphwidget.ui:483
 #, kde-format
 msgid "Generator Seed"
-msgstr ""
+msgstr "بذرة المولد"
 
 #. i18n: ectx: property (text), widget (QLabel, constant_label)
 #: editorplugins/assignvalues/assignvalueswidget.ui:372
@@ -347,7 +348,7 @@ msgstr "ثابت"
 #: editorplugins/assignvalues/assignvalueswidget.ui:400
 #, kde-format
 msgid "Overwrite existing values"
-msgstr ""
+msgstr "اكتب فوق القيم الموجودة"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
 #. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
@@ -371,66 +372,66 @@ msgstr "اسم الخاصية:"
 #: editorplugins/generategraph/generategraphwidget.ui:272
 #, kde-format
 msgid "Edges:"
-msgstr ""
+msgstr "الحواف:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, applyToEdges)
 #: editorplugins/assignvalues/assignvalueswidget.ui:482
 #, kde-format
 msgid "Assign values to selected edges."
-msgstr ""
+msgstr "اسند قيمًا للحواف المختارة."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
 #: editorplugins/assignvalues/assignvalueswidget.ui:509
 #, kde-format
 msgid "Assign values to selected nodes."
-msgstr ""
+msgstr "اسند قيمًا للعقد المختارة."
 
 #: editorplugins/generategraph/generategraphwidget.cpp:79
 #, kde-format
 msgctxt "@title:window"
 msgid "Generate Graph"
-msgstr ""
+msgstr "توليد رسم بياني"
 
 #: editorplugins/generategraph/generategraphwidget.cpp:119
 #: editorplugins/generategraph/generategraphwidget.cpp:126
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "%1 (ID %2)"
-msgstr "المعرّف"
+msgstr "%1 (المعرّف %2)"
 
 #: editorplugins/generategraph/generategraphwidget.cpp:529
 #, kde-format
 msgid "Incorrect Edge Direction"
-msgstr ""
+msgstr "اتجاه حافة غير صحيح"
 
 #: editorplugins/generategraph/generategraphwidget.cpp:529
 #, kde-format
 msgid "Edges in a Directed Acyclical Graph must be directional."
-msgstr ""
+msgstr "حواف الرسم البياني الموجه اللا دوري يجب أن تكون موجّهة."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
 #: editorplugins/generategraph/generategraphwidget.ui:14
 #, kde-format
 msgid "Generate Graph"
-msgstr ""
+msgstr "توليد رسم بياني"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:22
 #, kde-format
 msgid "Select the graph generator."
-msgstr ""
+msgstr "اختر مُولّد الرسم البياني."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:26
 #, kde-format
 msgid "Mesh Graph"
-msgstr ""
+msgstr "رسم بياني شبكي"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:31
 #, kde-format
 msgid "Star Graph"
-msgstr ""
+msgstr "رسم بياني نجمي"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:36
@@ -448,25 +449,25 @@ msgstr "رسم بياني عشوائي"
 #: editorplugins/generategraph/generategraphwidget.ui:46
 #, kde-format
 msgid "Erdös-Renyi Graph"
-msgstr ""
+msgstr "رسم بياني إردوش-رينيي"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:51
 #, kde-format
 msgid "Random Tree Graph"
-msgstr ""
+msgstr "رسم بياني شجري عشوائي"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:56
 #, kde-format
 msgid "Random Dag Graph"
-msgstr ""
+msgstr "رسم بياني DAG عشوائي"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:61
 #, kde-format
 msgid "Path Graph"
-msgstr ""
+msgstr "رسم بياني مسار"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:66
@@ -478,7 +479,7 @@ msgstr "رسم بياني كامل"
 #: editorplugins/generategraph/generategraphwidget.ui:71
 #, kde-format
 msgid "Complete Bipartite"
-msgstr ""
+msgstr "ثنائي الأجزاء الكامل"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
 #: editorplugins/generategraph/generategraphwidget.ui:91
@@ -490,7 +491,7 @@ msgstr "أظهر الإعدادات المتقدّمة"
 #: editorplugins/generategraph/generategraphwidget.ui:106
 #, kde-format
 msgid "Set the unique identifier of the generated graph."
-msgstr ""
+msgstr "اضبط المعرّف الفريد للرسم البياني المولّد."
 
 #. i18n: ectx: property (text), widget (QLineEdit, identifier)
 #: editorplugins/generategraph/generategraphwidget.ui:109
@@ -502,19 +503,19 @@ msgstr "رسم بياني"
 #: editorplugins/generategraph/generategraphwidget.ui:116
 #, kde-format
 msgid "The node type to create the nodes of the graph with"
-msgstr ""
+msgstr "نوع العقدة الذي ولّد به عقد الرسم البياني."
 
 #. i18n: ectx: property (text), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:119
 #, kde-format
 msgid "Node type:"
-msgstr ""
+msgstr "نوع العقدة:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
 #: editorplugins/generategraph/generategraphwidget.ui:126
 #, kde-format
 msgid "The identifier of the created graph (used for scripting)"
-msgstr ""
+msgstr "معرّف الرسم البياني الذي ولّد (يُستخدم للبرمجة النصية)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
 #: editorplugins/generategraph/generategraphwidget.ui:148
@@ -532,7 +533,7 @@ msgstr "عدد الصّفوف:"
 #: editorplugins/generategraph/generategraphwidget.ui:196
 #, kde-format
 msgid "Satellite Nodes:"
-msgstr ""
+msgstr "عقد أقمار:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
 #. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
@@ -542,7 +543,7 @@ msgstr ""
 #: editorplugins/generategraph/generategraphwidget.ui:527
 #, kde-format
 msgid "Number of Nodes:"
-msgstr ""
+msgstr "عدد العقد:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomSelfEdges)
 #. i18n: ectx: property (text), widget (QLabel, label_GNPSelfEdges)
@@ -550,25 +551,25 @@ msgstr ""
 #: editorplugins/generategraph/generategraphwidget.ui:332
 #, kde-format
 msgid "Allow self-edges:"
-msgstr ""
+msgstr "اسمح بالحواف الذاتية:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
 #: editorplugins/generategraph/generategraphwidget.ui:293
 #, kde-format
 msgid "Generator seed:"
-msgstr ""
+msgstr "بذرة المولد:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
 #: editorplugins/generategraph/generategraphwidget.ui:325
 #, kde-format
 msgid "Nodes (n):"
-msgstr ""
+msgstr "العقد (ن):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
 #: editorplugins/generategraph/generategraphwidget.ui:349
 #, kde-format
 msgid "Edge Probability (p):"
-msgstr ""
+msgstr "احتمالية الحافة (ف):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
 #. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
@@ -576,61 +577,61 @@ msgstr ""
 #: editorplugins/generategraph/generategraphwidget.ui:421
 #, kde-format
 msgid "Generator Seed:"
-msgstr ""
+msgstr "بذرة المولد:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
 #: editorplugins/generategraph/generategraphwidget.ui:446
 #, kde-format
 msgid "Number of Nodes"
-msgstr ""
+msgstr "عدد العقد"
 
 #. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
 #: editorplugins/generategraph/generategraphwidget.ui:463
 #, kde-format
 msgid "Edge Probability"
-msgstr ""
+msgstr "احتمالية الحافة"
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
 #: editorplugins/generategraph/generategraphwidget.ui:549
 #, kde-format
 msgid "Left Set Nodes:"
-msgstr ""
+msgstr "عقد المجموعة اليسرى:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
 #: editorplugins/generategraph/generategraphwidget.ui:563
 #, kde-format
 msgid "Right Set Nodes:"
-msgstr ""
+msgstr "عقد المجموعة اليمنى:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:590
 #, kde-format
 msgid "Select the edge type for connections of the generated graph."
-msgstr ""
+msgstr "اختر نوع الحافة لوصلات الرسم البياني المولّد."
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:604
 #, kde-format
 msgid "The edge type to create the edges of the graph with"
-msgstr ""
+msgstr "نوع الحافة الذي ولّد به حواف الرسم البياني."
 
 #. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:607
 #, kde-format
 msgid "Edge type:"
-msgstr ""
+msgstr "نوع الحافة:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:614
 #, kde-format
 msgid "Graph generator:"
-msgstr ""
+msgstr "مُولّد الرسم البياني:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:621
 #, kde-format
 msgid "Select the node type for node elements of the generated graph."
-msgstr ""
+msgstr "اختر نوع العقدة لعناصر عقد الرسم البياني المولّد."
 
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
 #, kde-format
@@ -648,73 +649,73 @@ msgstr "تخطيط الرسم"
 #: editorplugins/graphlayout/graphlayoutwidget.ui:36
 #, kde-format
 msgid "Force Based Layout"
-msgstr ""
+msgstr "تخطيط يعتمد على القوة"
 
 #. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:57
 #, kde-format
 msgid "Area factor:"
-msgstr ""
+msgstr "عامل المساحة:"
 
 #. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:77
 #, kde-format
 msgid "Repelling force:"
-msgstr ""
+msgstr "قوة التنافر:"
 
 #. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:97
 #, kde-format
 msgid "Attraction force:"
-msgstr ""
+msgstr "قوة الجذب:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:119
 #, kde-format
 msgid "Radial Tree Layout"
-msgstr ""
+msgstr "تخطيط شجرة شعاعي"
 
 #. i18n: ectx: property (text), widget (QLabel, rootLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:134
 #, kde-format
 msgid "Center/Root:"
-msgstr ""
+msgstr "المركز/الجذر:"
 
 #. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:144
 #, kde-format
 msgid "Node separation:"
-msgstr ""
+msgstr "فصل العقدة:"
 
 #. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:158
 #, kde-format
 msgid "Tree type:"
-msgstr ""
+msgstr "نوع الشجرة:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:165
 #, kde-format
 msgid "Free tree"
-msgstr ""
+msgstr "شجرة حرة"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:175
 #, kde-format
 msgid "Rooted tree"
-msgstr ""
+msgstr "شجرة مجذّرة"
 
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
 #, kde-format
 msgctxt "@title:window"
 msgid "Transform Edges"
-msgstr ""
+msgstr "تحويل الحواف"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
 #: editorplugins/transformedges/transformedgeswidget.ui:14
 #, kde-format
 msgid "Transform Edges"
-msgstr ""
+msgstr "تحويل الحواف"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
 #: editorplugins/transformedges/transformedgeswidget.ui:22
@@ -723,6 +724,8 @@ msgid ""
 "This option connects all nodes of the given graph. The new edges do not have "
 "any preset weights."
 msgstr ""
+"يربط هذا الخيار جميع عقد الرسم البياني المعطى. لا تحمل الحواف الجديدة أية "
+"أوزان مسبقة."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
 #: editorplugins/transformedges/transformedgeswidget.ui:25
@@ -734,13 +737,13 @@ msgstr "رسم بياني كامل"
 #: editorplugins/transformedges/transformedgeswidget.ui:35
 #, kde-format
 msgid "This option removes all edges from the given graph."
-msgstr ""
+msgstr "يزيل هذا الخيار جميع الحواف من الرسم البياني المعطى."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:38
 #, kde-format
 msgid "Remove all edges"
-msgstr ""
+msgstr "احذف جميع الحواف"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:45
@@ -749,12 +752,14 @@ msgid ""
 "This option reverses all edges of a directed graph. Note that this does not "
 "apply to undirected graphs."
 msgstr ""
+"يعكس هذا الخيار جميع حواف الرسم البياني الموجه. لاحظ أن هذا لا ينطبق على "
+"الرسوم البيانية غير الموجهة."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:48
 #, kde-format
 msgid "Reverse all edges"
-msgstr ""
+msgstr "اعكس جميع الحواف"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:59
@@ -774,23 +779,35 @@ msgid ""
 "equals 1. Directed and undirected graphs are processed accordingly.</p></"
 "body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">ينفّذ هذا الخيار <span "
+"style=\" font-style:italic;\">خوارزمية بريم لشجرة الامتداد الأصغر</span> على "
+"الرسم البياني. تُفترض أوزان جميع الحواف بدون أوزان معطاة مساوية لـ 1. تُعالج "
+"الرسوم البيانية الموجهة وغير الموجهة وفقًا لذلك.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:62
 #, kde-format
 msgid "Spanning tree transformation"
-msgstr ""
+msgstr "تحويل شجرة الامتداد"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:69
 #, kde-format
 msgid "Remove all self edges"
-msgstr ""
+msgstr "احذف جميع الحواف الذاتية"
 
 #: fileformats/dot/dotfileformat.cpp:45
 #, kde-format
 msgid "Graphviz Format (%1)"
-msgstr ""
+msgstr "تنسيق Graphviz (%1)"
 
 #: fileformats/dot/dotfileformat.cpp:55 fileformats/gml/gmlfileformat.cpp:54
 #: fileformats/rocs1/rocs1fileformat.cpp:57
@@ -798,17 +815,17 @@ msgstr ""
 #: fileformats/tgf/tgffileformat.cpp:52
 #, kde-format
 msgid "Could not open file \"%1\" in read mode: %2"
-msgstr ""
+msgstr "تعذّر فتح الملف «%1» في وضع القراءة: %2"
 
 #: fileformats/dot/dotfileformat.cpp:60 fileformats/gml/gmlfileformat.cpp:60
 #, kde-format
 msgid "Could not parse file \"%1\"."
-msgstr ""
+msgstr "تعذّر تحليل الملف «%1»."
 
 #: fileformats/dot/dotfileformat.cpp:73 fileformats/gml/gmlfileformat.cpp:74
 #, kde-format
 msgid "Cannot open file %1 to write document. Error: %2"
-msgstr ""
+msgstr "لا يمكن فتح الملف %1 لكتابة المستند. الخطأ: %2"
 
 #: fileformats/fileformatmanager.cpp:48
 #, kde-format
@@ -819,7 +836,7 @@ msgstr "خطأ في الملحقة"
 #: fileformats/fileformatmanager.cpp:50
 #, kde-format
 msgid "Plugins could not be found in specified directories:<br>"
-msgstr ""
+msgstr "تعذّر إيجاد الملحقات في المجلّدات المحددة:<br>"
 
 #: fileformats/fileformatmanager.cpp:52
 #, kde-format
@@ -827,58 +844,60 @@ msgid ""
 "<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>this "
 "link</a> for further information."
 msgstr ""
+"<br><br> راجع <a href='https://doc.qt.io/qt-5/deployment-plugins.html'>هذا "
+"الرابط</a> للحصول على مزيد من المعلومات."
 
 #: fileformats/gml/gmlfileformat.cpp:44
 #, kde-format
 msgid "Graph Markup Language Format (%1)"
-msgstr ""
+msgstr "تنسيق لغة ترميز الرسم البياني (%1)"
 
 #: fileformats/rocs1/rocs1fileformat.cpp:38
 #, kde-format
 msgid "Rocs 1 Graph File Format (%1)"
-msgstr ""
+msgstr "تنسيق ملف رسم بياني روكس 1 (%1)"
 
 #: fileformats/rocs1/rocs1fileformat.cpp:258
 #: fileformats/rocs2/rocs2fileformat.cpp:211
 #: fileformats/tgf/tgffileformat.cpp:102 fileformats/tikz/tikzfileformat.cpp:53
 #, kde-format
 msgid "Could not open file \"%1\" in write mode: %2"
-msgstr ""
+msgstr "تعذّر فتح الملف «%1» في وضع الكتابة: %2"
 
 #: fileformats/rocs1/rocs1fileformat.cpp:269
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
-msgstr ""
+msgstr "تعذّر كتابة البيانات، إجهاض. الخطأ: %1."
 
 #: fileformats/rocs2/rocs2fileformat.cpp:40
 #, kde-format
 msgid "Rocs Graph Format (%1)"
-msgstr ""
+msgstr "تنسيق رسم بياني روكس (%1)"
 
 #: fileformats/rocs2/rocs2fileformat.cpp:312
 #, kde-format
 msgid "Error on serializing file format to file."
-msgstr ""
+msgstr "خطأ في تسلسل تنسيق الملف إلى ملف."
 
 #: fileformats/tgf/tgffileformat.cpp:38
 #, kde-format
 msgid "Trivial Graph Format (%1)"
-msgstr ""
+msgstr "تنسيق رسم بياني تافه (%1)"
 
 #: fileformats/tgf/tgffileformat.cpp:73
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
-msgstr ""
+msgstr "تعذّر تحليل الملف. المعرّف «%1» قيد الاستخدام أكثر من مرة."
 
 #: fileformats/tgf/tgffileformat.cpp:85
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
-msgstr ""
+msgstr "تعذّر تحليل الملف. حافة من «%1» إلى «%2» تستخدم عقدًا غير مُعرّفة."
 
 #: fileformats/tikz/tikzfileformat.cpp:34
 #, kde-format
 msgid "TikZ (PGF) Format (%1)"
-msgstr ""
+msgstr "تنسيق TikZ (PGF) (%1)"
 
 #: graphdocument.cpp:129
 #, kde-format
@@ -889,19 +908,19 @@ msgstr "المبدئيّ"
 #, kde-format
 msgctxt "@title:tab initial title for graph document"
 msgid "New Graph"
-msgstr ""
+msgstr "رسم بياني جديد"
 
 #: kernel/documentwrapper.cpp:88
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: no node with ID %2 registered"
-msgstr ""
+msgstr "%1: لا يوجد عقدة مُسجّلة بالمعرّف %2"
 
 #: kernel/documentwrapper.cpp:115 kernel/nodewrapper.cpp:109
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: node type ID %2 not registered"
-msgstr ""
+msgstr "%1: معرّف نوع العقدة %2 غير مُسجّل"
 
 #: kernel/documentwrapper.cpp:150 kernel/edgewrapper.cpp:59
 #: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
@@ -910,37 +929,37 @@ msgstr ""
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: edge type ID %2 not registered"
-msgstr ""
+msgstr "%1: معرّف نوع الحافة %2 غير مُسجّل"
 
 #: kernel/documentwrapper.cpp:174
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"from\" is not a valid node object"
-msgstr ""
+msgstr "%1: \"from\" ليس كائن عقدة صالح"
 
 #: kernel/documentwrapper.cpp:179
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"to\" is not a valid node object"
-msgstr ""
+msgstr "%1: \"to\" ليس كائن عقدة صالح"
 
 #: kernel/documentwrapper.cpp:190
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"node\" is not a valid node object"
-msgstr ""
+msgstr "%1: \"node\" ليس كائن عقدة صالح"
 
 #: kernel/documentwrapper.cpp:204
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"edge\" is not a valid edge object"
-msgstr ""
+msgstr "%1: \"edge\" ليس كائن حافة صالح"
 
 #: kernel/kernel.cpp:94
 #, kde-format
 msgctxt "@info status message after successful script execution"
 msgid "<i>Execution Finished</i>"
-msgstr ""
+msgstr "<i>انتهى التنفيذ</i>"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -949,24 +968,25 @@ msgid ""
 "The global Console object allows you to print messages of different "
 "importance to a log."
 msgstr ""
+"كائن وحدة التحكم العام يسمح لك بطباعة رسائل ذات أهمية مختلفة إلى السجل."
 
 #: kernel/modules/console/console.xml:17
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given message of normal severity."
-msgstr ""
+msgstr "اطبع الرسالة المعطاة ذات الخطورة العادية."
 
 #: kernel/modules/console/console.xml:31
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given debug message."
-msgstr ""
+msgstr "اطبع رسالة التصحيح المعطاة."
 
 #: kernel/modules/console/console.xml:45
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given error message of high severity."
-msgstr ""
+msgstr "اطبع رسالة الخطأ المعطاة ذات الخطورة العالية."
 
 #: kernel/modules/document/document.xml:9
 #, kde-format
@@ -975,48 +995,50 @@ msgid ""
 "\n"
 "The document object provides access to all elements.\n"
 msgstr ""
+"\n"
+"يوفر كائن المستند وصولًا إلى جميع العناصر.\n"
 
 #: kernel/modules/document/document.xml:19
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the node with specified ID."
-msgstr ""
+msgstr "أرجع العقدة بالمعرّف المحدد."
 
 #: kernel/modules/document/document.xml:26
 #, kde-format
 msgctxt "Scripting API"
 msgid "Identifier of a node."
-msgstr ""
+msgstr "معرّف العقدة."
 
 #: kernel/modules/document/document.xml:33
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all nodes."
-msgstr ""
+msgstr "أرجع قائمة بجميع العقد."
 
 #: kernel/modules/document/document.xml:42
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all nodes of specified type."
-msgstr ""
+msgstr "أرجع قائمة بجميع العقد من النوع المحدد."
 
 #: kernel/modules/document/document.xml:49
 #, kde-format
 msgctxt "Scripting API"
 msgid "Identifier of a node type."
-msgstr ""
+msgstr "معرّف نوع العقدة."
 
 #: kernel/modules/document/document.xml:56
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all edges."
-msgstr ""
+msgstr "أرجع قائمة بجميع الحواف."
 
 #: kernel/modules/document/document.xml:65
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all edges of specified type."
-msgstr ""
+msgstr "أرجع قائمة بجميع الحواف من النوع المحدد."
 
 #: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
 #: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
@@ -1025,67 +1047,67 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "Identifier of an edge type."
-msgstr ""
+msgstr "معرّف نوع الحافة."
 
 #: kernel/modules/document/document.xml:79
 #, kde-format
 msgctxt "Scripting API"
 msgid "Create node at position (x,y)."
-msgstr ""
+msgstr "أنشئ عقدة عند الموضع (س، ص)."
 
 #: kernel/modules/document/document.xml:86
 #, kde-format
 msgctxt "Scripting API"
 msgid "X-coordinate of the node."
-msgstr ""
+msgstr "إحداثي س للعقدة."
 
 #: kernel/modules/document/document.xml:91
 #, kde-format
 msgctxt "Scripting API"
 msgid "Y-coordinate of the node."
-msgstr ""
+msgstr "إحداثي ص للعقدة."
 
 #: kernel/modules/document/document.xml:98
 #, kde-format
 msgctxt "Scripting API"
 msgid "Create edge between the given nodes of default edge type."
-msgstr ""
+msgstr "أنشئ حافة بين العقد المعطاة بنوع الحافة المبدئي."
 
 #: kernel/modules/document/document.xml:105
 #, kde-format
 msgctxt "Scripting API"
 msgid "Start node of the edge."
-msgstr ""
+msgstr "عقدة بداية الحافة."
 
 #: kernel/modules/document/document.xml:110
 #, kde-format
 msgctxt "Scripting API"
 msgid "Target node of the edge."
-msgstr ""
+msgstr "عقدة هدف الحافة."
 
 #: kernel/modules/document/document.xml:117
 #, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given node."
-msgstr ""
+msgstr "احذف العقدة المعطاة."
 
 #: kernel/modules/document/document.xml:124
 #, kde-format
 msgctxt "Scripting API"
 msgid "The node to be deleted."
-msgstr ""
+msgstr "العقدة المراد حذفها."
 
 #: kernel/modules/document/document.xml:131
 #, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given edge."
-msgstr ""
+msgstr "احذف الحافة المعطاة."
 
 #: kernel/modules/document/document.xml:138
 #, kde-format
 msgctxt "Scripting API"
 msgid "The edge to be deleted."
-msgstr ""
+msgstr "الحافة المراد حذفها."
 
 #: kernel/modules/document/edge.xml:9
 #, kde-format
@@ -1095,6 +1117,9 @@ msgid ""
 "An edge is the connection of two nodes. Edges can be either directed or "
 "undirected, depending on their type.\n"
 msgstr ""
+"\n"
+"الحافة هي وصلة بين عقدتين. يمكن أن تكون الحواف موجهة أو غير موجهة، يعتمد ذلك "
+"على نوعها.\n"
 
 #: kernel/modules/document/edge.xml:17
 #, kde-format
@@ -1102,25 +1127,25 @@ msgctxt "Scripting API"
 msgid ""
 "Read and set the identifier of the edge's type. If setting, the edge type "
 "identifier must exist."
-msgstr ""
+msgstr "اقرأ واضبط معرّف نوع الحافة. عند الضبط، يجب أن يوجد معرّف نوع الحافة."
 
 #: kernel/modules/document/edge.xml:26
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the origin node of the edge."
-msgstr ""
+msgstr "أرجع عقدة الأصل للحافة."
 
 #: kernel/modules/document/edge.xml:35
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the target node of the edge."
-msgstr ""
+msgstr "أرجع عقدة الهدف للحافة."
 
 #: kernel/modules/document/edge.xml:44
 #, kde-format
 msgctxt "Scripting API"
 msgid "Returns true if the edge's type is directed, otherwise false."
-msgstr ""
+msgstr "يرجع \"صحيح\" إن كان نوع الحافة موجهاً، وإلا \"خاطئ\"."
 
 #: kernel/modules/document/node.xml:11
 #, kde-format
@@ -1133,24 +1158,30 @@ msgid ""
 "Note that dynamic properties are only available after script execution, if "
 "they are registered for the node's type.\n"
 msgstr ""
+"\n"
+"العقدة هي عنصر بيانات الرسم البياني.\n"
+"يمكن أن تحمل خاصيات ديناميكية اختيارية تضبط في المحرر أو تسند ببساطة أثناء "
+"التنفيذ.\n"
+"لاحظ أن الخاصيات الديناميكية تتوفر فقط بعد تنفيذ النص البرمجي، إذا كانت "
+"مُسجّلة لنوع العقدة.\n"
 
 #: kernel/modules/document/node.xml:19
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the unique identifier of this node."
-msgstr ""
+msgstr "اقرأ واضبط المعرّف الفريد لهذه العقدة."
 
 #: kernel/modules/document/node.xml:26
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the x-coordinate of the node."
-msgstr ""
+msgstr "اقرأ واضبط إحداثي س للعقدة."
 
 #: kernel/modules/document/node.xml:33
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the y-coordinate of the node."
-msgstr ""
+msgstr "اقرأ واضبط إحداثي ص للعقدة."
 
 #: kernel/modules/document/node.xml:40
 #, kde-format
@@ -1159,6 +1190,7 @@ msgid ""
 "Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
 "for red)."
 msgstr ""
+"اقرأ واضبط سلسلة لون هذه العقدة بقيم سداسية عشرية (مثلاً، \"#ff0000\" للأحمر)."
 
 #: kernel/modules/document/node.xml:47
 #, kde-format
@@ -1166,13 +1198,13 @@ msgctxt "Scripting API"
 msgid ""
 "Read and set the identifier of the node's type. If setting, the node type "
 "identifier must exist."
-msgstr ""
+msgstr "اقرأ واضبط معرّف نوع العقدة. عند الضبط، يجب أن يوجد معرّف نوع العقدة."
 
 #: kernel/modules/document/node.xml:56
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all edges (incoming and outgoing) of this node."
-msgstr ""
+msgstr "أرجع قائمة بجميع حواف هذه العقدة (الداخلة والخارجة)."
 
 #: kernel/modules/document/node.xml:65
 #, kde-format
@@ -1180,31 +1212,31 @@ msgctxt "Scripting API"
 msgid ""
 "Return a list of all edges (incoming and outgoing) of this node of a "
 "specified type."
-msgstr ""
+msgstr "أرجع قائمة بجميع حواف هذه العقدة (الداخلة والخارجة) من نوع محدد."
 
 #: kernel/modules/document/node.xml:79
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of incoming edges of this node."
-msgstr ""
+msgstr "أرجع قائمة بالحواف الداخلة لهذه العقدة."
 
 #: kernel/modules/document/node.xml:88
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all incoming edges of this node of a specified type."
-msgstr ""
+msgstr "أرجع قائمة بجميع الحواف الداخلة لهذه العقدة من نوع محدد."
 
 #: kernel/modules/document/node.xml:102
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all outgoing edges of this node."
-msgstr ""
+msgstr "أرجع قائمة بجميع الحواف الخارجة لهذه العقدة."
 
 #: kernel/modules/document/node.xml:111
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all outgoing edges of this node of a specified type."
-msgstr ""
+msgstr "أرجع قائمة بجميع الحواف الخارجة لهذه العقدة من نوع محدد."
 
 #: kernel/modules/document/node.xml:125
 #, kde-format
@@ -1213,6 +1245,8 @@ msgid ""
 "Return list all nodes connected to this node. This method respects if edges "
 "are directed."
 msgstr ""
+"أرجع قائمة بجميع العقد الموصولة بهذه العقدة. تحترم هذه الطريقة ما إذا كانت "
+"الحواف موجهة."
 
 #: kernel/modules/document/node.xml:134
 #, kde-format
@@ -1221,12 +1255,14 @@ msgid ""
 "Return list all nodes connected to this node via an edge of specified type. "
 "This method respects if edges are directed."
 msgstr ""
+"أرجع قائمة بجميع العقد الموصولة بهذه العقدة عبر حافة من نوع محدد. تحترم هذه "
+"الطريقة ما إذا كانت الحواف موجهة."
 
 #: kernel/modules/document/node.xml:148
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all nodes connected to this node by an incoming edge."
-msgstr ""
+msgstr "أرجع قائمة بجميع العقد الموصولة بهذه العقدة بحافة داخلة."
 
 #: kernel/modules/document/node.xml:157
 #, kde-format
@@ -1234,13 +1270,13 @@ msgctxt "Scripting API"
 msgid ""
 "Return a list all nodes connected to this node by an incoming edge of "
 "specified type."
-msgstr ""
+msgstr "أرجع قائمة بجميع العقد الموصولة بهذه العقدة بحافة داخلة من نوع محدد."
 
 #: kernel/modules/document/node.xml:171
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return list all nodes connected to this node by an outgoing edge."
-msgstr ""
+msgstr "أرجع قائمة بجميع العقد الموصولة بهذه العقدة بحافة خارجة."
 
 #: kernel/modules/document/node.xml:180
 #, kde-format
@@ -1248,25 +1284,25 @@ msgctxt "Scripting API"
 msgid ""
 "Return list all nodes connected to this node by an outgoing edge of "
 "specified type."
-msgstr ""
+msgstr "أرجع قائمة بجميع العقد الموصولة بهذه العقدة بحافة خارجة من نوع محدد."
 
 #: kernel/modules/document/node.xml:194
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return list of distances to specified targets in same order."
-msgstr ""
+msgstr "أرجع قائمة بالمسافات إلى الأهداف المحددة بنفس الترتيب."
 
 #: kernel/modules/document/node.xml:201
 #, kde-format
 msgctxt "Scripting API"
 msgid "Name of edge property that holds the edge length."
-msgstr ""
+msgstr "اسم خاصية الحافة التي تحمل طول الحافة."
 
 #: kernel/modules/document/node.xml:206
 #, kde-format
 msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
-msgstr ""
+msgstr "قائمة العقد التي تحسب المسافات إليها."
 
 #: models/edgemodel.cpp:141
 #, kde-format
@@ -1278,19 +1314,19 @@ msgstr "الحافة"
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeProperty"
-msgstr ""
+msgstr "خاصية الحافة"
 
 #: models/edgetypemodel.cpp:190
 #, kde-format
 msgctxt "@title:column"
 msgid "Edge Type"
-msgstr ""
+msgstr "نوع الحافة"
 
 #: models/edgetypepropertymodel.cpp:131
 #, kde-format
 msgctxt "@title:column"
 msgid "EdgeTypeProperty"
-msgstr ""
+msgstr "خاصية نوع الحافة"
 
 #: models/nodemodel.cpp:142
 #, kde-format
@@ -1302,56 +1338,56 @@ msgstr "عقدة"
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeProperty"
-msgstr ""
+msgstr "خاصية العقدة"
 
 #: models/nodetypemodel.cpp:188
 #, kde-format
 msgctxt "@title:column"
 msgid "Node Type"
-msgstr ""
+msgstr "نوع العقدة"
 
 #: models/nodetypepropertymodel.cpp:131
 #, kde-format
 msgctxt "@title:column"
 msgid "NodeTypeProperty"
-msgstr ""
+msgstr "خاصية نوع العقدة"
 
 #: qml/AddEdgeAction.qml:28
 #, kde-format
 msgid "Create Edge"
-msgstr ""
+msgstr "أنشئ حافة"
 
 #: qml/AddEdgeAction.qml:31
 #, kde-format
 msgid "Create an edge between two nodes"
-msgstr ""
+msgstr "أنشئ حافة بين عقدتين"
 
 #: qml/AddNodeAction.qml:13
 #, kde-format
 msgid "Create Node"
-msgstr ""
+msgstr "أنشئ عقدة"
 
 #: qml/AddNodeAction.qml:16
 #, kde-format
 msgid "Add a node to the scene"
-msgstr ""
+msgstr "أضف عقدة إلى المشهد"
 
 #: qml/DeleteAction.qml:13
 #, kde-format
 msgid "Delete Element"
-msgstr ""
+msgstr "احذف العنصر"
 
 #: qml/DeleteAction.qml:16
 #, kde-format
 msgid "Delete element from scene"
-msgstr ""
+msgstr "احذف العنصر من المشهد"
 
 #: qml/SelectMoveAction.qml:14
 #, kde-format
 msgid "Select & Move"
-msgstr ""
+msgstr "اختَر وحرِّك"
 
 #: qml/SelectMoveAction.qml:17
 #, kde-format
 msgid "Select and move elements on the scene"
-msgstr ""
+msgstr "اختَر وحرِّك العناصر على المشهد"
