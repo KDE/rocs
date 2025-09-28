@@ -2,6 +2,7 @@
     "KPlugin": {
         "Id": "rocs_transformedges",
         "Name": "Transform Edges",
+        "Name[ar]": "تحويل الحواف",
         "Name[bs]": "Trasformiši ivice",
         "Name[ca@valencia]": "Transforma les arestes",
         "Name[ca]": "Transforma les arestes",

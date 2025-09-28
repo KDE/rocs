@@ -2,6 +2,7 @@
     "KPlugin": {
         "Id": "rocs_assignvaluesplugin",
         "Name": "Assign Values Plugin",
+        "Name[ar]": "محلق إسناد قيم",
         "Name[ca@valencia]": "Connector d'assignació de valors",
         "Name[ca]": "Connector d'assignació de valors",
         "Name[cs]": "Modul pro přiřazování hodnot",

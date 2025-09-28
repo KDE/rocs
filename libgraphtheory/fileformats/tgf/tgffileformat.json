@@ -2,6 +2,7 @@
     "KPlugin": {
         "Id": "rocs_tgffileformat",
         "Name": "TGF Graph File Format",
+        "Name[ar]": "تنسيق ملف رسم بياني TGF",
         "Name[ca@valencia]": "Format de fitxer de grafs TGF",
         "Name[ca]": "Format de fitxer de grafs TGF",
         "Name[cs]": "Formát souborů grafů TGF",

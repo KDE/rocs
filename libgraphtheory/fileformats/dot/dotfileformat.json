@@ -2,6 +2,7 @@
     "KPlugin": {
         "Id": "rocs_dotfileformat",
         "Name": "DOT Graph File Format",
+        "Name[ar]": "تنسيق ملف رسم بياني DOT",
         "Name[ca@valencia]": "Format de fitxer de grafs DOT",
         "Name[ca]": "Format de fitxer de grafs DOT",
         "Name[cs]": "Formát souborů grafů DOT",

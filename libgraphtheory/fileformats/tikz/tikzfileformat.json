@@ -2,6 +2,7 @@
     "KPlugin": {
         "Id": "rocs_tikzfileformat",
         "Name": "PGF/TikZ Graph File Export Plugin",
+        "Name[ar]": "الملحق PGF/TikZ لتصدير ملفات الرسوم البيانية",
         "Name[ca@valencia]": "Connector d'exportació del fitxer de grafs a PGF/TikZ",
         "Name[ca]": "Connector d'exportació del fitxer de grafs a PGF/TikZ",
         "Name[cs]": "Export souborů grafů PGF/TikZ",

@@ -2,6 +2,7 @@
     "KPlugin": {
         "Id": "rocs_rocs2fileformat",
         "Name": "Rocs File Format",
+        "Name[ar]": "تنسيق ملف روكس",
         "Name[ca@valencia]": "Format de fitxer de Rocs",
         "Name[ca]": "Format de fitxer del Rocs",
         "Name[cs]": "Formát souborů Rocs",

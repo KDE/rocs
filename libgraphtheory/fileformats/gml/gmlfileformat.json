@@ -2,6 +2,7 @@
     "KPlugin": {
         "Id": "rocs_gmlfileformat",
         "Name": "GML File Format",
+        "Name[ar]": "نسق الملفّ GML",
         "Name[ca@valencia]": "Format de fitxer GML",
         "Name[ca]": "Format de fitxer GML",
         "Name[cs]": "Formát souboru GML",
