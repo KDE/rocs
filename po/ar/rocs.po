@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the rocs package.
+# SPDX-FileCopyrightText: 2022, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-06 00:38+0000\n"
-"PO-Revision-Date: 2022-01-29 18:00+0400\n"
+"PO-Revision-Date: 2025-09-27 10:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -37,19 +38,19 @@ msgstr "روكس"
 #, kde-format
 msgctxt "@title Short program description"
 msgid "Graph Theory Simulator"
-msgstr ""
+msgstr "محاكي  نظرية البيان"
 
 #: main.cpp:32
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 2008-2016 Rocs Developers"
-msgstr ""
+msgstr "(c) 2008-2016 مطوّرو روكس"
 
 #: main.cpp:33
 #, kde-format
 msgctxt "@info:credit Developer name"
 msgid "Andreas Cord-Landwehr"
-msgstr "Andreas Cord-Landwehr"
+msgstr "أندرياس كورد-لاندوير"
 
 #: main.cpp:34
 #, kde-format
@@ -61,7 +62,7 @@ msgstr "الصائن"
 #, kde-format
 msgctxt "@info:credit Developer name"
 msgid "Tomaz Canabrava"
-msgstr "Tomaz Canabrava"
+msgstr "توماز كانابرافا"
 
 #: main.cpp:38
 #, kde-format
@@ -73,7 +74,7 @@ msgstr "المؤلف الأصلي"
 #, kde-format
 msgctxt "@info:credit Developer name"
 msgid "Wagner Reck"
-msgstr ""
+msgstr "واغنر ريك"
 
 #: main.cpp:42
 #, kde-format
@@ -84,7 +85,7 @@ msgstr "مطوّر"
 #: main.cpp:58
 #, kde-format
 msgid "Project to open."
-msgstr ""
+msgstr "المشروع للفتح."
 
 #: plugins/scriptapi/scriptapimanager.cpp:109
 #, kde-format
@@ -126,7 +127,7 @@ msgstr "النّوع"
 #, kde-format
 msgctxt "@title"
 msgid "Return Type"
-msgstr ""
+msgstr "نوع الإرجاع"
 
 #: plugins/scriptapi/scriptapimanager.cpp:116
 #, kde-format
@@ -144,13 +145,13 @@ msgstr "الوصف"
 #, kde-format
 msgctxt "@title"
 msgid "Script Engine API"
-msgstr ""
+msgstr "واجهة برمجة تطبيقات محرّك السكربت"
 
 #: plugins/scriptapi/scriptapimanager.cpp:254
 #, kde-format
 msgctxt "@title"
 msgid "The Graph Document"
-msgstr ""
+msgstr "مستند المخطط"
 
 #: plugins/scriptapi/scriptapimanager.cpp:255
 #, kde-format
@@ -162,12 +163,12 @@ msgstr "الكائنات"
 #, kde-format
 msgctxt "@title"
 msgid "Script Engine Modules"
-msgstr ""
+msgstr "وحدات محرّك السكربت"
 
 #: plugins/scriptapi/scriptapimodel.cpp:111
 #, kde-format
 msgid "Script Objects"
-msgstr ""
+msgstr "كائنات السكربت"
 
 #: plugins/scriptapi/scriptapimodel.cpp:229
 #, kde-format
@@ -183,7 +184,7 @@ msgstr "الطّرق"
 #: plugins/scriptapi/scriptapiwidget.ui:17
 #, kde-format
 msgid "Rocs Scripting API"
-msgstr ""
+msgstr "واجهة برمجة تطبيقات سكربتات روكس"
 
 #. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
 #. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
@@ -196,7 +197,7 @@ msgstr "أظهر النص بجانب الأيقونة"
 #: rocs.kcfg:49
 #, kde-format
 msgid "Path where include manager seek for includes."
-msgstr ""
+msgstr "المسار حيث يسعى مدير التضمين إلى التضمينات."
 
 #. i18n: ectx: Menu (project)
 #: rocsui.rc:23
@@ -208,25 +209,25 @@ msgstr "مشروع"
 #: rocsui.rc:29
 #, kde-format
 msgid "Script Document"
-msgstr ""
+msgstr "مستند سكربت"
 
 #. i18n: ectx: Menu (graph)
 #: rocsui.rc:35
 #, kde-format
 msgid "Graph Document"
-msgstr ""
+msgstr "مستند مخطط"
 
 #. i18n: ectx: Menu (graph_file)
 #: rocsui.rc:41
 #, kde-format
 msgid "Graph File"
-msgstr ""
+msgstr "ملف مخطط"
 
 #. i18n: ectx: Menu (graph_selected)
 #: rocsui.rc:45
 #, kde-format
 msgid "Edit Selected Data"
-msgstr ""
+msgstr "حرّر البيانات المحدّدة"
 
 #. i18n: ectx: Menu
 #: rocsui.rc:47
@@ -244,29 +245,29 @@ msgstr "أدوات"
 #, kde-format
 msgctxt "@title"
 msgid "Code Document Name"
-msgstr ""
+msgstr "اسم مستند الشيفرة"
 
 #: ui/codeeditorwidget.cpp:82
 #, kde-format
 msgid "Enter the name of your code document"
-msgstr ""
+msgstr "أدخل اسم مستند الشيفرة لديك"
 
 #: ui/documenttypeswidget.cpp:29
 #, kde-format
 msgctxt "@title"
 msgid "Node Types"
-msgstr ""
+msgstr "أنواع العقد"
 
 #: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
 #, kde-format
 msgid "Create Type"
-msgstr ""
+msgstr "أنشئ نوعًا"
 
 #: ui/documenttypeswidget.cpp:45
 #, kde-format
 msgctxt "@title"
 msgid "Edge Types"
-msgstr ""
+msgstr "أنواع الحواف"
 
 #: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
 #, kde-format
@@ -276,12 +277,12 @@ msgstr "غير مسمّى"
 #: ui/edgetypesdelegate.cpp:57
 #, kde-format
 msgid "Direction of edges of edge type."
-msgstr ""
+msgstr "اتجاه حواف نوع الحافة."
 
 #: ui/edgetypesdelegate.cpp:61
 #, kde-format
 msgid "Unique ID of edge type."
-msgstr ""
+msgstr "المعرّف الفريد لنوع الحافة."
 
 #: ui/fileformatdialog.cpp:46
 #, kde-format
@@ -295,6 +296,8 @@ msgid ""
 "<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
 "want to overwrite it, change the file name to something else.</p>"
 msgstr ""
+"<p>الملفّ <br /><strong>'%1'</strong><br /> موجود فعلًا؛ إذا لا تريد أن يكتب "
+"فوقه، غيّر اسم الملفّ إلى شيء آخر.</p>"
 
 #: ui/fileformatdialog.cpp:69
 #, kde-format
@@ -307,11 +310,13 @@ msgid ""
 "<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
 "backend. Aborting export.</p>"
 msgstr ""
+"<p>لا أستطيع حلّ لاحقة الملفّ <strong>'%1'</strong> إلى واجهة خلفية ملفّ متاحة. "
+"أجهض التصدير.</p>"
 
 #: ui/fileformatdialog.cpp:96
 #, kde-format
 msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
-msgstr ""
+msgstr "<p>وقع خطأ عند كتابة الملفّ: <strong>'%1'</strong></p>"
 
 #: ui/fileformatdialog.cpp:114
 #, kde-format
@@ -322,24 +327,24 @@ msgstr "*|كل الملفات"
 #, kde-format
 msgctxt "@title:window"
 msgid "Import Graph File into Project"
-msgstr ""
+msgstr "استورد ملف مخطط إلى مشروع"
 
 #: ui/grapheditorwidget.cpp:79
 #, kde-format
 msgctxt "@title"
 msgid "Graph Document Name"
-msgstr ""
+msgstr "اسم مستند المخطط"
 
 #: ui/grapheditorwidget.cpp:80
 #, kde-format
 msgid "Enter the name of your graph document"
-msgstr ""
+msgstr "أدخل اسم مستند المخطط لديك"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: ui/journalwidget.ui:17
 #, kde-format
 msgid "Project Journal"
-msgstr ""
+msgstr "يوميّات المشروع"
 
 #: ui/mainwindow.cpp:169
 #, kde-format
@@ -351,7 +356,7 @@ msgstr "شغّل"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Execute currently active script on active graph document."
-msgstr ""
+msgstr "نفّذ السكربت النشط حاليًا على مستند المخطط النشط."
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -363,12 +368,12 @@ msgstr "أوقف"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop script execution."
-msgstr ""
+msgstr "أوقف تنفيذ السكربت."
 
 #: ui/mainwindow.cpp:204
 #, kde-format
 msgid "Element Types"
-msgstr ""
+msgstr "أنواع العناصر"
 
 #: ui/mainwindow.cpp:211
 #, kde-format
@@ -380,7 +385,7 @@ msgstr "اليوميّات"
 #, kde-format
 msgctxt "@title"
 msgid "Scripting API"
-msgstr ""
+msgstr "واجهة برمجة تطبيقات السكربتات"
 
 #: ui/mainwindow.cpp:250
 #, kde-format
@@ -392,7 +397,7 @@ msgstr "مشروع جديد"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project"
-msgstr ""
+msgstr "احفظ المشروع"
 
 #: ui/mainwindow.cpp:262
 #, kde-format
@@ -410,31 +415,31 @@ msgstr "المشاريع الحديثة"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project As..."
-msgstr ""
+msgstr "احفظ المشروع باسم..."
 
 #: ui/mainwindow.cpp:276
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Graph Document"
-msgstr ""
+msgstr "مستند مخطط جديد"
 
 #: ui/mainwindow.cpp:277
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Script File..."
-msgstr ""
+msgstr "ملف سكربت جديد..."
 
 #: ui/mainwindow.cpp:278
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Graph..."
-msgstr ""
+msgstr "استورد مخططًا..."
 
 #: ui/mainwindow.cpp:279
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Graph As..."
-msgstr ""
+msgstr "صدّر المخطط باسم..."
 
 #: ui/mainwindow.cpp:280
 #, kde-format
@@ -446,24 +451,24 @@ msgstr "استيراد سكربت"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Script..."
-msgstr ""
+msgstr "صدّر سكربت..."
 
 #: ui/mainwindow.cpp:320
 #, kde-format
 msgctxt "@title:window"
 msgid "Import Script into Project"
-msgstr ""
+msgstr "استورد سكربتًا إلى مشروع"
 
 #: ui/mainwindow.cpp:332
 #, kde-format
 msgctxt "@title:window"
 msgid "Export Script"
-msgstr ""
+msgstr "صدّر سكربت"
 
 #: ui/mainwindow.cpp:332
 #, kde-format
 msgid "JavaScript (*.js)"
-msgstr ""
+msgstr "جافاسكربت (*.js)"
 
 #: ui/mainwindow.cpp:343
 #, kde-format
@@ -474,12 +479,12 @@ msgstr "بلا عنوان"
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Project As"
-msgstr ""
+msgstr "احفظ المشروع باسم"
 
 #: ui/mainwindow.cpp:366
 #, kde-format
 msgid "Rocs Projects (*.rocs)"
-msgstr ""
+msgstr "مشاريع روكس (*.rocs)"
 
 #: ui/mainwindow.cpp:376
 #, kde-format
@@ -498,12 +503,12 @@ msgstr "أأكتب فوق الملفّ؟"
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Project Files"
-msgstr ""
+msgstr "افتح ملفات المشروع"
 
 #: ui/mainwindow.cpp:400
 #, kde-format
 msgid "Rocs projects (*.rocs)"
-msgstr ""
+msgstr "مشاريع روكس (*.rocs)"
 
 #: ui/mainwindow.cpp:407
 #, kde-format
@@ -511,7 +516,7 @@ msgctxt "@info"
 msgid ""
 "The Rocs project could not be imported because the project file could not be "
 "parsed."
-msgstr ""
+msgstr "لا أستطيع استيراد مشروع روكس بسبب تعذّر تحليل ملف المشروع."
 
 #: ui/mainwindow.cpp:429
 #, kde-format
@@ -522,12 +527,12 @@ msgstr "[ بلا عنوان ]%1"
 #: ui/mainwindow.cpp:458
 #, kde-format
 msgid "ScriptName"
-msgstr ""
+msgstr "اسم السكربت"
 
 #: ui/mainwindow.cpp:458
 #, kde-format
 msgid "Enter the name of your new script"
-msgstr ""
+msgstr "أدخل اسم سكربتك الجديد"
 
 #: ui/mainwindow.cpp:467
 #, kde-format
@@ -538,47 +543,47 @@ msgstr "الملفّ موجود فعلًا"
 #, kde-format
 msgctxt "@info"
 msgid "Changes on your project are unsaved. Do you want to save your changes?"
-msgstr ""
+msgstr "تغييرات مشروعك غير محفوظة. أتريد حفظ تغييراتك؟"
 
 #: ui/nodetypesdelegate.cpp:60
 #, kde-format
 msgid "Unique ID of the node type."
-msgstr ""
+msgstr "المعرّف الفريد لنوع العقدة."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/scriptoutputwidget.ui:24
 #, kde-format
 msgid "Script output:"
-msgstr ""
+msgstr "خرج السكربت:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
 #: ui/scriptoutputwidget.ui:37
 #, kde-format
 msgid "Clear program output with each execution."
-msgstr ""
+msgstr "امسح خرج البرنامج مع كل تنفيذ."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
 #: ui/scriptoutputwidget.ui:56
 #, kde-format
 msgid "Show debug output."
-msgstr ""
+msgstr "أظهر خرج التنقيح."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonClear)
 #: ui/scriptoutputwidget.ui:82
 #, kde-format
 msgid "Clear output."
-msgstr ""
+msgstr "امسح الخرج."
 
 #: ui/sidedockwidget.cpp:105
 #, kde-format
 msgctxt "@title"
 msgid "Side Toolbar"
-msgstr ""
+msgstr "شريط الأدوات الجانبي"
 
 #: ui/sidedockwidget.cpp:133
 #, kde-format
 msgid "Toggle '%1' view."
-msgstr ""
+msgstr "بدّل عرض '%1'."
 
 #~ msgctxt "@action:intoolbar Open Debugger"
 #~ msgid "Debugger"
