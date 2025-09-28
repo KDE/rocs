@@ -2,6 +2,7 @@
     "KPlugin": {
         "Id": "rocs_generategraphplugin",
         "Name": "Generate Graph",
+        "Name[ar]": "توليد رسم بياني",
         "Name[bg]": "Създаване на графика",
         "Name[bs]": "Generiši Graf",
         "Name[ca@valencia]": "Genera el graf",
