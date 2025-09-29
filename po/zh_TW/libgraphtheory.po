@@ -2,20 +2,21 @@
 # Frank Weng (a.k.a. Franklin) <franklin@goodhorse.idv.tw>, 2010.
 # Franklin Weng <franklin@goodhorse.idv.tw>, 2010, 2011, 2012, 2013, 2014, 2015, 2017.
 # pan93412 <pan93412@gmail.com>, 2018, 2019.
+# SPDX-FileCopyrightText: 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-14 00:38+0000\n"
-"PO-Revision-Date: 2019-11-26 21:23+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2025-09-29 01:30+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 19.11.80\n"
+"X-Generator: Lokalize 25.11.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -67,8 +68,7 @@ msgid "Edges"
 msgstr "邊"
 
 #: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
-#, fuzzy, kde-format
-#| msgid "Property Names"
+#, kde-format
 msgid "Property names"
 msgstr "屬性名稱"
 
@@ -79,10 +79,9 @@ msgid "Edge Type Properties"
 msgstr "邊緣型態屬性"
 
 #: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgid "Name:"
-msgstr "名稱"
+msgstr "名稱："
 
 #. i18n: ectx: property (text), widget (QLabel, labelId)
 #. i18n: ectx: property (text), widget (QLabel, labelIdentifier)
@@ -111,16 +110,14 @@ msgid "Bidirectional"
 msgstr "雙向"
 
 #: dialogs/edgetypeproperties.cpp:54
-#, fuzzy, kde-format
-#| msgid "Direction"
+#, kde-format
 msgid "Direction:"
-msgstr "方向"
+msgstr "方向："
 
 #: dialogs/edgetypeproperties.cpp:61 dialogs/nodetypeproperties.cpp:59
-#, fuzzy, kde-format
-#| msgid "Visibility"
+#, kde-format
 msgid "Visibility:"
-msgstr "可見度"
+msgstr "可見度："
 
 #: dialogs/edgetypeproperties.cpp:137
 #, kde-format
@@ -287,10 +284,9 @@ msgstr "指定常數值"
 
 #. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
 #: editorplugins/assignvalues/assignvalueswidget.ui:132
-#, fuzzy, kde-format
-#| msgid "Start ID"
+#, kde-format
 msgid "Start ID:"
-msgstr "開始代碼"
+msgstr "開始代碼："
 
 #. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:167
@@ -366,10 +362,9 @@ msgstr "節點："
 
 #. i18n: ectx: property (text), widget (QLabel, labelProperty)
 #: editorplugins/assignvalues/assignvalueswidget.ui:447
-#, fuzzy, kde-format
-#| msgid "Property Name"
+#, kde-format
 msgid "Property name:"
-msgstr "屬性名稱"
+msgstr "屬性名稱："
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
 #. i18n: ectx: property (text), widget (QLabel, labelConnection)
@@ -563,8 +558,7 @@ msgstr "允許自我邊緣："
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
 #: editorplugins/generategraph/generategraphwidget.ui:293
-#, fuzzy, kde-format
-#| msgid "Generator Seed:"
+#, kde-format
 msgid "Generator seed:"
 msgstr "產生種子："
 
@@ -650,13 +644,13 @@ msgstr "選擇產生圖形的節點元素的節點型態。"
 #, kde-format
 msgctxt "@title:window"
 msgid "Graph Layout"
-msgstr ""
+msgstr "圖形佈局"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:20
 #, kde-format
 msgid "Graph Layout"
-msgstr ""
+msgstr "圖形佈局"
 
 #. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:36
@@ -894,8 +888,7 @@ msgid "TikZ (PGF) Format (%1)"
 msgstr "TikZ (PGF) 格式 (%1)"
 
 #: graphdocument.cpp:129
-#, fuzzy, kde-format
-#| msgid "default"
+#, kde-format
 msgid "Default"
 msgstr "預設"
 
