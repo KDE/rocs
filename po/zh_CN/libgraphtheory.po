@@ -1290,22 +1290,6 @@ msgid "Delete Element"
 msgstr "删除元素"
 
 #: org/kde/rocs/Scene.qml:97
-#, fuzzy, kde-format
-#| msgid "Delete Element"
+#, kde-format
 msgid "Delete element from scene"
-msgstr "删除元素"
-
-#~ msgctxt "@title:column"
-#~ msgid "Edge"
-#~ msgstr "边缘"
-
-#~ msgctxt "@title:column"
-#~ msgid "Node"
-#~ msgstr "节点"
-
-#~ msgctxt "@title:window"
-#~ msgid "Plugin Error"
-#~ msgstr "插件错误"
-
-#~ msgid "Plugins could not be found in specified directories:<br>"
-#~ msgstr "在指定的目录中找不到插件：<br>"
+msgstr ""
