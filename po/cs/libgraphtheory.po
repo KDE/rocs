@@ -1263,7 +1263,7 @@ msgstr "Vytvořit uzel"
 #: org/kde/rocs/Scene.qml:70
 #, kde-format
 msgid "Add a node to the scene"
-msgstr ""
+msgstr "Přidat na obrazovku uzel"
 
 #: org/kde/rocs/Scene.qml:86
 #, kde-format
@@ -1271,11 +1271,9 @@ msgid "Create Edge"
 msgstr "Vytvořit hranu"
 
 #: org/kde/rocs/Scene.qml:89
-#, fuzzy, kde-format
-#| msgctxt "Scripting API"
-#| msgid "Create edge between the given nodes of default edge type."
+#, kde-format
 msgid "Create an edge between two nodes"
-msgstr "Vytvořit hranu mezi danými uzly výchozího typu hrany."
+msgstr "Vytvořit hranu mezi dvěma uzly"
 
 #: org/kde/rocs/Scene.qml:94
 #, kde-format
@@ -1283,27 +1281,6 @@ msgid "Delete Element"
 msgstr "Smazat prvek"
 
 #: org/kde/rocs/Scene.qml:97
-#, fuzzy, kde-format
-#| msgid "Delete Element"
+#, kde-format
 msgid "Delete element from scene"
-msgstr "Smazat prvek"
-
-#~ msgctxt "@title:column"
-#~ msgid "Edge"
-#~ msgstr "Hrana"
-
-#~ msgctxt "@title:column"
-#~ msgid "Edge Type"
-#~ msgstr "Typ hrany"
-
-#~ msgctxt "@title:column"
-#~ msgid "Node"
-#~ msgstr "Uzel"
-
-#~ msgctxt "@title:column"
-#~ msgid "Node Type"
-#~ msgstr "Typ uzlu"
-
-#~ msgctxt "@title:window"
-#~ msgid "Plugin Error"
-#~ msgstr "Chyba modulu"
+msgstr "Smazat prvek ze scény"
