@@ -1322,10 +1322,9 @@ msgid "Select & Move"
 msgstr "Tria i mou"
 
 #: org/kde/rocs/Scene.qml:60
-#, fuzzy, kde-format
-#| msgid "Select the node type for node elements of the generated graph."
+#, kde-format
 msgid "Select and move elements on the scene"
-msgstr "Trieu el tipus de node per als elements de node del graf generat."
+msgstr "Tria i mou els elements a l'escena"
 
 #: org/kde/rocs/Scene.qml:67
 #, kde-format
@@ -1333,11 +1332,9 @@ msgid "Create Node"
 msgstr "Crea un node"
 
 #: org/kde/rocs/Scene.qml:70
-#, fuzzy, kde-format
-#| msgctxt "Scripting API"
-#| msgid "Start node of the edge."
+#, kde-format
 msgid "Add a node to the scene"
-msgstr "Node d'inici de l'aresta."
+msgstr "Afig un node a l'escena"
 
 #: org/kde/rocs/Scene.qml:86
 #, kde-format
@@ -1345,12 +1342,9 @@ msgid "Create Edge"
 msgstr "Crea una aresta"
 
 #: org/kde/rocs/Scene.qml:89
-#, fuzzy, kde-format
-#| msgctxt "Scripting API"
-#| msgid "Create edge between the given nodes of default edge type."
+#, kde-format
 msgid "Create an edge between two nodes"
-msgstr ""
-"Crea una aresta entre els nodes donats amb el tipus d'aresta predeterminada."
+msgstr "Crea una aresta entre dos nodes"
 
 #: org/kde/rocs/Scene.qml:94
 #, kde-format
@@ -1358,54 +1352,6 @@ msgid "Delete Element"
 msgstr "Suprimix l'element"
 
 #: org/kde/rocs/Scene.qml:97
-#, fuzzy, kde-format
-#| msgid "Delete Element"
+#, kde-format
 msgid "Delete element from scene"
-msgstr "Suprimix l'element"
-
-#~ msgctxt "@title:column"
-#~ msgid "Edge"
-#~ msgstr "Aresta"
-
-#~ msgctxt "@title:column"
-#~ msgid "EdgeProperty"
-#~ msgstr "Propietats de l'aresta"
-
-#~ msgctxt "@title:column"
-#~ msgid "Edge Type"
-#~ msgstr "Tipus d'aresta"
-
-#~ msgctxt "@title:column"
-#~ msgid "EdgeTypeProperty"
-#~ msgstr "Propietats del tipus d'aresta"
-
-#~ msgctxt "@title:column"
-#~ msgid "Node"
-#~ msgstr "Node"
-
-#~ msgctxt "@title:column"
-#~ msgid "NodeProperty"
-#~ msgstr "Propietats del node"
-
-#~ msgctxt "@title:column"
-#~ msgid "Node Type"
-#~ msgstr "Tipus de node"
-
-#~ msgctxt "@title:column"
-#~ msgid "NodeTypeProperty"
-#~ msgstr "Propietats del tipus de node"
-
-#~ msgctxt "@title:window"
-#~ msgid "Plugin Error"
-#~ msgstr "S'ha produït un error del connector"
-
-#~ msgid "Plugins could not be found in specified directories:<br>"
-#~ msgstr ""
-#~ "Els connectors no s'han pogut trobar als directoris especificats:<br>"
-
-#~ msgid ""
-#~ "<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins."
-#~ "html'>this link</a> for further information."
-#~ msgstr ""
-#~ "<br><br> Vegeu <a href='https://doc.qt.io/qt-5/deployment-plugins."
-#~ "html'>este enllaç</a> per a informació addicional."
+msgstr "Suprimix l'element de l'escena"
