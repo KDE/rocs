@@ -7,6 +7,8 @@
 #include "graphdocument.h"
 #include "graphtheory_export.h"
 #include "typenames.h"
+#include "org/kde/rocs/edgeproxy.h"
+#include "org/kde/rocs/nodeproxy.h"
 #include <QList>
 #include <QObject>
 #include <QQuickWidget>
@@ -29,6 +31,10 @@ public:
     ~View() override;
     void setGraphDocument(GraphDocumentPtr document);
     GraphDocumentPtr graphDocument() const;
+
+private Q_SLOTS:
+    void showNodePropertiesDialog(NodeProxy *node);
+    void showEdgePropertiesDialog(EdgeProxy *edge);
 
 private:
     const QScopedPointer<ViewPrivate> d;

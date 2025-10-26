@@ -277,8 +277,8 @@ Item {
                         Loader {
                             id: nodeDialogLoader
                         }
-                        onDoubleClicked: {
-                            root.graph.showNodePropertiesDialog(nodeItem.node);
+                        onDoubleClicked: mouse => {
+                            root.showNodePropertiesDialog(nodeItem.node);
                             mouse.accepted = true
                         }
                         onPressed: mouse => {

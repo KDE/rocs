@@ -6,11 +6,9 @@
 #include "dialogs/nodeproperties.h"
 #include "logging_p.h"
 #include "org/kde/rocs/edgemodel.h"
-#include "org/kde/rocs/edgepropertymodel.h"
 #include "org/kde/rocs/edgetypemodel.h"
 #include "org/kde/rocs/graph.h"
 #include "org/kde/rocs/nodemodel.h"
-#include "org/kde/rocs/nodepropertymodel.h"
 #include "org/kde/rocs/nodetypemodel.h"
 #include <KLocalizedContext>
 #include <QPointer>
@@ -78,8 +76,8 @@ View::View(QWidget *parent)
     QObject *topLevel = component->createWithInitialProperties(initialViewProperties);
 
     // connections to QML signals
-    // connect(topLevel, SIGNAL(showNodePropertiesDialog(GraphTheory::NodeProxy *)), this, SLOT(showNodePropertiesDialog(GraphTheory::NodeProxy *)));
-    // connect(topLevel, SIGNAL(showEdgePropertiesDialog(GraphTheory::EdgeProxy *)), this, SLOT(showEdgePropertiesDialog(GraphTheory::EdgeProxy *)));
+    connect(topLevel, SIGNAL(showNodePropertiesDialog(GraphTheory::NodeProxy *)), this, SLOT(showNodePropertiesDialog(GraphTheory::NodeProxy *)));
+    connect(topLevel, SIGNAL(showEdgePropertiesDialog(GraphTheory::EdgeProxy *)), this, SLOT(showEdgePropertiesDialog(GraphTheory::EdgeProxy *)));
 
     // create widget
     setContent(path, component, topLevel);
@@ -102,19 +100,18 @@ GraphDocumentPtr View::graphDocument() const
     return d->m_document;
 }
 
-// TODO move
-// void View::showNodePropertiesDialog(NodeProxy *node)
-// {
-//     QPointer<NodeProperties> dialog = new NodeProperties();
-//     dialog->setData(node->node()->self());
-//     dialog->show(); // workaround: scene-drag not working with modal dialogs
-// }
+void View::showNodePropertiesDialog(NodeProxy *node)
+{
+    QPointer<NodeProperties> dialog = new NodeProperties();
+    dialog->setData(node->node()->self());
+    dialog->show(); // workaround: scene-drag not working with modal dialogs
+}
 
-// void View::showEdgePropertiesDialog(EdgeProxy *edge)
-// {
-//     QPointer<EdgeProperties> dialog = new EdgeProperties();
-//     dialog->setData(edge->edge()->self());
-//     dialog->show(); // workaround: scene-drag not working with modal dialogs
-// }
+void View::showEdgePropertiesDialog(EdgeProxy *edge)
+{
+    QPointer<EdgeProperties> dialog = new EdgeProperties();
+    dialog->setData(edge->edge()->self());
+    dialog->show(); // workaround: scene-drag not working with modal dialogs
+}
 
 #include "moc_view.cpp"
