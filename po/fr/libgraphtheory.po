@@ -1183,7 +1183,7 @@ msgid ""
 "Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
 "for red)."
 msgstr ""
-"Lire et définir la chaîne de couleur du nœud, en valeur hexadécimale (par "
+"Lire et définir la chaine de couleur du nœud, en valeur hexadécimale (par "
 "exemple, « #ff0000 » pour le rouge)."
 
 #: kernel/modules/document/node.xml:47
