@@ -866,7 +866,9 @@ msgstr "Format de graf de Rocs (%1)"
 #: fileformats/rocs2/rocs2fileformat.cpp:303
 #, kde-format
 msgid "Error on serializing file format to file."
-msgstr "S'ha produït un error en serialitzar el format de fitxer en el fitxer."
+msgstr ""
+"S'ha produït un error mentre se serialitzava el format de fitxer en el "
+"fitxer."
 
 #: fileformats/tgf/tgffileformat.cpp:29
 #, kde-format
