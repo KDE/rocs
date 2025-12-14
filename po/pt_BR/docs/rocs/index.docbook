@@ -1,7 +1,5 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-
-  <!ENTITY kappname "&rocs;">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % Brazilian-Portuguese "INCLUDE">
 
@@ -65,16 +63,16 @@
 </authorgroup>
 
 <date
->10/04/2016</date>
+>23/10/2021</date>
 <releaseinfo
->Rocs 2.1.50 (Applications 16.04)</releaseinfo>
+>KDE Gear 21.08</releaseinfo>
 
 <legalnotice
 >&FDLNotice;</legalnotice>
 
 <abstract>
 <para
->&rocs; é a ferramenta da teoria dos grafos do &kde;. </para>
+>&rocs; é uma ferramenta da teoria dos grafos. </para>
 </abstract>
 
 <keywordset>
@@ -92,6 +90,8 @@
 >nó</keyword>
 <keyword
 >aresta</keyword>
+<keyword
+>Rocs</keyword>
 </keywordset>
 
 </bookinfo>
@@ -122,20 +122,19 @@
 ></listitem>
 </itemizedlist>
 <para
->Para todos eles, o &rocs; oferece um editor gráfico fácil de usar para criar grafos, um mecanismo de criação de scripts poderoso para executar algoritmos e diversas ferramentas para ajudar nas simulações, experiências e exportações de grafos. A forma típica de usar o &rocs; é criar um grafo, seja à mão (i.e., arrastando nós e arestas para o quadro) ou usando um dos geradores de grafos. Os algoritmos de grafos poderão então ser implementados e executados no grafo criado, assim como todas as alterações feitas pelo algoritmo, serão visíveis imediatamente no editor do grafo. </para>
+>Para todos eles, o &rocs; oferece um editor gráfico fácil de usar para criar grafos, um mecanismo de criação de scripts poderoso para executar algoritmos e diversas ferramentas para ajudar nas simulações, experiências e exportações de grafos. A forma típica de usar o &rocs; é criar um grafo, seja à mão (&ie;, arrastando nós e arestas para o quadro) ou usando um dos geradores de grafos. Os algoritmos de grafos poderão então ser implementados e executados no grafo criado, assim como todas as alterações feitas pelo algoritmo, serão visíveis imediatamente no editor do grafo. </para>
 
 <screenshot>
-<screeninfo
+  <screeninfo
 >Uma captura de tela do &rocs;.</screeninfo>
-<mediaobject>
-<imageobject>
-<imagedata fileref="rocs-screenshot.png" format="PNG"/>
-</imageobject>
-<textobject>
-<phrase
->Uma captura de tela do &rocs;.</phrase>
-</textobject>
-</mediaobject>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-screenshot.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Uma captura de tela do &rocs;.</phrase
+></textobject>
+  </mediaobject>
 </screenshot>
 </sect1>
 
@@ -166,14 +165,14 @@
 <title
 >Tipos de borda</title>
 <para
->Em alguns cenários, os grafos consistem em diversos tipos de arestas (p.ex., um grafo não-direcional mais as arestas da árvore calculadas por um algoritmo de pesquisa primeiro-em-largura) que deverá ser tratado e apresentado de forma diferente. Para isso, além de um tipo de aresta padrão, você poderá definir outros tipos de arestas arbitrários. Cada tipo de aresta tem a sua própria representação visual, propriedades dinâmicas e pode ser definido como direcionado ou não-direcionado. A interface de criação de scripts oferece métodos de conveniência para acessar de forma específica apenas as arestas de determinados tipos. </para>
+>Em alguns cenários, os grafos consistem em diversos tipos de arestas (&eg;, um grafo não-direcional mais as arestas da árvore calculadas por um algoritmo de pesquisa primeiro-em-largura) que deverá ser tratado e apresentado de forma diferente. Para isso, além de um tipo de aresta padrão, você poderá definir outros tipos de arestas arbitrários. Cada tipo de aresta tem a sua própria representação visual, propriedades dinâmicas e pode ser definido como direcionado ou não-direcionado. A interface de criação de scripts oferece métodos de conveniência para acessar de forma específica apenas as arestas de determinados tipos. </para>
 </sect2>
 
 <sect2>
 <title
 >Tipos de nós</title>
 <para
->De forma análoga aos tipos de arestas, você poderá definir diferentes tipos de nós de um grafo (p.ex., para indicar algumas regras especiais aos nós). Cada tipo de nó tem sua própria representação visual e propriedades dinâmicas. </para>
+>De forma análoga aos tipos de arestas, você poderá definir diferentes tipos de nós de um grafo (&eg;, para indicar algumas regras especiais aos nós). Cada tipo de nó tem sua própria representação visual e propriedades dinâmicas. </para>
 </sect2>
 
 <sect2>
@@ -184,13 +183,15 @@
 >Tipos de elementos</guilabel
 > e o botão <inlinemediaobject
 ><imageobject
-><imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/> </imageobject
+><imagedata fileref="document-properties.png" format="PNG"/> </imageobject
 ></inlinemediaobject
 ><guibutton
 >Propriedades</guibutton
 > para abrir a janela de propriedades. </para>
 <para
->Você também pode usar o mecanismo de criação de scripts para acessar as propriedades registradas e alterar os seus valores. No exemplo a seguir, assume-se que a propriedade "peso" está registrada para o tipo de aresta padrão. <programlisting
+>Você também pode usar o mecanismo de criação de scripts para acessar as propriedades registradas e alterar os seus valores. No exemplo a seguir, assume-se que a propriedade <quote
+>peso</quote
+> está registrada para o tipo de aresta padrão. <programlisting
 >var nos = Document.nodes()
 for (var i = 0; i &lt; nos.length; ++i){
     nos[i].peso = i;
@@ -211,7 +212,9 @@ for (var i = 0; i &lt; nos.length; ++i){
 >cobertura mínima de vértices</emphasis
 >. Esse problema consiste em encontrar um subconjunto de nós do grafo C com um tamanho mínimo, de modo que cada aresta do grafo esteja conectada a pelo menos um nó do C. Este problema é conhecido por ser NP-difícil e queremos ilustrar como encontrar uma aproximação com um fator 2 computando uma correspondência no grafo dado. </para>
 <para
->Nosso objetivo é visualizar o relacionamento da ocorrência e da cobertura mínima de vértices. Para tal, queremos mostrar dois tipos de arestas, um para mostrar as arestas correspondentes e outro para mostrar as "normais", assim como dois tipos de nós que usamos para distinguir os nós contidos em C e os não-contidos. </para>
+>Nosso objetivo é visualizar o relacionamento da ocorrência e da cobertura mínima de vértices. Para tal, queremos mostrar dois tipos de arestas, um para mostrar as arestas correspondentes e outro para mostrar as <quote
+>normais</quote
+>, assim como dois tipos de nós que usamos para distinguir os nós contidos em C e os não-contidos. </para>
 
 <sect2>
 <title
@@ -236,7 +239,11 @@ for (var i = 0; i &lt; nos.length; ++i){
 <para
 >Usamos os <guilabel
 >Tipos de elementos</guilabel
-> e criamos um segundo tipo de nó, assim como um segundo tipo de aresta. Para os novos tipos, abrimos a janela de propriedades, usando os respectivos botões de <guibutton
+> e criamos um segundo tipo de nó, assim como um segundo tipo de aresta. Para os novos tipos, abrimos a janela de propriedades, usando os respectivos botões de <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
 >Propriedades</guibutton
 > e definimos os IDs como <literal
 >2</literal
@@ -298,7 +305,11 @@ Console.log("A cobertura de vértices contém " + C.length + " nós.");
 <title
 >Executar o Algoritmo</title>
 <para
->O algoritmo pode ser executado com o botão <guibutton
+>O algoritmo pode ser executado com o botão <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
 >Executar</guibutton
 > no painel de controle de scripts. </para>
 </sect2>
@@ -314,150 +325,151 @@ Console.log("A cobertura de vértices contém " + C.length + " nós.");
 >Elementos principais da interface do usuário</title>
 <para
 >A interface do usuário está dividida em várias partes lógicas, como aparece na imagem abaixo. </para>
+
 <screenshot>
-    <screeninfo
+  <screeninfo
 >Elementos gráficos da interface do &rocs;.</screeninfo>
-    <mediaobject>
-    <imageobject>
-    <imagedata fileref="rocs-interfaces.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-    <phrase
->Elementos gráficos da interface do &rocs;.</phrase>
-    </textobject>
-    </mediaobject>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-interfaces.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>Elementos gráficos da interface do &rocs;.</phrase
+></textobject>
+  </mediaobject>
 </screenshot>
+
 <variablelist>
-<varlistentry>
+  <varlistentry>
     <term
 >Editor de grafos</term>
     <listitem
 ><para
->O editor oferece um quadro onde os nós e arestas podem ser colocados. Ao clicar duas vezes em qualquer um dos elementos, será aberto um menu de propriedades correspondente. Você pode usar as ferramentas da <emphasis
->Barra de Edição do Grafo</emphasis
-> para criar e modificar os grafos.</para
-></listitem>
-</varlistentry>
-<varlistentry>
-    <term
->Barra de ferramentas do editor de grafos</term>
-    <listitem
+>O editor oferece um quadro onde os nós e arestas podem ser colocados. Ao clicar duas vezes em qualquer um dos elementos, será aberto um menu de propriedades correspondente. Você pode usar as ferramentas das <emphasis
+>abas da barra lateral</emphasis
+> para criar e modificar os grafos.</para>
+    <para
+>Ferramentas disponíveis:</para>
+      <itemizedlist>
+        <listitem
 ><para
->A barra oferece as ferramentas <inlinemediaobject
+>No canto superior esquerdo da caixa, você encontrará os seguintes ícones de ação. Clicar em uma ação significa que o ponteiro do mouse aplica essa ação no quadro branco do editor de grafos:</para>
+          <itemizedlist>
+            <listitem
+><para
+><inlinemediaobject
 ><imageobject
-><imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject
-> </inlinemediaobject
-><guibutton
->Criar nó</guibutton
-> ou <inlinemediaobject
-><imageobject
-><imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject
+><imagedata fileref="sc-actions-rocsselect.png" format="PNG"/></imageobject
 ></inlinemediaobject
-><guibutton
->Criar aresta</guibutton
->, são usadas para criação de novos elementos no quadro. Observe que a barra de ferramentas extra, para seleção do tipo de nó ou aresta respectivo, fica visível se uma dessas ferramentas for selecionada. As ferramentas também são usadas para seleção, movimentação e exclusão dos elementos que estiverem disponíveis aqui. Para obter mais detalhes, consulte <xref linkend="user-interface-toolbar"/>. </para
+><guiicon
+>Selecionar e mover</guiicon
+>: Para selecionar os elementos, você poderá clicar no espaço em branco do quadro, manter o mouse pressionado e desenhar um retângulo que contenha alguns elementos de dados e/ou arestas para selecionar estes elementos ou então clicar diretamente em um elemento não selecionado para escolher esse elemento. Se clicar em um elemento ou conjunto de elementos selecionados, você poderá mover estes elementos em conjunto. A movimentação dos elementos selecionados também é possível com as teclas direcionais.</para
 ></listitem>
-</varlistentry>
-<varlistentry>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsnode.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Adicionar nó</guiicon
+>: Clique em uma posição arbitrária no quadro do editor do grafo para criar um novo elemento de dados que pertença ao grafo selecionado na estrutura de dados. Mantendo o ponteiro do mouse pressionado no botão, um menu mostra a quais tipos de dados o novo elemento de dados criados pode pertencer (somente se existirem diferentes tipos de dados).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsedge.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Criar aresta</guiicon
+>: Clique em um elemento de dado, mantenha o mouse pressionado e desenhe uma linha para outro elemento de dado, apontando a aresta nessa direção. Esta ação só será bem-sucedida se o grafo atual permitir adicionar esta aresta (&eg;, em um grafo não-direcionado, você não poderá adicionar várias arestas entre dois elementos de dado). Mantendo o ponteiro do mouse pressionado no botão, um menu mostra qual o tipo das novas arestas criadas pode ser selecionado (somente se existirem diferentes tipos de aresta).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsdelete.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>Excluir elemento</guiicon
+>: Clique em um elemento para excluí-lo. Se excluir um nó, todas as arestas adjacentes serão também excluídas.</para
+></listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
     <term
 >Barra lateral</term>
     <listitem
 ><para
->À direita, você poderá encontrar a barra lateral que oferece diversas ferramentas para o seu fluxo de trabalho: <itemizedlist>
+>À direita, você poderá encontrar a barra lateral que oferece diversas ferramentas para o seu fluxo de trabalho:</para>
+      <itemizedlist>
         <listitem
 ><para
->Tipos de elementos: Este elemento fornece acesso direto para os tipos de arestas e nós disponíveis.</para
+><guilabel
+>Tipos de elementos</guilabel
+>: Este widget fornece acesso direto para os tipos de arestas e nós disponíveis.</para
 ></listitem>
+
         <listitem
 ><para
->Diário: Cada projeto tem o seu próprio diário que pode ser usado &eg; para: notas das tarefas, resultados ou observações.</para
+><guilabel
+>Diário</guilabel
+>: Cada projeto tem o seu próprio diário que pode ser usado para, &eg;, notas das tarefas, resultados ou observações.</para
 ></listitem>
+
         <listitem
 ><para
->API de criação de scripts: Para obter acesso direto à documentação do script, você poderá abrir este widget.</para
+><guilabel
+>API de criação de scripts</guilabel
+>: Para obter acesso direto à documentação do script, você poderá abrir este widget.</para
 ></listitem>
-        </itemizedlist>
-    </para
-></listitem>
-</varlistentry>
-<varlistentry>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
     <term
 >Editor de script</term>
     <listitem
 ><para
->Neste editor de texto você pode criar os algoritmos como explicado em detalhes em <xref linkend="scripting"/>. Você poderá trabalhar com vários documentos de script ao mesmo tempo usando diversas abas. </para
+>Neste editor de texto você pode criar os algoritmos como explicado em detalhes em <xref linkend="scripting"/>. Você poderá trabalhar com vários documentos de script ao mesmo tempo usando diversas abas.</para
 ></listitem>
-</varlistentry>
-<varlistentry>
+  </varlistentry>
+  <varlistentry>
     <term
->Resultado do programa</term>
+>Resultado do programa:</term>
     <listitem
 ><para
->Esta área de texto poderá apresentar as informações de depuração ou o resultado do script para o seu algoritmo, dependendo da configuração no topo deste elemento. Se o script emitir um erro, o resultado de depuração é automaticamente apresentado. </para
+>Esta área de texto poderá apresentar as informações de depuração ou o resultado do script para o seu algoritmo, dependendo da configuração no topo deste elemento. Se o script emitir um erro, o resultado de depuração é automaticamente apresentado.</para
 ></listitem>
-</varlistentry>
-<varlistentry>
+  </varlistentry>
+  <varlistentry>
     <term
 >Controles</term>
     <listitem
 ><para
->Aqui você pode encontrar controles para a execução do script. Você pode executar o script atualmente aberto no editor do script clicando em <guiicon
->Executar</guiicon
->. Enquanto o script estiver em execução, é possível interrompê-lo se clicar no botão <guiicon
->Parar</guiicon
->. </para
+>Aqui você encontra os controles para executar scripts. Você pode executar o script que está aberto no editor de scripts pressionando o botão <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Executar</guibutton
+>. Enquanto o script estiver em execução, é possível interromper a execução pressionando o botão <inlinemediaobject
+><imageobject
+><imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>Parar</guibutton
+>.</para
 ></listitem>
-</varlistentry>
+  </varlistentry>
 </variablelist>
-</sect1>
-
-<sect1 id="user-interface-toolbar">
-<title
->Barra de ferramentas do editor de grafos</title>
-<para
->Esta barra de ferramentas consiste nas seguintes ações. Clicar em uma ação significa que o ponteiro do seu mouse aplica esta ação ao quadro do editor do grafo:</para>
-<itemizedlist>
-<listitem
-><para>
-<inlinemediaobject
-><imageobject>
-<imagedata fileref="hi22-actions-rocsselectmove.png" format="PNG"/></imageobject
-></inlinemediaobject
-> <guilabel
->Selecionar e mover</guilabel
->: Para selecionar os elementos, você poderá clicar no espaço em branco do quadro, manter o mouse pressionado e desenhar um retângulo que contenha alguns elementos de dados e/ou arestas para selecionar estes elementos ou então clicar diretamente em um elemento não selecionado para escolher esse elemento. Se clicar em um elemento ou conjunto de elementos selecionados, você poderá mover estes elementos em conjunto. A movimentação dos elementos selecionados também é possível com as teclas direcionais.</para
-></listitem>
-<listitem
-><para>
-<inlinemediaobject
-><imageobject>
-<imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject
-></inlinemediaobject
-> <guilabel
->Criar nó</guilabel
->: Clique em uma posição arbitrária no quadro do editor do grafo para criar um novo elemento de dados que pertença ao grafo selecionado na estrutura de dados. Mantendo o ponteiro do mouse pressionado no botão, um menu mostra a quais tipos de dados o novo elemento de dados criados pode pertencer (somente se existirem diferentes tipos de dados).</para
-></listitem>
-<listitem
-><para>
-<inlinemediaobject
-><imageobject>
-<imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject
-></inlinemediaobject
-> <guilabel
->Criar aresta</guilabel
->: Clique em um elemento de dado, mantenha o mouse pressionado e desenhe uma linha para outro elemento de dado, apontando a aresta nessa direção. Esta ação só será bem-sucedida se o grafo atual permitir adicionar esta aresta (&eg;, em um grafo não-direcionado, você não poderá adicionar várias arestas entre dois elementos de dado). Mantendo o ponteiro do mouse pressionado no botão, um menu mostra qual o tipo das novas arestas criadas pode ser selecionado (somente se existirem diferentes tipos de aresta).</para
-></listitem>
-<listitem
-><para>
-<inlinemediaobject
-><imageobject>
-<imagedata fileref="hi22-actions-rocsdelete.png" format="PNG"/></imageobject
-></inlinemediaobject
-> <guilabel
->Excluir</guilabel
->: Clique em um elemento para excluí-lo. Se excluir um nó, todas as arestas adjacentes serão também excluídas.</para
-></listitem>
-</itemizedlist>
 </sect1>
 
 <!--FIXME nop alignment action any more?-->
@@ -470,7 +482,7 @@ Console.log("A cobertura de vértices contém " + C.length + " nós.");
     <title
 >Executando algoritmos no &rocs;</title>
 <para
->O &rocs; usa internamente o mecanismo JavaScript do QtScript. Isso significa que todos os algoritmos que implementarem deverão usar JavaScript. Nos seguintes pontos, explicaremos como acessar e modificar os elementos de um documento de grafo a partir do mecanismo de criação de scripts. É importante apontar que as alterações feitas pelo mecanismo de criação de scripts são diretamente refletidas nas propriedades dos elementos do editor de grafos. </para>
+>O &rocs; usa internamente o mecanismo &javascript; do QtScript. Isso significa que todos os algoritmos que implementarem deverão usar &javascript;. Nos seguintes pontos, explicaremos como acessar e modificar os elementos de um documento de grafo a partir do mecanismo de criação de scripts. É importante apontar que as alterações feitas pelo mecanismo de criação de scripts são diretamente refletidas nas propriedades dos elementos do editor de grafos. </para>
 
 <sect2>
 <title
@@ -482,20 +494,20 @@ Console.log("A cobertura de vértices contém " + C.length + " nós.");
 ><para>
         <inlinemediaobject
 ><imageobject>
-        <imagedata fileref="hi22-actions-controls-run.png" format="PNG"/></imageobject
+        <imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
 ></inlinemediaobject
-> <guilabel
->Executar</guilabel
+> <guibutton
+>Executar</guibutton
 >: Executa o script até ele terminar.</para
 ></listitem>
     <listitem
 ><para>
         <inlinemediaobject
 ><imageobject>
-        <imagedata fileref="hi22-actions-control-stop.png" format="PNG"/></imageobject
+        <imagedata fileref="process-stop.png" format="PNG"/></imageobject
 ></inlinemediaobject
-> <guilabel
->Parar</guilabel
+> <guibutton
+>Parar</guibutton
 >: Interrompe a execução do script (só está disponível enquanto um script estiver em execução).</para
 ></listitem>
 </itemizedlist>
@@ -551,19 +563,19 @@ Console.log("A cobertura de vértices contém " + C.length + " nós.");
     <title
 >Compartilhar projetos do &rocs;</title>
     <para
->Os projetos do &rocs; podem ser importados e exportados como arquivos <literal
+>Os projetos do &rocs; podem ser importados e exportados como arquivos <literal role="extension"
 >.tar.gz</literal
 >. Estes arquivos podem ser usados para compartilhar projetos. A importação e exportação pode ser feita com o <menuchoice
 ><guimenu
 >Documento do grafo</guimenu
 > <guimenuitem
->Importar grafo</guimenuitem
+>Importar grafo...</guimenuitem
 ></menuchoice
 > e <menuchoice
 ><guimenu
 >Documento do grafo</guimenu
 > <guimenuitem
->Exportar grafo como</guimenuitem
+>Exportar grafo como...</guimenuitem
 ></menuchoice
 >, respectivamente. </para>
 
@@ -575,11 +587,13 @@ Console.log("A cobertura de vértices contém " + C.length + " nós.");
     <itemizedlist>
         <listitem
 ><para
->Arquivos DOT, também conhecidos como arquivos Graphviz</para
+>Arquivos &DOT;, também conhecidos como arquivos Graphviz</para
 ></listitem>
         <listitem
 ><para
->Arquivos GML</para
+>Arquivos <acronym
+>GML</acronym
+></para
 ></listitem>
         <listitem
 ><para
@@ -597,7 +611,11 @@ Console.log("A cobertura de vértices contém " + C.length + " nós.");
 <para
 >O <emphasis
 >Formato Trivial Graph</emphasis
-> (TGF, sigla em inglês) é um formato de arquivo simples baseado em texto para descrever gráficos. O arquivo TGF consiste de uma lista de definições de nó, o mapa de IDs dos nós para rótulos, seguido de uma lista de arestas. Neste formato, somente é possível ter um rótulo por nó e um valor por aresta. O &rocs; interpreta os gráficos importados como gráficos não direcionados. Os gráficos exportados conterão duas arestas por conexão se as conexões forem bidirecionais. </para>
+> (<acronym
+>TGF</acronym
+>, sigla em inglês) é um formato de arquivo simples baseado em texto para descrever gráficos. O arquivo <acronym
+>TGF</acronym
+> consiste de uma lista de definições de nó, o mapa de IDs dos nós para rótulos, seguido de uma lista de arestas. Neste formato, somente é possível ter um rótulo por nó e um valor por aresta. O &rocs; interpreta os gráficos importados como gráficos não direcionados. Os gráficos exportados conterão duas arestas por conexão se as conexões forem bidirecionais. </para>
 
 <sect4>
 <title
@@ -605,7 +623,9 @@ Console.log("A cobertura de vértices contém " + C.length + " nós.");
     <itemizedlist>
         <listitem
 ><para
->O arquivo inicia com uma lista de nós (um nó por linha), seguida de uma linha com somente o caractere "#", seguida pela lista de arestas (uma aresta por linha).</para
+>O arquivo inicia com uma lista de nós (um nó por linha), seguida de uma linha com somente o caractere <quote
+>#</quote
+>, seguida pela lista de arestas (uma aresta por linha).</para
 ></listitem>
         <listitem
 ><para
@@ -634,21 +654,21 @@ Console.log("A cobertura de vértices contém " + C.length + " nós.");
 
 <sect3 id="format-specification-dot">
 <title
->Linguagem DOT / Formato do Arquivo de Grafos do Graphviz</title>
+>Linguagem &DOT; / Formato do Arquivo de Grafos do Graphviz</title>
 <para
->DOT é uma linguagem descritiva em texto simples que permite tanto uma representação legível para os usuários dos grafos, assim como um processamento eficiente pelos programas de formatação de grafos. O DOT é o formato de arquivo padrão do pacote de visualização de grafos Graphviz, mas também é largamente usado por outras ferramentas de grafos. As extensões usuais para os nomes de arquivos da linguagem DOT são <emphasis
->.gv</emphasis
-> e <emphasis
->.dot</emphasis
+>&DOT; é uma linguagem descritiva em texto simples que permite tanto uma representação legível para os usuários dos grafos, assim como um processamento eficiente pelos programas de formatação de grafos. O &DOT; é o formato de arquivo padrão do pacote de visualização de grafos Graphviz, mas também é largamente usado por outras ferramentas de grafos. As extensões usuais para os nomes de arquivos da linguagem &DOT; são <literal role="extension"
+>.gv</literal
+> e <literal role="extension"
+>.dot</literal
 >. </para>
 
 <sect4>
 <title
 >Funcionalidades não suportadas</title>
 <para
->O &rocs; consegue processar todos os arquivos de grafos que tenham um grafo definido de acordo com a especificação da linguagem DOT<footnote
+>O &rocs; consegue processar todos os arquivos de grafos que tenham um grafo definido de acordo com a especificação da linguagem &DOT;<footnote
 ><para
->http://www.graphviz.org/content/dot-language</para
+>https://graphviz.org/doc/info/lang.html</para
 ></footnote
 >. O suporte das funcionalidades da linguagem é completo, apesar das seguintes exceções: </para>
     <itemizedlist>
@@ -675,6 +695,82 @@ Console.log("A cobertura de vértices contém " + C.length + " nós.");
 </sect3>
 </sect2>
 </sect1>
+</chapter>
+
+<chapter id="graph-layout">
+    <title
+>Layout do grafo</title>
+
+    <sect1>
+        <title
+>Layout automática de grafos no &rocs;</title>
+        <para
+>O &rocs; pode criar grafos automaticamente. A ferramenta de layout de grafos do &rocs; pode ser encontrada no menu principal em <menuchoice
+><guimenu
+>Documento do Grafo</guimenu
+> <guisubmenu
+>Ferramentas</guisubmenu
+> <guimenuitem
+>Layout do Grafo</guimenuitem
+></menuchoice
+>. Existem dois algoritmos de layout diferentes que podem ser aplicados: Layout baseado em força e Layout de árvore radial. Para aplicar um deles, selecione a aba correspondente da ferramenta de layout de gráficos, escolha os parâmetros desejados e execute o algoritmo pressionando o botão <guibutton
+>OK</guibutton
+>. Detalhes específicos de cada um dos algoritmos de layout são fornecidos nas próximas seções. </para>
+
+    <sect2>
+        <title
+>Layout baseado na força</title>
+
+        <para
+>O Layout baseado em força pode ser aplicado a qualquer grafo. Intuitivamente, este algoritmo simula as forças que atuam em cada nó. Existem forças repulsivas entre pares de nós e forças de atração entre pares de nós que são vizinhos. A magnitude dessas forças pode ser especificada movendo os controles deslizantes correspondentes na interface do usuário. </para>
+
+        <screenshot>
+          <screeninfo
+>Captura de tela da aba de Layout baseado em força da ferramenta de layout gráfico do &rocs;.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Captura de tela da aba de Layout baseado em força da ferramenta de layout gráfico do &rocs;.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>Outro parâmetro que pode ser controlado é o fator de área. Este parâmetro controla como os nós são distribuídos. Layouts gerados com valores altos de fator de área tendem a ter grandes distâncias entre os nós. </para>
+
+    <sect3>
+        <title
+>Layout de árvore radial</title>
+        <para
+>O layout de árvore radial só pode ser aplicado a árvores. Qualquer tentativa de aplicar este algoritmo de layout a outros tipos de grafo produzirá uma mensagem de erro. Os parâmetros para o layout de árvore radial podem ser selecionados usando a interface de usuário fornecida. </para>
+
+
+        <screenshot>
+          <screeninfo
+>Captura de tela da aba de Layout de árvore radial da ferramenta de layout gráfico do &rocs;.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>Captura de tela da aba de Layout de árvore radial da ferramenta de layout gráfico do &rocs;.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>O parâmetro de tipo de árvore seleciona entre um layout de árvore livre e um layout de árvore enraizada. Em um layout de árvore livre, os nós são colocados livremente, sem nenhuma hierarquia aparente entre eles. Em um layout de árvore enraizada, o nó raiz é colocado no topo e as subárvores são dispostas abaixo dele, dando a ideia de uma hierarquia entre os nós. </para>
+
+        <para
+>O parâmetro centro/raiz define qual nó será usado como raiz para o layout de árvore enraizada ou como centro para o layout de árvore livre. O centro de um layout de árvore livre é o primeiro nó a ser posicionado pelo algoritmo. Todos os outros nós são posicionados em círculos centrados no nó central. Um centro/raiz pode ser selecionado automaticamente pelo algoritmo de layout. </para>
+
+        <para
+>O parâmetro de separação de nós controla a distância entre os nós. Aumentar o valor desse parâmetro fará com que a distância entre os nós aumente. Da mesma forma, diminuir o valor desse parâmetro fará com que a distância entre os nós diminua. </para>
+    </sect3>
+    </sect2>
+    </sect1>
 </chapter>
 
 <chapter id="credits">
