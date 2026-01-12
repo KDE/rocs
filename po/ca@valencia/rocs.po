@@ -320,7 +320,8 @@ msgstr ""
 #, kde-format
 msgid "<p>Error occurred when writing file: <strong>'%1'</strong></p>"
 msgstr ""
-"<p>S'ha detectat un error en escriure el fitxer: <strong>«%1»</strong></p>"
+"<p>S'ha detectat un error mentre s'escrivia el fitxer: <strong>«%1»</"
+"strong></p>"
 
 #: ui/fileformatdialog.cpp:114
 #, kde-format
