@@ -40,12 +40,10 @@ msgid "Graph Theory Simulator"
 msgstr ""
 
 #: main.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "(c) 2009-2012 Rocs Developers"
+#, kde-format
 msgctxt "@info:credit"
 msgid "(c) 2008-2016 Rocs Developers"
-msgstr "© 2009-2012 Forbróirí Rocs"
+msgstr ""
 
 #: main.cpp:33
 #, kde-format
@@ -84,10 +82,9 @@ msgid "Developer"
 msgstr "Forbróir"
 
 #: main.cpp:58
-#, fuzzy, kde-format
-#| msgid "Project"
+#, kde-format
 msgid "Project to open."
-msgstr "Tionscadal"
+msgstr ""
 
 #: plugins/scriptapi/scriptapimanager.cpp:109
 #, kde-format
@@ -96,12 +93,10 @@ msgid "Syntax"
 msgstr ""
 
 #: plugins/scriptapi/scriptapimanager.cpp:110
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Properties"
+#, kde-format
 msgctxt "@title"
 msgid "Properties"
-msgstr "Airíonna"
+msgstr ""
 
 #: plugins/scriptapi/scriptapimanager.cpp:111
 #, kde-format
@@ -122,11 +117,10 @@ msgid "Methods"
 msgstr ""
 
 #: plugins/scriptapi/scriptapimanager.cpp:114
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt "@title"
 msgid "Type"
-msgstr "Cineál"
+msgstr ""
 
 #: plugins/scriptapi/scriptapimanager.cpp:115
 #, kde-format
@@ -147,18 +141,16 @@ msgid "Description"
 msgstr ""
 
 #: plugins/scriptapi/scriptapimanager.cpp:253
-#, fuzzy, kde-format
-#| msgid "Script File"
+#, kde-format
 msgctxt "@title"
 msgid "Script Engine API"
-msgstr "Comhad Scripte"
+msgstr ""
 
 #: plugins/scriptapi/scriptapimanager.cpp:254
-#, fuzzy, kde-format
-#| msgid "Graph Document"
+#, kde-format
 msgctxt "@title"
 msgid "The Graph Document"
-msgstr "Cáipéis Ghraif"
+msgstr ""
 
 #: plugins/scriptapi/scriptapimanager.cpp:255
 #, kde-format
@@ -167,24 +159,20 @@ msgid "Objects"
 msgstr ""
 
 #: plugins/scriptapi/scriptapimanager.cpp:256
-#, fuzzy, kde-format
-#| msgid "Script Document"
+#, kde-format
 msgctxt "@title"
 msgid "Script Engine Modules"
-msgstr "Cáipéis Scripte"
+msgstr ""
 
 #: plugins/scriptapi/scriptapimodel.cpp:111
-#, fuzzy, kde-format
-#| msgid "Script Output:"
+#, kde-format
 msgid "Script Objects"
-msgstr "Aschur na Scripte:"
+msgstr ""
 
 #: plugins/scriptapi/scriptapimodel.cpp:229
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Properties"
+#, kde-format
 msgid "Properties"
-msgstr "Airíonna"
+msgstr ""
 
 #: plugins/scriptapi/scriptapimodel.cpp:243
 #, kde-format
@@ -193,10 +181,9 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: plugins/scriptapi/scriptapiwidget.ui:17
-#, fuzzy, kde-format
-#| msgid "Rocs Script Files"
+#, kde-format
 msgid "Rocs Scripting API"
-msgstr "Scripteanna Rocs"
+msgstr ""
 
 #. i18n: ectx: label, entry (showButtonText), group (ItemPalette)
 #. i18n: ectx: whatsthis, entry (showButtonText), group (ItemPalette)
@@ -254,37 +241,32 @@ msgid "Tools"
 msgstr "Uirlisí"
 
 #: ui/codeeditorwidget.cpp:81
-#, fuzzy, kde-format
-#| msgid "Graph Document"
+#, kde-format
 msgctxt "@title"
 msgid "Code Document Name"
-msgstr "Cáipéis Ghraif"
+msgstr ""
 
 #: ui/codeeditorwidget.cpp:82
-#, fuzzy, kde-format
-#| msgid "Enter the name of your new script"
+#, kde-format
 msgid "Enter the name of your code document"
-msgstr "Cuir ainm do scripte nua isteach"
+msgstr ""
 
 #: ui/documenttypeswidget.cpp:29
-#, fuzzy, kde-format
-#| msgid "Nodes"
+#, kde-format
 msgctxt "@title"
 msgid "Node Types"
-msgstr "Nóid"
+msgstr ""
 
 #: ui/documenttypeswidget.cpp:31 ui/documenttypeswidget.cpp:47
-#, fuzzy, kde-format
-#| msgid "Graph Type:"
+#, kde-format
 msgid "Create Type"
-msgstr "Cineál an Ghraif:"
+msgstr ""
 
 #: ui/documenttypeswidget.cpp:45
-#, fuzzy, kde-format
-#| msgid "Edge style"
+#, kde-format
 msgctxt "@title"
 msgid "Edge Types"
-msgstr "Stíl an naisc"
+msgstr ""
 
 #: ui/documenttypeswidget.cpp:88 ui/documenttypeswidget.cpp:109
 #, kde-format
@@ -337,32 +319,27 @@ msgid "*|All files"
 msgstr "*|Gach comhad"
 
 #: ui/fileformatdialog.cpp:116
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Import Script"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import Graph File into Project"
-msgstr "Iompórtáil Script"
+msgstr ""
 
 #: ui/grapheditorwidget.cpp:79
-#, fuzzy, kde-format
-#| msgid "Graph Document"
+#, kde-format
 msgctxt "@title"
 msgid "Graph Document Name"
-msgstr "Cáipéis Ghraif"
+msgstr ""
 
 #: ui/grapheditorwidget.cpp:80
-#, fuzzy, kde-format
-#| msgid "Enter the name of your new script"
+#, kde-format
 msgid "Enter the name of your graph document"
-msgstr "Cuir ainm do scripte nua isteach"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: ui/journalwidget.ui:17
-#, fuzzy, kde-format
-#| msgid "Project"
+#, kde-format
 msgid "Project Journal"
-msgstr "Tionscadal"
+msgstr ""
 
 #: ui/mainwindow.cpp:169
 #, kde-format
@@ -400,11 +377,10 @@ msgid "Journal"
 msgstr "Dialann"
 
 #: ui/mainwindow.cpp:215
-#, fuzzy, kde-format
-#| msgid "Rocs Script Files"
+#, kde-format
 msgctxt "@title"
 msgid "Scripting API"
-msgstr "Scripteanna Rocs"
+msgstr ""
 
 #: ui/mainwindow.cpp:250
 #, kde-format
@@ -419,12 +395,10 @@ msgid "Save Project"
 msgstr "Sábháil Tionscadal"
 
 #: ui/mainwindow.cpp:262
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Open Project"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Project..."
-msgstr "Oscail Tionscadal"
+msgstr ""
 
 #: ui/mainwindow.cpp:270
 #, kde-format
@@ -433,12 +407,10 @@ msgid "Recent Projects"
 msgstr ""
 
 #: ui/mainwindow.cpp:275
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save Project as"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project As..."
-msgstr "Sábháil Tionscadal mar"
+msgstr ""
 
 #: ui/mainwindow.cpp:276
 #, kde-format
@@ -447,60 +419,46 @@ msgid "New Graph Document"
 msgstr ""
 
 #: ui/mainwindow.cpp:277
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "New Script File"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "New Script File..."
-msgstr "Comhad Nua Scripte"
+msgstr ""
 
 #: ui/mainwindow.cpp:278
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Import Graph"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Graph..."
-msgstr "Iompórtáil Graf"
+msgstr ""
 
 #: ui/mainwindow.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Export Graph as"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Graph As..."
-msgstr "Easpórtáil Graf mar"
+msgstr ""
 
 #: ui/mainwindow.cpp:280
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Import Script"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Script..."
-msgstr "Iompórtáil Script"
+msgstr ""
 
 #: ui/mainwindow.cpp:281
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Export Script as"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Script..."
-msgstr "Easpórtáil Script mar"
+msgstr ""
 
 #: ui/mainwindow.cpp:320
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Import Script"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import Script into Project"
-msgstr "Iompórtáil Script"
+msgstr ""
 
 #: ui/mainwindow.cpp:332
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Export Script as"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export Script"
-msgstr "Easpórtáil Script mar"
+msgstr ""
 
 #: ui/mainwindow.cpp:332
 #, kde-format
@@ -513,12 +471,10 @@ msgid "untitled"
 msgstr "gan teideal"
 
 #: ui/mainwindow.cpp:366
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save Project as"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Project As"
-msgstr "Sábháil Tionscadal mar"
+msgstr ""
 
 #: ui/mainwindow.cpp:366
 #, kde-format
@@ -533,11 +489,10 @@ msgid ""
 msgstr ""
 
 #: ui/mainwindow.cpp:377
-#, fuzzy, kde-format
-#| msgid "Overwrite"
+#, kde-format
 msgctxt "@title:window"
 msgid "Overwrite File?"
-msgstr "Forscríobh"
+msgstr ""
 
 #: ui/mainwindow.cpp:400
 #, kde-format
@@ -559,12 +514,10 @@ msgid ""
 msgstr ""
 
 #: ui/mainwindow.cpp:429
-#, fuzzy, kde-format
-#| msgctxt "caption text for temporary project"
-#| msgid "[ untitled ]"
+#, kde-format
 msgctxt "caption text for temporary project"
 msgid "[ untitled ]%1"
-msgstr "[ gan teideal ]"
+msgstr ""
 
 #: ui/mainwindow.cpp:458
 #, kde-format
@@ -577,10 +530,9 @@ msgid "Enter the name of your new script"
 msgstr "Cuir ainm do scripte nua isteach"
 
 #: ui/mainwindow.cpp:467
-#, fuzzy, kde-format
-#| msgid "File Exists"
+#, kde-format
 msgid "File already exists."
-msgstr "Tá an comhad ann"
+msgstr ""
 
 #: ui/mainwindow.cpp:493
 #, kde-format
@@ -595,10 +547,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/scriptoutputwidget.ui:24
-#, fuzzy, kde-format
-#| msgid "Script Output:"
+#, kde-format
 msgid "Script output:"
-msgstr "Aschur na Scripte:"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonDisableClear)
 #: ui/scriptoutputwidget.ui:37
@@ -628,467 +579,3 @@ msgstr ""
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr ""
-
-#, fuzzy
-#~| msgctxt "@title:menu Debug execution"
-#~| msgid "Debug"
-#~ msgctxt "@action:intoolbar Open Debugger"
-#~ msgid "Debugger"
-#~ msgstr "Dífhabhtaigh"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Save Project as"
-#~ msgstr "Sábháil Tionscadal mar"
-
-#~ msgid "Overwrite"
-#~ msgstr "Forscríobh"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Príomhbharra Uirlisí"
-
-#~ msgid "Align Toolbar"
-#~ msgstr "Ailínigh Barra Uirlisí"
-
-#, fuzzy
-#~| msgctxt "@title"
-#~| msgid "Handbook"
-#~ msgid "Rocs Handbook"
-#~ msgstr "Lámhleabhar"
-
-#~ msgctxt "@title"
-#~ msgid "Handbook"
-#~ msgstr "Lámhleabhar"
-
-#, fuzzy
-#~| msgid "Data Structure"
-#~ msgctxt "@title"
-#~ msgid "Data Structures"
-#~ msgstr "Struchtúr Sonraí"
-
-#~ msgctxt "@title Short program description"
-#~ msgid "Rocs - Data Structure Analysis"
-#~ msgstr "Rocs - Anailís ar Struchtúir Sonraí"
-
-#~ msgid "Script File"
-#~ msgstr "Comhad Scripte"
-
-#~ msgid "Convert To"
-#~ msgstr "Tiontaigh Go"
-
-#~ msgid "Settings"
-#~ msgstr "Socruithe"
-
-#~ msgid "Help"
-#~ msgstr "Cabhair"
-
-#, fuzzy
-#~| msgid "Data Properties"
-#~ msgid "Display of Element Properties"
-#~ msgstr "Airíonna Sonraí"
-
-#~ msgid "Data Properties"
-#~ msgstr "Airíonna Sonraí"
-
-#~ msgid "centered"
-#~ msgstr "láraithe"
-
-#~ msgid "below"
-#~ msgstr "thíos"
-
-#~ msgid "above"
-#~ msgstr "thuas"
-
-#~ msgid "Connection Properties"
-#~ msgstr "Airíonna Naisc"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Properties"
-#~ msgstr "Airíonna"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Export graphs to file"
-#~ msgstr "Easpórtáil graif go comhaid"
-
-#~ msgid "Loaded Plugins"
-#~ msgstr "Breiseáin Luchtaithe"
-
-#~ msgid "*.js|Script files"
-#~ msgstr "*.js|Scripteanna"
-
-#~ msgid "Rocs Script Files"
-#~ msgstr "Scripteanna Rocs"
-
-#~ msgid "Add your description here."
-#~ msgstr "Cuir do chur síos anseo."
-
-#~ msgctxt "@action:intoolbar Script Execution"
-#~ msgid "One Step"
-#~ msgstr "Céim Amháin"
-
-#~ msgctxt "@action:inmenu Debug execution"
-#~ msgid "Interrupt at first line"
-#~ msgstr "Briseadh ar an chéad líne"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Download Examples"
-#~ msgstr "Íosluchtaigh Samplaí"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Upload project"
-#~ msgstr "Uasluchtaigh tionscadal"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Loaded Plugins"
-#~ msgstr "Breiseáin Luchtaithe"
-
-#~ msgctxt "@title:tab"
-#~ msgid "Default Settings"
-#~ msgstr "Réamhshocruithe"
-
-#~ msgctxt "@info"
-#~ msgid "This does not seem to be a graph file."
-#~ msgstr "Ní dóigh liom gur comhad graif é seo."
-
-#~ msgctxt "@title:window"
-#~ msgid "Invalid File"
-#~ msgstr "Comhad Neamhbhailí"
-
-#~ msgctxt "@title:window"
-#~ msgid "Save Project"
-#~ msgstr "Sábháil an Tionscadal"
-
-#~ msgid ""
-#~ "*.graph|Rocs graph documents\n"
-#~ "*|All files"
-#~ msgstr ""
-#~ "*.graph|Cáipéisí graif Rocs\n"
-#~ "*|Gach comhad"
-
-#~ msgid "Graph name"
-#~ msgstr "Ainm an ghraif"
-
-#~ msgid "Edge Information"
-#~ msgstr "Eolas faoin Nasc"
-
-#~ msgid "Untitled"
-#~ msgstr "Gan Teideal"
-
-#~ msgid "Data Structure:"
-#~ msgstr "Struchtúr Sonraí:"
-
-#~ msgid "Node color"
-#~ msgstr "Dath an nóid"
-
-#~ msgid "Color:"
-#~ msgstr "Dath:"
-
-#~ msgid "Name:"
-#~ msgstr "Ainm:"
-
-#~ msgid "Name"
-#~ msgstr "Ainm"
-
-#~ msgid "Property"
-#~ msgstr "Airí"
-
-#~ msgid "Value"
-#~ msgstr "Luach"
-
-#~ msgid "Width:"
-#~ msgstr "Leithead:"
-
-#~ msgid "Style:"
-#~ msgstr "Stíl:"
-
-#~ msgid "Align"
-#~ msgstr "Ailínigh"
-
-#~ msgid "Assign Values"
-#~ msgstr "Sann Luachanna"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">List of all data "
-#~ "structures that are of type <span style=\" font-style:italic;\">Graph</"
-#~ "span>.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Liosta de gach "
-#~ "struchtúr sonraí de chineál <span style=\" font-style:italic;\">Graf</"
-#~ "span>.</p></body></html>"
-
-# makes more sense than "ciumhaiseanna"
-#~ msgid "Edges"
-#~ msgstr "Naisc"
-
-#~ msgid "Start ID"
-#~ msgstr "Aitheantas Tosaigh"
-
-#~ msgid "Lower Limit"
-#~ msgstr "Íosteorainn"
-
-#~ msgid "Upper Limit"
-#~ msgstr "Uasteorainn"
-
-#~ msgid "Assign Random Integers"
-#~ msgstr "Sann Slánuimhreacha Randamacha"
-
-#~ msgid "Assign Random Reals"
-#~ msgstr "Sann Réaduimhreacha Randamacha"
-
-#~ msgid "Overwrite existing values"
-#~ msgstr "Forscríobh na luachanna atá ann"
-
-#~ msgid "Mesh Graph"
-#~ msgstr "Graf Mogaill"
-
-#~ msgid "Star Graph"
-#~ msgstr "Réaltghraf"
-
-#~ msgid "Circle Graph"
-#~ msgstr "Graf Ciorcail"
-
-#~ msgid "RandomGraph"
-#~ msgstr "Graf Randamach"
-
-#~ msgid "Generate Graph"
-#~ msgstr "Gin Graf"
-
-#~ msgid "Random Graph"
-#~ msgstr "Graf Randamach"
-
-#~ msgid "Erdös-Renyi Graph"
-#~ msgstr "Graf Erdös-Renyi"
-
-#~ msgid "Number of Columns:"
-#~ msgstr "Líon na gColún:"
-
-#~ msgid "Number of Rows:"
-#~ msgstr "Líon na Rónna:"
-
-#~ msgid "Number of Nodes:"
-#~ msgstr "Líon na Nód:"
-
-#~ msgid "Nodes:"
-#~ msgstr "Nóid:"
-
-#~ msgid "Edges:"
-#~ msgstr "Naisc:"
-
-#~ msgid "Allow self-edges:"
-#~ msgstr "Ceadaigh féin-naisc:"
-
-#~ msgid "Nodes (n):"
-#~ msgstr "Nóid (n):"
-
-#~ msgid "Edge Probability (p):"
-#~ msgstr "Dóchúlacht Naisc (p):"
-
-#~ msgid "Transform Edges"
-#~ msgstr "Trasfhoirmigh Naisc"
-
-#~ msgid "Complete Graph"
-#~ msgstr "Graf Iomlán"
-
-#~ msgid "Remove all Edges"
-#~ msgstr "Bain gach Nasc"
-
-#~ msgid "Reverse all Edges"
-#~ msgstr "Iompaigh gach Nasc"
-
-#~ msgctxt "type of dynamic property"
-#~ msgid "None"
-#~ msgstr "Neamhní"
-
-#~ msgid "No active graph in this document."
-#~ msgstr "Níl aon ghraf gníomhach sa cháipéis seo."
-
-#~ msgid "Cannot open file %1 to write document. Error: %2"
-#~ msgstr ""
-#~ "Ní féidir comhad %1 a oscailt chun an cháipéis a scríobh. Earráid: %2"
-
-#~ msgid "Cannot open file %1: %2"
-#~ msgstr "Ní féidir comhad %1 a oscailt: %2"
-
-#~ msgid "Size"
-#~ msgstr "Méid"
-
-#~ msgid "Front value"
-#~ msgstr "An chéad luach"
-
-#~ msgid "Cannot convert document '%1'"
-#~ msgstr "Ní féidir cáipéis '%1' a thiontú"
-
-#~ msgid "New File"
-#~ msgstr "Comhad Nua"
-
-#~ msgid "Untitled%1"
-#~ msgstr "Gan teideal%1"
-
-#~ msgid "Edge Properties"
-#~ msgstr "Airíonna Naisc"
-
-#~ msgid "Edge name"
-#~ msgstr "Ainm an naisc"
-
-#~ msgid "Edge color"
-#~ msgstr "Dath an naisc"
-
-#~ msgid "Value:"
-#~ msgstr "Luach:"
-
-#~ msgid "Edge value"
-#~ msgstr "Luach an naisc"
-
-#~ msgid "Edge width"
-#~ msgstr "Leithead an naisc"
-
-#~ msgid "Show"
-#~ msgstr "Taispeáin"
-
-#~ msgid "Show/hide edge name"
-#~ msgstr "Taispeáin/folaigh ainm an naisc"
-
-#~ msgid "Show/add edge value"
-#~ msgstr "Taispeáin/folaigh luach an naisc"
-
-#~ msgid "Add Property"
-#~ msgstr "Cuir Airí Leis"
-
-#~ msgid "Global"
-#~ msgstr "Comhchoiteann"
-
-#~ msgid "add"
-#~ msgstr "cuir leis"
-
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid "v=%1"
-#~ msgstr "v=%1"
-
-#~ msgid "Delete"
-#~ msgstr "Scrios"
-
-#~ msgid "dot"
-#~ msgstr "poncanna"
-
-#~ msgid ""
-#~ "*.graph|Graph files\n"
-#~ "*|All files"
-#~ msgstr ""
-#~ "*.graph|Comhaid ghraif\n"
-#~ "*|Gach comhad"
-
-#~ msgid "Cannot open the file: %1. Error %2"
-#~ msgstr "Ní féidir comhad %1 a oscail. Earráid %2"
-
-#~ msgid "*.txt|Plain TXT Files"
-#~ msgstr "*.txt|Comhaid Ghnáth-théacs"
-
-#~ msgid "Add Node"
-#~ msgstr "Cuir Nód Leis"
-
-#~ msgid "Open Script"
-#~ msgstr "Oscail Script"
-
-#~ msgid "Edit"
-#~ msgstr "Eagar"
-
-#~ msgid "Delete the active graph"
-#~ msgstr "Scrios an graf gníomhach"
-
-#~ msgctxt "@action:button"
-#~ msgid "x"
-#~ msgstr "x"
-
-#~ msgid "Apply to all nodes"
-#~ msgstr "Cuir i bhfeidhm ar gach nód"
-
-#~ msgid "Close"
-#~ msgstr "Dún"
-
-#~ msgid "Image"
-#~ msgstr "Íomhá"
-
-#~ msgid "Untitled0"
-#~ msgstr "Gan teideal0"
-
-#~ msgid "Open Graph"
-#~ msgstr "Oscail Graf"
-
-#~ msgid "Save All"
-#~ msgstr "Sábháil Uile"
-
-#~ msgid "New"
-#~ msgstr "Nua"
-
-#~ msgid "Color for new nodes"
-#~ msgstr "Dath le haghaidh nód nua"
-
-#~ msgid "Color for new edges"
-#~ msgstr "Dath le haghaidh nasc nua"
-
-#~ msgid "Apply the current color to all nodes"
-#~ msgstr "Cuir an dath reatha ar gach nód"
-
-#~ msgid "All"
-#~ msgstr "Uile"
-
-#~ msgid "Apply the current color to all edges"
-#~ msgstr "Cuir an dath reatha ar gach nasc"
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "(c) 2009"
-#~ msgstr "© 2009"
-
-#~ msgid "Dialog"
-#~ msgstr "Dialóg"
-
-#~ msgid "Radius:"
-#~ msgstr "Ga:"
-
-#~ msgid "0"
-#~ msgstr "0"
-
-#~ msgid "Complete"
-#~ msgstr "Críochnaithe"
-
-#~ msgid "Name: %1"
-#~ msgstr "Ainm: %1"
-
-#~ msgid "Value: %1"
-#~ msgstr "Luach: %1"
-
-#~ msgid "Save Script As..."
-#~ msgstr "Sábháil Script Mar..."
-
-#~ msgid "End"
-#~ msgstr "Deireadh"
-
-#~| msgctxt "NAME OF TRANSLATORS"
-#~| msgid "Your names"
-#~ msgid "Node name"
-#~ msgstr "Kevin Scannell"
-
-#~ msgid "KSqueezedTextLabel"
-#~ msgstr "KSqueezedTextLabel"
-
-#~ msgid "ok"
-#~ msgstr "OK"

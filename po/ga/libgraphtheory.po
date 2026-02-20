@@ -28,11 +28,10 @@ msgid "Your emails"
 msgstr "kscanne@gmail.com"
 
 #: dialogs/edgeproperties.cpp:25
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edge Properties"
-msgstr "Airíonna Naisc"
+msgstr ""
 
 #: dialogs/edgeproperties.cpp:80 dialogs/nodeproperties.cpp:86
 #, kde-format
@@ -52,17 +51,15 @@ msgstr "Airíonna Naisc"
 
 #. i18n: ectx: property (text), widget (QLabel, labelType)
 #: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgid "Type:"
-msgstr "Cineál"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
 #: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
+#, kde-format
 msgid "Dynamic Properties"
-msgstr "Airíonna Naisc"
+msgstr ""
 
 # makes more sense than "ciumhaiseanna"
 #: dialogs/edgetypeproperties.cpp:37
@@ -71,17 +68,15 @@ msgid "Edges"
 msgstr "Naisc"
 
 #: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
-#, fuzzy, kde-format
-#| msgid "Property"
+#, kde-format
 msgid "Property names"
-msgstr "Airí"
+msgstr ""
 
 #: dialogs/edgetypeproperties.cpp:43
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edge Type Properties"
-msgstr "Airíonna Naisc"
+msgstr ""
 
 #: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
 #, kde-format
@@ -139,11 +134,10 @@ msgid ""
 msgstr ""
 
 #: dialogs/nodeproperties.cpp:26
-#, fuzzy, kde-format
-#| msgid "Node Properties"
+#, kde-format
 msgctxt "@title:window"
 msgid "Node Properties"
-msgstr "Airíonna Nóid"
+msgstr ""
 
 #: dialogs/nodeproperties.cpp:133
 #, kde-format
@@ -178,11 +172,10 @@ msgid "Nodes"
 msgstr "Nóid"
 
 #: dialogs/nodetypeproperties.cpp:41
-#, fuzzy, kde-format
-#| msgid "Node Properties"
+#, kde-format
 msgctxt "@title:window"
 msgid "Node Type Properties"
-msgstr "Airíonna Nóid"
+msgstr ""
 
 #: dialogs/nodetypeproperties.cpp:133
 #, kde-format
@@ -209,11 +202,10 @@ msgid "Delete this property."
 msgstr ""
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:33
-#, fuzzy, kde-format
-#| msgid "Assign Values"
+#, kde-format
 msgctxt "@title:window"
 msgid "Assign Values"
-msgstr "Sann Luachanna"
+msgstr ""
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:52
 #, kde-format
@@ -221,16 +213,14 @@ msgid "All Data Types"
 msgstr ""
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:57
-#, fuzzy, kde-format
-#| msgid "Edge style"
+#, kde-format
 msgid "All Edge Types"
-msgstr "Stíl an naisc"
+msgstr ""
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:81
-#, fuzzy, kde-format
-#| msgid "Edge Properties"
+#, kde-format
 msgid "Enter Property Name"
-msgstr "Airíonna Naisc"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
 #: editorplugins/assignvalues/assignvalueswidget.ui:32
@@ -240,10 +230,9 @@ msgstr "Sann Luachanna"
 
 #. i18n: ectx: property (text), widget (QLabel, property_choice_label)
 #: editorplugins/assignvalues/assignvalueswidget.ui:40
-#, fuzzy, kde-format
-#| msgid "Node Properties"
+#, kde-format
 msgid "Choose Properties"
-msgstr "Airíonna Nóid"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
 #: editorplugins/assignvalues/assignvalueswidget.ui:59
@@ -265,10 +254,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:86
-#, fuzzy, kde-format
-#| msgid "Generate Graph"
+#, kde-format
 msgid "Enumerate Alpha"
-msgstr "Gin Graf"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:91
@@ -290,17 +278,15 @@ msgstr "Sann Réaduimhreacha Randamacha"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:106
-#, fuzzy, kde-format
-#| msgid "Assign Values"
+#, kde-format
 msgid "Assign Constant Value"
-msgstr "Sann Luachanna"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
 #: editorplugins/assignvalues/assignvalueswidget.ui:132
-#, fuzzy, kde-format
-#| msgid "Start ID"
+#, kde-format
 msgid "Start ID:"
-msgstr "Aitheantas Tosaigh"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:167
@@ -376,10 +362,9 @@ msgstr "Nóid:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelProperty)
 #: editorplugins/assignvalues/assignvalueswidget.ui:447
-#, fuzzy, kde-format
-#| msgid "Property"
+#, kde-format
 msgid "Property name:"
-msgstr "Airí"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
 #. i18n: ectx: property (text), widget (QLabel, labelConnection)
@@ -402,11 +387,10 @@ msgid "Assign values to selected nodes."
 msgstr ""
 
 #: editorplugins/generategraph/generategraphwidget.cpp:79
-#, fuzzy, kde-format
-#| msgid "Generate Graph"
+#, kde-format
 msgctxt "@title:window"
 msgid "Generate Graph"
-msgstr "Gin Graf"
+msgstr ""
 
 #: editorplugins/generategraph/generategraphwidget.cpp:119
 #: editorplugins/generategraph/generategraphwidget.cpp:126
@@ -469,24 +453,21 @@ msgstr "Graf Erdös-Renyi"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:51
-#, fuzzy, kde-format
-#| msgid "Random Graph"
+#, kde-format
 msgid "Random Tree Graph"
-msgstr "Graf Randamach"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:56
-#, fuzzy, kde-format
-#| msgid "Random Graph"
+#, kde-format
 msgid "Random Dag Graph"
-msgstr "Graf Randamach"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:61
-#, fuzzy, kde-format
-#| msgid "Mesh Graph"
+#, kde-format
 msgid "Path Graph"
-msgstr "Graf Mogaill"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:66
@@ -496,10 +477,9 @@ msgstr "Graf Iomlán"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:71
-#, fuzzy, kde-format
-#| msgid "Complete Graph"
+#, kde-format
 msgid "Complete Bipartite"
-msgstr "Graf Iomlán"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
 #: editorplugins/generategraph/generategraphwidget.ui:91
@@ -515,11 +495,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLineEdit, identifier)
 #: editorplugins/generategraph/generategraphwidget.ui:109
-#, fuzzy, kde-format
-#| msgctxt "@label:inlistbox"
-#| msgid "Graph"
+#, kde-format
 msgid "Graph"
-msgstr "Graf"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:116
@@ -529,10 +507,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:119
-#, fuzzy, kde-format
-#| msgid "Node name"
+#, kde-format
 msgid "Node type:"
-msgstr "Kevin Scannell"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
 #: editorplugins/generategraph/generategraphwidget.ui:126
@@ -604,17 +581,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
 #: editorplugins/generategraph/generategraphwidget.ui:446
-#, fuzzy, kde-format
-#| msgid "Number of Nodes:"
+#, kde-format
 msgid "Number of Nodes"
-msgstr "Líon na Nód:"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
 #: editorplugins/generategraph/generategraphwidget.ui:463
-#, fuzzy, kde-format
-#| msgid "Edge Probability (p):"
+#, kde-format
 msgid "Edge Probability"
-msgstr "Dóchúlacht Naisc (p):"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
 #: editorplugins/generategraph/generategraphwidget.ui:549
@@ -642,10 +617,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:607
-#, fuzzy, kde-format
-#| msgid "Edge style"
+#, kde-format
 msgid "Edge type:"
-msgstr "Stíl an naisc"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:614
@@ -660,18 +634,16 @@ msgid "Select the node type for node elements of the generated graph."
 msgstr ""
 
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
-#, fuzzy, kde-format
-#| msgid "Layout"
+#, kde-format
 msgctxt "@title:window"
 msgid "Graph Layout"
-msgstr "Leagan Amach"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:20
-#, fuzzy, kde-format
-#| msgid "Layout"
+#, kde-format
 msgid "Graph Layout"
-msgstr "Leagan Amach"
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:36
@@ -717,10 +689,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:158
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgid "Tree type:"
-msgstr "Cineál"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:165
@@ -735,11 +706,10 @@ msgid "Rooted tree"
 msgstr ""
 
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
-#, fuzzy, kde-format
-#| msgid "Transform Edges"
+#, kde-format
 msgctxt "@title:window"
 msgid "Transform Edges"
-msgstr "Trasfhoirmigh Naisc"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
 #: editorplugins/transformedges/transformedgeswidget.ui:14
@@ -757,10 +727,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
 #: editorplugins/transformedges/transformedgeswidget.ui:25
-#, fuzzy, kde-format
-#| msgid "Complete Graph"
+#, kde-format
 msgid "Complete graph"
-msgstr "Graf Iomlán"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:35
@@ -770,10 +739,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:38
-#, fuzzy, kde-format
-#| msgid "Remove all Edges"
+#, kde-format
 msgid "Remove all edges"
-msgstr "Bain gach Nasc"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:45
@@ -785,26 +753,13 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:48
-#, fuzzy, kde-format
-#| msgid "Reverse all Edges"
+#, kde-format
 msgid "Reverse all edges"
-msgstr "Iompaigh gach Nasc"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:59
-#, fuzzy, kde-format
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\">List of all data "
-#| "structures that are of type <span style=\" font-style:italic;\">Graph</"
-#| "span>.</p></body></html>"
+#, kde-format
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -820,17 +775,6 @@ msgid ""
 "equals 1. Directed and undirected graphs are processed accordingly.</p></"
 "body></html>"
 msgstr ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-"REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Liosta de gach struchtúr "
-"sonraí de chineál <span style=\" font-style:italic;\">Graf</span>.</p></"
-"body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:62
@@ -840,16 +784,14 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:69
-#, fuzzy, kde-format
-#| msgid "Remove all Edges"
+#, kde-format
 msgid "Remove all self edges"
-msgstr "Bain gach Nasc"
+msgstr ""
 
 #: fileformats/dot/dotfileformat.cpp:41
-#, fuzzy, kde-format
-#| msgid "*.dot *.gv|Graphviz Format"
+#, kde-format
 msgid "Graphviz Format (%1)"
-msgstr "*.dot *.gv|Formáid Graphviz"
+msgstr ""
 
 #: fileformats/dot/dotfileformat.cpp:51 fileformats/gml/gmlfileformat.cpp:52
 #: fileformats/rocs1/rocs1fileformat.cpp:53
@@ -870,10 +812,9 @@ msgid "Cannot open file %1 to write document. Error: %2"
 msgstr "Ní féidir comhad %1 a oscailt chun an cháipéis a scríobh. Earráid: %2"
 
 #: fileformats/gml/gmlfileformat.cpp:42
-#, fuzzy, kde-format
-#| msgid "*.gml|Graph Markup Language Format"
+#, kde-format
 msgid "Graph Markup Language Format (%1)"
-msgstr "*.gml|Teanga Mharcála Ghraif"
+msgstr ""
 
 #: fileformats/rocs1/rocs1fileformat.cpp:34
 #, kde-format
@@ -893,10 +834,9 @@ msgid "Could not write data, aborting. Error: %1."
 msgstr ""
 
 #: fileformats/rocs2/rocs2fileformat.cpp:31
-#, fuzzy, kde-format
-#| msgid "*.dot *.gv|Graphviz Format"
+#, kde-format
 msgid "Rocs Graph Format (%1)"
-msgstr "*.dot *.gv|Formáid Graphviz"
+msgstr ""
 
 #: fileformats/rocs2/rocs2fileformat.cpp:303
 #, kde-format
@@ -929,11 +869,10 @@ msgid "Default"
 msgstr ""
 
 #: graphdocument.cpp:315
-#, fuzzy, kde-format
-#| msgid "Mesh Graph"
+#, kde-format
 msgctxt "@title:tab initial title for graph document"
 msgid "New Graph"
-msgstr "Graf Mogaill"
+msgstr ""
 
 #: kernel/documentwrapper.cpp:89
 #, kde-format
@@ -1102,11 +1041,10 @@ msgid "Target node of the edge."
 msgstr ""
 
 #: kernel/modules/document/document.xml:117
-#, fuzzy, kde-format
-#| msgid "Delete the active graph"
+#, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given node."
-msgstr "Scrios an graf gníomhach"
+msgstr ""
 
 #: kernel/modules/document/document.xml:124
 #, kde-format
@@ -1115,11 +1053,10 @@ msgid "The node to be deleted."
 msgstr ""
 
 #: kernel/modules/document/document.xml:131
-#, fuzzy, kde-format
-#| msgid "Delete the active graph"
+#, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given edge."
-msgstr "Scrios an graf gníomhach"
+msgstr ""
 
 #: kernel/modules/document/document.xml:138
 #, kde-format
@@ -1339,317 +1276,11 @@ msgid "Create an edge between two nodes"
 msgstr ""
 
 #: org/kde/rocs/Scene.qml:94
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgid "Delete Element"
-msgstr "Scrios"
+msgstr ""
 
 #: org/kde/rocs/Scene.qml:97
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgid "Delete element from scene"
-msgstr "Scrios"
-
-# makes more sense than "ciumhaiseanna"
-#, fuzzy
-#~| msgid "Edges"
-#~ msgctxt "@title:column"
-#~ msgid "Edge"
-#~ msgstr "Naisc"
-
-#, fuzzy
-#~| msgid "Edge Properties"
-#~ msgctxt "@title:column"
-#~ msgid "EdgeProperty"
-#~ msgstr "Airíonna Naisc"
-
-#, fuzzy
-#~| msgid "Edge style"
-#~ msgctxt "@title:column"
-#~ msgid "Edge Type"
-#~ msgstr "Stíl an naisc"
-
-#, fuzzy
-#~| msgid "Edge Properties"
-#~ msgctxt "@title:column"
-#~ msgid "EdgeTypeProperty"
-#~ msgstr "Airíonna Naisc"
-
-#, fuzzy
-#~| msgid "Nodes"
-#~ msgctxt "@title:column"
-#~ msgid "Node"
-#~ msgstr "Nóid"
-
-#, fuzzy
-#~| msgid "Node Properties"
-#~ msgctxt "@title:column"
-#~ msgid "NodeProperty"
-#~ msgstr "Airíonna Nóid"
-
-#, fuzzy
-#~| msgid "Node name"
-#~ msgctxt "@title:column"
-#~ msgid "Node Type"
-#~ msgstr "Kevin Scannell"
-
-#, fuzzy
-#~| msgid "Node Properties"
-#~ msgctxt "@title:column"
-#~ msgid "NodeTypeProperty"
-#~ msgstr "Airíonna Nóid"
-
-#, fuzzy
-#~| msgid "Color:"
-#~ msgid "Color"
-#~ msgstr "Dath:"
-
-#~ msgctxt "@title Displayed plugin name"
-#~ msgid "Graph Structure"
-#~ msgstr "Struchtúr an Ghraif"
-
-#~ msgctxt "coordinate axis"
-#~ msgid "x"
-#~ msgstr "x"
-
-#~ msgctxt "coordinate axis"
-#~ msgid "y"
-#~ msgstr "y"
-
-#~ msgid "Size"
-#~ msgstr "Méid"
-
-#~ msgid "Graph Type:"
-#~ msgstr "Cineál an Ghraif:"
-
-#~ msgctxt ""
-#~ "@label:inlistbox graph for which several edges between same nodes may "
-#~ "exist"
-#~ msgid "Multigraph"
-#~ msgstr "Ilghraf"
-
-#~ msgctxt "@title Displayed plugin name"
-#~ msgid "Linked List Structure"
-#~ msgstr "Struchtúr Liosta Nasctha"
-
-#~ msgid "Front value"
-#~ msgstr "An chéad luach"
-
-#~ msgid "Cannot convert document '%1'"
-#~ msgstr "Ní féidir cáipéis '%1' a thiontú"
-
-#~ msgid "Cannot open file %1."
-#~ msgstr "Ní féidir comhad %1 a oscailt."
-
-#~ msgid "Import"
-#~ msgstr "Iompórtáil"
-
-#~ msgid "No active graph in this document."
-#~ msgstr "Níl aon ghraf gníomhach sa cháipéis seo."
-
-#~ msgid "*.kml|Keyhole Markup Language Format"
-#~ msgstr "*.kml|Teanga Mharcála Keyhole"
-
-#~ msgid "Cannot open file %1: %2"
-#~ msgstr "Ní féidir comhad %1 a oscailt: %2"
-
-#~ msgctxt "type of dynamic property"
-#~ msgid "None"
-#~ msgstr "Neamhní"
-
-#~ msgid "untitled"
-#~ msgstr "gan teideal"
-
-#~ msgid "Data Structure:"
-#~ msgstr "Struchtúr Sonraí:"
-
-#~ msgid "Width:"
-#~ msgstr "Leithead:"
-
-#~ msgid "Style:"
-#~ msgstr "Stíl:"
-
-#~ msgid "Align"
-#~ msgstr "Ailínigh"
-
-#~ msgid "Data Structure"
-#~ msgstr "Struchtúr Sonraí"
-
-#~ msgid "RandomGraph"
-#~ msgstr "Graf Randamach"
-
-#~ msgid "centered"
-#~ msgstr "láraithe"
-
-#~ msgid "below"
-#~ msgstr "thíos"
-
-#~ msgid "above"
-#~ msgstr "thuas"
-
-#~ msgid "Edge Information"
-#~ msgstr "Eolas faoin Nasc"
-
-#~ msgid "*|All files"
-#~ msgstr "*|Gach comhad"
-
-#~ msgid "*.js|Script files"
-#~ msgstr "*.js|Scripteanna"
-
-#~ msgid "Rocs Script Files"
-#~ msgstr "Scripteanna Rocs"
-
-#~ msgid "Show text beside icon"
-#~ msgstr "Taispeáin téacs in aice leis an deilbhín"
-
-#~ msgid "Tools"
-#~ msgstr "Uirlisí"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Príomhbharra Uirlisí"
-
-#~ msgid "Untitled"
-#~ msgstr "Gan Teideal"
-
-#~ msgid "New File"
-#~ msgstr "Comhad Nua"
-
-#~ msgid "Untitled%1"
-#~ msgstr "Gan teideal%1"
-
-#~ msgid "Edge name"
-#~ msgstr "Ainm an naisc"
-
-#~ msgid "Edge color"
-#~ msgstr "Dath an naisc"
-
-#~ msgid "Value:"
-#~ msgstr "Luach:"
-
-#~ msgid "Edge value"
-#~ msgstr "Luach an naisc"
-
-#~ msgid "Edge width"
-#~ msgstr "Leithead an naisc"
-
-#~ msgid "Show"
-#~ msgstr "Taispeáin"
-
-#~ msgid "Show/hide edge name"
-#~ msgstr "Taispeáin/folaigh ainm an naisc"
-
-#~ msgid "Show/add edge value"
-#~ msgstr "Taispeáin/folaigh luach an naisc"
-
-#~ msgid "Global"
-#~ msgstr "Comhchoiteann"
-
-#~ msgid "add"
-#~ msgstr "cuir leis"
-
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid "v=%1"
-#~ msgstr "v=%1"
-
-#~ msgid "dot"
-#~ msgstr "poncanna"
-
-#~ msgid ""
-#~ "*.graph|Graph files\n"
-#~ "*|All files"
-#~ msgstr ""
-#~ "*.graph|Comhaid ghraif\n"
-#~ "*|Gach comhad"
-
-#~ msgid "Cannot open the file: %1. Error %2"
-#~ msgstr "Ní féidir comhad %1 a oscail. Earráid %2"
-
-#~ msgid "*.txt|Plain TXT Files"
-#~ msgstr "*.txt|Comhaid Ghnáth-théacs"
-
-#~ msgid "Add Node"
-#~ msgstr "Cuir Nód Leis"
-
-#~ msgid "Open Script"
-#~ msgstr "Oscail Script"
-
-#~ msgid "Edit"
-#~ msgstr "Eagar"
-
-#~ msgctxt "@action:button"
-#~ msgid "x"
-#~ msgstr "x"
-
-#~ msgid "Apply to all nodes"
-#~ msgstr "Cuir i bhfeidhm ar gach nód"
-
-#~ msgid "Close"
-#~ msgstr "Dún"
-
-#~ msgid "Image"
-#~ msgstr "Íomhá"
-
-#~ msgid "Untitled0"
-#~ msgstr "Gan teideal0"
-
-#~ msgid "Open Graph"
-#~ msgstr "Oscail Graf"
-
-#~ msgid "Save All"
-#~ msgstr "Sábháil Uile"
-
-#~ msgid "New"
-#~ msgstr "Nua"
-
-#~ msgid "Color for new nodes"
-#~ msgstr "Dath le haghaidh nód nua"
-
-#~ msgid "Color for new edges"
-#~ msgstr "Dath le haghaidh nasc nua"
-
-#~ msgid "Apply the current color to all nodes"
-#~ msgstr "Cuir an dath reatha ar gach nód"
-
-#~ msgid "All"
-#~ msgstr "Uile"
-
-#~ msgid "Apply the current color to all edges"
-#~ msgstr "Cuir an dath reatha ar gach nasc"
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "(c) 2009"
-#~ msgstr "© 2009"
-
-#~ msgid "Dialog"
-#~ msgstr "Dialóg"
-
-#~ msgid "Radius:"
-#~ msgstr "Ga:"
-
-#~ msgid "0"
-#~ msgstr "0"
-
-#~ msgid "Complete"
-#~ msgstr "Críochnaithe"
-
-#~ msgid "Name: %1"
-#~ msgstr "Ainm: %1"
-
-#~ msgid "Value: %1"
-#~ msgstr "Luach: %1"
-
-#~ msgid "Save Script As..."
-#~ msgstr "Sábháil Script Mar..."
-
-#~ msgid "End"
-#~ msgstr "Deireadh"
-
-#~ msgid "KSqueezedTextLabel"
-#~ msgstr "KSqueezedTextLabel"
-
-#~ msgid "ok"
-#~ msgstr "OK"
+msgstr ""
