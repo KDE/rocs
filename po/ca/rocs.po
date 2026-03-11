@@ -591,15 +591,3 @@ msgstr "Barra d'eines lateral"
 #, kde-format
 msgid "Toggle '%1' view."
 msgstr "Commuta la vista «%1»."
-
-#~ msgctxt "@action:intoolbar Open Debugger"
-#~ msgid "Debugger"
-#~ msgstr "Depurador"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Open the Javascript code debugger."
-#~ msgstr "Obre el depurador de codi JavaScript."
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Save Project as"
-#~ msgstr "Desa el projecte com a"
