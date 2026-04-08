@@ -13,8 +13,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -66,8 +66,7 @@ msgid "Edges"
 msgstr "Hrany"
 
 #: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
-#, fuzzy, kde-format
-#| msgid "Property Names"
+#, kde-format
 msgid "Property names"
 msgstr "Názvy vlastností"
 
@@ -592,17 +591,15 @@ msgstr "Pravdepodobnosť hrany"
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
 #: editorplugins/generategraph/generategraphwidget.ui:549
-#, fuzzy, kde-format
-#| msgid "Satellite Nodes:"
+#, kde-format
 msgid "Left Set Nodes:"
-msgstr "Satelitné uzly:"
+msgstr "Uzly ľavej množiny:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
 #: editorplugins/generategraph/generategraphwidget.ui:563
-#, fuzzy, kde-format
-#| msgid "Satellite Nodes:"
+#, kde-format
 msgid "Right Set Nodes:"
-msgstr "Satelitné uzly:"
+msgstr "Uzly pravej množiny:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:590
@@ -624,10 +621,9 @@ msgstr "Typ hrany:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:614
-#, fuzzy, kde-format
-#| msgid "Graph Generator"
+#, kde-format
 msgid "Graph generator:"
-msgstr "Generátor grafov"
+msgstr "Generátor grafov:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:621
@@ -651,64 +647,61 @@ msgstr "Rozloženie grafu"
 #: editorplugins/graphlayout/graphlayoutwidget.ui:36
 #, kde-format
 msgid "Force Based Layout"
-msgstr ""
+msgstr "Rozloženie založené na silách"
 
 #. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:57
 #, kde-format
 msgid "Area factor:"
-msgstr ""
+msgstr "Faktor plochy:"
 
 #. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:77
 #, kde-format
 msgid "Repelling force:"
-msgstr ""
+msgstr "Odpudivá sila:"
 
 #. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:97
 #, kde-format
 msgid "Attraction force:"
-msgstr ""
+msgstr "Príťažlivá sila:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:119
 #, kde-format
 msgid "Radial Tree Layout"
-msgstr ""
+msgstr "Radiálne stromové rozloženie"
 
 #. i18n: ectx: property (text), widget (QLabel, rootLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:134
 #, kde-format
 msgid "Center/Root:"
-msgstr ""
+msgstr "Stred/Koreň:"
 
 #. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:144
 #, kde-format
 msgid "Node separation:"
-msgstr ""
+msgstr "Odstup uzlov:"
 
 #. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:158
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgid "Tree type:"
-msgstr "Typ:"
+msgstr "Typ stromu:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:165
 #, kde-format
 msgid "Free tree"
-msgstr ""
+msgstr "Voľný strom"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@title Displayed plugin name"
-#| msgid "RootedTree Structure"
+#, kde-format
 msgid "Rooted tree"
-msgstr "Štruktúra RootedTree"
+msgstr "Zakorenený strom"
 
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
 #, kde-format
@@ -746,10 +739,9 @@ msgstr "Táto voľba odstrániť všetky okraje z daného grafu."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:38
-#, fuzzy, kde-format
-#| msgid "Remove all Edges"
+#, kde-format
 msgid "Remove all edges"
-msgstr "Odstrániť všetky okraje"
+msgstr "Odstrániť všetky hrany"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:45
@@ -763,10 +755,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:48
-#, fuzzy, kde-format
-#| msgid "Reverse all Edges"
+#, kde-format
 msgid "Reverse all edges"
-msgstr "Obrátiť všetky okraje"
+msgstr "Obrátiť všetky hrany"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:59
@@ -802,17 +793,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:62
-#, fuzzy, kde-format
-#| msgid "Spanning Tree Transformation"
+#, kde-format
 msgid "Spanning tree transformation"
 msgstr "Transformácia rozpínajúceho stromu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:69
-#, fuzzy, kde-format
-#| msgid "Remove all Edges"
+#, kde-format
 msgid "Remove all self edges"
-msgstr "Odstrániť všetky okraje"
+msgstr "Odstrániť všetky slučky"
 
 #: fileformats/dot/dotfileformat.cpp:41
 #, kde-format
@@ -935,17 +924,13 @@ msgid "%1: \"to\" is not a valid node object"
 msgstr "%1: \"pre\" nie je platný objekt uzla"
 
 #: kernel/documentwrapper.cpp:191
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "%1: \"to\" is not a valid node object"
+#, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is not called on an object"
 msgstr "%1: \"pre\" nie je platný objekt uzla"
 
 #: kernel/documentwrapper.cpp:210
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "%1: \"to\" is not a valid node object"
+#, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is neither a valid node or edge object"
 msgstr "%1: \"pre\" nie je platný objekt uzla"
@@ -1388,9 +1373,6 @@ msgstr "Vymazať prvok zo scény"
 #~ msgstr "Doplnky sa nenašli v určených adresároch:<br>"
 
 #, fuzzy
-#~| msgid ""
-#~| "<br><br> Check <a href='http://doc.qt.io/qt-5/deployment-plugins."
-#~| "html'>this link</a> for further information."
 #~ msgid ""
 #~ "<br><br> Check <a href='https://doc.qt.io/qt-5/deployment-plugins."
 #~ "html'>this link</a> for further information."
