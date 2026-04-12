@@ -143,7 +143,6 @@ void NodeTypesDelegate::showPropertiesDialog()
     QPointer<NodeTypeProperties> dialog = new NodeTypeProperties(nullptr);
     dialog->setType(type->self());
     dialog->exec();
-    dialog->deleteLater();
 }
 
 #include "moc_nodetypesdelegate.cpp"
