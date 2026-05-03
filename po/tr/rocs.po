@@ -5,13 +5,13 @@
 # Renan Cakirerk, 2010.
 # obsoleteman <tulliana@gmail.com>, 2009.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# SPDX-FileCopyrightText: 2022, 2024, 2025 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeedu-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:49+0000\n"
-"PO-Revision-Date: 2025-03-08 00:04+0300\n"
+"PO-Revision-Date: 2026-05-02 19:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Serdar Soytetir, Renan Çakırerk, Kaan Özdinçer, Emir SARI"
+msgstr "Serdar SOYTETİR, Renan Çakırerk, Kaan ÖZDİNÇER, Emir SARI"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -301,7 +301,7 @@ msgid ""
 "<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
 "want to overwrite it, change the file name to something else.</p>"
 msgstr ""
-"<p><br /><strong>“%1”</strong><br /> dosyası halihazırda var; üzerine yazmak "
+"<p><br /><strong>“%1”</strong><br /> dosyası hâlihazırda var; üzerine yazmak "
 "istemiyorsanız dosyanın adını değiştirin.</p>"
 
 #: ui/fileformatdialog.cpp:69
@@ -497,7 +497,7 @@ msgctxt "@info"
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
-"“%1” adlı bir dosya halihazırda var. Üzerine yazmak istediğinizden emin "
+"“%1” adlı bir dosya hâlihazırda var. Üzerine yazmak istediğinizden emin "
 "misiniz?"
 
 #: ui/mainwindow.cpp:377
@@ -544,7 +544,7 @@ msgstr "Yeni betiğinizin adını girin"
 #: ui/mainwindow.cpp:467
 #, kde-format
 msgid "File already exists."
-msgstr "Dosya halihazırda var."
+msgstr "Dosya hâlihazırda var."
 
 #: ui/mainwindow.cpp:493
 #, kde-format
