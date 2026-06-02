@@ -8,32 +8,31 @@ msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:49+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-06-01 18:39-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "ئابدۇقادىر ئابلىز, غەيرەت كەنجى"
+msgstr "ئابدۇقادىر ئابلىز، غەيرەت كەنجى"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "sahran.ug@gmail.com,  gheyret@gmail.com"
+msgstr "sahranbay@gmail.com, gheyret@gmail.com"
 
 #: dialogs/edgeproperties.cpp:25
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Properties"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edge Properties"
-msgstr "خاسلىق"
+msgstr ""
 
 #: dialogs/edgeproperties.cpp:80 dialogs/nodeproperties.cpp:86
 #, kde-format
@@ -47,17 +46,15 @@ msgstr "قىممەت"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, EdgeProperties)
 #: dialogs/edgeproperties.ui:26
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Properties"
+#, kde-format
 msgid "Edge Properties"
-msgstr "خاسلىق"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelType)
 #: dialogs/edgeproperties.ui:52 dialogs/nodeproperties.ui:52
 #, kde-format
 msgid "Type:"
-msgstr "تىپى"
+msgstr "تۈرى:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, DynamicProperties)
 #: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
@@ -66,25 +63,20 @@ msgid "Dynamic Properties"
 msgstr "خاسلىق"
 
 #: dialogs/edgetypeproperties.cpp:37
-#, fuzzy, kde-format
-#| msgctxt "@action:intoolbar"
-#| msgid "Add Edge"
+#, kde-format
 msgid "Edges"
-msgstr "گىرۋەك قوش"
+msgstr ""
 
 #: dialogs/edgetypeproperties.cpp:38 dialogs/nodetypeproperties.cpp:36
-#, fuzzy, kde-format
-#| msgid "Property"
+#, kde-format
 msgid "Property names"
-msgstr "خاسلىق"
+msgstr ""
 
 #: dialogs/edgetypeproperties.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Data Type Properties"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edge Type Properties"
-msgstr "خاسلىق"
+msgstr ""
 
 #: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
 #, kde-format
@@ -98,7 +90,7 @@ msgstr "ئاتى:"
 #: editorplugins/generategraph/generategraphwidget.ui:129
 #, kde-format
 msgid "Identifier:"
-msgstr ""
+msgstr "بەلگە:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelColor)
 #: dialogs/edgetypeproperties.cpp:51 dialogs/nodeproperties.ui:102
@@ -108,27 +100,24 @@ msgid "Color:"
 msgstr "رەڭ:"
 
 #: dialogs/edgetypeproperties.cpp:52 graphdocument.cpp:120
-#, fuzzy, kde-format
-#| msgid "Direction:"
+#, kde-format
 msgid "Unidirectional"
-msgstr "باغلىنىش تىپى"
+msgstr ""
 
 #: dialogs/edgetypeproperties.cpp:53 graphdocument.cpp:125
-#, fuzzy, kde-format
-#| msgid "Direction:"
+#, kde-format
 msgid "Bidirectional"
-msgstr "باغلىنىش تىپى"
+msgstr ""
 
 #: dialogs/edgetypeproperties.cpp:54
-#, fuzzy, kde-format
-#| msgid "Direction:"
+#, kde-format
 msgid "Direction:"
-msgstr "باغلىنىش تىپى"
+msgstr "يونۇلۇش:"
 
 #: dialogs/edgetypeproperties.cpp:61 dialogs/nodetypeproperties.cpp:59
 #, kde-format
 msgid "Visibility:"
-msgstr ""
+msgstr "كۆرۈشچانلىقى:"
 
 #: dialogs/edgetypeproperties.cpp:137
 #, kde-format
@@ -145,12 +134,10 @@ msgid ""
 msgstr ""
 
 #: dialogs/nodeproperties.cpp:26
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Properties"
+#, kde-format
 msgctxt "@title:window"
 msgid "Node Properties"
-msgstr "خاسلىق"
+msgstr ""
 
 #: dialogs/nodeproperties.cpp:133
 #, kde-format
@@ -168,11 +155,9 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
 #: dialogs/nodeproperties.ui:26
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Properties"
+#, kde-format
 msgid "Node Properties"
-msgstr "خاسلىق"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelColor)
 #. i18n: ectx: property (toolTip), widget (KColorCombo, color)
@@ -187,12 +172,10 @@ msgid "Nodes"
 msgstr "تۈگۈنلەر"
 
 #: dialogs/nodetypeproperties.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Pointer Type Properties"
+#, kde-format
 msgctxt "@title:window"
 msgid "Node Type Properties"
-msgstr "خاسلىق"
+msgstr ""
 
 #: dialogs/nodetypeproperties.cpp:133
 #, kde-format
@@ -219,30 +202,25 @@ msgid "Delete this property."
 msgstr ""
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:33
-#, fuzzy, kde-format
-#| msgid "Assign Values"
+#, kde-format
 msgctxt "@title:window"
 msgid "Assign Values"
 msgstr "تەقسىملەنگەن قىممەتلەر"
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:52
-#, fuzzy, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Data Types"
+#, kde-format
 msgid "All Data Types"
-msgstr "خاسلىق"
+msgstr ""
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:57
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgid "All Edge Types"
-msgstr "تىپى"
+msgstr ""
 
 #: editorplugins/assignvalues/assignvalueswidget.cpp:81
-#, fuzzy, kde-format
-#| msgid "Pointer Properties"
+#, kde-format
 msgid "Enter Property Name"
-msgstr "خاسلىق"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, AssignValuesWidget)
 #: editorplugins/assignvalues/assignvalueswidget.ui:32
@@ -252,10 +230,9 @@ msgstr "تەقسىملەنگەن قىممەتلەر"
 
 #. i18n: ectx: property (text), widget (QLabel, property_choice_label)
 #: editorplugins/assignvalues/assignvalueswidget.ui:40
-#, fuzzy, kde-format
-#| msgid "Pointer Properties"
+#, kde-format
 msgid "Choose Properties"
-msgstr "خاسلىق"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
 #: editorplugins/assignvalues/assignvalueswidget.ui:59
@@ -277,11 +254,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:86
-#, fuzzy, kde-format
-#| msgctxt "@Title Displayed plugin name"
-#| msgid "Generate Graph"
+#, kde-format
 msgid "Enumerate Alpha"
-msgstr "گراڧنى ساقلاش"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:91
@@ -297,17 +272,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:101
-#, fuzzy, kde-format
-#| msgid "Assign Values"
+#, kde-format
 msgid "Assign Random Reals"
-msgstr "تەقسىملەنگەن قىممەتلەر"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:106
-#, fuzzy, kde-format
-#| msgid "Assign Values"
+#, kde-format
 msgid "Assign Constant Value"
-msgstr "تەقسىملەنگەن قىممەتلەر"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, IDlabelStartValue)
 #: editorplugins/assignvalues/assignvalueswidget.ui:132
@@ -325,7 +298,7 @@ msgstr ""
 #: editorplugins/assignvalues/assignvalueswidget.ui:174
 #, kde-format
 msgid "a"
-msgstr ""
+msgstr "a"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericID)
 #: editorplugins/assignvalues/assignvalueswidget.ui:192
@@ -337,7 +310,7 @@ msgstr ""
 #: editorplugins/assignvalues/assignvalueswidget.ui:209
 #, kde-format
 msgid "Prefix"
-msgstr ""
+msgstr "ئالدى قوشۇلغۇچى"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), widget (QLabel, label_4)
@@ -369,7 +342,7 @@ msgstr ""
 #: editorplugins/assignvalues/assignvalueswidget.ui:372
 #, kde-format
 msgid "Constant"
-msgstr ""
+msgstr "تۇراقلىق سان"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: editorplugins/assignvalues/assignvalueswidget.ui:400
@@ -383,17 +356,15 @@ msgstr ""
 #: editorplugins/assignvalues/assignvalueswidget.ui:434
 #: editorplugins/generategraph/generategraphwidget.ui:252
 #: editorplugins/generategraph/generategraphwidget.ui:404
-#, fuzzy, kde-format
-#| msgid "Nodes"
+#, kde-format
 msgid "Nodes:"
-msgstr "تۈگۈنلەر"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelProperty)
 #: editorplugins/assignvalues/assignvalueswidget.ui:447
-#, fuzzy, kde-format
-#| msgid "Property"
+#, kde-format
 msgid "Property name:"
-msgstr "خاسلىق"
+msgstr "قۇرۇلۇش ئاتى:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomEdges)
 #. i18n: ectx: property (text), widget (QLabel, labelConnection)
@@ -419,7 +390,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Generate Graph"
-msgstr "گراڧنى ساقلاش"
+msgstr "گىرافىك ھاسىللا"
 
 #: editorplugins/generategraph/generategraphwidget.cpp:119
 #: editorplugins/generategraph/generategraphwidget.cpp:126
@@ -440,11 +411,9 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
 #: editorplugins/generategraph/generategraphwidget.ui:14
-#, fuzzy, kde-format
-#| msgctxt "@Title Displayed plugin name"
-#| msgid "Generate Graph"
+#, kde-format
 msgid "Generate Graph"
-msgstr "گراڧنى ساقلاش"
+msgstr "گىرافىك ھاسىللا"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:22
@@ -454,34 +423,27 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:26
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save Graph"
+#, kde-format
 msgid "Mesh Graph"
-msgstr "گراڧنى ساقلاش"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:31
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save Graph"
+#, kde-format
 msgid "Star Graph"
-msgstr "گراڧنى ساقلاش"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:36
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu align elements as a circle"
-#| msgid "Circle"
+#, kde-format
 msgid "Circle Graph"
-msgstr "چەمبەر"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:41
-#, fuzzy, kde-format
-#| msgid "RandomGraph"
+#, kde-format
 msgid "Random Graph"
-msgstr "گرافىك"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:46
@@ -491,39 +453,33 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:51
-#, fuzzy, kde-format
-#| msgid "RandomGraph"
+#, kde-format
 msgid "Random Tree Graph"
-msgstr "گرافىك"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:56
-#, fuzzy, kde-format
-#| msgid "RandomGraph"
+#, kde-format
 msgid "Random Dag Graph"
-msgstr "گرافىك"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:61
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save Graph"
+#, kde-format
 msgid "Path Graph"
-msgstr "گراڧنى ساقلاش"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:66
-#, fuzzy, kde-format
-#| msgid "Complete"
+#, kde-format
 msgid "Complete Graph"
-msgstr "تولۇق"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:71
-#, fuzzy, kde-format
-#| msgid "Complete"
+#, kde-format
 msgid "Complete Bipartite"
-msgstr "تولۇق"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
 #: editorplugins/generategraph/generategraphwidget.ui:91
@@ -539,11 +495,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLineEdit, identifier)
 #: editorplugins/generategraph/generategraphwidget.ui:109
-#, fuzzy, kde-format
-#| msgctxt "@label:inlistbox"
-#| msgid "Graph"
+#, kde-format
 msgid "Graph"
-msgstr "گرافىك"
+msgstr "گىرافىك"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:116
@@ -553,11 +507,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:119
-#, fuzzy, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Pointer Types"
+#, kde-format
 msgid "Node type:"
-msgstr "خاسلىق"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelIdentifier)
 #: editorplugins/generategraph/generategraphwidget.ui:126
@@ -603,17 +555,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
 #: editorplugins/generategraph/generategraphwidget.ui:293
-#, fuzzy, kde-format
-#| msgid "Graph name"
+#, kde-format
 msgid "Generator seed:"
-msgstr "گراڧ ھۆججەتلىرى"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPNodes)
 #: editorplugins/generategraph/generategraphwidget.ui:325
-#, fuzzy, kde-format
-#| msgid "Nodes"
+#, kde-format
 msgid "Nodes (n):"
-msgstr "تۈگۈنلەر"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
 #: editorplugins/generategraph/generategraphwidget.ui:349
@@ -637,10 +587,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_edgeProbability)
 #: editorplugins/generategraph/generategraphwidget.ui:463
-#, fuzzy, kde-format
-#| msgid "Property"
+#, kde-format
 msgid "Edge Probability"
-msgstr "خاسلىق"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesLeft)
 #: editorplugins/generategraph/generategraphwidget.ui:549
@@ -668,17 +617,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:607
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgid "Edge type:"
-msgstr "تىپى"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:614
-#, fuzzy, kde-format
-#| msgid "Graph name"
+#, kde-format
 msgid "Graph generator:"
-msgstr "گراڧ ھۆججەتلىرى"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, nodeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:621
@@ -687,18 +634,16 @@ msgid "Select the node type for node elements of the generated graph."
 msgstr ""
 
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
-#, fuzzy, kde-format
-#| msgid "Graph Document"
+#, kde-format
 msgctxt "@title:window"
 msgid "Graph Layout"
-msgstr "يېڭى گراڧ"
+msgstr "گىرافىك جايلاشتۇرۇش"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GraphLayoutWidget)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:20
-#, fuzzy, kde-format
-#| msgid "Graph Document"
+#, kde-format
 msgid "Graph Layout"
-msgstr "يېڭى گراڧ"
+msgstr "گىرافىك جايلاشتۇرۇش"
 
 #. i18n: ectx: attribute (title), widget (QWidget, forceBasedLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:36
@@ -732,11 +677,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, rootLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:134
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu align elements at center"
-#| msgid "Center"
+#, kde-format
 msgid "Center/Root:"
-msgstr "مەركەز"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:144
@@ -746,10 +689,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:158
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgid "Tree type:"
-msgstr "تىپى"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, freeTreeRadioButton)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:165
@@ -785,10 +727,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
 #: editorplugins/transformedges/transformedgeswidget.ui:25
-#, fuzzy, kde-format
-#| msgid "Complete"
+#, kde-format
 msgid "Complete graph"
-msgstr "تولۇق"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:35
@@ -923,18 +864,15 @@ msgid "TikZ (PGF) Format (%1)"
 msgstr ""
 
 #: graphdocument.cpp:129
-#, fuzzy, kde-format
-#| msgid "Default Value"
+#, kde-format
 msgid "Default"
-msgstr "رەڭ:"
+msgstr "كۆڭۈلدىكى"
 
 #: graphdocument.cpp:315
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save Graph"
+#, kde-format
 msgctxt "@title:tab initial title for graph document"
 msgid "New Graph"
-msgstr "گراڧنى ساقلاش"
+msgstr ""
 
 #: kernel/documentwrapper.cpp:89
 #, kde-format
@@ -1308,11 +1246,9 @@ msgid "List of nodes to that the distances shall be computed."
 msgstr ""
 
 #: org/kde/rocs/Scene.qml:58
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "Selected"
+#, kde-format
 msgid "Select & Move"
-msgstr "تاللانغان"
+msgstr ""
 
 #: org/kde/rocs/Scene.qml:60
 #, kde-format
@@ -1340,83 +1276,69 @@ msgid "Create an edge between two nodes"
 msgstr ""
 
 #: org/kde/rocs/Scene.qml:94
-#, fuzzy, kde-format
-#| msgid "Element"
+#, kde-format
 msgid "Delete Element"
-msgstr "ئېلېمېنت"
+msgstr "ئېلېمېنت ئۆچۈر"
 
 #: org/kde/rocs/Scene.qml:97
-#, fuzzy, kde-format
-#| msgid "Element"
+#, kde-format
 msgid "Delete element from scene"
-msgstr "ئېلېمېنت"
+msgstr ""
 
-#, fuzzy
 #~| msgctxt "@action:intoolbar"
 #~| msgid "Add Edge"
 #~ msgctxt "@title:column"
 #~ msgid "Edge"
 #~ msgstr "گىرۋەك قوش"
 
-#, fuzzy
 #~| msgid "Property"
 #~ msgctxt "@title:column"
 #~ msgid "EdgeProperty"
 #~ msgstr "خاسلىق"
 
-#, fuzzy
 #~| msgid "Type"
 #~ msgctxt "@title:column"
 #~ msgid "Edge Type"
 #~ msgstr "تىپى"
 
-#, fuzzy
 #~| msgid "Property"
 #~ msgctxt "@title:column"
 #~ msgid "EdgeTypeProperty"
 #~ msgstr "خاسلىق"
 
-#, fuzzy
 #~| msgid "Nodes"
 #~ msgctxt "@title:column"
 #~ msgid "Node"
 #~ msgstr "تۈگۈنلەر"
 
-#, fuzzy
 #~| msgid "Property"
 #~ msgctxt "@title:column"
 #~ msgid "NodeProperty"
 #~ msgstr "خاسلىق"
 
-#, fuzzy
 #~| msgctxt "@title:tab"
 #~| msgid "Pointer Types"
 #~ msgctxt "@title:column"
 #~ msgid "Node Type"
 #~ msgstr "خاسلىق"
 
-#, fuzzy
 #~| msgid "Property"
 #~ msgctxt "@title:column"
 #~ msgid "NodeTypeProperty"
 #~ msgstr "خاسلىق"
 
-#, fuzzy
 #~| msgid "Color:"
 #~ msgid "Color"
 #~ msgstr "رەڭ:"
 
-#, fuzzy
 #~| msgid "Direction:"
 #~ msgid "unidirectional"
 #~ msgstr "باغلىنىش تىپى"
 
-#, fuzzy
 #~| msgid "Direction:"
 #~ msgid "bidirectional"
 #~ msgstr "باغلىنىش تىپى"
 
-#, fuzzy
 #~| msgctxt "@action:intoolbar"
 #~| msgid "Add Connection"
 #~ msgid "All Connection Types"
