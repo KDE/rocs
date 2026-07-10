@@ -52,7 +52,6 @@
 #include <ktexteditor/document.h>
 #include <ktexteditor/editor.h>
 #include <ktexteditor/view.h>
-#include <kwidgetsaddons_version.h>
 
 using namespace GraphTheory;
 
@@ -485,11 +484,7 @@ bool MainWindow::queryClose()
     if (!m_currentProject->isModified()) {
         return true;
     }
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
     const int btnCode = KMessageBox::warningTwoActionsCancel(this,
-#else
-    const int btnCode = KMessageBox::warningYesNoCancel(this,
-#endif
                                                              i18nc("@info", "Changes on your project are unsaved. Do you want to save your changes?"),
                                                              QString(),
                                                              KStandardGuiItem::save(),
@@ -499,11 +494,7 @@ bool MainWindow::queryClose()
         return false;
     }
 
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
     if (btnCode == KMessageBox::PrimaryAction) {
-#else
-    if (btnCode == KMessageBox::Yes) {
-#endif
         saveProject();
     }
 
