@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:49+0000\n"
+"POT-Creation-Date: 2026-07-11 00:39+0000\n"
 "PO-Revision-Date: 2022-01-01 15:57+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -346,147 +346,147 @@ msgstr "Enter the name of your graph document"
 msgid "Project Journal"
 msgstr "Project Journal"
 
-#: ui/mainwindow.cpp:169
+#: ui/mainwindow.cpp:168
 #, kde-format
 msgctxt "@action:intoolbar Script Execution"
 msgid "Run"
 msgstr "Run"
 
-#: ui/mainwindow.cpp:170
+#: ui/mainwindow.cpp:169
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Execute currently active script on active graph document."
 msgstr "Execute currently active script on active graph document."
 
-#: ui/mainwindow.cpp:171
+#: ui/mainwindow.cpp:170
 #, kde-format
 msgctxt "@action:intoolbar Script Execution"
 msgid "Stop"
 msgstr "Stop"
 
-#: ui/mainwindow.cpp:172
+#: ui/mainwindow.cpp:171
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop script execution."
 msgstr "Stop script execution."
 
-#: ui/mainwindow.cpp:204
+#: ui/mainwindow.cpp:203
 #, kde-format
 msgid "Element Types"
 msgstr "Element Types"
 
-#: ui/mainwindow.cpp:211
+#: ui/mainwindow.cpp:210
 #, kde-format
 msgctxt "@title"
 msgid "Journal"
 msgstr "Journal"
 
-#: ui/mainwindow.cpp:215
+#: ui/mainwindow.cpp:214
 #, kde-format
 msgctxt "@title"
 msgid "Scripting API"
 msgstr "Scripting API"
 
-#: ui/mainwindow.cpp:250
+#: ui/mainwindow.cpp:249
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Project"
 msgstr "New Project"
 
-#: ui/mainwindow.cpp:256
+#: ui/mainwindow.cpp:255
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project"
 msgstr "Save Project"
 
-#: ui/mainwindow.cpp:262
+#: ui/mainwindow.cpp:261
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Project..."
 msgstr "Open Project..."
 
-#: ui/mainwindow.cpp:270
+#: ui/mainwindow.cpp:269
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Recent Projects"
 msgstr "Recent Projects"
 
-#: ui/mainwindow.cpp:275
+#: ui/mainwindow.cpp:274
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project As..."
 msgstr "Save Project As..."
 
-#: ui/mainwindow.cpp:276
+#: ui/mainwindow.cpp:275
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Graph Document"
 msgstr "New Graph Document"
 
-#: ui/mainwindow.cpp:277
+#: ui/mainwindow.cpp:276
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New Script File..."
 msgstr "New Script File..."
 
-#: ui/mainwindow.cpp:278
+#: ui/mainwindow.cpp:277
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Graph..."
 msgstr "Import Graph..."
 
-#: ui/mainwindow.cpp:279
+#: ui/mainwindow.cpp:278
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Graph As..."
 msgstr "Export Graph As..."
 
-#: ui/mainwindow.cpp:280
+#: ui/mainwindow.cpp:279
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Script..."
 msgstr "Import Script..."
 
-#: ui/mainwindow.cpp:281
+#: ui/mainwindow.cpp:280
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Script..."
 msgstr "Export Script..."
 
-#: ui/mainwindow.cpp:320
+#: ui/mainwindow.cpp:319
 #, kde-format
 msgctxt "@title:window"
 msgid "Import Script into Project"
 msgstr "Import Script into Project"
 
-#: ui/mainwindow.cpp:332
+#: ui/mainwindow.cpp:331
 #, kde-format
 msgctxt "@title:window"
 msgid "Export Script"
 msgstr "Export Script"
 
-#: ui/mainwindow.cpp:332
+#: ui/mainwindow.cpp:331
 #, kde-format
 msgid "JavaScript (*.js)"
 msgstr "JavaScript (*.js)"
 
-#: ui/mainwindow.cpp:343
+#: ui/mainwindow.cpp:342
 #, kde-format
 msgid "untitled"
 msgstr "untitled"
 
-#: ui/mainwindow.cpp:366
+#: ui/mainwindow.cpp:365
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Project As"
 msgstr "Save Project As"
 
-#: ui/mainwindow.cpp:366
+#: ui/mainwindow.cpp:365
 #, kde-format
 msgid "Rocs Projects (*.rocs)"
 msgstr "Rocs Projects (*.rocs)"
 
-#: ui/mainwindow.cpp:376
+#: ui/mainwindow.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -494,24 +494,24 @@ msgid ""
 msgstr ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 
-#: ui/mainwindow.cpp:377
+#: ui/mainwindow.cpp:376
 #, kde-format
 msgctxt "@title:window"
 msgid "Overwrite File?"
 msgstr "Overwrite File?"
 
-#: ui/mainwindow.cpp:400
+#: ui/mainwindow.cpp:399
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Project Files"
 msgstr "Open Project Files"
 
-#: ui/mainwindow.cpp:400
+#: ui/mainwindow.cpp:399
 #, kde-format
 msgid "Rocs projects (*.rocs)"
 msgstr "Rocs projects (*.rocs)"
 
-#: ui/mainwindow.cpp:407
+#: ui/mainwindow.cpp:406
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -521,28 +521,28 @@ msgstr ""
 "The Rocs project could not be imported because the project file could not be "
 "parsed."
 
-#: ui/mainwindow.cpp:429
+#: ui/mainwindow.cpp:428
 #, kde-format
 msgctxt "caption text for temporary project"
 msgid "[ untitled ]%1"
 msgstr "[ untitled ]%1"
 
-#: ui/mainwindow.cpp:458
+#: ui/mainwindow.cpp:457
 #, kde-format
 msgid "ScriptName"
 msgstr "ScriptName"
 
-#: ui/mainwindow.cpp:458
+#: ui/mainwindow.cpp:457
 #, kde-format
 msgid "Enter the name of your new script"
 msgstr "Enter the name of your new script"
 
-#: ui/mainwindow.cpp:467
+#: ui/mainwindow.cpp:466
 #, kde-format
 msgid "File already exists."
 msgstr "File already exists."
 
-#: ui/mainwindow.cpp:493
+#: ui/mainwindow.cpp:488
 #, kde-format
 msgctxt "@info"
 msgid "Changes on your project are unsaved. Do you want to save your changes?"
