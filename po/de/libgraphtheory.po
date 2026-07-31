@@ -521,7 +521,7 @@ msgstr "Knotentyp:"
 #: editorplugins/generategraph/generategraphwidget.ui:126
 #, kde-format
 msgid "The identifier of the created graph (used for scripting)"
-msgstr "Die Kennung des erstellten Graphen, er wird in den Skripten benutzt"
+msgstr "Die Kennung des erstellten Graphen, er wird in den Skripten verwendet"
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
 #: editorplugins/generategraph/generategraphwidget.ui:148
@@ -881,7 +881,7 @@ msgstr "„Trivial Graph“-Format (%1)"
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
 msgstr ""
-"Datei kann nicht eingelesen werden. Die Kennung „%1“ wird mehrfach benutzt."
+"Datei kann nicht eingelesen werden. Die Kennung „%1“ wird mehrfach verwendet."
 
 #: fileformats/tgf/tgffileformat.cpp:76
 #, kde-format
@@ -1190,7 +1190,7 @@ msgid ""
 "Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
 "for red)."
 msgstr ""
-"Farbe dieses Knotens als Zeichenfolge in hexadezimalen Werten (z. B. "
+"Farbe dieses Knotens als Zeichenfolge in hexadezimalen Werten (z. B. "
 "„#ff0000“ für Rot) lesen und festlegen."
 
 #: kernel/modules/document/node.xml:47
