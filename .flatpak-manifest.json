@@ -5,7 +5,9 @@
     "runtime-version": "6.11",
     "sdk": "org.kde.Sdk",
     "command": "rocs",
-    "tags": ["nightly"],
+    "tags": [
+        "nightly"
+    ],
     "desktop-file-name-suffix": " (Nightly)",
     "finish-args": [
         "--share=ipc",
@@ -48,8 +50,15 @@
         {
             "name": "rocs",
             "buildsystem": "cmake-ninja",
-            "config-opts": ["-DENABLE_TESTING=OFF" ],
-            "sources": [ { "type": "dir", "path": "." } ]
+            "config-opts": [
+                "-DENABLE_TESTING=OFF"
+            ],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
+            ]
         }
     ]
 }
