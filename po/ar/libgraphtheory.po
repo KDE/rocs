@@ -256,25 +256,25 @@ msgstr "عدّد العناصر"
 #: editorplugins/assignvalues/assignvalueswidget.ui:86
 #, kde-format
 msgid "Enumerate Alpha"
-msgstr "عدّد أبجدياً"
+msgstr "عدّد أبجديًا"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:91
 #, kde-format
 msgid "Enumerate Alpha-Numeric"
-msgstr "عدّد أبجدياً رقمياً"
+msgstr "عدّد أبجديًا رقميًا"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:96
 #, kde-format
 msgid "Assign Random Integers"
-msgstr "اسند أعداداً صحيحة عشوائية"
+msgstr "اسند أعدادًا صحيحة عشوائية"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:101
 #, kde-format
 msgid "Assign Random Reals"
-msgstr "اسند أعداداً حقيقية عشوائية"
+msgstr "اسند أعدادًا حقيقية عشوائية"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:106
@@ -1119,7 +1119,7 @@ msgstr "أرجع عقدة الهدف للحافة."
 #, kde-format
 msgctxt "Scripting API"
 msgid "Returns true if the edge's type is directed, otherwise false."
-msgstr "يرجع \"صحيح\" إن كان نوع الحافة موجهاً، وإلا \"خاطئ\"."
+msgstr "يرجع \"صحيح\" إن كان نوع الحافة موجهًا، وإلا \"خاطئ\"."
 
 #: kernel/modules/document/node.xml:11
 #, kde-format
@@ -1164,7 +1164,7 @@ msgid ""
 "Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
 "for red)."
 msgstr ""
-"اقرأ واضبط سلسلة لون هذه العقدة بقيم سداسية عشرية (مثلاً، \"#ff0000\" للأحمر)."
+"اقرأ واضبط سلسلة لون هذه العقدة بقيم سداسية عشرية (مثلًا، \"#ff0000\" للأحمر)."
 
 #: kernel/modules/document/node.xml:47
 #, kde-format
