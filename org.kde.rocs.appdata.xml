@@ -120,6 +120,9 @@
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=rocs</url>
   <url type="help">https://docs.kde.org/?application=rocs</url>
   <url type="donation">https://www.kde.org/community/donations/?app=rocs&amp;source=appdata</url>
+  <custom>
+    <value key="KDE::mailinglist">kde-edu@kde.org</value>
+  </custom>
   <screenshots>
     <screenshot type="default">
       <caption>Working with graphs in Rocs</caption>
