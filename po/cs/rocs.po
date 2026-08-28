@@ -2,31 +2,34 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2023.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012.
+# SPDX-FileCopyrightText: 2026 Libor Filipek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:49+0000\n"
-"PO-Revision-Date: 2023-02-03 11:45+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-08-27 10:01+0200\n"
+"Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Vít Pelčák, Miroslav Hrončok, Tomáš Chvátal"
+msgstr "Vít Pelčák,Miroslav Hrončok,Tomáš Chvátal,Libor Filípek"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "vit@pelcak.org, miro@hroncok.cz, tomas.chvatal@gmail.com"
+msgstr ""
+"vit@pelcak.org,miro@hroncok.cz,tomas.chvatal@gmail.com,libor.filipek@gmail."
+"com"
 
 #: main.cpp:26
 #, kde-format
@@ -38,7 +41,7 @@ msgstr "Rocs"
 #, kde-format
 msgctxt "@title Short program description"
 msgid "Graph Theory Simulator"
-msgstr ""
+msgstr "Simulátor teorie grafů"
 
 #: main.cpp:32
 #, kde-format
@@ -197,7 +200,7 @@ msgstr "Zobrazit popisky u ikon"
 #: rocs.kcfg:49
 #, kde-format
 msgid "Path where include manager seek for includes."
-msgstr ""
+msgstr "Cesta, ve které správce hledá soubory k zahrnutí."
 
 #. i18n: ectx: Menu (project)
 #: rocsui.rc:23
@@ -245,7 +248,7 @@ msgstr "Nástroje"
 #, kde-format
 msgctxt "@title"
 msgid "Code Document Name"
-msgstr ""
+msgstr "Název dokumentu s kódem"
 
 #: ui/codeeditorwidget.cpp:82
 #, kde-format
@@ -282,7 +285,7 @@ msgstr "Směry hrany typu hrany."
 #: ui/edgetypesdelegate.cpp:61
 #, kde-format
 msgid "Unique ID of edge type."
-msgstr ""
+msgstr "Jedinečný identifikátor typu hrany."
 
 #: ui/fileformatdialog.cpp:46
 #, kde-format
@@ -296,6 +299,8 @@ msgid ""
 "<p>The file <br /><strong>'%1'</strong><br /> already exists; if you do not "
 "want to overwrite it, change the file name to something else.</p>"
 msgstr ""
+"<p>Soubor <br /><strong>'%1'</strong><br /> již existuje; pokud jej nechcete "
+"přepsat, změňte název souboru na jiný.</p>"
 
 #: ui/fileformatdialog.cpp:69
 #, kde-format
@@ -308,6 +313,8 @@ msgid ""
 "<p>Cannot resolve suffix of file <strong>'%1'</strong> to an available file "
 "backend. Aborting export.</p>"
 msgstr ""
+"<p>Nelze přiřadit příponu souboru <strong>'%1'</strong> k dostupné podpůrné "
+"vrstvě systému souborů. Export se přerušuje.</p>"
 
 #: ui/fileformatdialog.cpp:96
 #, kde-format
@@ -334,7 +341,7 @@ msgstr "Název dokumentu grafu"
 #: ui/grapheditorwidget.cpp:80
 #, kde-format
 msgid "Enter the name of your graph document"
-msgstr ""
+msgstr "Zadejte název svého dokumentu grafu"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: ui/journalwidget.ui:17
@@ -352,7 +359,7 @@ msgstr "Spustit"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Execute currently active script on active graph document."
-msgstr ""
+msgstr "Spustit aktuálně aktivní skript na aktivním dokumentu grafu."
 
 #: ui/mainwindow.cpp:171
 #, kde-format
@@ -364,7 +371,7 @@ msgstr "Zastavit"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop script execution."
-msgstr ""
+msgstr "Zastavit provádění skriptu."
 
 #: ui/mainwindow.cpp:204
 #, kde-format
@@ -514,6 +521,8 @@ msgid ""
 "The Rocs project could not be imported because the project file could not be "
 "parsed."
 msgstr ""
+"Projekt Rocs se nepodařilo importovat, protože nebylo možné analyzovat "
+"soubor projektu."
 
 #: ui/mainwindow.cpp:429
 #, kde-format
@@ -540,12 +549,12 @@ msgstr "Soubor již existuje."
 #, kde-format
 msgctxt "@info"
 msgid "Changes on your project are unsaved. Do you want to save your changes?"
-msgstr ""
+msgstr "Změny ve vašem projektu nebyly uloženy. Chcete změny uložit?"
 
 #: ui/nodetypesdelegate.cpp:60
 #, kde-format
 msgid "Unique ID of the node type."
-msgstr ""
+msgstr "Jedinečný identifikátor typu uzlu."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/scriptoutputwidget.ui:24
@@ -557,7 +566,7 @@ msgstr "Výstup skriptu:"
 #: ui/scriptoutputwidget.ui:37
 #, kde-format
 msgid "Clear program output with each execution."
-msgstr ""
+msgstr "Při každém spuštění vymazat výstup programu."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonEnableDebugOutput)
 #: ui/scriptoutputwidget.ui:56
@@ -580,4 +589,4 @@ msgstr "Postranní panel nástrojů"
 #: ui/sidedockwidget.cpp:133
 #, kde-format
 msgid "Toggle '%1' view."
-msgstr ""
+msgstr "Přepnout zobrazení '%1'."
