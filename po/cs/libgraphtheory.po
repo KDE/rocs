@@ -2,31 +2,32 @@
 # This file is distributed under the same license as the PACKAGE package.
 # SPDX-FileCopyrightText: 2014, 2015, 2016, 2019, 2025 Vít Pelčák <vit@pelcak.org>
 # Vit Pelcak <vit@pelcak.org>, 2021, 2023.
+# SPDX-FileCopyrightText: 2026 Libor Filipek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:49+0000\n"
-"PO-Revision-Date: 2023-02-03 11:45+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-08-27 23:19+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Vít Pelčák"
+msgstr "Vít Pelčák,Libor Filípek"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "vit@pelcak.org"
+msgstr "vit@pelcak.org,libor.filipek@gmail.com"
 
 #: dialogs/edgeproperties.cpp:25
 #, kde-format
@@ -60,7 +61,7 @@ msgstr "Typ:"
 #: dialogs/edgeproperties.ui:98 dialogs/nodeproperties.ui:138
 #, kde-format
 msgid "Dynamic Properties"
-msgstr "Dynamické vlastnosti "
+msgstr "Dynamické vlastnosti"
 
 #: dialogs/edgetypeproperties.cpp:37
 #, kde-format
@@ -76,7 +77,7 @@ msgstr "Názvy vlastnosti"
 #, kde-format
 msgctxt "@title:window"
 msgid "Edge Type Properties"
-msgstr ""
+msgstr "Vlastnosti typu hrany"
 
 #: dialogs/edgetypeproperties.cpp:48 dialogs/nodetypeproperties.cpp:47
 #, kde-format
@@ -123,7 +124,7 @@ msgstr "Viditelnost:"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this edge type."
-msgstr ""
+msgstr "Vybrané ID pro tento typ hrany."
 
 #: dialogs/edgetypeproperties.cpp:141
 #, kde-format
@@ -131,7 +132,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another edge type, please select a "
 "different one."
-msgstr ""
+msgstr "Vybrané ID je již použito pro jiný typ hrany, vyberte prosím jiné."
 
 #: dialogs/nodeproperties.cpp:26
 #, kde-format
@@ -143,7 +144,7 @@ msgstr "Vlastnosti uzlu"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this node."
-msgstr ""
+msgstr "Vybrané ID tohoto uzlu."
 
 #: dialogs/nodeproperties.cpp:137
 #, kde-format
@@ -151,7 +152,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another node, please select a different "
 "one."
-msgstr ""
+msgstr "Vybrané ID je již přiděleno jinému uzlu. Vyberte prosím jiné."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, NodeProperties)
 #: dialogs/nodeproperties.ui:26
@@ -181,7 +182,7 @@ msgstr "Vlastnosti typu uzlu"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The selected ID for this node type."
-msgstr ""
+msgstr "Vybrané ID pro tento typ uzlu."
 
 #: dialogs/nodetypeproperties.cpp:137
 #, kde-format
@@ -189,7 +190,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "The selected ID is already used for another node type, please select a "
 "different one."
-msgstr ""
+msgstr "Vybrané ID je již použito pro jiný typ uzlu, vyberte prosím jiné."
 
 #: dialogs/propertieswidget.cpp:33
 #, kde-format
@@ -250,31 +251,31 @@ msgstr "Metoda přiřazení"
 #: editorplugins/assignvalues/assignvalueswidget.ui:81
 #, kde-format
 msgid "Enumerate Items"
-msgstr ""
+msgstr "Vyčíslit položky"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:86
 #, kde-format
 msgid "Enumerate Alpha"
-msgstr ""
+msgstr "Alfabetické číslování"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:91
 #, kde-format
 msgid "Enumerate Alpha-Numeric"
-msgstr ""
+msgstr "Alfanumerické číslování"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:96
 #, kde-format
 msgid "Assign Random Integers"
-msgstr ""
+msgstr "Přiřadit náhodná celá čísla"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:101
 #, kde-format
 msgid "Assign Random Reals"
-msgstr ""
+msgstr "Přiřadit náhodná reálná čísla"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboBoxMethod)
 #: editorplugins/assignvalues/assignvalueswidget.ui:106
@@ -286,13 +287,13 @@ msgstr "Přiřadit konstantní hodnotu"
 #: editorplugins/assignvalues/assignvalueswidget.ui:132
 #, kde-format
 msgid "Start ID:"
-msgstr ""
+msgstr "Počáteční ID:"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:167
 #, kde-format
 msgid "Initial string"
-msgstr ""
+msgstr "Počáteční řetězec"
 
 #. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:174
@@ -304,7 +305,7 @@ msgstr "a"
 #: editorplugins/assignvalues/assignvalueswidget.ui:192
 #, kde-format
 msgid "Start ID"
-msgstr ""
+msgstr "Počáteční ID"
 
 #. i18n: ectx: property (text), widget (QLabel, LabelAlphaNumericPrefix)
 #: editorplugins/assignvalues/assignvalueswidget.ui:209
@@ -336,7 +337,7 @@ msgstr "Horní limit"
 #: editorplugins/generategraph/generategraphwidget.ui:483
 #, kde-format
 msgid "Generator Seed"
-msgstr ""
+msgstr "Použitý generátor"
 
 #. i18n: ectx: property (text), widget (QLabel, constant_label)
 #: editorplugins/assignvalues/assignvalueswidget.ui:372
@@ -348,7 +349,7 @@ msgstr "Konstanta"
 #: editorplugins/assignvalues/assignvalueswidget.ui:400
 #, kde-format
 msgid "Overwrite existing values"
-msgstr ""
+msgstr "Přepsat stávající hodnoty"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomNodes)
 #. i18n: ectx: property (text), widget (QLabel, label_randomTreeNodes)
@@ -378,13 +379,13 @@ msgstr "Hrany:"
 #: editorplugins/assignvalues/assignvalueswidget.ui:482
 #, kde-format
 msgid "Assign values to selected edges."
-msgstr ""
+msgstr "Přiřadit hodnoty vybraným hranám."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, applyToNodes)
 #: editorplugins/assignvalues/assignvalueswidget.ui:509
 #, kde-format
 msgid "Assign values to selected nodes."
-msgstr ""
+msgstr "Přiřaďte hodnoty vybraným uzlům."
 
 #: editorplugins/generategraph/generategraphwidget.cpp:79
 #, kde-format
@@ -402,12 +403,12 @@ msgstr "%1 (ID %2)"
 #: editorplugins/generategraph/generategraphwidget.cpp:529
 #, kde-format
 msgid "Incorrect Edge Direction"
-msgstr ""
+msgstr "Nesprávná orientace hrany"
 
 #: editorplugins/generategraph/generategraphwidget.cpp:529
 #, kde-format
 msgid "Edges in a Directed Acyclical Graph must be directional."
-msgstr ""
+msgstr "Hrany v orientovaném acyklickém grafu musí být přímé."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GenerateGraphWidget)
 #: editorplugins/generategraph/generategraphwidget.ui:14
@@ -419,25 +420,25 @@ msgstr "Vygenerovat graf"
 #: editorplugins/generategraph/generategraphwidget.ui:22
 #, kde-format
 msgid "Select the graph generator."
-msgstr ""
+msgstr "Vyberte generátor grafů."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:26
 #, kde-format
 msgid "Mesh Graph"
-msgstr ""
+msgstr "Síťový graf"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:31
 #, kde-format
 msgid "Star Graph"
-msgstr ""
+msgstr "Hvězdicový graf"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:36
 #, kde-format
 msgid "Circle Graph"
-msgstr ""
+msgstr "Kruhový graf"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:41
@@ -461,37 +462,37 @@ msgstr "Náhodný stromový graf"
 #: editorplugins/generategraph/generategraphwidget.ui:56
 #, kde-format
 msgid "Random Dag Graph"
-msgstr ""
+msgstr "Náhodný Dag graf"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:61
 #, kde-format
 msgid "Path Graph"
-msgstr ""
+msgstr "Graf cesty"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:66
 #, kde-format
 msgid "Complete Graph"
-msgstr ""
+msgstr "Dokončit graf"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, comboGraphGenerator)
 #: editorplugins/generategraph/generategraphwidget.ui:71
 #, kde-format
 msgid "Complete Bipartite"
-msgstr ""
+msgstr "Kompletní bipartitní graf"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonShowAdvanced)
 #: editorplugins/generategraph/generategraphwidget.ui:91
 #, kde-format
 msgid "Show advanced settings."
-msgstr ""
+msgstr "Zobrazit pokročilá nastavení."
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, identifier)
 #: editorplugins/generategraph/generategraphwidget.ui:106
 #, kde-format
 msgid "Set the unique identifier of the generated graph."
-msgstr ""
+msgstr "Nastavit jedinečný identifikátor vygenerovaného grafu."
 
 #. i18n: ectx: property (text), widget (QLineEdit, identifier)
 #: editorplugins/generategraph/generategraphwidget.ui:109
@@ -503,7 +504,7 @@ msgstr "Graf"
 #: editorplugins/generategraph/generategraphwidget.ui:116
 #, kde-format
 msgid "The node type to create the nodes of the graph with"
-msgstr ""
+msgstr "Typ uzlu, pomocí kterého se mají vytvořit uzly grafu"
 
 #. i18n: ectx: property (text), widget (QLabel, labelNodeType)
 #: editorplugins/generategraph/generategraphwidget.ui:119
@@ -515,7 +516,7 @@ msgstr "Typ uzlu:"
 #: editorplugins/generategraph/generategraphwidget.ui:126
 #, kde-format
 msgid "The identifier of the created graph (used for scripting)"
-msgstr ""
+msgstr "Identifikátor vytvořeného grafu (slouží pro skriptování)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
 #: editorplugins/generategraph/generategraphwidget.ui:148
@@ -533,7 +534,7 @@ msgstr "Počet řádků:"
 #: editorplugins/generategraph/generategraphwidget.ui:196
 #, kde-format
 msgid "Satellite Nodes:"
-msgstr ""
+msgstr "Satelitní uzly:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_numberCircle)
 #. i18n: ectx: property (text), widget (QLabel, labe_pathNodes)
@@ -551,7 +552,7 @@ msgstr "Počet uzlů:"
 #: editorplugins/generategraph/generategraphwidget.ui:332
 #, kde-format
 msgid "Allow self-edges:"
-msgstr ""
+msgstr "Povolit vlastní hrany:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_randomGeneratorSeed)
 #: editorplugins/generategraph/generategraphwidget.ui:293
@@ -563,13 +564,13 @@ msgstr "Použitý generátor:"
 #: editorplugins/generategraph/generategraphwidget.ui:325
 #, kde-format
 msgid "Nodes (n):"
-msgstr ""
+msgstr "Uzly (n):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPEdgeProbability)
 #: editorplugins/generategraph/generategraphwidget.ui:349
 #, kde-format
 msgid "Edge Probability (p):"
-msgstr ""
+msgstr "Pravděpodobnost hran (p):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_GNPGeneratorSeed)
 #. i18n: ectx: property (text), widget (QLabel, label_randomTreeGeneratorSeed)
@@ -577,7 +578,7 @@ msgstr ""
 #: editorplugins/generategraph/generategraphwidget.ui:421
 #, kde-format
 msgid "Generator Seed:"
-msgstr ""
+msgstr "Použitý generátor:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_numberNodes)
 #: editorplugins/generategraph/generategraphwidget.ui:446
@@ -595,25 +596,25 @@ msgstr "Pravděpodobnost hrany"
 #: editorplugins/generategraph/generategraphwidget.ui:549
 #, kde-format
 msgid "Left Set Nodes:"
-msgstr ""
+msgstr "Uzly levé části:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_completeBipartiteNodesRight)
 #: editorplugins/generategraph/generategraphwidget.ui:563
 #, kde-format
 msgid "Right Set Nodes:"
-msgstr ""
+msgstr "Uzly pravé části:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, edgeTypeSelector)
 #: editorplugins/generategraph/generategraphwidget.ui:590
 #, kde-format
 msgid "Select the edge type for connections of the generated graph."
-msgstr ""
+msgstr "Vyberte typ hrany pro spojení ve vygenerovaném grafu."
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:604
 #, kde-format
 msgid "The edge type to create the edges of the graph with"
-msgstr ""
+msgstr "Typ hrany, pomocí kterého se vytvoří hrany grafu"
 
 #. i18n: ectx: property (text), widget (QLabel, labelEdgeType)
 #: editorplugins/generategraph/generategraphwidget.ui:607
@@ -631,7 +632,7 @@ msgstr "Generátor grafů:"
 #: editorplugins/generategraph/generategraphwidget.ui:621
 #, kde-format
 msgid "Select the node type for node elements of the generated graph."
-msgstr ""
+msgstr "Vyberte typ uzlu pro prvky uzlů vygenerovaného grafu."
 
 #: editorplugins/graphlayout/graphlayoutwidget.cpp:37
 #, kde-format
@@ -649,43 +650,43 @@ msgstr "Rozvržení grafu"
 #: editorplugins/graphlayout/graphlayoutwidget.ui:36
 #, kde-format
 msgid "Force Based Layout"
-msgstr ""
+msgstr "Vynucené základní rozložení"
 
 #. i18n: ectx: property (text), widget (QLabel, areaFactorLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:57
 #, kde-format
 msgid "Area factor:"
-msgstr ""
+msgstr "Faktor plochy:"
 
 #. i18n: ectx: property (text), widget (QLabel, repellingForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:77
 #, kde-format
 msgid "Repelling force:"
-msgstr ""
+msgstr "Odpudivá síla:"
 
 #. i18n: ectx: property (text), widget (QLabel, attractionForceLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:97
 #, kde-format
 msgid "Attraction force:"
-msgstr ""
+msgstr "Přitažlivá síla:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, radialTreeLayoutTab)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:119
 #, kde-format
 msgid "Radial Tree Layout"
-msgstr ""
+msgstr "Radiální rozložení stromu"
 
 #. i18n: ectx: property (text), widget (QLabel, rootLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:134
 #, kde-format
 msgid "Center/Root:"
-msgstr ""
+msgstr "Střed/Kořen:"
 
 #. i18n: ectx: property (text), widget (QLabel, nodeSeparationLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:144
 #, kde-format
 msgid "Node separation:"
-msgstr ""
+msgstr "Oddělení uzlů:"
 
 #. i18n: ectx: property (text), widget (QLabel, treeTypeLabel)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:158
@@ -697,25 +698,25 @@ msgstr "Typ stromu:"
 #: editorplugins/graphlayout/graphlayoutwidget.ui:165
 #, kde-format
 msgid "Free tree"
-msgstr ""
+msgstr "Volný strom"
 
 #. i18n: ectx: property (text), widget (QRadioButton, rootedTreeRadioButton)
 #: editorplugins/graphlayout/graphlayoutwidget.ui:175
 #, kde-format
 msgid "Rooted tree"
-msgstr ""
+msgstr "Zakořeněný strom"
 
 #: editorplugins/transformedges/transformedgeswidget.cpp:23
 #, kde-format
 msgctxt "@title:window"
 msgid "Transform Edges"
-msgstr ""
+msgstr "Transformace hran"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, TransformEdgesWidget)
 #: editorplugins/transformedges/transformedgeswidget.ui:14
 #, kde-format
 msgid "Transform Edges"
-msgstr ""
+msgstr "Transformace hran"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, radioButtonMakeComplete)
 #: editorplugins/transformedges/transformedgeswidget.ui:22
@@ -724,6 +725,8 @@ msgid ""
 "This option connects all nodes of the given graph. The new edges do not have "
 "any preset weights."
 msgstr ""
+"Tato volba propojí všechny uzly daného grafu. Nové hrany nemají žádné "
+"přednastavené váhy."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeComplete)
 #: editorplugins/transformedges/transformedgeswidget.ui:25
@@ -735,7 +738,7 @@ msgstr "Dokončit graf"
 #: editorplugins/transformedges/transformedgeswidget.ui:35
 #, kde-format
 msgid "This option removes all edges from the given graph."
-msgstr ""
+msgstr "Tato volba odstraní všechny hrany ze zadaného grafu."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:38
@@ -750,6 +753,8 @@ msgid ""
 "This option reverses all edges of a directed graph. Note that this does not "
 "apply to undirected graphs."
 msgstr ""
+"Tato volba obrátí směr všech hran orientovaného grafu. Upozorňujeme, že se "
+"to nevztahuje na neorientované grafy."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonReverseEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:48
@@ -775,18 +780,31 @@ msgid ""
 "equals 1. Directed and undirected graphs are processed accordingly.</p></"
 "body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC „-//W3C//DTD HTML 4.0//EN“ „http://www.w3.org/TR/REC-"
+"html40/strict.dtd“>\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:‚DejaVu Sans‘; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Tato volba spustí <span "
+"style=\" font-style:italic;\">Primův algoritmus minimálního rozkládacího "
+"stromu</span> na grafu. U všech hran bez zadané váhy se předpokládá váha "
+"rovná 1. Orientované i neorientované grafy jsou zpracovány odpovídajícím "
+"způsobem.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonMakeSpanningtree)
 #: editorplugins/transformedges/transformedgeswidget.ui:62
 #, kde-format
 msgid "Spanning tree transformation"
-msgstr ""
+msgstr "Transformace rozkládacího stromu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButtonEraseSelfEdges)
 #: editorplugins/transformedges/transformedgeswidget.ui:69
 #, kde-format
 msgid "Remove all self edges"
-msgstr ""
+msgstr "Odstranit všechny vlastní hrany"
 
 #: fileformats/dot/dotfileformat.cpp:41
 #, kde-format
@@ -809,7 +827,7 @@ msgstr "Nelze analyzovat soubor %1."
 #: fileformats/dot/dotfileformat.cpp:69 fileformats/gml/gmlfileformat.cpp:72
 #, kde-format
 msgid "Cannot open file %1 to write document. Error: %2"
-msgstr ""
+msgstr "Nelze otevřít soubor %1 pro zápis dokumentu. Chyba: %2"
 
 #: fileformats/gml/gmlfileformat.cpp:42
 #, kde-format
@@ -831,32 +849,33 @@ msgstr "Nelze otevřít soubor \"%1\" pro zápis: %2"
 #: fileformats/rocs1/rocs1fileformat.cpp:263
 #, kde-format
 msgid "Could not write data, aborting. Error: %1."
-msgstr ""
+msgstr "Nelze zapsat data, operace se přerušuje. Chyba: %1."
 
 #: fileformats/rocs2/rocs2fileformat.cpp:31
 #, kde-format
 msgid "Rocs Graph Format (%1)"
-msgstr ""
+msgstr "Formát grafu Rocs (%1)"
 
 #: fileformats/rocs2/rocs2fileformat.cpp:303
 #, kde-format
 msgid "Error on serializing file format to file."
-msgstr ""
+msgstr "Došlo k chybě při serializaci formátu do souboru."
 
 #: fileformats/tgf/tgffileformat.cpp:29
 #, kde-format
 msgid "Trivial Graph Format (%1)"
-msgstr ""
+msgstr "Formát Trivial Graph (%1)"
 
 #: fileformats/tgf/tgffileformat.cpp:64
 #, kde-format
 msgid "Could not parse file. Identifier \"%1\" is used more than once."
-msgstr ""
+msgstr "Nelze zpracovat soubor. Identifikátor \"%1\" je použit vícekrát."
 
 #: fileformats/tgf/tgffileformat.cpp:76
 #, kde-format
 msgid "Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes."
 msgstr ""
+"Nelze zpracovat soubor. Hrana z \"%1\" do \"%2\" používá nedefinované uzly."
 
 #: fileformats/tikz/tikzfileformat.cpp:30
 #, kde-format
@@ -878,13 +897,13 @@ msgstr "Nový graf"
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: no node with ID %2 registered"
-msgstr ""
+msgstr "%1: není registrován žádný uzel s ID %2"
 
 #: kernel/documentwrapper.cpp:116 kernel/nodewrapper.cpp:109
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: node type ID %2 not registered"
-msgstr ""
+msgstr "%1: ID typu uzlu %2 není registrováno"
 
 #: kernel/documentwrapper.cpp:151 kernel/edgewrapper.cpp:87
 #: kernel/nodewrapper.cpp:138 kernel/nodewrapper.cpp:172
