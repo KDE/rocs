@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:49+0000\n"
-"PO-Revision-Date: 2026-08-27 23:19+0200\n"
-"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
+"PO-Revision-Date: 2026-08-28 10:37+0200\n"
+"Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -912,31 +912,31 @@ msgstr "%1: ID typu uzlu %2 není registrováno"
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: edge type ID %2 not registered"
-msgstr ""
+msgstr "%1: ID typu hrany %2 není zaregistrováno"
 
 #: kernel/documentwrapper.cpp:175
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"from\" is not a valid node object"
-msgstr ""
+msgstr "%1: \"from\" není platný objekt uzlu"
 
 #: kernel/documentwrapper.cpp:180
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"to\" is not a valid node object"
-msgstr ""
+msgstr "%1: \"to\" není platný objekt uzlu"
 
 #: kernel/documentwrapper.cpp:191
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is not called on an object"
-msgstr ""
+msgstr "%1: \"obj\" není voláno na objektu"
 
 #: kernel/documentwrapper.cpp:210
 #, kde-format
 msgctxt "@info:shell"
 msgid "%1: \"obj\" is neither a valid node or edge object"
-msgstr ""
+msgstr "%1: \"obj\" není platný uzel ani hrana"
 
 #: kernel/modules/console/console.xml:7
 #, kde-format
@@ -945,24 +945,26 @@ msgid ""
 "The global Console object allows you to print messages of different "
 "importance to a log."
 msgstr ""
+"Globální objekt Console umožňuje zapisovat do protokolu zprávy různé "
+"důležitosti."
 
 #: kernel/modules/console/console.xml:17
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given message of normal severity."
-msgstr ""
+msgstr "Vytisknout zadanou zprávu s normální závažností."
 
 #: kernel/modules/console/console.xml:31
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given debug message."
-msgstr ""
+msgstr "Vytisknout zadanou ladicí zprávu."
 
 #: kernel/modules/console/console.xml:45
 #, kde-format
 msgctxt "Scripting API"
 msgid "Print the given error message of high severity."
-msgstr ""
+msgstr "Vytisknout uvedenou chybovou zprávu s vysokou závažností."
 
 #: kernel/modules/document/document.xml:9
 #, kde-format
@@ -971,12 +973,14 @@ msgid ""
 "\n"
 "The document object provides access to all elements.\n"
 msgstr ""
+"\n"
+"Objekt dokumentu umožňuje přístup ke všem prvkům.\n"
 
 #: kernel/modules/document/document.xml:19
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the node with specified ID."
-msgstr ""
+msgstr "Vrátit uzel se zadaným ID."
 
 #: kernel/modules/document/document.xml:26
 #, kde-format
@@ -988,31 +992,31 @@ msgstr "Identifikátor uzlu."
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all nodes."
-msgstr ""
+msgstr "Vrátit seznam všech uzlů."
 
 #: kernel/modules/document/document.xml:42
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all nodes of specified type."
-msgstr ""
+msgstr "Vrátit seznam všech uzlů zadaného typu."
 
 #: kernel/modules/document/document.xml:49
 #, kde-format
 msgctxt "Scripting API"
 msgid "Identifier of a node type."
-msgstr ""
+msgstr "Identifikátor typu uzlu."
 
 #: kernel/modules/document/document.xml:56
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all edges."
-msgstr ""
+msgstr "Vrátit seznam všech hran."
 
 #: kernel/modules/document/document.xml:65
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all edges of specified type."
-msgstr ""
+msgstr "Vrátit seznam všech hran zadaného typu."
 
 #: kernel/modules/document/document.xml:72 kernel/modules/document/node.xml:72
 #: kernel/modules/document/node.xml:95 kernel/modules/document/node.xml:118
@@ -1021,7 +1025,7 @@ msgstr ""
 #, kde-format
 msgctxt "Scripting API"
 msgid "Identifier of an edge type."
-msgstr ""
+msgstr "Identifikátor typu hrany."
 
 #: kernel/modules/document/document.xml:79
 #, kde-format
@@ -1033,13 +1037,13 @@ msgstr "Vytvořit uzel na pozici (x,y)."
 #, kde-format
 msgctxt "Scripting API"
 msgid "X-coordinate of the node."
-msgstr ""
+msgstr "Souřadnice uzlu na ose X."
 
 #: kernel/modules/document/document.xml:91
 #, kde-format
 msgctxt "Scripting API"
 msgid "Y-coordinate of the node."
-msgstr ""
+msgstr "Souřadnice uzlu na ose Y."
 
 #: kernel/modules/document/document.xml:98
 #, kde-format
@@ -1051,13 +1055,13 @@ msgstr "Vytvořit hranu mezi danými uzly výchozího typu hrany."
 #, kde-format
 msgctxt "Scripting API"
 msgid "Start node of the edge."
-msgstr ""
+msgstr "Počáteční uzel hrany."
 
 #: kernel/modules/document/document.xml:110
 #, kde-format
 msgctxt "Scripting API"
 msgid "Target node of the edge."
-msgstr ""
+msgstr "Cílový uzel hrany."
 
 #: kernel/modules/document/document.xml:117
 #, kde-format
@@ -1075,13 +1079,13 @@ msgstr "Uzel, jenž má být smazán."
 #, kde-format
 msgctxt "Scripting API"
 msgid "Delete the given edge."
-msgstr "Smazat daný okraj."
+msgstr "Smazat danou hranu."
 
 #: kernel/modules/document/document.xml:138
 #, kde-format
 msgctxt "Scripting API"
 msgid "The edge to be deleted."
-msgstr "Okraj, jenž má být smazán."
+msgstr "Hrana, která má být smazána."
 
 #: kernel/modules/document/edge.xml:9
 #, kde-format
@@ -1091,6 +1095,9 @@ msgid ""
 "An edge is the connection of two nodes. Edges can be either directed or "
 "undirected, depending on their type.\n"
 msgstr ""
+"\n"
+"Hrana je spojení dvou uzlů. Hrany mohou být směrované nebo nesměrované, v "
+"závislosti na jejich typu.\n"
 
 #: kernel/modules/document/edge.xml:17
 #, kde-format
@@ -1099,24 +1106,26 @@ msgid ""
 "Read and set the identifier of the edge's type. If setting, the edge type "
 "identifier must exist."
 msgstr ""
+"Načíst a nastavit identifikátor typu hrany. Při nastavování musí "
+"identifikátor typu hrany existovat."
 
 #: kernel/modules/document/edge.xml:26
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the origin node of the edge."
-msgstr ""
+msgstr "Vrátit počáteční uzel hrany."
 
 #: kernel/modules/document/edge.xml:35
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return the target node of the edge."
-msgstr ""
+msgstr "Vrátit cílový uzel hrany."
 
 #: kernel/modules/document/edge.xml:44
 #, kde-format
 msgctxt "Scripting API"
 msgid "Returns true if the edge's type is directed, otherwise false."
-msgstr ""
+msgstr "Vrátit hodnotu true, pokud je hrana směrovaná, jinak false."
 
 #: kernel/modules/document/node.xml:11
 #, kde-format
@@ -1129,24 +1138,30 @@ msgid ""
 "Note that dynamic properties are only available after script execution, if "
 "they are registered for the node's type.\n"
 msgstr ""
+"\n"
+"Uzel je datový prvek grafu.\n"
+"Může mít libovolné dynamické vlastnosti, které se buď nastavují v editoru, "
+"nebo se jednoduše přiřazují za běhu.\n"
+"Upozorňujeme, že dynamické vlastnosti jsou k dispozici až po spuštění "
+"skriptu, pokud jsou pro daný typ uzlu zaregistrovány.\n"
 
 #: kernel/modules/document/node.xml:19
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the unique identifier of this node."
-msgstr ""
+msgstr "Načíst a nastavit jedinečný identifikátor tohoto uzlu."
 
 #: kernel/modules/document/node.xml:26
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the x-coordinate of the node."
-msgstr ""
+msgstr "Načíst a nastavit souřadnici uzlu na ose x."
 
 #: kernel/modules/document/node.xml:33
 #, kde-format
 msgctxt "Scripting API"
 msgid "Read and set the y-coordinate of the node."
-msgstr ""
+msgstr "Načíst a nastavit souřadnici uzlu na ose y."
 
 #: kernel/modules/document/node.xml:40
 #, kde-format
@@ -1155,6 +1170,8 @@ msgid ""
 "Read and set the color string of this node in hex values (e.g., \"#ff0000\" "
 "for red)."
 msgstr ""
+"Načíst a nastavit barevný řetězec tohoto uzlu v hexadecimálních hodnotách "
+"(např. \"#ff0000\" pro červenou barvu)."
 
 #: kernel/modules/document/node.xml:47
 #, kde-format
@@ -1163,12 +1180,14 @@ msgid ""
 "Read and set the identifier of the node's type. If setting, the node type "
 "identifier must exist."
 msgstr ""
+"Načíst a nastavit identifikátor typu uzlu. Při nastavování musí "
+"identifikátor typu uzlu existovat."
 
 #: kernel/modules/document/node.xml:56
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all edges (incoming and outgoing) of this node."
-msgstr ""
+msgstr "Vrátit seznam všech hran (příchozích i odchozích) tohoto uzlu."
 
 #: kernel/modules/document/node.xml:65
 #, kde-format
@@ -1177,30 +1196,31 @@ msgid ""
 "Return a list of all edges (incoming and outgoing) of this node of a "
 "specified type."
 msgstr ""
+"Vrátit seznam všech hran (příchozích i odchozích) tohoto uzlu daného typu."
 
 #: kernel/modules/document/node.xml:79
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of incoming edges of this node."
-msgstr ""
+msgstr "Vrátit seznam příchozích hran tohoto uzlu."
 
 #: kernel/modules/document/node.xml:88
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all incoming edges of this node of a specified type."
-msgstr ""
+msgstr "Vrátit seznam všech příchozích hran tohoto uzlu daného typu."
 
 #: kernel/modules/document/node.xml:102
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all outgoing edges of this node."
-msgstr ""
+msgstr "Vrátit seznam všech odchozích hran tohoto uzlu."
 
 #: kernel/modules/document/node.xml:111
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list of all outgoing edges of this node of a specified type."
-msgstr ""
+msgstr "Vrátit seznam všech odchozích hran tohoto uzlu daného typu."
 
 #: kernel/modules/document/node.xml:125
 #, kde-format
@@ -1209,6 +1229,8 @@ msgid ""
 "Return list all nodes connected to this node. This method respects if edges "
 "are directed."
 msgstr ""
+"Vrátit seznam všech uzlů připojených k tomuto uzlu. Tato metoda zohledňuje, "
+"zda jsou hrany směrované."
 
 #: kernel/modules/document/node.xml:134
 #, kde-format
@@ -1217,12 +1239,15 @@ msgid ""
 "Return list all nodes connected to this node via an edge of specified type. "
 "This method respects if edges are directed."
 msgstr ""
+"Vrátit seznam všech uzlů, které jsou s tímto uzlem spojeny hranou zadaného "
+"typu. Tato metoda zohledňuje, zda jsou hrany směrované."
 
 #: kernel/modules/document/node.xml:148
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return a list all nodes connected to this node by an incoming edge."
 msgstr ""
+"Vrátit seznam všech uzlů, které jsou s tímto uzlem spojeny příchozí hranou."
 
 #: kernel/modules/document/node.xml:157
 #, kde-format
@@ -1231,12 +1256,15 @@ msgid ""
 "Return a list all nodes connected to this node by an incoming edge of "
 "specified type."
 msgstr ""
+"Vrátit seznam všech uzlů, které jsou s tímto uzlem spojeny příchozí hranou "
+"zadaného typu."
 
 #: kernel/modules/document/node.xml:171
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return list all nodes connected to this node by an outgoing edge."
 msgstr ""
+"Vrátit seznam všech uzlů, které jsou s tímto uzlem spojeny odchozí hranou."
 
 #: kernel/modules/document/node.xml:180
 #, kde-format
@@ -1245,34 +1273,36 @@ msgid ""
 "Return list all nodes connected to this node by an outgoing edge of "
 "specified type."
 msgstr ""
+"Vrátit seznam všech uzlů, které jsou s tímto uzlem spojeny odchozí hranou "
+"zadaného typu."
 
 #: kernel/modules/document/node.xml:194
 #, kde-format
 msgctxt "Scripting API"
 msgid "Return list of distances to specified targets in same order."
-msgstr ""
+msgstr "Vrátit seznam vzdáleností ke zadaným cílům ve stejném pořadí."
 
 #: kernel/modules/document/node.xml:201
 #, kde-format
 msgctxt "Scripting API"
 msgid "Name of edge property that holds the edge length."
-msgstr ""
+msgstr "Název vlastnosti hrany, která udává délku hrany."
 
 #: kernel/modules/document/node.xml:206
 #, kde-format
 msgctxt "Scripting API"
 msgid "List of nodes to that the distances shall be computed."
-msgstr ""
+msgstr "Seznam uzlů, ke kterým se mají vypočítat vzdálenosti."
 
 #: org/kde/rocs/Scene.qml:58
 #, kde-format
 msgid "Select & Move"
-msgstr ""
+msgstr "Vybrat a přesunout"
 
 #: org/kde/rocs/Scene.qml:60
 #, kde-format
 msgid "Select and move elements on the scene"
-msgstr ""
+msgstr "Výběr a přesun prvků na scéně"
 
 #: org/kde/rocs/Scene.qml:67
 #, kde-format
