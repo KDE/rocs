@@ -302,7 +302,7 @@ msgstr "Identifiant de départ :"
 #: editorplugins/assignvalues/assignvalueswidget.ui:167
 #, kde-format
 msgid "Initial string"
-msgstr "Chaîne initiale"
+msgstr "Chaine initiale"
 
 #. i18n: ectx: property (text), widget (QLineEdit, LineEditInitialString)
 #: editorplugins/assignvalues/assignvalueswidget.ui:174
