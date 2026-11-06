@@ -1,6 +1,6 @@
 # Copyright © 2011, 2012 This_file_is_part_of_KDE
 # This file is distributed under the same license as the rocs package.
-# Tommi Nieminen <translator@legisign.org>, 2011, 2012, 2021.
+# SPDX-FileCopyrightText: 2011, 2012, 2021, 2026 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
 #
 # KDE Finnish translation sprint participants:
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: rocs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-11 00:39+0000\n"
-"PO-Revision-Date: 2021-01-04 18:47+0200\n"
+"PO-Revision-Date: 2026-10-11 15:53+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -403,12 +404,10 @@ msgid "Save Project"
 msgstr "Tallenna projekti"
 
 #: ui/mainwindow.cpp:261
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Open Project"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Project..."
-msgstr "Avaa projekti"
+msgstr "Avaa projekti…"
 
 #: ui/mainwindow.cpp:269
 #, kde-format
@@ -417,12 +416,10 @@ msgid "Recent Projects"
 msgstr "Viimeisimmät projektit"
 
 #: ui/mainwindow.cpp:274
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Save Project As"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Project As..."
-msgstr "Tallenna projekti nimellä"
+msgstr "Tallenna projekti nimellä…"
 
 #: ui/mainwindow.cpp:275
 #, kde-format
@@ -431,44 +428,34 @@ msgid "New Graph Document"
 msgstr "Uusi graafitiedosto"
 
 #: ui/mainwindow.cpp:276
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "New Script File"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "New Script File..."
-msgstr "Uusi skriptitiedosto"
+msgstr "Uusi skriptitiedosto…"
 
 #: ui/mainwindow.cpp:277
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Import Graph"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Graph..."
-msgstr "Tuo graafi"
+msgstr "Tuo graafi…"
 
 #: ui/mainwindow.cpp:278
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Export Graph as"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Graph As..."
-msgstr "Vie graafi nimellä"
+msgstr "Vie graafi nimellä…"
 
 #: ui/mainwindow.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Import Script"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Script..."
-msgstr "Tuo skripti"
+msgstr "Tuo skripti…"
 
 #: ui/mainwindow.cpp:280
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Export Script"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Export Script..."
-msgstr "Vie skripti"
+msgstr "Vie skripti…"
 
 #: ui/mainwindow.cpp:319
 #, kde-format
@@ -570,8 +557,7 @@ msgstr "Solmutyypin yksilöllinen tunniste."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/scriptoutputwidget.ui:24
-#, fuzzy, kde-format
-#| msgid "Script Output:"
+#, kde-format
 msgid "Script output:"
 msgstr "Skriptin tuloste:"
 
