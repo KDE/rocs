@@ -582,4 +582,4 @@ msgstr "Sideverktøylinje"
 #: ui/sidedockwidget.cpp:133
 #, kde-format
 msgid "Toggle '%1' view."
-msgstr "Slå av/på visningen  «%1»."
+msgstr "Slå på/av visningen  «%1»."
