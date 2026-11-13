@@ -1,0 +1,770 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Arabic "INCLUDE">
+
+]>
+<book id="rocs" lang="&language;">
+
+<bookinfo>
+<title
+>دليل روكس</title>
+<authorgroup>
+<author
+><personname
+> <firstname
+>Tomaz</firstname
+> <surname
+>Canabrava</surname
+> </personname
+> <email
+>tomaz.canabrava@gmail.com</email
+> </author>
+<author
+><personname
+> <firstname
+>Andreas</firstname
+> <surname
+>Cord-Landwehr</surname
+> </personname
+> <email
+>cordlandwehr@kde.org</email
+> </author>
+
+<othercredit role="translator"
+><firstname
+>زايد</firstname
+><surname
+>السعيدي</surname
+><affiliation
+><address
+><email
+>zayed.alsaidi@gmail.com</email
+></address
+></affiliation
+><contrib
+>التّرجمة العربيّة</contrib
+></othercredit
+> 
+</authorgroup>
+
+<date
+>2021-10-23</date>
+<releaseinfo
+>ترس كيدي 21.08</releaseinfo>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<abstract>
+<para
+>روكس هي أداة نظرية المخططات. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>كيدي</keyword>
+<keyword
+>kdeedu</keyword>
+<keyword
+>رياضيات</keyword>
+<keyword
+>رياضيات</keyword>
+<keyword
+>رسوم</keyword>
+<keyword
+>عقدة</keyword>
+<keyword
+>حافة</keyword>
+<keyword
+>روكس</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>مقدمة</title>
+<para
+>يقدم هذا الفصل نظرة عامة على الميزات الأساسية وسير العمل النمطي. الأجزاء الأكثر أهمية هي <xref linkend="introduction-nutshell"/> و <xref linkend="scripting"/>، واللتان تتيحان معًا لكل مستخدم جديد البدء مباشرة في استخدام روكس. </para>
+
+<sect1 id="introduction-goals">
+<title
+>الأهداف، الجمهور المستهدف، وسير العمل</title>
+<para
+>روكس هي أداة نظرية المخططات لكل مهتم بتصميم ودراسة خوارزميات المخططات. على وجه الخصوص، هؤلاء هم</para>
+<itemizedlist>
+    <listitem
+><para
+>المحاضرون، الذين يريدون عرض الخوارزميات لطلابهم،</para
+></listitem>
+    <listitem
+><para
+>الطلاب والباحثون، الذين يريدون رؤية أداء خوارزمياتهم، و</para
+></listitem>
+    <listitem
+><para
+>كل من يهتم بهياكل البيانات والخوارزميات.</para
+></listitem>
+</itemizedlist>
+<para
+>لجميعهم، توفر روكس محررًا رسوميًا سهل الاستخدام لإنشاء المخططات، ومحرك برمجة نصية قوي لتنفيذ الخوارزميات، والعديد من الأدوات المساعدة للمحاكاة والتجارب وتصدير المخططات. الطريقة النمطية لاستخدام روكس هي إنشاء مخطط، إما يدويًا (أي سحب العقد والحواف إلى اللوحة البيضاء)، أو باستخدام أحد مولدات المخططات. يمكن بعد ذلك تنفيذ خوارزميات المخططات على المخطط المُنشأ وتكون جميع التغييرات التي يجريها الخوارزم مرئية فورًا في محرر المخطط. </para>
+
+<screenshot>
+  <screeninfo
+>لقطة شاشة لـ روكس.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-screenshot.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>لقطة شاشة لـ روكس.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+</sect1>
+
+<sect1 id="introduction-nutshell">
+<title
+>روكس باختصار</title>
+<para
+>كل جلسة روكس هي مشروع: عند فتح روكس يُنشأ مشروع فارغ، وعند تحميل مشروع ما يصبح هو المشروع الحالي. هنا، يتكون المشروع نفسه من <emphasis
+>مستندات مخطط</emphasis
+> و <emphasis
+>برامج نصية/خوارزميات</emphasis
+> و <emphasis
+>يومية</emphasis
+>. </para>
+
+<sect2>
+<title
+>مستندات المخطط</title>
+<para
+>يمثل مستند المخطط محتوى لوحة بيضاء في محرر المخطط. يحتوي على معلومات حول أنواع العقد والحواف المعرفة من قبل المستخدم، وخصائصها، وحول العقد والحواف المنشأة بالفعل. هذا يعني أن روكس تفهم مجموعة جميع العقد والحواف لمستند مخطط لتشكيل مخطط (ليس بالضرورة متصلًا). كل ما ينتمي إلى مستند مخطط يمكن الوصول إليه بواسطة محرك البرمجة النصية عبر الكائن العام <userinput
+><command
+>Document</command
+></userinput
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>أنواع الحواف</title>
+<para
+>في بعض السيناريوهات، تتكون المخططات من أنواع مختلفة من الحواف (مثلًا، مخطط غير موجه بالإضافة إلى حواف الشجرة المحسوبة بواسطة خوارزمية البحث بالاتساع أولًا) التي يجب معالجتها وعرضها بشكل مختلف. لهذا، بالإضافة إلى نوع الحافة المبدئي، يمكنك تعريف أنواع حواف أخرى عشوائية. لكل نوع حافة تمثيله البصري الفردي، وخصائصه الديناميكية، ويمكن ضبطه ليكون إما غير موجه أو موجهًا. توفر واجهة البرمجة النصية طرقًا ملائمة للوصول تحديدًا إلى حواف من أنواع محددة فقط. </para>
+</sect2>
+
+<sect2>
+<title
+>أنواع العقد</title>
+<para
+>بالمثل لأنواع الحواف، يمكنك تعريف أنواع مختلفة من عقد المخطط (مثلًا، لإعطاء بعض العقد أدوارًا خاصة). لكل نوع عقدة تمثيله البصري الخاص وخصائصه الديناميكية. </para>
+</sect2>
+
+<sect2>
+<title
+>الخصائص</title>
+<para
+>يمكن أن يكون لكل عنصر (عقدة أو حافة) خصائص. يجب إعداد تلك الخصائص في نوع العقدة أو الحافة المقابل. تُعرف الخصائص ويُوصل إليها بأسمائها ويمكن أن تحتوي على أي قيمة. لإنشاء خصائص جديدة أو تغيير خصائص موجودة، استخدم الشريط الجانبي <guilabel
+>أنواع العناصر</guilabel
+> واستخدم زر <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/> </imageobject
+></inlinemediaobject
+><guibutton
+>خصائص</guibutton
+> لفتح حوار الخصائص. </para>
+<para
+>يمكنك أيضًا استخدام محرك البرمجة النصية للوصول إلى الخصائص المسجلة وتغيير قيمها. في المثال التالي نفترض أن الخاصية <quote
+>وزن</quote
+> مسجلة لنوع الحافة المبدئي. <programlisting
+>var nodes = Document.nodes()
+</programlisting>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="introduction-tutorial">
+<title
+>درس تعليمي</title>
+<para
+>في هذا القسم نريد إنشاء مشروع مثال لاستكشاف بعض أهم وظائف روكس. الهدف هو إنشاء مخطط وبرنامج نصي يوضح خوارزمية تقريب بسيطة بعامل 2 لمشكلة <emphasis
+>التغطية الدنيا للرؤوس</emphasis
+>. مشكلة التغطية الدنيا للرؤوس هي مشكلة إيجاد مجموعة فرعية C من عقد المخطط ذات حجم أدنى بحيث تكون كل حافة مخطط متصلة بعقدة واحدة على الأقل في C. من المعروف أن هذه المشكلة NP-صعبة ونريد توضيح كيفية إيجاد تقريب بعامل 2 عن طريق حساب تطابق في المخطط المعطى. </para>
+<para
+>هدفنا هو تصور علاقة التطابق وأصغر غطاء رأس. لهذا، نريد تحديد نوعين من الحواف، نوع لعرض حواف التطابق ونوع لعرض الحواف <quote
+>العادية</quote
+>، بالإضافة إلى نوعين من العقد نستخدمها لتمييز العقد الموجودة في C وتلك غير الموجودة في C. </para>
+
+<sect2>
+<title
+>توليد الرسم البياني</title>
+<para
+>لإنشاء الرسم البياني، نستخدم مولد رسم بياني مبدئي يوفره روكس. يمكن العثور على هذا في القائمة الرئيسة في <menuchoice
+><guimenu
+>مستند الرسم البياني</guimenu
+> <guisubmenu
+>أدوات</guisubmenu
+> <guimenuitem
+>توليد رسم بياني</guimenuitem
+></menuchoice
+>. هناك، نختار <guilabel
+>رسم بياني عشوائي</guilabel
+> بـ 30 عقدة و 90 حافة وبذرة 1 (البذرة هي البذرة الابتدائية لمولد الرسم البياني العشوائي؛ استخدام نفس البذرة عدة مرات ينتج رسومًا بيانية متطابقة وقابلة للتكرار). </para>
+</sect2>
+
+<sect2>
+<title
+>إنشاء أنواع العناصر</title>
+<para
+>نستخدم <guilabel
+>أنواع العناصر</guilabel
+> وننشئ نوع عقدة ثانٍ بالإضافة إلى نوع حافة ثانٍ. لكلا النوعين الجديدين، نفتح حوار الخصائص باستخدام أزرار <inlinemediaobject
+><imageobject
+><imagedata fileref="document-properties.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>خصائص</guibutton
+> المعنية ونضبط المعرفات إلى <literal
+>2</literal
+>. علاوة على ذلك، نغير ألوان عناصر هذين النوعين الجديدين (لتمييزها عن الأنواع المبدئية). أخيرًا، نضبط جميع أنواع الحواف لتكون ثنائية الاتجاه، ومعرفات الأنواع المبدئية إلى <literal
+>1</literal
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>الخوارزمية</title>
+<para
+>أخيرًا، علينا تنفيذ خوارزمية التقريب. لهذا نستخدم التنفيذ التالي: </para>
+<programlisting
+>for (var i=0; i &lt; Document.nodes.length; i++) {
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>تنفيذ الخوارزمية</title>
+<para
+>يمكن تنفيذ الخوارزمية بواسطة زر <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>تشغيل</guibutton
+> في لوحة تحكم النص البرمجي. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="user-interface">
+<title
+>واجهة مستخدم روكس</title>
+
+<sect1 id="user-interface-all">
+<title
+>العناصر الرئيسة لواجهة المستخدم</title>
+<para
+>تنقسم واجهة المستخدم إلى عدة أجزاء منطقية كما هو معروض في لقطة الشاشة أدناه. </para>
+
+<screenshot>
+  <screeninfo
+>عناصر <phrase
+>&GUI;</phrase
+> لواجهة روكس.</screeninfo>
+  <mediaobject>
+    <imageobject
+><imagedata fileref="rocs-interfaces.png" format="PNG"/></imageobject>
+    <textobject
+><phrase
+>عناصر <phrase
+>&GUI;</phrase
+> لواجهة روكس.</phrase
+></textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>محرر الرسم البياني</term>
+    <listitem
+><para
+>يوفر المحرر لوحة بياض يمكن وضع العقد والحواف فيها. النقر المزدوج على أي من عناصره يفتح قائمة خصائص مقابلة. يمكنك استخدام الأدوات من <emphasis
+>أشرطة الشريط الجانبي</emphasis
+> لإنشاء الرسوم البيانية وتعديلها.</para>
+    <para
+>الأدوات المتاحة:</para>
+      <itemizedlist>
+        <listitem
+><para
+>في أعلى يسار الصندوق، تجد أيقونات الإجراءات التالية. النقر على إجراء يعني أن مؤشر الفأرة يطبق هذا الإجراء على لوحة بياض محرر الرسم البياني:</para>
+          <itemizedlist>
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsselect.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>تحديد وتحريك</guiicon
+>: لتحديد العناصر، إما انقر على مساحة غير مستخدمة في اللوحة البياض، أبقِ الفأرة مضغوطة وارسم مستطيلًا يحتوي على بعض عناصر البيانات و/أو الحواف لتحديد هذه العناصر، أو انقر مباشرة على عنصر غير محدد لتحديد هذا العنصر. إذا نقرت على عنصر محدد أو مجموعة من العناصر المحددة، على التوالي، مع إبقاء الفأرة مضغوطة والتحريك، يمكنك تحريك هذه العناصر. تحريك العناصر المحددة ممكن أيضًا باستخدام مفاتيح الأسهم.</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsnode.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>أضف عقدة</guiicon
+>: انقر في موضع عشوائي على لوحة محرر الرسم البياني لإنشاء عنصر بيانات جديد ينتمي إلى بنية البيانات المحددة حاليًا. بإبقاء زر الفأرة مضغوطًا على الزر، تظهر قائمة يمكن من خلالها تحديد نوع البيانات لعناصر البيانات المنشأة حديثًا (فقط إذا كانت أنواع بيانات مختلفة موجودة).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsedge.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>أنشئ حافة</guiicon
+>: انقر على عنصر بيانات واحد، وأبق الفأرة مضغوطة واسحب خطًا إلى عنصر بيانات آخر ستتجه إليه الحافة. ينجح هذا الإجراء فقط إذا كان الرسم البياني الحالي يسمح بإضافة هذه الحافة (مثلًا، في رسم بياني غير موجه لا يُسمح لك بإضافة حواف متعددة بين عنصري بيانات). بإبقاء زر الفأرة مضغوطًا على الزر، تظهر قائمة يمكن من خلالها تحديد نوع الحافة للحواف المنشأة حديثًا (فقط إذا كانت أنواع حواف مختلفة موجودة).</para
+></listitem>
+
+            <listitem
+><para
+><inlinemediaobject
+><imageobject
+><imagedata fileref="sc-actions-rocsdelete.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guiicon
+>احذف عنصرًا</guiicon
+>: انقر على عنصر لحذفه. إذا حذفت عقدة، فسيتم حذف جميع الحواف المجاورة أيضًا.</para
+></listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>الشريط الجانبي</term>
+    <listitem
+><para
+>على اليمين، يمكنك العثور على الشريط الجانبي الذي يوفر عدة أدوات لسير عملك:</para>
+      <itemizedlist>
+        <listitem
+><para
+><guilabel
+>أنواع العناصر</guilabel
+>: تمنحك هذه الأداة وصولًا مباشرًا إلى أنواع الحواف والعقد المتاحة.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>اليومية</guilabel
+>: لكل مشروع يوميته الخاصة التي يمكن استخدامها، مثلًا، لتدوين المهام أو النتائج أو الملاحظات.</para
+></listitem>
+
+        <listitem
+><para
+><guilabel
+>واجهة برمجة النصوص</guilabel
+>: للوصول المباشر إلى توثيق النصوص، يمكنك فتح هذه الأداة.</para
+></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>محرّر السّكربتات</term>
+    <listitem
+><para
+>في محرر النصوص هذا يمكنك كتابة الخوارزميات كما هو موضح بالتفصيل في <xref linkend="scripting"/>. يمكنك العمل على عدة مستندات نصوص في وقت واحد باستخدام عدة ألسنة.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>خرج السكربت:</term>
+    <listitem
+><para
+>تعرض منطقة النصوص هذه إما معلومات التنقيح أو مخرجات النص لخوارزميتك، اعتمادًا على الإعداد المبدل في أعلى هذه الأداة. إذا ألقى النص خطأً، فسيتم عرض مخرجات التنقيح آليًا.</para
+></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+>عناصر تحكم</term>
+    <listitem
+><para
+>هنا يمكنك العثور على عناصر التحكم لتنفيذ النصوص. يمكنك تنفيذ النص المفتوح حاليًا في محرر النصوص بالضغط على زر <inlinemediaobject
+><imageobject
+><imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>تشغيل</guibutton
+>. أثناء تنفيذ النص، يمكن إيقاف التنفيذ بالضغط على زر <inlinemediaobject
+><imageobject
+><imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+><guibutton
+>إيقاف</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<!--FIXME nop alignment action any more?-->
+</chapter>
+
+<chapter id="scripting">
+<title
+>البرمجة</title>
+<sect1>
+    <title
+>تنفيذ الخوارزميات في روكس</title>
+<para
+>يستخدم روكس داخليًا محرك QtScript &javascript;. هذا يعني أن جميع الخوارزميات التي تنفذها يجب أن تستخدم &javascript;. فيما يلي، نشرح كيفية الوصول إلى عناصر مستند الرسم البياني وتغييرها من محرك النصوص. من المهم ملاحظة أن التغييرات التي يجريها محرك النصوص تنعكس مباشرة على الخصائص في عناصر محرر الرسم البياني. </para>
+
+<sect2>
+<title
+>تحكم في تنفيذ النص</title>
+<para
+>توجد أوضاع تنفيذ مختلفة لخوارزمياتك: </para>
+<itemizedlist>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="media-playback-start.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>تشغيل</guibutton
+>: نفذ النص حتى ينتهي.</para
+></listitem>
+    <listitem
+><para>
+        <inlinemediaobject
+><imageobject>
+        <imagedata fileref="process-stop.png" format="PNG"/></imageobject
+></inlinemediaobject
+> <guibutton
+>إيقاف</guibutton
+>: أوقف تنفيذ النص (متاح فقط أثناء تنفيذ نص).</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2>
+<title
+>خرج السكربت</title>
+<para
+>أثناء تنفيذ خوارزمية، يتم عرض مخرجات التنقيح والبرنامج في <emphasis
+>مخرجات التنقيح والنص</emphasis
+>. إذا اكتشف محرك النصوص خطأ نحويًا في نصك، يتم عرض الخطأ أيضًا كرسالة تنقيح. لاحظ أن جميع رسائل البرنامج تُعرض أيضًا في مخرجات التنقيح (معروضة كنص عريض). </para>
+<para
+>يمكنك التحكم في النص المعروض في مخرجات النص بالدوال التالية: </para>
+<programlisting
+>    Console.log(string message);            // يعرض الرسالة كمخرجات نص
+</programlisting>
+</sect2>
+
+<sect2>
+<title
+>واجهة برمجة محرك النصوص</title>
+<para
+>تقدم الأجزاء المختلفة من روكس كل منها عنصرًا ثابتًا يمكن الوصول إليه بواسطة محرك النصوص. هذه هي: <itemizedlist
+> <listitem
+><para
+><userinput
+><command
+>مستند</command
+></userinput
+> لمستند الرسم البياني</para
+></listitem
+> <listitem
+><para
+><userinput
+><command
+>وحدة التحكم</command
+></userinput
+> لإخراج سجل وحدة التحكم</para
+></listitem
+> </itemizedlist
+> لاستخدام واجهة البرمجة الصريح ومرجع الطريقة، يُرجى الاطلاع على المساعدة المضمنة في الشريط الجانبي لـ روكس. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="import-export">
+<title
+>استورد وصدّر</title>
+<sect1 id="import-export-projects">
+    <title
+>تبادل مشاريع روكس</title>
+    <para
+>يمكن استيراد وتصدير مشاريع روكس كملفات <literal role="extension"
+>.tar.gz</literal
+> مؤرشفة. يمكن استخدام هذه الأرشيفات لتبادل المشاريع. يمكن إجراء الاستيراد والتصدير باستخدام عناصر القائمة <menuchoice
+><guimenu
+>مستند الرسم البياني</guimenu
+> <guimenuitem
+>استيراد رسم بياني...</guimenuitem
+></menuchoice
+> و <menuchoice
+><guimenu
+>مستند الرسم البياني</guimenu
+> <guimenuitem
+>تصدير الرسم البياني كـ...</guimenuitem
+></menuchoice
+> على التوالي. </para>
+
+<sect2 id="import-export-graphs">
+    <title
+>استيراد وتصدير مستندات الرسم البياني</title>
+    <para
+>يدعم روكس حاليًا استيراد وتصدير تنسيقات الملفات التالية:</para>
+    <itemizedlist>
+        <listitem
+><para
+>ملفات &DOT;، المعروفة أيضًا بملفات Graphviz</para
+></listitem>
+        <listitem
+><para
+>ملفات <acronym
+>GML</acronym
+></para
+></listitem>
+        <listitem
+><para
+>ملفات تنسيق الرسم البياني التافه</para
+></listitem>
+        <listitem
+><para
+>تنسيق لغة الترميز Keyhole</para
+></listitem>
+    </itemizedlist>
+
+<sect3 id="format-specification-tgf">
+<title
+>تنسيق ملف الرسم البياني التافه</title>
+<para
+><emphasis
+>تنسيق الرسم البياني التافه</emphasis
+> (<acronym
+>TGF</acronym
+>) هو تنسيق ملف نصي بسيط لوصف الرسوم البيانية. يتكون ملف <acronym
+>TGF</acronym
+> من قائمة بتعريفات العقد، التي تربط معرفات العقد باللصائق، متبوعة بقائمة من الحواف. في هذا التنسيق، من الممكن فقط وجود لصيقة واحدة لكل عقدة وقيمة واحدة لكل حافة. يفسر روكس الرسوم البيانية المستوردة كرسوم بيانية غير موجهة. ستحتوي الرسوم البيانية المصدرة على حافتين لكل اتصال إذا كانت الاتصالات ثنائية الاتجاه. </para>
+
+<sect4>
+<title
+>مواصفات التنسيق</title>
+    <itemizedlist>
+        <listitem
+><para
+>يبدأ الملف بقائمة من العقد (عقدة واحدة لكل سطر)، متبوعة بسطر يحتوي على الحرف الوحيد <quote
+>#</quote
+>، متبوعة بقائمة من الحواف (حافة واحدة لكل سطر).</para
+></listitem>
+        <listitem
+><para
+>تتكون العقدة من عدد صحيح (معرف)، متبوعًا بمسافة، متبوعًا بسلسلة نصية عشوائية.</para
+></listitem>
+        <listitem
+><para
+>تتكون الحافة من عددين صحيحين (معرفين) مفصولين بمسافة، متبوعين بمسافة، متبوعين بسلسلة نصية عشوائية. يُفترض أن الحافة الموجهة تشير من المعرف الأول إلى المعرف الثاني.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>مثال</title>
+<programlisting
+>1 عقدة بداية\n2 مرسل\n3 مصرف\n#\n1 2 أزرق\n2 1 أحمر\n2 3 أخضر
+</programlisting>
+</sect4>
+</sect3>
+
+<sect3 id="format-specification-dot">
+<title
+>لغة &DOT; / تنسيق ملف الرسم البياني Graphviz</title>
+<para
+>لغة &DOT; هي لغة وصف رسم بياني نصية عادية تسمح بتمثيل رسوم بيانية مقروءة جيدًا للبشر بالإضافة إلى معالجة فعالة بواسطة برامج تخطيط الرسوم البيانية. &DOT; هو تنسيق الملف المبدئي لمجموعة Graphviz لتصور الرسوم البيانية، ولكنه يُستخدم أيضًا على نطاق واسع بواسطة أدوات الرسم البياني الأخرى. امتدادات الملفات المعتادة لـ &DOT; هي <literal role="extension"
+>.gv</literal
+> و <literal role="extension"
+>.dot</literal
+>. </para>
+
+<sect4>
+<title
+>الميزات غير المدعومة</title>
+<para
+>يمكن لـ روكس تحليل كل ملف رسم بياني يحتوي على رسم بياني محدد وفقًا لمواصفات لغة &DOT;<footnote
+><para
+>https://graphviz.org/doc/info/lang.html</para
+></footnote
+>. دعم ميزات اللغة كامل، باستثناء الاستثناءات التالية: </para>
+    <itemizedlist>
+        <listitem
+><para
+>رسم فرعي: نظرًا لعدم وجود مفهوم الرسم الفرعي في روكس، تُستورد الرسوم الفرعية فقط كمجموعة من عناصر التاريخ والوصلات. خاصةً، لا تُستورد الوصلات من أو إلى الرسوم الفرعية.</para
+></listitem>
+        <listitem
+><para
+>سمات &HTML; و &XML;: تُقرأ السمات (مثل اللصائق) التي تحتوي على صياغة &HTML; أو &XML; دون تغيير. خاصةً، لا تُقرأ تعديلات الخطوط والأنماط من تلك السمات.</para
+></listitem>
+    </itemizedlist>
+</sect4>
+<sect4>
+<title
+>مثال</title>
+<programlisting
+>رسم موجه myGraph {
+</programlisting>
+</sect4>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="graph-layout">
+    <title
+>تخطيط الرسم</title>
+
+    <sect1>
+        <title
+>ترتيب الرسوم بيانيًا آليًا في روكس</title>
+        <para
+>يمكن لـ روكس ترتيب الرسوم بيانيًا آليًا. يمكن العثور على أداة ترتيب الرسوم في روكس في القائمة الرئيسة ضمن <menuchoice
+><guimenu
+>مستند الرسم البياني</guimenu
+> <guisubmenu
+>أدوات</guisubmenu
+> <guimenuitem
+>ترتيب الرسم البياني</guimenuitem
+></menuchoice
+>. هناك خوارزميتان مختلفتان للترتيب يمكن تطبيقهما: الترتيب القائم على القوة والترتيب الشجري الشعاعي. لتطبيق إحداهما، اختر اللسان المقابل لأداة ترتيب الرسم البياني، واختر المعاملات المطلوبة، ونفّذ الخوارزمية بالضغط على الزر <guibutton
+>موافق</guibutton
+>. تُقدّم التفاصيل الخاصة بكل خوارزمية ترتيب في الأقسام التالية. </para>
+
+    <sect2>
+        <title
+>تخطيط يعتمد على القوة</title>
+
+        <para
+>يمكن تطبيق الترتيب القائم على القوة على أي رسم بياني. بديهيًا، تحاكي هذه الخوارزمية قوى تؤثر في كل عقدة. هناك قوى تنافر بين أزواج العقد وقوى جذب بين أزواج العقد المتجاورة. يمكن تحديد مقدار هذه القوى بتحريك أشرطة التمرير المقابلة في واجهة المستخدم. </para>
+
+        <screenshot>
+          <screeninfo
+>لقطة شاشة لسان الترتيب القائم على القوة لأداة ترتيب الرسم البياني في روكس.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="force-based-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>لقطة شاشة لسان الترتيب القائم على القوة لأداة ترتيب الرسم البياني في روكس.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>معامل آخر يمكن التحكم به هو معامل المساحة. يتحكم هذا المعامل في كيفية انتشار العقد. تميل الترتيبات المولّدة بقيم عالية لمعامل المساحة إلى وجود مسافات كبيرة بين العقد. </para>
+
+    <sect3>
+        <title
+>تخطيط شجرة شعاعي</title>
+        <para
+>يمكن تطبيق الترتيب الشجري الشعاعي فقط على الأشجار. أي محاولة لتطبيق خوارزمية الترتيب هذه على أنواع أخرى من الرسوم البيانية ستنتج رسالة خطأ. يمكن اختيار معاملات الترتيب الشجري الشعاعي باستخدام واجهة المستخدم المقدمة. </para>
+
+
+        <screenshot>
+          <screeninfo
+>لقطة شاشة لسان الترتيب الشجري الشعاعي لأداة ترتيب الرسم البياني في روكس.</screeninfo>
+          <mediaobject>
+            <imageobject
+><imagedata fileref="radial-tree-layout-ui-screenshot.png" format="PNG"/></imageobject>
+            <textobject
+><phrase
+>لقطة شاشة لسان الترتيب الشجري الشعاعي لأداة ترتيب الرسم البياني في روكس.</phrase
+></textobject>
+          </mediaobject>
+        </screenshot>
+
+        <para
+>يختار معامل نوع الشجرة بين ترتيب شجري حر وترتيب شجري متجذر. في الترتيب الشجري الحر، توضع العقد بحرية دون أي تسلسل هرمي ظاهر بينها. في الترتيب الشجري المتجذر، توضع العقدة الجذرية في الأعلى وتوضع الأشجار الفرعية أسفلها، مما يعطي فكرة عن تسلسل هرمي بين العقد. </para>
+
+        <para
+>يحدد معامل المركز/الجذر أي عقدة ستُستخدم كجذر للترتيب الشجري المتجذر أو كمركز للترتيب الشجري الحر. مركز الترتيب الشجري الحر هو أول عقدة توضع بواسطة الخوارزمية. توضع جميع العقد الأخرى على دوائر متمركزة حول العقدة المركزية. يمكن اختيار مركز/جذر آليًا بواسطة خوارزمية الترتيب. </para>
+
+        <para
+>يتحكم معامل فصل العقد في المسافة بين العقد. زيادة قيمة هذا المعامل ستؤدي إلى زيادة المسافة بين العقد. وبالمثل، تقليل قيمة هذا المعامل سيؤدي إلى تقليل المسافة بين العقد. </para>
+    </sect3>
+    </sect2>
+    </sect1>
+</chapter>
+
+<chapter id="credits">
+<title
+>الحقوق والترخيص</title>
+
+<para
+>روكس </para>
+<para
+>حقوق نشر البرنامج:</para>
+<itemizedlist>
+	<listitem
+><para
+>حقوق النشر 2008 Ugo Sangiori (ugorox AT gmail.com)</para
+></listitem>
+	<listitem
+><para
+>حقوق النشر 2008-2012 Tomaz Canabrava (tcanabrava AT kde.org)</para
+></listitem>
+	<listitem
+><para
+>حقوق النشر 2008-2012 Wagner Reck (wagner.reck AT gmail.com)</para
+></listitem>
+	<listitem
+><para
+>حقوق النشر 2011-2015 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>حقوق نشر الوثائق:</para>
+<itemizedlist>
+	<listitem
+><para
+>حقوق نشر التوثيق 2009 لـ &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para
+></listitem>
+	<listitem
+><para
+>حقوق نشر التوثيق 2009 توماز كانابرافا (tcanabrava AT kde.org)</para
+></listitem>
+	<listitem
+><para
+>حقوق نشر التوثيق 2011-2015 أندرياس كورد-لاندفير (cordlandwehr AT kde.org)</para
+></listitem>
+</itemizedlist>
+
+<para
+>الترجمة: زايد السعيدي <email
+>zayed.alsaidi@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes: nil
+sgml-general-insert-case: lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
